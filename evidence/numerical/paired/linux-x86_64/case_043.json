@@ -1,0 +1,51 @@
+{
+  "case_id": "snell_02",
+  "duration_seconds": 2.0792000213987194e-05,
+  "finished_utc": "2026-10-20T21:17:32.319918Z",
+  "horizon": null,
+  "invariants": {
+    "N/A": "ok"
+  },
+  "model": "snell",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "N/A": 5.551115123125783e-17
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "n1": 1.33,
+    "n2": 1.5,
+    "theta1": 0.7
+  },
+  "refinement_applicable": false,
+  "refinements": [
+    null
+  ],
+  "resolution": "N/A",
+  "return_code": 0,
+  "scale": 1.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.319897Z",
+  "status": "PASS",
+  "units": {
+    "n1": "1",
+    "n2": "1",
+    "theta1": "rad",
+    "theta2": "rad"
+  },
+  "values": {
+    "N/A": [
+      0.15499573153758775,
+      0.3089264214477982,
+      0.46051427333466566,
+      0.6079748171419828
+    ]
+  },
+  "variant": "baseline"
+}

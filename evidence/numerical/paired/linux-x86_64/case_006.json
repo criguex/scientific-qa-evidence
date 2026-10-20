@@ -1,0 +1,71 @@
+{
+  "case_id": "rc_02",
+  "duration_seconds": 0.0001569599999129423,
+  "finished_utc": "2026-10-20T21:17:32.314839Z",
+  "horizon": 3.102,
+  "invariants": {
+    "128": "invariant_violation",
+    "256": "invariant_violation",
+    "64": "invariant_violation"
+  },
+  "model": "rc",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "128": 16.696458088525095,
+    "256": 16.696458204534874,
+    "64": 16.696456269442127
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "c": 0.00047,
+    "r": 2200.0,
+    "v0": 2.0,
+    "vin": 12.0
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 12.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.314682Z",
+  "status": "KILLED",
+  "units": {
+    "c": "F",
+    "r": "ohm",
+    "time": "s",
+    "v0": "V",
+    "vin": "V"
+  },
+  "values": {
+    "128": [
+      -9.170000126973653,
+      -32.81689053760643,
+      -82.87735783716927,
+      -188.85536774597975
+    ],
+    "256": [
+      -9.17000016365567,
+      -32.81689069291811,
+      -82.87735833036149,
+      -188.85536913809713
+    ],
+    "64": [
+      -9.169999551783825,
+      -32.816888102252726,
+      -82.87735010370358,
+      -188.85534591698416
+    ]
+  },
+  "variant": "rhs_sign"
+}

@@ -1,0 +1,16 @@
+{
+  "evidence_kind": "source_build",
+  "status": "PASS",
+  "command": "lake --no-cache build",
+  "exit_code": 0,
+  "jobs_completed": 11424,
+  "checkout": "clean source checkout",
+  "dependency_and_toolchain_cache_reused": true,
+  "full_bootstrap": false,
+  "theorem_or_kernel_validation": false,
+  "source_summary_sha256": "8cbe19b735665c39a9f2856822a81f7d02129d5e4d1f0ee7a90b5a972164005e",
+  "source_public_manifest_sha256": "74f7d48938be731eed3569c25d00f693ac5723216c2dd601c85eab5e8bf02385",
+  "source_inventory_sha256": "95bb21c93e834581e1400e31e33a9fb7943db2f64f11425b034f97b9b52e95fc",
+  "toolchain_binaries_sha256": "62bb47eb9f3d335be055649e09cf4daddad307078d47819b544926c3aa21341e",
+  "limits": "A successful source build is not a full bootstrap, theorem proof, kernel validation, or mathematical certification."
+}

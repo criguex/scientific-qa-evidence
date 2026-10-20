@@ -1,0 +1,69 @@
+{
+  "case_id": "logistic_02",
+  "duration_seconds": 0.00039637500000000436,
+  "finished_utc": "2026-10-20T21:17:21.036254Z",
+  "horizon": 1.0,
+  "invariants": {
+    "128": "invariant_violation",
+    "256": "invariant_violation",
+    "64": "invariant_violation"
+  },
+  "model": "logistic",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "128": 0.8861538209595315,
+    "256": 0.8861538209912342,
+    "64": 0.8861538204351902
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "capacity": 1.0,
+    "p0": 0.05,
+    "r": 5.0
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 1.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:21.035858Z",
+  "status": "KILLED",
+  "units": {
+    "capacity": "probability",
+    "p0": "probability",
+    "r": "1/normalized-stimulus",
+    "stimulus": "normalized [0,1]"
+  },
+  "values": {
+    "128": [
+      0.014855195691369658,
+      0.004301678897120189,
+      0.0012362459889260606,
+      0.00035450310621040835
+    ],
+    "256": [
+      0.014855195394563618,
+      0.004301678713785496,
+      0.0012362459073996517,
+      0.00035450307450779484
+    ],
+    "64": [
+      0.014855200595194254,
+      0.004301681927960534,
+      0.001236247337098042,
+      0.0003545036305518104
+    ]
+  },
+  "variant": "rhs_sign"
+}

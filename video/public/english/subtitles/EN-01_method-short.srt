@@ -1,0 +1,51 @@
+1
+00:00:00,000 --> 00:00:01,442
+A green test suite is not enough to
+
+2
+00:00:01,500 --> 00:00:02,738
+claim that a model works.
+
+3
+00:00:03,163 --> 00:00:05,447
+This study evaluates a QA instrument, not a
+
+4
+00:00:05,505 --> 00:00:06,028
+new theory.
+
+5
+00:00:06,531 --> 00:00:10,023
+Before testing, we fix the domain, units, tolerance,
+
+6
+00:00:10,149 --> 00:00:12,490
+invariants, and an independent oracle.
+
+7
+00:00:12,993 --> 00:00:15,035
+Then we run a baseline and specific mutations,
+
+8
+00:00:15,209 --> 00:00:17,318
+such as reversing a sign or doubling a
+
+9
+00:00:17,396 --> 00:00:18,063
+coefficient.
+
+10
+00:00:18,431 --> 00:00:20,753
+The question is whether tests detect deliberate changes.
+
+11
+00:00:21,072 --> 00:00:23,559
+Each result stays linked to its parameters, code,
+
+12
+00:00:23,704 --> 00:00:25,155
+and artifacts for later review.
+
+13
+00:00:25,581 --> 00:00:27,932
+This separates model correctness from test sensitivity.

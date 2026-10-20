@@ -1,0 +1,36 @@
+{
+  "status": "draft_for_human_review",
+  "language": "English",
+  "publication_gate": "Author approval required before any external upload or post.",
+  "youtube": {
+    "title": "When Tests Catch a Mutation: A QA Study of Synthetic Models and Formal Controls",
+    "description": "A reproducibility-focused QA study of nine synthetic models, bounded formal fixtures, and paired runs on macOS arm64 and Linux x86_64. Each host evaluated the same 84 variants: 27 PASS, 54 KILLED, and 3 SURVIVED. These are paired runs, not 168 distinct variants.\n\nThe study measures sensitivity to known changes under a fixed contract. It does not validate laboratory measurements, certify a real-world system, or claim discovery of a theorem. The periodic control is scoped to a torus. The flow footage is illustrative. The narration uses a synthetic AI-generated provider voice, not Cristian's recorded voice.\n\nAuthorship: Cristian Guerra (criguex), Colombian from Medellín, self-described 8+ years in QA Automation. OpenAI is credited for the original proofs. AI assistance for analysis, translation, editing, code preparation, and video-source preparation is disclosed in the release notes.",
+    "tags": ["software testing", "quality assurance", "reproducibility", "mutation testing", "formal verification", "Lean"]
+  },
+  "x_thread": [
+    "A green test suite is not enough to claim that a model works. This study fixes a contract first, then asks whether tests catch deliberate mutations against an independent oracle.",
+    "The numerical suite covers nine synthetic models. One example: a 1 kΩ × 1 mF RC circuit has nominal τ = 1 s. At 3 s, the baseline is about 4.751 V; a doubled-τ mutation is about 3.884 V. These are calculations, not lab readings.",
+    "A narrow proof-value fixture checks one declaration with Lean and nanoda. Separate Comparator runs rechecked configured Navier–Stokes and Euler challenges with both kernels after a clean-source build. This is bounded recorded evidence, not universal verification.",
+    "Each host evaluated 84 variants: 27 PASS, 54 KILLED, 3 SURVIVED. macOS arm64 and Linux x86_64 are paired runs of the same suite, so the result is 84 per host, not 168 distinct cases. Survivors stay visible.",
+    "The contribution is an auditable QA study and independent reproduction by Cristian Guerra (criguex). OpenAI is credited for the original proofs. AI assistance is disclosed. No theorem discovery, experimental validation, or real-world certification is claimed."
+  ],
+  "linkedin": {
+    "text": "I prepared an independent QA and reproducibility study around a clear question: do the tests detect deliberate changes under a contract fixed before execution?\n\nThe numerical suite contains nine synthetic models and paired runs across macOS arm64 and Linux x86_64. Each host evaluated the same 84 variants: 27 PASS, 54 KILLED, and 3 SURVIVED. The paired design matters: this is 84 variants per host, not 168 distinct cases.\n\nThe package also includes bounded Lean and nanoda controls, a clean-source build record, and a fresh Comparator rerun for configured Navier–Stokes and Euler challenges. These results do not certify a real-world system or establish a mathematical theorem.\n\nI’m Cristian Guerra (criguex), a Colombian QA Automation professional from Medellín. I self-describe as having more than eight years of experience. OpenAI is credited for the original proofs. AI assistance in analysis, translation, editing, code preparation, and video-source preparation is disclosed.\n\nThe English release candidate is prepared for review; no public upload has happened.",
+    "hashtags": ["SoftwareTesting", "QualityAssurance", "Reproducibility", "FormalMethods"]
+  },
+  "shorts": [
+    { "id": "ENShort01Method1080x1920", "title": "What a Test Can Show", "file": "media/shorts/EN-short-01-method-1080x1920.mp4", "subtitle": "video/public/english/subtitles/EN-01_method-short.srt", "caption": "A test can measure sensitivity to known changes. The contract and oracle must be fixed before the run.", "status": "awaiting_render_and_review" },
+    { "id": "ENShort02Models1080x1920", "title": "An RC Mutation, Measured", "file": "media/shorts/EN-short-02-models-1080x1920.mp4", "subtitle": "video/public/english/subtitles/EN-02_models_rc-short.srt", "caption": "A synthetic RC example: baseline 4.751 V, doubled-time-constant mutation 3.884 V at 3 seconds. No laboratory measurement is claimed.", "status": "awaiting_render_and_review" },
+    { "id": "ENShort03Formal1080x1920", "title": "A Narrow Kernel Control", "file": "media/shorts/EN-short-03-formal-1080x1920.mp4", "subtitle": "video/public/english/subtitles/EN-03_formal_controls-short.srt", "caption": "One fixture checks a proof value with Lean and nanoda. This is a bounded control, not universal verification.", "status": "awaiting_render_and_review" },
+    { "id": "ENShort04Results1080x1920", "title": "84 Variants Per Host", "file": "media/shorts/EN-short-04-results-1080x1920.mp4", "subtitle": "video/public/english/subtitles/EN-04_campaign_results-short.srt", "caption": "27 PASS, 54 KILLED, 3 SURVIVED per host. The two environments are paired runs, not 168 distinct cases.", "status": "awaiting_render_and_review" },
+    { "id": "ENShort05Limits1080x1920", "title": "Builds, Evidence, and Limits", "file": "media/shorts/EN-short-05-limits-1080x1920.mp4", "subtitle": "video/public/english/subtitles/EN-05_reproducibility_limits-short.srt", "caption": "A successful source build is not a bootstrap or a mathematical proof. Flow footage is illustrative.", "status": "awaiting_render_and_review" }
+  ],
+  "cards": [
+    { "id": "ENCard01Cover1080", "title": "Cover", "file": "media/cards/EN-card-01-cover-1080.png", "alt": "A QA study asks whether tests detect deliberate mutations; it does not certify a theory." },
+    { "id": "ENCard02Method1080", "title": "Method", "file": "media/cards/EN-card-02-method-1080.png", "alt": "A three-step test design: freeze the contract, run known mutations, compare against an oracle." },
+    { "id": "ENCard03Models1080", "title": "Synthetic models", "file": "media/cards/EN-card-03-models-1080.png", "alt": "Nine synthetic models, including an RC circuit; calculated values are not laboratory readings." },
+    { "id": "ENCard04Formal1080", "title": "Formal controls", "file": "media/cards/EN-card-04-formal-1080.png", "alt": "A bounded proof-value fixture is checked by Lean and nanoda; this is not universal verification." },
+    { "id": "ENCard05Results1080", "title": "Paired results", "file": "media/cards/EN-card-05-results-1080.png", "alt": "84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED; runs are paired, not 168 distinct cases." },
+    { "id": "ENCard06Limits1080", "title": "Reproducibility and limits", "file": "media/cards/EN-card-06-limits-1080.png", "alt": "A clean-source build and a separate Comparator run are evidence of bounded checks, not theorem discovery." }
+  ]
+}

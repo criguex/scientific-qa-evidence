@@ -1,0 +1,69 @@
+{
+  "case_id": "cooling_02",
+  "duration_seconds": 0.00014814999985901522,
+  "finished_utc": "2026-10-20T21:17:32.316646Z",
+  "horizon": 37.5,
+  "invariants": {
+    "128": "invariant_violation",
+    "256": "invariant_violation",
+    "64": "invariant_violation"
+  },
+  "model": "cooling",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "128": 20.035749706230114,
+    "256": 20.03574984544187,
+    "64": 20.03574752333055
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "ambient": 5.0,
+    "k": 0.08,
+    "t0": 15.0
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 10.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.316498Z",
+  "status": "KILLED",
+  "units": {
+    "ambient": "degC",
+    "k": "1/s",
+    "t0": "degC",
+    "time": "s"
+  },
+  "values": {
+    "128": [
+      26.170000126973655,
+      49.81689053760645,
+      99.87735783716928,
+      205.85536774597975
+    ],
+    "256": [
+      26.17000016365568,
+      49.81689069291812,
+      99.87735833036155,
+      205.85536913809733
+    ],
+    "64": [
+      26.16999955178382,
+      49.81688810225272,
+      99.87735010370356,
+      205.85534591698413
+    ]
+  },
+  "variant": "rhs_sign"
+}

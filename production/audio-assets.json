@@ -1,0 +1,62 @@
+{
+  "status": "processed_audio_copied_for_local_review",
+  "narration_sha256": "deb7d6c37d68886cc3a96451e1311e82502534f96120f8a485d90a5b8108f633",
+  "voiceover_disclosure": "Synthetic AI-generated provider voice; not the author's recorded voice or identity clone.",
+  "provider_speed": 1.0,
+  "offline_tempo": 1.2,
+  "offline_filter": "atempo=1.2,loudnorm=I=-16:TP=-1.5:LRA=11",
+  "sample_rate_hz": 44100,
+  "loudness_measurements": {
+    "method": "ffmpeg loudnorm measurement on each processed chapter audio file",
+    "note": "The filter settings are targets, not a claim that measured loudness equals -16 LUFS.",
+    "chapters": {
+      "01_method": { "integrated_loudness_lufs": -18.71, "true_peak_dbtp": -1.39, "lra_lu": 2.7 },
+      "02_models_rc": { "integrated_loudness_lufs": -18.76, "true_peak_dbtp": -1.10, "lra_lu": 3.2 },
+      "03_formal_controls": { "integrated_loudness_lufs": -18.25, "true_peak_dbtp": -1.33, "lra_lu": 2.7 },
+      "04_campaign_results": { "integrated_loudness_lufs": -18.30, "true_peak_dbtp": -1.21, "lra_lu": 2.7 },
+      "05_reproducibility_limits": { "integrated_loudness_lufs": -19.32, "true_peak_dbtp": -1.21, "lra_lu": 3.6 }
+    }
+  },
+  "chapters": [
+    {
+      "id": "01_method",
+      "file": "video/public/english/audio/01_method.mp3",
+      "duration_seconds": 88.089274,
+      "short_clip_end_seconds": 27.9325,
+      "raw_provider_audio_sha256": "61f79594b55b3a79fb5d30fde1c2ea6ed873ae372fc08a035db3da0896ccef1d",
+      "processed_audio_sha256": "546d535e5d6fc70bb935d8fbf5babff739d5c6eed97b2824568f4580fbe9e81c"
+    },
+    {
+      "id": "02_models_rc",
+      "file": "video/public/english/audio/02_models_rc.mp3",
+      "duration_seconds": 101.475873,
+      "short_clip_end_seconds": 36.2225,
+      "raw_provider_audio_sha256": "746fc5e71703b3c3c669f9bf6d0307d4300732e87d3f4759cedd21e3f2f7f460",
+      "processed_audio_sha256": "70cd67309122c7cadc63936f04038fa009c953131e819955e6f805d0c1d3bbe2"
+    },
+    {
+      "id": "03_formal_controls",
+      "file": "video/public/english/audio/03_formal_controls.mp3",
+      "duration_seconds": 70.05839,
+      "short_clip_end_seconds": 27.1766666667,
+      "raw_provider_audio_sha256": "4e1bc451684266a3275e5dc7f3a86859fb630072eb25abe081c865a4241de40c",
+      "processed_audio_sha256": "5cc23841a51975665614ba6fb5165fd08479c328d4f575489185349bd5cca5bd"
+    },
+    {
+      "id": "04_campaign_results",
+      "file": "video/public/english/audio/04_campaign_results.mp3",
+      "duration_seconds": 88.52161,
+      "short_clip_end_seconds": 32.1116666667,
+      "raw_provider_audio_sha256": "ce3ab0ae8d288137783baf73ff5b2d96d1d5285cf311c052591b161be566e7e3",
+      "processed_audio_sha256": "7148d5840f89447b57f388e4428de85c3d585e0909f2c9a6233d31a0e384faef"
+    },
+    {
+      "id": "05_reproducibility_limits",
+      "file": "video/public/english/audio/05_reproducibility_limits.mp3",
+      "duration_seconds": 93.305283,
+      "short_clip_end_seconds": 21.7108333333,
+      "raw_provider_audio_sha256": "53565ab13b827a6716e4afc0bee33beae56f0909dad7644a1f32950a1b69830d",
+      "processed_audio_sha256": "c3892388a98b61d339af8dcf53af109cae0d7cbcc9004e2bf3e13e70aa127ff1"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+✔ [11420/11424] Built Euler.ComparatorMaximalSolution
+ℹ [11423/11424] Built Euler.Solution
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (11424 jobs).
+
+exit_code=0
+elapsed_seconds=2448.86
+max_rss_kib=7518176

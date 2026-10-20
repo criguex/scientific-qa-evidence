@@ -1,0 +1,55 @@
+1
+00:00:00,000 --> 00:00:01,935
+The kernel control uses a minimal fixture:
+
+2
+00:00:02,138 --> 00:00:04,615
+target states zero equals zero and is proved
+
+3
+00:00:04,634 --> 00:00:05,398
+with rfl.
+
+4
+00:00:05,718 --> 00:00:07,827
+The mutation keeps the declared type but replaces
+
+5
+00:00:07,856 --> 00:00:09,588
+the proof value with a proof of True.
+
+6
+00:00:10,013 --> 00:00:11,968
+Lean and nanoda accept the baseline and reject
+
+7
+00:00:11,997 --> 00:00:13,052
+that incompatible value.
+
+8
+00:00:13,371 --> 00:00:15,567
+This is a typechecking control for one declaration,
+
+9
+00:00:15,712 --> 00:00:17,802
+contrasting the declared type with the exported proof
+
+10
+00:00:17,850 --> 00:00:18,238
+value.
+
+11
+00:00:18,741 --> 00:00:21,159
+Separately, Lean accepts a nonzero constant field in
+
+12
+00:00:21,218 --> 00:00:23,897
+periodic Navier–Stokes, with zero pressure and force and
+
+13
+00:00:23,974 --> 00:00:24,826
+unit viscosity.
+
+14
+00:00:25,407 --> 00:00:27,177
+These controls have distinct scopes.

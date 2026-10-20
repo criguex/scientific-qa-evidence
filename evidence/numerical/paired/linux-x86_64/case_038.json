@@ -1,0 +1,68 @@
+{
+  "case_id": "beer_lambert_03",
+  "duration_seconds": 0.0001162369999292423,
+  "finished_utc": "2026-10-20T21:17:32.319675Z",
+  "horizon": 1.6,
+  "invariants": {
+    "128": "invariant_violation",
+    "256": "invariant_violation",
+    "64": "invariant_violation"
+  },
+  "model": "beer_lambert",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "128": 3.9837680575107144,
+    "256": 3.9837680582639594,
+    "64": 3.9837680455748705
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "alpha": 0.9,
+    "i0": 250.0,
+    "length": 1.6
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 250.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.319559Z",
+  "status": "KILLED",
+  "units": {
+    "alpha": "1/m",
+    "i0": "W/m^2",
+    "length": "m"
+  },
+  "values": {
+    "128": [
+      358.33235362302645,
+      513.6083026120706,
+      736.1698876612433,
+      1055.173954048209
+    ],
+    "256": [
+      358.33235363901383,
+      513.6083026579012,
+      736.1698877597787,
+      1055.1739542365203
+    ],
+    "64": [
+      358.3323533696914,
+      513.6083018858457,
+      736.1698860998639,
+      1055.173951064248
+    ]
+  },
+  "variant": "exponent_sign"
+}

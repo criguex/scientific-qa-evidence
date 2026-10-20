@@ -1,0 +1,103 @@
+Script started on 2026-10-20 16:42:08-05:00 [COMMAND=<redacted>]
+Building ComparatorChallenges.NavierStokes
+⣾ [0/0] Running job computation
+⣷ [186/191] Running Batteries.Util.ExtendedBinder (+ 5 more)
+⣯ [376/393] Running Aesop.RuleSet.Name (+ 2 more)
+⣟ [606/606] Running job computation (+ 0 more)
+⡿ [803/812] Running Mathlib.Algebra.GroupWithZero.Equiv (+ 4 more)
+⢿ [999/1011] Running Mathlib.Data.List.Perm.Subperm (+ 3 more)
+⣻ [1191/1205] Running Mathlib.GroupTheory.Coset.Defs (+ 3 more)
+⣽ [1385/1392] Running Mathlib.Data.Multiset.Sections (+ 4 more)
+⣾ [1571/1582] Running Mathlib.Algebra.MonoidAlgebra.Lift (+ 4 more)
+⣷ [1770/1777] Running Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition (+ 5 more)
+⣯ [1958/1967] Running Mathlib.Algebra.BigOperators.WithTop (+ 3 more)
+⣟ [2107/2157] Running Mathlib.Algebra.Category.MonCat.ForgetCorepresentable (+ 4 more)
+⡿ [2323/2341] Running Mathlib.Algebra.WithConv (+ 3 more)
+⢿ [2494/2517] Running Mathlib.Order.ZornAtoms (+ 3 more)
+⣻ [2688/2694] Running Mathlib.LinearAlgebra.Matrix.MvPolynomial (+ 5 more)
+⣽ [2864/2886] Running Mathlib.CategoryTheory.MorphismProperty.Retract (+ 5 more)
+⣾ [3067/3086] Running Mathlib.CategoryTheory.Limits.Preserves.SigmaConst (+ 5 more)
+⣷ [3265/3270] Running Mathlib.GroupTheory.FreeGroup.Reduce (+ 4 more)
+⣯ [3444/3458] Running Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor (+ 7 more)
+⣟ [3626/3635] Running Mathlib.RingTheory.FiniteLength (+ 5 more)
+⡿ [3815/3821] Running Mathlib.RingTheory.UniqueFactorizationDomain.Finsupp (+ 3 more)
+⢿ [3978/3990] Running Mathlib.Topology.Order.Lattice (+ 5 more)
+⣻ [4139/4160] Running Mathlib.Topology.Instances.RealVectorSpace (+ 7 more)
+⣽ [4342/4351] Running Mathlib.Topology.Algebra.Indicator (+ 4 more)
+⣾ [4529/4536] Running Mathlib.Algebra.Order.Quantale (+ 5 more)
+⣷ [4686/4713] Running Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField (+ 3 more)
+⣯ [4879/4889] Running Mathlib.Analysis.Complex.ReImTopology (+ 2 more)
+⣟ [5066/5084] Running Mathlib.AlgebraicGeometry.LimitsOver (+ 6 more)
+⡿ [5264/5269] Running Mathlib.CategoryTheory.Types.Set (+ 5 more)
+⢿ [5449/5457] Running Mathlib.Topology.EMetricSpace.BoundedVariation (+ 2 more)
+⣻ [5632/5637] Running Mathlib.Analysis.Calculus.FDeriv.ContinuousMultilinearMap (+ 2 more)
+⣽ [5812/5818] Running Mathlib.Analysis.Complex.UpperHalfPlane.Exp (+ 3 more)
+⣾ [5990/6002] Running Mathlib.Data.ZMod.Units (+ 5 more)
+⣷ [6169/6175] Running Mathlib.Analysis.Real.Pi.Chudnovsky (+ 5 more)
+⣯ [6354/6358] Running Mathlib.CategoryTheory.Category.KleisliCat (+ 3 more)
+⣟ [6526/6530] Running Mathlib.CategoryTheory.Monoidal.Cartesian.InfSemilattice (+ 3 more)
+⡿ [6691/6696] Running Mathlib.Combinatorics.Enumerative.DoubleCounting (+ 2 more)
+⢿ [6872/6876] Running Mathlib.Combinatorics.SimpleGraph.Walks.Decomp (+ 4 more)
+⣻ [7052/7056] Running Mathlib.Data.Finsupp.BigOperators (+ 2 more)
+⣽ [7216/7222] Running Mathlib.Dynamics.TopologicalEntropy.DynamicalEntourage (+ 4 more)
+⣾ [7392/7399] Running Mathlib.Geometry.Manifold.VectorBundle.LocalFrame (+ 3 more)
+⣷ [7561/7581] Running Mathlib.LinearAlgebra.FixedSubmodule (+ 4 more)
+⣯ [7753/7757] Running Mathlib.Order.Interval.Set.Union (+ 2 more)
+⣟ [7919/7928] Running Mathlib.NumberTheory.FactorisationProperties (+ 3 more)
+⡿ [8115/8119] Running Mathlib.Order.Interval.Lex (+ 4 more)
+⢿ [8290/8295] Running Mathlib.RingTheory.Artinian.Algebra (+ 3 more)
+⣻ [8466/8470] Running Mathlib.RingTheory.TwoSidedIdeal.Instances (+ 4 more)
+⣽ [8635/8642] Running Mathlib.Topology.Category.Locale (+ 3 more)
+⣾ [8762/8763] Running ComparatorChallenges.NavierStokes
+⣷ [8762/8763] Running ComparatorChallenges.NavierStokes
+⣯ [8763/8763] Running ComparatorChallenges.NavierStokes (+ 0 more)
+⚠ [8763/8763] Replayed ComparatorChallenges.NavierStokes
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.NavierStokes
+Building NavierStokes.ComparatorSolution
+⣾ [0/0] Running job computation
+⣷ [350/350] Running job computation (+ 0 more)
+⣯ [723/724] Running job computation (+ 0 more)
+⣟ [1089/1089] Running job computation (+ 0 more)
+⡿ [1449/1452] Running Mathlib.Algebra.Module.Pi (+ 1 more)
+⢿ [1811/1814] Running Mathlib.LinearAlgebra.AffineSpace.AffineSubspace.Basic (+ 1 more)
+⣻ [2173/2174] Running Mathlib.RingTheory.Finiteness.Cofinite (+ 1 more)
+⣽ [2525/2528] Running job computation (+ 0 more)
+⣾ [2883/2887] Running Mathlib.Topology.Algebra.Module.Spaces.WeakBilin (+ 2 more)
+⣷ [3208/3211] Running NavierStokes.R3.HeatKernelTimeBound (+ 1 more)
+⣯ [3547/3548] Running Mathlib.CategoryTheory.Linear.LinearFunctor (+ 1 more)
+⣟ [3911/3911] Running job computation (+ 0 more)
+⡿ [4279/4283] Running job computation (+ 0 more)
+⢿ [4632/4632] Running job computation (+ 0 more)
+⣻ [4974/4977] Running Mathlib.Algebra.Order.Monoid.LocallyFiniteOrder (+ 1 more)
+⣽ [5306/5309] Running Mathlib.Topology.Category.TopCat.GrothendieckTopology (+ 1 more)
+⣾ [5675/5675] Running job computation (+ 0 more)
+⣷ [6013/6014] Running job computation (+ 0 more)
+⣯ [6333/6341] Running Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Connected (+ 2 more)
+⣟ [6650/6650] Running job computation (+ 0 more)
+⡿ [6943/6943] Running job computation (+ 0 more)
+⢿ [7260/7260] Running job computation (+ 0 more)
+⣻ [7541/7542] Running Mathlib.GroupTheory.Perm.DomMulAct (+ 1 more)
+⣽ [7816/7817] Running Mathlib.MeasureTheory.Integral.IntervalIntegral.MeanValue (+ 1 more)
+⣾ [8095/8096] Running Mathlib.NumberTheory.NumberField.AdeleRing (+ 1 more)
+⣷ [8376/8377] Running Mathlib.RingTheory.Congruence.Star (+ 1 more)
+⣯ [8653/8654] Running ProofWidgets.Component.HtmlDisplay (+ 1 more)
+⣟ [8850/8857] Running job computation (+ 0 more)
+⡿ [9004/9011] Running job computation (+ 0 more)
+⢿ [9167/9175] Running NavierStokes.CorrectionStep (+ 1 more)
+⣻ [9342/9354] Running job computation (+ 0 more)
+⣽ [9371/9371] Running NavierStokes.ComparatorSolution (+ 0 more)
+ℹ [9371/9371] Replayed NavierStokes.ComparatorSolution
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (9371 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from NavierStokes.ComparatorSolution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+Your solution is okay!
+
+Script done on 2026-10-20 16:49:05-05:00 [COMMAND_EXIT_CODE="0"]

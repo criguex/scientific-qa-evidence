@@ -1,0 +1,56 @@
+{
+  "case_id": "acoustic_interface_02",
+  "duration_seconds": 4.685999783760053e-06,
+  "finished_utc": "2026-10-20T21:17:32.320147Z",
+  "horizon": null,
+  "invariants": {
+    "N/A": "ok"
+  },
+  "model": "acoustic_interface",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "N/A": 1.7763568394002506e-16
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "pi": 20.0,
+    "z1": 400000.0,
+    "z2": 1500000.0
+  },
+  "refinement_applicable": false,
+  "refinements": [
+    null
+  ],
+  "resolution": "N/A",
+  "return_code": 0,
+  "scale": 20.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.320142Z",
+  "status": "PASS",
+  "units": {
+    "pi": "Pa",
+    "pr": "Pa",
+    "pt": "Pa",
+    "z1": "Rayl",
+    "z2": "Rayl"
+  },
+  "values": {
+    "N/A": [
+      11.578947368421053,
+      31.578947368421055,
+      11.578947368421053,
+      31.578947368421055,
+      11.578947368421053,
+      31.578947368421055,
+      11.578947368421053,
+      31.578947368421055
+    ]
+  },
+  "variant": "baseline"
+}

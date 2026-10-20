@@ -1,0 +1,51 @@
+{
+  "case_id": "thin_lens_03",
+  "duration_seconds": 5.749999999998812e-06,
+  "finished_utc": "2026-10-20T21:17:21.010277Z",
+  "horizon": null,
+  "invariants": {
+    "N/A": "invariant_violation"
+  },
+  "model": "thin_lens",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "N/A": 0.12000000000000002
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "do": 0.75,
+    "f": 0.25,
+    "height": 0.04
+  },
+  "refinement_applicable": false,
+  "refinements": [
+    null
+  ],
+  "resolution": "N/A",
+  "return_code": 0,
+  "scale": 0.25,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:21.010271Z",
+  "status": "KILLED",
+  "units": {
+    "di": "m",
+    "do": "m",
+    "f": "m",
+    "height": "m"
+  },
+  "values": {
+    "N/A": [
+      0.0025,
+      0.005,
+      0.0075,
+      0.01
+    ]
+  },
+  "variant": "power_sign"
+}

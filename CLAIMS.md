@@ -1,0 +1,17 @@
+# Claims and evidence map
+
+The package distinguishes synthetic numerical checks, narrow formal controls, and earlier campaign context. Original evidence files are copied byte-for-byte where noted; their source hashes are preserved in [evidence/SHA256SUMS.txt](evidence/SHA256SUMS.txt). English explanations are translations and do not replace the originals.
+
+| Claim | Scope and wording | Evidence |
+| --- | --- | --- |
+| The synthetic suite covers nine models and 27 fixed configurations. | These are controlled calculations, not independent scientific regimes or empirical systems. | `evidence/numerical/summary.mac.json`; `evidence/numerical/fixtures/`; source in `evidence/numerical/source/` |
+| Each host evaluated 84 variants: 27 PASS, 54 KILLED, 3 SURVIVED. | macOS arm64 and Linux x86_64 ran the same suite. The runs are paired: 84 per host, not 168 distinct variants. Survivors remain reported. | All case JSON, summary JSON, and observation CSV files under `evidence/numerical/paired/`; verify with `python3 evidence/verify_numerical.py` |
+| The paired hosts agreed on their classifications and numerical outputs. | 84 classification/parameter records matched; 738 finite values and 18 null non-finite mutant values were compared. | Paired raw records and CSVs, integrity-checked by `evidence/verify_numerical.py`; derived report in `evidence/numerical/multidomain_derived.json` |
+| RC baseline and doubled-time-constant results differ at three seconds. | With R = 1 kΩ and C = 1 mF, nominal τ = 1 s. At 256 steps the baseline is about 4.751 V; doubling τ yields about 3.884 V. These are rounded JSON results, not physical readings. | `evidence/numerical/fixtures/rc-baseline.json`; `evidence/numerical/fixtures/rc-tau-double.json` |
+| A tiny RC mutation survives the fixed tolerance. | SURVIVED is preserved as a valid result; it is not proof of equivalence. | Original 84-variant summaries; source hash map |
+| The fixture control tests a mismatched proof value. | Lean reports a type mismatch. nanoda reaches an internal definitional-equality assertion; pinned source analysis derives this as a typechecking rejection. The raw summary retains its pending classification. This does not certify all theorems or a general kernel property. | `evidence/formal/fixtures/KernelFixture.lean`; `evidence/formal/kernel-mutation/` raw and derived records |
+| Clean03 completed a source build. | PASS, exit code 0, 11,424 jobs. Dependencies and toolchain cache were reused; this was not a full bootstrap and did not validate theorems or kernels. | `evidence/formal/clean-build/summary.en.json`; original manifest hash recorded in the source map |
+| Comparator rechecked configured Navier–Stokes and Euler challenges after that source build. | Both nanoda and Lean accepted the configured challenges in the fresh run. This is a bounded recorded run, not universal verification. The sanitized summary identifies the original transcripts by hash; raw transcripts are not distributed. | `evidence/formal/comparator/README.md` |
+| Earlier ODE runs and Taylor–Green visuals are separate context. | The 150 ODE records are grouped 90 + 30 + 30, not 150 independent cases. Taylor–Green V1 is an illustrative flow visualization, not a formal construction or evidence of blow-up. | `production/narration.json`; labeled `video/public/english/media/flow-illustration.mp4` |
+
+No theorem-discovery, experimental validation, certification, or proof of a real-world system is claimed.

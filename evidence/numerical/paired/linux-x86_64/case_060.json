@@ -1,0 +1,56 @@
+{
+  "case_id": "acoustic_interface_01",
+  "duration_seconds": 4.870000111623085e-06,
+  "finished_utc": "2026-10-20T21:17:32.320139Z",
+  "horizon": null,
+  "invariants": {
+    "N/A": "invariant_violation"
+  },
+  "model": "acoustic_interface",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "N/A": 0.6666666666666665
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "pi": 100.0,
+    "z1": 1500000.0,
+    "z2": 3000000.0
+  },
+  "refinement_applicable": false,
+  "refinements": [
+    null
+  ],
+  "resolution": "N/A",
+  "return_code": 0,
+  "scale": 100.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.320134Z",
+  "status": "KILLED",
+  "units": {
+    "pi": "Pa",
+    "pr": "Pa",
+    "pt": "Pa",
+    "z1": "Rayl",
+    "z2": "Rayl"
+  },
+  "values": {
+    "N/A": [
+      -33.33333333333333,
+      66.66666666666667,
+      -33.33333333333333,
+      66.66666666666667,
+      -33.33333333333333,
+      66.66666666666667,
+      -33.33333333333333,
+      66.66666666666667
+    ]
+  },
+  "variant": "impedance_swap"
+}

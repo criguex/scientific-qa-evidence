@@ -1,0 +1,51 @@
+{
+  "case_id": "fechner_03",
+  "duration_seconds": 0.0018268479998369003,
+  "finished_utc": "2026-10-20T21:17:32.329848Z",
+  "horizon": null,
+  "invariants": {
+    "N/A": "ok"
+  },
+  "model": "fechner",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "N/A": 7.629393805608231e-08
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "i0": 2e-11,
+    "i1": 1e-10,
+    "k": 0.5
+  },
+  "refinement_applicable": false,
+  "refinements": [
+    null
+  ],
+  "resolution": "N/A",
+  "return_code": 0,
+  "scale": 0.5,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.328020Z",
+  "status": "PASS",
+  "units": {
+    "i0": "W/m^2",
+    "i1": "W/m^2",
+    "k": "subjective-unit",
+    "s": "subjective-unit"
+  },
+  "values": {
+    "N/A": [
+      0.34657359027997275,
+      0.5493061443340549,
+      0.6931471805599453,
+      0.8047189562170503
+    ]
+  },
+  "variant": "baseline"
+}

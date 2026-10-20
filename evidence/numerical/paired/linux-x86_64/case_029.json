@@ -1,0 +1,67 @@
+{
+  "case_id": "chemical_second_order_03",
+  "duration_seconds": 0.00015238600008160574,
+  "finished_utc": "2026-10-20T21:17:32.318444Z",
+  "horizon": 6.666666666666667,
+  "invariants": {
+    "128": "non_finite",
+    "256": "non_finite",
+    "64": "non_finite"
+  },
+  "model": "chemical_second_order",
+  "non_finite_observed": true,
+  "normalized_error": {
+    "128": null,
+    "256": null,
+    "64": null
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "a0": 2.0,
+    "k": 0.15
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 2.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.318291Z",
+  "status": "KILLED",
+  "units": {
+    "a0": "mol/L",
+    "k": "L/(mol s)",
+    "time": "s"
+  },
+  "values": {
+    "128": [
+      3.999999953718968,
+      1049.4852969273277,
+      null,
+      null
+    ],
+    "256": [
+      3.999999997103802,
+      2098.9701276343953,
+      null,
+      null
+    ],
+    "64": [
+      3.999999263050771,
+      524.7435797358609,
+      null,
+      null
+    ]
+  },
+  "variant": "rhs_sign"
+}

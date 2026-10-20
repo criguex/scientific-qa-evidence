@@ -1,0 +1,91 @@
+Script started on 2026-10-20 16:49:05-05:00 [COMMAND=<redacted>]
+Building ComparatorChallenges.Euler
+⣾ [0/0] Running job computation
+⣷ [343/343] Running job computation (+ 0 more)
+⣯ [733/733] Running job computation (+ 0 more)
+⣟ [1102/1103] Running job computation (+ 0 more)
+⡿ [1473/1473] Running job computation (+ 0 more)
+⢿ [1843/1844] Running job computation (+ 0 more)
+⣻ [2210/2212] Running Mathlib.RingTheory.Bialgebra.Equiv (+ 1 more)
+⣽ [2571/2575] Running Mathlib.Topology.UniformSpace.UniformApproximation (+ 1 more)
+⣾ [2937/2942] Running job computation (+ 0 more)
+⣷ [3302/3302] Running job computation (+ 0 more)
+⣯ [3663/3664] Running Mathlib.Algebra.Lie.Weights.RootSystem (+ 1 more)
+⣟ [3806/3808] Running Mathlib.RingTheory.Ideal.AssociatedPrime.Basic (+ 1 more)
+⡿ [4152/4153] Running Mathlib.Analysis.RCLike.Basic (+ 1 more)
+⢿ [4509/4509] Running job computation (+ 0 more)
+⣻ [4835/4835] Running job computation (+ 0 more)
+⣽ [5194/5198] Running Mathlib.NumberTheory.Padics.PadicNorm (+ 1 more)
+⣾ [5548/5551] Running Mathlib.Analysis.Convex.Extreme (+ 2 more)
+⣷ [5890/5891] Running Mathlib.Analysis.Convex.KreinMilman (+ 1 more)
+⣯ [6211/6212] Running Mathlib.MeasureTheory.Constructions.HaarToSphere (+ 1 more)
+⣟ [6520/6521] Running Mathlib.CategoryTheory.Monoidal.Arrow (+ 1 more)
+⡿ [6810/6811] Running Mathlib.Order.Birkhoff (+ 1 more)
+⢿ [7120/7120] Running job computation (+ 0 more)
+⣻ [7377/7378] Running Mathlib.Geometry.Manifold.Instances.Sphere (+ 1 more)
+⣽ [7647/7647] Running job computation (+ 0 more)
+⣾ [7913/7913] Running job computation (+ 0 more)
+⣷ [8180/8180] Running job computation (+ 0 more)
+⣯ [8452/8453] Running Mathlib.RingTheory.Regular.ProjectiveDimension (+ 1 more)
+⣟ [8701/8704] Running Mathlib.Topology.Order.UpperLowerSetTopology (+ 1 more)
+⡿ [8762/8763] Running ComparatorChallenges.Euler
+⢿ [8762/8763] Running ComparatorChallenges.Euler
+⣻ [8762/8763] Running ComparatorChallenges.Euler
+⣽ [8763/8763] Running ComparatorChallenges.Euler (+ 0 more)
+⚠ [8763/8763] Replayed ComparatorChallenges.Euler
+warning: ComparatorChallenges/Euler.lean:85:8: declaration uses `sorry`
+warning: ComparatorChallenges/Euler.lean:170:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.Euler
+Building Euler.Solution
+⣾ [0/0] Running job computation
+⣷ [314/316] Running Mathlib.Algebra.Opposites (+ 1 more)
+⣯ [694/696] Running Mathlib.Tactic.Widget.CongrM (+ 2 more)
+⣟ [1069/1070] Running Mathlib.Data.List.Flatten (+ 1 more)
+⡿ [1436/1438] Running Mathlib.Logic.Equiv.Fin.Basic (+ 1 more)
+⢿ [1802/1805] Running Mathlib.Algebra.Notation.Lemmas (+ 1 more)
+⣻ [2166/2167] Running job computation (+ 0 more)
+⣽ [2520/2524] Running Mathlib.Topology.LocallyFinite (+ 2 more)
+⣾ [2884/2887] Running job computation (+ 0 more)
+⣷ [3243/3246] Running job computation (+ 0 more)
+⣯ [3582/3588] Running job computation (+ 0 more)
+⣟ [3931/3933] Running job computation (+ 0 more)
+⡿ [4283/4285] Running Mathlib.Data.Real.ConjExponents (+ 1 more)
+⢿ [4618/4619] Running Mathlib.Algebra.Star.TransferInstance (+ 1 more)
+⣻ [4962/4965] Running Mathlib.Data.Real.Embedding (+ 1 more)
+⣽ [5314/5315] Running Mathlib.AlgebraicTopology.SimplexCategory.MorphismProperty (+ 1 more)
+⣾ [5650/5651] Running Mathlib.Analysis.Calculus.IteratedDeriv.Analytic (+ 1 more)
+⣷ [5977/5978] Running job computation (+ 0 more)
+⣯ [6287/6287] Running job computation (+ 0 more)
+⣟ [6579/6581] Running Mathlib.CategoryTheory.Subobject.NoetherianObject (+ 1 more)
+⡿ [6867/6868] Running Mathlib.Combinatorics.SimpleGraph.StronglyRegular (+ 1 more)
+⢿ [7146/7147] Running Mathlib.Data.QPF.Multivariate.Constructions.Quot (+ 1 more)
+⣻ [7395/7395] Running job computation (+ 0 more)
+⣽ [7649/7651] Running Mathlib.LinearAlgebra.SpecialLinearGroup (+ 1 more)
+⣾ [7888/7888] Running job computation (+ 0 more)
+⣷ [8143/8143] Running job computation (+ 0 more)
+⣯ [8397/8398] Running Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic (+ 1 more)
+⣟ [8634/8634] Running job computation (+ 0 more)
+⡿ [8780/8802] Running Euler.TimeLpLinearity (+ 3 more)
+⢿ [8970/8981] Running Euler.CylinderScalarRepresentative (+ 1 more)
+⣻ [9158/9168] Running Euler.MeanContinuousVelocity (+ 3 more)
+⣽ [9320/9338] Running Euler.FiniteMetricEnergy (+ 2 more)
+⣾ [9562/9568] Running Euler.ClassicalDivergence (+ 3 more)
+⣷ [9751/9757] Running Euler.CylinderCorrectorMeanZero (+ 3 more)
+⣯ [9966/9975] Running Euler.PacketPrimaryDynamics (+ 1 more)
+⣟ [10184/10195] Running Euler.PacketFieldTensorBounds (+ 4 more)
+⡿ [10402/10405] Running Euler.ParentRenewalScaleCosts (+ 1 more)
+⢿ [10591/10591] Running Euler.Solution (+ 0 more)
+⣻ [10591/10591] Running Euler.Solution (+ 0 more)
+ℹ [10591/10591] Replayed Euler.Solution
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (10591 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from Euler.Solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+Your solution is okay!
+
+Script done on 2026-10-20 17:00:00-05:00 [COMMAND_EXIT_CODE="0"]

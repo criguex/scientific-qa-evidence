@@ -1,0 +1,97 @@
+{
+  "artifact_kind": "derived_cross_host_summary",
+  "scope": "synthetic QA mutation sensitivity campaign; not empirical science or validation of real-world systems",
+  "source_archive_sha256": "8a98368e7ac53aeb3fedb777ba13073afe42f03b9204d0cfec77120a1f218f99",
+  "contract_sha256": "9c48dae363e549243ea5bab36da0d56c51ddec21903bd8dc3c982c2bdb520efb",
+  "campaigns": [
+    {
+      "host_label": "macOS arm64",
+      "runtime": "Python 3.9.6",
+      "started_utc": "2026-10-20T21:17:20.994955Z",
+      "finished_utc": "2026-10-20T21:17:21.037904Z",
+      "result_directory": "multidomain_mac",
+      "summary_sha256": "d45fe458dd10c1c5053cb7ba49796b84a2fd178e7627b46fa74c5e71eb95e0ec"
+    },
+    {
+      "host_label": "Linux x86_64 WAR",
+      "runtime": "Python 3.12.3",
+      "started_utc": "2026-10-20T21:17:32.313714Z",
+      "finished_utc": "2026-10-20T21:17:32.336451Z",
+      "result_directory": "multidomain_war",
+      "summary_sha256": "867ce78201e211a587dcec4a6c89900963d54b92b6b5f6d78a73c52f84954b17"
+    }
+  ],
+  "per_host": {
+    "distinct_configurations": 27,
+    "variant_evaluations": 84,
+    "process_invocations": 1,
+    "classification_counts": {
+      "PASS": 27,
+      "KILLED": 54,
+      "SURVIVED": 3
+    },
+    "csv_rows": 756,
+    "finite_point_errors_recalculated": 738,
+    "null_nonfinite_values": 18,
+    "artifact_hashes_verified": 85,
+    "summary_sha256_verified": true
+  },
+  "paired_host_comparison": {
+    "classification_and_parameter_records_equal": 84,
+    "finite_values_compared": 738,
+    "null_values_equal": 18,
+    "maximum_scaled_cross_host_delta": 1.1102230246251565e-16,
+    "source_hashes_equal": true
+  },
+  "nonfinite_values": {
+    "count": 18,
+    "cause": "known rhs_sign mutant in the three second-order chemical-consumption configurations",
+    "affected_cases": [
+      "chemical_second_order_01",
+      "chemical_second_order_02",
+      "chemical_second_order_03"
+    ],
+    "classification": "KILLED after baseline PASS; nonfinite mutant outputs are an expected mutation response, not infrastructure failure"
+  },
+  "error_metrics": {
+    "tolerance": 1e-6,
+    "largest_fine_normalized_error_including_NA_models": {
+      "case_id": "fechner_03",
+      "value": 7.629393805608231e-8,
+      "resolution": "N/A",
+      "comparison": "logarithmic formula vs trapezoidal numerical integral"
+    },
+    "largest_fine_ode_normalized_error": {
+      "case_id": "logistic_01",
+      "value": 1.1215475770320893e-9,
+      "resolution": 256
+    },
+    "baseline_ode_refinement_orders_diagnostic": {
+      "baseline_count": 15,
+      "range": [3.960676, 4.028201],
+      "interpretation": "observed diagnostic only; not an error bound; some cases may be affected by roundoff"
+    },
+    "fechner_trapezoid_exact_arithmetic_truncation_bound_normalized_by_k": {
+      "formula": "(b/a - 1)^3 / (6 n^2)",
+      "n": 4096,
+      "maximum_b_over_a": 5,
+      "bound": 6.357828776041666e-7,
+      "interpretation": "truncation-only bound under exact arithmetic; excludes floating-point error and is not an interval-certified total error"
+    }
+  },
+  "version_history": {
+    "v1_outputs_preserved_privately": true,
+    "v1_csv_rows_per_host": 720,
+    "v2_csv_rows_per_host": 756,
+    "v1_omission": "CSV exporter wrote only four acoustic scalar entries although JSON stored four repeated reflected/transmitted pressure pairs",
+    "v2_change": "CSV labels reflected/transmitted components, exports every stored value and includes point_normalized_error plus max_normalized_error",
+    "json_values_parameters_and_classifications_identical_v1_v2_per_host": 84,
+    "scientific_model_oracle_parameter_tolerance_changes": false
+  },
+  "limits": [
+    "the 27 configurations include dimensionless rescalings and are not 27 independent scientific regimes",
+    "macOS and WAR are paired reruns of the same synthetic variants, not 168 distinct test cases",
+    "Fechner and logistic are illustrative and do not validate human perception",
+    "no empirical observations, experimental apparatus, industrial system, or project theorem was validated"
+  ]
+}

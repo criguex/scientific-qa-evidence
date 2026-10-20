@@ -1,0 +1,51 @@
+1
+00:00:00,000 --> 00:00:02,487
+The suite ran on macOS arm64 and Linux
+
+2
+00:00:02,690 --> 00:00:04,063
+x86_64.
+
+3
+00:00:04,567 --> 00:00:07,131
+Each environment evaluated the same eighty-four variants:
+
+4
+00:00:07,305 --> 00:00:10,827
+twenty-seven baseline PASS, fifty-four mutant KILLED, and three
+
+5
+00:00:10,865 --> 00:00:12,374
+tiny calibration SURVIVED.
+
+6
+00:00:12,800 --> 00:00:15,306
+Classifications and parameters match across hosts.
+
+7
+00:00:15,577 --> 00:00:17,308
+These are paired runs of one suite, not
+
+8
+00:00:17,367 --> 00:00:19,292
+one hundred sixty-eight distinct cases.
+
+9
+00:00:19,718 --> 00:00:22,213
+Survivors remain in the report without forcing rejection.
+
+10
+00:00:22,717 --> 00:00:25,088
+Counts are per host, with explicit denominators;
+
+11
+00:00:25,407 --> 00:00:27,071
+another platform added no cases.
+
+12
+00:00:27,574 --> 00:00:29,983
+This distinction matters when reporting totals and comparing
+
+13
+00:00:30,022 --> 00:00:32,112
+results across both hosts side by side.

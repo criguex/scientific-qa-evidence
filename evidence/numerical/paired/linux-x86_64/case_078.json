@@ -1,0 +1,69 @@
+{
+  "case_id": "logistic_01",
+  "duration_seconds": 0.0002881769999021344,
+  "finished_utc": "2026-10-20T21:17:32.334644Z",
+  "horizon": 1.0,
+  "invariants": {
+    "128": "ok",
+    "256": "ok",
+    "64": "ok"
+  },
+  "model": "logistic",
+  "non_finite_observed": false,
+  "normalized_error": {
+    "128": 0.49765995086390374,
+    "256": 0.4976599504668179,
+    "64": 0.4976599575192922
+  },
+  "observations": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "oracle_valid": true,
+  "params": {
+    "capacity": 1.0,
+    "p0": 0.1,
+    "r": 8.0
+  },
+  "refinement_applicable": true,
+  "refinements": [
+    64,
+    128,
+    256
+  ],
+  "resolution": "64,128,256",
+  "return_code": 0,
+  "scale": 1.0,
+  "seed": null,
+  "started_utc": "2026-10-20T21:17:32.334355Z",
+  "status": "KILLED",
+  "units": {
+    "capacity": "probability",
+    "p0": "probability",
+    "r": "1/normalized-stimulus",
+    "stimulus": "normalized [0,1]"
+  },
+  "values": {
+    "128": [
+      0.32439281831726413,
+      0.4658692252200118,
+      0.495091164973014,
+      0.4993299733962346
+    ],
+    "256": [
+      0.32439282190175744,
+      0.46586922940388514,
+      0.4950911666607228,
+      0.49932997379332045
+    ],
+    "64": [
+      0.32439276155926094,
+      0.46586915659277844,
+      0.49509113682893124,
+      0.4993299667408461
+    ]
+  },
+  "variant": "capacity_half"
+}
