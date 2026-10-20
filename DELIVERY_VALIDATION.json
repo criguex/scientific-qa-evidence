@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-20T22:30:19Z",
+  "status": "local_review_candidate_not_published",
+  "source_commit": "3281ad5f9c17cb603c3091eab2137ffeced8a58c",
+  "language": "English",
+  "voice": "ElevenLabs Christian - Calm Latin voice; synthetic provider voice, not the author's voice",
+  "baked_tempo": 1.2,
+  "player_speed_for_review": 1,
+  "checks": {
+    "python_unit_tests": {
+      "passed": 13,
+      "failed": 0,
+      "paid_api_calls": 0
+    },
+    "clean_npm_install": "PASS: npm ci --ignore-scripts --offline",
+    "typescript": "PASS: tsc --noEmit",
+    "source_checksums": "PASS in a clean local Git clone",
+    "numerical_reexecution": {
+      "variants": 84,
+      "PASS": 27,
+      "KILLED": 54,
+      "SURVIVED": 3
+    },
+    "saved_paired_evidence": "PASS: 84 records per host, 738 finite pairs and 18 null pairs",
+    "processed_audio": "PASS: five hashes, durations and aligned clip boundaries",
+    "video_decode": "PASS: full long video and all five shorts decoded with no reported errors",
+    "visual_review": "Spot checks of landscape and portrait frames and three cards; not every frame",
+    "browser_playback": "Confirmed English long video playing at 1x, duration 441.536 s, no player error"
+  },
+  "human_audio_and_editorial_approval": "PENDING",
+  "external_publication": "NOT PERFORMED",
+  "repository_visibility": "LOCAL ONLY; no remote configured",
+  "license_confirmation": "PENDING",
+  "assets": [
+    {
+      "file": "media/EN-long-1920x1080.mp4",
+      "bytes": 32109257,
+      "sha256": "8ad07f7ed94952879c84ba1a2cd47ddb3d646f0d4aa807dab62147783aa1b7ca",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "441.536000"
+        }
+      }
+    },
+    {
+      "file": "media/cards/EN-card-01-cover-1080.png",
+      "bytes": 654894,
+      "sha256": "0f15dfa6c7082d81cfbd6ccb36bd654ddb866beae9d9241808297e927bda5269",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/cards/EN-card-02-method-1080.png",
+      "bytes": 649771,
+      "sha256": "004eac24d14849cd54af104d709e83ee0236b6bfcf6f9a806696d4fd90257dc2",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/cards/EN-card-03-models-1080.png",
+      "bytes": 653305,
+      "sha256": "7ca2fa120e8afd35a6ed00b233a92419408c6c5b644b4069c8e8f38833805a81",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/cards/EN-card-04-formal-1080.png",
+      "bytes": 657536,
+      "sha256": "79f5a22e1cd16700d5d818ea3a12254d8296a2facd3fd4917c8574e4dfb10d73",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/cards/EN-card-05-results-1080.png",
+      "bytes": 650464,
+      "sha256": "d6afcf009ad367eef75fcad55893a08ca2a7204045c6fe62ce52e61bd73483e5",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/cards/EN-card-06-limits-1080.png",
+      "bytes": 685465,
+      "sha256": "088f313aea4e61743e44fd9baa92d430b474e0161cc59bbc43cec591d422d423",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "png",
+            "width": 1080,
+            "height": 1080
+          }
+        ],
+        "format": {}
+      }
+    },
+    {
+      "file": "media/shorts/EN-short-01-method-1080x1920.mp4",
+      "bytes": 2173070,
+      "sha256": "05f271be2b6ecf69cd96300d97ac26c8b027158173ea62b3ed89a3a944d67772",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1080,
+            "height": 1920
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "27.947000"
+        }
+      }
+    },
+    {
+      "file": "media/shorts/EN-short-02-models-1080x1920.mp4",
+      "bytes": 2550413,
+      "sha256": "afed9526ec6af8b0bb6e80144be4aaff8cedabbe87f2ed33e14346814eab416c",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1080,
+            "height": 1920
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "36.245000"
+        }
+      }
+    },
+    {
+      "file": "media/shorts/EN-short-03-formal-1080x1920.mp4",
+      "bytes": 2225486,
+      "sha256": "f8c0d086cc8a1268848b86ed98692e79f807ac37fba8f2b9854bf467291c78eb",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1080,
+            "height": 1920
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "27.200000"
+        }
+      }
+    },
+    {
+      "file": "media/shorts/EN-short-04-results-1080x1920.mp4",
+      "bytes": 2193459,
+      "sha256": "909886eca7b7d31395b4274d2c39a378900190878b0ca99292b5b95cfecb2f0e",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1080,
+            "height": 1920
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "32.149000"
+        }
+      }
+    },
+    {
+      "file": "media/shorts/EN-short-05-limits-1080x1920.mp4",
+      "bytes": 2484248,
+      "sha256": "ce56f8029aff59a38f852e64a8953d152e33c469ef2c5211e494d88635a7a781",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1080,
+            "height": 1920
+          },
+          {
+            "codec_name": "aac"
+          }
+        ],
+        "format": {
+          "duration": "21.739000"
+        }
+      }
+    }
+  ]
+}
