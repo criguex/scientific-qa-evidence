@@ -69,6 +69,6 @@ This reruns the numerical suite only; it does not rebuild the formal source or r
 
 Created by **Cristian Guerra**, QA Automation, from **Medellín, Colombia** ([`@criguex`](https://github.com/criguex)). Original proofs are credited to their OpenAI authors; see [Authorship and AI disclosure](AUTHORSHIP.md) for attribution and tool-assistance details. Lean, mathlib, and Comparator are identified in the [dependency and fidelity records](evidence/formal/clay-lean-fidelity.md).
 
-Six interactive HTML scenes and supporting loops are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. **No video or social post is represented as published.** The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
+Six interactive HTML scenes and an RC preview loop are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. **No video or social post is represented as published.** The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
 
 No theorem discovery, scientific certification, empirical validation, or proof of a real-world system is claimed.
