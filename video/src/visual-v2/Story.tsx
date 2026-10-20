@@ -83,7 +83,7 @@ const beats: Beat[][] = [
     { at: 85, scene: "campaign", kind: "trace", title: "JSON stayed authoritative", body: "JSON and classifications were preserved when the CSV export was corrected.", values: ["Raw JSON", "Derived CSV", "Classification preserved"] },
   ],
   [
-    { at: 0, scene: "campaign", kind: "trace", title: "A reviewable evidence path", body: "The package links source, records and reproducible checks; publication remains a separate review decision.", values: ["Source", "Evidence", "Reproduction"] },
+    { at: 0, scene: "campaign", kind: "trace", title: "A reviewable evidence path", body: "The public repository links source, records and reproducible checks for independent review.", values: ["Source", "Evidence", "Reproduction"] },
     { at: 8, scene: "formal", kind: "chain", title: "Integrity, rows, paired correspondence", body: "Local checks confirmed artifact integrity, CSV row counts and cross-host correspondence.", values: ["SHA-256", "CSV rows", "Paired host records"] },
     { at: 17, scene: "campaign", kind: "reproduce", title: "Reproducing files is not repeating experiments", body: "A saved-evidence check verifies artifacts; the synthetic suite rerun is a distinct action.", values: ["Verify saved records", "Rerun synthetic suite", "Different from experiment"] },
     { at: 22, scene: "campaign", kind: "build", title: "Clean source build: 11,424 jobs", body: "Clean03 exited successfully and reused dependency and toolchain caches; it was not a full bootstrap.", values: ["PASS · exit 0", "11,424 jobs", "Cache reused"] },
@@ -128,14 +128,15 @@ const Matrix: React.FC<{ vertical: boolean; progress: number }> = ({ vertical, p
 };
 
 const TorusDiagram: React.FC<{ frame: number; vertical: boolean }> = ({ frame, vertical }) => {
-  const rotation = frame * 1.4;
+  const particleX = 52 + ((frame * 2.4) % 316);
   return (
     <div style={{ display: "grid", gridTemplateColumns: vertical ? "1fr" : "1fr 1fr", alignItems: "center", gap: 24, marginTop: 20 }}>
-      <svg viewBox="0 0 420 270" style={{ width: "100%", height: vertical ? 220 : 280 }} aria-label="Periodic torus schematic with constant velocity arrows">
-        <ellipse cx="210" cy="134" rx="166" ry="72" fill="#0b2434" stroke={colors.mint} strokeWidth="4" />
-        <ellipse cx="210" cy="134" rx="92" ry="72" fill="none" stroke="#315264" strokeWidth="3" />
-        {[0, 1, 2, 3, 4, 5].map((i) => <g key={i} transform={`rotate(${rotation + i * 60} 210 134)`}><line x1="210" y1="134" x2="350" y2="134" stroke={i % 2 ? colors.gold : colors.mint} strokeWidth="5" /><path d="M350 134l-18 -10v20z" fill={i % 2 ? colors.gold : colors.mint} /></g>)}
-        <text x="210" y="252" fill={colors.muted} fontSize="18" textAnchor="middle">Periodic domain · schematic</text>
+      <svg viewBox="0 0 420 270" style={{ width: "100%", height: vertical ? 220 : 280 }} aria-label="Periodic box schematic with parallel equal-length constant-velocity arrows">
+        <rect x="42" y="48" width="336" height="150" rx="16" fill="#0b2434" stroke={colors.mint} strokeWidth="4" />
+        {[82, 128, 174].map((y, index) => <g key={y}><line x1="90" y1={y} x2="170" y2={y} stroke={index === 1 ? colors.gold : colors.mint} strokeWidth="5" /><path d={`M170 ${y}l-16 -9v18z`} fill={index === 1 ? colors.gold : colors.mint} /></g>)}
+        <circle cx={particleX} cy="128" r="8" fill={colors.white} />
+        <path d="M45 214h330" stroke="#315264" strokeWidth="2" strokeDasharray="7 7" />
+        <text x="210" y="242" fill={colors.muted} fontSize="18" textAnchor="middle">Periodic wrap · schematic</text>
       </svg>
       <div style={{ display: "grid", gap: 12 }}>{["Constant velocity", "Zero pressure and force", "Unit viscosity"].map((value, i) => <div key={value} style={{ padding: 16, background: "#102f43", borderLeft: `5px solid ${i === 1 ? colors.gold : colors.mint}`, borderRadius: 12, fontSize: vertical ? 22 : 28, fontWeight: 750 }}>{value}</div>)}</div>
     </div>
@@ -144,7 +145,7 @@ const TorusDiagram: React.FC<{ frame: number; vertical: boolean }> = ({ frame, v
 
 const ODEBars: React.FC<{ vertical: boolean }> = ({ vertical }) => {
   const values = [{ h: "0.05", value: 1.3023e-5, label: "1.3023 × 10⁻⁵" }, { h: "0.025", value: 7.24e-7, label: "7.24 × 10⁻⁷" }, { h: "0.0125", value: 4.27e-8, label: "4.27 × 10⁻⁸" }];
-  return <div style={{ display: "grid", gap: vertical ? 12 : 18, marginTop: 24 }}>{values.map((item, index) => <div key={item.h} style={{ display: "grid", gridTemplateColumns: vertical ? "150px 1fr" : "210px 1fr", alignItems: "center", gap: 16 }}><div style={{ fontSize: vertical ? 21 : 27, fontWeight: 700 }}>h = {item.h}</div><div><div style={{ height: vertical ? 32 : 42, width: `${Math.max(12, Math.sqrt(item.value / values[0].value) * 100)}%`, background: index === 0 ? colors.coral : index === 1 ? colors.gold : colors.mint, borderRadius: 9 }} /><div style={{ marginTop: 4, fontSize: vertical ? 20 : 25, fontWeight: 800 }}>{item.label}</div></div></div>)}</div>;
+  return <div style={{ display: "grid", gap: vertical ? 12 : 18, marginTop: 24 }}><div style={{ fontSize: vertical ? 17 : 20, color: colors.muted }}>Bar length proportional to absolute error</div>{values.map((item, index) => <div key={item.h} style={{ display: "grid", gridTemplateColumns: vertical ? "150px 1fr" : "210px 1fr", alignItems: "center", gap: 16 }}><div style={{ fontSize: vertical ? 21 : 27, fontWeight: 700 }}>h = {item.h}</div><div><div style={{ height: vertical ? 32 : 42, width: `${Math.max(2, item.value / values[0].value * 100)}%`, background: index === 0 ? colors.coral : index === 1 ? colors.gold : colors.mint, borderRadius: 9 }} /><div style={{ marginTop: 4, fontSize: vertical ? 20 : 25, fontWeight: 800 }}>{item.label}</div></div></div>)}</div>;
 };
 
 const PhaseGraphic: React.FC<{ beat: Beat; progress: number; frame: number; vertical: boolean }> = ({ beat, progress, frame, vertical }) => {
@@ -180,12 +181,12 @@ const StageArt: React.FC<{ beat: Beat; scene: SceneId; sceneTime: number; vertic
   <div style={{ width: vertical ? 792 : 700, height: vertical ? 792 : 700, overflow: "hidden", border: "1px solid #315264", borderRadius: 22, background: colors.navy, position: "relative" }}>
     {beat.video ? (
       <Sequence from={startFrame} durationInFrames={duration} trimBefore={Math.round((beat.videoStart ?? 0) * fps)} premountFor={fps} style={{ position: "absolute", inset: 0 }}>
-        <Video src={staticFile("english/media/flow-illustration.mp4")} muted premountFor={fps} objectFit="cover" style={{ position: "absolute", width: 1080, height: 1080, transform: vertical ? "scale(.7333)" : "scale(.6481)", transformOrigin: "top left", opacity: 0.82 }} />
+        <Video src={staticFile("english/media/flow-illustration.mp4")} muted premountFor={fps} objectFit="contain" style={{ position: "absolute", left: 0, right: 0, top: vertical ? 184 : 196, width: "100%", height: vertical ? 211 : 187, opacity: 0.95 }} />
       </Sequence>
     ) : (
       <div style={{ width: 1080, height: 1080, transform: vertical ? "scale(.7333)" : "scale(.6481)", transformOrigin: "top left" }}><CanvasScene sceneId={scene} timeOverrideSeconds={sceneTime} /></div>
     )}
-    {beat.video && <div style={{ position: "absolute", left: 18, right: 18, bottom: 16, textAlign: "center", borderRadius: 12, padding: 10, background: "#071b2bd9", color: colors.gold, fontSize: vertical ? 16 : 20, fontWeight: 850 }}>ILLUSTRATIVE FLOW · NOT CAMPAIGN EVIDENCE OR PROOF</div>}
+    {beat.video && <><div style={{ position: "absolute", top: vertical ? 128 : 138, left: 20, right: 20, textAlign: "center", color: colors.white, fontSize: vertical ? 19 : 22, fontWeight: 800 }}>TWO-PANEL FLOW CLIP · FULL FRAME</div><div style={{ position: "absolute", left: 18, right: 18, bottom: 16, textAlign: "center", borderRadius: 12, padding: 10, background: "#071b2bd9", color: colors.gold, fontSize: vertical ? 16 : 20, fontWeight: 850 }}>ILLUSTRATIVE FLOW · NOT CAMPAIGN EVIDENCE OR PROOF</div></>}
   </div>
 );
 
@@ -209,29 +210,31 @@ const StoryVisual: React.FC<{ chapterIndex: number; vertical: boolean }> = ({ ch
 
   return (
     <Shell vertical={vertical}>
-      <div style={{ position: "absolute", top: vertical ? 58 : 48, left: vertical ? 54 : 90, right: vertical ? 54 : 90, display: "flex", justifyContent: "space-between", alignItems: "center", color: colors.mint, fontSize: vertical ? 20 : 22, letterSpacing: vertical ? 2 : 4, fontWeight: 800, textTransform: "uppercase" }}>
-        <span>ADV-050 · {String(chapterIndex + 1).padStart(2, "0")} / 05</span><span>Cristian Guerra · QA Automation · Medellín, Colombia · @criguex</span>
-      </div>
       {vertical ? (
         <>
-          <div style={{ position: "absolute", top: 150, left: 54, right: 54, fontSize: 48, fontWeight: 850, lineHeight: 1.05 }}>{title}</div>
+          <div style={{ position: "absolute", top: 42, left: 54, right: 54, display: "grid", gap: 10, color: colors.mint, textTransform: "uppercase", fontWeight: 800 }}>
+            <div style={{ fontSize: 20, letterSpacing: 2 }}>ADV-050 · {String(chapterIndex + 1).padStart(2, "0")} / 05</div>
+            <div style={{ fontSize: 17, letterSpacing: 0.5 }}>Cristian Guerra · QA Automation · Medellín, Colombia · @criguex</div>
+          </div>
+          <div style={{ position: "absolute", top: 145, left: 54, right: 54, fontSize: 48, fontWeight: 850, lineHeight: 1.05, minWidth: 0, overflowWrap: "anywhere" }}>{title}</div>
           <div style={{ position: "absolute", top: 280, left: 144 }}><StageArt beat={beat} scene={canvasScene} sceneTime={sceneTime} vertical startFrame={startFrame} duration={duration} fps={fps} /></div>
           <div style={{ position: "absolute", top: 1105, left: 54, right: 54, border: "1px solid #315264", borderRadius: 22, background: "linear-gradient(145deg,#15374a,#0d2638)", padding: 24 }}>
             <div style={{ color: colors.gold, fontSize: 18, fontWeight: 800, letterSpacing: 1.6 }}>{beat.kind.toUpperCase().replace(/-/g, " ")}</div>
             <div style={{ marginTop: 10, fontSize: 34, fontWeight: 850, lineHeight: 1.08 }}>{beat.title}</div>
-            <div style={{ marginTop: 12, color: colors.muted, fontSize: 22, lineHeight: 1.28 }}>{beat.body}</div>
+            <div style={{ marginTop: 12, color: colors.muted, fontSize: 22, lineHeight: 1.28, minWidth: 0, maxWidth: "100%", overflowWrap: "anywhere" }}>{beat.body}</div>
             <PhaseGraphic beat={beat} progress={progress} frame={frame} vertical />
           </div>
           <div style={{ position: "absolute", left: 54, right: 54, bottom: 280, height: 8, background: "#25485a", borderRadius: 6 }}><div style={{ width: `${progress * 100}%`, height: "100%", borderRadius: 6, background: colors.mint }} /></div>
         </>
       ) : (
         <>
-          <div style={{ position: "absolute", top: 120, left: 90, right: 90, display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 32 }}><div style={{ fontSize: 32, fontWeight: 800 }}>{title}</div><div style={{ color: colors.muted, fontSize: 21 }}>Chapter time {second.toFixed(1)} s</div></div>
+          <div style={{ position: "absolute", top: 48, left: 90, right: 90, display: "flex", justifyContent: "space-between", alignItems: "center", color: colors.mint, fontSize: 22, letterSpacing: 2, fontWeight: 800, textTransform: "uppercase" }}><span>ADV-050 · {String(chapterIndex + 1).padStart(2, "0")} / 05</span><span style={{ fontSize: 17, letterSpacing: 0.5 }}>Cristian Guerra · QA Automation · Medellín, Colombia · @criguex</span></div>
+          <div style={{ position: "absolute", top: 120, left: 90, right: 90, display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 32, minWidth: 0 }}><div style={{ fontSize: 32, fontWeight: 800, minWidth: 0, overflowWrap: "anywhere" }}>{title}</div><div style={{ color: colors.muted, fontSize: 21, whiteSpace: "nowrap" }}>Chapter time {second.toFixed(1)} s</div></div>
           <div style={{ position: "absolute", top: 210, left: 90 }}><StageArt beat={beat} scene={canvasScene} sceneTime={sceneTime} vertical={false} startFrame={startFrame} duration={duration} fps={fps} /></div>
           <div style={{ position: "absolute", top: 210, left: 830, right: 90, height: 700, border: "1px solid #315264", borderRadius: 22, background: "linear-gradient(145deg,#15374a,#0d2638)", padding: 36, overflow: "hidden" }}>
             <div style={{ color: colors.gold, fontSize: 20, fontWeight: 800, letterSpacing: 2 }}>{beat.kind.toUpperCase().replace(/-/g, " ")}</div>
             <div style={{ marginTop: 18, fontSize: 47, fontWeight: 850, lineHeight: 1.04 }}>{beat.title}</div>
-            <div style={{ marginTop: 18, color: colors.muted, fontSize: 26, lineHeight: 1.3 }}>{beat.body}</div>
+            <div style={{ marginTop: 18, color: colors.muted, fontSize: 26, lineHeight: 1.3, minWidth: 0, maxWidth: "100%", overflowWrap: "anywhere" }}>{beat.body}</div>
             <PhaseGraphic beat={beat} progress={progress} frame={frame} vertical={false} />
           </div>
           <div style={{ position: "absolute", left: 90, right: 90, bottom: 94, height: 8, background: "#25485a", borderRadius: 6 }}><div style={{ width: `${progress * 100}%`, height: "100%", borderRadius: 6, background: colors.mint }} /></div>
@@ -248,7 +251,7 @@ const CaptionOverlay: React.FC<{ chapterIndex: number; vertical: boolean }> = ({
   const currentMs = frame * 1000 / fps;
   const caption = media.chapters[chapterIndex].captions.find((item) => currentMs >= item.startMs && currentMs < item.endMs);
   if (!caption) return null;
-  return <div style={{ position: "absolute", zIndex: 20, left: vertical ? 66 : 120, right: vertical ? 66 : 120, bottom: vertical ? 164 : 38, display: "flex", justifyContent: "center" }}><div style={{ maxWidth: vertical ? 930 : 1650, textAlign: "center", border: "1px solid #55dfbd", borderRadius: 18, padding: vertical ? "20px 28px" : "16px 30px", background: "#061723ed", color: colors.white, fontSize: vertical ? 40 : 32, fontWeight: 700, lineHeight: 1.18 }}>{caption.text}</div></div>;
+  return <div style={{ position: "absolute", zIndex: 20, left: vertical ? 66 : 120, right: vertical ? 66 : 120, bottom: vertical ? 164 : 38, display: "flex", justifyContent: "center", fontFamily: "Inter, Avenir Next, Arial, sans-serif" }}><div style={{ maxWidth: vertical ? 930 : 1650, textAlign: "center", border: "1px solid #55dfbd", borderRadius: 18, padding: vertical ? "20px 28px" : "16px 30px", background: "#061723ed", color: colors.white, fontSize: vertical ? 40 : 32, fontWeight: 700, lineHeight: 1.18, fontFamily: "inherit" }}>{caption.text}</div></div>;
 };
 
 const ChapterSegment: React.FC<{ chapterIndex: number; vertical: boolean }> = ({ chapterIndex, vertical }) => {

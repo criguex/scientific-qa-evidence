@@ -85,6 +85,34 @@ class VisualV2Tests(unittest.TestCase):
             intervals = [right - left for left, right in zip(seconds, seconds[1:])]
             self.assertLessEqual(max(intervals), 12)
 
+    def test_visuals_preserve_the_claimed_vector_and_error_scale(self):
+        torus = STORY.split("const TorusDiagram", 1)[1].split("const ODEBars", 1)[0]
+        bars = STORY.split("const ODEBars", 1)[1].split("const PhaseGraphic", 1)[0]
+        self.assertIn("parallel equal-length constant-velocity arrows", torus)
+        self.assertIn("((frame * 2.4) % 316)", torus)
+        self.assertNotIn("rotate(", torus)
+        self.assertIn("Bar length proportional to absolute error", bars)
+        self.assertIn("item.value / values[0].value * 100", bars)
+        self.assertIn("Math.max(2,", bars)
+        self.assertNotIn("Math.sqrt", bars)
+
+    def test_video_and_portrait_layout_keep_content_inside_safe_frame(self):
+        stage = STORY.split("const StageArt", 1)[1].split("const StoryVisual", 1)[0]
+        visual = STORY.split("const StoryVisual", 1)[1].split("const CaptionOverlay", 1)[0]
+        captions = STORY.split("const CaptionOverlay", 1)[1].split("const ChapterSegment", 1)[0]
+        self.assertIn('objectFit="contain"', stage)
+        self.assertIn('width: "100%", height: vertical ? 211 : 187', stage)
+        self.assertIn("TWO-PANEL FLOW CLIP · FULL FRAME", stage)
+        self.assertIn("top: 42, left: 54, right: 54, display: \"grid\"", visual)
+        self.assertIn("top: 145, left: 54, right: 54", visual)
+        self.assertIn('fontFamily: "Inter, Avenir Next, Arial, sans-serif"', captions)
+        self.assertIn('fontFamily: "inherit"', captions)
+        self.assertIn("minWidth: 0, maxWidth: \"100%\", overflowWrap: \"anywhere\"", visual)
+
+    def test_final_chapter_points_to_the_live_public_repository(self):
+        self.assertIn("The public repository links source, records and reproducible checks", STORY)
+        self.assertNotIn("publication remains a separate review decision", STORY)
+
 
 if __name__ == "__main__":
     unittest.main()
