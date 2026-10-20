@@ -133,11 +133,11 @@ function base(ctx, title, eyebrow, t, color) {
   for (let y = 24; y < H; y += 48) line(ctx, 0, y, W, y, C.grid, 1);
   ctx.restore();
   label(ctx, eyebrow.toUpperCase(), 66, 61, 19, color, 800);
-  label(ctx, "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex", 66, 94, 17, C.muted, 650);
   label(ctx, title, 66, 124, 48, C.white, 800);
   rounded(ctx, 66, 170, 948, 5, 3, "#2c4a59");
   rounded(ctx, 66, 170, 948 * clamp(t / 20, 0, 1), 5, 3, color);
   label(ctx, `CLIP ${Math.min(20, Math.max(0, t)).toFixed(1)} s`, 1010, 62, 18, C.muted, 700, "right");
+  label(ctx, "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex", 66, 1045, 16, C.muted, 650);
 }
 
 function chartFrame(ctx, x, y, w, h, xLabel, yLabel, yMax, xMax) {
@@ -191,7 +191,7 @@ function plotCurve(ctx, frame, fn, domain, maxValue, color, progress, dash = [])
 
 function drawRc(ctx, data, t) {
   const d = data.animations.rc;
-  base(ctx, "One mutation. A measured difference.", "01 / Numerical evidence", t, C.mint);
+  base(ctx, "One mutation. A computed difference.", "01 / Numerical evidence", t, C.mint);
   label(ctx, "C V′ = (Vᵢₙ − V) / R", 70, 220, 26, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
   label(ctx, `R = ${d.parameters.r_ohm} Ω · C = ${d.parameters.c_f} F · τ = ${d.parameters.tau_s.toFixed(1)} s`, 70, 258, 19, C.muted);
   const frame = chartFrame(ctx, 66, 295, 620, 500, "time (s)", "volts", d.parameters.vin, d.horizon_s);
@@ -510,7 +510,6 @@ function drawSnell(ctx, data, t) {
   rounded(ctx, 66, 986, 948, 50, 14, "#332d25", "#ffc56e");
   label(ctx, `Recorded endpoints: ${d.baseline.recorded_refracted_rad[3].toFixed(3)} rad → ${d.mutation.recorded_refracted_rad[3].toFixed(3)} rad · mutation error ${d.mutation.normalized_error.toFixed(3)} > ${d.tolerance}`, 540, 1011, 16, C.gold, 750, "center");
   ctx.globalAlpha = 1;
-  label(ctx, "Ray paths are analytic illustrations; hollow rings are recorded outputs. Angles are measured from the normal.", 70, 1058, 15, C.muted, 600);
 }
 
 function drawAnimation(ctx, data, id, seconds) {
