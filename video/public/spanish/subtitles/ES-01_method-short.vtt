@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.727
+Una suite de pruebas en verde no basta
+
+2
+00:00:01.774 --> 00:00:03.511
+para afirmar que un modelo funciona.
+
+3
+00:00:03.864 --> 00:00:06.492
+Este estudio evalúa un instrumento de QA, no
+
+4
+00:00:06.530 --> 00:00:07.273
+una teoría nueva.
+
+5
+00:00:07.681 --> 00:00:11.712
+Antes de probar, fijamos dominio, unidades, tolerancia, invariantes
+
+6
+00:00:11.805 --> 00:00:13.217
+y un oráculo independiente.
+
+7
+00:00:13.570 --> 00:00:16.700
+Luego ejecutamos una línea base y mutaciones específicas,
+
+8
+00:00:16.867 --> 00:00:19.523
+como invertir un signo o duplicar un coeficiente.
+
+9
+00:00:19.932 --> 00:00:21.975
+La pregunta es si las pruebas detectan cambios
+
+10
+00:00:22.003 --> 00:00:22.710
+deliberados.
+
+11
+00:00:23.062 --> 00:00:26.062
+Cada resultado queda ligado a sus parámetros, código
+
+12
+00:00:26.202 --> 00:00:28.245
+y artefactos para que pueda revisarse.

@@ -1,9 +1,1492 @@
 {
-  "status": "pending",
+  "status": "ready",
   "language": "es",
+  "tempo": 1.25,
   "fps": 30,
   "width": 1920,
   "height": 1080,
-  "long_duration_in_frames": 0,
-  "chapters": []
+  "long_duration_in_frames": 14753,
+  "chapters": [
+    {
+      "id": "01_method",
+      "title": "Qué puede demostrar una prueba",
+      "audio": "spanish/audio/01_method.mp3",
+      "duration_seconds": 94.367029,
+      "clip_end_seconds": 28.244799999999998,
+      "duration_in_frames": 2832,
+      "clip_end_frame": 848,
+      "from_frame": 0,
+      "captions": [
+        {
+          "text": "Una suite de pruebas en verde no basta",
+          "startMs": 0,
+          "endMs": 1727,
+          "timestampMs": 0,
+          "confidence": null
+        },
+        {
+          "text": "para afirmar que un modelo funciona.",
+          "startMs": 1774,
+          "endMs": 3511,
+          "timestampMs": 1774,
+          "confidence": null
+        },
+        {
+          "text": "Este estudio evalúa un instrumento de QA, no",
+          "startMs": 3864,
+          "endMs": 6492,
+          "timestampMs": 3864,
+          "confidence": null
+        },
+        {
+          "text": "una teoría nueva.",
+          "startMs": 6530,
+          "endMs": 7273,
+          "timestampMs": 6530,
+          "confidence": null
+        },
+        {
+          "text": "Antes de probar, fijamos dominio, unidades, tolerancia, invariantes",
+          "startMs": 7681,
+          "endMs": 11712,
+          "timestampMs": 7681,
+          "confidence": null
+        },
+        {
+          "text": "y un oráculo independiente.",
+          "startMs": 11805,
+          "endMs": 13217,
+          "timestampMs": 11805,
+          "confidence": null
+        },
+        {
+          "text": "Luego ejecutamos una línea base y mutaciones específicas,",
+          "startMs": 13570,
+          "endMs": 16700,
+          "timestampMs": 13570,
+          "confidence": null
+        },
+        {
+          "text": "como invertir un signo o duplicar un coeficiente.",
+          "startMs": 16867,
+          "endMs": 19523,
+          "timestampMs": 16867,
+          "confidence": null
+        },
+        {
+          "text": "La pregunta es si las pruebas detectan cambios",
+          "startMs": 19932,
+          "endMs": 21975,
+          "timestampMs": 19932,
+          "confidence": null
+        },
+        {
+          "text": "deliberados.",
+          "startMs": 22003,
+          "endMs": 22710,
+          "timestampMs": 22003,
+          "confidence": null
+        },
+        {
+          "text": "Cada resultado queda ligado a sus parámetros, código",
+          "startMs": 23062,
+          "endMs": 26062,
+          "timestampMs": 23062,
+          "confidence": null
+        },
+        {
+          "text": "y artefactos para que pueda revisarse.",
+          "startMs": 26202,
+          "endMs": 28245,
+          "timestampMs": 26202,
+          "confidence": null
+        },
+        {
+          "text": "Si el programa y el oráculo comparten fórmula",
+          "startMs": 28654,
+          "endMs": 31059,
+          "timestampMs": 28654,
+          "confidence": null
+        },
+        {
+          "text": "e integrador, también pueden compartir el mismo error.",
+          "startMs": 31366,
+          "endMs": 34226,
+          "timestampMs": 31366,
+          "confidence": null
+        },
+        {
+          "text": "Por eso la suite compara implementaciones distintas en",
+          "startMs": 34635,
+          "endMs": 37142,
+          "timestampMs": 34635,
+          "confidence": null
+        },
+        {
+          "text": "varias observaciones.",
+          "startMs": 37217,
+          "endMs": 38322,
+          "timestampMs": 37217,
+          "confidence": null
+        },
+        {
+          "text": "El contrato define los criterios antes de conocer",
+          "startMs": 38731,
+          "endMs": 40941,
+          "timestampMs": 38731,
+          "confidence": null
+        },
+        {
+          "text": "los resultados.",
+          "startMs": 40969,
+          "endMs": 41823,
+          "timestampMs": 40969,
+          "confidence": null
+        },
+        {
+          "text": "Una línea base que falla bloquea la interpretación",
+          "startMs": 42306,
+          "endMs": 44740,
+          "timestampMs": 42306,
+          "confidence": null
+        },
+        {
+          "text": "de sus mutantes;",
+          "startMs": 44777,
+          "endMs": 45603,
+          "timestampMs": 44777,
+          "confidence": null
+        },
+        {
+          "text": "una variación pequeña puede sobrevivir si queda bajo",
+          "startMs": 45910,
+          "endMs": 48622,
+          "timestampMs": 45910,
+          "confidence": null
+        },
+        {
+          "text": "la tolerancia.",
+          "startMs": 48650,
+          "endMs": 49318,
+          "timestampMs": 48650,
+          "confidence": null
+        },
+        {
+          "text": "El umbral no se cambia después.",
+          "startMs": 49876,
+          "endMs": 51743,
+          "timestampMs": 49876,
+          "confidence": null
+        },
+        {
+          "text": "El paquete conserva hashes y salidas para seguir",
+          "startMs": 52050,
+          "endMs": 54204,
+          "timestampMs": 52050,
+          "confidence": null
+        },
+        {
+          "text": "cada clasificación.",
+          "startMs": 54260,
+          "endMs": 55245,
+          "timestampMs": 54260,
+          "confidence": null
+        },
+        {
+          "text": "Separamos cálculos sintéticos, controles de kernel y campañas",
+          "startMs": 55598,
+          "endMs": 58904,
+          "timestampMs": 55598,
+          "confidence": null
+        },
+        {
+          "text": "anteriores.",
+          "startMs": 58941,
+          "endMs": 59601,
+          "timestampMs": 58941,
+          "confidence": null
+        },
+        {
+          "text": "Soy Cristian Guerra, conocido como criguex, profesional colombiano",
+          "startMs": 60009,
+          "endMs": 63585,
+          "timestampMs": 60009,
+          "confidence": null
+        },
+        {
+          "text": "de QA Automation de Medellín, con más de",
+          "startMs": 63659,
+          "endMs": 66139,
+          "timestampMs": 63659,
+          "confidence": null
+        },
+        {
+          "text": "ocho años de experiencia.",
+          "startMs": 66232,
+          "endMs": 67402,
+          "timestampMs": 66232,
+          "confidence": null
+        },
+        {
+          "text": "Soy autor de este estudio de QA y",
+          "startMs": 67449,
+          "endMs": 69399,
+          "timestampMs": 67449,
+          "confidence": null
+        },
+        {
+          "text": "reproducción independiente:",
+          "startMs": 69492,
+          "endMs": 70727,
+          "timestampMs": 69492,
+          "confidence": null
+        },
+        {
+          "text": "contribuí a la estrategia, las mutaciones, los recursos",
+          "startMs": 71034,
+          "endMs": 73894,
+          "timestampMs": 71034,
+          "confidence": null
+        },
+        {
+          "text": "y la validación.",
+          "startMs": 73922,
+          "endMs": 74656,
+          "timestampMs": 73922,
+          "confidence": null
+        },
+        {
+          "text": "Declaro el uso de herramientas de IA como",
+          "startMs": 74962,
+          "endMs": 77238,
+          "timestampMs": 74962,
+          "confidence": null
+        },
+        {
+          "text": "apoyo para análisis y preparación de código, no",
+          "startMs": 77257,
+          "endMs": 79616,
+          "timestampMs": 77257,
+          "confidence": null
+        },
+        {
+          "text": "como coautoras ni descubridoras.",
+          "startMs": 79662,
+          "endMs": 81427,
+          "timestampMs": 79662,
+          "confidence": null
+        },
+        {
+          "text": "OpenAI recibe crédito por las pruebas originales;",
+          "startMs": 82189,
+          "endMs": 84975,
+          "timestampMs": 82189,
+          "confidence": null
+        },
+        {
+          "text": "este estudio no reclama su autoría ni el",
+          "startMs": 85328,
+          "endMs": 87836,
+          "timestampMs": 85328,
+          "confidence": null
+        },
+        {
+          "text": "descubrimiento de un teorema.",
+          "startMs": 87873,
+          "endMs": 89322,
+          "timestampMs": 87873,
+          "confidence": null
+        },
+        {
+          "text": "La contribución consiste en hacer auditables las pruebas,",
+          "startMs": 89805,
+          "endMs": 92312,
+          "timestampMs": 89805,
+          "confidence": null
+        },
+        {
+          "text": "los fallos detectados y sus límites.",
+          "startMs": 92414,
+          "endMs": 94365,
+          "timestampMs": 92414,
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "id": "02_models_rc",
+      "title": "Nueve modelos sintéticos",
+      "audio": "spanish/audio/02_models_rc.mp3",
+      "duration_seconds": 105.229887,
+      "clip_end_seconds": 36.6696,
+      "duration_in_frames": 3157,
+      "clip_end_frame": 1101,
+      "from_frame": 2832,
+      "captions": [
+        {
+          "text": "La suite contiene nueve modelos sintéticos:",
+          "startMs": 0,
+          "endMs": 2341,
+          "timestampMs": 0,
+          "confidence": null
+        },
+        {
+          "text": "circuito RC, enfriamiento de Newton, consumo de segundo",
+          "startMs": 2508,
+          "endMs": 6399,
+          "timestampMs": 2508,
+          "confidence": null
+        },
+        {
+          "text": "orden, atenuación de Beer–Lambert, refracción de Snell, lente",
+          "startMs": 6437,
+          "endMs": 9985,
+          "timestampMs": 6437,
+          "confidence": null
+        },
+        {
+          "text": "delgada, interfaz acústica, escala ilustrativa de Fechner y",
+          "startMs": 10022,
+          "endMs": 13978,
+          "timestampMs": 10022,
+          "confidence": null
+        },
+        {
+          "text": "respuesta logística sintética.",
+          "startMs": 14099,
+          "endMs": 15799,
+          "timestampMs": 14099,
+          "confidence": null
+        },
+        {
+          "text": "Un ejemplo concreto es el circuito RC.",
+          "startMs": 16208,
+          "endMs": 18697,
+          "timestampMs": 16208,
+          "confidence": null
+        },
+        {
+          "text": "Con un kiloohmio y un milifaradio, su constante",
+          "startMs": 19050,
+          "endMs": 21706,
+          "timestampMs": 19050,
+          "confidence": null
+        },
+        {
+          "text": "de tiempo nominal es un segundo.",
+          "startMs": 21734,
+          "endMs": 23471,
+          "timestampMs": 21734,
+          "confidence": null
+        },
+        {
+          "text": "Cambiar deliberadamente tau modifica el resultado registrado.",
+          "startMs": 23954,
+          "endMs": 27233,
+          "timestampMs": 23954,
+          "confidence": null
+        },
+        {
+          "text": "Son cálculos reproducibles, no mediciones de laboratorio.",
+          "startMs": 27539,
+          "endMs": 30390,
+          "timestampMs": 27539,
+          "confidence": null
+        },
+        {
+          "text": "Cada modelo tiene tres configuraciones no degeneradas, con",
+          "startMs": 30799,
+          "endMs": 33994,
+          "timestampMs": 30799,
+          "confidence": null
+        },
+        {
+          "text": "unidades y observaciones fijadas en el contrato.",
+          "startMs": 34059,
+          "endMs": 36670,
+          "timestampMs": 34059,
+          "confidence": null
+        },
+        {
+          "text": "El caso RC se ejecuta durante tres segundos,",
+          "startMs": 37153,
+          "endMs": 39911,
+          "timestampMs": 37153,
+          "confidence": null
+        },
+        {
+          "text": "con sesenta y cuatro, ciento veintiocho y doscientos",
+          "startMs": 40106,
+          "endMs": 42622,
+          "timestampMs": 40106,
+          "confidence": null
+        },
+        {
+          "text": "cincuenta y seis pasos de integración.",
+          "startMs": 42716,
+          "endMs": 44508,
+          "timestampMs": 42716,
+          "confidence": null
+        },
+        {
+          "text": "A los tres segundos y en la resolución",
+          "startMs": 44861,
+          "endMs": 46691,
+          "timestampMs": 44861,
+          "confidence": null
+        },
+        {
+          "text": "más fina, la línea base registra cuatro coma",
+          "startMs": 46738,
+          "endMs": 49236,
+          "timestampMs": 46738,
+          "confidence": null
+        },
+        {
+          "text": "siete cinco uno voltios;",
+          "startMs": 49291,
+          "endMs": 50796,
+          "timestampMs": 49291,
+          "confidence": null
+        },
+        {
+          "text": "al duplicar tau registra tres coma ocho ocho",
+          "startMs": 51102,
+          "endMs": 53759,
+          "timestampMs": 51102,
+          "confidence": null
+        },
+        {
+          "text": "cuatro.",
+          "startMs": 53796,
+          "endMs": 54214,
+          "timestampMs": 53796,
+          "confidence": null
+        },
+        {
+          "text": "Son valores JSON redondeados para mostrarlos, no lecturas",
+          "startMs": 54567,
+          "endMs": 57836,
+          "timestampMs": 54567,
+          "confidence": null
+        },
+        {
+          "text": "físicas.",
+          "startMs": 57892,
+          "endMs": 58440,
+          "timestampMs": 57892,
+          "confidence": null
+        },
+        {
+          "text": "La constante de tiempo nominal es resistencia por",
+          "startMs": 58793,
+          "endMs": 61486,
+          "timestampMs": 58793,
+          "confidence": null
+        },
+        {
+          "text": "capacitancia:",
+          "startMs": 61551,
+          "endMs": 62480,
+          "timestampMs": 61551,
+          "confidence": null
+        },
+        {
+          "text": "tau igual a R por C.",
+          "startMs": 62786,
+          "endMs": 65016,
+          "timestampMs": 62786,
+          "confidence": null
+        },
+        {
+          "text": "Los demás oráculos también son distintos:",
+          "startMs": 65666,
+          "endMs": 67514,
+          "timestampMs": 65666,
+          "confidence": null
+        },
+        {
+          "text": "soluciones cerradas para varias ecuaciones diferenciales, bisección para",
+          "startMs": 67710,
+          "endMs": 71453,
+          "timestampMs": 67710,
+          "confidence": null
+        },
+        {
+          "text": "Snell, trazado de rayos para la lente, un",
+          "startMs": 71481,
+          "endMs": 73905,
+          "timestampMs": 71481,
+          "confidence": null
+        },
+        {
+          "text": "sistema de frontera para acústica e integración numérica",
+          "startMs": 73933,
+          "endMs": 76923,
+          "timestampMs": 73933,
+          "confidence": null
+        },
+        {
+          "text": "para Fechner.",
+          "startMs": 76970,
+          "endMs": 77676,
+          "timestampMs": 76970,
+          "confidence": null
+        },
+        {
+          "text": "El modelo logístico es una respuesta sintética a",
+          "startMs": 78084,
+          "endMs": 80555,
+          "timestampMs": 78084,
+          "confidence": null
+        },
+        {
+          "text": "un estímulo normalizado, entre cero y uno;",
+          "startMs": 80630,
+          "endMs": 83481,
+          "timestampMs": 80630,
+          "confidence": null
+        },
+        {
+          "text": "Fechner es ilustrativo, no una ley universal.",
+          "startMs": 83890,
+          "endMs": 86536,
+          "timestampMs": 83890,
+          "confidence": null
+        },
+        {
+          "text": "Algunas configuraciones comparten estructura matemática después de reescalarse;",
+          "startMs": 86842,
+          "endMs": 90567,
+          "timestampMs": 86842,
+          "confidence": null
+        },
+        {
+          "text": "nueve nombres no significan nueve regímenes independientes.",
+          "startMs": 90920,
+          "endMs": 93734,
+          "timestampMs": 90920,
+          "confidence": null
+        },
+        {
+          "text": "No se usaron mediciones experimentales.",
+          "startMs": 94087,
+          "endMs": 96038,
+          "timestampMs": 94087,
+          "confidence": null
+        },
+        {
+          "text": "Las gráficas conservan unidades y puntos calculados.",
+          "startMs": 96298,
+          "endMs": 98973,
+          "timestampMs": 96298,
+          "confidence": null
+        },
+        {
+          "text": "La suite estudia si se detectan cambios conocidos",
+          "startMs": 99326,
+          "endMs": 101546,
+          "timestampMs": 99326,
+          "confidence": null
+        },
+        {
+          "text": "en ejemplos controlados;",
+          "startMs": 101592,
+          "endMs": 102586,
+          "timestampMs": 101592,
+          "confidence": null
+        },
+        {
+          "text": "no certifica el desempeño de sistemas reales.",
+          "startMs": 102939,
+          "endMs": 105214,
+          "timestampMs": 102939,
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "id": "03_formal_controls",
+      "title": "Controles formales acotados",
+      "audio": "spanish/audio/03_formal_controls.mp3",
+      "duration_seconds": 82.670522,
+      "clip_end_seconds": 31.4032,
+      "duration_in_frames": 2481,
+      "clip_end_frame": 943,
+      "from_frame": 5989,
+      "captions": [
+        {
+          "text": "El control de kernel usa un ejemplo mínimo:",
+          "startMs": 0,
+          "endMs": 2229,
+          "timestampMs": 0,
+          "confidence": null
+        },
+        {
+          "text": "target afirma que cero es igual a cero",
+          "startMs": 2424,
+          "endMs": 4421,
+          "timestampMs": 2424,
+          "confidence": null
+        },
+        {
+          "text": "y se demuestra con rfl.",
+          "startMs": 4588,
+          "endMs": 6538,
+          "timestampMs": 4588,
+          "confidence": null
+        },
+        {
+          "text": "La mutación conserva el tipo declarado, pero reemplaza",
+          "startMs": 6947,
+          "endMs": 9641,
+          "timestampMs": 6947,
+          "confidence": null
+        },
+        {
+          "text": "el valor de la prueba por una prueba",
+          "startMs": 9659,
+          "endMs": 11182,
+          "timestampMs": 9659,
+          "confidence": null
+        },
+        {
+          "text": "de True.",
+          "startMs": 11220,
+          "endMs": 11563,
+          "timestampMs": 11220,
+          "confidence": null
+        },
+        {
+          "text": "Lean y nanoda aceptan la línea base y",
+          "startMs": 12046,
+          "endMs": 14471,
+          "timestampMs": 12046,
+          "confidence": null
+        },
+        {
+          "text": "rechazan ese valor incompatible.",
+          "startMs": 14573,
+          "endMs": 16458,
+          "timestampMs": 14573,
+          "confidence": null
+        },
+        {
+          "text": "Es un control de tipado para una sola",
+          "startMs": 16811,
+          "endMs": 18530,
+          "timestampMs": 16811,
+          "confidence": null
+        },
+        {
+          "text": "declaración:",
+          "startMs": 18567,
+          "endMs": 19134,
+          "timestampMs": 18567,
+          "confidence": null
+        },
+        {
+          "text": "contrasta el tipo esperado con el valor exportado.",
+          "startMs": 19486,
+          "endMs": 21920,
+          "timestampMs": 19486,
+          "confidence": null
+        },
+        {
+          "text": "Por separado, Lean acepta un campo constante no",
+          "startMs": 22273,
+          "endMs": 24910,
+          "timestampMs": 22273,
+          "confidence": null
+        },
+        {
+          "text": "nulo en Navier–Stokes periódico, con presión y fuerza",
+          "startMs": 24948,
+          "endMs": 27706,
+          "timestampMs": 24948,
+          "confidence": null
+        },
+        {
+          "text": "cero y viscosidad unitaria.",
+          "startMs": 27743,
+          "endMs": 29285,
+          "timestampMs": 27743,
+          "confidence": null
+        },
+        {
+          "text": "Son controles con alcances distintos.",
+          "startMs": 29638,
+          "endMs": 31403,
+          "timestampMs": 29638,
+          "confidence": null
+        },
+        {
+          "text": "Lean informa que True no coincide con el",
+          "startMs": 31756,
+          "endMs": 33874,
+          "timestampMs": 31756,
+          "confidence": null
+        },
+        {
+          "text": "tipo esperado;",
+          "startMs": 33920,
+          "endMs": 34672,
+          "timestampMs": 33920,
+          "confidence": null
+        },
+        {
+          "text": "nanoda llega a una aserción de igualdad definicional.",
+          "startMs": 35025,
+          "endMs": 37811,
+          "timestampMs": 35025,
+          "confidence": null
+        },
+        {
+          "text": "Este par es un control acotado.",
+          "startMs": 38165,
+          "endMs": 39762,
+          "timestampMs": 38165,
+          "confidence": null
+        },
+        {
+          "text": "El ejemplo periódico está en un toro y",
+          "startMs": 40114,
+          "endMs": 41778,
+          "timestampMs": 40114,
+          "confidence": null
+        },
+        {
+          "text": "el reporte de axiomas enumera tres:",
+          "startMs": 41814,
+          "endMs": 43700,
+          "timestampMs": 41814,
+          "confidence": null
+        },
+        {
+          "text": "propext, Classical.choice y Quot.sound.",
+          "startMs": 44006,
+          "endMs": 47963,
+          "timestampMs": 44006,
+          "confidence": null
+        },
+        {
+          "text": "Una velocidad constante no tiene energía finita en",
+          "startMs": 48520,
+          "endMs": 50545,
+          "timestampMs": 48520,
+          "confidence": null
+        },
+        {
+          "text": "todo R³, por lo que no se traslada",
+          "startMs": 50619,
+          "endMs": 52533,
+          "timestampMs": 50619,
+          "confidence": null
+        },
+        {
+          "text": "al problema euclidiano.",
+          "startMs": 52607,
+          "endMs": 53731,
+          "timestampMs": 52607,
+          "confidence": null
+        },
+        {
+          "text": "Después de la compilación desde código fuente limpio,",
+          "startMs": 54214,
+          "endMs": 56527,
+          "timestampMs": 54214,
+          "confidence": null
+        },
+        {
+          "text": "Comparator volvió a comprobar los desafíos configurados de",
+          "startMs": 56694,
+          "endMs": 59360,
+          "timestampMs": 56694,
+          "confidence": null
+        },
+        {
+          "text": "Navier–Stokes y Euler:",
+          "startMs": 59415,
+          "endMs": 61078,
+          "timestampMs": 59415,
+          "confidence": null
+        },
+        {
+          "text": "tanto nanoda como Lean los aceptaron.",
+          "startMs": 61431,
+          "endMs": 63660,
+          "timestampMs": 61431,
+          "confidence": null
+        },
+        {
+          "text": "La calibración incluyó dos controles positivos aceptados y",
+          "startMs": 64143,
+          "endMs": 66902,
+          "timestampMs": 64143,
+          "confidence": null
+        },
+        {
+          "text": "cuatro negativos rechazados antes de invocar el kernel.",
+          "startMs": 66994,
+          "endMs": 69726,
+          "timestampMs": 66994,
+          "confidence": null
+        },
+        {
+          "text": "Estos resultados registrados no son verificación universal.",
+          "startMs": 70375,
+          "endMs": 73515,
+          "timestampMs": 70375,
+          "confidence": null
+        },
+        {
+          "text": "Los nombres exactos aparecen en pantalla y los",
+          "startMs": 73868,
+          "endMs": 76134,
+          "timestampMs": 73868,
+          "confidence": null
+        },
+        {
+          "text": "artefactos conservados permiten inspeccionar el harness, las declaraciones",
+          "startMs": 76171,
+          "endMs": 80026,
+          "timestampMs": 76171,
+          "confidence": null
+        },
+        {
+          "text": "y las salidas sin modificar las pruebas originales.",
+          "startMs": 80193,
+          "endMs": 82663,
+          "timestampMs": 80193,
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "id": "04_campaign_results",
+      "title": "Resultados de la campaña pareada",
+      "audio": "spanish/audio/04_campaign_results.mp3",
+      "duration_seconds": 99.089819,
+      "clip_end_seconds": 29.0808,
+      "duration_in_frames": 2973,
+      "clip_end_frame": 873,
+      "from_frame": 8470,
+      "captions": [
+        {
+          "text": "La suite se ejecutó en macOS arm64 y",
+          "startMs": 0,
+          "endMs": 2629,
+          "timestampMs": 0,
+          "confidence": null
+        },
+        {
+          "text": "Linux x86_64.",
+          "startMs": 2722,
+          "endMs": 5350,
+          "timestampMs": 2722,
+          "confidence": null
+        },
+        {
+          "text": "Cada entorno evaluó las mismas ochenta y cuatro",
+          "startMs": 5638,
+          "endMs": 7727,
+          "timestampMs": 5638,
+          "confidence": null
+        },
+        {
+          "text": "variantes:",
+          "startMs": 7746,
+          "endMs": 8285,
+          "timestampMs": 7746,
+          "confidence": null
+        },
+        {
+          "text": "veintisiete líneas base PASS, cincuenta y cuatro mutantes",
+          "startMs": 8573,
+          "endMs": 11591,
+          "timestampMs": 8573,
+          "confidence": null
+        },
+        {
+          "text": "KILLED y tres calibraciones pequeñas SURVIVED.",
+          "startMs": 11684,
+          "endMs": 14526,
+          "timestampMs": 11684,
+          "confidence": null
+        },
+        {
+          "text": "Las clasificaciones y los parámetros coinciden entre hosts.",
+          "startMs": 15056,
+          "endMs": 17582,
+          "timestampMs": 15056,
+          "confidence": null
+        },
+        {
+          "text": "Son ejecuciones pareadas de una suite, no ciento",
+          "startMs": 17749,
+          "endMs": 19959,
+          "timestampMs": 17749,
+          "confidence": null
+        },
+        {
+          "text": "sesenta y ocho casos distintos.",
+          "startMs": 19997,
+          "endMs": 21399,
+          "timestampMs": 19997,
+          "confidence": null
+        },
+        {
+          "text": "Los supervivientes permanecen en el informe;",
+          "startMs": 21706,
+          "endMs": 23954,
+          "timestampMs": 21706,
+          "confidence": null
+        },
+        {
+          "text": "no se fuerza su rechazo.",
+          "startMs": 24148,
+          "endMs": 25421,
+          "timestampMs": 24148,
+          "confidence": null
+        },
+        {
+          "text": "Los conteos son por host y conservan su",
+          "startMs": 25681,
+          "endMs": 27780,
+          "timestampMs": 25681,
+          "confidence": null
+        },
+        {
+          "text": "denominador explícito.",
+          "startMs": 27808,
+          "endMs": 29081,
+          "timestampMs": 27808,
+          "confidence": null
+        },
+        {
+          "text": "La comparación incluyó setecientos treinta y ocho valores",
+          "startMs": 29489,
+          "endMs": 32350,
+          "timestampMs": 29489,
+          "confidence": null
+        },
+        {
+          "text": "finitos y dieciocho resultados no finitos del mutante",
+          "startMs": 32387,
+          "endMs": 35666,
+          "timestampMs": 32387,
+          "confidence": null
+        },
+        {
+          "text": "que invierte el signo químico, representados como null.",
+          "startMs": 35722,
+          "endMs": 38833,
+          "timestampMs": 35722,
+          "confidence": null
+        },
+        {
+          "text": "La mayor diferencia escalada entre hosts fue aproximadamente",
+          "startMs": 39242,
+          "endMs": 42530,
+          "timestampMs": 39242,
+          "confidence": null
+        },
+        {
+          "text": "uno coma once por diez elevado a menos",
+          "startMs": 42622,
+          "endMs": 45390,
+          "timestampMs": 42622,
+          "confidence": null
+        },
+        {
+          "text": "dieciséis.",
+          "startMs": 45437,
+          "endMs": 46031,
+          "timestampMs": 45437,
+          "confidence": null
+        },
+        {
+          "text": "Cada línea base usa un oráculo independiente y",
+          "startMs": 46440,
+          "endMs": 49115,
+          "timestampMs": 46440,
+          "confidence": null
+        },
+        {
+          "text": "una tolerancia de error normalizado de diez elevado",
+          "startMs": 49254,
+          "endMs": 52450,
+          "timestampMs": 49254,
+          "confidence": null
+        },
+        {
+          "text": "a menos seis respecto de una escala fija.",
+          "startMs": 52570,
+          "endMs": 55134,
+          "timestampMs": 52570,
+          "confidence": null
+        },
+        {
+          "text": "Las ecuaciones diferenciales usan su última resolución aplicable;",
+          "startMs": 55616,
+          "endMs": 58682,
+          "timestampMs": 55616,
+          "confidence": null
+        },
+        {
+          "text": "los modelos algebraicos no reciben refinamientos inventados.",
+          "startMs": 59090,
+          "endMs": 61839,
+          "timestampMs": 59090,
+          "confidence": null
+        },
+        {
+          "text": "En quince líneas base de ecuaciones diferenciales, el",
+          "startMs": 62322,
+          "endMs": 65081,
+          "timestampMs": 62322,
+          "confidence": null
+        },
+        {
+          "text": "error disminuyó al refinar y los órdenes observados",
+          "startMs": 65136,
+          "endMs": 67718,
+          "timestampMs": 65136,
+          "confidence": null
+        },
+        {
+          "text": "se acercaron a cuatro;",
+          "startMs": 67979,
+          "endMs": 69158,
+          "timestampMs": 67979,
+          "confidence": null
+        },
+        {
+          "text": "es un diagnóstico, no una cota general.",
+          "startMs": 69511,
+          "endMs": 71954,
+          "timestampMs": 69511,
+          "confidence": null
+        },
+        {
+          "text": "El mayor error fino de ese grupo fue",
+          "startMs": 72437,
+          "endMs": 74109,
+          "timestampMs": 72437,
+          "confidence": null
+        },
+        {
+          "text": "aproximadamente uno coma doce por diez elevado a",
+          "startMs": 74155,
+          "endMs": 77202,
+          "timestampMs": 74155,
+          "confidence": null
+        },
+        {
+          "text": "menos nueve, en un caso logístico.",
+          "startMs": 77258,
+          "endMs": 78938,
+          "timestampMs": 77258,
+          "confidence": null
+        },
+        {
+          "text": "Fechner llegó a cerca de siete coma sesenta",
+          "startMs": 79496,
+          "endMs": 81567,
+          "timestampMs": 79496,
+          "confidence": null
+        },
+        {
+          "text": "y tres por diez elevado a menos ocho",
+          "startMs": 81594,
+          "endMs": 83842,
+          "timestampMs": 81594,
+          "confidence": null
+        },
+        {
+          "text": "con un oráculo trapezoidal.",
+          "startMs": 84066,
+          "endMs": 85849,
+          "timestampMs": 84066,
+          "confidence": null
+        },
+        {
+          "text": "Las mutaciones RC pequeñas sobreviven bajo este contrato;",
+          "startMs": 86498,
+          "endMs": 89285,
+          "timestampMs": 86498,
+          "confidence": null
+        },
+        {
+          "text": "eso no demuestra equivalencia.",
+          "startMs": 89545,
+          "endMs": 90818,
+          "timestampMs": 89545,
+          "confidence": null
+        },
+        {
+          "text": "La campaña mide detección de cambios conocidos y",
+          "startMs": 91170,
+          "endMs": 93223,
+          "timestampMs": 91170,
+          "confidence": null
+        },
+        {
+          "text": "consistencia entre plataformas.",
+          "startMs": 93316,
+          "endMs": 94793,
+          "timestampMs": 93316,
+          "confidence": null
+        },
+        {
+          "text": "Se conservaron JSON y clasificaciones cuando se corrigió",
+          "startMs": 95099,
+          "endMs": 97626,
+          "timestampMs": 95099,
+          "confidence": null
+        },
+        {
+          "text": "la exportación CSV.",
+          "startMs": 97662,
+          "endMs": 99084,
+          "timestampMs": 97662,
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "id": "05_reproducibility_limits",
+      "title": "Reproducibilidad y límites",
+      "audio": "spanish/audio/05_reproducibility_limits.mp3",
+      "duration_seconds": 110.310476,
+      "clip_end_seconds": 21.4088,
+      "duration_in_frames": 3310,
+      "clip_end_frame": 643,
+      "from_frame": 11443,
+      "captions": [
+        {
+          "text": "El repositorio público enlaza código, registros y verificaciones",
+          "startMs": 0,
+          "endMs": 3121,
+          "timestampMs": 0,
+          "confidence": null
+        },
+        {
+          "text": "reproducibles.",
+          "startMs": 3139,
+          "endMs": 3882,
+          "timestampMs": 3139,
+          "confidence": null
+        },
+        {
+          "text": "Reproducir archivos no es repetir experimentos.",
+          "startMs": 4291,
+          "endMs": 7040,
+          "timestampMs": 4291,
+          "confidence": null
+        },
+        {
+          "text": "El valor está en seguir el recorrido desde",
+          "startMs": 7394,
+          "endMs": 9427,
+          "timestampMs": 7394,
+          "confidence": null
+        },
+        {
+          "text": "el contrato hasta los datos, auditar decisiones, detectar",
+          "startMs": 9446,
+          "endMs": 12910,
+          "timestampMs": 9446,
+          "confidence": null
+        },
+        {
+          "text": "errores de exportación y conservar criterios fijados antes",
+          "startMs": 12947,
+          "endMs": 15826,
+          "timestampMs": 12947,
+          "confidence": null
+        },
+        {
+          "text": "de ejecutar.",
+          "startMs": 15854,
+          "endMs": 16458,
+          "timestampMs": 15854,
+          "confidence": null
+        },
+        {
+          "text": "Las campañas anteriores se documentan por separado, con",
+          "startMs": 16867,
+          "endMs": 19412,
+          "timestampMs": 16867,
+          "confidence": null
+        },
+        {
+          "text": "parámetros y resultados para su revisión.",
+          "startMs": 19458,
+          "endMs": 21409,
+          "timestampMs": 19458,
+          "confidence": null
+        },
+        {
+          "text": "La verificación local confirmó la integridad de los",
+          "startMs": 21892,
+          "endMs": 24130,
+          "timestampMs": 21892,
+          "confidence": null
+        },
+        {
+          "text": "artefactos, las filas CSV y la correspondencia entre",
+          "startMs": 24167,
+          "endMs": 27790,
+          "timestampMs": 24167,
+          "confidence": null
+        },
+        {
+          "text": "hosts.",
+          "startMs": 27826,
+          "endMs": 28282,
+          "timestampMs": 27826,
+          "confidence": null
+        },
+        {
+          "text": "Clean03 completó la compilación desde código fuente con",
+          "startMs": 28402,
+          "endMs": 31022,
+          "timestampMs": 28402,
+          "confidence": null
+        },
+        {
+          "text": "código de salida cero y once mil cuatrocientos",
+          "startMs": 31114,
+          "endMs": 33696,
+          "timestampMs": 31114,
+          "confidence": null
+        },
+        {
+          "text": "veinticuatro trabajos;",
+          "startMs": 33734,
+          "endMs": 34913,
+          "timestampMs": 33734,
+          "confidence": null
+        },
+        {
+          "text": "reutilizó caché de dependencias y toolchain, así que",
+          "startMs": 35220,
+          "endMs": 37681,
+          "timestampMs": 35220,
+          "confidence": null
+        },
+        {
+          "text": "no fue un bootstrap completo.",
+          "startMs": 37727,
+          "endMs": 39037,
+          "timestampMs": 37727,
+          "confidence": null
+        },
+        {
+          "text": "Después, Comparator volvió a comprobar los desafíos de",
+          "startMs": 39390,
+          "endMs": 41749,
+          "timestampMs": 39390,
+          "confidence": null
+        },
+        {
+          "text": "Navier–Stokes y Euler con nanoda y Lean.",
+          "startMs": 41805,
+          "endMs": 44517,
+          "timestampMs": 41805,
+          "confidence": null
+        },
+        {
+          "text": "El contexto anterior de ecuaciones diferenciales es independiente",
+          "startMs": 44926,
+          "endMs": 47805,
+          "timestampMs": 44926,
+          "confidence": null
+        },
+        {
+          "text": "de esta suite:",
+          "startMs": 47879,
+          "endMs": 48631,
+          "timestampMs": 47879,
+          "confidence": null
+        },
+        {
+          "text": "ciento cincuenta ejecuciones en grupos de noventa, treinta",
+          "startMs": 48938,
+          "endMs": 51353,
+          "timestampMs": 48938,
+          "confidence": null
+        },
+        {
+          "text": "y treinta, no ciento cincuenta casos independientes.",
+          "startMs": 51381,
+          "endMs": 53981,
+          "timestampMs": 51381,
+          "confidence": null
+        },
+        {
+          "text": "Los errores máximos fueron aproximadamente uno coma treinta",
+          "startMs": 54538,
+          "endMs": 57678,
+          "timestampMs": 54538,
+          "confidence": null
+        },
+        {
+          "text": "por diez elevado a menos cinco con paso",
+          "startMs": 57724,
+          "endMs": 59870,
+          "timestampMs": 57724,
+          "confidence": null
+        },
+        {
+          "text": "cero coma cero cinco;",
+          "startMs": 59907,
+          "endMs": 61746,
+          "timestampMs": 59907,
+          "confidence": null
+        },
+        {
+          "text": "siete coma veinticuatro por diez elevado a menos",
+          "startMs": 62098,
+          "endMs": 64755,
+          "timestampMs": 62098,
+          "confidence": null
+        },
+        {
+          "text": "siete con cero coma cero dos cinco;",
+          "startMs": 64774,
+          "endMs": 66770,
+          "timestampMs": 64774,
+          "confidence": null
+        },
+        {
+          "text": "y cuatro coma veintisiete por diez elevado a",
+          "startMs": 66947,
+          "endMs": 69297,
+          "timestampMs": 66947,
+          "confidence": null
+        },
+        {
+          "text": "menos ocho con cero coma cero uno dos",
+          "startMs": 69353,
+          "endMs": 71786,
+          "timestampMs": 69353,
+          "confidence": null
+        },
+        {
+          "text": "cinco, frente a una tolerancia fina de diez",
+          "startMs": 71805,
+          "endMs": 74563,
+          "timestampMs": 71805,
+          "confidence": null
+        },
+        {
+          "text": "elevado a menos seis.",
+          "startMs": 74628,
+          "endMs": 75938,
+          "timestampMs": 74628,
+          "confidence": null
+        },
+        {
+          "text": "Taylor–Green V1 ilustra un flujo;",
+          "startMs": 76467,
+          "endMs": 78818,
+          "timestampMs": 76467,
+          "confidence": null
+        },
+        {
+          "text": "no es una construcción formal ni evidencia de",
+          "startMs": 79124,
+          "endMs": 81353,
+          "timestampMs": 79124,
+          "confidence": null
+        },
+        {
+          "text": "blow-up.",
+          "startMs": 81399,
+          "endMs": 81826,
+          "timestampMs": 81399,
+          "confidence": null
+        },
+        {
+          "text": "La contribución es definir contratos, detectar fallos con",
+          "startMs": 82310,
+          "endMs": 85346,
+          "timestampMs": 82310,
+          "confidence": null
+        },
+        {
+          "text": "mutaciones conocidas, repetir en dos entornos y conservar",
+          "startMs": 85374,
+          "endMs": 88430,
+          "timestampMs": 85374,
+          "confidence": null
+        },
+        {
+          "text": "evidencia rastreable.",
+          "startMs": 88467,
+          "endMs": 89600,
+          "timestampMs": 88467,
+          "confidence": null
+        },
+        {
+          "text": "Cristian Guerra, criguex, recibe crédito por el estudio",
+          "startMs": 90083,
+          "endMs": 93000,
+          "timestampMs": 90083,
+          "confidence": null
+        },
+        {
+          "text": "de QA y la reproducción independiente;",
+          "startMs": 93037,
+          "endMs": 94959,
+          "timestampMs": 93037,
+          "confidence": null
+        },
+        {
+          "text": "la IA figura como asistencia.",
+          "startMs": 95312,
+          "endMs": 97272,
+          "timestampMs": 95312,
+          "confidence": null
+        },
+        {
+          "text": "OpenAI recibe crédito por las pruebas originales.",
+          "startMs": 97578,
+          "endMs": 100504,
+          "timestampMs": 97578,
+          "confidence": null
+        },
+        {
+          "text": "No se reclama un teorema nuevo ni la",
+          "startMs": 100858,
+          "endMs": 102864,
+          "timestampMs": 100858,
+          "confidence": null
+        },
+        {
+          "text": "validación de un problema matemático abierto.",
+          "startMs": 102910,
+          "endMs": 105056,
+          "timestampMs": 102910,
+          "confidence": null
+        },
+        {
+          "text": "Invitamos a revisar el alcance, los datos y",
+          "startMs": 105613,
+          "endMs": 107796,
+          "timestampMs": 105613,
+          "confidence": null
+        },
+        {
+          "text": "las limitaciones antes de reutilizar el material.",
+          "startMs": 107833,
+          "endMs": 110303,
+          "timestampMs": 107833,
+          "confidence": null
+        }
+      ]
+    }
+  ]
 }

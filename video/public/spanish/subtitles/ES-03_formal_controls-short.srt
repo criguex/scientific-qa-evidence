@@ -1,0 +1,59 @@
+1
+00:00:00,000 --> 00:00:02,229
+El control de kernel usa un ejemplo mínimo:
+
+2
+00:00:02,424 --> 00:00:04,421
+target afirma que cero es igual a cero
+
+3
+00:00:04,588 --> 00:00:06,538
+y se demuestra con rfl.
+
+4
+00:00:06,947 --> 00:00:09,641
+La mutación conserva el tipo declarado, pero reemplaza
+
+5
+00:00:09,659 --> 00:00:11,182
+el valor de la prueba por una prueba
+
+6
+00:00:11,220 --> 00:00:11,563
+de True.
+
+7
+00:00:12,046 --> 00:00:14,471
+Lean y nanoda aceptan la línea base y
+
+8
+00:00:14,573 --> 00:00:16,458
+rechazan ese valor incompatible.
+
+9
+00:00:16,811 --> 00:00:18,530
+Es un control de tipado para una sola
+
+10
+00:00:18,567 --> 00:00:19,134
+declaración:
+
+11
+00:00:19,486 --> 00:00:21,920
+contrasta el tipo esperado con el valor exportado.
+
+12
+00:00:22,273 --> 00:00:24,910
+Por separado, Lean acepta un campo constante no
+
+13
+00:00:24,948 --> 00:00:27,706
+nulo en Navier–Stokes periódico, con presión y fuerza
+
+14
+00:00:27,743 --> 00:00:29,285
+cero y viscosidad unitaria.
+
+15
+00:00:29,638 --> 00:00:31,403
+Son controles con alcances distintos.

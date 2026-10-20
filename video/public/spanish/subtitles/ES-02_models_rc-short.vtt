@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.341
+La suite contiene nueve modelos sintéticos:
+
+2
+00:00:02.508 --> 00:00:06.399
+circuito RC, enfriamiento de Newton, consumo de segundo
+
+3
+00:00:06.437 --> 00:00:09.985
+orden, atenuación de Beer–Lambert, refracción de Snell, lente
+
+4
+00:00:10.022 --> 00:00:13.978
+delgada, interfaz acústica, escala ilustrativa de Fechner y
+
+5
+00:00:14.099 --> 00:00:15.799
+respuesta logística sintética.
+
+6
+00:00:16.208 --> 00:00:18.697
+Un ejemplo concreto es el circuito RC.
+
+7
+00:00:19.050 --> 00:00:21.706
+Con un kiloohmio y un milifaradio, su constante
+
+8
+00:00:21.734 --> 00:00:23.471
+de tiempo nominal es un segundo.
+
+9
+00:00:23.954 --> 00:00:27.233
+Cambiar deliberadamente tau modifica el resultado registrado.
+
+10
+00:00:27.539 --> 00:00:30.390
+Son cálculos reproducibles, no mediciones de laboratorio.
+
+11
+00:00:30.799 --> 00:00:33.994
+Cada modelo tiene tres configuraciones no degeneradas, con
+
+12
+00:00:34.059 --> 00:00:36.670
+unidades y observaciones fijadas en el contrato.

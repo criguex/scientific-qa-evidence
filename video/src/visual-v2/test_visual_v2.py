@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 MEDIA = json.loads((ROOT / "video/src/generatedMedia.json").read_text(encoding="utf-8"))
+SPANISH_MEDIA = json.loads((ROOT / "video/src/generatedSpanishMedia.json").read_text(encoding="utf-8"))
 PLAN = json.loads((ROOT / "video/src/visual-v2/publication.json").read_text(encoding="utf-8"))
 STORY = (ROOT / "video/src/visual-v2/Story.tsx").read_text(encoding="utf-8")
 REGISTRATIONS = (ROOT / "video/src/visual-v2/Root.tsx").read_text(encoding="utf-8")
@@ -112,6 +113,42 @@ class VisualV2Tests(unittest.TestCase):
     def test_final_chapter_points_to_the_live_public_repository(self):
         self.assertIn("The public repository links source, records and reproducible checks", STORY)
         self.assertNotIn("publication remains a separate review decision", STORY)
+
+    def test_spanish_exports_use_spanish_audio_and_actual_caption_timing(self):
+        self.assertEqual(SPANISH_MEDIA["status"], "ready")
+        self.assertEqual(SPANISH_MEDIA["language"], "es")
+        self.assertEqual(SPANISH_MEDIA["fps"], 30)
+        self.assertEqual(len(SPANISH_MEDIA["chapters"]), 5)
+        self.assertIn('id="ES-V2-Long"', REGISTRATIONS)
+        self.assertIn('language="es"', REGISTRATIONS)
+        self.assertEqual(len(PLAN["youtube"]["spanish"]["shorts"]), 5)
+        self.assertEqual(PLAN["youtube"]["spanish"]["long_video"]["composition_id"], "ES-V2-Long")
+        for index, item in enumerate(PLAN["youtube"]["spanish"]["shorts"]):
+            self.assertIn(item["composition_id"], REGISTRATIONS)
+            self.assertIn(f"durationInFrames={{spanishMedia.chapters[{index}].clip_end_frame}}", REGISTRATIONS)
+        self.assertIn('const cue = spanishMedia.chapters[chapterIndex].captions.find((caption) => caption.text.includes(anchor))', STORY)
+        spanish_beat_source = STORY.split("const spanishBeats", 1)[1].split("const getSpanishBeats", 1)[0]
+        beat_chapters = re.split(r"\n  \],\n  \[", spanish_beat_source)
+        self.assertEqual(len(beat_chapters), 5)
+        for beat_source, chapter in zip(beat_chapters, SPANISH_MEDIA["chapters"]):
+            anchors = re.findall(r'anchor: "([^"]+)"', beat_source)
+            self.assertGreaterEqual(len(anchors), 10)
+            start_times = []
+            for anchor in anchors:
+                cue = next((item for item in chapter["captions"] if anchor in item["text"]), None)
+                self.assertIsNotNone(cue, (chapter["id"], anchor))
+                start_times.append(cue["startMs"] / 1000)
+            self.assertEqual(start_times, sorted(start_times), chapter["id"])
+            self.assertLessEqual(max(right - left for left, right in zip(start_times, start_times[1:])), 12, chapter["id"])
+        cursor = 0
+        for chapter in SPANISH_MEDIA["chapters"]:
+            self.assertEqual(chapter["from_frame"], cursor)
+            self.assertGreater(chapter["duration_in_frames"], chapter["clip_end_frame"])
+            self.assertTrue((ROOT / "video/public" / chapter["audio"]).is_file())
+            cursor += chapter["duration_in_frames"]
+        self.assertEqual(cursor, SPANISH_MEDIA["long_duration_in_frames"])
+        for phrase in ["¿Qué puede demostrar una prueba?", "Nueve modelos sintéticos", "Control periódico independiente", "Registros pareados, no 168 casos", "Una ruta de evidencia revisable"]:
+            self.assertIn(phrase, STORY)
 
 
 if __name__ == "__main__":

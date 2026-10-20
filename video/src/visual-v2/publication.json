@@ -19,7 +19,21 @@
       { "composition_id": "EN-V2-Short-03-Formal", "render_path": "media/shorts/EN-v2-short-03-formal-1080x1920.mp4", "status": "render_pending" },
       { "composition_id": "EN-V2-Short-04-Campaign", "render_path": "media/shorts/EN-v2-short-04-campaign-1080x1920.mp4", "status": "render_pending" },
       { "composition_id": "EN-V2-Short-05-Limits", "render_path": "media/shorts/EN-v2-short-05-limits-1080x1920.mp4", "status": "render_pending" }
-    ]
+    ],
+    "spanish": {
+      "long_video": {
+        "composition_id": "ES-V2-Long",
+        "render_path": "media/ES-long-v2-1920x1080.mp4",
+        "status": "render_pending"
+      },
+      "shorts": [
+        { "composition_id": "ES-V2-Short-01-Method", "render_path": "media/shorts/ES-v2-short-01-method-1080x1920.mp4", "status": "render_pending" },
+        { "composition_id": "ES-V2-Short-02-Models", "render_path": "media/shorts/ES-v2-short-02-models-1080x1920.mp4", "status": "render_pending" },
+        { "composition_id": "ES-V2-Short-03-Formal", "render_path": "media/shorts/ES-v2-short-03-formal-1080x1920.mp4", "status": "render_pending" },
+        { "composition_id": "ES-V2-Short-04-Campaign", "render_path": "media/shorts/ES-v2-short-04-campaign-1080x1920.mp4", "status": "render_pending" },
+        { "composition_id": "ES-V2-Short-05-Limits", "render_path": "media/shorts/ES-v2-short-05-limits-1080x1920.mp4", "status": "render_pending" }
+      ]
+    }
   },
   "tiktok": {
     "shorts_composition_ids": [
