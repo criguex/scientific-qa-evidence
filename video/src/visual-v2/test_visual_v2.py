@@ -97,8 +97,16 @@ class VisualV2Tests(unittest.TestCase):
         self.assertNotIn("rotate(", torus)
         self.assertIn("Bar length proportional to absolute error", bars)
         self.assertIn("item.value / values[0].value * 100", bars)
-        self.assertIn("Math.max(2,", bars)
+        self.assertIn("width: `${item.value / values[0].value * 100}%`", bars)
+        self.assertIn("minWidth: 2", bars)
+        self.assertNotIn("Math.max(2,", bars)
         self.assertNotIn("Math.sqrt", bars)
+
+    def test_resolution_bars_are_scaled_to_the_labeled_step_counts(self):
+        resolution = STORY.split('if (beat.kind === "resolution")', 1)[1].split('if (beat.kind === "axioms")', 1)[0]
+        self.assertIn('item.match(/\\d+/)', resolution)
+        self.assertIn("stepCounts[index] / maxSteps * 100", resolution)
+        self.assertNotIn("45 + ((index + 1) / items.length) * 45", resolution)
 
     def test_video_and_portrait_layout_keep_content_inside_safe_frame(self):
         stage = STORY.split("const StageArt", 1)[1].split("const StoryVisual", 1)[0]
