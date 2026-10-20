@@ -2,10 +2,6 @@
 
 **A reproducible numerical mutation campaign, alongside bounded formal-tool controls.** This package keeps those two kinds of evidence separate: finite numerical tests are not theorem proofs, and the formal examples do not certify scientific models.
 
-![Animated RC mutation comparison: baseline and doubled time constant](docs/assets/rc-mutation.gif)
-
-*Illustrative reconstruction from the recorded RC fixture. The dots are recorded RK4 checkpoints; the curves are analytic reconstructions. Parameters and source hashes are in [`animations/manifest.json`](animations/manifest.json).*
-
 ## Two evidence tracks
 
 ### 1. Formal reproduction and controls
@@ -46,14 +42,21 @@ Each host recorded **27 PASS, 54 KILLED, and 3 SURVIVED** across the same **84 p
 
 - [Open the offline animation gallery](animations/index.html) or read the full [animation guide](animations/README.md) for equations, parameters, mutation outcomes, oracle scope, and source traces.
 
-| Scene | What changes | Open the standalone animation |
-| --- | --- | --- |
-| RC circuit | Time constant doubled; voltage response compared | [RC](animations/rc.html) |
-| Second-order chemistry | Reaction rate doubled; concentration changes at fixed volume | [Chemistry](animations/chemistry.html) |
-| Newton cooling | Cooling rate halved; invariant passes while oracle error fails | [Cooling](animations/cooling.html) |
-| Snell refraction | Refractive indices swapped during an incidence-angle sweep | [Refraction](animations/snell.html) |
-| Mutation campaign | Same 84 synthetic variants summarized per host | [Campaign](animations/campaign.html) |
-| Formal typecheck | A valid proof value compared with a deliberately wrong type | [Formal control](animations/formal.html) |
+### Six data-backed animation scenes
+
+| Numerical models | Campaign and formal controls |
+| --- | --- |
+| <a href="animations/rc.html">RC · doubled time constant</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="RC baseline and mutation comparison"> | <a href="animations/campaign.html">Campaign · paired classifications</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Per-host mutation campaign classifications"> |
+| <a href="animations/chemistry.html">Chemistry · doubled reaction rate</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Second-order concentration comparison at fixed volume"> | <a href="animations/formal.html">Formal · proof-value typecheck control</a><br><img src="docs/assets/formal-preview.gif" width="360" alt="Baseline proof value accepted and wrong-type mutation rejected"> |
+| <a href="animations/cooling.html">Cooling · halved rate constant</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Cooling baseline and rate mutation comparison"> | <a href="animations/snell.html">Snell · swapped refractive indices</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Refraction rays and incidence-angle sweep"> |
+
+The standalone HTML scenes retain play and seek controls. The table previews are motion exports for quick scanning; they are not the narration-synced long video or its five shorts.
+
+### Separate 3D flow context
+
+![Illustrative Taylor–Green flow clip, separate from the evidence scenes](docs/assets/flow-preview.gif)
+
+This cropped visual is context only—not campaign data, evidence of blow-up, or a formal solution. Its source and crop provenance are documented in [SOURCE_PROVENANCE.md](evidence/SOURCE_PROVENANCE.md).
 
 - [Read the evidence map](CLAIMS.md), [source provenance](evidence/SOURCE_PROVENANCE.md), and [curated evidence guide](evidence/README.md).
 - [Review the narrated V2 plan](video/src/visual-v2/publication.json). The rejected static-text V1 must not be uploaded.
@@ -86,6 +89,6 @@ This reruns the numerical suite only; it does not rebuild the formal source or r
 
 Created by **Cristian Guerra**, QA Automation, from **Medellín, Colombia** ([`@criguex`](https://github.com/criguex)). Original proofs are credited to their OpenAI authors; see [Authorship and AI disclosure](AUTHORSHIP.md) for attribution and tool-assistance details. Lean, mathlib, and Comparator are identified in the [dependency and fidelity records](evidence/formal/clay-lean-fidelity.md).
 
-Six interactive HTML scenes and an RC preview loop are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. An introductory X thread has been posted; YouTube and TikTok uploads have not. The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
+Six interactive HTML scenes and six matching preview loops are available for review, with a separate 3D illustrative flow clip. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. An introductory X thread has been posted; YouTube and TikTok uploads have not. The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
 
 No theorem discovery, scientific certification, empirical validation, or proof of a real-world system is claimed.
