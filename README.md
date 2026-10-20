@@ -44,7 +44,17 @@ Each host recorded **27 PASS, 54 KILLED, and 3 SURVIVED** across the same **84 p
 
 ## Explore and reproduce
 
-- [Open the offline animation gallery](animations/index.html): six interactive scenes—RC, second-order chemistry, Newton cooling, Snell refraction, campaign summary, and formal typecheck control. Their shared manifest records evidence-file hashes.
+- [Open the offline animation gallery](animations/index.html) or read the full [animation guide](animations/README.md) for equations, parameters, mutation outcomes, oracle scope, and source traces.
+
+| Scene | What changes | Open the standalone animation |
+| --- | --- | --- |
+| RC circuit | Time constant doubled; voltage response compared | [RC](animations/rc.html) |
+| Second-order chemistry | Reaction rate doubled; concentration changes at fixed volume | [Chemistry](animations/chemistry.html) |
+| Newton cooling | Cooling rate halved; invariant passes while oracle error fails | [Cooling](animations/cooling.html) |
+| Snell refraction | Refractive indices swapped during an incidence-angle sweep | [Refraction](animations/snell.html) |
+| Mutation campaign | Same 84 synthetic variants summarized per host | [Campaign](animations/campaign.html) |
+| Formal typecheck | A valid proof value compared with a deliberately wrong type | [Formal control](animations/formal.html) |
+
 - [Read the evidence map](CLAIMS.md), [source provenance](evidence/SOURCE_PROVENANCE.md), and [curated evidence guide](evidence/README.md).
 - [Review the narrated V2 plan](video/src/visual-v2/publication.json). The rejected static-text V1 must not be uploaded.
 
@@ -69,6 +79,6 @@ This reruns the numerical suite only; it does not rebuild the formal source or r
 
 Created by **Cristian Guerra**, QA Automation, from **Medellín, Colombia** ([`@criguex`](https://github.com/criguex)). Original proofs are credited to their OpenAI authors; see [Authorship and AI disclosure](AUTHORSHIP.md) for attribution and tool-assistance details. Lean, mathlib, and Comparator are identified in the [dependency and fidelity records](evidence/formal/clay-lean-fidelity.md).
 
-Six interactive HTML scenes and an RC preview loop are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. **No video or social post is represented as published.** The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
+Six interactive HTML scenes and an RC preview loop are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. An introductory X thread has been posted; YouTube and TikTok uploads have not. The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
 
 No theorem discovery, scientific certification, empirical validation, or proof of a real-world system is claimed.
