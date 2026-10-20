@@ -12,7 +12,7 @@ class ComparatorSanitizerTests(unittest.TestCase):
             source = root / "raw.typescript"
             destination = root / "safe.log"
             source.write_text(
-                "Script started on 2026-10-20 [COMMAND=cd /Users/cris/work && tool --ip 100.75.2.3]\n"
+                "Script started on 2026-10-20 [COMMAND=cd /Users/example-person/work && tool --ip 100.75.2.3]\n"
                 "\x1b[32mYour solution is okay!\x1b[0m\n"
                 "COMMAND_EXIT_CODE=0\n"
                 "peer 100.75.2.3\n"
@@ -29,7 +29,7 @@ class ComparatorSanitizerTests(unittest.TestCase):
             self.assertIn("<PRIVATE_PATH>", result)
             self.assertIn("<PRIVATE_IP>", result)
             self.assertNotIn("\x1b", result)
-            self.assertNotIn("/Users/cris", result)
+            self.assertNotIn("/Users/example-person", result)
             self.assertNotIn("/home/alice", result)
             self.assertNotIn("100.75.2.3", result)
 

@@ -8,7 +8,7 @@
     "tags": ["software testing", "quality assurance", "reproducibility", "mutation testing", "formal verification", "Lean"]
   },
   "x_thread": [
-    "A green test suite is not enough to claim that a model works. This study fixes a contract first, then asks whether tests catch deliberate mutations against an independent oracle.",
+    "I'm Cristian Guerra, a Colombian QA Automation professional from Medellín. With AI assistance, I ask whether tests catch deliberate mutations when the contract and oracle are fixed first.",
     "The numerical suite covers nine synthetic models. One example: a 1 kΩ × 1 mF RC circuit has nominal τ = 1 s. At 3 s, the baseline is about 4.751 V; a doubled-τ mutation is about 3.884 V. These are calculations, not lab readings.",
     "A narrow proof-value fixture checks one declaration with Lean and nanoda. Separate Comparator runs rechecked configured Navier–Stokes and Euler challenges with both kernels after a clean-source build. This is bounded recorded evidence, not universal verification.",
     "Each host evaluated 84 variants: 27 PASS, 54 KILLED, 3 SURVIVED. macOS arm64 and Linux x86_64 are paired runs of the same suite, so the result is 84 per host, not 168 distinct cases. Survivors stay visible.",
