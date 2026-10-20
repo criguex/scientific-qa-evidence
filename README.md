@@ -27,6 +27,10 @@ The provider generated audio at speed 1.0; offline post-processing applies tempo
 
 The Remotion project uses the existing package versions in `video/package.json` (Remotion 4.0.537). Install the pinned dependencies with `cd video && npm ci --ignore-scripts`, then run Studio from `video/`. Render targets are listed in `video/README.md`; the review page is [index.html](index.html).
 
+## Animated evidence
+
+Open [the animated evidence gallery](animations/index.html) for six interactive, offline HTML scenes and their square/portrait export targets. Build and test instructions are in [animations/README.md](animations/README.md); these are local review assets and have not been uploaded.
+
 ## Reproduce and verify
 
 From this directory, verify the curated evidence files:
