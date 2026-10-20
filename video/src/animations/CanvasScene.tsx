@@ -4,7 +4,7 @@ import packageData from "../../../animations/manifest.json";
 import { drawAnimation } from "../../../animations/src/scene.js";
 
 type AnimationId = "rc" | "chemistry" | "campaign" | "formal" | "cooling" | "snell";
-type Props = { sceneId: AnimationId; vertical?: boolean };
+type Props = { sceneId: AnimationId; vertical?: boolean; timeOverrideSeconds?: number };
 
 const titles: Record<AnimationId, string> = {
   rc: "One mutation. A measured difference.",
@@ -24,7 +24,7 @@ const notes: Record<AnimationId, string> = {
   snell: "Angles from normal · rays are schematic",
 };
 
-export const CanvasScene: React.FC<Props> = ({ sceneId, vertical = false }) => {
+export const CanvasScene: React.FC<Props> = ({ sceneId, vertical = false, timeOverrideSeconds }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -36,8 +36,8 @@ export const CanvasScene: React.FC<Props> = ({ sceneId, vertical = false }) => {
     if (!canvas || !context) throw new Error("Could not acquire the 2D animation canvas");
     const scale = size / 1080;
     context.setTransform(scale, 0, 0, scale, 0, 0);
-    drawAnimation(context, packageData, sceneId, frame / fps);
-  }, [frame, fps, sceneId, size]);
+    drawAnimation(context, packageData, sceneId, timeOverrideSeconds ?? frame / fps);
+  }, [frame, fps, sceneId, size, timeOverrideSeconds]);
 
   if (!vertical) {
     return <canvas ref={canvasRef} width={1080} height={1080} style={{ width: 1080, height: 1080, display: "block" }} />;

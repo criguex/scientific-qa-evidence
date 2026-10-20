@@ -31,6 +31,10 @@ The Remotion project uses the existing package versions in `video/package.json` 
 
 Open [the animated evidence gallery](animations/index.html) for six interactive, offline HTML scenes and their square/portrait export targets. Build and test instructions are in [animations/README.md](animations/README.md); these are local review assets and have not been uploaded.
 
+## Narrated video V2
+
+The former static-text V1 is rejected and must not be uploaded. V2 uses the existing aligned English audio for one full master and exactly five opening-excerpt shorts; its export targets and separate review gate are described in [the V2 publication plan](video/src/visual-v2/publication.json). Start the separate Remotion entry with `cd video && npx remotion studio --entry-point src/visual-v2-entry.tsx`.
+
 ## Reproduce and verify
 
 From this directory, verify the curated evidence files:

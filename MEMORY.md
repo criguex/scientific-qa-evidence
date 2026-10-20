@@ -8,4 +8,5 @@
 - Numerical and formal evidence are curated allowlists. Original evidence hashes must remain unchanged; English summaries are derived translations.
 - Human author review is required before any external publication. License status remains pending.
 - The first static-text animation draft was rejected; the approved direction is six data-backed animated evidence scenes with offline HTML controls, square/portrait exports and visible Cristian Guerra · QA Automation · Medellín, Colombia attribution. Nothing has been published.
+- Narrated video V1 is also superseded/rejected and must not be uploaded. V2 is registered separately and reuses the existing aligned English 1.20× chapter audio for one long master plus exactly five opening-excerpt shorts; pending renders and human review remain publication gates.
 - When producing the Remotion lockfile, work in a package directory without a reused `node_modules` symlink, then verify with a fresh offline `npm ci --ignore-scripts`; keep raw provider responses and private request metadata outside the package.
