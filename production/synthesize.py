@@ -28,6 +28,26 @@ MAX_CHARACTERS = 11_000
 TEMPO = 1.2
 POSTPROCESS_FILTER = "atempo=1.2,loudnorm=I=-16:TP=-1.5:LRA=11"
 SCRIPT_PATH = Path(__file__).with_name("narration.json")
+SPANISH_SCRIPT_PATH = Path(__file__).with_name("narration.es.json")
+LANGUAGE_SETTINGS = {
+    "en": {"tempo": 1.2, "audio_name": "audio_1.20x.mp3"},
+    "es": {"tempo": 1.25, "audio_name": "audio_1.25x.mp3"},
+}
+
+
+def script_path_for(language: str) -> Path:
+    if language == "en":
+        return SCRIPT_PATH
+    if language == "es":
+        return SPANISH_SCRIPT_PATH
+    raise ValueError("Language must be 'en' or 'es'.")
+
+
+def filter_for(language: str) -> str:
+    settings = LANGUAGE_SETTINGS.get(language)
+    if settings is None:
+        raise ValueError("Language must be 'en' or 'es'.")
+    return f"atempo={settings['tempo']:g},loudnorm=I=-16:TP=-1.5:LRA=11"
 
 
 def utc_now() -> str:
@@ -48,7 +68,10 @@ def payload_for(text: str) -> dict[str, Any]:
     }
 
 
-def load_script(path: Path = SCRIPT_PATH) -> list[dict[str, Any]]:
+def load_script(path: Path | None = None, language: str = "en") -> list[dict[str, Any]]:
+    if language not in LANGUAGE_SETTINGS:
+        raise ValueError("Language must be 'en' or 'es'.")
+    path = path or script_path_for(language)
     document = json.loads(path.read_text(encoding="utf-8"))
     chapters = document.get("chapters")
     if not isinstance(chapters, list) or len(chapters) != 5:
@@ -70,19 +93,20 @@ def load_script(path: Path = SCRIPT_PATH) -> list[dict[str, Any]]:
         raise ValueError("Chapter IDs must be unique.")
     calls: list[dict[str, Any]] = []
     for chapter in chapters:
-        if "es" in chapter:
-            raise ValueError("English release scripts must not contain Spanish text.")
-        entry = chapter.get("en")
+        other_language = "es" if language == "en" else "en"
+        if other_language in chapter:
+            raise ValueError(f"{language.upper()} release scripts must contain only {language.upper()} chapter text.")
+        entry = chapter.get(language)
         if not isinstance(entry, dict) or any(
             not isinstance(entry.get(field), str) or not entry[field]
             for field in ("title", "clip_text", "long_extra")
         ):
-            raise ValueError(f"Chapter {chapter['id']} is missing required English text fields.")
+            raise ValueError(f"Chapter {chapter['id']} is missing required {language.upper()} text fields.")
         clip = entry["clip_text"]
         text = f"{clip} {entry['long_extra']}"
         if not text.startswith(clip + " "):
-            raise ValueError(f"Invalid excerpt boundary for {chapter['id']} English.")
-        calls.append({"id": chapter["id"], "language": "en", "title": entry["title"], "clip_text": clip, "text": text})
+            raise ValueError(f"Invalid excerpt boundary for {chapter['id']} {language.upper()}.")
+        calls.append({"id": chapter["id"], "language": language, "title": entry["title"], "clip_text": clip, "text": text})
     characters = sum(len(call["text"]) for call in calls)
     if len(calls) > MAX_REQUESTS:
         raise ValueError("Narration exceeds the five-request limit.")
@@ -144,8 +168,8 @@ def atomic_json(path: Path, value: Any) -> None:
     temporary.replace(path)
 
 
-def run_generation(out_dir: Path, key: str, script_path: Path = SCRIPT_PATH) -> dict[str, Any]:
-    calls = load_script(script_path)
+def run_generation(out_dir: Path, key: str, script_path: Path | None = None, language: str = "en") -> dict[str, Any]:
+    calls = load_script(script_path, language)
     if out_dir.exists():
         raise FileExistsError("Output path already exists; refusing duplicate paid requests.")
     out_dir.mkdir(parents=True)
@@ -207,7 +231,7 @@ def run_generation(out_dir: Path, key: str, script_path: Path = SCRIPT_PATH) -> 
             record.update({"status": "response_error_no_retry", "error_type": type(error).__name__, "response_saved_utc": utc_now()})
             atomic_json(chapter_dir / "manifest.json", record)
             raise
-    summary = {"status": "all_raw_responses_saved", "requests": len(results), "generated_utc": utc_now(), "results": results}
+    summary = {"status": "all_raw_responses_saved", "language": calls[0]["language"], "requests": len(results), "generated_utc": utc_now(), "results": results}
     atomic_json(out_dir / "summary.json", summary)
     return summary
 
@@ -265,35 +289,41 @@ def to_srt(captions: list[dict[str, Any]]) -> str:
     return "\n".join(chunks)
 
 
-def run_postprocess(out_dir: Path, script_path: Path = SCRIPT_PATH) -> dict[str, Any]:
+def run_postprocess(out_dir: Path, script_path: Path | None = None, language: str = "en") -> dict[str, Any]:
     if not out_dir.is_dir():
         raise FileNotFoundError("Generated output directory does not exist.")
-    chapters = load_script(script_path)
+    chapters = load_script(script_path, language)
+    settings = LANGUAGE_SETTINGS[language]
+    tempo = settings["tempo"]
+    filter_value = filter_for(language)
     if not (out_dir / "summary.json").is_file():
         raise FileNotFoundError("Generation summary is missing; refusing post-processing.")
+    generation_summary = json.loads((out_dir / "summary.json").read_text(encoding="utf-8"))
+    if generation_summary.get("status") != "all_raw_responses_saved" or generation_summary.get("language", "en") != language:
+        raise ValueError("Generation summary status or language does not match the selected release.")
     for chapter in chapters:
         directory = out_dir / chapter["language"] / chapter["id"]
         if not (directory / "audio_raw.mp3").is_file() or not (directory / "alignment_raw.json").is_file():
             raise FileNotFoundError("A raw response or alignment is missing; refusing post-processing.")
-        if any((directory / name).exists() for name in ("audio_1.20x.mp3", "captions.json", "captions.srt")):
+        if any((directory / name).exists() for name in (settings["audio_name"], "captions.json", "captions.srt")):
             raise FileExistsError("Post-processed output already exists; refusing overwrite.")
     processed: list[dict[str, Any]] = []
     for chapter in chapters:
         directory = out_dir / chapter["language"] / chapter["id"]
         raw_audio = directory / "audio_raw.mp3"
-        final_audio = directory / "audio_1.20x.mp3"
+        final_audio = directory / settings["audio_name"]
         if not raw_audio.is_file() or final_audio.exists():
             raise FileExistsError("Missing raw audio or post-processed output already exists.")
         subprocess.run([
             "ffmpeg", "-nostdin", "-v", "error", "-i", str(raw_audio),
-            "-filter:a", POSTPROCESS_FILTER, "-ar", "44100", "-c:a", "libmp3lame", "-q:a", "2", str(final_audio),
+            "-filter:a", filter_value, "-ar", "44100", "-c:a", "libmp3lame", "-q:a", "2", str(final_audio),
         ], check=True, capture_output=True, text=True, timeout=300)
         probe = subprocess.run([
             "ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "json", str(final_audio),
         ], check=True, capture_output=True, text=True, timeout=30)
         duration = float(json.loads(probe.stdout)["format"]["duration"])
         alignment = json.loads((directory / "alignment_raw.json").read_text(encoding="utf-8"))
-        captions, clip_end = captions_from_alignment(alignment, chapter["clip_text"])
+        captions, clip_end = captions_from_alignment(alignment, chapter["clip_text"], tempo)
         atomic_json(directory / "captions.json", captions)
         (directory / "captions.srt").write_text(to_srt(captions), encoding="utf-8")
         manifest_path = directory / "manifest.json"
@@ -302,8 +332,9 @@ def run_postprocess(out_dir: Path, script_path: Path = SCRIPT_PATH) -> dict[str,
         manifest.update({
             "status": "postprocessed",
             "postprocess_utc": utc_now(),
-            "tempo": TEMPO,
-            "postprocess_filter": POSTPROCESS_FILTER,
+            "language": language,
+            "tempo": tempo,
+            "postprocess_filter": filter_value,
             "sample_rate_hz": 44100,
             "final_duration_seconds": duration,
             "clip_end_seconds": clip_end,
@@ -313,7 +344,7 @@ def run_postprocess(out_dir: Path, script_path: Path = SCRIPT_PATH) -> dict[str,
         })
         atomic_json(manifest_path, manifest)
         processed.append({"id": chapter["id"], "language": chapter["language"], "duration_seconds": duration, "clip_end_seconds": clip_end})
-    summary = {"status": "postprocessing_complete_no_new_provider_calls", "tempo": TEMPO, "processed": processed, "timestamp_utc": utc_now()}
+    summary = {"status": "postprocessing_complete_no_new_provider_calls", "language": language, "tempo": tempo, "processed": processed, "timestamp_utc": utc_now()}
     atomic_json(out_dir / "postprocess_summary.json", summary)
     return summary
 
@@ -326,18 +357,20 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--postprocess", action="store_true")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--key-file", type=Path)
-    parser.add_argument("--script", type=Path, default=SCRIPT_PATH)
+    parser.add_argument("--language", choices=tuple(LANGUAGE_SETTINGS), default="en")
+    parser.add_argument("--script", type=Path)
     args = parser.parse_args(argv)
+    script_path = args.script or script_path_for(args.language)
     try:
         if args.dry_run:
-            calls = load_script(args.script)
-            print(json.dumps({"status": "dry_run_only", "requests": len(calls), "characters": sum(len(c["text"]) for c in calls), "voice_id": VOICE_ID, "model_id": MODEL_ID, "speed": SPEED, "no_network": True}))
+            calls = load_script(script_path, args.language)
+            print(json.dumps({"status": "dry_run_only", "language": args.language, "requests": len(calls), "characters": sum(len(c["text"]) for c in calls), "voice_id": VOICE_ID, "model_id": MODEL_ID, "speed": SPEED, "tempo": LANGUAGE_SETTINGS[args.language]["tempo"], "no_network": True}))
             return 0
         if args.generate:
             key = load_key(os.environ.get("GV_ELEVENLABS_API_KEY"), args.key_file)
-            result = run_generation(args.out, key, args.script)
+            result = run_generation(args.out, key, script_path, args.language)
         else:
-            result = run_postprocess(args.out, args.script)
+            result = run_postprocess(args.out, script_path, args.language)
         print(json.dumps({"status": result["status"], "requests": result.get("requests"), "processed": len(result.get("processed", []))}))
         return 0
     except Exception as error:

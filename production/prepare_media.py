@@ -14,6 +14,11 @@ from typing import Any
 
 FPS = 30
 SCRIPT_PATH = Path(__file__).with_name("narration.json")
+SPANISH_SCRIPT_PATH = Path(__file__).with_name("narration.es.json")
+LANGUAGE_SETTINGS = {
+    "en": {"script": SCRIPT_PATH, "tag": "EN", "directory": "english", "audio": "audio_1.20x.mp3", "tempo": 1.2},
+    "es": {"script": SPANISH_SCRIPT_PATH, "tag": "ES", "directory": "spanish", "audio": "audio_1.25x.mp3", "tempo": 1.25},
+}
 
 
 def load_json(path: Path) -> Any:
@@ -46,24 +51,32 @@ def cue_offset(frame: int) -> int:
     return round(frame * 1000 / FPS)
 
 
-def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path = SCRIPT_PATH) -> dict[str, Any]:
+def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path | None = None, language: str = "en") -> dict[str, Any]:
+    settings = LANGUAGE_SETTINGS.get(language)
+    if settings is None:
+        raise ValueError("Language must be 'en' or 'es'.")
+    script_path = script_path or settings["script"]
     narration = load_json(script_path)
     chapters = narration.get("chapters")
     if not isinstance(chapters, list) or len(chapters) != 5:
-        raise ValueError("Narration must contain exactly five English chapters.")
+        raise ValueError("Narration must contain exactly five chapters.")
     ids = [chapter.get("id") for chapter in chapters if isinstance(chapter, dict)]
     if len(ids) != len(chapters) or any(not safe_id(chapter_id) for chapter_id in ids) or len(set(ids)) != 5:
         raise ValueError("Chapter IDs must be unique, safe path components.")
-    if any("es" in chapter or not isinstance(chapter.get("en"), dict) for chapter in chapters):
-        raise ValueError("English release narration must contain only English chapter text.")
+    chapter_text = [chapter.get(language) for chapter in chapters]
+    other_language = "es" if language == "en" else "en"
+    if any(other_language in chapter or not isinstance(text, dict) for chapter, text in zip(chapters, chapter_text)):
+        raise ValueError(f"{language.upper()} release narration must contain only {language.upper()} chapter text.")
 
     postprocess = load_json(source / "postprocess_summary.json")
     processed = postprocess.get("processed")
     if postprocess.get("status") != "postprocessing_complete_no_new_provider_calls" or not isinstance(processed, list):
         raise ValueError("A complete post-processing summary is required.")
-    by_id = {item.get("id"): item for item in processed if isinstance(item, dict) and item.get("language", "en") == "en"}
+    if postprocess.get("language", "en") != language:
+        raise ValueError("Post-processing language does not match the selected release language.")
+    by_id = {item.get("id"): item for item in processed if isinstance(item, dict) and item.get("language", language) == language}
     if len(by_id) != len(processed) or set(by_id) != set(ids):
-        raise ValueError("Post-processing summary must contain each English chapter exactly once.")
+        raise ValueError(f"Post-processing summary must contain each {language.upper()} chapter exactly once.")
 
     records = []
     for chapter in chapters:
@@ -73,8 +86,8 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
         clip_end = float(item["clip_end_seconds"])
         if not math.isfinite(duration) or not math.isfinite(clip_end) or duration <= 0 or clip_end <= 0 or clip_end > duration:
             raise ValueError(f"Invalid audio duration or clip boundary for {chapter_id}.")
-        directory = source / "en" / chapter_id
-        audio = directory / "audio_1.20x.mp3"
+        directory = source / language / chapter_id
+        audio = directory / settings["audio"]
         captions_path = directory / "captions.json"
         if not audio.is_file() or audio.stat().st_size < 1000 or not captions_path.is_file():
             raise FileNotFoundError(f"Processed audio and captions are required for {chapter_id}.")
@@ -88,7 +101,7 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
                 raise ValueError(f"Caption falls outside the audio duration in {chapter_id}.")
         records.append({
             "id": chapter_id,
-            "title": chapter["en"]["title"],
+            "title": chapter[language]["title"],
             "audio_source": audio,
             "captions": captions,
             "duration_seconds": duration,
@@ -100,11 +113,11 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
     audio_dir = public / "audio"
     subtitle_dir = public / "subtitles"
     planned = [audio_dir / f"{record['id']}.mp3" for record in records]
-    planned.extend([subtitle_dir / "EN-long.srt", subtitle_dir / "EN-long.vtt"])
+    planned.extend([subtitle_dir / f"{settings['tag']}-long.srt", subtitle_dir / f"{settings['tag']}-long.vtt"])
     for record in records:
         planned.extend([
-            subtitle_dir / f"EN-{record['id']}-short.srt",
-            subtitle_dir / f"EN-{record['id']}-short.vtt",
+            subtitle_dir / f"{settings['tag']}-{record['id']}-short.srt",
+            subtitle_dir / f"{settings['tag']}-{record['id']}-short.vtt",
         ])
     if any(path.exists() for path in planned):
         raise FileExistsError("A destination media file already exists; refusing overwrite.")
@@ -128,14 +141,14 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
             if caption["startMs"] >= record["clip_end_seconds"] * 1000:
                 break
             short.append({**caption, "endMs": min(caption["endMs"], math.ceil(record["clip_end_seconds"] * 1000))})
-        srt_path = subtitle_dir / f"EN-{record['id']}-short.srt"
-        vtt_path = subtitle_dir / f"EN-{record['id']}-short.vtt"
+        srt_path = subtitle_dir / f"{settings['tag']}-{record['id']}-short.srt"
+        vtt_path = subtitle_dir / f"{settings['tag']}-{record['id']}-short.vtt"
         srt_path.write_text(subtitle_text(short), encoding="utf-8")
         vtt_path.write_text("WEBVTT\n\n" + subtitle_text(short, decimal="."), encoding="utf-8")
         manifest_chapters.append({
             "id": record["id"],
             "title": record["title"],
-            "audio": f"english/audio/{record['id']}.mp3",
+            "audio": f"{settings['directory']}/audio/{record['id']}.mp3",
             "duration_seconds": record["duration_seconds"],
             "clip_end_seconds": record["clip_end_seconds"],
             "duration_in_frames": record["duration_in_frames"],
@@ -145,10 +158,12 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
         })
         offset_frames += record["duration_in_frames"]
 
-    (subtitle_dir / "EN-long.srt").write_text(subtitle_text(long_captions), encoding="utf-8")
-    (subtitle_dir / "EN-long.vtt").write_text("WEBVTT\n\n" + subtitle_text(long_captions, decimal="."), encoding="utf-8")
+    (subtitle_dir / f"{settings['tag']}-long.srt").write_text(subtitle_text(long_captions), encoding="utf-8")
+    (subtitle_dir / f"{settings['tag']}-long.vtt").write_text("WEBVTT\n\n" + subtitle_text(long_captions, decimal="."), encoding="utf-8")
     manifest = {
         "status": "ready",
+        "language": language,
+        "tempo": settings["tempo"],
         "fps": FPS,
         "width": 1920,
         "height": 1080,
@@ -163,15 +178,16 @@ def prepare(source: Path, public: Path, manifest_path: Path, script_path: Path =
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Copy approved English audio and derive aligned subtitle assets.")
+    parser = argparse.ArgumentParser(description="Copy language-specific audio and derive aligned subtitle assets.")
     parser.add_argument("--source", type=Path, required=True, help="Post-processed TTS output directory")
     parser.add_argument("--public", type=Path, required=True, help="Release video public directory")
     parser.add_argument("--manifest", type=Path, required=True, help="Generated media manifest path")
-    parser.add_argument("--script", type=Path, default=SCRIPT_PATH)
+    parser.add_argument("--language", choices=tuple(LANGUAGE_SETTINGS), default="en")
+    parser.add_argument("--script", type=Path)
     arguments = parser.parse_args(argv)
     try:
-        manifest = prepare(arguments.source, arguments.public, arguments.manifest, arguments.script)
-        print(json.dumps({"status": manifest["status"], "chapters": len(manifest["chapters"]), "long_duration_in_frames": manifest["long_duration_in_frames"]}))
+        manifest = prepare(arguments.source, arguments.public, arguments.manifest, arguments.script, arguments.language)
+        print(json.dumps({"status": manifest["status"], "language": manifest["language"], "chapters": len(manifest["chapters"]), "long_duration_in_frames": manifest["long_duration_in_frames"]}))
         return 0
     except Exception as error:
         print(json.dumps({"status": "failed", "error_type": type(error).__name__}), file=sys.stderr)

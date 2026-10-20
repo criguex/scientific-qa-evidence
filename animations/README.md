@@ -4,7 +4,7 @@ The six standalone HTML scenes are committed in this directory. They are offline
 
 ## Numerical scenes
 
-All four ODE scenes use the synthetic suite's `1e-6` normalized-error tolerance and compare an implementation using RK4 with a separately coded analytic oracle. Solid curves are analytic reconstructions; hollow points are recorded 256-step RK4 outputs at quarter-interval checkpoints. The models are illustrative software tests, not physical measurements.
+The three ODE scenes—RC, chemistry, and cooling—use the synthetic suite's `1e-6` normalized-error tolerance and compare an RK4 implementation with a separately coded analytic oracle. Solid curves are analytic reconstructions; hollow points are recorded 256-step RK4 outputs at quarter-interval checkpoints. The models are illustrative software tests, not physical measurements. Snell is algebraic, not an ODE: its independent oracle uses bisection, and its comparison uses the same `1e-6` tolerance.
 
 ### 1. RC circuit — one mutation, a computed difference
 

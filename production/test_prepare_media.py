@@ -7,24 +7,26 @@ import prepare_media
 
 
 class PrepareMediaTests(unittest.TestCase):
-    def make_source(self, root):
-        document = json.loads(prepare_media.SCRIPT_PATH.read_text(encoding="utf-8"))
+    def make_source(self, root, language="en"):
+        settings = prepare_media.LANGUAGE_SETTINGS[language]
+        document = json.loads(settings["script"].read_text(encoding="utf-8"))
         records = []
         for chapter in document["chapters"]:
-            directory = root / "en" / chapter["id"]
+            directory = root / language / chapter["id"]
             directory.mkdir(parents=True)
-            (directory / "audio_1.20x.mp3").write_bytes(b"a" * 1200)
+            (directory / settings["audio"]).write_bytes(b"a" * 1200)
             (directory / "captions.json").write_text(json.dumps([
                 {"text": "Aligned caption.", "startMs": 0, "endMs": 900}
             ]), encoding="utf-8")
             records.append({
                 "id": chapter["id"],
-                "language": "en",
+                "language": language,
                 "duration_seconds": 2.0,
                 "clip_end_seconds": 1.0,
             })
         (root / "postprocess_summary.json").write_text(json.dumps({
             "status": "postprocessing_complete_no_new_provider_calls",
+            "language": language,
             "processed": records,
         }), encoding="utf-8")
 
@@ -67,6 +69,33 @@ class PrepareMediaTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 prepare_media.prepare(source, root / "public", root / "generatedMedia.json", script_path)
             self.assertFalse((root / "public").exists())
+
+    def test_spanish_media_uses_own_audio_tree_and_caption_names(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source"
+            public = root / "video-public" / "spanish"
+            manifest_path = root / "src" / "generatedSpanishMedia.json"
+            source.mkdir()
+            self.make_source(source, "es")
+            manifest_path.parent.mkdir()
+            manifest_path.write_text('{"status":"pending"}\n', encoding="utf-8")
+
+            result = prepare_media.prepare(
+                source, public, manifest_path, prepare_media.SPANISH_SCRIPT_PATH, "es"
+            )
+
+            self.assertEqual(result["language"], "es")
+            self.assertEqual(result["tempo"], 1.25)
+            self.assertEqual(result["chapters"][0]["audio"], "spanish/audio/01_method.mp3")
+            self.assertTrue((public / "audio" / "01_method.mp3").is_file())
+            self.assertTrue((public / "subtitles" / "ES-long.vtt").is_file())
+            short = (public / "subtitles" / "ES-01_method-short.srt").read_text(encoding="utf-8")
+            self.assertIn("Aligned caption.", short)
+            with self.assertRaises(FileExistsError):
+                prepare_media.prepare(
+                    source, public, manifest_path, prepare_media.SPANISH_SCRIPT_PATH, "es"
+                )
 
 
 if __name__ == "__main__":

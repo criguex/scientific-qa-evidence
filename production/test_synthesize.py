@@ -19,6 +19,31 @@ class SynthesizeTests(unittest.TestCase):
         self.assertEqual(payload["voice_settings"]["speed"], 1.0)
         self.assertNotIn("language_code", payload)
 
+    def test_spanish_script_is_separate_and_uses_125_tempo(self):
+        calls = synthesize.load_script(language="es")
+        self.assertEqual(len(calls), 5)
+        self.assertTrue(all(call["language"] == "es" for call in calls))
+        self.assertLessEqual(sum(len(call["text"]) for call in calls), synthesize.MAX_CHARACTERS)
+        self.assertTrue(all(len(call["text"]) <= 5_000 for call in calls))
+        self.assertEqual(synthesize.LANGUAGE_SETTINGS["en"]["tempo"], 1.2)
+        self.assertEqual(synthesize.LANGUAGE_SETTINGS["es"]["tempo"], 1.25)
+        self.assertEqual(synthesize.filter_for("en"), synthesize.POSTPROCESS_FILTER)
+        self.assertEqual(synthesize.filter_for("es"), "atempo=1.25,loudnorm=I=-16:TP=-1.5:LRA=11")
+
+    def test_spanish_schema_is_rejected_before_output_or_provider_when_mislabeled(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            document = json.loads(synthesize.SPANISH_SCRIPT_PATH.read_text(encoding="utf-8"))
+            document["chapters"][0]["en"] = {"title": "Wrong language", "clip_text": "Text", "long_extra": "More text"}
+            script = root / "mixed-language.json"
+            script.write_text(json.dumps(document), encoding="utf-8")
+            output = root / "no-output"
+            with patch.object(synthesize, "request_once") as request:
+                with self.assertRaises(ValueError):
+                    synthesize.run_generation(output, "mock-key", script, "es")
+            self.assertFalse(output.exists())
+            request.assert_not_called()
+
     def test_dry_run_does_not_make_network_request(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "not-created"
@@ -143,9 +168,35 @@ class SynthesizeTests(unittest.TestCase):
                 result = synthesize.run_generation(output, "mock-key")
             self.assertEqual(len(calls_seen), 5)
             self.assertEqual(result["requests"], 5)
+            self.assertEqual(result["language"], "en")
             self.assertTrue((output / "summary.json").is_file())
             for manifest in output.glob("*/*/manifest.json"):
                 self.assertNotIn("mock-key", manifest.read_text(encoding="utf-8"))
+
+    def test_spanish_generation_writes_five_responses_to_separate_tree(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "spanish-output"
+            responses = []
+
+            def fake_request(text, key, timeout=120):
+                responses.append(text)
+                return {
+                    "audio_base64": base64.b64encode(b"s" * 1100).decode("ascii"),
+                    "alignment": {
+                        "characters": list(text),
+                        "character_start_times_seconds": [i * 0.01 for i in range(len(text))],
+                        "character_end_times_seconds": [(i + 1) * 0.01 for i in range(len(text))],
+                    },
+                }, {"duration_seconds": 0.01, "request_id": "mock-es", "character_cost": None, "http_status": 200}
+
+            with patch.object(synthesize, "request_once", side_effect=fake_request):
+                result = synthesize.run_generation(output, "mock-key", language="es")
+
+            self.assertEqual(result["requests"], 5)
+            self.assertEqual(result["language"], "es")
+            self.assertEqual(len(responses), 5)
+            self.assertTrue((output / "es" / "01_method" / "audio_raw.mp3").is_file())
+            self.assertTrue((output / "summary.json").is_file())
 
     def test_postprocess_uses_mocked_ffmpeg_and_never_calls_provider(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -181,6 +232,39 @@ class SynthesizeTests(unittest.TestCase):
             captions = json.loads((output / first_chapter["language"] / first_chapter["id"] / "captions.json").read_text(encoding="utf-8"))
             self.assertTrue(captions)
             self.assertTrue(all(caption["endMs"] >= caption["startMs"] for caption in captions))
+
+    def test_spanish_postprocess_uses_125_tempo_and_separate_audio_name(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "generated"
+            output.mkdir()
+            synthesize.atomic_json(output / "summary.json", {"status": "all_raw_responses_saved", "language": "es"})
+            for call in synthesize.load_script(language="es"):
+                chapter_dir = output / "es" / call["id"]
+                chapter_dir.mkdir(parents=True)
+                (chapter_dir / "audio_raw.mp3").write_bytes(b"raw")
+                alignment = {
+                    "characters": list(call["text"]),
+                    "character_start_times_seconds": [i * 0.01 for i in range(len(call["text"]))],
+                    "character_end_times_seconds": [(i + 1) * 0.01 for i in range(len(call["text"]))],
+                }
+                synthesize.atomic_json(chapter_dir / "alignment_raw.json", alignment)
+                synthesize.atomic_json(chapter_dir / "manifest.json", {"status": "generated_raw; postprocess_pending"})
+
+            def fake_subprocess(command, **kwargs):
+                if command[0] == "ffmpeg":
+                    Path(command[-1]).write_bytes(b"processed")
+                    self.assertEqual(command[7], "atempo=1.25,loudnorm=I=-16:TP=-1.5:LRA=11")
+                    return type("Result", (), {"stdout": ""})()
+                return type("Result", (), {"stdout": '{"format":{"duration":"12.5"}}'})()
+
+            with patch.object(synthesize.subprocess, "run", side_effect=fake_subprocess) as mock_run:
+                with patch.object(synthesize, "request_once", side_effect=AssertionError("provider called")):
+                    result = synthesize.run_postprocess(output, language="es")
+            self.assertEqual(result["language"], "es")
+            self.assertEqual(result["tempo"], 1.25)
+            self.assertTrue((output / "es" / "01_method" / "audio_1.25x.mp3").is_file())
+            self.assertFalse((output / "es" / "01_method" / "audio_1.20x.mp3").exists())
+            self.assertEqual(len(mock_run.call_args_list), 10)
 
 
 if __name__ == "__main__":

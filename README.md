@@ -57,6 +57,13 @@ Each host recorded **27 PASS, 54 KILLED, and 3 SURVIVED** across the same **84 p
 
 - [Read the evidence map](CLAIMS.md), [source provenance](evidence/SOURCE_PROVENANCE.md), and [curated evidence guide](evidence/README.md).
 - [Review the narrated V2 plan](video/src/visual-v2/publication.json). The rejected static-text V1 must not be uploaded.
+- Spanish script source: [`production/narration.es.json`](production/narration.es.json). It is based on the current English narration, fits the five-request/11,000-character plan, and has a no-network dry run; no Spanish audio has been generated.
+
+```sh
+python3 production/synthesize.py --dry-run --language es --out /tmp/adv050-es-review
+```
+
+Spanish audio, if generated after script review, stays in a separate private output tree. Its 1.25× offline tempo, audio and aligned captions are kept separate from the English 1.20× manifest; caption timing is derived from the new Spanish provider alignment.
 
 Verify the saved numerical evidence and bundled files:
 
