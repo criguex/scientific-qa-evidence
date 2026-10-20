@@ -1,3 +1,7 @@
-# License status
+# Rights and license status
 
-The license for this curated release package is not yet confirmed. Do not add an Apache-2.0 notice or redistribute the package publicly until the author confirms the applicable license and permissions for every included source, evidence artifact, and media asset. This file records a pending decision; it is not a license grant.
+The author authorized publication of this package on 2026-10-20. This is publication authorization, not a blanket permissive license: rights in the original package and media are reserved unless a separate license is stated. No Apache-2.0 or other general reuse grant is made here.
+
+The reviewed media inventory identified no third-party footage. The flow illustration is a locally generated crop from the project's existing Taylor–Green visualization, not stock footage. The source asset is identified by SHA-256 `a87f54738a7021c0078c2e5f6834a7bd68a3d4b8d5e2838c542fb44bfcbc900c`; the distributed illustrative crop is identified by SHA-256 `5709a87177c85315750ade115e12ab4cae6cce17393ddd03b59d9e6458b9d959`. See [source provenance](evidence/SOURCE_PROVENANCE.md). The crop transformation is recorded there; it was not independently rerun as part of this review.
+
+Third-party software, frameworks, models, and hosted services remain subject to their own terms and notices. The synthetic narration uses a provider voice; this record does not make a representation about commercial-use rights or subscription entitlements. No credentials, provider responses, or private account data are included.

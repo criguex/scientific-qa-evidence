@@ -1,68 +1,74 @@
-# ADV-050 English review package
+# Scientific QA Evidence
 
-This directory contains the English narration, a curated evidence allowlist, Remotion source, and publication drafts for human review. It is a local release candidate. No public upload or repository publication has happened.
+**A reproducible numerical mutation campaign, alongside bounded formal-tool controls.** This package keeps those two kinds of evidence separate: finite numerical tests are not theorem proofs, and the formal examples do not certify scientific models.
 
-## Quick start
+![Animated RC mutation comparison: baseline and doubled time constant](docs/assets/rc-mutation.gif)
 
-Run the narration checks and inspect the request plan without contacting the voice provider:
+*Illustrative reconstruction from the recorded RC fixture. The dots are recorded RK4 checkpoints; the curves are analytic reconstructions. Parameters and source hashes are in [`animations/manifest.json`](animations/manifest.json).*
 
-```sh
-cd production
-python3 -m unittest -v test_synthesize.py test_prepare_media.py
-python3 synthesize.py --dry-run --out /tmp/adv-050-english-voice
+## Two evidence tracks
+
+### 1. Formal reproduction and controls
+
+```mermaid
+flowchart LR
+    A[OpenAI-authored original proofs] --> B[Pinned source checkout]
+    B --> C[Clean source build<br/>11,424 jobs · exit 0]
+    C --> D[Comparator challenge run]
+    D --> E[Navier–Stokes<br/>nanoda + Lean accept]
+    D --> F[Euler<br/>nanoda + Lean accept]
+    G[Separate controlled fixture<br/>valid proof value] --> H[Lean accepts]
+    G --> I[Wrong proof value] --> J[Lean type mismatch]
+    I --> K[nanoda assertion rejection<br/>classification derived from pinned source]
 ```
 
-The approved voice generation is five English requests. Supply `GV_ELEVENLABS_API_KEY` through the process environment, and keep raw responses outside this directory:
+The clean build reused cached dependencies and toolchain artifacts; it was not a full bootstrap. The later Comparator run is a bounded recorded check of the configured challenges, not a general proof of correctness. The deliberately wrong fixture changes the exported proof value while retaining its declared type and dependencies. See the [formal evidence map](CLAIMS.md) and [Comparator records](evidence/formal/comparator/README.md).
 
-```sh
-python3 synthesize.py --generate --out /tmp/adv-050-english-voice
-python3 synthesize.py --postprocess --out /tmp/adv-050-english-voice
-python3 prepare_media.py \
-  --source /tmp/adv-050-english-voice \
-  --public ../video/public/english \
-  --manifest ../video/src/generatedMedia.json
+### 2. Numerical mutation QA
+
+```mermaid
+flowchart LR
+    A[Contract + tolerance 10⁻⁶] --> B[Model-specific oracle]
+    B --> C[Baseline implementation]
+    B --> D[Synthetic mutation]
+    C --> E[Fixed configurations and solver steps]
+    D --> E
+    E --> F[PASS / KILLED / SURVIVED]
+    F --> G[Pair the same 84 variants<br/>macOS arm64]
+    F --> H[Pair the same 84 variants<br/>Linux x86_64]
+    G --> I[Compare outputs and classifications]
+    H --> I
 ```
 
-The provider generated audio at speed 1.0; offline post-processing applies tempo 1.20 and loudness normalization (targets `I=-16`, `TP=-1.5`, `LRA=11`) to the English copy, encoded at 44.1 kHz. The English 1.20× speed is baked into the export: play it at normal 1× to avoid applying the speed change twice. Measured loudness varies by chapter; all five measurements are recorded in `production/audio-assets.json`, and the filter targets are not claims about those measurements. The separate Spanish V4 master and any 1.25× derivative are outside this English package; their voice/speed provenance is still under review. `prepare_media.py` copies only processed MP3 files and derives long and short SRT/VTT subtitles from provider alignment and the saved post-processing summary. It refuses to replace existing media. The Remotion compositions appear after the generated manifest is ready.
+Each host recorded **27 PASS, 54 KILLED, and 3 SURVIVED** across the same **84 paired variants**—not 168 distinct variants. The paired comparison covered **738 finite values and 18 non-finite values** (represented as null); the maximum reported cross-host scaled delta was **1.11 × 10⁻¹⁶**. Survivors remain visible and are not proof of equivalence. All models and mutation inputs are synthetic fixtures, not empirical measurements.
 
-The Remotion project uses the existing package versions in `video/package.json` (Remotion 4.0.537). Install the pinned dependencies with `cd video && npm ci --ignore-scripts`, then run Studio from `video/`. Render targets are listed in `video/README.md`; the review page is [index.html](index.html).
+## Explore and reproduce
 
-## Animated evidence
+- [Open the offline animation gallery](animations/index.html): six interactive scenes—RC, second-order chemistry, Newton cooling, Snell refraction, campaign summary, and formal typecheck control. Their shared manifest records evidence-file hashes.
+- [Read the evidence map](CLAIMS.md), [source provenance](evidence/SOURCE_PROVENANCE.md), and [curated evidence guide](evidence/README.md).
+- [Review the narrated V2 plan](video/src/visual-v2/publication.json). The rejected static-text V1 must not be uploaded.
 
-Open [the animated evidence gallery](animations/index.html) for six interactive, offline HTML scenes and their square/portrait export targets. Build and test instructions are in [animations/README.md](animations/README.md); these are local review assets and have not been uploaded.
-
-## Narrated video V2
-
-The former static-text V1 is rejected and must not be uploaded. V2 uses the existing aligned English audio for one full master and exactly five opening-excerpt shorts; its export targets and separate review gate are described in [the V2 publication plan](video/src/visual-v2/publication.json). Start the separate Remotion entry with `cd video && npx remotion studio --entry-point src/visual-v2-entry.tsx`.
-
-## Reproduce and verify
-
-From this directory, verify the curated evidence files:
+Verify the saved numerical evidence and bundled files:
 
 ```sh
 shasum -a 256 -c evidence/SHA256SUMS.txt
 python3 evidence/verify_numerical.py
-python3 production/verify_audio_assets.py
+python3 -m unittest discover -s animations -p 'test_*.py'
 ```
 
-To rerun the synthetic numerical suite, use a new output directory:
+To rerun the synthetic suite in a new, nonexistent output directory:
 
 ```sh
 cd evidence/numerical/source
-python3 runner.py --out /tmp/adv050-multidomain-english-rerun
+python3 runner.py --out /tmp/adv050-multidomain-rerun
 ```
 
-That exact command completed successfully in this environment. For another run, choose a new, nonexistent output directory. It reruns the synthetic numerical suite; it does not rebuild the formal source or rerun Comparator.
+This reruns the numerical suite only; it does not rebuild the formal source or rerun Comparator. The clean-source build instructions and limits are documented in [`evidence/formal/clean-build/`](evidence/formal/clean-build/). Saved evidence checks do not imply a fresh run.
 
-The formal source-build record is separate from the Comparator run. Repeating the recorded saved-evidence checks does not rerun Lean or Comparator. The included English contract is a translation for the self-contained numerical rerun; its hash differs from the original Spanish contract, while the runner, suite, SUT, and oracles are preserved and hash-checked. Repeating the clean source build requires the authorized source checkout at commit `f9e8bc5b38b6e212696e8a30e3e91517af887bbd` and its pinned Lean toolchain and dependencies:
+## Credit and status
 
-```sh
-git rev-parse HEAD
-lake --no-cache build
-```
+Created by **Cristian Guerra**, QA Automation, from **Medellín, Colombia** ([`@criguex`](https://github.com/criguex)). Original proofs are credited to their OpenAI authors; see [Authorship and AI disclosure](AUTHORSHIP.md) for attribution and tool-assistance details. Lean, mathlib, and Comparator are identified in the [dependency and fidelity records](evidence/formal/clay-lean-fidelity.md).
 
-The recorded build reused cached dependencies and toolchain artifacts. This command does not represent a full bootstrap or theorem/kernel validation. Fresh Comparator reproduction instructions and sanitized run records are in `evidence/formal/comparator/` when included. No rerun is implied by checking saved evidence hashes.
+Six interactive HTML scenes and supporting loops are available for review. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. **No video or social post is represented as published.** The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
 
-## Review gates
-
-Review [CLAIMS.md](CLAIMS.md), [AUTHORSHIP.md](AUTHORSHIP.md), the rendered long video, five shorts, and six cards before approving any external publication. Draft channel copy is in [publication.json](publication.json). Raw provider responses and the provider key are excluded. Processed English audio is included for review; final video renders are produced separately.
+No theorem discovery, scientific certification, empirical validation, or proof of a real-world system is claimed.

@@ -4,7 +4,7 @@ Cristian Guerra (criguex) is the human author of this QA study and independent r
 
 OpenAI is credited for the original proofs and the original repository. This package does not claim authorship of those proofs, discovery of a theorem, or validation of an open mathematical problem.
 
-AI tools assisted with analysis, translation, editing, code preparation, and video-source preparation. They are disclosed as assistance, not academic coauthors or co-discoverers. A required Git `Co-Authored-By: Codex` trailer, where used, records tool-assisted code contribution under the repository's attribution convention; it is not a claim of academic authorship. The human author remains responsible for the claims, limitations, evidence selection, and release decision. External publication is still pending the author's review and approval.
+AI tools assisted with analysis, translation, editing, code preparation, and video-source preparation. They are disclosed as assistance, not academic coauthors or co-discoverers. A required Git `Co-Authored-By: Codex` trailer, where used, records tool-assisted code contribution under the repository's attribution convention; it is not a claim of academic authorship. The human author remains responsible for the claims, limitations, evidence selection, and release decision. Publication workflow authorization was given on 2026-10-20; final rendered-media review and applicable rights checks remain distinct readiness items.
 
 The English narration uses a synthetic AI-generated voice supplied by the speech provider. It is not presented as Cristian's own recorded voice or as an identity clone.
 
