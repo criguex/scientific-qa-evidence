@@ -17,14 +17,14 @@ The author has authorized proceeding with the publication workflow. That authori
 
 ## Spanish V2 plan
 
-The five-chapter source is [`production/narration.es.json`](production/narration.es.json), translated from the current English narration rather than the stale bilingual draft. The historical Spanish master uses a Chatterbox voice that is not approved for reuse in this delivery. Five new approved provider requests completed once, with no retries; processed chapter audio, Spanish-aligned captions, and the V2 media manifest are ready. Raw provider responses remain private and are not included here. Spanish long and short V2 renders remain pending.
+The five-chapter source is [`production/narration.es.json`](production/narration.es.json), translated from the current English narration rather than the stale bilingual draft. The historical Spanish master uses a Chatterbox voice that is not approved for reuse in this delivery. Five new approved provider requests completed once, with no retries; processed chapter audio, Spanish-aligned captions, and the V2 media manifest are ready. Raw provider responses remain private and are not included here. Spanish long and short V2 renders remain pending. Story panels, narration and captions are Spanish; some labels inside the shared plot artwork remain English and require final render review.
 
-After human script review, inspect the no-network request plan:
+Optional regeneration plan inspection (no network, no audio generation):
 
 ```sh
 python3 production/synthesize.py --dry-run --language es --out /tmp/adv050-es-review
 ```
 
-Generation, if approved, must use a new private output directory. Post-processing and media preparation use `--language es` and a separate `video/src/generatedSpanishMedia.json` plus `video/public/spanish/`; aligned Spanish captions must come from the new Spanish provider response, never from English timing.
+The Spanish generation has already completed in five approved requests without retries. Do not rerun paid synthesis to use these assets. If regeneration is ever separately authorized, it must use a new private output directory. Post-processing and media preparation use `--language es` and the separate `video/src/generatedSpanishMedia.json` plus `video/public/spanish/`; aligned Spanish captions must come from the new Spanish provider response, never from English timing.
 
-The public repository is [github.com/criguex/scientific-qa-evidence](https://github.com/criguex/scientific-qa-evidence). The last independently verified public snapshot is `46ba636`, which includes the six-scene animation gallery and preview assets. Later work in this branch has not yet been pushed.
+The public repository is [github.com/criguex/scientific-qa-evidence](https://github.com/criguex/scientific-qa-evidence). The independently verified public snapshot `46ba636` includes the six-scene animation gallery and preview assets (verified 2026-10-20).

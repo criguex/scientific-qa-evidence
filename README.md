@@ -60,13 +60,13 @@ This cropped visual is context only—not campaign data, evidence of blow-up, or
 
 - [Read the evidence map](CLAIMS.md), [source provenance](evidence/SOURCE_PROVENANCE.md), and [curated evidence guide](evidence/README.md).
 - [Review the narrated V2 plan](video/src/visual-v2/publication.json). The rejected static-text V1 must not be uploaded.
-- Spanish script source: [`production/narration.es.json`](production/narration.es.json). It is based on the current English narration, fits the five-request/11,000-character plan, and has a no-network dry run; no Spanish audio has been generated.
+- Spanish V2 script, generated audio, provider-aligned captions and media manifest are ready: [`production/narration.es.json`](production/narration.es.json), [`video/public/spanish/`](video/public/spanish/) and [`video/src/generatedSpanishMedia.json`](video/src/generatedSpanishMedia.json). The five Spanish chapters each have a long-form track and an aligned short opening.
 
 ```sh
 python3 production/synthesize.py --dry-run --language es --out /tmp/adv050-es-review
 ```
 
-Spanish audio, if generated after script review, stays in a separate private output tree. Its 1.25× offline tempo, audio and aligned captions are kept separate from the English 1.20× manifest; caption timing is derived from the new Spanish provider alignment.
+The command above only inspects the request plan and makes no network calls. Paid regeneration is not needed: the processed Spanish audio and captions already exist. Do not run synthesis without explicit need and authorization. Raw provider responses remain outside the repository. English exports have 1.20× and Spanish exports 1.25× offline speed baked into their audio; play both at normal 1×. The Spanish narration, captions, story panels and major diagram labels are localized, while some labels inside the shared plot artwork remain English; final media review is pending.
 
 Verify the saved numerical evidence and bundled files:
 
@@ -89,6 +89,6 @@ This reruns the numerical suite only; it does not rebuild the formal source or r
 
 Created by **Cristian Guerra**, QA Automation, from **Medellín, Colombia** ([`@criguex`](https://github.com/criguex)). Original proofs are credited to their OpenAI authors; see [Authorship and AI disclosure](AUTHORSHIP.md) for attribution and tool-assistance details. Lean, mathlib, and Comparator are identified in the [dependency and fidelity records](evidence/formal/clay-lean-fidelity.md).
 
-Six interactive HTML scenes and six matching preview loops are available for review, with a separate 3D illustrative flow clip. The narration-synced V2 source defines one long video and five shorts; their final exports are still pending. An introductory X thread has been posted; YouTube and TikTok uploads have not. The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
+Six interactive HTML scenes and six matching preview loops are available for review, with a separate 3D illustrative flow clip. V2 source defines one long video and five narrated shorts in each language; final exports are pending. An introductory X thread and six GIF replies have been posted; YouTube and TikTok uploads have not. The author has authorized the publication workflow; final rendered-media review and third-party rights checks remain separate readiness items. See [publication status](PUBLICATION_STATUS.md).
 
 No theorem discovery, scientific certification, empirical validation, or proof of a real-world system is claimed.

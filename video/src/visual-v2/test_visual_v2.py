@@ -27,10 +27,13 @@ class VisualV2Tests(unittest.TestCase):
 
     def test_youtube_and_tiktok_plan_contains_exactly_five_aligned_short_openings(self):
         youtube_shorts = PLAN["youtube"]["shorts"]
+        spanish_shorts = PLAN["youtube"]["spanish"]["shorts"]
         tiktok_ids = PLAN["tiktok"]["shorts_composition_ids"]
         self.assertEqual(len(youtube_shorts), 5)
-        self.assertEqual(PLAN["tiktok"]["short_count"], 5)
-        self.assertEqual(tiktok_ids, [item["composition_id"] for item in youtube_shorts])
+        self.assertEqual(len(spanish_shorts), 5)
+        self.assertEqual(PLAN["tiktok"]["short_count"], 10)
+        self.assertEqual(PLAN["tiktok"]["shorts_per_language"], 5)
+        self.assertEqual(tiktok_ids, [item["composition_id"] for item in youtube_shorts + spanish_shorts])
         for index, item in enumerate(youtube_shorts):
             chapter = MEDIA["chapters"][index]
             self.assertIn(chapter["id"].split("_")[0], item["render_path"])

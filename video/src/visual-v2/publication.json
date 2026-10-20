@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "status": "awaiting_human_review",
-  "repo_url": null,
+  "repo_url": "https://github.com/criguex/scientific-qa-evidence",
   "supersedes": {
     "version": 1,
     "status": "rejected_static_text_draft",
@@ -41,12 +41,18 @@
       "EN-V2-Short-02-Models",
       "EN-V2-Short-03-Formal",
       "EN-V2-Short-04-Campaign",
-      "EN-V2-Short-05-Limits"
+      "EN-V2-Short-05-Limits",
+      "ES-V2-Short-01-Method",
+      "ES-V2-Short-02-Models",
+      "ES-V2-Short-03-Formal",
+      "ES-V2-Short-04-Campaign",
+      "ES-V2-Short-05-Limits"
     ],
-    "short_count": 5,
+    "short_count": 10,
+    "shorts_per_language": 5,
     "status": "render_pending"
   },
   "attribution": "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex",
   "ai_assistance": "Disclosed in AUTHORSHIP.md; AI tools assisted analysis and code preparation, not academic authorship or theorem discovery.",
-  "publication_gate": "No upload is part of this implementation. Review the rendered V2 files, captions, claims and rights before posting."
+  "publication_gate": "The author has authorized publication. Final V2 exports still require render, caption, claim and rights checks before upload."
 }
