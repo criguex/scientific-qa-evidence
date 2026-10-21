@@ -9,18 +9,16 @@
 | `assign.py`, case templates and check scripts written | Done | [protocol_lib.py](protocol_lib.py), [assign.py](assign.py), [run_checks.py](run_checks.py), [score.py](score.py) |
 | Self-check and end-to-end dry run (test seed) | Done: F6 caught by both, F1/F2/F4/F5 by protocol only, 0 false alarms | [test_protocol.py](test_protocol.py) |
 | Design and scripts frozen (hash in `FROZEN.md`) | Done 2026-10-21 | [FROZEN.md](FROZEN.md) |
-| Author runs the assignment with the seed | **Next: author's turn** | see command below |
-| Blind checks on 21 cases, each result committed | Pending | — |
+| Author runs the assignment with the seed | Done 2026-10-21; seed hash matched the commitment | commit `ae55a24` (21 case folders, key withheld) |
+| Blind checks on 21 cases, results committed before the key | Done: baseline flagged 3 of 21, protocol 15 of 21; scripts matched FROZEN.md hashes | [results.json](results.json) |
 | Key opened, results counted and published | Pending | — |
 
 No results exist yet. Nothing in this folder is evidence about the protocol until the design is frozen and the blind phase is complete.
 
 ## Next step (author)
 
-In a terminal, in this folder, with the seed file you already committed by hash:
+Reveal the key so the results can be scored. In the same terminal, in this folder:
 
 ```sh
-python3 assign.py --seed-file ~/semilla-experimento.txt --out cases
+git add -f key.json && git commit -m "reveal: blind-fault key" && git push origin HEAD:main
 ```
-
-It prints the seed's SHA-256 (must equal the one in SEED_COMMITMENT.md) and writes `cases/` and `key.json`. Commit `cases/` (not `key.json` yet). The assistant then runs `run_checks.py` blind and commits the results; `key.json` is revealed last.

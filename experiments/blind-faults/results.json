@@ -1,0 +1,251 @@
+{
+  "cases": {
+    "case-01": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P1:prebuilt-batteries"
+        ]
+      }
+    },
+    "case-02": {
+      "baseline": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      }
+    },
+    "case-03": {
+      "baseline": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      }
+    },
+    "case-04": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-05": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P2:statement-mismatch"
+        ]
+      }
+    },
+    "case-06": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P5:oracle-failure-hidden"
+        ]
+      }
+    },
+    "case-07": {
+      "baseline": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "B:axioms"
+        ]
+      }
+    },
+    "case-08": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-09": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P5:oracle-failure-hidden"
+        ]
+      }
+    },
+    "case-10": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-11": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-12": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P1:prebuilt-batteries"
+        ]
+      }
+    },
+    "case-13": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-14": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P2:statement-mismatch"
+        ]
+      }
+    },
+    "case-15": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": true,
+        "flags": []
+      }
+    },
+    "case-16": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P6:receipt-log-other-build.log"
+        ]
+      }
+    },
+    "case-17": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P6:receipt-log-other-build.log"
+        ]
+      }
+    },
+    "case-18": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P5:oracle-failure-hidden"
+        ]
+      }
+    },
+    "case-19": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P2:statement-mismatch"
+        ]
+      }
+    },
+    "case-20": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P6:receipt-log-other-build.log"
+        ]
+      }
+    },
+    "case-21": {
+      "baseline": {
+        "accepted": true,
+        "flags": []
+      },
+      "protocol": {
+        "accepted": false,
+        "flags": [
+          "P1:prebuilt-batteries"
+        ]
+      }
+    }
+  },
+  "schema": 1
+}
