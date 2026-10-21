@@ -1,0 +1,19 @@
+{
+  "registered": "2026-10-21",
+  "classes": ["SAME", "CHANGED_EQUIVALENT", "CHANGED_WEAKER", "CHANGED_FALSE", "CHANGED_UNKNOWN"],
+  "cases": [
+    {"id": "primes/orig",    "challenge": "PrimesOrig",    "solution": "Primes",        "comparator": "accept", "second_route": "none",                 "class": "SAME"},
+    {"id": "primes/reform",  "challenge": "PrimesReform",  "solution": "Primes",        "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
+    {"id": "primes/bounded", "challenge": "PrimesBounded", "solution": "Primes",        "comparator": "reject", "second_route": "schema_non_implication", "class": "CHANGED_WEAKER"},
+    {"id": "primes/swap",    "challenge": "PrimesSwap",    "solution": "Primes",        "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"},
+    {"id": "cs/orig",        "challenge": "CSOrig",        "solution": "CauchySchwarz", "comparator": "accept", "second_route": "none",                 "class": "SAME"},
+    {"id": "cs/reform",      "challenge": "CSReform",      "solution": "CauchySchwarz", "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
+    {"id": "cs/strict",      "challenge": "CSStrict",      "solution": "CauchySchwarz", "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"},
+    {"id": "dct/orig",       "challenge": "DCTOrig",       "solution": "DCT",           "comparator": "accept", "second_route": "none",                 "class": "SAME"},
+    {"id": "dct/reform",     "challenge": "DCTReform",     "solution": "DCT",           "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
+    {"id": "dct/nodom",      "challenge": "DCTNoDom",      "solution": "DCT",           "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"}
+  ],
+  "guard_controls": [
+    {"id": "guard/cheat", "description": "an equivalence proof for primes/reform that uses Nat.exists_infinite_primes", "expected": "guard rejects; the equivalence does not count"}
+  ]
+}

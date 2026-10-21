@@ -1,0 +1,15 @@
+import Mathlib
+
+open MeasureTheory Filter Topology
+
+namespace QAControls
+
+theorem dominated_convergence {α : Type*} [MeasurableSpace α] {μ : Measure α}
+    (F : ℕ → α → ℝ) (f : α → ℝ)
+    (bound : α → ℝ) (hF : ∀ n, AEStronglyMeasurable (F n) μ) (hb : Integrable bound μ)
+    (hle : ∀ n, ∀ᵐ a ∂μ, ‖F n a‖ ≤ bound a)
+    (hlim : ∀ᵐ a ∂μ, Tendsto (fun n => F n a) atTop (𝓝 (f a))) :
+    Tendsto (fun n => ∫ a, F n a ∂μ) atTop (𝓝 (∫ a, f a ∂μ)) :=
+  tendsto_integral_of_dominated_convergence bound hF hb hle hlim
+
+end QAControls
