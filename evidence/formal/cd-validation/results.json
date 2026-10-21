@@ -1,73 +1,151 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "campaign": "cd-revalidation-2026-10-21",
   "host_label": "Linux x86_64 · WSL2 · 12 vCPU · 30 GiB",
   "source_repository": "https://github.com/openai/NavierStokesAndEuler",
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
-  "state": "complete",
-  "updated_utc": "2026-10-21T17:20:36Z",
-  "reference_run_1": "evidence/formal/comparator/README.md",
+  "state": "in_progress",
+  "builds": {
+    "clean03": {
+      "label": "B1 · clean03 · 2026-10-20",
+      "command": "lake --no-cache build",
+      "mathlib": "compiled; the clean03 record states that dependency and toolchain caches were reused",
+      "record": "../clean-build/README.md"
+    },
+    "audit": {
+      "label": "B2 · audit build · 2026-10-20",
+      "command": "lake exe cache get, then lake build",
+      "mathlib": "prebuilt Mathlib cache downloaded with `lake exe cache get` (8,747 files attempted)",
+      "record": null
+    },
+    "fresh": {
+      "label": "B3 · fresh build · 2026-10-21",
+      "command": "XDG_CACHE_HOME=<empty dir> MATHLIB_NO_CACHE_ON_UPDATE=1 lake build",
+      "mathlib": "compiled locally; 7 smaller dependencies arrived as prebuilt Reservoir barrels",
+      "record": "#b3-fresh-build-2026-10-21"
+    },
+    "nocache": {
+      "label": "B4 · no-cache build · 2026-10-21",
+      "command": "XDG_CACHE_HOME=<empty dir> MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build",
+      "mathlib": "everything compiled locally (Lake told not to download build caches)",
+      "record": "#b4-no-cache-build-2026-10-21"
+    }
+  },
+  "reference_run_1": {
+    "build": "clean03",
+    "record": "evidence/formal/comparator/README.md"
+  },
   "checks": [
     {
       "id": "comparator2_NavierStokes",
       "group": "comparator",
       "title": "Comparator run 2 · Navier–Stokes (C, D)",
       "expected": "accept",
+      "build": "audit",
       "verdict": "ACCEPTED",
       "exit_code": 0,
       "finished_utc": "2026-10-21T14:26:24Z",
       "elapsed_s": 422.32,
       "decision": "Your solution is okay!",
-      "log": "logs/comparator2_NavierStokes.sanitized.log"
+      "log": "logs/comparator2_NavierStokes.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "86f19cfa0e008549d11147e7fe3ceefc5bfd317ffa4b0824eeb6e3327ec973bf",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "6e59f7a0dc56cd2a4c8e954831c45342adebe72284da75283409a97b8b8bceb3"
+      }
     },
     {
       "id": "comparator2_Euler",
       "group": "comparator",
       "title": "Comparator run 2 · Euler",
       "expected": "accept",
+      "build": "audit",
       "verdict": "ACCEPTED",
       "exit_code": 0,
       "finished_utc": "2026-10-21T14:37:34Z",
       "elapsed_s": 669.59,
       "decision": "Your solution is okay!",
-      "log": "logs/comparator2_Euler.sanitized.log"
+      "log": "logs/comparator2_Euler.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "5f410965535ca08ed4cfca05bd9fb259ece2ef95858319a83134f92bc83b96ba",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "3b6933fa61e4eaf7dab5124c6dc2a8440b328c90e96c5b8f509770730d8d1c93"
+      }
     },
     {
       "id": "comparator3_clean_NavierStokes",
       "group": "comparator",
-      "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
+      "title": "Comparator run 3 · Navier–Stokes on B3",
       "expected": "accept",
+      "build": "fresh",
       "verdict": "ACCEPTED",
       "exit_code": 0,
       "finished_utc": "2026-10-21T17:08:58Z",
       "elapsed_s": 395.11,
       "decision": "Your solution is okay!",
-      "log": "logs/comparator3_clean_NavierStokes.sanitized.log"
+      "log": "logs/comparator3_clean_NavierStokes.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "86f19cfa0e008549d11147e7fe3ceefc5bfd317ffa4b0824eeb6e3327ec973bf",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "ab6fac57ff440c55102b327caa18a819b1482cb9f1416743a0fa19eb55e1a79d"
+      }
     },
     {
       "id": "comparator3_clean_Euler",
       "group": "comparator",
-      "title": "Comparator run 3 · Euler on the from-scratch build",
+      "title": "Comparator run 3 · Euler on B3",
       "expected": "accept",
+      "build": "fresh",
       "verdict": "ACCEPTED",
       "exit_code": 0,
       "finished_utc": "2026-10-21T17:20:09Z",
       "elapsed_s": 670.88,
       "decision": "Your solution is okay!",
-      "log": "logs/comparator3_clean_Euler.sanitized.log"
+      "log": "logs/comparator3_clean_Euler.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "5f410965535ca08ed4cfca05bd9fb259ece2ef95858319a83134f92bc83b96ba",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "6b632cfbeea93381102e19c6640c1be409c76b6570da3d701faca6ffabb35916"
+      }
+    },
+    {
+      "id": "comparator4_nocache_NavierStokes",
+      "group": "comparator",
+      "title": "Comparator run 4 · Navier–Stokes on B4",
+      "expected": "accept",
+      "build": "nocache",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "comparator4_nocache_Euler",
+      "group": "comparator",
+      "title": "Comparator run 4 · Euler on B4",
+      "expected": "accept",
+      "build": "nocache",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
     },
     {
       "id": "mutant_control_comment",
       "group": "mutant",
       "title": "Control · comment-only edit to the challenge",
       "expected": "accept",
+      "build": "audit",
       "verdict": "CONTROL_ACCEPTED",
       "exit_code": 0,
       "finished_utc": "2026-10-21T14:45:08Z",
       "elapsed_s": 419.45,
       "decision": "Your solution is okay!",
       "log": "logs/mutant_control_comment.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "d3a2b1fce86b2b51df16fd962dc065feb5f3ad098afd725aa0a19b1a68034285",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "65f9fed7e7c86e189abbf547cc65956f5c87cfac64acc8ca6b22212d6d3b41fa"
+      },
       "diff": "mutants/control_comment.diff"
     },
     {
@@ -75,12 +153,18 @@
       "group": "mutant",
       "title": "(C) add f = 0 · forceless statement",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:46:33Z",
       "elapsed_s": 85.63,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
       "log": "logs/mutant_force_zero_R3.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "9eb4ded8d681232cdd5c2bf82c6949476cb74e0fbca90e5f5e4b5ae599c84d07",
+        "stderr.log": "ff03063c9fbc40fae471bd8c695852d2c1fa37e4c20797dfd882dcdf7c5b2a3f",
+        "time.log": "db4b4eae6d1882a406748972f9f1c5b785b7faff19acada86dd911c7d8a30dc9"
+      },
       "diff": "mutants/force_zero_R3.diff"
     },
     {
@@ -88,12 +172,18 @@
       "group": "mutant",
       "title": "(D) add f = 0 · forceless statement",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:47:59Z",
       "elapsed_s": 86.11,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'",
       "log": "logs/mutant_force_zero_periodic.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "227c974b3d65d28955366bf5a6a6f99af769f3e89cc7aa7b80636745e95fd64d",
+        "stderr.log": "63446e597a26220ae20335753b86ccef121bb1255eeec95a024c197f85ccf07f",
+        "time.log": "2b9b4e8753f7aaa1ee449a8e261c73f705e1e69be721ff1ce8488368f98a6c3b"
+      },
       "diff": "mutants/force_zero_periodic.diff"
     },
     {
@@ -101,12 +191,18 @@
       "group": "mutant",
       "title": "(C) swap ℝ³ decay data for periodic data",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:49:24Z",
       "elapsed_s": 84.75,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
       "log": "logs/mutant_domain_R3_to_periodic_data.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "0747d144f28b1e9a94ce60d3121744babb741b6bccad3e6f1938932380f0c103",
+        "stderr.log": "ff03063c9fbc40fae471bd8c695852d2c1fa37e4c20797dfd882dcdf7c5b2a3f",
+        "time.log": "e963db732c96dfc139a5d48038e2342599889bb23f66f1bf5237098f4dd0fcd6"
+      },
       "diff": "mutants/domain_R3_to_periodic_data.diff"
     },
     {
@@ -114,12 +210,18 @@
       "group": "mutant",
       "title": "(C) weaken nu > 0 to nu ≥ 0",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:50:48Z",
       "elapsed_s": 84.09,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
       "log": "logs/mutant_viscosity_nonneg_R3.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "0747d144f28b1e9a94ce60d3121744babb741b6bccad3e6f1938932380f0c103",
+        "stderr.log": "ff03063c9fbc40fae471bd8c695852d2c1fa37e4c20797dfd882dcdf7c5b2a3f",
+        "time.log": "10245b045867bcb8f31e503c04e972fe9943e7be26c007ebb7c7ae888b763ac1"
+      },
       "diff": "mutants/viscosity_nonneg_R3.diff"
     },
     {
@@ -127,12 +229,18 @@
       "group": "mutant",
       "title": "(D) drop ¬ · existence instead of breakdown",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:52:15Z",
       "elapsed_s": 86.72,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'",
       "log": "logs/mutant_existence_not_breakdown_periodic.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "71c327714600d61a1088312aeda5d3408ee4cf7cdd50b0ca80b408e15338a97b",
+        "stderr.log": "63446e597a26220ae20335753b86ccef121bb1255eeec95a024c197f85ccf07f",
+        "time.log": "cb265aedbd177764a2ab227e369a9e70cc0591c7aa826ef210806b3201fc029e"
+      },
       "diff": "mutants/existence_not_breakdown_periodic.diff"
     },
     {
@@ -140,61 +248,203 @@
       "group": "mutant",
       "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
       "expected": "reject",
+      "build": "audit",
       "verdict": "KILLED",
       "exit_code": 1,
       "finished_utc": "2026-10-21T14:53:37Z",
       "elapsed_s": 81.58,
       "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'",
       "log": "logs/mutant_euler_tstar_half.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "01e507146ec980dcf353ec2b0eb6a7746ffa33ac991c2f1456978c7a0f9bb305",
+        "stderr.log": "ee160da5cdd168f08be12a06cf679e42bf33db58d503bf3be8a3c868f00d6690",
+        "time.log": "60cc616f38adffb75bafcff736f91d000f246527657e2eeaec4cafdbfa3a27cf"
+      },
       "diff": "mutants/euler_tstar_half.diff"
     },
     {
       "id": "clean_build",
       "group": "build",
-      "title": "From-scratch build · empty caches, Mathlib compiled",
+      "title": "B3 · fresh build, Mathlib compiled locally",
       "expected": "ok",
+      "build": "fresh",
       "verdict": "OK",
       "exit_code": 0,
       "finished_utc": "2026-10-21T17:02:23Z",
-      "facts": {
-        "built_mathlib_modules": 8370,
-        "built_total": 11030,
-        "fetched_or_unpacked": 0,
-        "xdg_cache_contents": 0,
-        "jobs": 11432
+      "started_utc": "2026-10-21T15:35:41Z",
+      "elapsed_s": 5201.0,
+      "log": "logs/clean_build.excerpt.log",
+      "original_sha256": {
+        "build.log": "627f1474a9cf3ac698693aa295445574343239364b563a89975e4efbe8522011",
+        "build.time.log": "0183161019b98ebb70f63d0a2fd34dca1367195f2d066168cdf0dc7e27d762b3"
       },
-      "elapsed_s": 5201.0
+      "facts": {
+        "jobs": 11432,
+        "printed_built_lines": 11030,
+        "barrels": [
+          {
+            "package": "LeanSearchClient",
+            "bytes": "1110298",
+            "sha256": "3261fb4aeea5c924815272a52b398eb66c899e82b181c010d66dcf8b79fff67a",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/LeanSearchClient/barrel?rev=ba67e212be1197b84c1f1f6299488a10a3002713&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "Qq",
+            "bytes": "4671641",
+            "sha256": "b89ab157960dc0c10c9b6963fa230273d10b446276860421eb95fe396be59233",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/Qq/barrel?rev=507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "aesop",
+            "bytes": "30521889",
+            "sha256": "7f1e07f0fa8b63f54af124350c9b0504d28ef9f5c120cbe1745844b39b5910a7",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/aesop/barrel?rev=18889deb9e83ea7420ef51c160d6f88552e744e3&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "batteries",
+            "bytes": "99850446",
+            "sha256": "694bf9ca49d5450f82419ff7034ecd90393d2a44c2e0e23bf776f29153bc53c5",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/batteries/barrel?rev=d54dddc581e08be364c278052863524bff7a99a9&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "importGraph",
+            "bytes": "61390129",
+            "sha256": "dc1fe957970c455d5b086106d6d3df34e106599b9ee170d6c510fd977e5dbc16",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/importGraph/barrel?rev=d8823026ac7ef130c253089d95685f9877b95323&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "plausible",
+            "bytes": "3010777",
+            "sha256": "8e3d14110256a72e960f1ad955f9f6465dda100b6ee636d10b0bf16777abb159",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/plausible/barrel?rev=d9598f07b1bc701f1e3aae163d2681c1fd978793&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          },
+          {
+            "package": "proofwidgets",
+            "bytes": "10715826",
+            "sha256": "8f0969afc70a21ae5714e3ec029cf1de88b71febadab957ff5d0306152a7db9f",
+            "url": "https://reservoir.lean-lang.org/api/v1/packages/leanprover-community/proofwidgets/barrel?rev=a8acbfd87375ff4abe14ce09db5b7664d383bc7f&toolchain=leanprover%2Flean4%3Av4.34.0-rc2"
+          }
+        ],
+        "oleans": [
+          {
+            "package": "Cli",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "Comparator",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "LeanSearchClient",
+            "total": "4",
+            "older_than_build_start": "4"
+          },
+          {
+            "package": "Qq",
+            "total": "14",
+            "older_than_build_start": "14"
+          },
+          {
+            "package": "aesop",
+            "total": "132",
+            "older_than_build_start": "132"
+          },
+          {
+            "package": "batteries",
+            "total": "191",
+            "older_than_build_start": "191"
+          },
+          {
+            "package": "importGraph",
+            "total": "21",
+            "older_than_build_start": "21"
+          },
+          {
+            "package": "lean4export",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "mathlib",
+            "total": "8371",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "plausible",
+            "total": "13",
+            "older_than_build_start": "13"
+          },
+          {
+            "package": "proofwidgets",
+            "total": "24",
+            "older_than_build_start": "24"
+          },
+          {
+            "package": "_project",
+            "total": "2659",
+            "older_than_build_start": "0"
+          }
+        ],
+        "xdg_cache_files_after": 0
+      }
+    },
+    {
+      "id": "nocache_build",
+      "group": "build",
+      "title": "B4 · no-cache build, everything compiled locally",
+      "expected": "ok",
+      "build": "nocache",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
     },
     {
       "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
       "group": "replay",
       "title": "leanchecker --fresh · Navier–Stokes solution",
       "expected": "ok",
+      "build": "audit",
       "verdict": "OK",
       "exit_code": 0,
       "finished_utc": "2026-10-21T15:13:12Z",
+      "log": "logs/leanchecker_fresh_NavierStokes.ComparatorSolution.log",
+      "receipt": "receipts/leanchecker_fresh_NavierStokes.ComparatorSolution.txt",
       "elapsed_s": 1175.25,
-      "log": "logs/leanchecker_fresh_NavierStokes.ComparatorSolution.sanitized.log"
+      "started_utc": "2026-10-21T14:53:37Z",
+      "command": "timeout 10h lake env leanchecker --fresh NavierStokes.ComparatorSolution",
+      "log_bytes": 0
     },
     {
       "id": "leanchecker_fresh_Euler.Solution",
       "group": "replay",
       "title": "leanchecker --fresh · Euler solution",
       "expected": "ok",
+      "build": "audit",
       "verdict": "OK",
       "exit_code": 0,
       "finished_utc": "2026-10-21T15:35:41Z",
+      "log": "logs/leanchecker_fresh_Euler.Solution.log",
+      "receipt": "receipts/leanchecker_fresh_Euler.Solution.txt",
       "elapsed_s": 1348.82,
-      "log": "logs/leanchecker_fresh_Euler.Solution.sanitized.log"
+      "started_utc": "2026-10-21T15:13:12Z",
+      "command": "timeout 10h lake env leanchecker --fresh Euler.Solution",
+      "log_bytes": 0
     },
     {
       "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",
       "group": "replay",
       "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
       "expected": "ok",
+      "build": "audit",
       "verdict": "FAILED_TOOLCHAIN_MISMATCH",
       "exit_code": 1,
-      "finished_utc": "2026-10-21T17:20:36Z"
+      "finished_utc": "2026-10-21T17:20:36Z",
+      "log": "logs/lean4lean_build.error-excerpt.log",
+      "receipt": "receipts/lean4lean.txt",
+      "started_utc": "2026-10-21T17:20:09Z",
+      "command": "lake update && lake build (lean-toolchain set to leanprover/lean4:v4.34.0-rc2)"
     }
   ]
 }

@@ -1,0 +1,4 @@
+Command being timed: "timeout 10h lake env leanchecker --fresh Euler.Solution"
+Elapsed (wall clock) time (h:mm:ss or m:ss): 22:28.82
+Maximum resident set size (kbytes): 10696344
+Exit status: 0

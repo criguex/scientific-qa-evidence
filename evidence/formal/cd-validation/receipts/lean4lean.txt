@@ -1,0 +1,4 @@
+67f63b0c818920dfaed2ad07ccff187a6a8fe1e3
+upstream_toolchain=leanprover/lean4:v4.33.0-rc2
+used_toolchain=leanprover/lean4:v4.34.0-rc2
+batteries 76e1c118b0700b4ceafe99532e887d6431625e1a

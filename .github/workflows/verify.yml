@@ -1,0 +1,32 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Checksums
+        run: sha256sum -c evidence/SHA256SUMS.txt
+      - name: Saved numerical evidence
+        run: python3 evidence/verify_numerical.py
+      - name: Numerical runner
+        working-directory: evidence/numerical/source
+        run: python3 -m unittest -v test_runner
+      - name: Animation package
+        run: python3 -m unittest discover -s animations -p 'test_*.py' -v
+      - name: Comparator log sanitizer
+        working-directory: evidence/formal/comparator
+        run: python3 -m unittest -v test_sanitize_comparator_logs
+      - name: Statement comparison
+        working-directory: evidence/formal/statement-provenance
+        run: python3 -m unittest -v test_compare_statements

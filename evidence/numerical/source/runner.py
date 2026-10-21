@@ -69,11 +69,15 @@ def run_variant(case, variant, baseline_status=None):
     error_by_refinement = {}
     reasons = {}
     oracle_invalid = False
+    stage = "oracle"
     try:
         for n in resolutions:
             key = str(n) if n is not None else "N/A"
-            got = sut.evaluate(case, variant, n or 1)
+            stage = "oracle"
             expected = oracles.evaluate(case, n or 1)
+            stage = "sut"
+            got = sut.evaluate(case, variant, n or 1)
+            stage = "check"
             valid, reason = invariants(case, got)
             if len(got) != len(expected) or not finite(expected):
                 oracle_invalid = True
@@ -95,7 +99,8 @@ def run_variant(case, variant, baseline_status=None):
     except Exception as exc:
         return_code = 1
         status = "INCONCLUSIVE"
-        reasons["exception"] = type(exc).__name__
+        oracle_invalid = oracle_invalid or stage == "oracle"
+        reasons["exception"] = f"{stage}:{type(exc).__name__}"
     duration = time.monotonic() - started
     finished_utc = utc_now()
     if variant != "baseline":

@@ -1,0 +1,14 @@
+leanprover/lean4:v4.34.0-rc2
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Comparator 19e111e2141cf333c7daff0f64c5f24acc91dd2e
+mathlib 85e3a25e006c35636f0e53b0e9296caca2685bc0
+lean4export cacf989bd75f608700820f6afc595f32e7a99a4d
+plausible d9598f07b1bc701f1e3aae163d2681c1fd978793
+LeanSearchClient ba67e212be1197b84c1f1f6299488a10a3002713
+importGraph d8823026ac7ef130c253089d95685f9877b95323
+proofwidgets a8acbfd87375ff4abe14ce09db5b7664d383bc7f
+aesop 18889deb9e83ea7420ef51c160d6f88552e744e3
+Qq 507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3
+batteries d54dddc581e08be364c278052863524bff7a99a9
+Cli ab3a82db9fea14cf0fd7f5a2de650f4b534640af

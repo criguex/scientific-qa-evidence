@@ -499,45 +499,49 @@ function minutes(seconds) {
   return `${Math.floor(seconds / 3600)} h ${Math.round((seconds % 3600) / 60)} min`;
 }
 
+function verdictChip(ctx, x, y, w, h, verdict, size) {
+  if (verdict === "PENDING") chip(ctx, x, y, w, h, "#173b4c", C.muted, "PENDING", size);
+  else chip(ctx, x, y, w, h, verdict === "ACCEPTED" || verdict === "OK" ? C.mint : C.gold, C.navy, verdict, size);
+}
+
 function drawRerun(ctx, data, t) {
   const d = data.animations.rerun;
-  base(ctx, "Rebuild from zero. Check again.", "07 / C·D revalidation · rerun", t, C.mint);
+  base(ctx, "Rebuild, then check again.", "07 / C·D revalidation · rerun", t, C.mint);
   label(ctx, `OpenAI's Navier–Stokes and Euler proofs · commit ${d.source_commit}`, 70, 214, 19, C.muted, 600);
   stepBox(ctx, 66, 244, 290, 196, "1 · SOURCE", ["OpenAI's Lean proof", "pinned commit", "+ Mathlib library"], C.blue, smooth((t - 0.3) / 0.8));
   arrow(ctx, 360, 342, 392, 342, C.muted, smooth((t - 1.2) / 0.6));
   const b = d.build;
-  const count = Math.round(b.built_mathlib_modules * clamp((t - 1.6) / 3.4, 0, 1));
-  stepBox(ctx, 396, 244, 300, 196, "2 · BUILD FROM ZERO", [`${count.toLocaleString("en-US")} Mathlib modules compiled`, `${b.fetched_or_unpacked} cache downloads`, `${b.jobs.toLocaleString("en-US")} jobs · ${minutes(b.elapsed_s)}`], C.gold, smooth((t - 1.4) / 0.8));
+  const count = Math.round(b.fresh_local * clamp((t - 1.6) / 3.4, 0, 1));
+  const nocache = b.nocache_verdict === "PENDING" ? "B4 --no-cache: running" : `B4 --no-cache: ${b.nocache_verdict} · ${minutes(b.nocache_elapsed_s)}`;
+  stepBox(ctx, 396, 244, 300, 196, "2 · BUILD", [`B3: ${count.toLocaleString("en-US")} modules compiled here`, `${b.fresh_prebuilt_packages} deps prebuilt (${b.fresh_prebuilt} modules)`, nocache], C.gold, smooth((t - 1.4) / 0.8));
   arrow(ctx, 700, 342, 732, 342, C.muted, smooth((t - 5.2) / 0.6));
   stepBox(ctx, 736, 244, 278, 196, "3 · COMPARATOR", ["statements identical?", "only standard axioms?", "nanoda + Lean kernel"], C.mint, smooth((t - 5.4) / 0.8));
   const tick = (x, y, start) => { const a = smooth((t - start) / 0.4); ctx.globalAlpha = a; label(ctx, "✓", x, y, 22, C.mint, 900); ctx.globalAlpha = 1; };
   tick(984, 310, 6.4); tick(984, 338, 7.2); tick(984, 366, 8.0);
-  const gridAlpha = smooth((t - 9) / 0.8);
-  ctx.globalAlpha = gridAlpha;
-  rounded(ctx, 66, 468, 948, 410, 20, "#0b2434", "#315264");
-  label(ctx, "THREE RUNS", 92, 506, 17, C.gold, 800);
-  label(ctx, "Navier–Stokes (C, D)", 690, 506, 17, C.muted, 800, "center");
-  label(ctx, "Euler", 900, 506, 17, C.muted, 800, "center");
+  ctx.globalAlpha = smooth((t - 9) / 0.8);
+  rounded(ctx, 66, 462, 948, 420, 20, "#0b2434", "#315264");
+  label(ctx, "ONE RUN PER BUILD", 92, 498, 17, C.gold, 800);
+  label(ctx, "Navier–Stokes (C, D)", 700, 498, 17, C.muted, 800, "center");
+  label(ctx, "Euler", 905, 498, 17, C.muted, 800, "center");
   ctx.globalAlpha = 1;
   d.rows.forEach((row, i) => {
-    const y = 572 + i * 104;
-    const alpha = smooth((t - 9.6 - i * 1.6) / 0.6);
-    ctx.globalAlpha = alpha;
-    rounded(ctx, 84, y - 38, 912, 82, 14, i === 2 ? "#163a3c" : "#102f43");
-    label(ctx, row.label, 106, y, 19, C.white, 750);
+    const y = 556 + i * 84;
+    ctx.globalAlpha = smooth((t - 9.6 - i * 1.3) / 0.6);
+    rounded(ctx, 84, y - 34, 912, 74, 14, i >= 2 ? "#163a3c" : "#102f43");
+    label(ctx, row.label, 106, y, 18, C.white, 750);
     row.runs.forEach((run, j) => {
-      const x = j === 0 ? 690 : 900;
-      chip(ctx, x - 90, y - 18, 180, 32, run.verdict === "ACCEPTED" ? C.mint : C.gold, C.navy, run.verdict, 15);
-      label(ctx, minutes(run.elapsed_s), x, y + 30, 14, C.muted, 600, "center");
+      const x = j === 0 ? 700 : 905;
+      verdictChip(ctx, x - 85, y - 18, 170, 30, run.verdict, 14);
+      if (run.elapsed_s) label(ctx, minutes(run.elapsed_s), x, y + 27, 13, C.muted, 600, "center");
     });
     ctx.globalAlpha = 1;
   });
   narration(ctx, t, [
     [0, "Start from OpenAI's published Lean proof at a pinned commit, with the exact Mathlib version it was written for."],
-    [1.6, "Rebuild everything from source with an empty cache: Mathlib is compiled on this machine, nothing is downloaded prebuilt."],
+    [1.6, "Build B3 compiled Mathlib and the project on this machine. Seven small dependencies still arrived prebuilt, so build B4 forbids that with --no-cache."],
     [5.4, "Comparator then compiles the official challenge and the solution separately and checks the statements match exactly."],
-    [8.6, "Two independent kernels, nanoda and Lean's own, re-check every proof step. The result is repeated three times."],
-    [15, "All three runs accept both challenges, the last one on the build compiled from zero."],
+    [8.6, "Two independent kernels, nanoda and Lean's own, re-check every proof step. Each run uses a different build."],
+    [15, "Every finished run accepts both challenges. A run still marked PENDING has not finished."],
   ]);
 }
 

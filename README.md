@@ -19,8 +19,8 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 
 | Question | What was done | Result |
 | --- | --- | --- |
-| Does it build from pinned source? | `lake --no-cache build` on OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 | 2026-10-20: exit 0, 11,424 jobs, with dependency caches reused. 2026-10-21 rebuild from the source archive with an empty cache: exit 0, 11,432 jobs, 8,370 Mathlib modules compiled locally, 0 cache downloads ([record](evidence/formal/cd-validation/README.md)). |
-| Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) in three runs, the third on the from-scratch build |
+| Does it build from pinned source? | Builds of OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 ([builds and receipts](evidence/formal/cd-validation/README.md#builds-used-by-each-run)) | 2026-10-20 (B1): exit 0, 11,424 jobs, dependency caches reused. 2026-10-21 (B3): exit 0, 11,432 jobs; Mathlib and the project compiled locally (11,030 modules), but 7 smaller dependencies arrived as prebuilt Reservoir archives. A full `lake --no-cache build` (B4) is running. |
+| Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) in every run so far: three runs on three different builds (B1, B2, B3); a fourth on B4 is running |
 | Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and a [clause-by-clause risk review](evidence/formal/clay-lean-risk.md): 6 direct, 9 via standard facts, 1 needing a human decision (periodic pressure in D). Reading-based, not an expert equivalence proof. |
 | Is OpenAI's challenge the public statement? | Declaration-by-declaration comparison with DeepMind's Formal Conjectures file at `8bf45ed` ([provenance](evidence/formal/statement-provenance/README.md)) | Identical: all 18 named declarations, including (C) and (D). Packaging differences only. |
 | Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | 6 of 6 mutants refused as statement mismatches; comment-only control accepted |
@@ -38,7 +38,10 @@ cd scientific-qa-evidence
 shasum -a 256 -c evidence/SHA256SUMS.txt     # on Linux: sha256sum -c
 python3 evidence/verify_numerical.py
 python3 -m unittest discover -s animations -p 'test_*.py'
+(cd evidence/numerical/source && python3 -m unittest test_runner)   # reruns all 84 variants
 ```
+
+The same checks, plus the tests of the log sanitizer and the statement comparator, run in [GitHub Actions](.github/workflows/verify.yml) on every push.
 
 The numerical verifier should print:
 
@@ -77,7 +80,7 @@ A second pass was run to close the gaps under [Known limitations](#known-limitat
 
 | Animation | What it shows |
 | --- | --- |
-| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Rebuild from zero and three Comparator runs, all accepted"></a> | **1. Rebuild from zero, check again.** The pinned source was rebuilt with an empty cache and `MATHLIB_NO_CACHE_ON_UPDATE=1`: exit 0, 11,432 jobs in 1 h 27 min, 8,370 Mathlib modules compiled on the machine and no cache downloads. Comparator then accepted Navier–Stokes (C, D) and Euler in all three runs, the last on that build. The Lean toolchain and the Comparator, lean4export, nanoda and landrun binaries were reused. |
+| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Comparator runs on different builds, all accepted"></a> | **1. Rebuild, check again.** Comparator accepted Navier–Stokes (C, D) and Euler on three different builds: the 2026-10-20 record (B1), the audit build whose Mathlib came from the prebuilt cache (B2), and a fresh 2026-10-21 build (B3). B3 compiled Mathlib and the project on the machine, 11,030 modules in 1 h 27 min with exit 0. **Correction:** Lake also fetched 7 smaller dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives without logging them, so an earlier "0 cache downloads" claim was wrong. A full `lake --no-cache build` (B4) with a fourth run is in progress. The Lean toolchain and checker binaries were reused. |
 | <a href="animations/mutants.html"><img src="docs/assets/mutants-preview.gif" width="380" alt="Six statement mutants refused and a comment-only control accepted"></a> | **2. Change the statement; it must be refused.** OpenAI's proof is never touched. Six one-symbol edits to the official challenge were all refused with `Challenge and solution theorem statement do not match`: `f = 0` in (C) and in (D), ℝ³ decay data swapped for periodic data, `nu > 0` weakened to `nu ≥ 0`, the negation dropped from (D), and Euler's `T* ≤ 1` tightened to `T* ≤ 1/2`. A comment-only control was accepted, so the refusals come from the changed statement. |
 | <a href="animations/replay.html"><img src="docs/assets/replay-preview.gif" width="380" alt="Fresh kernel replay and which kernel implementations examined the proofs"></a> | **3. Replay every step from an empty start.** `leanchecker --fresh` re-added every declaration, Mathlib included, to an empty environment and accepted both solutions (19.6 and 22.5 minutes). It reuses Lean's kernel, so it is a from-scratch replay, not a third implementation. `lean4lean` could not be built on Lean 4.34 (its Batteries dependency fails), so it never examined the proofs: a tooling gap, not a verdict. |
 
@@ -110,6 +113,26 @@ Mutation testing asks whether a test suite notices when the code is deliberately
 
 Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 paired variants**, not 168 distinct ones. The comparison covered 738 finite values and 18 non-finite values (stored as null). The three survivors are the deliberately tiny RC mutation, kept visible on purpose. All models and inputs are synthetic; none of this is an empirical measurement.
 
+## Method: what this study adds
+
+**Research question.** Can ordinary software-QA techniques (a frozen contract, an independent oracle, deliberate mutations and repeated runs) give an outside reader verifiable confidence in a machine-checked proof and in scientific code, without trusting the original authors' setup?
+
+**What the author designed.** One protocol, applied at two levels. The author chose the questions, froze the contracts, decided what counts as evidence and directed the work, with AI assistance as disclosed in [AUTHORSHIP.md](AUTHORSHIP.md).
+
+| Element | Numerical code | Formal proof pipeline |
+| --- | --- | --- |
+| Contract, frozen first | [`CONTRACT.md`](evidence/numerical/source/CONTRACT.md), tolerance 10⁻⁶ | The official challenge statement and the permitted axioms |
+| Independent oracle | A separately coded analytic, bisection or linear-system solution per model | Comparator with two kernels (nanoda, Lean), plus a `leanchecker --fresh` replay |
+| Deliberate mutation | Two known bugs per model, plus one near-threshold RC change | A wrong proof value, which the checker must reject, and six statement mutants with a comment-only control, which Comparator must refuse or accept |
+| Repetition | The same 84 variants on two hosts | Comparator on three builds so far, a fourth running |
+| Specification check | The contract itself | [Statement provenance](evidence/formal/statement-provenance/README.md) and the [Clay risk review](evidence/formal/clay-lean-risk.md) |
+
+**What the results support.** Numerically, every coarse mutant was killed and the deliberately tiny one survived where expected, with identical classifications on both hosts. Formally, the wrong proof value was rejected, all six statement mutants were refused while the control passed, the acceptance repeated across builds, and the statement proved is the public DeepMind statement.
+
+**Prior techniques it builds on.** Mutation analysis (DeMillo, Lipton and Sayward, 1978); independent test oracles and cross-platform differential testing; the de Bruijn criterion of small, independent proof checkers (nanoda, leanchecker, lean4lean); [Comparator](https://github.com/leanprover/comparator) for statement-exact checking; and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) for the statement. The combination is what this study contributes: it applies mutation analysis to the verification pipeline itself, the checker and the specification, not only to the code under test, and publishes every step with hashes so the audit can be audited. No literature review was done to establish that the combination is new.
+
+**Limits of the method.** Statement mutants test that the statement is compared exactly, not whether the proof would fail if it were wrong. All formal runs used one host. The Clay comparison is reading-based. The numerical mutants are coarse and all models are synthetic.
+
 ## Animations
 
 Open the [offline gallery](animations/index.html), or read the [animation guide](animations/README.md) for equations, parameters, outcomes and source traces.
@@ -130,8 +153,8 @@ The 3D flow clip is visual context only. It is not campaign data, evidence of bl
 
 A QA report is only useful if it says what it did not test.
 
-- **Bootstrap scope.** The 2026-10-21 rebuild compiled every dependency, Mathlib included, from source with an empty cache. It still reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries.
-- **Repeated runs, one host.** Comparator has run three times per challenge: twice on the 2026-10-20 build and once on the 2026-10-21 from-scratch build. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
+- **Bootstrap scope.** No full bootstrap is recorded yet. The 2026-10-21 build B3 compiled Mathlib and OpenAI's project locally but took 7 smaller dependencies (399 modules) as prebuilt Reservoir archives. A `lake --no-cache build` (B4) is running. Every build reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries, whose hashes are [recorded](evidence/formal/cd-validation/README.md#reused-tools).
+- **Repeated runs, one host.** Comparator has run three times per challenge, each time on a different build: B1 (the 2026-10-20 record), B2 (Mathlib from the prebuilt cache) and B3 (fresh build). The mutants and the leanchecker replay used B2. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are ([provenance](evidence/formal/cd-validation/PROVENANCE.md)).
 - **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. `leanchecker --fresh` replayed both solutions from an empty environment without errors; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) failed to build on Lean 4.34 (its Batteries dependency does not compile), so no third kernel implementation has checked the proofs.
 - **Standalone Comparator.** The run used the standalone tool pinned at `19e111e`. Comparator has since been merged into Lean core as `lake comparator` and `lake check` (Lean v4.35.0); the result has not been repeated with those.
 - **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs. The 2026-10-21 statement mutants test the challenge side instead: they show that Comparator refuses a changed statement, not that the proof would fail if it were broken.
@@ -151,11 +174,16 @@ The work was AI-assisted and human-directed. OpenAI Codex was the main coding ag
 
 ```text
 evidence/
-  formal/              clean build, Comparator logs, wrong-proof fixture, Clay–Lean table
-  numerical/           frozen contract, source, 84-case runs for macOS and Linux
+  formal/
+    cd-validation/          2026-10-21 revalidation: builds, receipts, logs, provenance
+    statement-provenance/   OpenAI's challenge compared with DeepMind's statement
+    clay-lean-risk.md       clause-by-clause risk review against Clay's text
+    …                       clean build, Comparator logs, wrong-proof fixture, Clay–Lean table
+  numerical/           frozen contract, source and runner tests, 84-case runs for macOS and Linux
   verify_numerical.py  integrity and cross-host check of the saved runs
   SHA256SUMS.txt       checksums for every curated file
-animations/            six offline HTML scenes, build script and tests
+animations/            ten offline HTML scenes, build and GIF export scripts, tests
+.github/workflows/     CI that runs every check on each push
 docs/assets/           GIF previews used in this README
 CLAIMS.md              claim → scope → evidence
 AUTHORSHIP.md          authorship and AI disclosure

@@ -1,0 +1,58 @@
+info: Comparator: cloning https://github.com/leanprover/comparator.git
+info: Comparator: checking out revision '19e111e2141cf333c7daff0f64c5f24acc91dd2e'
+info: mathlib: cloning https://github.com/leanprover-community/mathlib4.git
+info: mathlib: checking out revision '85e3a25e006c35636f0e53b0e9296caca2685bc0'
+info: lean4export: cloning https://github.com/leanprover/lean4export
+info: lean4export: checking out revision 'cacf989bd75f608700820f6afc595f32e7a99a4d'
+info: plausible: cloning https://github.com/leanprover-community/plausible
+info: plausible: checking out revision 'd9598f07b1bc701f1e3aae163d2681c1fd978793'
+info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+info: LeanSearchClient: checking out revision 'ba67e212be1197b84c1f1f6299488a10a3002713'
+info: importGraph: cloning https://github.com/leanprover-community/import-graph
+info: importGraph: checking out revision 'd8823026ac7ef130c253089d95685f9877b95323'
+info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+info: proofwidgets: checking out revision 'a8acbfd87375ff4abe14ce09db5b7664d383bc7f'
+info: aesop: cloning https://github.com/leanprover-community/aesop
+info: aesop: checking out revision '18889deb9e83ea7420ef51c160d6f88552e744e3'
+info: Qq: cloning https://github.com/leanprover-community/quote4
+info: Qq: checking out revision '507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3'
+info: batteries: cloning https://github.com/leanprover-community/batteries
+info: batteries: checking out revision 'd54dddc581e08be364c278052863524bff7a99a9'
+info: Cli: cloning https://github.com/leanprover/lean4-cli
+info: Cli: checking out revision 'ab3a82db9fea14cf0fd7f5a2de650f4b534640af'
+✔ [13/46] Built Mathlib.Tactic.Linter.DirectoryDependency (621ms)
+✔ [14/46] Built Mathlib.Tactic.Linter.Header (600ms)
+✔ [15/46] Built Mathlib.Lean.Environment (528ms)
+✔ [16/46] Built Mathlib.Tactic.Linter.TacticDocumentation (554ms)
+✔ [17/46] Built Mathlib.Tactic.DeclarationNames (598ms)
+✔ [18/46] Built Mathlib.Lean.Elab.Tactic.Meta (621ms)
+✔ [19/46] Built Mathlib.Tactic.Linter.OldObtain (632ms)
+✔ [20/46] Built Mathlib.Tactic.Linter.PrivateModule (663ms)
+✔ [21/46] Built Mathlib.Tactic.Linter.UnusedTacticExtension (812ms)
+✔ [22/46] Built Mathlib.Tactic.Linter.Multigoal (880ms)
+✔ [23/46] Built Mathlib.Tactic.Linter.Whitespace (1.2s)
+✔ [24/46] Built Mathlib.Tactic.Linter.GlobalAttributeIn (721ms)
+✔ [25/46] Built Mathlib.Tactic.Linter.HaveILetI (717ms)
+✔ [26/46] Built Mathlib.Lean.Expr.Basic (1.3s)
+✔ [27/46] Built Mathlib.Tactic.Linter.HashCommandLinter (829ms)
+✔ [28/46] Built Mathlib.Tactic.Linter.AuxLemma (661ms)
+✔ [29/46] Built Mathlib.Tactic.Linter.EmptyLine (941ms)
+✔ [30/46] Built Mathlib.Tactic.Lemma (495ms)
+
+[... middle of the log omitted ...]
+
+✔ [11420/11432] Built Euler.EulerFiniteLifespan (8.6s)
+✔ [11421/11432] Built Euler.StageVorticityConfinement (1.0s)
+✔ [11422/11432] Built Euler.CanonicalVorticityConfinement (2.2s)
+✔ [11423/11432] Built Euler.EulerC1Breakdown (2.6s)
+✔ [11424/11432] Built Euler.EulerC1Limsup (1.8s)
+✔ [11425/11432] Built Euler.EulerSingularity (1.9s)
+✔ [11426/11432] Built Euler (1.7s)
+✔ [11427/11432] Built Euler.ComparatorSingularityNorms (3.7s)
+✔ [11428/11432] Built Euler.ComparatorSobolevEvolution (4.2s)
+✔ [11429/11432] Built Euler.ComparatorMaximalFields (3.3s)
+✔ [11430/11432] Built Euler.ComparatorMaximalSolution (3.4s)
+ℹ [11431/11432] Built Euler.Solution (3.2s)
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (11432 jobs).

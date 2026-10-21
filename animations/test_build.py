@@ -80,7 +80,8 @@ class AnimationPackageTests(unittest.TestCase):
         self.assertEqual(len(mutants), 7)
         self.assertEqual(sum(item["verdict"] == "KILLED" for item in mutants), 6)
         self.assertTrue(all(item["after"] for item in mutants))
-        self.assertEqual(len(animations["rerun"]["rows"]), 3)
+        rows = animations["rerun"]["rows"]
+        self.assertEqual([row["label"].split(" · ")[1] for row in rows], ["B1", "B2", "B3", "B4"])
         provenance = animations["provenance"]
         self.assertIn("navier_stokes_breakdown_R3", provenance["names"])
         self.assertIn("navier_stokes_breakdown_periodic", provenance["names"])

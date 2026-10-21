@@ -19,8 +19,8 @@ En septiembre de 2026 OpenAI publicó formalizaciones en Lean 4 de las alternati
 
 | Pregunta | Qué se hizo | Resultado |
 | --- | --- | --- |
-| ¿Compila desde la fuente fijada? | `lake --no-cache build` sobre el commit `f9e8bc5` de OpenAI, Lean 4.34.0-rc2 | 2026-10-20: exit 0, 11.424 jobs, reutilizando cachés de dependencias. 2026-10-21, compilación desde el archivo fuente con caché vacía: exit 0, 11.432 jobs, 8.370 módulos de Mathlib compilados localmente y 0 descargas de caché ([registro](evidence/formal/cd-validation/README.md)). |
-| ¿Lo aceptan verificadores independientes? | [Comparator](https://github.com/leanprover/comparator) con el kernel de Lean y [nanoda](https://github.com/ammkrn/nanoda_lib) sobre los desafíos configurados | Navier–Stokes y Euler: ambos kernels aceptan (`Your solution is okay!`, exit 0) en tres corridas, la tercera sobre la compilación desde cero |
+| ¿Compila desde la fuente fijada? | Compilaciones del commit `f9e8bc5` de OpenAI, Lean 4.34.0-rc2 ([compilaciones y recibos](evidence/formal/cd-validation/README.md#builds-used-by-each-run)) | 2026-10-20 (B1): exit 0, 11.424 jobs, reutilizando cachés de dependencias. 2026-10-21 (B3): exit 0, 11.432 jobs; Mathlib y el proyecto se compilaron localmente (11.030 módulos), pero 7 dependencias pequeñas llegaron como archivos precompilados de Reservoir. Está en curso una compilación completa con `lake --no-cache build` (B4). |
+| ¿Lo aceptan verificadores independientes? | [Comparator](https://github.com/leanprover/comparator) con el kernel de Lean y [nanoda](https://github.com/ammkrn/nanoda_lib) sobre los desafíos configurados | Navier–Stokes y Euler: ambos kernels aceptan (`Your solution is okay!`, exit 0) en todas las corridas hasta ahora: tres corridas sobre tres compilaciones distintas (B1, B2, B3); una cuarta sobre B4 está en curso |
 | ¿El enunciado coincide con el texto de Clay? | Tabla cláusula por cláusula contra el PDF de Clay y el enunciado de [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind en `8bf45ed` | Correspondencia mapeada y una [revisión de riesgos cláusula por cláusula](evidence/formal/clay-lean-risk.md): 6 directas, 9 por hechos estándar, 1 que necesita una decisión humana (presión periódica en D). Es de lectura, no una prueba experta de equivalencia. |
 | ¿El desafío de OpenAI es el enunciado público? | Comparación declaración por declaración con el archivo de Formal Conjectures de DeepMind en `8bf45ed` ([procedencia](evidence/formal/statement-provenance/README.md)) | Idéntico: las 18 declaraciones con nombre, incluidas (C) y (D). Solo cambia el empaque. |
 | ¿Comparator revisa el enunciado exacto? | Mutantes del enunciado en el archivo del desafío, sin tocar la prueba de OpenAI, más un control que solo agrega un comentario ([revalidación](evidence/formal/cd-validation/README.md)) | 6 de 6 mutantes rechazados por enunciado distinto; el control que solo agrega un comentario fue aceptado |
@@ -38,7 +38,10 @@ cd scientific-qa-evidence
 shasum -a 256 -c evidence/SHA256SUMS.txt     # en Linux: sha256sum -c
 python3 evidence/verify_numerical.py
 python3 -m unittest discover -s animations -p 'test_*.py'
+(cd evidence/numerical/source && python3 -m unittest test_runner)   # vuelve a correr las 84 variantes
 ```
+
+Las mismas comprobaciones, más los tests del depurador de logs y del comparador de enunciados, corren en [GitHub Actions](.github/workflows/verify.yml) en cada push.
 
 El verificador numérico debe imprimir:
 
@@ -78,7 +81,7 @@ Se hizo una segunda pasada para cerrar las brechas de [Limitaciones conocidas](#
 
 | Animación | Qué muestra |
 | --- | --- |
-| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Compilación desde cero y tres corridas de Comparator aceptadas"></a> | **1. Compilar desde cero y volver a verificar.** El código fijado se recompiló con la caché vacía y `MATHLIB_NO_CACHE_ON_UPDATE=1`: exit 0, 11.432 jobs en 1 h 27 min, 8.370 módulos de Mathlib compilados en la máquina y ninguna descarga de caché. Después Comparator aceptó Navier–Stokes (C, D) y Euler en las tres corridas, la última sobre esa compilación. Se reutilizaron la toolchain de Lean y los binarios de Comparator, lean4export, nanoda y landrun. |
+| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Corridas de Comparator sobre distintas compilaciones, todas aceptadas"></a> | **1. Recompilar y volver a verificar.** Comparator aceptó Navier–Stokes (C, D) y Euler sobre tres compilaciones distintas: el registro del 2026-10-20 (B1), la compilación de auditoría cuyo Mathlib vino de la caché precompilada (B2) y una compilación nueva del 2026-10-21 (B3). B3 compiló Mathlib y el proyecto en la máquina: 11.030 módulos en 1 h 27 min, exit 0. **Corrección:** Lake también descargó 7 dependencias pequeñas como archivos precompilados de [Reservoir](https://reservoir.lean-lang.org) sin registrarlo en el log, así que la afirmación anterior de "0 descargas de caché" era incorrecta. Está en curso una compilación completa con `lake --no-cache build` (B4) y una cuarta corrida. Se reutilizaron la toolchain de Lean y los binarios de los verificadores. |
 | <a href="animations/mutants.html"><img src="docs/assets/mutants-preview.gif" width="380" alt="Seis mutantes del enunciado rechazados y un control aceptado"></a> | **2. Cambiar el enunciado: debe ser rechazado.** La prueba de OpenAI nunca se toca. Seis cambios de un símbolo en el desafío oficial fueron rechazados con `Challenge and solution theorem statement do not match`: `f = 0` en (C) y en (D), datos con decaimiento en ℝ³ cambiados por datos periódicos, `nu > 0` debilitado a `nu ≥ 0`, la negación quitada en (D) y el `T* ≤ 1` de Euler endurecido a `T* ≤ 1/2`. Un control que solo agrega un comentario fue aceptado, así que los rechazos vienen del enunciado cambiado. |
 | <a href="animations/replay.html"><img src="docs/assets/replay-preview.gif" width="380" alt="Revisión del kernel desde cero y qué kernels revisaron las pruebas"></a> | **3. Revisar cada paso desde un entorno vacío.** `leanchecker --fresh` volvió a cargar cada declaración, Mathlib incluido, en un entorno vacío y aceptó las dos soluciones (19,6 y 22,5 minutos). Usa el kernel de Lean, así que es una revisión desde cero y no una tercera implementación. `lean4lean` no compiló en Lean 4.34 (falla su dependencia Batteries), así que nunca revisó las pruebas: es una brecha de herramientas, no un veredicto. |
 
@@ -111,6 +114,26 @@ Las pruebas de mutación preguntan si una suite nota cuando el código se rompe 
 
 Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **84 variantes pareadas**, no 168 distintas. La comparación cubrió 738 valores finitos y 18 no finitos (guardados como null). Los tres sobrevivientes son la mutación RC deliberadamente diminuta, que se deja visible a propósito. Todos los modelos y entradas son sintéticos; nada de esto es una medición empírica.
 
+## Método: qué aporta este estudio
+
+**Pregunta de investigación.** ¿Pueden las técnicas habituales de QA de software (un contrato congelado, un oráculo independiente, mutaciones deliberadas y corridas repetidas) darle a un lector externo una confianza verificable en una prueba verificada por máquina y en código científico, sin confiar en el montaje de los autores originales?
+
+**Qué diseñó el autor.** Un solo protocolo aplicado en dos niveles. El autor eligió las preguntas, congeló los contratos, decidió qué cuenta como evidencia y dirigió el trabajo, con asistencia de IA según [AUTHORSHIP.md](AUTHORSHIP.md).
+
+| Elemento | Código numérico | Cadena de verificación formal |
+| --- | --- | --- |
+| Contrato, congelado primero | [`CONTRACT.md`](evidence/numerical/source/CONTRACT.md), tolerancia 10⁻⁶ | El enunciado oficial del desafío y los axiomas permitidos |
+| Oráculo independiente | Una solución analítica, por bisección o por sistema lineal, programada aparte para cada modelo | Comparator con dos kernels (nanoda, Lean) y una revisión con `leanchecker --fresh` |
+| Mutación deliberada | Dos errores conocidos por modelo y un cambio de RC cerca del umbral | Un valor de prueba erróneo, que el verificador debe rechazar, y seis mutantes del enunciado con un control de solo comentario, que Comparator debe rechazar o aceptar |
+| Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre tres compilaciones hasta ahora; una cuarta en curso |
+| Revisión de la especificación | El propio contrato | [Procedencia del enunciado](evidence/formal/statement-provenance/README.md) y la [revisión de riesgos frente a Clay](evidence/formal/clay-lean-risk.md) |
+
+**Qué respaldan los resultados.** En lo numérico, todos los mutantes gruesos fueron eliminados y el diminuto sobrevivió donde se esperaba, con clasificaciones idénticas en las dos máquinas. En lo formal, el valor de prueba erróneo fue rechazado, los seis mutantes del enunciado fueron rechazados mientras el control pasaba, la aceptación se repitió entre compilaciones y el enunciado probado es el enunciado público de DeepMind.
+
+**Técnicas previas en las que se apoya.** Análisis de mutación (DeMillo, Lipton y Sayward, 1978); oráculos de prueba independientes y pruebas diferenciales entre plataformas; el criterio de De Bruijn de verificadores de pruebas pequeños e independientes (nanoda, leanchecker, lean4lean); [Comparator](https://github.com/leanprover/comparator) para verificar el enunciado exacto; y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind para el enunciado. Lo que aporta este estudio es la combinación: aplica el análisis de mutación a la propia cadena de verificación, al verificador y a la especificación, no solo al código bajo prueba, y publica cada paso con hashes para que la auditoría también se pueda auditar. No se hizo una revisión bibliográfica para establecer que la combinación sea nueva.
+
+**Límites del método.** Los mutantes del enunciado prueban que el enunciado se compara exactamente, no que la prueba fallaría si estuviera mal. Todas las corridas formales usaron una sola máquina. La comparación con Clay es de lectura. Los mutantes numéricos son gruesos y todos los modelos son sintéticos.
+
 ## Animaciones
 
 Abre la [galería offline](animations/index.html) o lee la [guía de animaciones](animations/README.md) (en inglés) con ecuaciones, parámetros, resultados y trazas de fuente.
@@ -131,8 +154,8 @@ El clip de flujo 3D es solo contexto visual. No es dato de la campaña, ni evide
 
 Un informe de QA solo sirve si dice lo que no probó.
 
-- **Alcance del bootstrap.** La compilación del 2026-10-21 compiló desde la fuente todas las dependencias, Mathlib incluido, con caché vacía. Aun así reutilizó la toolchain de Lean instalada y los binarios ya compilados de Comparator, lean4export, nanoda y landrun.
-- **Corridas repetidas, una sola máquina.** Comparator corrió tres veces por desafío: dos sobre el build del 2026-10-20 y una sobre la compilación desde cero del 2026-10-21. Todas las corridas usaron una sola máquina Linux. Las transcripciones originales no se distribuyen; sí las copias depuradas y los hashes de los originales.
+- **Alcance del bootstrap.** Todavía no hay un bootstrap completo registrado. La compilación B3 del 2026-10-21 compiló Mathlib y el proyecto de OpenAI localmente, pero tomó 7 dependencias pequeñas (399 módulos) como archivos precompilados de Reservoir. Está en curso una compilación con `lake --no-cache build` (B4). Todas las compilaciones reutilizaron la toolchain de Lean instalada y los binarios ya compilados de Comparator, lean4export, nanoda y landrun, cuyos hashes están [registrados](evidence/formal/cd-validation/README.md#reused-tools).
+- **Corridas repetidas, una sola máquina.** Comparator corrió tres veces por desafío, cada vez sobre una compilación distinta: B1 (el registro del 2026-10-20), B2 (Mathlib de la caché precompilada) y B3 (compilación nueva). Los mutantes y la revisión con leanchecker usaron B2. Todas las corridas usaron una sola máquina Linux. Las transcripciones originales no se distribuyen; sí las copias depuradas y los hashes de los originales ([procedencia](evidence/formal/cd-validation/PROVENANCE.md)).
 - **Dos implementaciones de kernel.** Hasta ahora solo el kernel de Lean y nanoda han aceptado las pruebas. `leanchecker --fresh` revisó las dos soluciones desde un entorno vacío sin errores; usa el mismo kernel de Lean, así que es una revisión desde cero y no una tercera implementación. [lean4lean](https://github.com/digama0/lean4lean) no compiló en Lean 4.34 (su dependencia Batteries falla), así que ninguna tercera implementación de kernel ha revisado las pruebas.
 - **Comparator standalone.** La corrida usó la herramienta independiente fijada en `19e111e`. Comparator ya se integró al núcleo de Lean como `lake comparator` y `lake check` (Lean v4.35.0); el resultado no se ha repetido con esas herramientas.
 - **Un solo fixture de prueba errónea.** El control formal muestra que los verificadores rechazan un valor de prueba erróneo. No es una campaña de mutación sobre las pruebas de OpenAI. Los mutantes del enunciado del 2026-10-21 prueban el lado del desafío: muestran que Comparator rechaza un enunciado cambiado, no que la prueba fallaría si estuviera rota.
@@ -152,11 +175,16 @@ El trabajo fue asistido por IA y dirigido por una persona. OpenAI Codex fue el a
 
 ```text
 evidence/
-  formal/              build limpio, logs de Comparator, fixture de prueba errónea, tabla Clay–Lean
-  numerical/           contrato congelado, fuente, corridas de 84 casos en macOS y Linux
+  formal/
+    cd-validation/          revalidación del 2026-10-21: compilaciones, recibos, logs, procedencia
+    statement-provenance/   desafío de OpenAI comparado con el enunciado de DeepMind
+    clay-lean-risk.md       revisión de riesgos cláusula por cláusula frente al texto de Clay
+    …                       build limpio, logs de Comparator, fixture de prueba errónea, tabla Clay–Lean
+  numerical/           contrato congelado, fuente y tests del runner, corridas de 84 casos en macOS y Linux
   verify_numerical.py  chequeo de integridad y entre máquinas de las corridas guardadas
   SHA256SUMS.txt       checksums de cada archivo curado
-animations/            seis escenas HTML offline, script de build y tests
+animations/            diez escenas HTML offline, scripts de build y de exportación de GIF, tests
+.github/workflows/     CI que corre todas las comprobaciones en cada push
 docs/assets/           GIFs de vista previa usados en este README
 CLAIMS.md              afirmación → alcance → evidencia
 AUTHORSHIP.md          autoría y declaración de uso de IA

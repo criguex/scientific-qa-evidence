@@ -1,0 +1,36 @@
+warning: Batteries/Data/UnionFind/Basic.lean:416:23: `if_pos` has been deprecated: Use `ite_eq_left` instead
+✔ [59/161] Built Batteries.Lean.AttributeExtra (724ms)
+✔ [60/161] Built Batteries.Data.UnionFind.Basic:c.o (323ms)
+✔ [61/161] Built Batteries.Data.String.Legacy (1.1s)
+✔ [62/161] Built Batteries.Util.ProofWanted (3.9s)
+✔ [63/161] Built Batteries.Tactic.Alias:c.o (3.1s)
+⚠ [64/161] Built Batteries.Data.UnionFind.Lemmas (923ms)
+warning: Batteries/Data/UnionFind/Lemmas.lean:55:28: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: Batteries/Data/UnionFind/Lemmas.lean:75:61: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: Batteries/Data/UnionFind/Lemmas.lean:87:14: `if_pos` has been deprecated: Use `ite_eq_left` instead
+✔ [65/161] Built Batteries.Linter.UnnecessarySeqFocus (1.1s)
+✔ [66/161] Built Lean4Lean.Std.HashMap (1.8s)
+✔ [67/161] Built Lean4Lean.EquivManager (1.4s)
+✔ [68/161] Built Lean4Lean.Level (5.0s)
+✔ [69/161] Built Batteries.Linter (246ms)
+✖ [70/161] Building Batteries.Data.List.Basic (3.2s)
+trace: .> LEAN_PATH=<PRIVATE_PATH> <PRIVATE_PATH> <PRIVATE_PATH> -o <PRIVATE_PATH> -i <PRIVATE_PATH> -c <PRIVATE_PATH> --setup <PRIVATE_PATH> --json
+error: Batteries/Data/List/Basic.lean:577:31: Tactic `unfold` failed to unfold `cond` in
+  (if R a b = true then takeWhile₂TR.go R as bs (a :: acca) (b :: accb) else (acca.reverse, accb.reverse)) =
+    (acca.reverse ++
+        (if R a b = true then (a :: (takeWhile₂ R as bs).fst, b :: (takeWhile₂ R as bs).snd) else ([], [])).fst,
+      accb.reverse ++
+        (if R a b = true then (a :: (takeWhile₂ R as bs).fst, b :: (takeWhile₂ R as bs).snd) else ([], [])).snd)
+✔ [108/161] Built Lean4Lean.EquivManager:c.o (343ms)
+✔ [109/161] Built Batteries.Tactic.Basic (282ms)
+⚠ [110/161] Built Batteries.Classes.Order (456ms)
+warning: Batteries/Classes/Order.lean:167:51: `if_neg` has been deprecated: Use `ite_eq_right` instead
+✔ [112/161] Built Lean4Lean.Level:c.o (1.2s)
+✔ [113/161] Built Lean4Lean.Verify.QSort (6.6s)
+✔ [127/161] Built Lean4Lean.TypeChecker (2.4s)
+✔ [137/161] Built Lean4Lean.Primitive (1.9s)
+✔ [159/161] Built Lean4Lean.TypeChecker:c.o (2.0s)
+✔ [160/161] Built Lean4Lean.Primitive:c.o (2.7s)
+Some required targets logged failures:
+- Batteries.Data.List.Basic
+error: build failed

@@ -175,18 +175,28 @@ def check(validation, check_id):
 
 def rerun_data(validation, run1_text):
     run1 = {name: float(re.search(rf"\| {name} \|.*?\| ([0-9.]+) s \|", run1_text).group(1)) for name in ("Navier–Stokes", "Euler")}
-    build_check = check(validation, "clean_build")
+    fresh = check(validation, "clean_build")
+    nocache = check(validation, "nocache_build")
+    oleans = fresh.get("facts", {}).get("oleans", [])
 
     def run(label, ns_id, euler_id):
-        return {"label": label, "runs": [{"verdict": check(validation, ns_id)["verdict"], "elapsed_s": check(validation, ns_id)["elapsed_s"]}, {"verdict": check(validation, euler_id)["verdict"], "elapsed_s": check(validation, euler_id)["elapsed_s"]}]}
+        return {"label": label, "runs": [{"verdict": check(validation, item)["verdict"], "elapsed_s": check(validation, item).get("elapsed_s")} for item in (ns_id, euler_id)]}
 
     return {
         "source_commit": validation["source_commit"][:7],
-        "build": {"verdict": build_check["verdict"], "elapsed_s": build_check["elapsed_s"], **build_check["facts"]},
+        "build": {
+            "fresh_local": sum(int(o["total"]) for o in oleans if o["older_than_build_start"] == "0"),
+            "fresh_prebuilt": sum(int(o["older_than_build_start"]) for o in oleans),
+            "fresh_prebuilt_packages": sum(1 for o in oleans if o["older_than_build_start"] != "0"),
+            "fresh_elapsed_s": fresh.get("elapsed_s"),
+            "nocache_verdict": nocache["verdict"],
+            "nocache_elapsed_s": nocache.get("elapsed_s"),
+        },
         "rows": [
-            {"label": "Run 1 · 2026-10-20 · build with reused caches", "runs": [{"verdict": "ACCEPTED", "elapsed_s": run1["Navier–Stokes"]}, {"verdict": "ACCEPTED", "elapsed_s": run1["Euler"]}]},
-            run("Run 2 · 2026-10-21 · same build", "comparator2_NavierStokes", "comparator2_Euler"),
-            run("Run 3 · 2026-10-21 · rebuilt from scratch", "comparator3_clean_NavierStokes", "comparator3_clean_Euler"),
+            {"label": "Run 1 · B1 · 2026-10-20 record", "runs": [{"verdict": "ACCEPTED", "elapsed_s": run1["Navier–Stokes"]}, {"verdict": "ACCEPTED", "elapsed_s": run1["Euler"]}]},
+            run("Run 2 · B2 · Mathlib from prebuilt cache", "comparator2_NavierStokes", "comparator2_Euler"),
+            run("Run 3 · B3 · Mathlib compiled here", "comparator3_clean_NavierStokes", "comparator3_clean_Euler"),
+            run("Run 4 · B4 · --no-cache, all compiled here", "comparator4_nocache_NavierStokes", "comparator4_nocache_Euler"),
         ],
     }
 

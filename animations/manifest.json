@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "37aa28b3e53f52cdb1a0fe0e660917d1d1dbe0807d3472a125528e6d48eb6eb7"
+      "sha256": "79c283ebfd21b76234b446c5b57af1571f52f0f1d01b4fc7575860b6323dffac"
     },
     "comparator_run1": {
       "path": "evidence/formal/comparator/README.md",
@@ -268,17 +268,16 @@
     "rerun": {
       "source_commit": "f9e8bc5",
       "build": {
-        "verdict": "OK",
-        "elapsed_s": 5201.0,
-        "built_mathlib_modules": 8370,
-        "built_total": 11030,
-        "fetched_or_unpacked": 0,
-        "xdg_cache_contents": 0,
-        "jobs": 11432
+        "fresh_local": 11030,
+        "fresh_prebuilt": 399,
+        "fresh_prebuilt_packages": 7,
+        "fresh_elapsed_s": 5201.0,
+        "nocache_verdict": "PENDING",
+        "nocache_elapsed_s": null
       },
       "rows": [
         {
-          "label": "Run 1 · 2026-10-20 · build with reused caches",
+          "label": "Run 1 · B1 · 2026-10-20 record",
           "runs": [
             {
               "verdict": "ACCEPTED",
@@ -291,7 +290,7 @@
           ]
         },
         {
-          "label": "Run 2 · 2026-10-21 · same build",
+          "label": "Run 2 · B2 · Mathlib from prebuilt cache",
           "runs": [
             {
               "verdict": "ACCEPTED",
@@ -304,7 +303,7 @@
           ]
         },
         {
-          "label": "Run 3 · 2026-10-21 · rebuilt from scratch",
+          "label": "Run 3 · B3 · Mathlib compiled here",
           "runs": [
             {
               "verdict": "ACCEPTED",
@@ -313,6 +312,19 @@
             {
               "verdict": "ACCEPTED",
               "elapsed_s": 670.88
+            }
+          ]
+        },
+        {
+          "label": "Run 4 · B4 · --no-cache, all compiled here",
+          "runs": [
+            {
+              "verdict": "PENDING",
+              "elapsed_s": null
+            },
+            {
+              "verdict": "PENDING",
+              "elapsed_s": null
             }
           ]
         }

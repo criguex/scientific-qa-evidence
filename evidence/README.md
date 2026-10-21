@@ -8,6 +8,8 @@ The root checksum list covers every curated release file, including both paired 
 
 `numerical/summary.mac.json` is the original macOS arm64 run summary. `numerical/multidomain_derived.json` is the original paired-host summary. The complete 84-case records, original summaries, and observations CSVs for macOS arm64 and Linux x86_64 are under `numerical/paired/`. Two byte-preserved RC outputs make one baseline-versus-mutation comparison concrete. The four Python source files are the exact runner and numerical implementations named by the original source hashes. The source contract is described in English in [CLAIMS.md](../CLAIMS.md).
 
+`numerical/source/test_runner.py` tests the runner: an oracle exception must mark the oracle invalid, a system-under-test exception must leave the variant `INCONCLUSIVE`, and a full rerun must reproduce every saved record. `runner.py` was fixed on 2026-10-21; see `SOURCE_PROVENANCE.md` for the hash of the version that produced the saved runs.
+
 The selected results are not a substitute for the full 84-variant run. The 27 PASS, 54 KILLED, and 3 SURVIVED counts are per host. macOS arm64 and Linux x86_64 are paired executions of the same variants.
 
 ## Formal controls
