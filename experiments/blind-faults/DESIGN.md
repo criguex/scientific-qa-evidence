@@ -74,3 +74,17 @@ F6 checks that the baseline works as intended; if B misses F6, the setup is brok
 | Item | Status |
 | --- | --- |
 | `assign.py`, case templates and check scripts | Pending |
+
+## Implementation and its scope
+
+The experiment is implemented in Python so it is fully reproducible in CI, with no Lean or remote host needed:
+
+- `protocol_lib.py` — the clean case template, the one-artifact fault injectors, and the two procedures `baseline` and `protocol` as functions over a case's artifacts.
+- `assign.py` — reads the committed seed and writes `case-01..21` plus `key.json`.
+- `run_checks.py` — runs both procedures over every case, blind to `key.json`.
+- `score.py` — joins results with the revealed key into the metrics.
+- `test_protocol.py` — asserts the intended pattern (clean passes both; F6 caught by both; F1, F2, F4, F5 pass the baseline but the protocol flags them).
+
+**What this models and what it does not.** A case is a directory of recorded artifacts of the kind the real protocol reads: a build log, an artifact-timestamp table, a solution statement and its reference, an axioms report, receipts, and a numerical summary. The checks run over these artifacts exactly as the real checks do over the real logs, source and receipts. The experiment does **not** re-run Lean, Comparator or the kernels; those live runs are the main study under `evidence/formal/`. So the experiment demonstrates the protocol's checks on controlled artifacts, not a second live verification.
+
+**Determinism.** The per-class outcome does not depend on the seed: the checks are deterministic, so a fault of a given class is detected the same way whichever case number it lands on. The seed only fixes the assignment, and its commitment plus the frozen script hashes prevent the checks from being tuned to it.

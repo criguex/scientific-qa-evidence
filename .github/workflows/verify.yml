@@ -37,3 +37,6 @@ jobs:
       - name: Statement comparison
         working-directory: evidence/formal/statement-provenance
         run: python3 -m unittest -v test_compare_statements
+      - name: Blind-fault protocol library
+        working-directory: experiments/blind-faults
+        run: python3 -m unittest -v test_protocol
