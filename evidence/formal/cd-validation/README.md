@@ -1,6 +1,6 @@
 # Revalidation of alternatives (C) and (D), 2026-10-21
 
-State: **in progress** · 17 of 18 checks recorded · 0 unexpected · 1 not run (toolchain mismatch).
+State: **complete** · 18 of 18 checks recorded · 0 unexpected · 1 not run (toolchain mismatch).
 
 This record repeats and extends the [2026-10-20 Comparator record](../comparator/README.md) for OpenAI's [NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) at commit `f9e8bc5` (leanprover/lean4:v4.34.0-rc2) on one host: Linux x86_64 · WSL2 · 12 vCPU · 30 GiB. Machine-readable results are in [`results.json`](results.json); every public file is traced to its original and that original's SHA-256 in [`PROVENANCE.md`](PROVENANCE.md).
 
@@ -13,7 +13,7 @@ This record repeats and extends the [2026-10-20 Comparator record](../comparator
 | Comparator run 3 · Navier–Stokes on B3 | B3 | accept | **ACCEPTED** | 6.6 min | `Your solution is okay!` | [log](logs/comparator3_clean_NavierStokes.sanitized.log) |
 | Comparator run 3 · Euler on B3 | B3 | accept | **ACCEPTED** | 11.2 min | `Your solution is okay!` | [log](logs/comparator3_clean_Euler.sanitized.log) |
 | Comparator run 4 · Navier–Stokes on B4 | B4 | accept | **ACCEPTED** | 6.7 min | `Your solution is okay!` | [log](logs/comparator4_nocache_NavierStokes.sanitized.log) |
-| Comparator run 4 · Euler on B4 | B4 | accept | **PENDING** | — | — | — |
+| Comparator run 4 · Euler on B4 | B4 | accept | **ACCEPTED** | 11.2 min | `Your solution is okay!` | [log](logs/comparator4_nocache_Euler.sanitized.log) |
 | Control · comment-only edit to the challenge | B2 | accept | **CONTROL_ACCEPTED** | 7.0 min | `Your solution is okay!` | [log](logs/mutant_control_comment.sanitized.log) · [diff](mutants/control_comment.diff) |
 | (C) add f = 0 · forceless statement | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'` | [log](logs/mutant_force_zero_R3.sanitized.log) · [diff](mutants/force_zero_R3.diff) |
 | (D) add f = 0 · forceless statement | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_force_zero_periodic.sanitized.log) · [diff](mutants/force_zero_periodic.diff) |

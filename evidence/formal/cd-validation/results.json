@@ -5,7 +5,7 @@
   "source_repository": "https://github.com/openai/NavierStokesAndEuler",
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
-  "state": "in_progress",
+  "state": "complete",
   "builds": {
     "clean03": {
       "label": "B1 · clean03 · 2026-10-20",
@@ -135,9 +135,19 @@
       "title": "Comparator run 4 · Euler on B4",
       "expected": "accept",
       "build": "nocache",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T19:32:19Z",
+      "started_utc": "2026-10-21T19:21:07Z",
+      "command": "lake env <comparator> ComparatorChallenges/Euler.json (cwd: no-cache build)",
+      "elapsed_s": 672.11,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator4_nocache_Euler.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "5f410965535ca08ed4cfca05bd9fb259ece2ef95858319a83134f92bc83b96ba",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "9c73e31340932eec9d4b9ef274b287c305ae567b6393ca7bf8bad8e383466ee1"
+      }
     },
     {
       "id": "mutant_control_comment",
