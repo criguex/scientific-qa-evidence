@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "e8060f00060efff50af5a470221d4c191bd03ecf1dd1fc058177b81b28972fd5"
+      "sha256": "f080822cc53d955dd9a2aa879cd2bab4621532855d13cf7d970c452aab12ea49"
     }
   },
   "animations": {
@@ -280,16 +280,16 @@
           "group": "comparator",
           "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
           "expected": "accept",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "ACCEPTED",
+          "elapsed_s": 395.11
         },
         {
           "id": "comparator3_clean_Euler",
           "group": "comparator",
           "title": "Comparator run 3 · Euler on the from-scratch build",
           "expected": "accept",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "ACCEPTED",
+          "elapsed_s": 670.88
         },
         {
           "id": "mutant_control_comment",
@@ -352,7 +352,7 @@
           "group": "build",
           "title": "From-scratch build · empty caches, Mathlib compiled",
           "expected": "ok",
-          "verdict": "PENDING",
+          "verdict": "OK",
           "elapsed_s": null
         },
         {

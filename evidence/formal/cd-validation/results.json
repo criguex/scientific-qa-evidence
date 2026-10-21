@@ -6,7 +6,7 @@
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
   "state": "in_progress",
-  "updated_utc": "2026-10-21T15:35:41Z",
+  "updated_utc": "2026-10-21T17:20:09Z",
   "reference_run_1": "evidence/formal/comparator/README.md",
   "checks": [
     {
@@ -38,18 +38,24 @@
       "group": "comparator",
       "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
       "expected": "accept",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T17:08:58Z",
+      "elapsed_s": 395.11,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator3_clean_NavierStokes.sanitized.log"
     },
     {
       "id": "comparator3_clean_Euler",
       "group": "comparator",
       "title": "Comparator run 3 · Euler on the from-scratch build",
       "expected": "accept",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T17:20:09Z",
+      "elapsed_s": 670.88,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator3_clean_Euler.sanitized.log"
     },
     {
       "id": "mutant_control_comment",
@@ -147,9 +153,15 @@
       "group": "build",
       "title": "From-scratch build · empty caches, Mathlib compiled",
       "expected": "ok",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "OK",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T17:02:23Z",
+      "facts": {
+        "built_mathlib_modules": 8370,
+        "built_total": 11030,
+        "fetched_or_unpacked": 0,
+        "xdg_cache_contents": 0
+      }
     },
     {
       "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",

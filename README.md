@@ -19,8 +19,8 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 
 | Question | What was done | Result |
 | --- | --- | --- |
-| Does it build from pinned source? | `lake --no-cache build` on OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 | Exit 0, 11,424 jobs. Dependency caches were reused, so this is not a full bootstrap. |
-| Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) |
+| Does it build from pinned source? | `lake --no-cache build` on OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 | 2026-10-20: exit 0, 11,424 jobs, with dependency caches reused. 2026-10-21 rebuild from the source archive with an empty cache: exit 0, 11,432 jobs, 8,370 Mathlib modules compiled locally, 0 cache downloads ([record](evidence/formal/cd-validation/README.md)). |
+| Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) in three runs, the third on the from-scratch build |
 | Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and open gaps listed. Documentary only, not an expert equivalence proof. |
 | Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | 6 of 6 mutants refused as statement mismatches; comment-only control accepted |
 | Do the checkers reject a wrong proof? | A fixture whose proof value is wrong but keeps the declared type | Lean reports a type mismatch; nanoda stops with an assertion rejection |
@@ -79,8 +79,9 @@ A second pass was run to close the gaps under [Known limitations](#known-limitat
 - **The result repeats.** Comparator accepted Navier–Stokes (C and D) and Euler a second time on the same build. Both nanoda and the Lean kernel accepted, in 7.0 and 11.2 minutes.
 - **Comparator compares the statement exactly.** Each statement mutant edits only the challenge file and leaves OpenAI's proof untouched. All six mutants were refused with `Challenge and solution theorem statement do not match`: `f = 0` added to (C) and to (D) (forceless versions), ℝ³ decay data swapped for periodic data, `nu > 0` weakened to `nu ≥ 0`, the negation dropped from (D), and Euler's `T* ≤ 1` tightened to `T* ≤ 1/2`. A comment-only control was still accepted, so the refusals come from the changed statement, not from editing the file.
 - **A from-scratch kernel replay agrees.** `leanchecker --fresh` re-added every declaration, Mathlib included, to an empty environment and accepted both solutions: Navier–Stokes in 19.6 minutes and Euler in 22.5 minutes, each with exit 0 and no errors. It uses the same Lean kernel as Comparator, so it confirms the stored build replays from scratch; it is not a third kernel implementation.
+- **It builds from scratch, and Comparator still accepts.** The pinned source archive was rebuilt with an empty cache directory and `MATHLIB_NO_CACHE_ON_UPDATE=1`. The build finished with exit 0 and 11,432 jobs in 1 h 27 min. The log shows 8,370 Mathlib modules compiled locally and no cache downloads, and the cache directory was still empty afterwards. Comparator then accepted Navier–Stokes (6.6 min) and Euler (11.2 min) on that build. The Lean toolchain and the Comparator, lean4export, nanoda and landrun binaries were reused from the 2026-10-20 setup.
 - **What the mutants do not show.** A refused mutant says nothing about whether the mutated statement is true. The `f = 0` mutants are not evidence about the forceless alternatives (A) and (B), which remain open.
-- **Still running:** the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
+- **Still running:** a best-effort `lean4lean` attempt.
 
 The live table, verdicts, sanitized logs and every mutant diff are in [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md).
 
@@ -123,8 +124,8 @@ The 3D flow clip is visual context only. It is not campaign data, evidence of bl
 
 A QA report is only useful if it says what it did not test.
 
-- **Not a full bootstrap.** The source build reused dependency and toolchain caches.
-- **Repeated runs, one host.** Comparator has now run twice per challenge on the same build (2026-10-20 and 2026-10-21); a third run on a from-scratch build is in progress. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
+- **Bootstrap scope.** The 2026-10-21 rebuild compiled every dependency, Mathlib included, from source with an empty cache. It still reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries.
+- **Repeated runs, one host.** Comparator has run three times per challenge: twice on the 2026-10-20 build and once on the 2026-10-21 from-scratch build. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
 - **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. `leanchecker --fresh` replayed both solutions from an empty environment without errors; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) is pinned to Lean v4.33 upstream and is only attempted on a best-effort basis.
 - **Standalone Comparator.** The run used the standalone tool pinned at `19e111e`. Comparator has since been merged into Lean core as `lake comparator` and `lake check` (Lean v4.35.0); the result has not been repeated with those.
 - **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs. The 2026-10-21 statement mutants test the challenge side instead: they show that Comparator refuses a changed statement, not that the proof would fail if it were broken.
