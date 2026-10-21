@@ -1,6 +1,8 @@
 # Is OpenAI's challenge the public DeepMind statement?
 
-**Finding (2026-10-21):** yes, in substance. OpenAI's Comparator challenge for Navier–Stokes is the same formal statement as Google DeepMind's public Formal Conjectures file. Every definition, every structure and both breakdown theorems, (C) and (D), are identical declaration by declaration. The differences are packaging only.
+**Finding (2026-10-21):** The 18 declarations match after textual normalization; name resolution was not verified. After removing comments, attributes and whitespace, every named declaration in OpenAI's Comparator challenge, including the breakdown theorems (C) and (D), is textually the same as in Google DeepMind's public Formal Conjectures file. The remaining differences are imports, namespace and notation.
+
+**Scope.** This is a textual comparison. It does not show semantic identity. That would require comparing the elaborated declarations and their constants and dependencies in Lean, to prove that the different imports, namespace and notation do not change the meaning. That comparison was not done.
 
 | | Reference | Candidate |
 | --- | --- | --- |
@@ -29,7 +31,7 @@ Also checked by reading the pinned Mathlib: `∞` in `ContDiff ℝ ∞` is `((�
 
 ## What this does and does not show
 
-It shows that OpenAI did not adapt the statement to its proof. The question "does the formal statement say what Clay says?" now concerns the public DeepMind statement, not a file written by the prover. It does not answer that question; see [`../clay-lean-risk.md`](../clay-lean-risk.md).
+Within that scope, it shows that OpenAI's challenge text was not adapted from the public statement. The question "does the formal statement say what Clay says?" now concerns the public DeepMind statement, not a file written by the prover. It does not answer that question; see [`../clay-lean-risk.md`](../clay-lean-risk.md).
 
 ## Reproduce
 

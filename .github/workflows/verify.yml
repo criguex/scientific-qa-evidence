@@ -9,19 +9,26 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.9", "3.12"]
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python }}
       - name: Checksums
-        run: sha256sum -c evidence/SHA256SUMS.txt
+        run: shasum -a 256 -c evidence/SHA256SUMS.txt
       - name: Saved numerical evidence
         run: python3 evidence/verify_numerical.py
-      - name: Numerical runner
+      - name: Numerical runner (reruns all 84 variants)
         working-directory: evidence/numerical/source
         run: python3 -m unittest -v test_runner
+      - name: Documentation consistency
+        run: python3 evidence/test_consistency.py -v
       - name: Animation package
         run: python3 -m unittest discover -s animations -p 'test_*.py' -v
       - name: Comparator log sanitizer

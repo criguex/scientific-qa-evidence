@@ -75,6 +75,8 @@ def run_variant(case, variant, baseline_status=None):
             key = str(n) if n is not None else "N/A"
             stage = "oracle"
             expected = oracles.evaluate(case, n or 1)
+            if not finite(expected):
+                oracle_invalid = True
             stage = "sut"
             got = sut.evaluate(case, variant, n or 1)
             stage = "check"
@@ -150,6 +152,7 @@ def main(argv=None):
             results.append(result)
     files = [Path(__file__), Path(__file__).with_name("sut.py"), Path(__file__).with_name("oracles.py"), Path(__file__).with_name("suite.py"), Path(__file__).with_name("CONTRACT.md")]
     source_hashes = {p.name: sha256(p) for p in files}
+    export_errors = []
     with (out / "observations.csv").open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=["case_id", "model", "variant", "resolution", "fraction", "component", "value", "oracle", "point_normalized_error", "max_normalized_error", "invariant"])
         writer.writeheader()
@@ -157,7 +160,11 @@ def main(argv=None):
             for n in r["refinements"]:
                 key = str(n) if n is not None else "N/A"
                 values = r["values"].get(key, [])
-                reference = oracles.evaluate(next(c for c in cases if c["case_id"] == r["case_id"].removesuffix("_tiny")), n or 1) if len(values) else []
+                try:
+                    reference = oracles.evaluate(next(c for c in cases if c["case_id"] == r["case_id"].removesuffix("_tiny")), n or 1) if len(values) else []
+                except Exception as exc:
+                    reference = []
+                    export_errors.append({"case_id": r["case_id"], "variant": r["variant"], "resolution": key, "exception": f"oracle:{type(exc).__name__}"})
                 for i, value in enumerate(values):
                     observation_index = i // 2 if r["model"] == "acoustic_interface" else i
                     fraction = OBSERVATION_FRACTIONS[observation_index] if observation_index < len(OBSERVATION_FRACTIONS) else "N/A"
@@ -173,12 +180,14 @@ def main(argv=None):
     counts = {}
     for r in results:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
-    summary = {"collection_complete": len(results) == 84, "expected_variants": 84, "variant_evaluations": len(results), "process_invocations": 1, "all_expected_responses": None, "counts": counts, "tolerance": TOLERANCE, "refinements": list(REFINEMENTS), "started_utc": min(r["started_utc"] for r in results), "finished_utc": max(r["finished_utc"] for r in results), "duration_seconds": sum(r["duration_seconds"] for r in results), "source_sha256": source_hashes, "runtime": {"python": platform.python_version(), "os": sys.platform, "architecture": platform.machine()}, "seed": None, "command": "python3 runner.py --out <NEW_OUTPUT_DIR>"}
+    summary = {"collection_complete": len(results) == 84 and not export_errors, "expected_variants": 84, "variant_evaluations": len(results), "process_invocations": 1, "all_expected_responses": None, "counts": counts, "tolerance": TOLERANCE, "refinements": list(REFINEMENTS), "started_utc": min(r["started_utc"] for r in results), "finished_utc": max(r["finished_utc"] for r in results), "duration_seconds": sum(r["duration_seconds"] for r in results), "source_sha256": source_hashes, "runtime": {"python": platform.python_version(), "os": sys.platform, "architecture": platform.machine()}, "seed": None, "command": "python3 runner.py --out <NEW_OUTPUT_DIR>"}
+    if export_errors:
+        summary["export_errors"] = export_errors
     artifact_hashes = {p.name: sha256(p) for p in sorted(out.iterdir()) if p.is_file() and p.name != "summary.json"}
     summary["artifact_sha256"] = artifact_hashes
     (out / "summary.json").write_text(json.dumps(summary, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     (out / "summary.json.sha256").write_text(f"{sha256(out / 'summary.json')}  summary.json\n", encoding="ascii")
-    print(json.dumps({"collection_complete": summary["collection_complete"], "actual_variants": len(results), "counts": counts}, sort_keys=True))
+    print(json.dumps({"collection_complete": summary["collection_complete"], "actual_variants": len(results), "counts": counts, "export_errors": len(export_errors)}, sort_keys=True))
     return 0 if summary["collection_complete"] else 2
 
 

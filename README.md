@@ -22,7 +22,7 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 | Does it build from pinned source? | Builds of OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 ([builds and receipts](evidence/formal/cd-validation/README.md#builds-used-by-each-run)) | 2026-10-20 (B1): exit 0, 11,424 jobs, dependency caches reused. 2026-10-21 (B3): exit 0, 11,432 jobs; Mathlib and the project compiled locally (11,030 modules), but 7 smaller dependencies arrived as prebuilt Reservoir archives. A full `lake --no-cache build` (B4) is running. |
 | Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) in every run so far: three runs on three different builds (B1, B2, B3); a fourth on B4 is running |
 | Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and a [clause-by-clause risk review](evidence/formal/clay-lean-risk.md): 6 direct, 9 via standard facts, 1 needing a human decision (periodic pressure in D). Reading-based, not an expert equivalence proof. |
-| Is OpenAI's challenge the public statement? | Declaration-by-declaration comparison with DeepMind's Formal Conjectures file at `8bf45ed` ([provenance](evidence/formal/statement-provenance/README.md)) | Identical: all 18 named declarations, including (C) and (D). Packaging differences only. |
+| Does OpenAI's challenge text match the public statement? | Declaration-by-declaration comparison with DeepMind's Formal Conjectures file at `8bf45ed` ([provenance](evidence/formal/statement-provenance/README.md)) | The 18 declarations match after textual normalization; name resolution was not verified. Includes (C) and (D). Semantic identity was not checked. |
 | Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | 6 of 6 mutants refused as statement mismatches; comment-only control accepted |
 | Do the checkers reject a wrong proof? | A fixture whose proof value is wrong but keeps the declared type | Lean reports a type mismatch; nanoda stops with an assertion rejection |
 | Do the numerical tests catch bugs? | 9 synthetic models × 3 configurations, each baseline plus known mutations: 84 variants | 27 PASS · 54 KILLED · 3 SURVIVED per host |
@@ -41,7 +41,7 @@ python3 -m unittest discover -s animations -p 'test_*.py'
 (cd evidence/numerical/source && python3 -m unittest test_runner)   # reruns all 84 variants
 ```
 
-The same checks, plus the tests of the log sanitizer and the statement comparator, run in [GitHub Actions](.github/workflows/verify.yml) on every push.
+The same checks, plus the tests of the log sanitizer and the statement comparator, run in [GitHub Actions](.github/workflows/verify.yml) on every push. [REPRODUCE.md](REPRODUCE.md) lists the versions needed, the steps from a clean checkout, and which results are recomputed versus only verified by hash.
 
 The numerical verifier should print:
 
@@ -76,7 +76,7 @@ Comparator checks that the submitted solution proves exactly the theorem stated 
 
 ### Revalidation of (C) and (D), 2026-10-21
 
-A second pass was run to close the gaps under [Known limitations](#known-limitations). All 15 checks finished: none produced an unexpected result, and one could not run. Each animation plays one idea in real time, with a plain-language caption.
+A second pass was run to close the gaps under [Known limitations](#known-limitations). 15 of 18 checks have finished: none produced an unexpected result, and one could not run. The no-cache build B4 and its Comparator run are in progress. Each animation plays one idea in real time, with a plain-language caption.
 
 | Animation | What it shows |
 | --- | --- |
@@ -90,7 +90,7 @@ A refused mutant says nothing about whether the mutated statement is true. The `
 
 <a href="animations/provenance.html"><img src="docs/assets/provenance-preview.gif" width="380" alt="OpenAI's challenge statement matches DeepMind's public statement"></a>
 
-- **OpenAI did not write its own statement.** Compared declaration by declaration, OpenAI's challenge is identical to Google DeepMind's public Formal Conjectures statement at `8bf45ed`. All 18 named declarations are identical, including the theorems (C) and (D). The only differences are packaging: the import, the namespace, notation copied in with the same definition, and (A)/(B) left out. [Method, hashes and a script to reproduce it](evidence/formal/statement-provenance/README.md).
+- **OpenAI's challenge text matches the public statement.** The 18 declarations match after textual normalization; name resolution was not verified. Compared with Google DeepMind's Formal Conjectures file at `8bf45ed`, all 18 named declarations, including the theorems (C) and (D), are textually the same. The remaining differences are the import, the namespace, notation copied in with the same definition, and (A)/(B) left out. [Method, hashes and a script to reproduce it](evidence/formal/statement-provenance/README.md).
 - **Clause-by-clause risk review against Clay's text.** (C) and (D) say "there exist data for which no solution exists", so the formal version could only be easier if it allowed data Clay forbids or demanded more of solutions than Clay does. Of 16 clauses, 6 match directly, 9 match through standard analysis facts that are named but not yet formalized, and **1 needs a human decision**: Clay's erratum asks for periodic pressure "in Eqn (8)", the data list, while the formalization requires it of solutions in (D). That reading is the only one that constrains anything, but it makes the formal (D) a statement about the amended problem. [Full review](evidence/formal/clay-lean-risk.md). It is reading-based and not reviewed by a mathematician.
 
 ## Track 2: numerical mutation testing
@@ -127,7 +127,7 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 | Repetition | The same 84 variants on two hosts | Comparator on three builds so far, a fourth running |
 | Specification check | The contract itself | [Statement provenance](evidence/formal/statement-provenance/README.md) and the [Clay risk review](evidence/formal/clay-lean-risk.md) |
 
-**What the results support.** Numerically, every coarse mutant was killed and the deliberately tiny one survived where expected, with identical classifications on both hosts. Formally, the wrong proof value was rejected, all six statement mutants were refused while the control passed, the acceptance repeated across builds, and the statement proved is the public DeepMind statement.
+**What the results support.** Numerically, every coarse mutant was killed and the deliberately tiny one survived where expected, with identical classifications on both hosts. Formally, the wrong proof value was rejected, all six statement mutants were refused while the control passed, the acceptance repeated across builds, and the challenge's 18 declarations match DeepMind's public statement after textual normalization (name resolution not verified).
 
 **Prior techniques it builds on.** Mutation analysis (DeMillo, Lipton and Sayward, 1978); independent test oracles and cross-platform differential testing; the de Bruijn criterion of small, independent proof checkers (nanoda, leanchecker, lean4lean); [Comparator](https://github.com/leanprover/comparator) for statement-exact checking; and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) for the statement. The combination is what this study contributes: it applies mutation analysis to the verification pipeline itself, the checker and the specification, not only to the code under test, and publishes every step with hashes so the audit can be audited. No literature review was done to establish that the combination is new.
 
@@ -185,7 +185,8 @@ evidence/
 animations/            ten offline HTML scenes, build and GIF export scripts, tests
 .github/workflows/     CI that runs every check on each push
 docs/assets/           GIF previews used in this README
-CLAIMS.md              claim → scope → evidence
+CLAIMS.md              claim → evidence → result → limitation
+REPRODUCE.md           steps, versions, recomputed vs hash-verified
 AUTHORSHIP.md          authorship and AI disclosure
 CONTRIBUTING.md        rules for changing the evidence
 ```

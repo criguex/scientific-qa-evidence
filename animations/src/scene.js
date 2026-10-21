@@ -666,10 +666,10 @@ function drawReplay(ctx, data, t) {
 
 function drawProvenance(ctx, data, t) {
   const d = data.animations.provenance;
-  base(ctx, "Did OpenAI write its own statement?", "10 / Statement provenance", t, C.gold);
+  base(ctx, "Does OpenAI's challenge match the public text?", "10 / Statement provenance", t, C.gold);
   label(ctx, "OpenAI's challenge vs Google DeepMind's public Formal Conjectures file", 70, 214, 19, C.muted, 600);
   rounded(ctx, 66, 244, 948, 392, 20, "#0b2434", "#315264");
-  label(ctx, "IDENTICAL IN DEEPMIND 8bf45ed AND OPENAI f9e8bc5", 92, 278, 17, C.muted, 800);
+  label(ctx, "SAME TEXT AFTER NORMALIZATION · DEEPMIND 8bf45ed vs OPENAI f9e8bc5", 92, 278, 17, C.muted, 800);
   const per = 6.5 / d.names.length;
   d.names.forEach((name, i) => {
     const column = i < 9 ? 0 : 1;
@@ -685,7 +685,7 @@ function drawProvenance(ctx, data, t) {
   });
   const diffs = smooth((t - 8) / 0.6);
   ctx.globalAlpha = diffs;
-  label(ctx, `${d.identical} identical blocks · ${d.names.length} named declarations, including (C) and (D)`, 92, 616, 17, C.mint, 800);
+  label(ctx, `${d.names.length} named declarations match textually, incl. (C) and (D) · name resolution not verified`, 92, 616, 17, C.mint, 800);
   rounded(ctx, 66, 652, 948, 112, 20, "#102f43", "#315264");
   label(ctx, "ONLY DIFFERENCES", 92, 684, 16, C.gold, 800);
   label(ctx, "import Mathlib instead of DeepMind's helper library · namespace renamed", 92, 714, 17, C.white, 600);
@@ -706,7 +706,7 @@ function drawProvenance(ctx, data, t) {
   ctx.globalAlpha = 1;
   narration(ctx, t, [
     [0, "A prover could quietly weaken the statement it proves. So we compare OpenAI's challenge with DeepMind's public statement."],
-    [3.4, "Declaration by declaration, ignoring comments and spacing, every definition and both theorems (C) and (D) are identical."],
+    [3.4, "Declaration by declaration, ignoring comments and spacing, all 18 declarations, including (C) and (D), match as text. Name resolution was not verified."],
     [8, "The only changes are packaging: imports, a renamed namespace and notation copied in with the same meaning."],
     [11.5, "So the open question moves to DeepMind's statement versus Clay's text. A reading-based review finds one point that needs a human decision."],
   ]);

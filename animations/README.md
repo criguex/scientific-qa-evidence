@@ -99,7 +99,7 @@ These four scenes play in real time (20 seconds) with a caption box that explain
 
 ![OpenAI's challenge compared with DeepMind's statement](../docs/assets/provenance-preview.gif)
 
-- **Shows:** the 18 named declarations that are identical in DeepMind's `8bf45ed` and OpenAI's `f9e8bc5`, the packaging differences, and the counts from the Clay risk review.
+- **Shows:** the 18 named declarations that match after textual normalization in DeepMind's `8bf45ed` and OpenAI's `f9e8bc5` (name resolution not verified), the packaging differences, and the counts from the Clay risk review.
 - **Does not show:** an expert equivalence proof with Clay's text.
 - **Trace:** [scene](provenance.html) · [comparison](../evidence/formal/statement-provenance/README.md) · [risk review](../evidence/formal/clay-lean-risk.md).
 

@@ -22,7 +22,7 @@ En septiembre de 2026 OpenAI publicó formalizaciones en Lean 4 de las alternati
 | ¿Compila desde la fuente fijada? | Compilaciones del commit `f9e8bc5` de OpenAI, Lean 4.34.0-rc2 ([compilaciones y recibos](evidence/formal/cd-validation/README.md#builds-used-by-each-run)) | 2026-10-20 (B1): exit 0, 11.424 jobs, reutilizando cachés de dependencias. 2026-10-21 (B3): exit 0, 11.432 jobs; Mathlib y el proyecto se compilaron localmente (11.030 módulos), pero 7 dependencias pequeñas llegaron como archivos precompilados de Reservoir. Está en curso una compilación completa con `lake --no-cache build` (B4). |
 | ¿Lo aceptan verificadores independientes? | [Comparator](https://github.com/leanprover/comparator) con el kernel de Lean y [nanoda](https://github.com/ammkrn/nanoda_lib) sobre los desafíos configurados | Navier–Stokes y Euler: ambos kernels aceptan (`Your solution is okay!`, exit 0) en todas las corridas hasta ahora: tres corridas sobre tres compilaciones distintas (B1, B2, B3); una cuarta sobre B4 está en curso |
 | ¿El enunciado coincide con el texto de Clay? | Tabla cláusula por cláusula contra el PDF de Clay y el enunciado de [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind en `8bf45ed` | Correspondencia mapeada y una [revisión de riesgos cláusula por cláusula](evidence/formal/clay-lean-risk.md): 6 directas, 9 por hechos estándar, 1 que necesita una decisión humana (presión periódica en D). Es de lectura, no una prueba experta de equivalencia. |
-| ¿El desafío de OpenAI es el enunciado público? | Comparación declaración por declaración con el archivo de Formal Conjectures de DeepMind en `8bf45ed` ([procedencia](evidence/formal/statement-provenance/README.md)) | Idéntico: las 18 declaraciones con nombre, incluidas (C) y (D). Solo cambia el empaque. |
+| ¿El texto del desafío de OpenAI coincide con el enunciado público? | Comparación declaración por declaración con el archivo de Formal Conjectures de DeepMind en `8bf45ed` ([procedencia](evidence/formal/statement-provenance/README.md)) | Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. Incluye (C) y (D). No se verificó identidad semántica. |
 | ¿Comparator revisa el enunciado exacto? | Mutantes del enunciado en el archivo del desafío, sin tocar la prueba de OpenAI, más un control que solo agrega un comentario ([revalidación](evidence/formal/cd-validation/README.md)) | 6 de 6 mutantes rechazados por enunciado distinto; el control que solo agrega un comentario fue aceptado |
 | ¿Los verificadores rechazan una prueba errónea? | Un fixture cuyo valor de prueba es incorrecto pero conserva el tipo declarado | Lean reporta *type mismatch*; nanoda se detiene con un rechazo por aserción |
 | ¿Las pruebas numéricas detectan errores? | 9 modelos sintéticos × 3 configuraciones, cada línea base más mutaciones conocidas: 84 variantes | 27 PASS · 54 KILLED · 3 SURVIVED por máquina |
@@ -41,7 +41,7 @@ python3 -m unittest discover -s animations -p 'test_*.py'
 (cd evidence/numerical/source && python3 -m unittest test_runner)   # vuelve a correr las 84 variantes
 ```
 
-Las mismas comprobaciones, más los tests del depurador de logs y del comparador de enunciados, corren en [GitHub Actions](.github/workflows/verify.yml) en cada push.
+Las mismas comprobaciones, más los tests del depurador de logs y del comparador de enunciados, corren en [GitHub Actions](.github/workflows/verify.yml) en cada push. [REPRODUCE.md](REPRODUCE.md) (en inglés) lista las versiones necesarias, los pasos desde un checkout limpio y qué resultados se recalculan y cuáles solo se verifican por hash.
 
 El verificador numérico debe imprimir:
 
@@ -77,7 +77,7 @@ Comparator comprueba que la solución enviada demuestre exactamente el teorema e
 
 ### Revalidación de (C) y (D), 2026-10-21
 
-Se hizo una segunda pasada para cerrar las brechas de [Limitaciones conocidas](#limitaciones-conocidas). Terminaron las 15 pruebas: ninguna dio un resultado inesperado y una no pudo correr. Cada animación muestra una sola idea a velocidad real, con un subtítulo explicativo (en inglés).
+Se hizo una segunda pasada para cerrar las brechas de [Limitaciones conocidas](#limitaciones-conocidas). Terminaron 15 de 18 pruebas: ninguna dio un resultado inesperado y una no pudo correr. La compilación sin caché B4 y su corrida de Comparator están en curso. Cada animación muestra una sola idea a velocidad real, con un subtítulo explicativo (en inglés).
 
 | Animación | Qué muestra |
 | --- | --- |
@@ -91,7 +91,7 @@ Que un mutante sea rechazado no dice si el enunciado mutado es verdadero o falso
 
 <a href="animations/provenance.html"><img src="docs/assets/provenance-preview.gif" width="380" alt="El enunciado del desafío de OpenAI coincide con el enunciado público de DeepMind"></a>
 
-- **OpenAI no escribió su propio enunciado.** Comparado declaración por declaración, el desafío de OpenAI es idéntico al enunciado público de Formal Conjectures de Google DeepMind en `8bf45ed`. Las 18 declaraciones con nombre son idénticas, incluidos los teoremas (C) y (D). Las únicas diferencias son de empaque: el import, el namespace, notación copiada con la misma definición y (A)/(B) excluidos. [Método, hashes y un script para reproducirlo](evidence/formal/statement-provenance/README.md) (en inglés).
+- **El texto del desafío de OpenAI coincide con el enunciado público.** Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. Frente al archivo de Formal Conjectures de Google DeepMind en `8bf45ed`, las 18 declaraciones con nombre, incluidos los teoremas (C) y (D), son textualmente iguales. Las diferencias restantes son el import, el namespace, notación copiada con la misma definición y (A)/(B) excluidos. [Método, hashes y un script para reproducirlo](evidence/formal/statement-provenance/README.md) (en inglés).
 - **Revisión de riesgos cláusula por cláusula contra el texto de Clay.** (C) y (D) dicen "existen datos para los que no existe solución", así que la versión formal solo podría ser más fácil si permitiera datos que Clay prohíbe o si exigiera a las soluciones más que Clay. De 16 cláusulas, 6 coinciden directamente, 9 coinciden por hechos estándar de análisis que se nombran pero aún no se formalizan, y **1 necesita una decisión humana**: la errata de Clay pide presión periódica "en la Ec. (8)", que es la lista de datos, mientras que la formalización la exige a las soluciones en (D). Es la única lectura que restringe algo, pero hace que la (D) formal sea un enunciado sobre el problema corregido. [Revisión completa](evidence/formal/clay-lean-risk.md) (en inglés). Es una revisión de lectura, no revisada por un matemático.
 
 ## Pista 2: pruebas de mutación numéricas
@@ -128,7 +128,7 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 | Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre tres compilaciones hasta ahora; una cuarta en curso |
 | Revisión de la especificación | El propio contrato | [Procedencia del enunciado](evidence/formal/statement-provenance/README.md) y la [revisión de riesgos frente a Clay](evidence/formal/clay-lean-risk.md) |
 
-**Qué respaldan los resultados.** En lo numérico, todos los mutantes gruesos fueron eliminados y el diminuto sobrevivió donde se esperaba, con clasificaciones idénticas en las dos máquinas. En lo formal, el valor de prueba erróneo fue rechazado, los seis mutantes del enunciado fueron rechazados mientras el control pasaba, la aceptación se repitió entre compilaciones y el enunciado probado es el enunciado público de DeepMind.
+**Qué respaldan los resultados.** En lo numérico, todos los mutantes gruesos fueron eliminados y el diminuto sobrevivió donde se esperaba, con clasificaciones idénticas en las dos máquinas. En lo formal, el valor de prueba erróneo fue rechazado, los seis mutantes del enunciado fueron rechazados mientras el control pasaba, la aceptación se repitió entre compilaciones y las 18 declaraciones del desafío coinciden con el enunciado público de DeepMind tras normalización textual (la resolución de nombres no se verificó).
 
 **Técnicas previas en las que se apoya.** Análisis de mutación (DeMillo, Lipton y Sayward, 1978); oráculos de prueba independientes y pruebas diferenciales entre plataformas; el criterio de De Bruijn de verificadores de pruebas pequeños e independientes (nanoda, leanchecker, lean4lean); [Comparator](https://github.com/leanprover/comparator) para verificar el enunciado exacto; y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind para el enunciado. Lo que aporta este estudio es la combinación: aplica el análisis de mutación a la propia cadena de verificación, al verificador y a la especificación, no solo al código bajo prueba, y publica cada paso con hashes para que la auditoría también se pueda auditar. No se hizo una revisión bibliográfica para establecer que la combinación sea nueva.
 
@@ -186,7 +186,8 @@ evidence/
 animations/            diez escenas HTML offline, scripts de build y de exportación de GIF, tests
 .github/workflows/     CI que corre todas las comprobaciones en cada push
 docs/assets/           GIFs de vista previa usados en este README
-CLAIMS.md              afirmación → alcance → evidencia
+CLAIMS.md              afirmación → evidencia → resultado → limitación
+REPRODUCE.md           pasos, versiones, qué se recalcula y qué se verifica por hash
 AUTHORSHIP.md          autoría y declaración de uso de IA
 CONTRIBUTING.md        reglas para modificar la evidencia
 ```

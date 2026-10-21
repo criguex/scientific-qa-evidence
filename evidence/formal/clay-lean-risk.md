@@ -1,6 +1,6 @@
 # Clay ↔ Lean: could the formal (C) and (D) be easier than Clay's?
 
-A reading-based risk review of the formal statement that OpenAI proved, which is identical to Google DeepMind's public statement ([provenance](statement-provenance/README.md)). It compares each clause of the official Clay text (Fefferman, [PDF](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf), SHA-256 `c1b5f27b…a06d0c`) with the Lean declarations at OpenAI commit `f9e8bc5`.
+A reading-based risk review of the formal statement that OpenAI proved, whose 18 declarations match Google DeepMind's public statement after textual normalization, with name resolution not verified ([provenance](statement-provenance/README.md)). It compares each clause of the official Clay text (Fefferman, [PDF](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf), SHA-256 `c1b5f27b…a06d0c`) with the Lean declarations at OpenAI commit `f9e8bc5`.
 
 > **Status:** written by a QA engineer with AI assistance on 2026-10-21. It has **not** been reviewed by a mathematician, and the "standard fact" rows are not formalized here. It refines the [fidelity table](clay-lean-fidelity.md); it does not replace an expert review.
 
