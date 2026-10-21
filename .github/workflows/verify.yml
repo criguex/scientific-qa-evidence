@@ -40,3 +40,6 @@ jobs:
       - name: Blind-fault protocol library
         working-directory: experiments/blind-faults
         run: python3 -m unittest -v test_protocol
+      - name: Blind-fault evaluator v2 (absent and incomplete evidence)
+        working-directory: experiments/blind-faults/v2
+        run: python3 -m unittest -v test_protocol_v2

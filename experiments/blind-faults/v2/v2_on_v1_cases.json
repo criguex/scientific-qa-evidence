@@ -1,0 +1,272 @@
+{
+  "case-01": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F1",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P1:prebuilt-batteries",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-02": {
+    "baseline_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F6",
+    "protocol_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-03": {
+    "baseline_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F6",
+    "protocol_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-04": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-05": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F2",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P2:statement-differs-from-reference",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-06": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F4",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P5:oracle-failure-hidden",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-07": {
+    "baseline_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F6",
+    "protocol_flags": [
+      "B:axioms",
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-08": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-09": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F4",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P5:oracle-failure-hidden",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-10": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-11": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-12": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F1",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P1:prebuilt-batteries",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-13": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-14": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F2",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P2:statement-differs-from-reference",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-15": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "C",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-16": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F5",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log",
+      "P6:receipt-log-missing-other-build.log"
+    ]
+  },
+  "case-17": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F5",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log",
+      "P6:receipt-log-missing-other-build.log"
+    ]
+  },
+  "case-18": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F4",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P5:oracle-failure-hidden",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-19": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F2",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P2:statement-differs-from-reference",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  },
+  "case-20": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F5",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P6:receipt-log-missing-comparator.log",
+      "P6:receipt-log-missing-other-build.log"
+    ]
+  },
+  "case-21": {
+    "baseline_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log"
+    ],
+    "class": "F1",
+    "protocol_flags": [
+      "B:comparator-not-ok",
+      "B:missing:comparator.log",
+      "P1:prebuilt-batteries",
+      "P6:receipt-log-missing-comparator.log"
+    ]
+  }
+}

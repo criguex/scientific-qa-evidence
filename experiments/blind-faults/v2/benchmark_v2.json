@@ -1,0 +1,96 @@
+{
+  "evaluator": "v2",
+  "kind": "deterministic regression benchmark",
+  "classes": {
+    "C": {
+      "fault": "none (clean)",
+      "baseline": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 3.5874999999999995e-06
+      },
+      "protocol": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 8.520396000000001e-06
+      }
+    },
+    "F1": {
+      "fault": "a dependency arrived prebuilt (pre-dated .olean files); the build log is clean",
+      "baseline": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 3.5154795000000015e-06
+      },
+      "protocol": {
+        "flagged": true,
+        "flags": [
+          "P1:prebuilt-batteries"
+        ],
+        "seconds_per_case": 8.814312499999997e-06
+      }
+    },
+    "F2": {
+      "fault": "the solution statement differs textually from the pinned reference",
+      "baseline": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 3.4789789999999967e-06
+      },
+      "protocol": {
+        "flagged": true,
+        "flags": [
+          "P2:statement-differs-from-reference"
+        ],
+        "seconds_per_case": 8.426812499999998e-06
+      }
+    },
+    "F4": {
+      "fault": "the oracle failed but the harness reports a complete run",
+      "baseline": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 3.761645500000001e-06
+      },
+      "protocol": {
+        "flagged": true,
+        "flags": [
+          "P5:oracle-failure-hidden"
+        ],
+        "seconds_per_case": 8.820270500000005e-06
+      }
+    },
+    "F5": {
+      "fault": "a receipt names a log the build did not write",
+      "baseline": {
+        "flagged": false,
+        "flags": [],
+        "seconds_per_case": 3.4614999999999994e-06
+      },
+      "protocol": {
+        "flagged": true,
+        "flags": [
+          "P6:receipt-log-missing-other-build.log"
+        ],
+        "seconds_per_case": 8.398603999999997e-06
+      }
+    },
+    "F6": {
+      "fault": "positive control: the solution depends on sorry",
+      "baseline": {
+        "flagged": true,
+        "flags": [
+          "B:axioms"
+        ],
+        "seconds_per_case": 3.6318750000000066e-06
+      },
+      "protocol": {
+        "flagged": true,
+        "flags": [
+          "B:axioms"
+        ],
+        "seconds_per_case": 8.591770499999999e-06
+      }
+    }
+  }
+}

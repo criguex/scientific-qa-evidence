@@ -11,7 +11,8 @@
 | Design and scripts frozen (hash in `FROZEN.md`) | Done 2026-10-21 | [FROZEN.md](FROZEN.md) |
 | Author runs the assignment with the seed | Done 2026-10-21; seed hash matched the commitment | commit `ae55a24` (21 case folders, key withheld) |
 | Blind checks on 21 cases, results committed before the key | Done: baseline flagged 3 of 21, protocol 15 of 21; scripts matched FROZEN.md hashes | [results.json](results.json) |
-| Key revealed, results scored and published | Done: valid; protocol detected F1, F2, F4, F5 (3/3 each), baseline none; F6 caught by both; 0/6 false alarms | [RESULTS.md](RESULTS.md) |
+| Key revealed, results scored and published | Done (v1); later corrected by errata | [RESULTS.md](RESULTS.md) |
+| External review: reframe as regression benchmark, fix F2 label, cost, evaluator defects | Done: v1 kept with errata; evaluator v2 with absent/incomplete-evidence tests and benchmark | [v2/README.md](v2/README.md) |
 
 The blind phase is complete; see [RESULTS.md](RESULTS.md).
 
