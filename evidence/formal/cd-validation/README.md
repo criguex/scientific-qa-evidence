@@ -1,6 +1,6 @@
 # Revalidation of alternatives (C) and (D), 2026-10-21
 
-State: **in progress** · 15 of 18 checks recorded · 0 unexpected · 1 not run (toolchain mismatch).
+State: **in progress** · 17 of 18 checks recorded · 0 unexpected · 1 not run (toolchain mismatch).
 
 This record repeats and extends the [2026-10-20 Comparator record](../comparator/README.md) for OpenAI's [NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) at commit `f9e8bc5` (leanprover/lean4:v4.34.0-rc2) on one host: Linux x86_64 · WSL2 · 12 vCPU · 30 GiB. Machine-readable results are in [`results.json`](results.json); every public file is traced to its original and that original's SHA-256 in [`PROVENANCE.md`](PROVENANCE.md).
 
@@ -12,7 +12,7 @@ This record repeats and extends the [2026-10-20 Comparator record](../comparator
 | Comparator run 2 · Euler | B2 | accept | **ACCEPTED** | 11.2 min | `Your solution is okay!` | [log](logs/comparator2_Euler.sanitized.log) |
 | Comparator run 3 · Navier–Stokes on B3 | B3 | accept | **ACCEPTED** | 6.6 min | `Your solution is okay!` | [log](logs/comparator3_clean_NavierStokes.sanitized.log) |
 | Comparator run 3 · Euler on B3 | B3 | accept | **ACCEPTED** | 11.2 min | `Your solution is okay!` | [log](logs/comparator3_clean_Euler.sanitized.log) |
-| Comparator run 4 · Navier–Stokes on B4 | B4 | accept | **PENDING** | — | — | — |
+| Comparator run 4 · Navier–Stokes on B4 | B4 | accept | **ACCEPTED** | 6.7 min | `Your solution is okay!` | [log](logs/comparator4_nocache_NavierStokes.sanitized.log) |
 | Comparator run 4 · Euler on B4 | B4 | accept | **PENDING** | — | — | — |
 | Control · comment-only edit to the challenge | B2 | accept | **CONTROL_ACCEPTED** | 7.0 min | `Your solution is okay!` | [log](logs/mutant_control_comment.sanitized.log) · [diff](mutants/control_comment.diff) |
 | (C) add f = 0 · forceless statement | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'` | [log](logs/mutant_force_zero_R3.sanitized.log) · [diff](mutants/force_zero_R3.diff) |
@@ -22,7 +22,7 @@ This record repeats and extends the [2026-10-20 Comparator record](../comparator
 | (D) drop ¬ · existence instead of breakdown | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_existence_not_breakdown_periodic.sanitized.log) · [diff](mutants/existence_not_breakdown_periodic.diff) |
 | Euler · tighten T* ≤ 1 to T* ≤ 1/2 | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'` | [log](logs/mutant_euler_tstar_half.sanitized.log) · [diff](mutants/euler_tstar_half.diff) |
 | B3 · fresh build, Mathlib compiled locally | B3 | ok | **OK** | 1 h 27 min | — | [log](logs/clean_build.excerpt.log) |
-| B4 · no-cache build, everything compiled locally | B4 | ok | **PENDING** | — | — | — |
+| B4 · no-cache build, everything compiled locally | B4 | ok | **OK** | — | — | [log](logs/nocache_build.excerpt.log) |
 | leanchecker --fresh · Navier–Stokes solution | B2 | ok | **OK** | 19.6 min | — | [log](logs/leanchecker_fresh_NavierStokes.ComparatorSolution.log) · [receipt](receipts/leanchecker_fresh_NavierStokes.ComparatorSolution.txt) |
 | leanchecker --fresh · Euler solution | B2 | ok | **OK** | 22.5 min | — | [log](logs/leanchecker_fresh_Euler.Solution.log) · [receipt](receipts/leanchecker_fresh_Euler.Solution.txt) |
 | lean4lean --fresh · Navier–Stokes solution (best effort) | B2 | ok | **FAILED_TOOLCHAIN_MISMATCH** | — | — | [log](logs/lean4lean_build.error-excerpt.log) · [receipt](receipts/lean4lean.txt) |
@@ -87,7 +87,22 @@ So B3 compiled **11,030 modules locally** (Mathlib and the project) and received
 
 ## B4 · no-cache build, 2026-10-21
 
-Running. Its command, times, exit code, log excerpt and artifact checks will be added here when it finishes.
+- **Command:** `XDG_CACHE_HOME=<RUN>/nocache/xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build` in a fresh extraction of the same archive.
+- **Started / finished (UTC):** 2026-10-21T17:45:04Z → 2026-10-21T19:14:27Z · exit code **0** · 11424 jobs.
+- **Downloads:** 0 `build.barrel` files in `.lake/packages`; 0 files in the empty cache directory afterwards.
+- **Log:** [excerpt](logs/nocache_build.excerpt.log), original SHA-256 `7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668`. Versions: [receipt](receipts/nocache_build_versions.txt).
+
+| Package | .olean files | older than the build start |
+| --- | ---: | ---: |
+| LeanSearchClient | 4 | 0 |
+| Qq | 14 | 0 |
+| aesop | 132 | 0 |
+| batteries | 190 | 0 |
+| importGraph | 10 | 0 |
+| mathlib | 8371 | 0 |
+| plausible | 13 | 0 |
+| proofwidgets | 13 | 0 |
+| _project | 2659 | 0 |
 
 ## Receipts
 

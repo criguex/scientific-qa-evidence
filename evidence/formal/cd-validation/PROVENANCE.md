@@ -12,6 +12,8 @@ Each public file in this folder, the original record it comes from on the test h
 | `logs/comparator3_clean_NavierStokes.sanitized.log` | `<RUN>/comparator3_clean_NavierStokes/stderr.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | stdout and stderr combined, sanitized |
 | `logs/comparator3_clean_Euler.sanitized.log` | `<RUN>/comparator3_clean_Euler/stdout.log` | `5f410965535ca08ed4cfca05bd9fb259ece2ef95858319a83134f92bc83b96ba` | stdout and stderr combined, sanitized |
 | `logs/comparator3_clean_Euler.sanitized.log` | `<RUN>/comparator3_clean_Euler/stderr.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | stdout and stderr combined, sanitized |
+| `logs/comparator4_nocache_NavierStokes.sanitized.log` | `<RUN>/nocache/comparator4_NavierStokes/stdout.log` | `86f19cfa0e008549d11147e7fe3ceefc5bfd317ffa4b0824eeb6e3327ec973bf` | stdout and stderr combined, sanitized |
+| `logs/comparator4_nocache_NavierStokes.sanitized.log` | `<RUN>/nocache/comparator4_NavierStokes/stderr.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | stdout and stderr combined, sanitized |
 | `logs/mutant_control_comment.sanitized.log` | `<RUN>/mutants/control_comment/stdout.log` | `d3a2b1fce86b2b51df16fd962dc065feb5f3ad098afd725aa0a19b1a68034285` | stdout and stderr combined, sanitized |
 | `logs/mutant_control_comment.sanitized.log` | `<RUN>/mutants/control_comment/stderr.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | stdout and stderr combined, sanitized |
 | `mutants/control_comment.diff` | `<RUN>/mutants/control_comment.diff` | `20923ef340fe7cac200a3f8292dc81e9d066b96929eca7ab7e4bf58f3dc716aa` | sanitized |
@@ -34,6 +36,7 @@ Each public file in this folder, the original record it comes from on the test h
 | `logs/mutant_euler_tstar_half.sanitized.log` | `<RUN>/mutants/euler_tstar_half/stderr.log` | `ee160da5cdd168f08be12a06cf679e42bf33db58d503bf3be8a3c868f00d6690` | stdout and stderr combined, sanitized |
 | `mutants/euler_tstar_half.diff` | `<RUN>/mutants/euler_tstar_half.diff` | `e48ebbcb1f68014ca841e65bb0c609624398a522828629eca379101ac5793f21` | sanitized |
 | `logs/clean_build.excerpt.log` | `<RUN>/clean/build.log` | `627f1474a9cf3ac698693aa295445574343239364b563a89975e4efbe8522011` | first 40 and last 15 lines, sanitized |
+| `logs/nocache_build.excerpt.log` | `<RUN>/nocache/build.log` | `7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668` | first 40 and last 15 lines, sanitized |
 | `logs/leanchecker_fresh_NavierStokes.ComparatorSolution.log` | `<RUN>/leanchecker/NavierStokes.ComparatorSolution.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | copied byte for byte (empty: leanchecker prints nothing on success) |
 | `receipts/leanchecker_fresh_NavierStokes.ComparatorSolution.txt` | `<RUN>/leanchecker/NavierStokes.ComparatorSolution.time.log` | `df04cc36337ac6e8476d679bd69b599887a04abed2f76d0345da936a71c57fe2` | GNU time lines kept: command, elapsed, max RSS, exit status |
 | `logs/leanchecker_fresh_Euler.Solution.log` | `<RUN>/leanchecker/Euler.Solution.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | copied byte for byte (empty: leanchecker prints nothing on success) |

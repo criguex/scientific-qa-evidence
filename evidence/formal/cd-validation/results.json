@@ -115,9 +115,19 @@
       "title": "Comparator run 4 · Navier–Stokes on B4",
       "expected": "accept",
       "build": "nocache",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T19:21:07Z",
+      "started_utc": "2026-10-21T19:14:27Z",
+      "command": "lake env <comparator> ComparatorChallenges/NavierStokes.json (cwd: no-cache build)",
+      "elapsed_s": 399.78,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator4_nocache_NavierStokes.sanitized.log",
+      "original_sha256": {
+        "stdout.log": "86f19cfa0e008549d11147e7fe3ceefc5bfd317ffa4b0824eeb6e3327ec973bf",
+        "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "time.log": "0b05d0411e886f119591f9e18ac201179bf5eb19d7d64fb25799f234c78cacfe"
+      }
     },
     {
       "id": "comparator4_nocache_Euler",
@@ -396,9 +406,84 @@
       "title": "B4 · no-cache build, everything compiled locally",
       "expected": "ok",
       "build": "nocache",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "OK",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T19:14:27Z",
+      "started_utc": "2026-10-21T17:45:04Z",
+      "command": "XDG_CACHE_HOME=<RUN>/nocache/xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build",
+      "log": "logs/nocache_build.excerpt.log",
+      "original_sha256": {
+        "build.log": "7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668"
+      },
+      "elapsed_s": null,
+      "facts": {
+        "jobs": 11424,
+        "printed_built_lines": 11406,
+        "barrels_found": 0,
+        "xdg_cache_files_after": 0,
+        "oleans": [
+          {
+            "package": "Cli",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "Comparator",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "LeanSearchClient",
+            "total": "4",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "Qq",
+            "total": "14",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "aesop",
+            "total": "132",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "batteries",
+            "total": "190",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "importGraph",
+            "total": "10",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "lean4export",
+            "total": "0",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "mathlib",
+            "total": "8371",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "plausible",
+            "total": "13",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "proofwidgets",
+            "total": "13",
+            "older_than_build_start": "0"
+          },
+          {
+            "package": "_project",
+            "total": "2659",
+            "older_than_build_start": "0"
+          }
+        ]
+      }
     },
     {
       "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",

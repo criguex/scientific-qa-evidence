@@ -1,0 +1,58 @@
+info: Comparator: cloning https://github.com/leanprover/comparator.git
+info: Comparator: checking out revision '19e111e2141cf333c7daff0f64c5f24acc91dd2e'
+info: mathlib: cloning https://github.com/leanprover-community/mathlib4.git
+info: mathlib: checking out revision '85e3a25e006c35636f0e53b0e9296caca2685bc0'
+info: lean4export: cloning https://github.com/leanprover/lean4export
+info: lean4export: checking out revision 'cacf989bd75f608700820f6afc595f32e7a99a4d'
+info: plausible: cloning https://github.com/leanprover-community/plausible
+info: plausible: checking out revision 'd9598f07b1bc701f1e3aae163d2681c1fd978793'
+info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+info: LeanSearchClient: checking out revision 'ba67e212be1197b84c1f1f6299488a10a3002713'
+info: importGraph: cloning https://github.com/leanprover-community/import-graph
+info: importGraph: checking out revision 'd8823026ac7ef130c253089d95685f9877b95323'
+info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+info: proofwidgets: checking out revision 'a8acbfd87375ff4abe14ce09db5b7664d383bc7f'
+info: aesop: cloning https://github.com/leanprover-community/aesop
+info: aesop: checking out revision '18889deb9e83ea7420ef51c160d6f88552e744e3'
+info: Qq: cloning https://github.com/leanprover-community/quote4
+info: Qq: checking out revision '507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3'
+info: batteries: cloning https://github.com/leanprover-community/batteries
+info: batteries: checking out revision 'd54dddc581e08be364c278052863524bff7a99a9'
+info: Cli: cloning https://github.com/leanprover/lean4-cli
+info: Cli: checking out revision 'ab3a82db9fea14cf0fd7f5a2de650f4b534640af'
+✔ [4/74] Built Batteries.Lean.Syntax (376ms)
+✔ [5/104] Built Batteries.Lean.Position (465ms)
+✔ [6/104] Built Batteries.Lean.Meta.Inaccessible (472ms)
+✔ [7/104] Built ImportGraph.Imports.ImportGraph (461ms)
+✔ [8/104] Built ImportGraph.Lean.Environment (410ms)
+✔ [9/104] Built ImportGraph.Graph.TransitiveClosure (388ms)
+✔ [10/122] Built Batteries.Tactic.Unreachable (577ms)
+✔ [11/122] Built Batteries.Util.LibraryNote (656ms)
+✔ [12/123] Built Batteries.CodeAction.Deprecated (949ms)
+✔ [13/123] Built Batteries.Tactic.Lint.Basic (983ms)
+✔ [14/123] Built ImportGraph.Imports.Redundant (458ms)
+✔ [15/123] Built Batteries.Lean.NameMapAttribute (563ms)
+✔ [17/124] Built ImportGraph.Tools.ImportDiff (716ms)
+✔ [18/124] Built Batteries.Util.ExtendedBinder (744ms)
+✔ [19/127] Built Mathlib.Tactic.Linter.DirectoryDependency (1.3s)
+✔ [20/127] Built ImportGraph.Imports.RequiredModules (811ms)
+✔ [21/127] Built Batteries.Tactic.OpenPrivate (1.2s)
+✔ [22/127] Built ImportGraph.Tools.RedundantImports (650ms)
+
+[... middle of the log omitted ...]
+
+✔ [11412/11424] Built Euler.EulerFiniteLifespan (8.6s)
+✔ [11413/11424] Built Euler.StageVorticityConfinement (1.8s)
+✔ [11414/11424] Built Euler.CanonicalVorticityConfinement (1.0s)
+✔ [11415/11424] Built Euler.EulerC1Breakdown (2.3s)
+✔ [11416/11424] Built Euler.EulerC1Limsup (1.8s)
+✔ [11417/11424] Built Euler.EulerSingularity (1.0s)
+✔ [11418/11424] Built Euler (1.7s)
+✔ [11419/11424] Built Euler.ComparatorSingularityNorms (3.6s)
+✔ [11420/11424] Built Euler.ComparatorSobolevEvolution (4.1s)
+✔ [11421/11424] Built Euler.ComparatorMaximalFields (3.2s)
+✔ [11422/11424] Built Euler.ComparatorMaximalSolution (3.3s)
+ℹ [11423/11424] Built Euler.Solution (3.1s)
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (11424 jobs).
