@@ -54,4 +54,7 @@ So the formal (D) proves the problem as amended by the erratum. (C) is on ℝ³ 
 
 ## Bridges that remain
 
+The work plan for these bridges, as a claim → lemma → proof → review → pending table, is [clay-lean-bridges.md](clay-lean-bridges.md).
+
+
 The standard facts (a)–(e) are the [open bridges](clay-lean-fidelity.md#open-bridges-to-equivalence) of the fidelity table, now located clause by clause. They are textbook analysis, and all are statable in Mathlib, so the natural next step is to prove them as Lean lemmas instead of citing them. The erratum point needs a human decision, not a proof.
