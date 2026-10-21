@@ -6,7 +6,7 @@
 > 2. **F2 is mislabeled.** Its edit changes the hypothesis `nu > 0` to `nu >= 0`, which relaxes a hypothesis and therefore makes the theorem stronger, not weaker. F2 demonstrates only that P2 detects a textual difference from the reference, not detection of a weakened statement.
 > 3. **The planned cost metric was not measured.** DESIGN.md listed wall-clock cost per case; v1 recorded none. v2 measures evaluator time and states what it does not cover.
 > 4. **The v1 evaluator had defects** found afterwards: incomplete evidence failed open, absent evidence crashed, and P6 assumed a `comparator.log` that no case contained. Under the corrected evaluator the six v1 "clean" cases are flagged, so **the v1 claim of 0 false alarms does not hold**; it depended on evidence the evaluator assumed. See [v2/README.md](v2/README.md).
-> 5. **The seed is not yet revealed**, so the assignment in `key.json` cannot yet be reproduced independently.
+> 5. **The seed was revealed afterwards** ([semilla-experimento.txt](semilla-experimento.txt)). Its SHA-256 matches the commitment, and rerunning `assign.py` with it reproduces `key.json` and all 21 case folders byte for byte (see Reproduce below).
 
 
 **Status:** complete. Valid under its own frozen decision rule (the positive control F6 was detected by both procedures), but see errata 4: the v1 evaluator's clean-case result does not hold.
@@ -52,6 +52,15 @@ In the terms of [FINDINGS.md](../../FINDINGS.md): the protocol makes visible hid
 - **Small and deterministic.** Three instances per class; the seed only fixed which case number got which fault.
 - **F3 was withdrawn** before freezing ([F3_WITHDRAWN.md](F3_WITHDRAWN.md)).
 
-## Pending
+## Reproduce the assignment
 
-The author reveals the seed file itself, so anyone can rerun `assign.py` and reproduce `key.json` exactly ([SEED_COMMITMENT.md](SEED_COMMITMENT.md), rule 3).
+The seed is published as [semilla-experimento.txt](semilla-experimento.txt). From this folder:
+
+```sh
+shasum -a 256 semilla-experimento.txt        # must print 6ab9f825...614d5e, as in SEED_COMMITMENT.md
+mkdir /tmp/repro && cp protocol_lib.py assign.py /tmp/repro/
+(cd /tmp/repro && python3 assign.py --seed-file "$OLDPWD/semilla-experimento.txt" --out cases)
+diff /tmp/repro/key.json key.json && diff -r /tmp/repro/cases cases && echo identical
+```
+
+Checked on 2026-10-21: the hash matched, and the regenerated `key.json` and case folders were identical to the published ones.
