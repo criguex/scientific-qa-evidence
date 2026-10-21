@@ -103,6 +103,14 @@ These four scenes play in real time (20 seconds) with a caption box that explain
 - **Does not show:** an expert equivalence proof with Clay's text.
 - **Trace:** [scene](provenance.html) · [comparison](../evidence/formal/statement-provenance/README.md) · [risk review](../evidence/formal/clay-lean-risk.md).
 
+### 11. Blind-fault benchmark
+
+![Planted faults flagged by baseline and protocol, and four review rounds](../docs/assets/experiment-preview.gif)
+
+- **Shows:** the chain that makes the run auditable (committed seed → frozen design → drawn cases → blind results → key → seed reproduced), which procedure flags each planted fault class under the corrected v2.2 evaluator, and what each of the four review rounds found.
+- **Does not show:** a real-world detection rate; the faults are planted in recorded artifacts, not live Lean.
+- **Trace:** [scene](experiment.html) · [results with errata](../experiments/blind-faults/RESULTS.md) · [v2 benchmark](../experiments/blind-faults/v2/README.md) · [review rounds data](../experiments/blind-faults/review_rounds.json).
+
 ## Separate 3D flow context
 
 ![Taylor–Green flow context clip, separate from the campaign and model animations](../docs/assets/flow-preview.gif)

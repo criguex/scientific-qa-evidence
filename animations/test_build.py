@@ -88,6 +88,14 @@ class AnimationPackageTests(unittest.TestCase):
         risk = provenance["risk"]
         self.assertEqual(risk["direct"] + risk["standard"] + risk["attention"], risk["rows"])
 
+    def test_experiment_scene_is_data_derived(self):
+        experiment = build.load_package()["animations"]["experiment"]
+        self.assertEqual([row["id"] for row in experiment["classes"]], ["C", "F1", "F2", "F4", "F5", "F6"])
+        clean = experiment["classes"][0]
+        self.assertFalse(clean["baseline"] or clean["protocol"])
+        self.assertTrue(all(row["protocol"] for row in experiment["classes"][1:]))
+        self.assertEqual(sum(r["found"] for r in experiment["rounds"]), 17)
+
 
 if __name__ == "__main__":
     unittest.main()

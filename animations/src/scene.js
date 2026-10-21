@@ -713,6 +713,62 @@ function drawProvenance(ctx, data, t) {
   ]);
 }
 
+function drawExperiment(ctx, data, t) {
+  const d = data.animations.experiment;
+  base(ctx, "Plant faults blind. See who catches them.", "11 / Blind-fault benchmark", t, C.gold);
+  label(ctx, "OpenAI's documented procedure (baseline) vs this study's protocol, on controlled cases", 70, 214, 18, C.muted, 600);
+  const chain = [["seed", `hash ${d.seed_prefix}…`], ["design", "frozen"], ["21 cases", "drawn"], ["results", "blind"], ["key", "revealed"], ["seed", "reproduced"]];
+  chain.forEach(([top, bottom], i) => {
+    const x = 66 + i * 160;
+    const a = smooth((t - 0.6 - i * 0.7) / 0.5);
+    ctx.globalAlpha = a;
+    rounded(ctx, x, 238, 138, 70, 14, "#0b2434", i === 5 ? C.mint : "#315264");
+    label(ctx, top, x + 69, 262, 17, C.white, 800, "center");
+    label(ctx, bottom, x + 69, 288, 15, i === 5 ? C.mint : C.muted, 700, "center");
+    if (i < 5) arrow(ctx, x + 140, 273, x + 158, 273, C.muted, a);
+    ctx.globalAlpha = 1;
+  });
+  const tableAlpha = smooth((t - 5) / 0.6);
+  ctx.globalAlpha = tableAlpha;
+  rounded(ctx, 66, 328, 948, 372, 20, "#0b2434", "#315264");
+  label(ctx, "PLANTED FAULT", 92, 360, 15, C.gold, 800);
+  label(ctx, "Baseline", 700, 360, 15, C.muted, 800, "center");
+  label(ctx, "Protocol", 900, 360, 15, C.muted, 800, "center");
+  ctx.globalAlpha = 1;
+  d.classes.forEach((row, i) => {
+    const y = 404 + i * 48;
+    ctx.globalAlpha = smooth((t - 5.6 - i * 0.55) / 0.5);
+    rounded(ctx, 84, y - 20, 912, 40, 10, i % 2 ? "#0d2638" : "#102f43");
+    label(ctx, row.label, 106, y, 17, C.white, 700);
+    const draw = (flagged, x, isClean) => {
+      const good = isClean ? !flagged : flagged;
+      chip(ctx, x - 75, y - 14, 150, 28, flagged ? (good ? C.coral : C.gold) : (good ? C.mint : "#173b4c"), flagged || good ? C.navy : C.muted, flagged ? "FLAGS" : "passes", 13);
+    };
+    draw(row.baseline, 700, row.id === "C");
+    draw(row.protocol, 900, row.id === "C");
+    ctx.globalAlpha = 1;
+  });
+  ctx.globalAlpha = smooth((t - 10.5) / 0.6);
+  label(ctx, "REVIEW ROUNDS", 70, 726, 15, C.gold, 800);
+  ctx.globalAlpha = 1;
+  d.rounds.forEach((r, i) => {
+    const x = 66 + i * 240;
+    ctx.globalAlpha = smooth((t - 11 - i * 0.8) / 0.5);
+    rounded(ctx, x, 744, 222, 142, 16, "#102f43", "#315264");
+    label(ctx, `Round ${r.round}`, x + 18, 772, 18, C.white, 800);
+    label(ctx, r.by, x + 18, 798, 14, C.muted, 600);
+    label(ctx, r.found === 0 ? "0 crashes" : `${r.found} issues found`, x + 18, 834, 20, r.found === 0 ? C.mint : C.coral, 800);
+    label(ctx, r.fixed_in ? `fixed in ${r.fixed_in}` : "fuzzer kept in CI", x + 18, 864, 15, C.muted, 700);
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "A seed was committed by hash first, so the draw of faults could not be changed after seeing results."],
+    [4.8, "Each case hides one planted fault. The baseline only reads what OpenAI's procedure reads; the protocol also checks artifacts, provenance, harness and receipts."],
+    [10.4, "Both catch the sorry control. Only the protocol flags the other four classes, and the clean case passes both."],
+    [14.6, "Four review rounds found 17 issues in the experiment itself, all fixed. These are planted faults, not a real-world detection rate."],
+  ]);
+}
+
 export function drawAnimation(ctx, data, id, seconds) {
   const t = clamp(seconds, 0, 20);
   ctx.clearRect(0, 0, W, H);
@@ -726,5 +782,6 @@ export function drawAnimation(ctx, data, id, seconds) {
   else if (id === "mutants") drawMutants(ctx, data, t);
   else if (id === "replay") drawReplay(ctx, data, t);
   else if (id === "provenance") drawProvenance(ctx, data, t);
+  else if (id === "experiment") drawExperiment(ctx, data, t);
   else throw new Error(`Unknown animation: ${id}`);
 }

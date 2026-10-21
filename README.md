@@ -29,6 +29,14 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 | Do the numerical tests catch bugs? | 9 synthetic models × 3 configurations, each baseline plus known mutations: 84 variants | 27 PASS · 54 KILLED · 3 SURVIVED per host |
 | Is it reproducible across machines? | The same 84 variants on macOS arm64 and Linux x86_64 | Identical classifications; maximum scaled difference 1.11 × 10⁻¹⁶ |
 
+## Conclusions
+
+1. **OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.** Comparator, with nanoda and the Lean kernel, accepted both challenges on four different builds, the last compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel used includes every known 2026 soundness fix.
+2. **Comparator checks the exact statement.** It refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match DeepMind's public statement after textual normalization (name resolution not verified).
+3. **What this does not settle.** Whether the formal statement says exactly what Clay's text says is a reading-based review with one point, periodic pressure in (D), that needs a mathematician. Whether the Lean proof follows OpenAI's paper is out of scope and disputed by [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
+4. **What the protocol adds.** In this case it surfaced evidence the documented procedure does not produce ([FINDINGS.md](FINDINGS.md)), and in a pre-registered benchmark its checks flagged four planted fault classes the baseline passes ([results](experiments/blind-faults/RESULTS.md)). Four review rounds found 17 issues in that experiment itself, all corrected and kept in the record.
+5. **What is not claimed.** Methodological novelty ([RELATED_WORK.md](RELATED_WORK.md)), a real-world detection rate, or any part of the mathematical proof, which belongs to OpenAI.
+
 ## Verify it yourself
 
 Python 3 only, no dependencies, about a minute:
@@ -145,6 +153,7 @@ Open the [offline gallery](animations/index.html), or read the [animation guide]
 | <a href="animations/cooling.html">Cooling · halved rate constant</a> · <a href="docs/media/cooling.mp4">▶ MP4 1080p</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Cooling baseline and rate mutation comparison"> | <a href="animations/mutants.html">C/D · statement mutants</a> · <a href="docs/media/mutants.mp4">▶ MP4 1080p</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Statement mutants refused and control accepted"> |
 | <a href="animations/snell.html">Snell · swapped refractive indices</a> · <a href="docs/media/snell.mp4">▶ MP4 1080p</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Refraction rays and incidence-angle sweep"> | <a href="animations/replay.html">C/D · fresh kernel replay</a> · <a href="docs/media/replay.mp4">▶ MP4 1080p</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Fresh kernel replay and kernel implementations"> |
 | <a href="animations/campaign.html">Campaign · paired classifications</a> · <a href="docs/media/campaign.mp4">▶ MP4 1080p</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Per-host mutation campaign classifications"> | <a href="animations/provenance.html">Statement provenance · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4 1080p</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Identical declarations in OpenAI's and DeepMind's statements"> |
+| | <a href="animations/experiment.html">Blind-fault benchmark · baseline vs protocol</a> · <a href="docs/media/experiment.mp4">▶ MP4 1080p</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"> |
 
 ![Illustrative Taylor–Green flow clip, separate from the evidence scenes](docs/assets/flow-preview.gif)
 

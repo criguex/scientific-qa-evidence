@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 
 ANIMATIONS = Path(__file__).resolve().parent
 OUT = ANIMATIONS.parent / "docs" / "media"
-IDS = sys.argv[1:] or ["rc", "chemistry", "cooling", "snell", "campaign", "formal", "rerun", "mutants", "replay", "provenance"]
+IDS = sys.argv[1:] or ["rc", "chemistry", "cooling", "snell", "campaign", "formal", "rerun", "mutants", "replay", "provenance", "experiment"]
 FPS, DURATION = 30, 20
 OUT.mkdir(parents=True, exist_ok=True)
 

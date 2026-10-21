@@ -68,6 +68,18 @@
     "clay_risk": {
       "path": "evidence/formal/clay-lean-risk.md",
       "sha256": "a47cd334e8169587bd4de3cefd2215ec875263b8312ed23fdbff0a52021d6567"
+    },
+    "experiment_benchmark": {
+      "path": "experiments/blind-faults/v2/benchmark_v2.json",
+      "sha256": "2a3840b92b835df3417923a7732b87d5c8ff7be2e2f2b75cb67f8dfa1771e7c2"
+    },
+    "experiment_rounds": {
+      "path": "experiments/blind-faults/review_rounds.json",
+      "sha256": "f2bad621a0094b9b57dec854897f85a2f937eba1cc20201ead8421d73336a453"
+    },
+    "experiment_seed": {
+      "path": "experiments/blind-faults/SEED_COMMITMENT.md",
+      "sha256": "d612c995e91b81306c257754b0804c8c5cdc4b6eebf94c34eae8e63a0f024008"
     }
   },
   "animations": {
@@ -465,6 +477,73 @@
         "standard": 9,
         "attention": 1
       }
+    },
+    "experiment": {
+      "seed_prefix": "6ab9f8",
+      "classes": [
+        {
+          "id": "C",
+          "label": "Clean",
+          "baseline": false,
+          "protocol": false
+        },
+        {
+          "id": "F1",
+          "label": "F1 · prebuilt artifacts",
+          "baseline": false,
+          "protocol": true
+        },
+        {
+          "id": "F2",
+          "label": "F2 · statement differs",
+          "baseline": false,
+          "protocol": true
+        },
+        {
+          "id": "F4",
+          "label": "F4 · hidden oracle failure",
+          "baseline": false,
+          "protocol": true
+        },
+        {
+          "id": "F5",
+          "label": "F5 · receipt mismatch",
+          "baseline": false,
+          "protocol": true
+        },
+        {
+          "id": "F6",
+          "label": "F6 · sorry (control)",
+          "baseline": true,
+          "protocol": true
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "by": "external review",
+          "found": 7,
+          "fixed_in": "v2"
+        },
+        {
+          "round": 2,
+          "by": "external review",
+          "found": 3,
+          "fixed_in": "v2.1"
+        },
+        {
+          "round": 3,
+          "by": "assistant",
+          "found": 0,
+          "fixed_in": null
+        },
+        {
+          "round": 4,
+          "by": "assistant",
+          "found": 7,
+          "fixed_in": "v2.2"
+        }
+      ]
     }
   }
 }

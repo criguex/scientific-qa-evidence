@@ -29,6 +29,14 @@ En septiembre de 2026 OpenAI publicó formalizaciones en Lean 4 de las alternati
 | ¿Las pruebas numéricas detectan errores? | 9 modelos sintéticos × 3 configuraciones, cada línea base más mutaciones conocidas: 84 variantes | 27 PASS · 54 KILLED · 3 SURVIVED por máquina |
 | ¿Es reproducible entre máquinas? | Las mismas 84 variantes en macOS arm64 y Linux x86_64 | Clasificaciones idénticas; diferencia escalada máxima de 1,11 × 10⁻¹⁶ |
 
+## Conclusiones
+
+1. **Las pruebas de OpenAI para (C), (D) y Euler verifican, de forma repetida y desde cero.** Comparator, con nanoda y el kernel de Lean, aceptó los dos desafíos sobre cuatro compilaciones distintas, la última compilada entera desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel usado incluye todas las correcciones de solidez conocidas de 2026.
+2. **Comparator revisa el enunciado exacto.** Rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de DeepMind tras normalización textual (la resolución de nombres no se verificó).
+3. **Lo que esto no resuelve.** Si el enunciado formal dice exactamente lo mismo que el texto de Clay es una revisión de lectura con un punto, la presión periódica en (D), que necesita un matemático. Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance y lo disputa [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
+4. **Lo que aporta el protocolo.** En este caso mostró evidencia que el procedimiento documentado no produce ([FINDINGS.md](FINDINGS.md)), y en un benchmark prerregistrado sus checks marcaron cuatro clases de fallo sembradas que el procedimiento base deja pasar ([resultados](experiments/blind-faults/RESULTS.md)). Cuatro rondas de revisión encontraron 17 problemas en ese mismo experimento, todos corregidos y conservados en el registro.
+5. **Lo que no se afirma.** Novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)), una tasa de detección en el mundo real, ni ninguna parte de la prueba matemática, que pertenece a OpenAI.
+
 ## Verifícalo tú mismo
 
 Solo Python 3, sin dependencias, alrededor de un minuto:
@@ -146,6 +154,7 @@ Abre la [galería offline](animations/index.html) o lee la [guía de animaciones
 | <a href="animations/cooling.html">Enfriamiento · constante a la mitad</a> · <a href="docs/media/cooling.mp4">▶ MP4 1080p</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Comparación de enfriamiento base y mutación"> | <a href="animations/mutants.html">C/D · mutantes del enunciado</a> · <a href="docs/media/mutants.mp4">▶ MP4 1080p</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Mutantes rechazados y control aceptado"> |
 | <a href="animations/snell.html">Snell · índices de refracción intercambiados</a> · <a href="docs/media/snell.mp4">▶ MP4 1080p</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Rayos de refracción y barrido de ángulo"> | <a href="animations/replay.html">C/D · revisión del kernel desde cero</a> · <a href="docs/media/replay.mp4">▶ MP4 1080p</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Revisión desde cero y kernels"> |
 | <a href="animations/campaign.html">Campaña · clasificaciones pareadas</a> · <a href="docs/media/campaign.mp4">▶ MP4 1080p</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Clasificaciones de la campaña por máquina"> | <a href="animations/provenance.html">Procedencia del enunciado · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4 1080p</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Declaraciones idénticas en OpenAI y DeepMind"> |
+| | <a href="animations/experiment.html">Benchmark de fallos a ciegas · base vs protocolo</a> · <a href="docs/media/experiment.mp4">▶ MP4 1080p</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Fallos sembrados detectados por cada procedimiento y cuatro rondas de revisión"> |
 
 ![Clip ilustrativo de flujo Taylor–Green, separado de las escenas de evidencia](docs/assets/flow-preview.gif)
 

@@ -21,7 +21,7 @@ Every claim this package makes, the file that supports it, the recorded result a
 
 ## Conclusion this evidence supports
 
-The protocol was implemented and evaluated reproducibly on the documented cases. It detected the specified alterations, kept the survivors visible, and left verifiable traceability for its results.
+The protocol was implemented and evaluated reproducibly on the documented cases. It detected the specified alterations, kept the survivors visible, and left verifiable traceability for its results. In a pre-registered benchmark, reframed after review as a deterministic regression benchmark, its checks flagged four planted fault classes that the documented baseline passes, with the corrected v2.2 evaluator; four review rounds found and fixed 17 issues in that experiment, and its assignment is reproducible from the revealed seed.
 
 ## What stronger claims would need
 

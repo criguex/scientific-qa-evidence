@@ -24,6 +24,9 @@ INPUTS = {
     "comparator_run1": "evidence/formal/comparator/README.md",
     "statement_provenance": "evidence/formal/statement-provenance/result.json",
     "clay_risk": "evidence/formal/clay-lean-risk.md",
+    "experiment_benchmark": "experiments/blind-faults/v2/benchmark_v2.json",
+    "experiment_rounds": "experiments/blind-faults/review_rounds.json",
+    "experiment_seed": "experiments/blind-faults/SEED_COMMITMENT.md",
 }
 PAGES = {
     "rc": ("RC circuit mutation", "The curve is reconstructed from the analytic model; hollow checkpoints are recorded RK4 outputs.", "Analytic equation curves; hollow ring markers are recorded 256-step RK4 results at four source fractions. The capacitor fill is normalized charge, not fluid."),
@@ -36,6 +39,7 @@ PAGES = {
     "mutants": ("Statement mutants", "Each mutant changes one symbol in the official challenge statement while OpenAI's proof stays untouched. Comparator must refuse every one, and a comment-only control must still pass.", "Original line on top, mutated line below with the change highlighted. A refusal shows the statement check is exact; it does not mean the mutated statement is false, and the f = 0 cases say nothing about (A) or (B)."),
     "replay": ("Fresh kernel replay", "leanchecker --fresh ignores the compiled files and re-checks every declaration, Mathlib included, from an empty environment.", "Bars show the recorded replay time. The kernel panel shows which kernel implementations have actually examined the proofs; lean4lean could not be built for Lean 4.34 and never examined them."),
     "provenance": ("Where the statement comes from", "OpenAI's challenge statement compared with Google DeepMind's public Formal Conjectures statement, declaration by declaration.", "Identical declarations light up one by one; the remaining differences are listed below them. The last panel summarizes the clause-by-clause Clay ↔ Lean risk review, which is reading-based and not yet reviewed by a mathematician."),
+    "experiment": ("Blind-fault benchmark", "Faults planted in controlled cases, assigned by a committed seed, checked by both procedures before the key was opened, then reviewed in four rounds.", "Top: the chain that makes the run auditable. Middle: which procedure flags each planted fault, with the corrected v2.2 evaluator. Bottom: what each review round found. Planted faults over recorded artifacts, not live Lean and not a real-world rate."),
 }
 AUTHOR = "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex"
 
@@ -165,6 +169,7 @@ def load_package():
             "mutants": mutant_data(validation),
             "replay": replay_data(validation),
             "provenance": provenance_data(provenance, risk_text),
+            "experiment": experiment_data(),
         },
     }
 
@@ -237,6 +242,20 @@ def provenance_data(provenance, risk_text):
         "removed": [line[:60] for line in removed],
         "added": [line[:60] for line in added],
         "risk": {"rows": int(count.group(1)), "direct": int(count.group(2)), "standard": int(count.group(3)), "attention": int(count.group(4))},
+    }
+
+
+def experiment_data():
+    benchmark = read_json(INPUTS["experiment_benchmark"])["classes"]
+    rounds = read_json(INPUTS["experiment_rounds"])["rounds"]
+    seed = re.search(r"\b([0-9a-f]{64})\b", (ROOT / INPUTS["experiment_seed"]).read_text(encoding="utf-8")).group(1)
+    labels = {"C": "Clean", "F1": "F1 · prebuilt artifacts", "F2": "F2 · statement differs", "F4": "F4 · hidden oracle failure",
+              "F5": "F5 · receipt mismatch", "F6": "F6 · sorry (control)"}
+    return {
+        "seed_prefix": seed[:6],
+        "classes": [{"id": key, "label": labels[key], "baseline": value["baseline"]["flagged"], "protocol": value["protocol"]["flagged"]}
+                    for key, value in benchmark.items()],
+        "rounds": [{"round": r["round"], "by": r["by"], "found": r["found"], "fixed_in": r["fixed_in"]} for r in rounds],
     }
 
 
@@ -358,7 +377,7 @@ def gallery_html(package):
 :root{color-scheme:dark;font:16px/1.55 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 0,#173b4c,#071b2b 55%)}main{max-width:1180px;margin:auto;padding:42px 24px 88px}h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;margin:.25em 0}h2{color:#55dfbd;font-size:1.6rem;margin:0 0 10px}p{color:#bfd0d5}a{color:#55dfbd}.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.17em;font-weight:800;font-size:.8rem}.lead,.context,.sources{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:22px;margin:20px 0}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.fact{padding:16px;border-radius:14px;background:#102f43;border-left:4px solid #55dfbd}.fact strong{display:block;color:#f4f7f5;margin-bottom:8px}.fact:nth-child(2n){border-color:#ffc56e}.selectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}.selector{text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;padding:16px;border:1px solid #315264;border-radius:14px;background:#102f43;color:#f4f7f5;cursor:pointer;font:inherit}.selector strong{font-size:1rem}.selector span{color:#abc0c8;font-size:.87rem}.selector[aria-pressed=true]{border-color:#55dfbd;box-shadow:0 0 0 2px #55dfbd55}.selector:focus-visible,a:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}.active{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:18px}.active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.actions{display:flex;gap:12px;flex-wrap:wrap}iframe{display:block;width:100%;aspect-ratio:1;border:1px solid #315264;border-radius:14px;background:#071b2b;margin-top:14px}.badge{display:inline-block;border:1px solid #ffc56e;color:#ffc56e;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:800}.context img{display:block;width:min(100%,960px);border-radius:14px;background:#071b2b}summary{cursor:pointer;color:#55dfbd;font-weight:800}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.82rem}code{color:#ffc56e}@media(max-width:600px){main{padding:28px 14px 64px}}
 </style></head><body><main>
 <div class="eyebrow">Evidence, in motion · local and offline</div><h1>What changed?<br>What did the checks see?</h1>
-<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Ten supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
+<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Eleven supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
 <nav class="selectors" aria-label="Choose an evidence animation">__BUTTONS__</nav>
 <section class="active"><div class="active-head"><div><h2 id="active-title">RC circuit mutation</h2><p id="active-description"></p><p id="active-note"></p><p><strong>__AUTHOR__</strong></p></div><div class="actions"><a id="html-link" download>Download standalone HTML</a></div></div><iframe id="active-frame" title="Selected evidence animation" src="rc.html"></iframe></section>
 <section class="context"><span class="badge">ILLUSTRATIVE CONTEXT · NOT CAMPAIGN DATA</span><h2 style="margin-top:14px">A separate 3D flow visualization</h2><p>This Taylor–Green visualization is only visual context. It is not the 84-variant campaign, evidence of blow-up, or a formal solution. No synthetic physics scene is generated here.</p><img src="../docs/assets/flow-preview.gif" alt="Illustrative Taylor–Green flow clip"></section>

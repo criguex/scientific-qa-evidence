@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "rounds": [
+    {"round": 1, "by": "external review", "method": "review of the v1 results", "found": 7, "summary": "4 reporting corrections (benchmark framing, F2 label, cost, seed) and 3 evaluator defects (incomplete evidence accepted, absent evidence crashed, assumed comparator.log)", "fixed_in": "v2", "commit": "793ff3b"},
+    {"round": 2, "by": "external review", "method": "review of v2", "found": 3, "summary": "non-object JSON crashed; header-only tables accepted; non-zero exit codes accepted", "fixed_in": "v2.1", "commit": "94244a4"},
+    {"round": 3, "by": "assistant", "method": "deterministic fuzzing, 8,000 evaluations", "found": 0, "summary": "no crash in v2.1; the same fuzzer finds 52 crashes in v2", "fixed_in": null, "commit": "2a73983"},
+    {"round": 4, "by": "assistant", "method": "semantic attacks", "found": 7, "summary": "5 false accepts and 2 false alarms", "fixed_in": "v2.2", "commit": "2a73983"}
+  ]
+}
