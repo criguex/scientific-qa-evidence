@@ -1,6 +1,6 @@
 # Revalidation of alternatives (C) and (D), 2026-10-21
 
-State: **in progress** · 7 of 15 checks recorded · 0 unexpected · last update 2026-10-21T14:50:48Z.
+State: **in progress** · 9 of 15 checks recorded · 0 unexpected · last update 2026-10-21T14:53:37Z.
 
 This run repeats and extends the [2026-10-20 Comparator record](../comparator/README.md) for OpenAI's [NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) at commit `f9e8bc5` (leanprover/lean4:v4.34.0-rc2) on one host: Linux x86_64 · WSL2 · 12 vCPU · 30 GiB. It answers the gaps listed under "Known limitations" in the top-level README:
 
@@ -20,8 +20,8 @@ This run repeats and extends the [2026-10-20 Comparator record](../comparator/RE
 | (D) add f = 0 · forceless statement | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_force_zero_periodic.sanitized.log) · [diff](mutants/force_zero_periodic.diff) |
 | (C) swap ℝ³ decay data for periodic data | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'` | [log](logs/mutant_domain_R3_to_periodic_data.sanitized.log) · [diff](mutants/domain_R3_to_periodic_data.diff) |
 | (C) weaken nu > 0 to nu ≥ 0 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'` | [log](logs/mutant_viscosity_nonneg_R3.sanitized.log) · [diff](mutants/viscosity_nonneg_R3.diff) |
-| (D) drop ¬ · existence instead of breakdown | reject | **PENDING** | — | — | — |
-| Euler · tighten T* ≤ 1 to T* ≤ 1/2 | reject | **PENDING** | — | — | — |
+| (D) drop ¬ · existence instead of breakdown | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_existence_not_breakdown_periodic.sanitized.log) · [diff](mutants/existence_not_breakdown_periodic.diff) |
+| Euler · tighten T* ≤ 1 to T* ≤ 1/2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'` | [log](logs/mutant_euler_tstar_half.sanitized.log) · [diff](mutants/euler_tstar_half.diff) |
 | From-scratch build · empty caches, Mathlib compiled | ok | **PENDING** | — | — | — |
 | leanchecker --fresh · Navier–Stokes solution | ok | **PENDING** | — | — | — |
 | leanchecker --fresh · Euler solution | ok | **PENDING** | — | — | — |

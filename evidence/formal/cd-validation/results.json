@@ -6,7 +6,7 @@
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
   "state": "in_progress",
-  "updated_utc": "2026-10-21T14:50:48Z",
+  "updated_utc": "2026-10-21T14:53:37Z",
   "reference_run_1": "evidence/formal/comparator/README.md",
   "checks": [
     {
@@ -121,18 +121,26 @@
       "group": "mutant",
       "title": "(D) drop ¬ · existence instead of breakdown",
       "expected": "reject",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:52:15Z",
+      "elapsed_s": 86.72,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'",
+      "log": "logs/mutant_existence_not_breakdown_periodic.sanitized.log",
+      "diff": "mutants/existence_not_breakdown_periodic.diff"
     },
     {
       "id": "mutant_euler_tstar_half",
       "group": "mutant",
       "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
       "expected": "reject",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:53:37Z",
+      "elapsed_s": 81.58,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'",
+      "log": "logs/mutant_euler_tstar_half.sanitized.log",
+      "diff": "mutants/euler_tstar_half.diff"
     },
     {
       "id": "clean_build",

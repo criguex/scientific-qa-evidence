@@ -22,7 +22,7 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 | Does it build from pinned source? | `lake --no-cache build` on OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 | Exit 0, 11,424 jobs. Dependency caches were reused, so this is not a full bootstrap. |
 | Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) |
 | Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and open gaps listed. Documentary only, not an expert equivalence proof. |
-| Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | In progress: every recorded mutant refused, control accepted |
+| Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | 6 of 6 mutants refused as statement mismatches; comment-only control accepted |
 | Do the checkers reject a wrong proof? | A fixture whose proof value is wrong but keeps the declared type | Lean reports a type mismatch; nanoda stops with an assertion rejection |
 | Do the numerical tests catch bugs? | 9 synthetic models × 3 configurations, each baseline plus known mutations: 84 variants | 27 PASS · 54 KILLED · 3 SURVIVED per host |
 | Is it reproducible across machines? | The same 84 variants on macOS arm64 and Linux x86_64 | Identical classifications; maximum scaled difference 1.11 × 10⁻¹⁶ |
@@ -77,9 +77,9 @@ Comparator checks that the submitted solution proves exactly the theorem stated 
 A second pass was run to close the gaps under [Known limitations](#known-limitations): rerun Comparator, try to break the challenge statement, replay every declaration in a fresh kernel environment, and rebuild from scratch with empty caches. Findings so far:
 
 - **The result repeats.** Comparator accepted Navier–Stokes (C and D) and Euler a second time on the same build. Both nanoda and the Lean kernel accepted, in 7.0 and 11.2 minutes.
-- **Comparator compares the statement exactly.** Each statement mutant edits only the challenge file and leaves OpenAI's proof untouched. Every mutant recorded so far was refused with `Challenge and solution theorem statement do not match`. That includes the two that add `f = 0`, i.e. forceless versions of (C) and (D). A comment-only control was still accepted, so the refusals come from the changed statement, not from editing the file.
+- **Comparator compares the statement exactly.** Each statement mutant edits only the challenge file and leaves OpenAI's proof untouched. All six mutants were refused with `Challenge and solution theorem statement do not match`: `f = 0` added to (C) and to (D) (forceless versions), ℝ³ decay data swapped for periodic data, `nu > 0` weakened to `nu ≥ 0`, the negation dropped from (D), and Euler's `T* ≤ 1` tightened to `T* ≤ 1/2`. A comment-only control was still accepted, so the refusals come from the changed statement, not from editing the file.
 - **What the mutants do not show.** A refused mutant says nothing about whether the mutated statement is true. The `f = 0` mutants are not evidence about the forceless alternatives (A) and (B), which remain open.
-- **Still running:** the remaining mutants, `leanchecker --fresh`, the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
+- **Still running:** `leanchecker --fresh`, the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
 
 The live table, verdicts, sanitized logs and every mutant diff are in [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md).
 

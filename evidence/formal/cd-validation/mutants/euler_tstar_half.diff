@@ -1,0 +1,13 @@
+diff --git a/ComparatorChallenges/Euler.lean b/ComparatorChallenges/Euler.lean
+index d797fa5..c80e60b 100644
+--- a/ComparatorChallenges/Euler.lean
++++ b/ComparatorChallenges/Euler.lean
+@@ -170,7 +170,7 @@ The same datum also satisfies the global breakdown conclusion above. -/
+ theorem exists_compact_smooth_euler_singularity :
+     ∃ (u₀ : ℝ³ → ℝ³) (Tstar : ℝ) (v : ℝ³ → ℝ → ℝ³) (p : ℝ³ → ℝ → ℝ),
+       InitialVelocityConditionDecay u₀ ∧ HasCompactSupport u₀ ∧ u₀ ≠ 0 ∧
+-      0 < Tstar ∧ Tstar ≤ 1 ∧
++      0 < Tstar ∧ Tstar ≤ 1 / 2 ∧
+       EulerSobolevExistenceAndSmoothnessR3On (Ico 0 Tstar) u₀ v p ∧
+       (∃ E : ℝ, ∀ t ∈ Ico (0 : ℝ) Tstar, (∫ x : ℝ³, ‖v x t‖ ^ 2) < E) ∧
+       (∀ T : ℝ, 0 < T →

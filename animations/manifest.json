@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "c9d555b35c8c60f257dabeb414dad5f98d61a2fecb939abf66a41aa09021bc97"
+      "sha256": "cacabf24a0a27aa1b999729da899af53f61e97ec9632cf4806f80467581152e9"
     }
   },
   "animations": {
@@ -336,16 +336,16 @@
           "group": "mutant",
           "title": "(D) drop ¬ · existence instead of breakdown",
           "expected": "reject",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "KILLED",
+          "elapsed_s": 86.72
         },
         {
           "id": "mutant_euler_tstar_half",
           "group": "mutant",
           "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
           "expected": "reject",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "KILLED",
+          "elapsed_s": 81.58
         },
         {
           "id": "clean_build",
