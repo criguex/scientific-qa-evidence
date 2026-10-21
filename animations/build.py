@@ -30,14 +30,6 @@ PAGES = {
     "formal": ("Proof-value typecheck control", "One proof-value mutation is rejected by Lean. nanoda's rejection category is derived from pinned source, not a structured binary result.", "One fixture changes only the exported proof value. Lean records a type mismatch; nanoda's raw status remains pending and rejection is source-derived. No fresh run is implied."),
 }
 AUTHOR = "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex"
-PUBLICATION_COPY = {
-    "rc": ("Would your test catch a slower circuit?", "A controlled time-constant mutation changes the recorded voltage checkpoints. Analytic curves and RK4 outputs are shown separately."),
-    "chemistry": ("Same volume. Different reaction rate.", "A synthetic second-order model compares baseline and doubled rate. The concentration changes; the vessel volume does not."),
-    "cooling": ("The invariant passed. Did the oracle?", "In this synthetic cooling case, halving the rate preserves the invariant but the recorded output exceeds the oracle tolerance."),
-    "snell": ("Swap the refractive indices. Watch the angle.", "A bounded Snell-law case compares the recorded baseline with an index-swap mutation. Rays are schematic, not physical footage."),
-    "campaign": ("84 paired variants, checked on two hosts.", "Each host ran the same 84 variants: 27 PASS, 54 KILLED, 3 SURVIVED per host. This is classification evidence, not a performance benchmark."),
-    "formal": ("Change the proof value—not the theorem.", "A bounded fixture changes only an exported proof value. The Lean typecheck rejects the mutation; nanoda's category is source-derived."),
-}
 
 
 def read_json(relative_path):
@@ -214,7 +206,7 @@ a{{color:#55dfbd}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto
 </div>
 <p class="note"><strong>How to read this animation:</strong> {html.escape(source_note)}</p>
 <details class="data"><summary>Accessible explanation, equations, and source records</summary><pre id="accessible"></pre></details>
-<p class="note"><a href="./index.html">Open the evidence animation gallery</a> · <a href="{animation_id}.html" download>Download standalone HTML</a> · <a href="../media/animations/{animation_id}.mp4">Square MP4</a> · <a href="../media/animations/{animation_id}-vertical.mp4">Portrait MP4</a> · <a href="../media/animations/{animation_id}.gif">GIF</a> (media links resolve after export)</p>
+<p class="note"><a href="./index.html">Open the evidence animation gallery</a> · <a href="{animation_id}.html" download>Download standalone HTML</a></p>
 </main>
 <script id="evidence-data" type="application/json">{inline_data}</script>
 <script>
@@ -264,51 +256,21 @@ def gallery_html(package):
     page = '''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>ADV-050 · Animated evidence</title>
 <style>
-:root{color-scheme:dark;font:16px/1.55 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 0,#173b4c,#071b2b 55%)}main{max-width:1180px;margin:auto;padding:42px 24px 88px}h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;margin:.25em 0}h2{color:#55dfbd;font-size:1.6rem;margin:0 0 10px}p{color:#bfd0d5}a{color:#55dfbd}.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.17em;font-weight:800;font-size:.8rem}.lead,.context,.sources{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:22px;margin:20px 0}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.fact{padding:16px;border-radius:14px;background:#102f43;border-left:4px solid #55dfbd}.fact strong{display:block;color:#f4f7f5;margin-bottom:8px}.fact:nth-child(2n){border-color:#ffc56e}.selectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}.selector{text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;padding:16px;border:1px solid #315264;border-radius:14px;background:#102f43;color:#f4f7f5;cursor:pointer;font:inherit}.selector strong{font-size:1rem}.selector span{color:#abc0c8;font-size:.87rem}.selector[aria-pressed=true]{border-color:#55dfbd;box-shadow:0 0 0 2px #55dfbd55}.selector:focus-visible,a:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}.active{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:18px}.active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.actions{display:flex;gap:12px;flex-wrap:wrap}iframe{display:block;width:100%;aspect-ratio:1;border:1px solid #315264;border-radius:14px;background:#071b2b;margin-top:14px}.badge{display:inline-block;border:1px solid #ffc56e;color:#ffc56e;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:800}.context video{display:block;width:min(100%,960px);border-radius:14px;background:#071b2b}summary{cursor:pointer;color:#55dfbd;font-weight:800}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.82rem}code{color:#ffc56e}@media(max-width:600px){main{padding:28px 14px 64px}}
+:root{color-scheme:dark;font:16px/1.55 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 0,#173b4c,#071b2b 55%)}main{max-width:1180px;margin:auto;padding:42px 24px 88px}h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;margin:.25em 0}h2{color:#55dfbd;font-size:1.6rem;margin:0 0 10px}p{color:#bfd0d5}a{color:#55dfbd}.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.17em;font-weight:800;font-size:.8rem}.lead,.context,.sources{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:22px;margin:20px 0}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.fact{padding:16px;border-radius:14px;background:#102f43;border-left:4px solid #55dfbd}.fact strong{display:block;color:#f4f7f5;margin-bottom:8px}.fact:nth-child(2n){border-color:#ffc56e}.selectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}.selector{text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;padding:16px;border:1px solid #315264;border-radius:14px;background:#102f43;color:#f4f7f5;cursor:pointer;font:inherit}.selector strong{font-size:1rem}.selector span{color:#abc0c8;font-size:.87rem}.selector[aria-pressed=true]{border-color:#55dfbd;box-shadow:0 0 0 2px #55dfbd55}.selector:focus-visible,a:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}.active{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:18px}.active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.actions{display:flex;gap:12px;flex-wrap:wrap}iframe{display:block;width:100%;aspect-ratio:1;border:1px solid #315264;border-radius:14px;background:#071b2b;margin-top:14px}.badge{display:inline-block;border:1px solid #ffc56e;color:#ffc56e;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:800}.context img{display:block;width:min(100%,960px);border-radius:14px;background:#071b2b}summary{cursor:pointer;color:#55dfbd;font-weight:800}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.82rem}code{color:#ffc56e}@media(max-width:600px){main{padding:28px 14px 64px}}
 </style></head><body><main>
 <div class="eyebrow">Evidence, in motion · local and offline</div><h1>What changed?<br>What did the checks see?</h1>
-<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Six supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file or rendered MP4/GIF. These are supporting visuals, not the separate five narrated shorts. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
+<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Six supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
 <nav class="selectors" aria-label="Choose an evidence animation">__BUTTONS__</nav>
-<section class="active"><div class="active-head"><div><h2 id="active-title">RC circuit mutation</h2><p id="active-description"></p><p id="active-note"></p><p><strong>__AUTHOR__</strong></p></div><div class="actions"><a id="html-link" download>Download standalone HTML</a><a id="mp4-link" download>Square MP4</a><a id="vertical-link" download>Portrait MP4</a><a id="gif-link" download>Download GIF</a></div></div><iframe id="active-frame" title="Selected evidence animation" src="rc.html"></iframe></section>
-<section class="context"><span class="badge">ILLUSTRATIVE CONTEXT · NOT CAMPAIGN DATA</span><h2 style="margin-top:14px">A separate 3D flow visualization</h2><p>This Taylor–Green visualization is only visual context. It is not the 84-variant campaign, evidence of blow-up, or a formal solution. No synthetic physics scene is generated here.</p><video controls preload="metadata" src="../video/public/english/media/flow-illustration.mp4">Your browser does not support video playback.</video><p><a href="../video/public/english/media/flow-illustration.mp4">Open the source flow illustration</a></p></section>
+<section class="active"><div class="active-head"><div><h2 id="active-title">RC circuit mutation</h2><p id="active-description"></p><p id="active-note"></p><p><strong>__AUTHOR__</strong></p></div><div class="actions"><a id="html-link" download>Download standalone HTML</a></div></div><iframe id="active-frame" title="Selected evidence animation" src="rc.html"></iframe></section>
+<section class="context"><span class="badge">ILLUSTRATIVE CONTEXT · NOT CAMPAIGN DATA</span><h2 style="margin-top:14px">A separate 3D flow visualization</h2><p>This Taylor–Green visualization is only visual context. It is not the 84-variant campaign, evidence of blow-up, or a formal solution. No synthetic physics scene is generated here.</p><img src="../docs/assets/flow-preview.gif" alt="Illustrative Taylor–Green flow clip"></section>
 <section class="sources"><details><summary>Input evidence and SHA-256 provenance</summary><pre>__SOURCES__</pre></details><p><a href="../index.html">Back to the English review package</a></p></section>
 </main><script>
 const scenes=__SCENES__;const buttons=[...document.querySelectorAll(".selector")];const frame=document.getElementById("active-frame");
-function selectScene(id){const scene=scenes[id];if(!scene)return;frame.src=scene.id+".html";frame.title=scene.title+" animated evidence";document.getElementById("active-title").textContent=scene.title;document.getElementById("active-description").textContent=scene.description;document.getElementById("active-note").textContent=scene.note;document.getElementById("html-link").href=scene.id+".html";document.getElementById("mp4-link").href="../media/animations/"+scene.id+".mp4";document.getElementById("vertical-link").href="../media/animations/"+scene.id+"-vertical.mp4";document.getElementById("gif-link").href="../media/animations/"+scene.id+".gif";for(const button of buttons)button.setAttribute("aria-pressed",String(button.dataset.id===id));}
+function selectScene(id){const scene=scenes[id];if(!scene)return;frame.src=scene.id+".html";frame.title=scene.title+" animated evidence";document.getElementById("active-title").textContent=scene.title;document.getElementById("active-description").textContent=scene.description;document.getElementById("active-note").textContent=scene.note;document.getElementById("html-link").href=scene.id+".html";for(const button of buttons)button.setAttribute("aria-pressed",String(button.dataset.id===id));}
 for(const button of buttons)button.addEventListener("click",()=>selectScene(button.dataset.id));selectScene("rc");
 </script></body></html>'''
     scenes = {key: {"id": key, "title": value[0], "description": value[1], "note": value[2]} for key, value in PAGES.items()}
     return page.replace("__AUTHOR__", html.escape(AUTHOR)).replace("__FACTS__", facts).replace("__BUTTONS__", "".join(buttons)).replace("__SOURCES__", source_text).replace("__SCENES__", json.dumps(scenes, ensure_ascii=False).replace("<", "\\u003c"))
-
-
-def publication_manifest(package):
-    items = []
-    for key, (title, _, _) in PAGES.items():
-        hook, caption = PUBLICATION_COPY[key]
-        items.append({
-            "id": key,
-            "delivery_role": "supporting_animation_loop",
-            "title": title,
-            "hook": hook,
-            "caption": caption,
-            "tags": ["QA Automation", "software testing", "mutation testing", "synthetic evidence"],
-            "attribution": "QA Automation from Medellín, Colombia",
-            "files": {
-                "html": f"{key}.html",
-                "square_mp4": f"../media/animations/{key}.mp4",
-                "portrait_mp4": f"../media/animations/{key}-vertical.mp4",
-                "gif": f"../media/animations/{key}.gif",
-            },
-            "source_hashes": list(package["source_hashes"].keys()),
-            "upload_status": "not_uploaded",
-        })
-    return {
-        "schema_version": 1,
-        "repo_url": None,
-        "upload_status": "not_uploaded",
-        "shorts_plan": "A separate five-piece narrated shorts plan uses aligned narration excerpts. These six animations are supporting visuals, not those shorts.",
-        "items": items,
-    }
 
 
 def generate(destination=ANIMATIONS):
@@ -318,7 +280,6 @@ def generate(destination=ANIMATIONS):
     for animation_id in PAGES:
         (destination / f"{animation_id}.html").write_text(page_html(animation_id, package), encoding="utf-8")
     (destination / "index.html").write_text(gallery_html(package), encoding="utf-8")
-    (destination / "publication.json").write_text(json.dumps(publication_manifest(package), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return package
 
 

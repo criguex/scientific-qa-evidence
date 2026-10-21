@@ -2,7 +2,7 @@
 
 This folder contains a curated allowlist of fixtures and controls cited by the English release, not a copy of the legacy evidence tree. The package checksum list verifies its listed files. The two 84-case campaign datasets use each original host summary's `artifact_sha256` map; validate all 168 cases, both 756-row CSVs, and the cross-host comparison with `python3 evidence/verify_numerical.py` from the package root.
 
-The root checksum list covers every curated release file, including both paired case directories, but excludes generated render outputs, dependency directories, Python caches, and the checksum list itself. The numerical verifier additionally checks the two copied original summaries and every case JSON and observation CSV against those summaries' original per-file SHA-256 maps. Its comparison is read-only; rerunning the calculation suite is a separate action described in the root README. Processed audio provenance, file hashes, and actual timing are checked with `python3 production/verify_audio_assets.py` from the package root.
+The root checksum list covers every curated release file, including both paired case directories, but excludes generated render outputs, dependency directories, Python caches, and the checksum list itself. The numerical verifier additionally checks the two copied original summaries and every case JSON and observation CSV against those summaries' original per-file SHA-256 maps. Its comparison is read-only; rerunning the calculation suite is a separate action described in the root README.
 
 ## Numerical suite
 

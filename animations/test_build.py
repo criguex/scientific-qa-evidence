@@ -1,5 +1,4 @@
 import hashlib
-import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -44,7 +43,7 @@ class AnimationPackageTests(unittest.TestCase):
                 self.assertIn("window.renderAt=renderAt", content)
                 self.assertIn("How to read this animation", content)
                 self.assertIn(build.AUTHOR, content)
-                self.assertIn(f"{animation_id}-vertical.mp4", content)
+                self.assertNotIn("media/animations/", content)
                 self.assertNotIn("<script src=", content.lower())
                 self.assertNotIn("<link rel=\"stylesheet\" href=", content.lower())
                 self.assertEqual(content, (Path(second) / filename).read_text(encoding="utf-8"))
@@ -56,19 +55,10 @@ class AnimationPackageTests(unittest.TestCase):
             gallery = (Path(output) / "index.html").read_text(encoding="utf-8")
             self.assertEqual(gallery.count("<iframe"), 1)
             self.assertIn("id=\"active-note\"", gallery)
-            self.assertIn("../video/public/english/media/flow-illustration.mp4", gallery)
+            self.assertIn("../docs/assets/flow-preview.gif", gallery)
+            self.assertNotIn("media/animations/", gallery)
             for animation_id in build.PAGES:
                 self.assertIn(f'data-id="{animation_id}"', gallery)
-            self.assertIn('id="vertical-link"', gallery)
-            self.assertIn('scene.id+"-vertical.mp4"', gallery)
-            publication = json.loads((Path(output) / "publication.json").read_text(encoding="utf-8"))
-            self.assertIsNone(publication["repo_url"])
-            self.assertEqual(publication["upload_status"], "not_uploaded")
-            self.assertIn("separate five-piece narrated shorts", publication["shorts_plan"])
-            self.assertEqual(len(publication["items"]), 6)
-            self.assertTrue(all(item["upload_status"] == "not_uploaded" for item in publication["items"]))
-            self.assertTrue(all(item["delivery_role"] == "supporting_animation_loop" for item in publication["items"]))
-            self.assertTrue(all("portrait_mp4" in item["files"] and "gif" in item["files"] for item in publication["items"]))
 
 
 if __name__ == "__main__":

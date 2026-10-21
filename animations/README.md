@@ -1,6 +1,6 @@
 # Animation guide
 
-The six standalone HTML scenes and their animated preview loops are committed in this directory's parent `docs/assets/` folder. The scenes are offline, interactive, and use the same evidence-derived manifest as the Remotion export compositions. Open [`index.html`](index.html) for the gallery, or open an individual scene directly. Each page has playback/seek controls, an accessible text summary, and its embedded data. The HTML and plotted curves are visual explanations; the evidence remains the saved fixtures and case records linked below.
+The six standalone HTML scenes and their animated preview loops are committed in this directory's parent `docs/assets/` folder. The scenes are offline, interactive, and read the same evidence-derived manifest ([`manifest.json`](manifest.json)). Open [`index.html`](index.html) for the gallery, or open an individual scene directly. Each page has playback/seek controls, an accessible text summary, and its embedded data. The HTML and plotted curves are visual explanations; the evidence remains the saved fixtures and case records linked below.
 
 ## Numerical scenes
 
@@ -82,13 +82,6 @@ python3 animations/build.py
 python3 -m unittest discover -s animations -p 'test_*.py'
 ```
 
-The shared Remotion adapter registers square compositions `RC`, `Chemistry`, `Cooling`, `Snell`, `Campaign`, `Formal`, and portrait variants with a `Vertical` suffix. With the already pinned video dependencies installed, render an example from `video/`:
-
-```sh
-cd video
-npx remotion render src/animations-entry.tsx RC ../media/animations/rc.mp4
-npx remotion render src/animations-entry.tsx RCVertical ../media/animations/rc-vertical.mp4
-```
 
 Repeat with the other composition IDs. MP4/GIF exports do not retain HTML seek controls. Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.
 

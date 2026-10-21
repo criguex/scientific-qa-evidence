@@ -122,7 +122,7 @@ Cada afirmación, su redacción exacta y su archivo de evidencia están mapeados
 
 ## Cómo se usó la IA
 
-El trabajo fue asistido por IA y dirigido por una persona. OpenAI Codex fue el agente principal de código: bajo la dirección del autor preparó código, corrió builds y renders y redactó borradores, y cada commit de este repositorio lo registra con un trailer `Co-Authored-By`. Otros asistentes de IA ayudaron con análisis, traducción y revisión. Cristian Guerra eligió las preguntas, congeló el contrato, decidió qué cuenta como evidencia, volvió a correr los verificadores y responde por cada afirmación. Los detalles están en [AUTHORSHIP.md](AUTHORSHIP.md).
+El trabajo fue asistido por IA y dirigido por una persona. OpenAI Codex fue el agente principal de código: bajo la dirección del autor preparó código, corrió builds y renders y redactó borradores. Claude Code, de Anthropic, hizo los cambios posteriores de documentación y limpieza. Cada commit nombra al agente que participó en un trailer `Co-Authored-By`. Otros asistentes de IA ayudaron con análisis, traducción y revisión. Cristian Guerra eligió las preguntas, congeló el contrato, decidió qué cuenta como evidencia, volvió a correr los verificadores y responde por cada afirmación. Los detalles están en [AUTHORSHIP.md](AUTHORSHIP.md).
 
 ## Mapa del repositorio
 
@@ -134,11 +134,9 @@ evidence/
   SHA256SUMS.txt       checksums de cada archivo curado
 animations/            seis escenas HTML offline, script de build y tests
 docs/assets/           GIFs de vista previa usados en este README
-production/            narración, pipeline de audio y depurador de logs, con tests
-video/                 fuente Remotion del video narrado y los cinco shorts
 CLAIMS.md              afirmación → alcance → evidencia
 AUTHORSHIP.md          autoría y declaración de uso de IA
-PUBLICATION_STATUS.md  qué está publicado y qué falta
+CONTRIBUTING.md        reglas para modificar la evidencia
 ```
 
 ## Créditos, derechos y estado
@@ -146,6 +144,6 @@ PUBLICATION_STATUS.md  qué está publicado y qué falta
 - **Pruebas originales:** sus autores en OpenAI. **Enunciado del desafío:** Formal Conjectures de Google DeepMind. **Herramientas:** Lean 4, mathlib, Comparator, nanoda.
 - **Este estudio de QA:** Cristian Guerra. Para citarlo, usa [CITATION.cff](CITATION.cff).
 - **Derechos:** la publicación está autorizada, pero no se otorga licencia de código abierto. Ver [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Estado:** en X está publicado un hilo introductorio con vistas previas de las animaciones. El video narrado (inglés y español) está preparado como fuente; faltan los renders y la subida. Ver [PUBLICATION_STATUS.md](PUBLICATION_STATUS.md).
+- **Estado:** en [X](https://x.com/criguex/status/2112679712157753441) está publicado un hilo introductorio con vistas previas de las animaciones.
 
 No se reclama descubrimiento de teoremas, certificación científica, validación empírica ni prueba sobre un sistema del mundo real.

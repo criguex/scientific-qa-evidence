@@ -122,7 +122,7 @@ Each claim, its exact wording and its evidence file are mapped in [CLAIMS.md](CL
 
 ## How AI was used
 
-The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent: under the author's direction it prepared code, ran builds and renders and drafted documents, and every commit in this repository records it with a `Co-Authored-By` trailer. AI assistants also helped with analysis, translation and review. Cristian Guerra chose the questions, froze the contract, decided what counts as evidence, reran the verifiers and is responsible for every claim. Details are in [AUTHORSHIP.md](AUTHORSHIP.md).
+The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent: under the author's direction it prepared code, ran builds and renders and drafted documents. Anthropic's Claude Code made the later documentation and cleanup changes. Each commit names the agent involved in a `Co-Authored-By` trailer. AI assistants also helped with analysis, translation and review. Cristian Guerra chose the questions, froze the contract, decided what counts as evidence, reran the verifiers and is responsible for every claim. Details are in [AUTHORSHIP.md](AUTHORSHIP.md).
 
 ## Repository map
 
@@ -134,11 +134,9 @@ evidence/
   SHA256SUMS.txt       checksums for every curated file
 animations/            six offline HTML scenes, build script and tests
 docs/assets/           GIF previews used in this README
-production/            narration, audio pipeline and log sanitizer, with tests
-video/                 Remotion source for the narrated video and five shorts
 CLAIMS.md              claim → scope → evidence
 AUTHORSHIP.md          authorship and AI disclosure
-PUBLICATION_STATUS.md  what is published and what is pending
+CONTRIBUTING.md        rules for changing the evidence
 ```
 
 ## Credit, rights and status
@@ -146,6 +144,6 @@ PUBLICATION_STATUS.md  what is published and what is pending
 - **Original proofs:** their OpenAI authors. **Challenge statement:** Google DeepMind Formal Conjectures. **Tools:** Lean 4, mathlib, Comparator, nanoda.
 - **This QA study:** Cristian Guerra. To cite it, use [CITATION.cff](CITATION.cff).
 - **Rights:** publication is authorized, but no open-source license is granted. See [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Status:** an introductory thread with animation previews is posted on X. The narrated video (English and Spanish) is prepared as source; renders and uploads are pending. See [PUBLICATION_STATUS.md](PUBLICATION_STATUS.md).
+- **Status:** an introductory thread with animation previews is posted on [X](https://x.com/criguex/status/2112679712157753441).
 
 No theorem discovery, scientific certification, empirical validation or proof about a real-world system is claimed.

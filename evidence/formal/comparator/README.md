@@ -1,6 +1,6 @@
 # Fresh Comparator run record
 
-This English summary and the two full per-challenge transcripts are sanitized, derived records from the original terminal output. ANSI escapes are removed; private command lines, host usernames, workspace/tool paths, and private IPs are redacted. Original raw transcripts are not included in this distribution. Their SHA-256 values are retained below for provenance. The deterministic sanitizer is `production/sanitize_comparator_logs.py`.
+This English summary and the two full per-challenge transcripts are sanitized, derived records from the original terminal output. ANSI escapes are removed; private command lines, host usernames, workspace/tool paths, and private IPs are redacted. Original raw transcripts are not included in this distribution. Their SHA-256 values are retained below for provenance. The deterministic sanitizer is [`sanitize_comparator_logs.py`](sanitize_comparator_logs.py), with its tests in [`test_sanitize_comparator_logs.py`](test_sanitize_comparator_logs.py).
 
 | Challenge | Lean default kernel | nanoda | Comparator result | Elapsed | Maximum RSS |
 | --- | --- | --- | --- | ---: | ---: |
