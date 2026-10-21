@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scientific QA Evidence — Report v1.2.0</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10.2pt; line-height: 1.45; color: #14212b; }
+  h1 { font-size: 22pt; margin: 0 0 4pt; color: #071b2b; }
+  h2 { font-size: 13.5pt; margin: 18pt 0 6pt; color: #0b5c4a; border-bottom: 1.5px solid #cfe3dc; padding-bottom: 3pt; }
+  h3 { font-size: 11pt; margin: 12pt 0 4pt; color: #071b2b; }
+  .sub { color: #50626e; font-size: 10.5pt; margin-bottom: 10pt; }
+  .box { border: 1px solid #cfdbe2; background: #f5f9fb; padding: 8pt 10pt; border-radius: 6pt; margin: 8pt 0; }
+  .warn { border-color: #e8cf9a; background: #fffaf0; }
+  table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 9pt; }
+  th, td { border: 1px solid #d5dee4; padding: 4pt 5pt; vertical-align: top; text-align: left; }
+  th { background: #eaf2f6; }
+  td.n { text-align: right; white-space: nowrap; }
+  code { font-family: Menlo, monospace; font-size: 8.6pt; background: #eef3f6; padding: 0 2pt; border-radius: 2pt; }
+  ol, ul { margin: 4pt 0 6pt 16pt; padding: 0; }
+  li { margin: 2pt 0; }
+  .small { font-size: 8.6pt; color: #50626e; }
+  .pb { page-break-before: always; }
+  .ok { color: #0b6b4f; font-weight: 700; }
+  .no { color: #a8402f; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Scientific QA Evidence</h1>
+<div class="sub">An independent QA reproduction of OpenAI's Lean proofs for Navier–Stokes alternatives (C) and (D) and the Euler singularity · Report for release <b>v1.2.0</b> + bridge plan (commit <code>c400a6b</code>) · 21 October 2026<br>
+Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com/criguex/scientific-qa-evidence</div>
+
+<div class="box warn"><b>Read this first.</b> The proofs belong to OpenAI (<code>openai/NavierStokesAndEuler</code>). This work proves nothing new, claims no Millennium Prize result and is not a mathematical review. It is a software-QA study: rebuild the published artifacts, recheck them with independent checkers, test whether the checking pipeline itself catches errors, and publish every step with hashes.</div>
+
+<h2>1. Conclusions</h2>
+<ol>
+<li><b>OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.</b> Comparator, with nanoda and the Lean kernel, accepted both challenges on four different builds, the last compiled entirely from source with nothing prebuilt (<code>lake --no-cache build</code>, exit 0, 11,424 jobs, 1 h 29 min). A fresh <code>leanchecker</code> replay agreed, and the kernel source used includes every known 2026 kernel soundness fix.</li>
+<li><b>Comparator checks the exact statement.</b> It refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public Formal Conjectures statement after textual normalization (name resolution not verified).</li>
+<li><b>Not settled here.</b> Whether the formal statement says exactly what Clay's text says: a reading-based review leaves one interpretive point (periodic pressure in D) and a semantic work plan with 18 bridge claims, none yet formally proved or independently reviewed. Whether the Lean proof follows OpenAI's paper is out of scope and is disputed by arXiv:2610.08144.</li>
+<li><b>What the protocol adds.</b> In this case it surfaced eight findings that the documented verification procedure does not produce, three of them corrected defects in this study's own work. In a pre-registered benchmark its checks flagged four planted fault classes that the baseline passes. Four review rounds found and fixed 17 issues in that experiment itself.</li>
+<li><b>Not claimed.</b> Methodological novelty (a targeted literature search found close prior work), a real-world detection rate, or any part of the mathematical proof.</li>
+</ol>
+
+<h2>2. Formal results</h2>
+<table>
+<tr><th>Question</th><th>Result</th><th>Limitation</th></tr>
+<tr><td>Does it build from source?</td><td>B1 (2026-10-20) exit 0; B3 exit 0 (Mathlib and project local, 7 small dependencies prebuilt from Reservoir); <b>B4 <code>--no-cache</code> exit 0, every <code>.olean</code> newer than the build start</b></td><td>Lean toolchain and checker binaries reused; one Linux host</td></tr>
+<tr><td>Do independent kernels accept it?</td><td>Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all four runs, one per build</td><td>Standalone Comparator <code>19e111e</code>; one host</td></tr>
+<tr><td>Fresh replay</td><td><code>leanchecker --fresh</code> exit 0 for both solutions (19.6 and 22.5 min)</td><td>Same Lean kernel; lean4lean could not be built for Lean 4.34 and never examined the proofs</td></tr>
+<tr><td>Statement mutants</td><td>6/6 refused (<i>statements do not match</i>); comment-only control accepted</td><td>Tests statement equality only; says nothing about (A)/(B)</td></tr>
+<tr><td>Kernel currency</td><td>Lean <code>src/kernel</code> tree of v4.34.0-rc2 identical to v4.33.1–v4.34.1 (all 2026 kernel fixes); nanoda postdates its fix; a public exploit for #14576 is refused by the kernel used</td><td>Known bugs only; v4.34.1 runtime fixes not included</td></tr>
+<tr><td>Statement provenance</td><td>18 declarations match DeepMind <code>8bf45ed</code> after textual normalization</td><td>Textual, not semantic</td></tr>
+<tr><td>Clay risk review</td><td>16 clauses: 6 direct, 9 via standard facts, 1 needing a human decision</td><td>Reading-based; not reviewed by a mathematician</td></tr>
+</table>
+
+<h2>3. Numerical mutation campaign</h2>
+<p>Nine synthetic models × three configurations, independent oracles, frozen contract (tolerance 10<sup>−6</sup>). Per host: <b>27 PASS, 54 KILLED, 3 SURVIVED</b>, identical on macOS arm64 and Linux x86_64 (maximum scaled difference 1.11×10<sup>−16</sup>). The 54 KILLED are 51 distinct behaviors; the 3 survivors are a deliberately tiny RC change and stay visible. A rerun reproduces all 84 saved records. Synthetic models, not physical experiments.</p>
+
+<h2 class="pb">4. What the protocol found that the documented procedure does not show</h2>
+<p>Baseline: OpenAI's README procedure (<code>lake exe cache get</code>, <code>lake build</code>, Comparator).</p>
+<table>
+<tr><th>#</th><th>Finding</th><th>Protocol element</th></tr>
+<tr><td>1</td><td>A build believed clean had silently received 7 prebuilt dependencies; the log did not show it</td><td>Artifact timestamps vs build start</td></tr>
+<tr><td>2</td><td>A full from-source build is possible and verified</td><td><code>--no-cache</code> + artifact check</td></tr>
+<tr><td>3</td><td>Two runs reported as "same build" used different builds</td><td>Per-run receipts with original hashes</td></tr>
+<tr><td>4</td><td>Comparator refuses any one-symbol statement change</td><td>Statement mutants with a negative control</td></tr>
+<tr><td>5</td><td>Challenge text matches the public statement</td><td>Statement provenance</td></tr>
+<tr><td>6</td><td>Kernel and nanoda current with 2026 fixes</td><td>Kernel currency check</td></tr>
+<tr><td>7</td><td>Periodic pressure in (D) rests on reading Clay's erratum</td><td>Directional risk review</td></tr>
+<tr><td>8</td><td>The numerical runner reported a valid oracle when the oracle had failed</td><td>Fault injection into the test harness</td></tr>
+</table>
+<p class="small">Findings 1, 3 and 8 were defects in this study's own work, caught by the protocol and corrected in the open. One case is not a rate.</p>
+
+<h2>5. Pre-registered blind-fault benchmark</h2>
+<p>Seed committed by hash before the design was frozen; design and scripts frozen by hash; 21 cases drawn by the author; blind results committed before the key; key and seed revealed, and the draw reproduced byte for byte. After review it is presented as a <b>deterministic regression benchmark</b>; commit order is not taken as proof of blinding.</p>
+<table>
+<tr><th>Planted fault</th><th>Baseline</th><th>Protocol</th></tr>
+<tr><td>Clean</td><td class="ok">passes</td><td class="ok">passes</td></tr>
+<tr><td>F1 · prebuilt artifacts, clean log</td><td>passes</td><td class="no">flags</td></tr>
+<tr><td>F2 · statement differs textually from the reference</td><td>passes</td><td class="no">flags</td></tr>
+<tr><td>F4 · oracle failure hidden by the harness</td><td>passes</td><td class="no">flags</td></tr>
+<tr><td>F5 · receipt names a log the build did not write</td><td>passes</td><td class="no">flags</td></tr>
+<tr><td>F6 · positive control (<code>sorry</code>)</td><td class="no">flags</td><td class="no">flags</td></tr>
+</table>
+<table>
+<tr><th>Review round</th><th>Found</th><th>Outcome</th></tr>
+<tr><td>1 · external</td><td class="n">7</td><td>Errata (framing, F2 is a textual difference not a weakening, cost, seed) and evaluator v2 (fail closed on absent/incomplete evidence). The v1 "0 false alarms" does not hold.</td></tr>
+<tr><td>2 · external</td><td class="n">3</td><td>v2.1: non-object JSON, header-only tables, non-zero exit codes</td></tr>
+<tr><td>3 · fuzzing</td><td class="n">0</td><td>8,000 evaluations, no crash; same fuzzer finds 52 crashes in v2</td></tr>
+<tr><td>4 · semantic attacks</td><td class="n">7</td><td>v2.2: 5 false accepts and 2 false alarms fixed</td></tr>
+</table>
+<p class="small">Limits: planted faults over recorded artifacts, not live Lean; not a real-world rate; each fault sits in an artifact the baseline does not read. Class F3 (kernel exploit) was withdrawn before freezing after an automated safety filter stopped the assistant's work on it; the reason is recorded.</p>
+
+<h2 class="pb">6. Next stage: semantic and independent mathematical verification</h2>
+<p>To conclude that the formal (C) and (D) imply Clay's, one direction per clause suffices: formal data imply Clay data, and Clay solutions imply formal solutions. Plan: write Clay's text literally in Lean (<code>ClayLiteral.lean</code>), publish it for review before proving anything, then prove the bridge lemmas against the same pinned Mathlib.</p>
+<table>
+<tr><th>Rows</th><th>Content</th><th>Proof</th><th>Review</th></tr>
+<tr><td>K0</td><td>Literal Lean rendering of Clay's (1)–(11), (C), (D), erratum</td><td>in progress</td><td>none</td></tr>
+<tr><td>P1, D6, S3, S6, L1</td><td>Definitional or immediate</td><td>reading</td><td>none</td></tr>
+<tr><td>D1–D5, D7, S2</td><td>Smoothness, divergence and decay bounds (data side)</td><td>reading</td><td>none</td></tr>
+<tr><td>S1, S5</td><td>Equation in coordinates; energy and integrability (solution side)</td><td>reading</td><td>none</td></tr>
+<tr><td><b>S4</b></td><td>C<sup>∞</sup> up to the boundary vs <code>ContDiffOn</code>: depends on the meaning of C<sup>∞</sup> on a closed set</td><td>reading</td><td><b>needs a decision</b></td></tr>
+<tr><td><b>S7</b></td><td>Periodic pressure in (D): Clay's erratum read as a solution condition</td><td>interpretive</td><td><b>needs a decision</b></td></tr>
+<tr><td>K1</td><td>Composition: formal (C)/(D) ⇒ Clay (C)/(D)</td><td>reading</td><td>none</td></tr>
+</table>
+<p><b>State:</b> 18 claims, 0 formally proved, 0 independently reviewed.</p>
+
+<h2>7. Reproducibility and traceability</h2>
+<ul>
+<li>Release <b>v1.2.0</b>, commit <code>29c51a3</code>; CI green on Ubuntu and macOS, Python 3.9 and 3.12 (run 39683103016).</li>
+<li>Every curated file has a SHA-256 in <code>evidence/SHA256SUMS.txt</code>; every public log is traced to its original's hash in <code>PROVENANCE.md</code>.</li>
+<li><code>REPRODUCE.md</code> separates what is recomputed (numerical campaign, statement comparison, benchmark) from what is only verified by hash (formal logs).</li>
+<li>Related work, findings, claims with limitations, and errata are all in the repository: <code>RELATED_WORK.md</code>, <code>FINDINGS.md</code>, <code>CLAIMS.md</code>, <code>experiments/blind-faults/</code>.</li>
+<li>AI assistance is disclosed in <code>AUTHORSHIP.md</code>, including a mid-session change of the assistant's reported model; human authorship and responsibility remain with the author.</li>
+</ul>
+
+<p class="small">Contact: Cristian Guerra · github.com/criguex · Repository: https://github.com/criguex/scientific-qa-evidence</p>
+</body>
+</html>
