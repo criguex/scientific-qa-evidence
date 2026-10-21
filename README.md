@@ -100,7 +100,8 @@ To conclude that the formal (C) and (D) imply Clay's, one direction per clause i
 
 - Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean in [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), independent of DeepMind's style, and typecheck against the same Lean and Mathlib as the audit. It awaits review against the PDF.
 - **K1 is proved in Lean with no hypotheses:** for every ν > 0, OpenAI's proved theorems imply `AltC ν` and `AltD_withErratum ν`, Clay's (C) and (D) as written in `ClayLiteral` ([`bridges/`](bridges/README.md)). It uses only the three standard axioms, and a control checks that Clay's solution conditions are satisfiable, so the result is not vacuous. **None of it has been reviewed by a mathematician.**
-- The result is only as faithful as `ClayLiteral`, whose three stated readings and line-by-line fidelity to the PDF still need independent review. The data side used OpenAI's concrete witness: u₀ = 0 and a force smooth on all of ℝ × ℝ³, which is its own smooth extension (D4).
+- **Smoothness at t = 0 does not decide it:** K1 is proved under both readings of C^∞(ℝ³ × [0, ∞)), as a restriction of a C^∞ function and as derivatives continuous up to t = 0. **(C) does not use Clay's erratum;** the periodic-pressure question affects (D) only.
+- The result is only as faithful as `ClayLiteral`, whose fidelity to the PDF still needs independent review; the 14 points to check are in [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md). The data side used OpenAI's concrete witness: u₀ = 0 and a force smooth on all of ℝ × ℝ³, which is its own smooth extension (D4).
 - Two points need a human decision: the meaning of C^∞ on a closed set (S4) and periodic pressure in (D) (S7). A question on S7 was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
 
 ## Animations

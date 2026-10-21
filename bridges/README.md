@@ -24,8 +24,8 @@ Built on the Linux test host against the no-cache build B4 of OpenAI's `f9e8bc5`
 | --- | --- |
 | Lean | `4.34.0-rc2`, commit `6a10ac8c22beadecabdbb0919c2b50214762f91d` |
 | Mathlib | `85e3a25e006c35636f0e53b0e9296caca2685bc0` (B4, compiled locally) |
-| `ClayLiteral.lean` SHA-256 | `f5dd67fc765eca76029b88515381e3288083e53d1724e3ef804715f5dda06f78` |
-| `Bridges.lean` SHA-256 | `53fc89a9c5f6e617b98a0c541557102321d25d9c015e8cd9e4c9a29afde90ea0` |
+| `ClayLiteral.lean` SHA-256 | `1998dac2bee2477b8cc1d100f5345574624bf62290d1f85abf27203b9f8acb2d` |
+| `Bridges.lean` SHA-256 | `b22ddc0e09bf21778700b9ac8b5674b683aa365cafc99aac3ac354d3c1c73278` |
 | `ClayLiteral.lean` | typechecks, exit 0 |
 | `Bridges.lean` | typechecks, exit 0 |
 
@@ -51,8 +51,10 @@ No `sorry`, no extra axioms. `k1_C` and `k1_D` use OpenAI's proved theorems, whi
 
 `k1_C : ∀ ν, 0 < ν → AltC ν` and `k1_D : ∀ ν, 0 < ν → AltD_withErratum ν` have **no hypotheses**. They start from OpenAI's internal theorems (`NavierStokesR3.theorem_1_1`, `PeriodicPaper.periodic_corollary`), whose witness is u₀ = 0 and a force smooth on all of ℝ × ℝ³, and they use only `propext`, `Classical.choice` and `Quot.sound`.
 
-They are relative to `ClayLiteral`: its three READING choices (C^∞ on a closed set as the restriction of a C^∞ function, K real, the erratum as a condition on solutions) and its overall fidelity to the PDF, which no independent person has reviewed. (D) without the erratum on solutions is not proved (row S7). `zero_solution_C` and `zero_solution_D` check that ClayLiteral's solution conditions are satisfiable, so "no solution exists" is not vacuous.
+**Smoothness at t = 0 does not decide the result.** `ClayLiteral` renders C^∞(ℝ³ × [0, ∞)) in two ways, as the restriction of a C^∞ function (`SmoothUpToBoundary`) and as derivatives of every order continuous up to t = 0 (`SmoothOneSided`), and K1 is proved under both: `k1_C_oneSided`, `k1_D_oneSided`. **(C) does not use the erratum;** the periodic-pressure question (S7) affects (D) only.
+
+The result is relative to `ClayLiteral`'s fidelity to the PDF, which no independent person has reviewed; the points to check are in [`K0_REVIEW.md`](K0_REVIEW.md). (D) without the erratum on solutions is not proved (row S7). `zero_solution_C` and `zero_solution_D` check that ClayLiteral's solution conditions are satisfiable, so "no solution exists" is not vacuous.
 
 **How D4 closed.** Reading C^∞(ℝ³ × [0, ∞)) as a restriction makes S4 immediate but requires a smooth extension of the force (D4). No general extension theorem was used: OpenAI's own construction proves the force smooth on all of ℝ × ℝ³, so it is its own extension.
 
-All theorems, checked with `#print axioms` on Lean 4.34.0-rc2: `k1_C`, `k1_D`, `witness_C`, `witness_D`, `d1_zero`, `d2_zero`, `d3_zero`, `d5`, `d6`, `d7`, `s1`–`s6`, `s7_formal_side`, `p1`, `clay_bound`, `zero_solution_C`, `zero_solution_D`: `[propext, Classical.choice, Quot.sound]`. `Bridges.lean` contains no `sorry`.
+All theorems, checked with `#print axioms` on Lean 4.34.0-rc2: `k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided`, `witness_C`, `witness_D`, `d1_zero`, `d2_zero`, `d3_zero`, `d5`, `d6`, `d7`, `s1`–`s6`, `s7_formal_side`, `p1`, `clay_bound`, `zero_solution_C`, `zero_solution_D`: `[propext, Classical.choice, Quot.sound]`. `Bridges.lean` contains no `sorry`.

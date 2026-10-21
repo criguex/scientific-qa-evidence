@@ -1,19 +1,125 @@
 {
   "registered": "2026-10-21",
-  "classes": ["SAME", "CHANGED_EQUIVALENT", "CHANGED_WEAKER", "CHANGED_FALSE", "CHANGED_UNKNOWN"],
+  "classes": [
+    "ACCEPTED_BY_CHECKER",
+    "CHANGED_EQUIVALENT",
+    "CHANGED_WEAKER",
+    "CHANGED_NOT_EQUIVALENT",
+    "CHANGED_FALSE",
+    "CHANGED_UNKNOWN"
+  ],
   "cases": [
-    {"id": "primes/orig",    "challenge": "PrimesOrig",    "solution": "Primes",        "comparator": "accept", "second_route": "none",                 "class": "SAME"},
-    {"id": "primes/reform",  "challenge": "PrimesReform",  "solution": "Primes",        "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
-    {"id": "primes/bounded", "challenge": "PrimesBounded", "solution": "Primes",        "comparator": "reject", "second_route": "schema_non_implication", "class": "CHANGED_WEAKER"},
-    {"id": "primes/swap",    "challenge": "PrimesSwap",    "solution": "Primes",        "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"},
-    {"id": "cs/orig",        "challenge": "CSOrig",        "solution": "CauchySchwarz", "comparator": "accept", "second_route": "none",                 "class": "SAME"},
-    {"id": "cs/reform",      "challenge": "CSReform",      "solution": "CauchySchwarz", "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
-    {"id": "cs/strict",      "challenge": "CSStrict",      "solution": "CauchySchwarz", "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"},
-    {"id": "dct/orig",       "challenge": "DCTOrig",       "solution": "DCT",           "comparator": "accept", "second_route": "none",                 "class": "SAME"},
-    {"id": "dct/reform",     "challenge": "DCTReform",     "solution": "DCT",           "comparator": "reject", "second_route": "equivalence",          "class": "CHANGED_EQUIVALENT"},
-    {"id": "dct/nodom",      "challenge": "DCTNoDom",      "solution": "DCT",           "comparator": "reject", "second_route": "refutation",           "class": "CHANGED_FALSE"}
+    {
+      "id": "primes/orig",
+      "challenge": "PrimesOrig",
+      "solution": "Primes",
+      "comparator": "accept",
+      "second_route": "none",
+      "class": "ACCEPTED_BY_CHECKER"
+    },
+    {
+      "id": "primes/defeq",
+      "challenge": "PrimesDefeq",
+      "solution": "Primes",
+      "comparator": "reject (if Comparator compares expressions structurally; acceptance would show comparison up to definitional unfolding)",
+      "second_route": "equivalence",
+      "class": "CHANGED_EQUIVALENT, or ACCEPTED_BY_CHECKER if accepted"
+    },
+    {
+      "id": "primes/reform",
+      "challenge": "PrimesReform",
+      "solution": "Primes",
+      "comparator": "reject",
+      "second_route": "equivalence",
+      "class": "CHANGED_EQUIVALENT"
+    },
+    {
+      "id": "primes/bounded",
+      "challenge": "PrimesBounded",
+      "solution": "Primes",
+      "comparator": "reject",
+      "second_route": "original_implies_changed + schema_non_implication",
+      "class": "CHANGED_WEAKER"
+    },
+    {
+      "id": "primes/swap",
+      "challenge": "PrimesSwap",
+      "solution": "Primes",
+      "comparator": "reject",
+      "second_route": "refutation",
+      "class": "CHANGED_FALSE"
+    },
+    {
+      "id": "cs/orig",
+      "challenge": "CSOrig",
+      "solution": "CauchySchwarz",
+      "comparator": "accept",
+      "second_route": "none",
+      "class": "ACCEPTED_BY_CHECKER"
+    },
+    {
+      "id": "cs/reform",
+      "challenge": "CSReform",
+      "solution": "CauchySchwarz",
+      "comparator": "reject",
+      "second_route": "equivalence",
+      "class": "CHANGED_EQUIVALENT"
+    },
+    {
+      "id": "cs/strict",
+      "challenge": "CSStrict",
+      "solution": "CauchySchwarz",
+      "comparator": "reject",
+      "second_route": "refutation",
+      "class": "CHANGED_FALSE"
+    },
+    {
+      "id": "dct/orig",
+      "challenge": "DCTOrig",
+      "solution": "DCT",
+      "comparator": "accept",
+      "second_route": "none",
+      "class": "ACCEPTED_BY_CHECKER"
+    },
+    {
+      "id": "dct/reform",
+      "challenge": "DCTReform",
+      "solution": "DCT",
+      "comparator": "reject",
+      "second_route": "equivalence using nonnegativity of the bound from domination",
+      "class": "CHANGED_EQUIVALENT"
+    },
+    {
+      "id": "dct/nodom",
+      "challenge": "DCTNoDom",
+      "solution": "DCT",
+      "comparator": "reject",
+      "second_route": "refutation",
+      "class": "CHANGED_FALSE"
+    }
   ],
   "guard_controls": [
-    {"id": "guard/cheat", "description": "an equivalence proof for primes/reform that uses Nat.exists_infinite_primes", "expected": "guard rejects; the equivalence does not count"}
-  ]
+    {
+      "id": "guard/cheat",
+      "description": "an equivalence proof for primes/reform that uses Nat.exists_infinite_primes",
+      "expected": "guard rejects; the equivalence does not count"
+    },
+    {
+      "id": "control/dct-signed",
+      "description": "the isolated condition AEStronglyMeasurable g and finite lintegral of ofReal g does not imply Integrable g for a signed g (g = -1 on R)",
+      "expected": "refutation builds"
+    }
+  ],
+  "amendment": {
+    "number": 1,
+    "date": "2026-10-21",
+    "before_any_run": true,
+    "original_commit": "046a12839572821709aa7b8773c8fdd6536f1d73",
+    "changes": [
+      "SAME renamed ACCEPTED_BY_CHECKER: an acceptance is equality as Comparator checks it, not textual identity and not a separately proved equivalence",
+      "CHANGED_WEAKER now requires both original => changed and schema non-implication; non-implication alone gives CHANGED_NOT_EQUIVALENT",
+      "dct/reform: the equivalence must use that the domination hypothesis makes the bound nonnegative a.e.; a control shows the isolated condition is not equivalent to Integrable for a signed function",
+      "new case primes/defeq probes whether Comparator accepts a definitionally equal but textually different statement"
+    ]
+  }
 }

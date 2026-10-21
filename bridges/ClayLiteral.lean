@@ -48,10 +48,16 @@ noncomputable def dxt : List (Fin 3) → (R3 → ℝ → R3) → (R3 → ℝ →
 
 /-- C^∞(ℝ³ × [0, ∞)). READING (row S4): taken as the restriction of a C^∞ function
     on ℝ³ × ℝ. The alternative reading, continuous one-sided derivatives of every
-    order up to t = 0, is recorded as open in bridges/README.md. -/
+    order up to t = 0, is `SmoothOneSided` below; (C) and (D) are stated under both. -/
 def SmoothUpToBoundary {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]
     (g : R3 → ℝ → X) : Prop :=
   ∃ G : R3 × ℝ → X, ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) G ∧ ∀ x t, 0 ≤ t → G (x, t) = g x t
+
+/-- C^∞(ℝ³ × [0, ∞)), second READING (row S4): derivatives of every order exist one-sidedly
+    at t = 0 and are continuous up to t = 0, i.e. `ContDiffOn` within the closed half-space. -/
+def SmoothOneSided {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]
+    (g : R3 → ℝ → X) : Prop :=
+  ContDiffOn ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) (Function.uncurry g) (Set.univ ×ˢ Set.Ici 0)
 
 /-- div u = Σᵢ ∂uᵢ/∂xᵢ (equation (2), and the condition on u°). -/
 noncomputable def div (u : R3 → R3) (x : R3) : ℝ :=
@@ -85,6 +91,10 @@ def Cond5 (f : R3 → ℝ → R3) : Prop :=
 /-- Condition (6) (and (11)): p, u ∈ C^∞(ℝ³ × [0, ∞)). -/
 def Cond6 (u : R3 → ℝ → R3) (p : R3 → ℝ → ℝ) : Prop :=
   SmoothUpToBoundary u ∧ SmoothUpToBoundary p
+
+/-- Condition (6) under the second reading of C^∞ on a closed set. -/
+def Cond6OneSided (u : R3 → ℝ → R3) (p : R3 → ℝ → ℝ) : Prop :=
+  SmoothOneSided u ∧ SmoothOneSided p
 
 /-- Condition (7): ∫_{ℝ³} |u(x,t)|² dx < C for all t ≥ 0, as a Lebesgue integral of a
     nonnegative function. -/
@@ -129,6 +139,20 @@ def AltD_withoutErratum (ν : ℝ) : Prop :=
     SmoothR3 u0 ∧ (∀ x, div u0 x = 0) ∧ SmoothUpToBoundary f ∧ Cond8 u0 f ∧ Cond9 f ∧
     ¬ ∃ (p : R3 → ℝ → ℝ) (u : R3 → ℝ → R3),
       Eq1 ν f u p ∧ Eq2 u ∧ Eq3 u0 u ∧ Cond10 u ∧ Cond6 u p
+
+/-- Alternative (C) under the second reading of C^∞(ℝ³ × [0, ∞)). -/
+def AltC_oneSided (ν : ℝ) : Prop :=
+  ∃ (u0 : R3 → R3) (f : R3 → ℝ → R3),
+    SmoothR3 u0 ∧ (∀ x, div u0 x = 0) ∧ SmoothOneSided f ∧ Cond4 u0 ∧ Cond5 f ∧
+    ¬ ∃ (p : R3 → ℝ → ℝ) (u : R3 → ℝ → R3),
+      Eq1 ν f u p ∧ Eq2 u ∧ Eq3 u0 u ∧ Cond6OneSided u p ∧ Cond7 u
+
+/-- Alternative (D), with the erratum on solutions, under the second reading. -/
+def AltD_withErratum_oneSided (ν : ℝ) : Prop :=
+  ∃ (u0 : R3 → R3) (f : R3 → ℝ → R3),
+    SmoothR3 u0 ∧ (∀ x, div u0 x = 0) ∧ SmoothOneSided f ∧ Cond8 u0 f ∧ Cond9 f ∧
+    ¬ ∃ (p : R3 → ℝ → ℝ) (u : R3 → ℝ → R3),
+      Eq1 ν f u p ∧ Eq2 u ∧ Eq3 u0 u ∧ Cond10 u ∧ Cond6OneSided u p ∧ Erratum p
 
 /-- Sanity check: dropping a requirement on solutions can only make (D) stronger. -/
 theorem altD_withoutErratum_imp_withErratum (ν : ℝ) :

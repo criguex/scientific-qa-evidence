@@ -100,7 +100,8 @@ Para concluir que la (C) y la (D) formales implican las de Clay basta una direcc
 
 - Las ecuaciones (1)–(11), (C), (D) y la errata de Clay están escritas literalmente en Lean en [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), con un estilo independiente del de DeepMind, y compilan contra el mismo Lean y Mathlib de la auditoría. Falta revisarlas contra el PDF.
 - **K1 está probado en Lean sin hipótesis:** para todo ν > 0, los teoremas probados de OpenAI implican `AltC ν` y `AltD_withErratum ν`, la (C) y la (D) de Clay tal como están en `ClayLiteral` ([`bridges/`](bridges/README.md)). Usa solo los tres axiomas estándar, y un control comprueba que las condiciones de solución de Clay se pueden cumplir, así que el resultado no es vacío. **Nada de esto lo ha revisado un matemático.**
-- El resultado solo es tan fiel como `ClayLiteral`, cuyas tres lecturas declaradas y fidelidad línea por línea al PDF aún necesitan revisión independiente. El lado de los datos usó el testigo concreto de OpenAI: u₀ = 0 y una fuerza suave en todo ℝ × ℝ³, que es su propia extensión suave (D4).
+- **La suavidad en t = 0 no lo decide:** K1 está probado bajo las dos lecturas de C^∞(ℝ³ × [0, ∞)), como restricción de una función C^∞ y como derivadas continuas hasta t = 0. **La (C) no usa la errata de Clay;** la cuestión de la presión periódica afecta solo a la (D).
+- El resultado solo es tan fiel como `ClayLiteral`, cuya fidelidad al PDF aún necesita revisión independiente; los 14 puntos a revisar están en [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md) (en inglés). El lado de los datos usó el testigo concreto de OpenAI: u₀ = 0 y una fuerza suave en todo ℝ × ℝ³, que es su propia extensión suave (D4).
 - Dos puntos necesitan una decisión humana: qué significa C^∞ en un conjunto cerrado (S4) y la presión periódica en (D) (S7). El 2026-10-21 se envió una pregunta sobre S7 al Clay Mathematics Institute; las respuestas se registrarán aquí.
 
 ## Animaciones

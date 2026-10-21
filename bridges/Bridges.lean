@@ -207,11 +207,9 @@ theorem fderiv_cmp {v : R3 → R3} {x : R3} (hv : DifferentiableAt ℝ v x) (i :
   congrArg (fun L : R3 →L[ℝ] ℝ => L w) ((cmp i).hasFDerivAt.comp x hv.hasFDerivAt).fderiv
 
 theorem slice_smooth {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X] {g : R3 → ℝ → X}
-    {G : R3 × ℝ → X} (hG : ContDiff ℝ ∞ G) (hGg : ∀ x t, 0 ≤ t → G (x, t) = g x t)
-    {t : ℝ} (ht : 0 ≤ t) : ContDiff ℝ ∞ (g · t) := by
-  have : (g · t) = fun y => G (y, t) := funext fun y => (hGg y t ht).symm
-  rw [this]
-  exact hG.comp (contDiff_id.prodMk contDiff_const)
+    (hU : ContDiffOn ℝ ∞ (↿g) (Set.univ ×ˢ Set.Ici 0)) {t : ℝ} (ht : 0 ≤ t) :
+    ContDiff ℝ ∞ (g · t) :=
+  hU.comp_contDiff (contDiff_id.prodMk contDiff_const) fun _ => ⟨Set.mem_univ _, ht⟩
 
 theorem clm_expand (L : R3 →L[ℝ] ℝ) (w : R3) : L w = ∑ j, w j * L (e j) := by
   conv_lhs => rw [← (EuclideanSpace.basisFun (Fin 3) ℝ).sum_repr w]
@@ -223,33 +221,31 @@ theorem gradient_cmp (q : R3 → ℝ) (x : R3) (i : Fin 3) :
   rw [inner_gradient_right] at h
   simpa [e] using h.symm
 
-theorem time_cmp {u : R3 → ℝ → R3} {G : R3 × ℝ → R3} (hG : ContDiff ℝ ∞ G)
-    (hGu : ∀ x t, 0 ≤ t → G (x, t) = u x t) (x : R3) {t : ℝ} (ht : 0 ≤ t) (i : Fin 3) :
+theorem time_cmp {u : R3 → ℝ → R3} (hU : ContDiffOn ℝ ∞ (↿u) (Set.univ ×ˢ Set.Ici 0))
+    (x : R3) {t : ℝ} (ht : 0 ≤ t) (i : Fin 3) :
     cmp i (derivWithin (u x ·) (Set.Ici 0) t) = derivWithin (fun s => u x s i) (Set.Ici 0) t := by
-  have hd : HasDerivAt (fun s => G (x, s)) (fderiv ℝ G (x, t) ((0 : R3), (1 : ℝ))) t :=
-    ((contDiff_infty_iff_fderiv.mp hG).1 (x, t)).hasFDerivAt.comp_hasDerivAt t
-      ((hasDerivAt_const t x).prodMk (hasDerivAt_id t))
-  have hu : derivWithin (u x ·) (Set.Ici 0) t = fderiv ℝ G (x, t) ((0 : R3), (1 : ℝ)) := by
-    refine (derivWithin_congr (s := Set.Ici 0) (f := fun s => G (x, s))
-      (fun s hs => (hGu x s hs).symm) (hGu x t ht).symm).trans ?_
-    exact hd.hasDerivWithinAt.derivWithin (uniqueDiffOn_Ici 0 t ht)
-  have hui : derivWithin (fun s => u x s i) (Set.Ici 0) t =
-      cmp i (fderiv ℝ G (x, t) ((0 : R3), (1 : ℝ))) := by
-    refine (derivWithin_congr (s := Set.Ici 0) (f := fun s => cmp i (G (x, s)))
-      (fun s hs => by simp [hGu x s hs]) (by simp [hGu x t ht])).trans ?_
-    exact ((cmp i).hasFDerivAt.comp_hasDerivAt t hd).hasDerivWithinAt.derivWithin
-      (uniqueDiffOn_Ici 0 t ht)
-  rw [hu, hui]
+  have hdiff : DifferentiableWithinAt ℝ (↿u) (Set.univ ×ˢ Set.Ici 0) (x, t) :=
+    hU.differentiableOn (by simp) (x, t) ⟨Set.mem_univ _, ht⟩
+  have hd : HasDerivWithinAt (fun s => u x s)
+      (fderivWithin ℝ (↿u) (Set.univ ×ˢ Set.Ici 0) (x, t) ((0 : R3), (1 : ℝ))) (Set.Ici 0) t :=
+    hdiff.hasFDerivWithinAt.comp_hasDerivWithinAt t
+      ((hasDerivWithinAt_const t (Set.Ici 0) x).prodMk (hasDerivWithinAt_id t (Set.Ici 0)))
+      fun s hs => ⟨Set.mem_univ _, hs⟩
+  have h1 : derivWithin (u x ·) (Set.Ici 0) t =
+      fderivWithin ℝ (↿u) (Set.univ ×ˢ Set.Ici 0) (x, t) ((0 : R3), (1 : ℝ)) :=
+    hd.derivWithin (uniqueDiffOn_Ici 0 t ht)
+  have h2 : derivWithin (fun s => u x s i) (Set.Ici 0) t =
+      cmp i (fderivWithin ℝ (↿u) (Set.univ ×ˢ Set.Ici 0) (x, t) ((0 : R3), (1 : ℝ))) :=
+    ((cmp i).hasFDerivAt.comp_hasDerivWithinAt t hd).derivWithin (uniqueDiffOn_Ici 0 t ht)
+  rw [h1, h2]
 
 /-- Row S1: Clay's equation (1), componentwise, gives the formal vector equation. -/
 theorem s1 (ν : ℝ) (f u : R3 → ℝ → R3) (p : R3 → ℝ → ℝ) (h : Eq1 ν f u p)
-    (hu : SmoothUpToBoundary u) (hp : SmoothUpToBoundary p) :
+    (hu : ContDiffOn ℝ ∞ (↿u) (Set.univ ×ˢ Set.Ici 0)) :
     ∀ x, ∀ t ≥ (0 : ℝ), derivWithin (u x ·) (Set.Ici 0) t + fderiv ℝ (u · t) x (u x t) =
       ν • Δ (u · t) x - gradient (p · t) x + f x t := by
-  obtain ⟨G, hG, hGu⟩ := hu
-  obtain ⟨P, hP, hPp⟩ := hp
   intro x t ht
-  have hvs := slice_smooth hG hGu ht
+  have hvs := slice_smooth hu ht
   have hv := (contDiff_infty_iff_fderiv.mp hvs).1
   have hdk : ∀ k, Differentiable ℝ (fun y => fderiv ℝ (u · t) y (e k)) := fun k =>
     (contDiff_infty_iff_fderiv.mp
@@ -271,17 +267,16 @@ theorem s1 (ν : ℝ) (f u : R3 → ℝ → R3) (p : R3 → ℝ → ℝ) (h : Eq
     exact (fderiv_cmp (hdk k x) i (e k)).symm
   show cmp i (derivWithin (u x ·) (Set.Ici 0) t + fderiv ℝ (u · t) x (u x t)) =
     cmp i (ν • Δ (u · t) x - gradient (p · t) x + f x t)
-  rw [map_add, map_add, map_sub, map_smul, hL, map_sum, time_cmp hG hGu x ht i, hC,
+  rw [map_add, map_add, map_sub, map_smul, hL, map_sum, time_cmp hu x ht i, hC,
     gradient_cmp, smul_eq_mul]
   simp only [hLk]
   exact h x t ht i
 
 /-- Row S2: Clay's (2) gives the formal divergence-free field. -/
-theorem s2 (u : R3 → ℝ → R3) (h : Eq2 u) (hu : SmoothUpToBoundary u) :
+theorem s2 (u : R3 → ℝ → R3) (h : Eq2 u) (hu : ContDiffOn ℝ ∞ (↿u) (Set.univ ×ˢ Set.Ici 0)) :
     ∀ x, ∀ t ≥ (0 : ℝ), divergence (u · t) x = 0 := by
-  obtain ⟨G, hG, hGu⟩ := hu
   intro x t ht
-  have hv := (contDiff_infty_iff_fderiv.mp (slice_smooth hG hGu ht)).1
+  have hv := (contDiff_infty_iff_fderiv.mp (slice_smooth hu ht)).1
   have hd : divergence (u · t) x = ∑ i, fderiv ℝ (u · t) x (e i) i :=
     (NavierStokes.ComparatorBridge.divergence_eq
       (NavierStokes.ComparatorBridge.fromComparator u) t x).symm
@@ -290,21 +285,20 @@ theorem s2 (u : R3 → ℝ → R3) (h : Eq2 u) (hu : SmoothUpToBoundary u) :
   exact Finset.sum_congr rfl fun i _ => (fderiv_cmp (hv x) i (e i)).symm
 
 /-- Row S5: Clay's (7), a finite Lebesgue integral, gives the formal `MemLp` and energy bound. -/
-theorem s5 (u : R3 → ℝ → R3) (h7 : Cond7 u) (hu : SmoothUpToBoundary u) :
+theorem s5 (u : R3 → ℝ → R3) (h7 : Cond7 u) (hu : ContDiffOn ℝ ∞ (↿u) (Set.univ ×ˢ Set.Ici 0)) :
     (∀ t ≥ (0 : ℝ), MeasureTheory.MemLp (‖u · t‖) 2) ∧
       ∃ E, ∀ t ≥ (0 : ℝ), (∫ x, ‖u x t‖ ^ 2) < E := by
   obtain ⟨C, hC⟩ := h7
-  obtain ⟨G, hG, hGu⟩ := hu
   have h0 : ∀ t : ℝ, 0 ≤ᵐ[MeasureTheory.volume] fun x => ‖u x t‖ ^ 2 := fun t =>
     MeasureTheory.ae_of_all _ fun x => by simp only [Pi.zero_apply]; positivity
   have hm : ∀ t ≥ (0 : ℝ), MeasureTheory.AEStronglyMeasurable (fun x => ‖u x t‖ ^ 2) :=
-    fun t ht => ((slice_smooth hG hGu ht).continuous.norm.pow 2).aestronglyMeasurable
+    fun t ht => ((slice_smooth hu ht).continuous.norm.pow 2).aestronglyMeasurable
   have hint : ∀ t ≥ (0 : ℝ), MeasureTheory.Integrable (fun x => ‖u x t‖ ^ 2) := fun t ht =>
     ⟨hm t ht, (MeasureTheory.hasFiniteIntegral_iff_ofReal (h0 t)).mpr
       ((hC t ht).trans ENNReal.ofReal_lt_top)⟩
   refine ⟨fun t ht => ?_, C, fun t ht => ?_⟩
   · exact (MeasureTheory.memLp_two_iff_integrable_sq_norm
-      (slice_smooth hG hGu ht).continuous.norm.aestronglyMeasurable).mpr (by simpa using hint t ht)
+      (slice_smooth hu ht).continuous.norm.aestronglyMeasurable).mpr (by simpa using hint t ht)
   · rw [MeasureTheory.integral_eq_lintegral_of_nonneg_ae (h0 t) (hm t ht)]
     exact ENNReal.toReal_lt_of_lt_ofReal (hC t ht)
 
@@ -316,10 +310,10 @@ theorem k1_C (ν : ℝ) (hν : 0 < ν) : AltC ν := by
   refine ⟨fun _ => 0, fun x t => Φ (x, t), d1_zero, d2_zero, ⟨Φ, hΦ, fun _ _ _ => rfl⟩, d3_zero,
     d5 hΦ hf, ?_⟩
   rintro ⟨p, u, h1, h2, h3, ⟨hu6, hp6⟩, h7⟩
-  obtain ⟨hint, henergy⟩ := s5 u h7 hu6
+  obtain ⟨hint, henergy⟩ := s5 u h7 (s4 u hu6)
   exact hno ⟨u, p,
-    { navier_stokes := s1 ν _ u p h1 hu6 hp6
-      div_free := s2 u h2 hu6
+    { navier_stokes := s1 ν _ u p h1 (s4 u hu6)
+      div_free := s2 u h2 (s4 u hu6)
       initial_condition := s3 _ u h3
       velocity_smooth := s4 u hu6
       pressure_smooth := s4 p hp6
@@ -333,11 +327,46 @@ theorem k1_D (ν : ℝ) (hν : 0 < ν) : AltD_withErratum ν := by
     d6 _ _ hu hf, d7 hΦ hf, ?_⟩
   rintro ⟨p, u, h1, h2, h3, h10, ⟨hu6, hp6⟩, hErr⟩
   exact hno ⟨u, p,
-    { navier_stokes := s1 ν _ u p h1 hu6 hp6
-      div_free := s2 u h2 hu6
+    { navier_stokes := s1 ν _ u p h1 (s4 u hu6)
+      div_free := s2 u h2 (s4 u hu6)
       initial_condition := s3 _ u h3
       velocity_smooth := s4 u hu6
       pressure_smooth := s4 p hp6
+      isOnePeriodic_velocity := s6 u h10
+      isOnePeriodic_pressure := s7_formal_side p hErr }⟩
+
+/-! ### Row K1 under the second reading of C^∞ on a closed set
+
+Under `SmoothOneSided`, Clay's smoothness is the formal `ContDiffOn` itself, so S4 is the
+identity and the force's smoothness follows from its global smoothness. K1 therefore does not
+depend on which reading of smoothness at t = 0 Clay intends. -/
+
+theorem k1_C_oneSided (ν : ℝ) (hν : 0 < ν) : AltC_oneSided ν := by
+  obtain ⟨Φ, hΦ, hf, hno⟩ := witness_C ν hν
+  refine ⟨fun _ => 0, fun x t => Φ (x, t), d1_zero, d2_zero, hΦ.contDiffOn, d3_zero,
+    d5 hΦ hf, ?_⟩
+  rintro ⟨p, u, h1, h2, h3, ⟨hu6, hp6⟩, h7⟩
+  obtain ⟨hint, henergy⟩ := s5 u h7 hu6
+  exact hno ⟨u, p,
+    { navier_stokes := s1 ν _ u p h1 hu6
+      div_free := s2 u h2 hu6
+      initial_condition := s3 _ u h3
+      velocity_smooth := hu6
+      pressure_smooth := hp6
+      integrable := hint
+      globally_bounded_energy := henergy }⟩
+
+theorem k1_D_oneSided (ν : ℝ) (hν : 0 < ν) : AltD_withErratum_oneSided ν := by
+  obtain ⟨Φ, hΦ, hu, hf, hno⟩ := witness_D ν hν
+  refine ⟨fun _ => 0, fun x t => Φ (x, t), d1_zero, d2_zero, hΦ.contDiffOn,
+    d6 _ _ hu hf, d7 hΦ hf, ?_⟩
+  rintro ⟨p, u, h1, h2, h3, h10, ⟨hu6, hp6⟩, hErr⟩
+  exact hno ⟨u, p,
+    { navier_stokes := s1 ν _ u p h1 hu6
+      div_free := s2 u h2 hu6
+      initial_condition := s3 _ u h3
+      velocity_smooth := hu6
+      pressure_smooth := hp6
       isOnePeriodic_velocity := s6 u h10
       isOnePeriodic_pressure := s7_formal_side p hErr }⟩
 
