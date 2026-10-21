@@ -7,12 +7,12 @@
       "baseline": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 3.5874999999999995e-06
+        "seconds_per_case": 3.7794165000000003e-06
       },
       "protocol": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 8.520396000000001e-06
+        "seconds_per_case": 1.03404375e-05
       }
     },
     "F1": {
@@ -20,14 +20,14 @@
       "baseline": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 3.5154795000000015e-06
+        "seconds_per_case": 3.7471250000000006e-06
       },
       "protocol": {
         "flagged": true,
         "flags": [
           "P1:prebuilt-batteries"
         ],
-        "seconds_per_case": 8.814312499999997e-06
+        "seconds_per_case": 1.06239165e-05
       }
     },
     "F2": {
@@ -35,14 +35,14 @@
       "baseline": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 3.4789789999999967e-06
+        "seconds_per_case": 3.6787704999999974e-06
       },
       "protocol": {
         "flagged": true,
         "flags": [
           "P2:statement-differs-from-reference"
         ],
-        "seconds_per_case": 8.426812499999998e-06
+        "seconds_per_case": 1.0146875e-05
       }
     },
     "F4": {
@@ -50,14 +50,14 @@
       "baseline": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 3.761645500000001e-06
+        "seconds_per_case": 3.867916999999999e-06
       },
       "protocol": {
         "flagged": true,
         "flags": [
           "P5:oracle-failure-hidden"
         ],
-        "seconds_per_case": 8.820270500000005e-06
+        "seconds_per_case": 1.0761521000000003e-05
       }
     },
     "F5": {
@@ -65,14 +65,14 @@
       "baseline": {
         "flagged": false,
         "flags": [],
-        "seconds_per_case": 3.4614999999999994e-06
+        "seconds_per_case": 3.668312499999993e-06
       },
       "protocol": {
         "flagged": true,
         "flags": [
           "P6:receipt-log-missing-other-build.log"
         ],
-        "seconds_per_case": 8.398603999999997e-06
+        "seconds_per_case": 1.0008812500000006e-05
       }
     },
     "F6": {
@@ -82,14 +82,14 @@
         "flags": [
           "B:axioms"
         ],
-        "seconds_per_case": 3.6318750000000066e-06
+        "seconds_per_case": 3.817458499999996e-06
       },
       "protocol": {
         "flagged": true,
         "flags": [
           "B:axioms"
         ],
-        "seconds_per_case": 8.591770499999999e-06
+        "seconds_per_case": 1.0107916999999993e-05
       }
     }
   }

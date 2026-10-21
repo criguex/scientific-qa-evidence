@@ -69,5 +69,46 @@ class IncompleteEvidenceTests(unittest.TestCase):
         self.assertIn("P1:oleans-unparseable", flags)
 
 
+class ReviewRound2Tests(unittest.TestCase):
+    """Regression tests for the three defects reported in the second review."""
+
+    def test_non_object_summary_is_rejected_not_crashed(self):
+        for value in ("[]", "42", '"text"', "null"):
+            case = V2.clean_case()
+            case["numeric_summary.json"] = value
+            b_ok, b_flags = V2.baseline(case)
+            p_ok, _ = V2.protocol(case)
+            self.assertFalse(b_ok, value)
+            self.assertFalse(p_ok, value)
+            self.assertIn("B:numeric-summary-not-object", b_flags, value)
+
+    def test_header_only_tables_are_rejected(self):
+        case = V2.clean_case()
+        case["receipt.tsv"] = "step\tcommand\tlog\texit\n"
+        case["oleans.tsv"] = "package\ttotal\tolder_than_build_start\n"
+        accepted, flags = V2.protocol(case)
+        self.assertFalse(accepted)
+        self.assertIn("P6:receipt-no-rows", flags)
+        self.assertIn("P1:oleans-no-rows", flags)
+
+    def test_wrong_headers_are_rejected(self):
+        case = V2.clean_case()
+        case["receipt.tsv"] = case["receipt.tsv"].replace("step\tcommand", "stage\tcommand")
+        self.assertIn("P6:receipt-bad-header", V2.protocol(case)[1])
+
+    def test_nonzero_receipt_exit_codes_are_rejected(self):
+        case = V2.clean_case()
+        case["receipt.tsv"] = case["receipt.tsv"].replace("\t0\n", "\t1\n")
+        accepted, flags = V2.protocol(case)
+        self.assertFalse(accepted)
+        self.assertIn("P6:receipt-exit-build-1", flags)
+        self.assertIn("P6:receipt-exit-comparator-1", flags)
+
+    def test_receipts_must_cover_build_and_comparator(self):
+        case = V2.clean_case()
+        case["receipt.tsv"] = "step\tcommand\tlog\texit\nbuild\tlake build\tbuild.log\t0\n"
+        self.assertIn("P6:receipt-step-missing-comparator", V2.protocol(case)[1])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -52,11 +52,28 @@ def _axioms_flags(text, prefix):
     return [] if used <= PERMITTED_AXIOMS else [f"{prefix}:axioms"]
 
 
+RECEIPT_HEADER = "step\tcommand\tlog\texit"
+OLEANS_HEADER = "package\ttotal\tolder_than_build_start"
+REQUIRED_STEPS = {"build", "comparator"}
+
+
 def _summary(case):
     try:
-        return json.loads(case.get("numeric_summary.json", "")), []
+        value = json.loads(case.get("numeric_summary.json", ""))
     except ValueError:
         return {}, ["numeric-summary-unparseable"]
+    if not isinstance(value, dict):
+        return {}, ["numeric-summary-not-object"]
+    return value, []
+
+
+def _rows(text, header, label):
+    lines = [line for line in (text or "").splitlines() if line.strip()]
+    if not lines or lines[0] != header:
+        return [], [f"{label}-bad-header"]
+    if len(lines) == 1:
+        return [], [f"{label}-no-rows"]
+    return [line.split("\t") for line in lines[1:]], []
 
 
 def baseline(case):
@@ -81,8 +98,9 @@ def _norm(src):
 def protocol(case):
     _, flags = baseline(case)
     flags = list(flags)
-    for row in case.get("oleans.tsv", "").splitlines()[1:]:
-        parts = row.split("\t")
+    olean_rows, errors = _rows(case.get("oleans.tsv"), OLEANS_HEADER, "P1:oleans")
+    flags += errors
+    for parts in olean_rows:
         if len(parts) != 3 or not parts[2].isdigit():
             flags.append("P1:oleans-unparseable")
         elif int(parts[2]) > 0:
@@ -93,12 +111,22 @@ def protocol(case):
     if summary.get("export_errors") and summary.get("collection_complete"):
         flags.append("P5:oracle-failure-hidden")
     present = set(case)
-    for row in case.get("receipt.tsv", "").splitlines()[1:]:
-        parts = row.split("\t")
+    receipt_rows, errors = _rows(case.get("receipt.tsv"), RECEIPT_HEADER, "P6:receipt")
+    flags += errors
+    steps = set()
+    for parts in receipt_rows:
         if len(parts) != 4:
             flags.append("P6:receipt-unparseable")
-        elif parts[2] not in present:
-            flags.append(f"P6:receipt-log-missing-{parts[2]}")
+            continue
+        step, _, log, exit_code = parts
+        steps.add(step)
+        if log not in present:
+            flags.append(f"P6:receipt-log-missing-{log}")
+        if exit_code != "0":
+            flags.append(f"P6:receipt-exit-{step}-{exit_code}")
+    if receipt_rows:
+        for step in sorted(REQUIRED_STEPS - steps):
+            flags.append(f"P6:receipt-step-missing-{step}")
     return (not flags, sorted(set(flags)))
 
 

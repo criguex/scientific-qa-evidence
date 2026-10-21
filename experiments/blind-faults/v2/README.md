@@ -13,6 +13,18 @@ v1 (`../protocol_lib.py`, frozen in `../FROZEN.md`) is kept unchanged so its pub
 
 Tests for absent and incomplete evidence: [`test_protocol_v2.py`](test_protocol_v2.py) (10 tests, run in CI).
 
+### v2.1: second review round (2026-10-21)
+
+A second review found three more cases where v2 did not fail closed. Each now has a regression test, and all five new tests fail against the previous version (`793ff3b`):
+
+| Defect | Before (v2) | Now (v2.1) |
+| --- | --- | --- |
+| A numerical summary that is valid JSON but not an object, such as `[]` | `AttributeError`, no verdict | Rejected: `numeric-summary-not-object` |
+| Receipt and artifact tables with a header but no rows | Accepted | Rejected: `receipt-no-rows`, `oleans-no-rows`; wrong headers are also rejected |
+| Receipts whose exit code is not 0 | Accepted | Rejected: `receipt-exit-<step>-<code>`; receipts must also cover both `build` and `comparator` |
+
+15 tests in total. The benchmark outcome is unchanged.
+
 ## v2 applied to the v1 cases
 
 Running v2 over the 21 published v1 cases ([`v2_on_v1_cases.json`](v2_on_v1_cases.json)) flags **all 21, including the 6 clean ones**: their receipts name a `comparator.log` that does not exist, and they contain no Comparator output. So the v1 result of "0 false alarms on clean cases" depended on the v1 evaluator assuming evidence that was not there. The v1 clean cases were incomplete, not clean.
