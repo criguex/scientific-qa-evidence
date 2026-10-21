@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "cacabf24a0a27aa1b999729da899af53f61e97ec9632cf4806f80467581152e9"
+      "sha256": "e8060f00060efff50af5a470221d4c191bd03ecf1dd1fc058177b81b28972fd5"
     }
   },
   "animations": {
@@ -360,16 +360,16 @@
           "group": "replay",
           "title": "leanchecker --fresh · Navier–Stokes solution",
           "expected": "ok",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "OK",
+          "elapsed_s": 1175.25
         },
         {
           "id": "leanchecker_fresh_Euler.Solution",
           "group": "replay",
           "title": "leanchecker --fresh · Euler solution",
           "expected": "ok",
-          "verdict": "PENDING",
-          "elapsed_s": null
+          "verdict": "OK",
+          "elapsed_s": 1348.82
         },
         {
           "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",

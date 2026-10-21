@@ -1,6 +1,6 @@
 # Revalidation of alternatives (C) and (D), 2026-10-21
 
-State: **in progress** · 9 of 15 checks recorded · 0 unexpected · last update 2026-10-21T14:53:37Z.
+State: **in progress** · 11 of 15 checks recorded · 0 unexpected · last update 2026-10-21T15:35:41Z.
 
 This run repeats and extends the [2026-10-20 Comparator record](../comparator/README.md) for OpenAI's [NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) at commit `f9e8bc5` (leanprover/lean4:v4.34.0-rc2) on one host: Linux x86_64 · WSL2 · 12 vCPU · 30 GiB. It answers the gaps listed under "Known limitations" in the top-level README:
 
@@ -23,8 +23,8 @@ This run repeats and extends the [2026-10-20 Comparator record](../comparator/RE
 | (D) drop ¬ · existence instead of breakdown | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_existence_not_breakdown_periodic.sanitized.log) · [diff](mutants/existence_not_breakdown_periodic.diff) |
 | Euler · tighten T* ≤ 1 to T* ≤ 1/2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'` | [log](logs/mutant_euler_tstar_half.sanitized.log) · [diff](mutants/euler_tstar_half.diff) |
 | From-scratch build · empty caches, Mathlib compiled | ok | **PENDING** | — | — | — |
-| leanchecker --fresh · Navier–Stokes solution | ok | **PENDING** | — | — | — |
-| leanchecker --fresh · Euler solution | ok | **PENDING** | — | — | — |
+| leanchecker --fresh · Navier–Stokes solution | ok | **OK** | 19.6 min | — | [log](logs/leanchecker_fresh_NavierStokes.ComparatorSolution.sanitized.log) |
+| leanchecker --fresh · Euler solution | ok | **OK** | 22.5 min | — | [log](logs/leanchecker_fresh_Euler.Solution.sanitized.log) |
 | lean4lean --fresh · Navier–Stokes solution (best effort) | ok | **PENDING** | — | — | — |
 
 ## How to read the verdicts

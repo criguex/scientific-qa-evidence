@@ -78,8 +78,9 @@ A second pass was run to close the gaps under [Known limitations](#known-limitat
 
 - **The result repeats.** Comparator accepted Navier–Stokes (C and D) and Euler a second time on the same build. Both nanoda and the Lean kernel accepted, in 7.0 and 11.2 minutes.
 - **Comparator compares the statement exactly.** Each statement mutant edits only the challenge file and leaves OpenAI's proof untouched. All six mutants were refused with `Challenge and solution theorem statement do not match`: `f = 0` added to (C) and to (D) (forceless versions), ℝ³ decay data swapped for periodic data, `nu > 0` weakened to `nu ≥ 0`, the negation dropped from (D), and Euler's `T* ≤ 1` tightened to `T* ≤ 1/2`. A comment-only control was still accepted, so the refusals come from the changed statement, not from editing the file.
+- **A from-scratch kernel replay agrees.** `leanchecker --fresh` re-added every declaration, Mathlib included, to an empty environment and accepted both solutions: Navier–Stokes in 19.6 minutes and Euler in 22.5 minutes, each with exit 0 and no errors. It uses the same Lean kernel as Comparator, so it confirms the stored build replays from scratch; it is not a third kernel implementation.
 - **What the mutants do not show.** A refused mutant says nothing about whether the mutated statement is true. The `f = 0` mutants are not evidence about the forceless alternatives (A) and (B), which remain open.
-- **Still running:** `leanchecker --fresh`, the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
+- **Still running:** the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
 
 The live table, verdicts, sanitized logs and every mutant diff are in [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md).
 
@@ -124,7 +125,7 @@ A QA report is only useful if it says what it did not test.
 
 - **Not a full bootstrap.** The source build reused dependency and toolchain caches.
 - **Repeated runs, one host.** Comparator has now run twice per challenge on the same build (2026-10-20 and 2026-10-21); a third run on a from-scratch build is in progress. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
-- **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. A fresh replay with `leanchecker` is in progress; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) is pinned to Lean v4.33 upstream and is only attempted on a best-effort basis.
+- **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. `leanchecker --fresh` replayed both solutions from an empty environment without errors; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) is pinned to Lean v4.33 upstream and is only attempted on a best-effort basis.
 - **Standalone Comparator.** The run used the standalone tool pinned at `19e111e`. Comparator has since been merged into Lean core as `lake comparator` and `lake check` (Lean v4.35.0); the result has not been repeated with those.
 - **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs. The 2026-10-21 statement mutants test the challenge side instead: they show that Comparator refuses a changed statement, not that the proof would fail if it were broken.
 - **The Clay table is documentary.** It lists the clauses and the remaining gaps; it has not been reviewed by a mathematician.

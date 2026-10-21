@@ -6,7 +6,7 @@
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
   "state": "in_progress",
-  "updated_utc": "2026-10-21T14:53:37Z",
+  "updated_utc": "2026-10-21T15:35:41Z",
   "reference_run_1": "evidence/formal/comparator/README.md",
   "checks": [
     {
@@ -156,18 +156,22 @@
       "group": "replay",
       "title": "leanchecker --fresh · Navier–Stokes solution",
       "expected": "ok",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "OK",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T15:13:12Z",
+      "elapsed_s": 1175.25,
+      "log": "logs/leanchecker_fresh_NavierStokes.ComparatorSolution.sanitized.log"
     },
     {
       "id": "leanchecker_fresh_Euler.Solution",
       "group": "replay",
       "title": "leanchecker --fresh · Euler solution",
       "expected": "ok",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "OK",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T15:35:41Z",
+      "elapsed_s": 1348.82,
+      "log": "logs/leanchecker_fresh_Euler.Solution.sanitized.log"
     },
     {
       "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",
