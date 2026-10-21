@@ -1,0 +1,15 @@
+{
+  "collection_complete": true,
+  "counts": {
+    "PASS": 27,
+    "KILLED": 54,
+    "SURVIVED": 3
+  },
+  "oracle_valid": true,
+  "export_errors": [
+    {
+      "case_id": "rc_001",
+      "exception": "oracle:ValueError"
+    }
+  ]
+}

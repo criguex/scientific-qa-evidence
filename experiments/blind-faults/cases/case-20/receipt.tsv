@@ -1,0 +1,3 @@
+step	command	log	exit
+build	lake build	other-build.log	0
+comparator	lake env comparator demo.json	comparator.log	0
