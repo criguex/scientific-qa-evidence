@@ -1,0 +1,12 @@
+diff --git a/ComparatorChallenges/NavierStokes.lean b/ComparatorChallenges/NavierStokes.lean
+index 673fb19..38ae4a0 100644
+--- a/ComparatorChallenges/NavierStokes.lean
++++ b/ComparatorChallenges/NavierStokes.lean
+@@ -272,7 +272,7 @@ structure NavierStokesExistenceAndSmoothnessPeriodic
+ /-- (C) Breakdown of Navier–Stokes solutions on ℝ³. -/
+ theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :
+     ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),
+-    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧
++    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ f = 0 ∧
+     ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p) := by
+   sorry

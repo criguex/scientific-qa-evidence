@@ -67,6 +67,15 @@ The three ODE scenes—RC, chemistry, and cooling—use the synthetic suite's `1
 - **What it tests:** this fixture's bounded wrong-type control. It is not a fresh kernel run, a theorem-discovery result, a general kernel-correctness claim, or verification of Navier–Stokes/Euler mathematics.
 - **Trace:** [scene](formal.html) · [fixture](../evidence/formal/fixtures/KernelFixture.lean) · [raw and derived records](../evidence/formal/kernel-mutation/) · [`manifest.json`](manifest.json).
 
+### 7. C/D revalidation ladder — rerun, then try to break the statement
+
+![C/D revalidation: Comparator reruns, statement mutants and pending replays](../docs/assets/validation-preview.gif)
+
+- **Visualized data:** every check in [`evidence/formal/cd-validation/results.json`](../evidence/formal/cd-validation/results.json), grouped as Comparator reruns, statement mutants, from-scratch build and fresh kernel replay. Each row shows the recorded verdict and wall-clock time; unfinished checks show `PENDING`.
+- **Color:** mint means accepted or OK, coral means a mutant was KILLED as expected, and gold with ⚠ flags any verdict that differs from the expected one.
+- **What it tests:** that the (C)/(D) and Euler results repeat, and that Comparator refuses any edit to the challenge statement while a comment-only control still passes. It does not test the forceless alternatives (A) and (B), and a refused mutant is not a claim that the mutated statement is false.
+- **Trace:** [scene](validation.html) · [results and logs](../evidence/formal/cd-validation/README.md) · [`manifest.json`](manifest.json).
+
 ## Separate 3D flow context
 
 ![Taylor–Green flow context clip, separate from the campaign and model animations](../docs/assets/flow-preview.gif)

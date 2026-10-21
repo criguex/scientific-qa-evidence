@@ -1,0 +1,9 @@
+diff --git a/ComparatorChallenges/NavierStokes.lean b/ComparatorChallenges/NavierStokes.lean
+index 673fb19..3c20aee 100644
+--- a/ComparatorChallenges/NavierStokes.lean
++++ b/ComparatorChallenges/NavierStokes.lean
+@@ -284,3 +284,4 @@ theorem navier_stokes_breakdown_periodic (nu : ℝ) (hnu : nu > 0) :
+   sorry
+ 
+ end NavierStokes.Comparator
++-- control: comment-only change

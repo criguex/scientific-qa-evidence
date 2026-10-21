@@ -52,6 +52,10 @@
     "suite_contract": {
       "path": "evidence/numerical/source/suite.py",
       "sha256": "4213c8ed582a7ac9c716537ab716833bdfcdd6bf18322a00dbd4282240a4482d"
+    },
+    "cd_validation": {
+      "path": "evidence/formal/cd-validation/results.json",
+      "sha256": "c9d555b35c8c60f257dabeb414dad5f98d61a2fecb939abf66a41aa09021bc97"
     }
   },
   "animations": {
@@ -248,6 +252,134 @@
         "variant": "index_swap"
       },
       "tolerance": 1e-06
+    },
+    "validation": {
+      "state": "in_progress",
+      "host_label": "Linux x86_64 · WSL2 · 12 vCPU · 30 GiB",
+      "source_commit": "f9e8bc5",
+      "lean_version": "leanprover/lean4:v4.34.0-rc2",
+      "checks": [
+        {
+          "id": "comparator2_NavierStokes",
+          "group": "comparator",
+          "title": "Comparator run 2 · Navier–Stokes (C, D)",
+          "expected": "accept",
+          "verdict": "ACCEPTED",
+          "elapsed_s": 422.32
+        },
+        {
+          "id": "comparator2_Euler",
+          "group": "comparator",
+          "title": "Comparator run 2 · Euler",
+          "expected": "accept",
+          "verdict": "ACCEPTED",
+          "elapsed_s": 669.59
+        },
+        {
+          "id": "comparator3_clean_NavierStokes",
+          "group": "comparator",
+          "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
+          "expected": "accept",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "comparator3_clean_Euler",
+          "group": "comparator",
+          "title": "Comparator run 3 · Euler on the from-scratch build",
+          "expected": "accept",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "mutant_control_comment",
+          "group": "mutant",
+          "title": "Control · comment-only edit to the challenge",
+          "expected": "accept",
+          "verdict": "CONTROL_ACCEPTED",
+          "elapsed_s": 419.45
+        },
+        {
+          "id": "mutant_force_zero_R3",
+          "group": "mutant",
+          "title": "(C) add f = 0 · forceless statement",
+          "expected": "reject",
+          "verdict": "KILLED",
+          "elapsed_s": 85.63
+        },
+        {
+          "id": "mutant_force_zero_periodic",
+          "group": "mutant",
+          "title": "(D) add f = 0 · forceless statement",
+          "expected": "reject",
+          "verdict": "KILLED",
+          "elapsed_s": 86.11
+        },
+        {
+          "id": "mutant_domain_R3_to_periodic_data",
+          "group": "mutant",
+          "title": "(C) swap ℝ³ decay data for periodic data",
+          "expected": "reject",
+          "verdict": "KILLED",
+          "elapsed_s": 84.75
+        },
+        {
+          "id": "mutant_viscosity_nonneg_R3",
+          "group": "mutant",
+          "title": "(C) weaken nu > 0 to nu ≥ 0",
+          "expected": "reject",
+          "verdict": "KILLED",
+          "elapsed_s": 84.09
+        },
+        {
+          "id": "mutant_existence_not_breakdown_periodic",
+          "group": "mutant",
+          "title": "(D) drop ¬ · existence instead of breakdown",
+          "expected": "reject",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "mutant_euler_tstar_half",
+          "group": "mutant",
+          "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
+          "expected": "reject",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "clean_build",
+          "group": "build",
+          "title": "From-scratch build · empty caches, Mathlib compiled",
+          "expected": "ok",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
+          "group": "replay",
+          "title": "leanchecker --fresh · Navier–Stokes solution",
+          "expected": "ok",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "leanchecker_fresh_Euler.Solution",
+          "group": "replay",
+          "title": "leanchecker --fresh · Euler solution",
+          "expected": "ok",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        },
+        {
+          "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",
+          "group": "replay",
+          "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
+          "expected": "ok",
+          "verdict": "PENDING",
+          "elapsed_s": null
+        }
+      ]
     }
   }
 }

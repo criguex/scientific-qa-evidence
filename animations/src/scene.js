@@ -439,6 +439,61 @@ function drawSnell(ctx, data, t) {
   ctx.globalAlpha = 1;
 }
 
+const VALIDATION_GROUPS = [
+  ["comparator", "COMPARATOR RERUNS · expect accept"],
+  ["mutant", "STATEMENT MUTANTS · expect reject (control: accept)"],
+  ["build", "FROM-SCRATCH BUILD"],
+  ["replay", "FRESH KERNEL REPLAY"],
+];
+const EXPECTED_VERDICTS = { accept: ["ACCEPTED", "CONTROL_ACCEPTED"], reject: ["KILLED"], ok: ["OK"] };
+
+function verdictStyle(check) {
+  if (check.verdict === "PENDING") return { fill: "#173b4c", text: C.muted, word: "PENDING" };
+  if (!EXPECTED_VERDICTS[check.expected].includes(check.verdict)) return { fill: C.gold, text: C.navy, word: `⚠ ${check.verdict}` };
+  if (check.verdict === "KILLED") return { fill: C.coral, text: C.navy, word: "KILLED" };
+  return { fill: C.mint, text: C.navy, word: check.verdict === "CONTROL_ACCEPTED" ? "ACCEPTED" : check.verdict };
+}
+
+function drawValidation(ctx, data, t) {
+  const d = data.animations.validation;
+  base(ctx, "Run it again. Then try to break the statement.", "07 / C·D revalidation", t, C.mint);
+  const lean = (d.lean_version.match(/\d+\.\d+\.\d+(?:-rc\d+)?/) || [d.lean_version])[0];
+  label(ctx, `OpenAI ${d.source_commit} · Lean ${lean} · ${d.host_label}`, 70, 212, 18, C.muted, 600);
+  label(ctx, "Run 1 · 2026-10-20 · Navier–Stokes and Euler accepted (recorded reference)", 70, 246, 17, C.blue, 700);
+  let y = 282;
+  let index = 0;
+  const total = d.checks.length;
+  for (const [group, heading] of VALIDATION_GROUPS) {
+    const rows = d.checks.filter((check) => check.group === group);
+    label(ctx, heading, 70, y, 15, C.gold, 800);
+    y += 27;
+    for (const check of rows) {
+      const appear = smooth((t - 0.8 - (index / total) * 11) / 0.8);
+      const decide = smooth((t - 1.4 - (index / total) * 11) / 0.8);
+      ctx.globalAlpha = appear;
+      rounded(ctx, 66, y - 15, 948, 29, 8, index % 2 ? "#0d2638" : "#0b2434");
+      label(ctx, check.title, 86, y, 17, C.white, 650);
+      if (check.elapsed_s) label(ctx, `${(check.elapsed_s / 60).toFixed(1)} min`, 800, y, 15, C.muted, 600, "right");
+      ctx.globalAlpha = appear * decide;
+      const style = verdictStyle(check);
+      rounded(ctx, 816, y - 12, 188, 24, 7, style.fill);
+      label(ctx, style.word, 910, y + 1, 14, style.text, 900, "center");
+      ctx.globalAlpha = 1;
+      y += 32;
+      index += 1;
+    }
+    y += 6;
+  }
+  const done = d.checks.filter((check) => check.verdict !== "PENDING");
+  const unexpected = done.filter((check) => !EXPECTED_VERDICTS[check.expected].includes(check.verdict));
+  const alpha = smooth((t - 14) / 1.4);
+  ctx.globalAlpha = alpha;
+  rounded(ctx, 66, 922, 948, 76, 16, unexpected.length ? "#332d25" : "#183d3c", unexpected.length ? C.gold : C.mint);
+  label(ctx, `${done.length} / ${total} checks recorded · ${unexpected.length} unexpected · ${d.state.replace("_", " ")}`, 540, 948, 21, unexpected.length ? C.gold : C.mint, 800, "center");
+  label(ctx, "Mutants test that the statement is compared exactly · they say nothing about forceless (A) or (B)", 540, 978, 15, C.muted, 600, "center");
+  ctx.globalAlpha = 1;
+}
+
 export function drawAnimation(ctx, data, id, seconds) {
   const t = clamp(seconds, 0, 20);
   ctx.clearRect(0, 0, W, H);
@@ -448,5 +503,6 @@ export function drawAnimation(ctx, data, id, seconds) {
   else if (id === "formal") drawFormal(ctx, data, t);
   else if (id === "cooling") drawCooling(ctx, data, t);
   else if (id === "snell") drawSnell(ctx, data, t);
+  else if (id === "validation") drawValidation(ctx, data, t);
   else throw new Error(`Unknown animation: ${id}`);
 }

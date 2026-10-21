@@ -20,6 +20,7 @@ INPUTS = {
     "snell_baseline": "evidence/numerical/paired/macos-arm64/case_040.json",
     "snell_mutation": "evidence/numerical/paired/macos-arm64/case_041.json",
     "suite_contract": "evidence/numerical/source/suite.py",
+    "cd_validation": "evidence/formal/cd-validation/results.json",
 }
 PAGES = {
     "rc": ("RC circuit mutation", "The curve is reconstructed from the analytic model; hollow checkpoints are recorded RK4 outputs.", "Analytic equation curves; hollow ring markers are recorded 256-step RK4 results at four source fractions. The capacitor fill is normalized charge, not fluid."),
@@ -28,6 +29,7 @@ PAGES = {
     "snell": ("Snell refraction index swap", "Angles are measured from the normal. Rays are analytic illustrations; ring markers are the four recorded outputs, not literal photons.", "Analytic ray illustration sweeps incidence from 0.10 to 0.40 rad. Hollow markers are four recorded algebraic outputs, not photon trajectories."),
     "campaign": ("Paired 84-variant campaign", "Each host ran the same 84 variants. The two host runs are paired evidence, not 168 distinct variants.", "Dots encode recorded classification totals only. Reveal order is not timing or performance; both hosts ran the same 84 variants."),
     "formal": ("Proof-value typecheck control", "One proof-value mutation is rejected by Lean. nanoda's rejection category is derived from pinned source, not a structured binary result.", "One fixture changes only the exported proof value. Lean records a type mismatch; nanoda's raw status remains pending and rejection is source-derived. No fresh run is implied."),
+    "validation": ("C/D revalidation ladder", "OpenAI's (C) and (D) proofs rerun through Comparator, then attacked with statement mutants and fresh kernel replays. Rows marked PENDING are still running.", "Each row is one recorded check. A mutant edits only the challenge statement; KILLED means Comparator refused it. Mutants show the statement is compared exactly; they say nothing about the forceless alternatives (A) and (B)."),
 }
 AUTHOR = "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex"
 
@@ -51,6 +53,7 @@ def load_package():
     cooling_mutation = read_json(INPUTS["cooling_mutation"])
     snell_base = read_json(INPUTS["snell_baseline"])
     snell_mutation = read_json(INPUTS["snell_mutation"])
+    validation = read_json(INPUTS["cd_validation"])
     suite_source = (ROOT / INPUTS["suite_contract"]).read_text(encoding="utf-8")
     tolerance_match = re.search(r"^TOLERANCE\s*=\s*([0-9.eE+-]+)", suite_source, flags=re.M)
     if not tolerance_match:
@@ -149,6 +152,13 @@ def load_package():
                 },
                 "tolerance": float(tolerance_match.group(1)),
             },
+            "validation": {
+                "state": validation["state"],
+                "host_label": validation["host_label"],
+                "source_commit": validation["source_commit"][:7],
+                "lean_version": validation["lean_version"],
+                "checks": [{key: check.get(key) for key in ("id", "group", "title", "expected", "verdict", "elapsed_s")} for check in validation["checks"]],
+            },
         },
     }
 
@@ -230,6 +240,16 @@ window.renderAt=renderAt;renderAt(0);raf=requestAnimationFrame(tick);
 '''
 
 
+EXPECTED_VERDICTS = {"accept": {"ACCEPTED", "CONTROL_ACCEPTED"}, "reject": {"KILLED"}, "ok": {"OK"}}
+
+
+def validation_summary(validation):
+    done = [check for check in validation["checks"] if check["verdict"] != "PENDING"]
+    unexpected = [check for check in done if check["verdict"] not in EXPECTED_VERDICTS[check["expected"]]]
+    killed = sum(check["verdict"] == "KILLED" for check in done)
+    return f"{len(done)}/{len(validation['checks'])} checks recorded, {len(unexpected)} unexpected. {killed} statement mutants KILLED by Comparator. State: {validation['state'].replace('_', ' ')}."
+
+
 def gallery_html(package):
     buttons = []
     for animation_id, (title, description, source_note) in PAGES.items():
@@ -250,6 +270,7 @@ def gallery_html(package):
         ("Second-order chemistry", chem_summary + " Liquid volume stays fixed."),
         ("Newton cooling", cooling_summary),
         ("Snell refraction", snell_summary + " Angles are measured from the normal."),
+        ("C/D revalidation", validation_summary(package["animations"]["validation"])),
         ("Paired campaign", f"{campaign['per_host']['variant_evaluations']} per host: {counts['PASS']} PASS · {counts['KILLED']} KILLED · {counts['SURVIVED']} SURVIVED. Same variants on both hosts, not 168 distinct cases."),
     ])
     source_text = html.escape(manifest_text)
@@ -259,7 +280,7 @@ def gallery_html(package):
 :root{color-scheme:dark;font:16px/1.55 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 0,#173b4c,#071b2b 55%)}main{max-width:1180px;margin:auto;padding:42px 24px 88px}h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;margin:.25em 0}h2{color:#55dfbd;font-size:1.6rem;margin:0 0 10px}p{color:#bfd0d5}a{color:#55dfbd}.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.17em;font-weight:800;font-size:.8rem}.lead,.context,.sources{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:22px;margin:20px 0}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.fact{padding:16px;border-radius:14px;background:#102f43;border-left:4px solid #55dfbd}.fact strong{display:block;color:#f4f7f5;margin-bottom:8px}.fact:nth-child(2n){border-color:#ffc56e}.selectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}.selector{text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;padding:16px;border:1px solid #315264;border-radius:14px;background:#102f43;color:#f4f7f5;cursor:pointer;font:inherit}.selector strong{font-size:1rem}.selector span{color:#abc0c8;font-size:.87rem}.selector[aria-pressed=true]{border-color:#55dfbd;box-shadow:0 0 0 2px #55dfbd55}.selector:focus-visible,a:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}.active{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:18px}.active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.actions{display:flex;gap:12px;flex-wrap:wrap}iframe{display:block;width:100%;aspect-ratio:1;border:1px solid #315264;border-radius:14px;background:#071b2b;margin-top:14px}.badge{display:inline-block;border:1px solid #ffc56e;color:#ffc56e;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:800}.context img{display:block;width:min(100%,960px);border-radius:14px;background:#071b2b}summary{cursor:pointer;color:#55dfbd;font-weight:800}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.82rem}code{color:#ffc56e}@media(max-width:600px){main{padding:28px 14px 64px}}
 </style></head><body><main>
 <div class="eyebrow">Evidence, in motion · local and offline</div><h1>What changed?<br>What did the checks see?</h1>
-<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Six supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
+<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Seven supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
 <nav class="selectors" aria-label="Choose an evidence animation">__BUTTONS__</nav>
 <section class="active"><div class="active-head"><div><h2 id="active-title">RC circuit mutation</h2><p id="active-description"></p><p id="active-note"></p><p><strong>__AUTHOR__</strong></p></div><div class="actions"><a id="html-link" download>Download standalone HTML</a></div></div><iframe id="active-frame" title="Selected evidence animation" src="rc.html"></iframe></section>
 <section class="context"><span class="badge">ILLUSTRATIVE CONTEXT · NOT CAMPAIGN DATA</span><h2 style="margin-top:14px">A separate 3D flow visualization</h2><p>This Taylor–Green visualization is only visual context. It is not the 84-variant campaign, evidence of blow-up, or a formal solution. No synthetic physics scene is generated here.</p><img src="../docs/assets/flow-preview.gif" alt="Illustrative Taylor–Green flow clip"></section>

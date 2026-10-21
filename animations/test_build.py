@@ -60,6 +60,20 @@ class AnimationPackageTests(unittest.TestCase):
             for animation_id in build.PAGES:
                 self.assertIn(f'data-id="{animation_id}"', gallery)
 
+    def test_validation_verdicts_are_known_and_records_are_private(self):
+        validation = build.load_package()["animations"]["validation"]
+        allowed = {"PENDING", "ACCEPTED", "CONTROL_ACCEPTED", "CONTROL_FAILED", "KILLED", "SURVIVED", "REJECTED", "OK", "FAILED"}
+        for check in validation["checks"]:
+            self.assertTrue(check["verdict"] in allowed or check["verdict"].startswith(("INVALID", "KILLED_BUT", "FAILED", "TARBALL")), check)
+            self.assertIn(check["expected"], build.EXPECTED_VERDICTS)
+        control = next(check for check in validation["checks"] if check["id"] == "mutant_control_comment")
+        self.assertEqual(control["expected"], "accept")
+        record_dir = build.ROOT / "evidence/formal/cd-validation"
+        for path in record_dir.rglob("*"):
+            if path.is_file():
+                text = path.read_text(encoding="utf-8")
+                self.assertNotRegex(text, r"/home/|/Users/|\b100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.")
+
 
 if __name__ == "__main__":
     unittest.main()

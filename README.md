@@ -22,6 +22,7 @@ In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) an
 | Does it build from pinned source? | `lake --no-cache build` on OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 | Exit 0, 11,424 jobs. Dependency caches were reused, so this is not a full bootstrap. |
 | Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) |
 | Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and open gaps listed. Documentary only, not an expert equivalence proof. |
+| Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | In progress: every recorded mutant refused, control accepted |
 | Do the checkers reject a wrong proof? | A fixture whose proof value is wrong but keeps the declared type | Lean reports a type mismatch; nanoda stops with an assertion rejection |
 | Do the numerical tests catch bugs? | 9 synthetic models × 3 configurations, each baseline plus known mutations: 84 variants | 27 PASS · 54 KILLED · 3 SURVIVED per host |
 | Is it reproducible across machines? | The same 84 variants on macOS arm64 and Linux x86_64 | Identical classifications; maximum scaled difference 1.11 × 10⁻¹⁶ |
@@ -67,7 +68,20 @@ flowchart LR
     I --> K[nanoda assertion rejection<br/>classification derived from pinned source]
 ```
 
-Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). Each challenge was run once after the source build. Sanitized transcripts, timings and the hashes of the raw originals are in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The wrong-proof fixture and the raw and derived classifications are in [`evidence/formal/kernel-mutation/`](evidence/formal/kernel-mutation/). The Clay correspondence table is [`evidence/formal/clay-lean-fidelity.md`](evidence/formal/clay-lean-fidelity.md).
+Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). Each challenge was run once after the source build; the 2026-10-21 revalidation below adds a second run. Sanitized transcripts, timings and the hashes of the raw originals are in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The wrong-proof fixture and the raw and derived classifications are in [`evidence/formal/kernel-mutation/`](evidence/formal/kernel-mutation/). The Clay correspondence table is [`evidence/formal/clay-lean-fidelity.md`](evidence/formal/clay-lean-fidelity.md).
+
+### Revalidation of (C) and (D), 2026-10-21 · in progress
+
+<a href="animations/validation.html"><img src="docs/assets/validation-preview.gif" width="540" alt="Revalidation ladder: Comparator reruns accepted, statement mutants killed, pending checks marked"></a>
+
+A second pass was run to close the gaps under [Known limitations](#known-limitations): rerun Comparator, try to break the challenge statement, replay every declaration in a fresh kernel environment, and rebuild from scratch with empty caches. Findings so far:
+
+- **The result repeats.** Comparator accepted Navier–Stokes (C and D) and Euler a second time on the same build. Both nanoda and the Lean kernel accepted, in 7.0 and 11.2 minutes.
+- **Comparator compares the statement exactly.** Each statement mutant edits only the challenge file and leaves OpenAI's proof untouched. Every mutant recorded so far was refused with `Challenge and solution theorem statement do not match`. That includes the two that add `f = 0`, i.e. forceless versions of (C) and (D). A comment-only control was still accepted, so the refusals come from the changed statement, not from editing the file.
+- **What the mutants do not show.** A refused mutant says nothing about whether the mutated statement is true. The `f = 0` mutants are not evidence about the forceless alternatives (A) and (B), which remain open.
+- **Still running:** the remaining mutants, `leanchecker --fresh`, the from-scratch build with a third Comparator run, and a best-effort `lean4lean` attempt.
+
+The live table, verdicts, sanitized logs and every mutant diff are in [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md).
 
 ## Track 2: numerical mutation testing
 
@@ -98,6 +112,7 @@ Open the [offline gallery](animations/index.html), or read the [animation guide]
 | <a href="animations/rc.html">RC · doubled time constant</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="RC baseline and mutation comparison"> | <a href="animations/campaign.html">Campaign · paired classifications</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Per-host mutation campaign classifications"> |
 | <a href="animations/chemistry.html">Chemistry · doubled reaction rate</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Second-order concentration comparison at fixed volume"> | <a href="animations/formal.html">Formal · proof-value typecheck control</a><br><img src="docs/assets/formal-preview.gif" width="360" alt="Baseline proof value accepted and wrong-type mutation rejected"> |
 | <a href="animations/cooling.html">Cooling · halved rate constant</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Cooling baseline and rate mutation comparison"> | <a href="animations/snell.html">Snell · swapped refractive indices</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Refraction rays and incidence-angle sweep"> |
+| | <a href="animations/validation.html">C/D revalidation · reruns and statement mutants</a><br><img src="docs/assets/validation-preview.gif" width="360" alt="Comparator reruns and statement mutant verdicts"> |
 
 ![Illustrative Taylor–Green flow clip, separate from the evidence scenes](docs/assets/flow-preview.gif)
 
@@ -108,10 +123,10 @@ The 3D flow clip is visual context only. It is not campaign data, evidence of bl
 A QA report is only useful if it says what it did not test.
 
 - **Not a full bootstrap.** The source build reused dependency and toolchain caches.
-- **One recorded run per challenge.** Comparator ran once per challenge. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
-- **Two kernels.** Only the Lean kernel and nanoda were used. Other independent checkers, such as [lean4lean](https://github.com/digama0/lean4lean) or [lean4checker](https://github.com/leanprover/lean4checker), have not been run.
+- **Repeated runs, one host.** Comparator has now run twice per challenge on the same build (2026-10-20 and 2026-10-21); a third run on a from-scratch build is in progress. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are.
+- **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. A fresh replay with `leanchecker` is in progress; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) is pinned to Lean v4.33 upstream and is only attempted on a best-effort basis.
 - **Standalone Comparator.** The run used the standalone tool pinned at `19e111e`. Comparator has since been merged into Lean core as `lake comparator` and `lake check` (Lean v4.35.0); the result has not been repeated with those.
-- **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs.
+- **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs. The 2026-10-21 statement mutants test the challenge side instead: they show that Comparator refuses a changed statement, not that the proof would fail if it were broken.
 - **The Clay table is documentary.** It lists the clauses and the remaining gaps; it has not been reviewed by a mathematician.
 - **54 KILLED counts cases, not distinct behaviors.** In the acoustic model, `pressure_boundary_sign` and `impedance_swap` produce identical outputs in all three configurations, so there are 51 distinct killed behaviors.
 - **The mutants are coarse.** The smallest killed mutant has a normalized error of 0.12, about 120,000 times the 10⁻⁶ tolerance. The only near-threshold mutant (RC `tau_tiny`, a relative change of 5 × 10⁻⁸) survives roughly 56 to 68 times below tolerance. Sizes in between were not sampled, so the campaign does not locate where detection starts.

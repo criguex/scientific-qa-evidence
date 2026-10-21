@@ -22,6 +22,7 @@ En septiembre de 2026 OpenAI publicó formalizaciones en Lean 4 de las alternati
 | ¿Compila desde la fuente fijada? | `lake --no-cache build` sobre el commit `f9e8bc5` de OpenAI, Lean 4.34.0-rc2 | Exit 0, 11.424 jobs. Se reutilizaron cachés de dependencias, así que no es un bootstrap completo. |
 | ¿Lo aceptan verificadores independientes? | [Comparator](https://github.com/leanprover/comparator) con el kernel de Lean y [nanoda](https://github.com/ammkrn/nanoda_lib) sobre los desafíos configurados | Navier–Stokes y Euler: ambos kernels aceptan (`Your solution is okay!`, exit 0) |
 | ¿El enunciado coincide con el texto de Clay? | Tabla cláusula por cláusula contra el PDF de Clay y el enunciado de [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind en `8bf45ed` | Correspondencia mapeada y brechas abiertas listadas. Es documental, no una prueba experta de equivalencia. |
+| ¿Comparator revisa el enunciado exacto? | Mutantes del enunciado en el archivo del desafío, sin tocar la prueba de OpenAI, más un control que solo agrega un comentario ([revalidación](evidence/formal/cd-validation/README.md)) | En curso: todos los mutantes registrados fueron rechazados y el control fue aceptado |
 | ¿Los verificadores rechazan una prueba errónea? | Un fixture cuyo valor de prueba es incorrecto pero conserva el tipo declarado | Lean reporta *type mismatch*; nanoda se detiene con un rechazo por aserción |
 | ¿Las pruebas numéricas detectan errores? | 9 modelos sintéticos × 3 configuraciones, cada línea base más mutaciones conocidas: 84 variantes | 27 PASS · 54 KILLED · 3 SURVIVED por máquina |
 | ¿Es reproducible entre máquinas? | Las mismas 84 variantes en macOS arm64 y Linux x86_64 | Clasificaciones idénticas; diferencia escalada máxima de 1,11 × 10⁻¹⁶ |
@@ -69,6 +70,20 @@ flowchart LR
 
 Comparator comprueba que la solución enviada demuestre exactamente el teorema enunciado en el archivo del desafío, usando solo los axiomas permitidos (`propext`, `Quot.sound`, `Classical.choice`). Cada desafío se corrió una vez después del build. Las transcripciones depuradas, los tiempos y los hashes de los originales están en [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). El fixture de prueba errónea y sus clasificaciones están en [`evidence/formal/kernel-mutation/`](evidence/formal/kernel-mutation/). La tabla de correspondencia con Clay está en [`evidence/formal/clay-lean-fidelity.md`](evidence/formal/clay-lean-fidelity.md).
 
+
+### Revalidación de (C) y (D), 2026-10-21 · en curso
+
+<a href="animations/validation.html"><img src="docs/assets/validation-preview.gif" width="540" alt="Escalera de revalidación: reejecuciones de Comparator aceptadas, mutantes del enunciado eliminados, pruebas pendientes marcadas"></a>
+
+Se hizo una segunda pasada para cerrar las brechas de [Limitaciones conocidas](#limitaciones-conocidas): volver a correr Comparator, intentar romper el enunciado del desafío, revisar de nuevo cada declaración en un kernel con entorno vacío y compilar desde cero sin cachés. Hallazgos hasta ahora:
+
+- **El resultado se repite.** Comparator volvió a aceptar Navier–Stokes (C y D) y Euler sobre el mismo build. Aceptaron tanto nanoda como el kernel de Lean, en 7,0 y 11,2 minutos.
+- **Comparator compara el enunciado exacto.** Cada mutante edita solo el archivo del desafío y no toca la prueba de OpenAI. Todos los mutantes registrados hasta ahora fueron rechazados con `Challenge and solution theorem statement do not match`. Eso incluye los dos que agregan `f = 0`, es decir, versiones sin fuerza de (C) y (D). Un control que solo agrega un comentario sí fue aceptado, así que los rechazos vienen del enunciado cambiado y no de editar el archivo.
+- **Lo que los mutantes no muestran.** Que un mutante sea rechazado no dice si el enunciado mutado es verdadero o falso. Los mutantes con `f = 0` no son evidencia sobre las alternativas sin fuerza (A) y (B), que siguen abiertas.
+- **Todavía corriendo:** los mutantes restantes, `leanchecker --fresh`, el build desde cero con una tercera corrida de Comparator y un intento con `lean4lean`.
+
+La tabla en vivo, los veredictos, los logs depurados y el diff de cada mutante están en [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md) (en inglés).
+
 ## Pista 2: pruebas de mutación numéricas
 
 ```mermaid
@@ -98,6 +113,7 @@ Abre la [galería offline](animations/index.html) o lee la [guía de animaciones
 | <a href="animations/rc.html">RC · constante de tiempo duplicada</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="Comparación RC base y mutación"> | <a href="animations/campaign.html">Campaña · clasificaciones pareadas</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Clasificaciones de la campaña por máquina"> |
 | <a href="animations/chemistry.html">Química · tasa de reacción duplicada</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Comparación de concentración de segundo orden"> | <a href="animations/formal.html">Formal · control de tipado del valor de prueba</a><br><img src="docs/assets/formal-preview.gif" width="360" alt="Valor de prueba base aceptado y mutación rechazada"> |
 | <a href="animations/cooling.html">Enfriamiento · constante a la mitad</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Comparación de enfriamiento base y mutación"> | <a href="animations/snell.html">Snell · índices de refracción intercambiados</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Rayos de refracción y barrido de ángulo"> |
+| | <a href="animations/validation.html">Revalidación C/D · reejecuciones y mutantes del enunciado</a><br><img src="docs/assets/validation-preview.gif" width="360" alt="Reejecuciones de Comparator y veredictos de los mutantes"> |
 
 ![Clip ilustrativo de flujo Taylor–Green, separado de las escenas de evidencia](docs/assets/flow-preview.gif)
 
@@ -108,10 +124,10 @@ El clip de flujo 3D es solo contexto visual. No es dato de la campaña, ni evide
 Un informe de QA solo sirve si dice lo que no probó.
 
 - **No es un bootstrap completo.** El build reutilizó cachés de dependencias y de toolchain.
-- **Una corrida registrada por desafío.** Comparator corrió una vez por desafío. Las transcripciones originales no se distribuyen; sí las copias depuradas y los hashes de los originales.
-- **Dos kernels.** Solo se usaron el kernel de Lean y nanoda. Otros verificadores independientes, como [lean4lean](https://github.com/digama0/lean4lean) o [lean4checker](https://github.com/leanprover/lean4checker), no se han corrido.
+- **Corridas repetidas, una sola máquina.** Comparator ya corrió dos veces por desafío sobre el mismo build (2026-10-20 y 2026-10-21); una tercera corrida sobre un build desde cero está en curso. Todas las corridas usaron una sola máquina Linux. Las transcripciones originales no se distribuyen; sí las copias depuradas y los hashes de los originales.
+- **Dos implementaciones de kernel.** Hasta ahora solo el kernel de Lean y nanoda han aceptado las pruebas. Está en curso una revisión desde cero con `leanchecker`; usa el mismo kernel de Lean, así que es una revisión desde cero y no una tercera implementación. [lean4lean](https://github.com/digama0/lean4lean) está fijado a Lean v4.33 en su repositorio y solo se intenta como prueba adicional.
 - **Comparator standalone.** La corrida usó la herramienta independiente fijada en `19e111e`. Comparator ya se integró al núcleo de Lean como `lake comparator` y `lake check` (Lean v4.35.0); el resultado no se ha repetido con esas herramientas.
-- **Un solo fixture de prueba errónea.** El control formal muestra que los verificadores rechazan un valor de prueba erróneo. No es una campaña de mutación sobre las pruebas de OpenAI.
+- **Un solo fixture de prueba errónea.** El control formal muestra que los verificadores rechazan un valor de prueba erróneo. No es una campaña de mutación sobre las pruebas de OpenAI. Los mutantes del enunciado del 2026-10-21 prueban el lado del desafío: muestran que Comparator rechaza un enunciado cambiado, no que la prueba fallaría si estuviera rota.
 - **La tabla de Clay es documental.** Lista las cláusulas y las brechas pendientes; no la ha revisado un matemático.
 - **54 KILLED cuenta casos, no comportamientos distintos.** En el modelo acústico, `pressure_boundary_sign` e `impedance_swap` producen salidas idénticas en las tres configuraciones, así que hay 51 comportamientos eliminados distintos.
 - **Las mutaciones son gruesas.** La mutación eliminada más pequeña tiene un error normalizado de 0,12, unas 120.000 veces la tolerancia de 10⁻⁶. La única mutación cercana al umbral (RC `tau_tiny`, un cambio relativo de 5 × 10⁻⁸) sobrevive entre 56 y 68 veces por debajo de la tolerancia. No se muestrearon tamaños intermedios, así que la campaña no ubica dónde empieza la detección.

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "campaign": "cd-revalidation-2026-10-21",
+  "host_label": "Linux x86_64 · WSL2 · 12 vCPU · 30 GiB",
+  "source_repository": "https://github.com/openai/NavierStokesAndEuler",
+  "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+  "lean_version": "leanprover/lean4:v4.34.0-rc2",
+  "state": "in_progress",
+  "updated_utc": "2026-10-21T14:50:48Z",
+  "reference_run_1": "evidence/formal/comparator/README.md",
+  "checks": [
+    {
+      "id": "comparator2_NavierStokes",
+      "group": "comparator",
+      "title": "Comparator run 2 · Navier–Stokes (C, D)",
+      "expected": "accept",
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T14:26:24Z",
+      "elapsed_s": 422.32,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator2_NavierStokes.sanitized.log"
+    },
+    {
+      "id": "comparator2_Euler",
+      "group": "comparator",
+      "title": "Comparator run 2 · Euler",
+      "expected": "accept",
+      "verdict": "ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T14:37:34Z",
+      "elapsed_s": 669.59,
+      "decision": "Your solution is okay!",
+      "log": "logs/comparator2_Euler.sanitized.log"
+    },
+    {
+      "id": "comparator3_clean_NavierStokes",
+      "group": "comparator",
+      "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
+      "expected": "accept",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "comparator3_clean_Euler",
+      "group": "comparator",
+      "title": "Comparator run 3 · Euler on the from-scratch build",
+      "expected": "accept",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "mutant_control_comment",
+      "group": "mutant",
+      "title": "Control · comment-only edit to the challenge",
+      "expected": "accept",
+      "verdict": "CONTROL_ACCEPTED",
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T14:45:08Z",
+      "elapsed_s": 419.45,
+      "decision": "Your solution is okay!",
+      "log": "logs/mutant_control_comment.sanitized.log",
+      "diff": "mutants/control_comment.diff"
+    },
+    {
+      "id": "mutant_force_zero_R3",
+      "group": "mutant",
+      "title": "(C) add f = 0 · forceless statement",
+      "expected": "reject",
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:46:33Z",
+      "elapsed_s": 85.63,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
+      "log": "logs/mutant_force_zero_R3.sanitized.log",
+      "diff": "mutants/force_zero_R3.diff"
+    },
+    {
+      "id": "mutant_force_zero_periodic",
+      "group": "mutant",
+      "title": "(D) add f = 0 · forceless statement",
+      "expected": "reject",
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:47:59Z",
+      "elapsed_s": 86.11,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'",
+      "log": "logs/mutant_force_zero_periodic.sanitized.log",
+      "diff": "mutants/force_zero_periodic.diff"
+    },
+    {
+      "id": "mutant_domain_R3_to_periodic_data",
+      "group": "mutant",
+      "title": "(C) swap ℝ³ decay data for periodic data",
+      "expected": "reject",
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:49:24Z",
+      "elapsed_s": 84.75,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
+      "log": "logs/mutant_domain_R3_to_periodic_data.sanitized.log",
+      "diff": "mutants/domain_R3_to_periodic_data.diff"
+    },
+    {
+      "id": "mutant_viscosity_nonneg_R3",
+      "group": "mutant",
+      "title": "(C) weaken nu > 0 to nu ≥ 0",
+      "expected": "reject",
+      "verdict": "KILLED",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T14:50:48Z",
+      "elapsed_s": 84.09,
+      "decision": "uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'",
+      "log": "logs/mutant_viscosity_nonneg_R3.sanitized.log",
+      "diff": "mutants/viscosity_nonneg_R3.diff"
+    },
+    {
+      "id": "mutant_existence_not_breakdown_periodic",
+      "group": "mutant",
+      "title": "(D) drop ¬ · existence instead of breakdown",
+      "expected": "reject",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "mutant_euler_tstar_half",
+      "group": "mutant",
+      "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
+      "expected": "reject",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "clean_build",
+      "group": "build",
+      "title": "From-scratch build · empty caches, Mathlib compiled",
+      "expected": "ok",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
+      "group": "replay",
+      "title": "leanchecker --fresh · Navier–Stokes solution",
+      "expected": "ok",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "leanchecker_fresh_Euler.Solution",
+      "group": "replay",
+      "title": "leanchecker --fresh · Euler solution",
+      "expected": "ok",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    },
+    {
+      "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",
+      "group": "replay",
+      "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
+      "expected": "ok",
+      "verdict": "PENDING",
+      "exit_code": null,
+      "finished_utc": null
+    }
+  ]
+}
