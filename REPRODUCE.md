@@ -86,6 +86,8 @@ lake env leanchecker --fresh Euler.Solution
 
 A statement mutant is a one-line edit to `ComparatorChallenges/NavierStokes.lean` or `Euler.lean`, followed by the Comparator command. The exact edits are the diffs in [`evidence/formal/cd-validation/mutants/`](evidence/formal/cd-validation/mutants/). Every recorded run, its build, its times, exit code and the SHA-256 of its original log are in [`evidence/formal/cd-validation/README.md`](evidence/formal/cd-validation/README.md) and [`PROVENANCE.md`](evidence/formal/cd-validation/PROVENANCE.md).
 
+A full run of these steps from a fresh clone, with its results, is in [`evidence/FROM_ZERO.md`](evidence/FROM_ZERO.md).
+
 ## 5. The bridge lemmas (Lean)
 
 `bridges/ClayLiteral.lean` and `bridges/Bridges.lean` are checked against the same Lean 4.34.0-rc2 and Mathlib as the formal runs, from a built `openai/NavierStokesAndEuler` tree; the exact commands and the `#print axioms` receipt are in [`bridges/README.md`](bridges/README.md).

@@ -61,7 +61,7 @@ python3 evidence/test_consistency.py                               # README, CLA
 python3 experiments/mathlib-controls/verify.py                     # check Mathlib-control receipts, recompute classes
 ```
 
-The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here.
+The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here. A complete run from a fresh clone is recorded in [FROM_ZERO.md](evidence/FROM_ZERO.md).
 
 ## Part A · Formal audit of (C), (D) and Euler
 
