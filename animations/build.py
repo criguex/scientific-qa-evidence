@@ -245,9 +245,10 @@ EXPECTED_VERDICTS = {"accept": {"ACCEPTED", "CONTROL_ACCEPTED"}, "reject": {"KIL
 
 def validation_summary(validation):
     done = [check for check in validation["checks"] if check["verdict"] != "PENDING"]
-    unexpected = [check for check in done if check["verdict"] not in EXPECTED_VERDICTS[check["expected"]]]
+    inconclusive = [check for check in done if check["verdict"].startswith("FAILED_TOOLCHAIN")]
+    unexpected = [check for check in done if check["verdict"] not in EXPECTED_VERDICTS[check["expected"]] and check not in inconclusive]
     killed = sum(check["verdict"] == "KILLED" for check in done)
-    return f"{len(done)}/{len(validation['checks'])} checks recorded, {len(unexpected)} unexpected. {killed} statement mutants KILLED by Comparator. State: {validation['state'].replace('_', ' ')}."
+    return f"{len(done)}/{len(validation['checks'])} checks recorded, {len(unexpected)} unexpected, {len(inconclusive)} not run because of a toolchain mismatch. {killed} statement mutants KILLED by Comparator. State: {validation['state'].replace('_', ' ')}."
 
 
 def gallery_html(package):

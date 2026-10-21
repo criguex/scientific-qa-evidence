@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "f080822cc53d955dd9a2aa879cd2bab4621532855d13cf7d970c452aab12ea49"
+      "sha256": "7199e9d3a02dbf10fa568d1f036d512a0d64b2845757d619981f503236e6a3be"
     }
   },
   "animations": {
@@ -254,7 +254,7 @@
       "tolerance": 1e-06
     },
     "validation": {
-      "state": "in_progress",
+      "state": "complete",
       "host_label": "Linux x86_64 · WSL2 · 12 vCPU · 30 GiB",
       "source_commit": "f9e8bc5",
       "lean_version": "leanprover/lean4:v4.34.0-rc2",
@@ -353,7 +353,7 @@
           "title": "From-scratch build · empty caches, Mathlib compiled",
           "expected": "ok",
           "verdict": "OK",
-          "elapsed_s": null
+          "elapsed_s": 5201.0
         },
         {
           "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
@@ -376,7 +376,7 @@
           "group": "replay",
           "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
           "expected": "ok",
-          "verdict": "PENDING",
+          "verdict": "FAILED_TOOLCHAIN_MISMATCH",
           "elapsed_s": null
         }
       ]

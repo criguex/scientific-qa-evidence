@@ -5,8 +5,8 @@
   "source_repository": "https://github.com/openai/NavierStokesAndEuler",
   "source_commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
   "lean_version": "leanprover/lean4:v4.34.0-rc2",
-  "state": "in_progress",
-  "updated_utc": "2026-10-21T17:20:09Z",
+  "state": "complete",
+  "updated_utc": "2026-10-21T17:20:36Z",
   "reference_run_1": "evidence/formal/comparator/README.md",
   "checks": [
     {
@@ -161,7 +161,8 @@
         "built_total": 11030,
         "fetched_or_unpacked": 0,
         "xdg_cache_contents": 0
-      }
+      },
+      "elapsed_s": 5201.0
     },
     {
       "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
@@ -190,9 +191,9 @@
       "group": "replay",
       "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
       "expected": "ok",
-      "verdict": "PENDING",
-      "exit_code": null,
-      "finished_utc": null
+      "verdict": "FAILED_TOOLCHAIN_MISMATCH",
+      "exit_code": 1,
+      "finished_utc": "2026-10-21T17:20:36Z"
     }
   ]
 }

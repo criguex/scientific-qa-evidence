@@ -449,6 +449,7 @@ const EXPECTED_VERDICTS = { accept: ["ACCEPTED", "CONTROL_ACCEPTED"], reject: ["
 
 function verdictStyle(check) {
   if (check.verdict === "PENDING") return { fill: "#173b4c", text: C.muted, word: "PENDING" };
+  if (check.verdict.startsWith("FAILED_TOOLCHAIN")) return { fill: "#173b4c", text: C.gold, word: "NOT RUN · TOOLCHAIN" };
   if (!EXPECTED_VERDICTS[check.expected].includes(check.verdict)) return { fill: C.gold, text: C.navy, word: `⚠ ${check.verdict}` };
   if (check.verdict === "KILLED") return { fill: C.coral, text: C.navy, word: "KILLED" };
   return { fill: C.mint, text: C.navy, word: check.verdict === "CONTROL_ACCEPTED" ? "ACCEPTED" : check.verdict };
@@ -485,11 +486,12 @@ function drawValidation(ctx, data, t) {
     y += 6;
   }
   const done = d.checks.filter((check) => check.verdict !== "PENDING");
-  const unexpected = done.filter((check) => !EXPECTED_VERDICTS[check.expected].includes(check.verdict));
+  const inconclusive = done.filter((check) => check.verdict.startsWith("FAILED_TOOLCHAIN"));
+  const unexpected = done.filter((check) => !EXPECTED_VERDICTS[check.expected].includes(check.verdict) && !inconclusive.includes(check));
   const alpha = smooth((t - 14) / 1.4);
   ctx.globalAlpha = alpha;
   rounded(ctx, 66, 922, 948, 76, 16, unexpected.length ? "#332d25" : "#183d3c", unexpected.length ? C.gold : C.mint);
-  label(ctx, `${done.length} / ${total} checks recorded · ${unexpected.length} unexpected · ${d.state.replace("_", " ")}`, 540, 948, 21, unexpected.length ? C.gold : C.mint, 800, "center");
+  label(ctx, `${done.length} / ${total} recorded · ${unexpected.length} unexpected · ${inconclusive.length} not run · ${d.state.replace("_", " ")}`, 540, 948, 21, unexpected.length ? C.gold : C.mint, 800, "center");
   label(ctx, "Mutants test that the statement is compared exactly · they say nothing about forceless (A) or (B)", 540, 978, 15, C.muted, 600, "center");
   ctx.globalAlpha = 1;
 }

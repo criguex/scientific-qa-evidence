@@ -1,6 +1,6 @@
 # Revalidation of alternatives (C) and (D), 2026-10-21
 
-State: **in progress** · 14 of 15 checks recorded · 0 unexpected · last update 2026-10-21T17:20:09Z.
+State: **complete** · 15 of 15 checks recorded · 0 unexpected · 1 not run (toolchain mismatch) · last update 2026-10-21T17:20:36Z.
 
 This run repeats and extends the [2026-10-20 Comparator record](../comparator/README.md) for OpenAI's [NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) at commit `f9e8bc5` (leanprover/lean4:v4.34.0-rc2) on one host: Linux x86_64 · WSL2 · 12 vCPU · 30 GiB. It answers the gaps listed under "Known limitations" in the top-level README:
 
@@ -22,15 +22,16 @@ This run repeats and extends the [2026-10-20 Comparator record](../comparator/RE
 | (C) weaken nu > 0 to nu ≥ 0 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'` | [log](logs/mutant_viscosity_nonneg_R3.sanitized.log) · [diff](mutants/viscosity_nonneg_R3.diff) |
 | (D) drop ¬ · existence instead of breakdown | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_existence_not_breakdown_periodic.sanitized.log) · [diff](mutants/existence_not_breakdown_periodic.diff) |
 | Euler · tighten T* ≤ 1 to T* ≤ 1/2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'` | [log](logs/mutant_euler_tstar_half.sanitized.log) · [diff](mutants/euler_tstar_half.diff) |
-| From-scratch build · empty caches, Mathlib compiled | ok | **OK** | — | — | — |
+| From-scratch build · empty caches, Mathlib compiled | ok | **OK** | 86.7 min | — | — |
 | leanchecker --fresh · Navier–Stokes solution | ok | **OK** | 19.6 min | — | [log](logs/leanchecker_fresh_NavierStokes.ComparatorSolution.sanitized.log) |
 | leanchecker --fresh · Euler solution | ok | **OK** | 22.5 min | — | [log](logs/leanchecker_fresh_Euler.Solution.sanitized.log) |
-| lean4lean --fresh · Navier–Stokes solution (best effort) | ok | **PENDING** | — | — | — |
+| lean4lean --fresh · Navier–Stokes solution (best effort) | ok | **FAILED_TOOLCHAIN_MISMATCH** | — | — | — |
 
 ## How to read the verdicts
 
 - `ACCEPTED`: Comparator printed `Your solution is okay!` after both nanoda and the Lean kernel accepted the solution.
 - `KILLED`: Comparator refused a mutated statement. The decision column quotes its message. `Challenge and solution theorem statement do not match` means the mutated challenge compiled and the refusal came from the statement comparison.
+- `FAILED_TOOLCHAIN_MISMATCH`: the checker itself could not be built for this Lean version, so it never examined the proofs. This is not a verdict on the proofs.
 - `PENDING`: not finished yet. Any verdict outside the expected column would be listed as unexpected above.
 - A killed mutant says nothing about whether the mutated statement is true or false. In particular, the two `f = 0` mutants only show that Comparator will not accept the forced proofs for a forceless statement. They are not evidence about the forceless alternatives (A) and (B).
 
