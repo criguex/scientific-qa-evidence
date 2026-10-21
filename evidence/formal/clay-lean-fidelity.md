@@ -27,4 +27,6 @@
 
 An equivalence argument would still need to justify at least: (a) multi-index derivatives versus norms of Fréchet derivatives; (b) the real exponent `K` and its decay convention against the formal definitions; (c) regularity at `t = 0` and the use of `derivWithin`; (d) integrability and measure formulations, including avoidance of vacuous integrals; and (e) equivalence of coordinates and operators. A transfer of nonexistence also needs both directions: admissible formal data must imply admissible Clay data, and every Clay solution must induce a solution in the formalization.
 
+A clause-by-clause [risk review](clay-lean-risk.md) now locates each of these bridges and flags the one interpretive point, periodic pressure in (D).
+
 The nonzero periodic positive control is a concrete torus instance and reports standard axioms. It does not establish these bridges, cover every Clay hypothesis, or prove the global conclusion.

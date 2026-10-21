@@ -67,14 +67,41 @@ The three ODE scenes—RC, chemistry, and cooling—use the synthetic suite's `1
 - **What it tests:** this fixture's bounded wrong-type control. It is not a fresh kernel run, a theorem-discovery result, a general kernel-correctness claim, or verification of Navier–Stokes/Euler mathematics.
 - **Trace:** [scene](formal.html) · [fixture](../evidence/formal/fixtures/KernelFixture.lean) · [raw and derived records](../evidence/formal/kernel-mutation/) · [`manifest.json`](manifest.json).
 
-### 7. C/D revalidation ladder — rerun, then try to break the statement
+## C/D revalidation and statement scenes
 
-![C/D revalidation: Comparator reruns, statement mutants and pending replays](../docs/assets/validation-preview.gif)
+These four scenes play in real time (20 seconds) with a caption box that explains each step in plain language. All values come from [`evidence/formal/cd-validation/results.json`](../evidence/formal/cd-validation/results.json), the [2026-10-20 Comparator record](../evidence/formal/comparator/README.md), the [statement comparison](../evidence/formal/statement-provenance/result.json) and the [Clay risk review](../evidence/formal/clay-lean-risk.md).
 
-- **Visualized data:** every check in [`evidence/formal/cd-validation/results.json`](../evidence/formal/cd-validation/results.json), grouped as Comparator reruns, statement mutants, from-scratch build and fresh kernel replay. Each row shows the recorded verdict and wall-clock time; unfinished checks show `PENDING`.
-- **Color:** mint means accepted or OK, coral means a mutant was KILLED as expected, and gold with ⚠ flags any verdict that differs from the expected one.
-- **What it tests:** that the (C)/(D) and Euler results repeat, and that Comparator refuses any edit to the challenge statement while a comment-only control still passes. It does not test the forceless alternatives (A) and (B), and a refused mutant is not a claim that the mutated statement is false.
-- **Trace:** [scene](validation.html) · [results and logs](../evidence/formal/cd-validation/README.md) · [`manifest.json`](manifest.json).
+### 7. Rebuild from zero, check again
+
+![Rebuild from zero and three Comparator runs](../docs/assets/rerun-preview.gif)
+
+- **Shows:** source → from-scratch build (Mathlib modules compiled, cache downloads, jobs, time) → Comparator's three checks, then a grid of the three Comparator runs for Navier–Stokes (C, D) and Euler with recorded times.
+- **Does not show:** that the formal statement matches Clay's text, or anything about (A) and (B).
+- **Trace:** [scene](rerun.html) · [results](../evidence/formal/cd-validation/README.md).
+
+### 8. Statement mutants
+
+![Statement mutants refused and control accepted](../docs/assets/mutants-preview.gif)
+
+- **Shows:** each case in turn, with the original challenge line, the mutated line with the changed span highlighted, and Comparator's decision. The list below accumulates the seven verdicts.
+- **Does not show:** that a mutated statement is false. The `f = 0` cases are not evidence about (A) or (B).
+- **Trace:** [scene](mutants.html) · [mutant diffs](../evidence/formal/cd-validation/mutants/).
+
+### 9. Fresh kernel replay
+
+![Fresh kernel replay and kernel implementations](../docs/assets/replay-preview.gif)
+
+- **Shows:** `leanchecker --fresh` replay times for both solutions, then which kernel implementations have actually examined the proofs: nanoda and Lean's kernel did; lean4lean could not be built for Lean 4.34.
+- **Does not show:** a third independent kernel.
+- **Trace:** [scene](replay.html) · [logs](../evidence/formal/cd-validation/logs/).
+
+### 10. Statement provenance
+
+![OpenAI's challenge compared with DeepMind's statement](../docs/assets/provenance-preview.gif)
+
+- **Shows:** the 18 named declarations that are identical in DeepMind's `8bf45ed` and OpenAI's `f9e8bc5`, the packaging differences, and the counts from the Clay risk review.
+- **Does not show:** an expert equivalence proof with Clay's text.
+- **Trace:** [scene](provenance.html) · [comparison](../evidence/formal/statement-provenance/README.md) · [risk review](../evidence/formal/clay-lean-risk.md).
 
 ## Separate 3D flow context
 
@@ -91,11 +118,11 @@ python3 animations/build.py
 python3 -m unittest discover -s animations -p 'test_*.py'
 ```
 
-The README previews in `docs/assets/` are exported from these same HTML scenes at full 1080 × 1080 resolution: 120 frames sampled evenly across the 20-second scene and played at 15 fps as an 8-second loop, with one global 256-color palette. Exporting needs Python Playwright with Chromium and FFmpeg:
+The README previews in `docs/assets/` are exported from these same HTML scenes at full 1080 × 1080 resolution: 120 frames sampled evenly across the 20-second scene and played at 15 fps as an 8-second loop, with one global 256-color palette. The four captioned C/D scenes are exported in real time instead, 200 frames at 10 fps, so the captions stay readable. Exporting needs Python Playwright with Chromium and FFmpeg:
 
 ```sh
 python3 animations/export_gifs.py              # all scenes
-python3 animations/export_gifs.py validation   # one scene
+python3 animations/export_gifs.py mutants      # one scene
 ```
 
 GIF exports do not retain HTML seek controls. Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.

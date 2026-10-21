@@ -55,7 +55,19 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "7199e9d3a02dbf10fa568d1f036d512a0d64b2845757d619981f503236e6a3be"
+      "sha256": "37aa28b3e53f52cdb1a0fe0e660917d1d1dbe0807d3472a125528e6d48eb6eb7"
+    },
+    "comparator_run1": {
+      "path": "evidence/formal/comparator/README.md",
+      "sha256": "95e0b8d8f4de4a4bc84e0235b88230b3fb506f59d8b05bb3c1013b108ce76132"
+    },
+    "statement_provenance": {
+      "path": "evidence/formal/statement-provenance/result.json",
+      "sha256": "d9b120cbec3cc1e3a2680cade1f0f6fcf9dc27419ed336fac09eb89ed59fb084"
+    },
+    "clay_risk": {
+      "path": "evidence/formal/clay-lean-risk.md",
+      "sha256": "f020967a26f7854030c3a0303a938b1f4bde8339ffe92f234db882c31d9e289b"
     }
   },
   "animations": {
@@ -253,133 +265,194 @@
       },
       "tolerance": 1e-06
     },
-    "validation": {
-      "state": "complete",
-      "host_label": "Linux x86_64 · WSL2 · 12 vCPU · 30 GiB",
+    "rerun": {
       "source_commit": "f9e8bc5",
-      "lean_version": "leanprover/lean4:v4.34.0-rc2",
-      "checks": [
+      "build": {
+        "verdict": "OK",
+        "elapsed_s": 5201.0,
+        "built_mathlib_modules": 8370,
+        "built_total": 11030,
+        "fetched_or_unpacked": 0,
+        "xdg_cache_contents": 0,
+        "jobs": 11432
+      },
+      "rows": [
         {
-          "id": "comparator2_NavierStokes",
-          "group": "comparator",
-          "title": "Comparator run 2 · Navier–Stokes (C, D)",
-          "expected": "accept",
-          "verdict": "ACCEPTED",
-          "elapsed_s": 422.32
+          "label": "Run 1 · 2026-10-20 · build with reused caches",
+          "runs": [
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 417.56
+            },
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 654.43
+            }
+          ]
         },
         {
-          "id": "comparator2_Euler",
-          "group": "comparator",
-          "title": "Comparator run 2 · Euler",
-          "expected": "accept",
-          "verdict": "ACCEPTED",
-          "elapsed_s": 669.59
+          "label": "Run 2 · 2026-10-21 · same build",
+          "runs": [
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 422.32
+            },
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 669.59
+            }
+          ]
         },
         {
-          "id": "comparator3_clean_NavierStokes",
-          "group": "comparator",
-          "title": "Comparator run 3 · Navier–Stokes on the from-scratch build",
-          "expected": "accept",
-          "verdict": "ACCEPTED",
-          "elapsed_s": 395.11
-        },
+          "label": "Run 3 · 2026-10-21 · rebuilt from scratch",
+          "runs": [
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 395.11
+            },
+            {
+              "verdict": "ACCEPTED",
+              "elapsed_s": 670.88
+            }
+          ]
+        }
+      ]
+    },
+    "mutants": {
+      "items": [
         {
-          "id": "comparator3_clean_Euler",
-          "group": "comparator",
-          "title": "Comparator run 3 · Euler on the from-scratch build",
-          "expected": "accept",
-          "verdict": "ACCEPTED",
-          "elapsed_s": 670.88
-        },
-        {
-          "id": "mutant_control_comment",
-          "group": "mutant",
           "title": "Control · comment-only edit to the challenge",
+          "theorem": "end of challenge file",
+          "before": "",
+          "after": "-- control: comment-only change",
           "expected": "accept",
           "verdict": "CONTROL_ACCEPTED",
           "elapsed_s": 419.45
         },
         {
-          "id": "mutant_force_zero_R3",
-          "group": "mutant",
           "title": "(C) add f = 0 · forceless statement",
+          "theorem": "navier_stokes_breakdown_R3",
+          "before": "InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧",
+          "after": "InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ f = 0 ∧",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 85.63
         },
         {
-          "id": "mutant_force_zero_periodic",
-          "group": "mutant",
           "title": "(D) add f = 0 · forceless statement",
+          "theorem": "navier_stokes_breakdown_periodic",
+          "before": "InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧",
+          "after": "InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧ f = 0 ∧",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 86.11
         },
         {
-          "id": "mutant_domain_R3_to_periodic_data",
-          "group": "mutant",
           "title": "(C) swap ℝ³ decay data for periodic data",
+          "theorem": "navier_stokes_breakdown_R3",
+          "before": "InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧",
+          "after": "InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 84.75
         },
         {
-          "id": "mutant_viscosity_nonneg_R3",
-          "group": "mutant",
           "title": "(C) weaken nu > 0 to nu ≥ 0",
+          "theorem": "navier_stokes_breakdown_R3",
+          "before": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :",
+          "after": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu ≥ 0) :",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 84.09
         },
         {
-          "id": "mutant_existence_not_breakdown_periodic",
-          "group": "mutant",
           "title": "(D) drop ¬ · existence instead of breakdown",
+          "theorem": "navier_stokes_breakdown_periodic",
+          "before": "¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by",
+          "after": "(∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 86.72
         },
         {
-          "id": "mutant_euler_tstar_half",
-          "group": "mutant",
           "title": "Euler · tighten T* ≤ 1 to T* ≤ 1/2",
+          "theorem": "exists_compact_smooth_euler_singularity",
+          "before": "0 < Tstar ∧ Tstar ≤ 1 ∧",
+          "after": "0 < Tstar ∧ Tstar ≤ 1 / 2 ∧",
           "expected": "reject",
           "verdict": "KILLED",
           "elapsed_s": 81.58
-        },
-        {
-          "id": "clean_build",
-          "group": "build",
-          "title": "From-scratch build · empty caches, Mathlib compiled",
-          "expected": "ok",
-          "verdict": "OK",
-          "elapsed_s": 5201.0
-        },
+        }
+      ]
+    },
+    "replay": {
+      "checks": [
         {
           "id": "leanchecker_fresh_NavierStokes.ComparatorSolution",
-          "group": "replay",
           "title": "leanchecker --fresh · Navier–Stokes solution",
-          "expected": "ok",
           "verdict": "OK",
           "elapsed_s": 1175.25
         },
         {
           "id": "leanchecker_fresh_Euler.Solution",
-          "group": "replay",
           "title": "leanchecker --fresh · Euler solution",
-          "expected": "ok",
           "verdict": "OK",
           "elapsed_s": 1348.82
         },
         {
           "id": "lean4lean_fresh_NavierStokes.ComparatorSolution",
-          "group": "replay",
           "title": "lean4lean --fresh · Navier–Stokes solution (best effort)",
-          "expected": "ok",
           "verdict": "FAILED_TOOLCHAIN_MISMATCH",
           "elapsed_s": null
         }
       ]
+    },
+    "provenance": {
+      "identical": 20,
+      "names": [
+        "divergence",
+        "divergence_of_not_differentiableAt",
+        "divergence_zero",
+        "divergence_const",
+        "divergence_add",
+        "divergence_smul",
+        "IsOnePeriodic",
+        "InitialVelocityCondition",
+        "InitialVelocityConditionDecay",
+        "InitialVelocityConditionPeriodic",
+        "ForceCondition",
+        "ForceConditionDecay",
+        "ForceConditionPeriodic",
+        "NavierStokesExistenceAndSmoothness",
+        "NavierStokesExistenceAndSmoothnessRn",
+        "NavierStokesExistenceAndSmoothnessPeriodic",
+        "navier_stokes_breakdown_R3",
+        "navier_stokes_breakdown_periodic"
+      ],
+      "removed": [
+        "import FormalConjecturesUtil",
+        "open ContDiff Set InnerProductSpace MeasureTheory EuclideanG",
+        "namespace NavierStokes",
+        "notation \"∇⬝\" => divergence",
+        "theorem navier_stokes_existence_and_smoothness_R3 (nu : ℝ) (",
+        "theorem navier_stokes_existence_and_smoothness_periodic (nu ",
+        "end NavierStokes"
+      ],
+      "added": [
+        "import Mathlib",
+        "open ContDiff Set InnerProductSpace MeasureTheory",
+        "namespace NavierStokes.Comparator",
+        "local notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)",
+        "local notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)",
+        "local notation \"∇⬝\" => divergence",
+        "end NavierStokes.Comparator"
+      ],
+      "risk": {
+        "rows": 16,
+        "direct": 6,
+        "standard": 9,
+        "attention": 1
+      }
     }
   }
 }

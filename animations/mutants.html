@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>ADV-050 · Statement mutants</title>
+<style>
+:root{color-scheme:dark;font:16px/1.5 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#173b4c,#071b2b 58%);min-height:100vh}
+main{max-width:1100px;margin:auto;padding:28px 22px 56px}h1{font-size:clamp(1.8rem,5vw,3.4rem);line-height:1.04;margin:.25em 0}
+.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.15em;font-weight:800;font-size:.78rem}
+.stage{width:min(100%,860px);margin:24px auto 0;border:1px solid #315264;border-radius:20px;overflow:hidden;box-shadow:0 25px 80px #020b1280;background:#071b2b}
+canvas{display:block;width:100%;height:auto;aspect-ratio:1;touch-action:none}
+.controls{display:flex;align-items:center;gap:12px;max-width:860px;margin:14px auto;flex-wrap:wrap}
+button{font:inherit;font-weight:750;color:#071b2b;background:#55dfbd;border:0;border-radius:10px;padding:11px 16px;cursor:pointer}
+button.secondary{background:#173b4c;color:#f4f7f5;border:1px solid #315264}button:focus-visible,input:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}
+input[type=range]{flex:1;min-width:160px;accent-color:#55dfbd}.time{font-variant-numeric:tabular-nums;color:#abc0c8;min-width:92px;text-align:right}
+.note{max-width:860px;margin:16px auto;color:#bfd0d5}.data{max-width:860px;margin:20px auto;padding:18px 20px;border:1px solid #315264;border-radius:14px;background:#0d2638}
+summary{cursor:pointer;color:#55dfbd;font-weight:750}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.78rem}
+a{color:#55dfbd}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">ADV-050 · evidence animation · mutants</div>
+<p class="note"><strong>Cristian Guerra · QA Automation · Medellín, Colombia · @criguex</strong></p>
+<h1>Statement mutants</h1>
+<p class="note">Each mutant changes one symbol in the official challenge statement while OpenAI&#x27;s proof stays untouched. Comparator must refuse every one, and a comment-only control must still pass.</p>
+<div class="stage"><canvas id="scene" width="1080" height="1080" role="img" aria-label="Animated evidence diagram. Read the accompanying description and evidence data below."></canvas></div>
+<div class="controls" aria-label="Animation controls">
+<button id="toggle" type="button" aria-pressed="true">Pause</button>
+<button id="replay" class="secondary" type="button">Replay</button>
+<label for="scrub">Seek</label><input id="scrub" type="range" min="0" max="20" step="0.01" value="0" aria-label="Seek animation time">
+<output class="time" id="time" for="scrub">0.0 / 20.0 s</output>
+</div>
+<p class="note"><strong>How to read this animation:</strong> Original line on top, mutated line below with the change highlighted. A refusal shows the statement check is exact; it does not mean the mutated statement is false, and the f = 0 cases say nothing about (A) or (B).</p>
+<details class="data"><summary>Accessible explanation, equations, and source records</summary><pre id="accessible"></pre></details>
+<p class="note"><a href="./index.html">Open the evidence animation gallery</a> · <a href="mutants.html" download>Download standalone HTML</a></p>
+</main>
+<script id="evidence-data" type="application/json">{"schema_version":1,"fps":24,"duration_seconds":20,"width":1080,"height":1080,"source_hashes":{"rc_baseline":{"path":"evidence/numerical/fixtures/rc-baseline.json","sha256":"57a7df125bca23ebe94c6de859961c69e8373e65f08a429ffc71e85918cfc7d4"},"rc_mutation":{"path":"evidence/numerical/fixtures/rc-tau-double.json","sha256":"9ffa207d1a80d0410cac884d6f9ff8fe8bcf1989fb3527826ce45187694260ef"},"chemistry_baseline":{"path":"evidence/numerical/paired/macos-arm64/case_022.json","sha256":"ade5e557e71f807d386b20bbb5572a66de9be0e537fb4bcb8def7384dfd661df"},"chemistry_mutation":{"path":"evidence/numerical/paired/macos-arm64/case_024.json","sha256":"d84d75a5b0d46b025f08a0c129f95e7a9fd40610bb70c3fcbb590569f35bba5a"},"campaign":{"path":"evidence/numerical/multidomain_derived.json","sha256":"b56bc9af121905fb1c962322a4b0c23fc5a8f4dd0b00601a5edf662d21cc5a50"},"formal_derived":{"path":"evidence/formal/kernel-mutation/derived-classification.json","sha256":"33cf64988ce0d31d9b35d2ddc6491e58f53aeb6d59a37116eb339e847533f30a"},"formal_fixture":{"path":"evidence/formal/fixtures/KernelFixture.lean","sha256":"10839136a8412011f617d4e57924a159cd58a680020cb3c5774c63c748923c27"},"cooling_baseline":{"path":"evidence/numerical/paired/macos-arm64/case_013.json","sha256":"596b069b45e1ffd30dcd13778d36b0199cd43e40b1d2db91351bd1707e4c6778"},"cooling_mutation":{"path":"evidence/numerical/paired/macos-arm64/case_015.json","sha256":"fdbb9ef4f76b8bb7b09c82c52e098b2059a96704177dffff44cb20d056da9541"},"snell_baseline":{"path":"evidence/numerical/paired/macos-arm64/case_040.json","sha256":"4927dcb99ab0c98d256aa3571b1b47c124d0ed1d8b2412cfed483290697e8095"},"snell_mutation":{"path":"evidence/numerical/paired/macos-arm64/case_041.json","sha256":"4ae5cd9f4114a196744569ccf371986ea822ca443fd72cbf7f14a2d0b992f45d"},"suite_contract":{"path":"evidence/numerical/source/suite.py","sha256":"4213c8ed582a7ac9c716537ab716833bdfcdd6bf18322a00dbd4282240a4482d"},"cd_validation":{"path":"evidence/formal/cd-validation/results.json","sha256":"37aa28b3e53f52cdb1a0fe0e660917d1d1dbe0807d3472a125528e6d48eb6eb7"},"comparator_run1":{"path":"evidence/formal/comparator/README.md","sha256":"95e0b8d8f4de4a4bc84e0235b88230b3fb506f59d8b05bb3c1013b108ce76132"},"statement_provenance":{"path":"evidence/formal/statement-provenance/result.json","sha256":"d9b120cbec3cc1e3a2680cade1f0f6fcf9dc27419ed336fac09eb89ed59fb084"},"clay_risk":{"path":"evidence/formal/clay-lean-risk.md","sha256":"f020967a26f7854030c3a0303a938b1f4bde8339ffe92f234db882c31d9e289b"}},"animations":{"rc":{"parameters":{"vin":5.0,"v0":0.0,"r_ohm":1000.0,"c_f":0.001,"tau_s":1.0},"horizon_s":3.0,"sample_fractions":[0.25,0.5,0.75,1.0],"sample_times_s":[0.75,1.5,2.25,3.0],"baseline":{"status":"PASS","recorded_rk4_v":[2.638167236013804,3.8843491989922647,4.473003877002498,4.75106465804216]},"mutation":{"status":"KILLED","tau_s":2.0,"recorded_rk4_v":[1.563553606032419,2.638167236277442,3.3767376631902253,3.884349199241331],"variant":"tau_double"}},"chemistry":{"parameters":{"a0_mol_l":1.2,"k_l_mol_s":0.4},"horizon_s":4.166666666666667,"sample_fractions":[0.25,0.5,0.75,1.0],"sample_times_s":[1.041666666667,2.083333333333,3.125,4.166666666667],"baseline":{"status":"PASS","recorded_rk4_mol_l":[0.8000000000194158,0.6000000000135801,0.48000000000929716,0.4000000000066425]},"mutation":{"status":"KILLED","k_l_mol_s":0.8,"recorded_rk4_mol_l":[0.6000000002172111,0.40000000010624626,0.30000000006109273,0.24000000003940244],"variant":"rate_double"}},"campaign":{"per_host":{"variant_evaluations":84,"classification_counts":{"PASS":27,"KILLED":54,"SURVIVED":3},"hosts":["macOS arm64","Linux x86_64 WAR"]},"paired_variant_records":84},"formal":{"record_count_each":212,"only_semantic_change":"target.thm.value; target.type and target.all unchanged","lean_baseline":"ACCEPT","lean_mutant":"KERNEL_TYPE_MISMATCH_REJECT","lean_diagnostic":"declaration type mismatch: target has type True; expected @Eq Nat 0 0","nanoda_baseline":"ACCEPT","nanoda_mutant_raw":"COLLECTED_PENDING_CLASSIFICATION","nanoda_mutant_derived":"TYPECHECK_ASSERTION_REJECT_DERIVED","nanoda_basis":"pinned source infers the declaration value type then assert_def_eq compares it with the expected type; the binary output itself does not emit a structured reject category","fixture_text":"theorem target : 0 = 0 := rfl\n\ntheorem wrong : True := True.intro\n"},"cooling":{"parameters":{"t0_c":90.0,"ambient_c":20.0,"k_per_s":0.2},"horizon_s":15.0,"sample_fractions":[0.25,0.5,0.75,1.0],"sample_times_s":[3.75,7.5,11.25,15.0],"baseline":{"status":"PASS","recorded_rk4_c":[53.065658695806725,35.61911121410829,27.37794572196503,23.48509478740975],"normalized_error":5.6224231619645644e-11},"mutation":{"status":"KILLED","k_per_s":0.1,"recorded_rk4_c":[68.11024951554617,53.06565869211583,42.725672715336835,35.619111210621334],"normalized_error":0.24923639259608207,"invariants":"ok","variant":"rate_half"},"tolerance":1e-06},"snell":{"parameters":{"n1":1.0,"n2":1.5,"max_incidence_rad":0.4},"sample_fractions":[0.25,0.5,0.75,1.0],"sample_incidence_rad":[0.1,0.2,0.3,0.4],"baseline":{"status":"PASS","recorded_refracted_rad":[0.06660484563923312,0.13283653820739805,0.19831075045863564,0.26262064182521755],"normalized_error":5.551115123125783e-17},"mutation":{"status":"KILLED","recorded_refracted_rad":[0.1503155431508584,0.3026009599304236,0.45925487201513177,0.6238047030615395],"normalized_error":0.36118406123632196,"invariants":"ok","variant":"index_swap"},"tolerance":1e-06},"rerun":{"source_commit":"f9e8bc5","build":{"verdict":"OK","elapsed_s":5201.0,"built_mathlib_modules":8370,"built_total":11030,"fetched_or_unpacked":0,"xdg_cache_contents":0,"jobs":11432},"rows":[{"label":"Run 1 · 2026-10-20 · build with reused caches","runs":[{"verdict":"ACCEPTED","elapsed_s":417.56},{"verdict":"ACCEPTED","elapsed_s":654.43}]},{"label":"Run 2 · 2026-10-21 · same build","runs":[{"verdict":"ACCEPTED","elapsed_s":422.32},{"verdict":"ACCEPTED","elapsed_s":669.59}]},{"label":"Run 3 · 2026-10-21 · rebuilt from scratch","runs":[{"verdict":"ACCEPTED","elapsed_s":395.11},{"verdict":"ACCEPTED","elapsed_s":670.88}]}]},"mutants":{"items":[{"title":"Control · comment-only edit to the challenge","theorem":"end of challenge file","before":"","after":"-- control: comment-only change","expected":"accept","verdict":"CONTROL_ACCEPTED","elapsed_s":419.45},{"title":"(C) add f = 0 · forceless statement","theorem":"navier_stokes_breakdown_R3","before":"InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧","after":"InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ f = 0 ∧","expected":"reject","verdict":"KILLED","elapsed_s":85.63},{"title":"(D) add f = 0 · forceless statement","theorem":"navier_stokes_breakdown_periodic","before":"InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧","after":"InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧ f = 0 ∧","expected":"reject","verdict":"KILLED","elapsed_s":86.11},{"title":"(C) swap ℝ³ decay data for periodic data","theorem":"navier_stokes_breakdown_R3","before":"InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧","after":"InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧","expected":"reject","verdict":"KILLED","elapsed_s":84.75},{"title":"(C) weaken nu > 0 to nu ≥ 0","theorem":"navier_stokes_breakdown_R3","before":"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :","after":"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu ≥ 0) :","expected":"reject","verdict":"KILLED","elapsed_s":84.09},{"title":"(D) drop ¬ · existence instead of breakdown","theorem":"navier_stokes_breakdown_periodic","before":"¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by","after":"(∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by","expected":"reject","verdict":"KILLED","elapsed_s":86.72},{"title":"Euler · tighten T* ≤ 1 to T* ≤ 1/2","theorem":"exists_compact_smooth_euler_singularity","before":"0 \u003c Tstar ∧ Tstar ≤ 1 ∧","after":"0 \u003c Tstar ∧ Tstar ≤ 1 / 2 ∧","expected":"reject","verdict":"KILLED","elapsed_s":81.58}]},"replay":{"checks":[{"id":"leanchecker_fresh_NavierStokes.ComparatorSolution","title":"leanchecker --fresh · Navier–Stokes solution","verdict":"OK","elapsed_s":1175.25},{"id":"leanchecker_fresh_Euler.Solution","title":"leanchecker --fresh · Euler solution","verdict":"OK","elapsed_s":1348.82},{"id":"lean4lean_fresh_NavierStokes.ComparatorSolution","title":"lean4lean --fresh · Navier–Stokes solution (best effort)","verdict":"FAILED_TOOLCHAIN_MISMATCH","elapsed_s":null}]},"provenance":{"identical":20,"names":["divergence","divergence_of_not_differentiableAt","divergence_zero","divergence_const","divergence_add","divergence_smul","IsOnePeriodic","InitialVelocityCondition","InitialVelocityConditionDecay","InitialVelocityConditionPeriodic","ForceCondition","ForceConditionDecay","ForceConditionPeriodic","NavierStokesExistenceAndSmoothness","NavierStokesExistenceAndSmoothnessRn","NavierStokesExistenceAndSmoothnessPeriodic","navier_stokes_breakdown_R3","navier_stokes_breakdown_periodic"],"removed":["import FormalConjecturesUtil","open ContDiff Set InnerProductSpace MeasureTheory EuclideanG","namespace NavierStokes","notation \"∇⬝\" => divergence","theorem navier_stokes_existence_and_smoothness_R3 (nu : ℝ) (","theorem navier_stokes_existence_and_smoothness_periodic (nu ","end NavierStokes"],"added":["import Mathlib","open ContDiff Set InnerProductSpace MeasureTheory","namespace NavierStokes.Comparator","local notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)","local notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)","local notation \"∇⬝\" => divergence","end NavierStokes.Comparator"],"risk":{"rows":16,"direct":6,"standard":9,"attention":1}}}}</script>
+<script>
+function clamp(value, low, high) {
+  return Math.max(low, Math.min(high, value));
+}
+
+function smooth(value) {
+  const x = clamp(value, 0, 1);
+  return x * x * (3 - 2 * x);
+}
+
+function mix(start, end, amount) {
+  return start + (end - start) * clamp(amount, 0, 1);
+}
+
+function rcVoltage(time, inputVoltage, initialVoltage, tau) {
+  return inputVoltage + (initialVoltage - inputVoltage) * Math.exp(-time / tau);
+}
+
+function secondOrderConcentration(time, initialConcentration, rate) {
+  return initialConcentration / (1 + rate * initialConcentration * time);
+}
+
+function coolingTemperature(time, ambient, initialTemperature, rate) {
+  return ambient + (initialTemperature - ambient) * Math.exp(-rate * time);
+}
+
+function snellAngle(incidence, n1, n2) {
+  return Math.asin((n1 / n2) * Math.sin(incidence));
+}
+
+function visiblePointCount(progress, total) {
+  return Math.floor(clamp(progress, 0, 1) * total + 0.000001);
+}
+
+const C = { navy: "#071b2b", deep: "#0d2638", panel: "#123448", mint: "#55dfbd", white: "#f4f7f5", muted: "#abc0c8", coral: "#fb8176", gold: "#ffc56e", grid: "#214456", blue: "#70b9ff" };
+const W = 1080;
+const H = 1080;
+
+function rounded(ctx, x, y, w, h, radius, fill, stroke) {
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, radius);
+  ctx.fillStyle = fill;
+  ctx.fill();
+  if (stroke) {
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+function label(ctx, value, x, y, size, color = C.white, weight = 600, align = "left", family = "Inter, Avenir Next, Arial, sans-serif") {
+  ctx.font = `${weight} ${size}px ${family}`;
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.textBaseline = "middle";
+  ctx.fillText(String(value), x, y, 920);
+}
+
+function line(ctx, x1, y1, x2, y2, color, width = 3, dash = []) {
+  ctx.beginPath();
+  ctx.setLineDash(dash);
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function circle(ctx, x, y, radius, fill, stroke = null) {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = fill;
+  ctx.fill();
+  if (stroke) {
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 4;
+    ctx.stroke();
+  }
+}
+
+function base(ctx, title, eyebrow, t, color) {
+  const background = ctx.createLinearGradient(0, 0, W, H);
+  background.addColorStop(0, C.deep);
+  background.addColorStop(0.55, C.navy);
+  background.addColorStop(1, "#102d3b");
+  ctx.fillStyle = background;
+  ctx.fillRect(0, 0, W, H);
+  ctx.save();
+  ctx.globalAlpha = 0.18;
+  for (let x = 26; x < W; x += 48) line(ctx, x, 0, x, H, C.grid, 1);
+  for (let y = 24; y < H; y += 48) line(ctx, 0, y, W, y, C.grid, 1);
+  ctx.restore();
+  label(ctx, eyebrow.toUpperCase(), 66, 61, 19, color, 800);
+  label(ctx, title, 66, 124, 48, C.white, 800);
+  rounded(ctx, 66, 170, 948, 5, 3, "#2c4a59");
+  rounded(ctx, 66, 170, 948 * clamp(t / 20, 0, 1), 5, 3, color);
+  label(ctx, `CLIP ${Math.min(20, Math.max(0, t)).toFixed(1)} s`, 1010, 62, 18, C.muted, 700, "right");
+  label(ctx, "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex", 66, 1045, 16, C.muted, 650);
+}
+
+function chartFrame(ctx, x, y, w, h, xLabel, yLabel, yMax, xMax) {
+  rounded(ctx, x, y, w, h, 22, "#0b2434", "#315264");
+  const left = x + 68;
+  const right = x + w - 28;
+  const top = y + 34;
+  const bottom = y + h - 88;
+  for (let i = 0; i <= 4; i += 1) {
+    const py = mix(bottom, top, i / 4);
+    line(ctx, left, py, right, py, "#274859", 1);
+    label(ctx, (yMax * i / 4).toFixed(1), left - 13, py, 15, C.muted, 500, "right");
+  }
+  line(ctx, left, top, left, bottom, C.muted, 2);
+  line(ctx, left, bottom, right, bottom, C.muted, 2);
+  ctx.save();
+  ctx.translate(x + 22, y + h / 2);
+  ctx.rotate(-Math.PI / 2);
+  label(ctx, yLabel, 0, 0, 16, C.muted, 700, "center");
+  ctx.restore();
+  for (let i = 0; i <= 4; i += 1) {
+    const px = left + (i / 4) * (right - left);
+    line(ctx, px, bottom, px, bottom + 6, C.muted, 2);
+    label(ctx, (xMax * i / 4).toFixed(2), px, bottom + 21, 14, C.muted, 600, "center");
+  }
+  label(ctx, xLabel, (left + right) / 2, y + h - 27, 17, C.muted, 600, "center");
+  return { left, right, top, bottom, plotWidth: right - left, plotHeight: bottom - top };
+}
+
+function plotCurve(ctx, frame, fn, domain, maxValue, color, progress, dash = []) {
+  const end = clamp(progress, 0, 1);
+  if (end <= 0) return;
+  const points = Math.max(2, Math.floor(160 * end));
+  ctx.beginPath();
+  ctx.setLineDash(dash);
+  for (let i = 0; i <= points; i += 1) {
+    const ratio = i / 160;
+    const x = frame.left + ratio * frame.plotWidth;
+    const time = domain * ratio;
+    const y = frame.bottom - (fn(time) / maxValue) * frame.plotHeight;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawRc(ctx, data, t) {
+  const d = data.animations.rc;
+  base(ctx, "One mutation. A computed difference.", "01 / Numerical evidence", t, C.mint);
+  label(ctx, "C V′ = (Vᵢₙ − V) / R", 70, 220, 26, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  label(ctx, `R = ${d.parameters.r_ohm} Ω · C = ${d.parameters.c_f} F · τ = ${d.parameters.tau_s.toFixed(1)} s`, 70, 258, 19, C.muted);
+  const frame = chartFrame(ctx, 66, 295, 620, 500, "time (s)", "volts", d.parameters.vin, d.horizon_s);
+  const revealBase = smooth((t - 0.8) / 5.2);
+  const revealMutant = smooth((t - 5.8) / 5.2);
+  const curve = (tau) => (time) => rcVoltage(time, d.parameters.vin, d.parameters.v0, tau);
+  plotCurve(ctx, frame, curve(d.parameters.tau_s), d.horizon_s, d.parameters.vin, C.mint, revealBase);
+  plotCurve(ctx, frame, curve(d.mutation.tau_s), d.horizon_s, d.parameters.vin, C.coral, revealMutant);
+  const modelTime = d.horizon_s * clamp((t - 0.8) / 15.2, 0, 1);
+  const cursorX = frame.left + (modelTime / d.horizon_s) * frame.plotWidth;
+  line(ctx, cursorX, frame.top, cursorX, frame.bottom, C.gold, 2, [7, 8]);
+  const liveVoltage = rcVoltage(modelTime, d.parameters.vin, d.parameters.v0, d.parameters.tau_s);
+  const liveY = frame.bottom - (liveVoltage / d.parameters.vin) * frame.plotHeight;
+  circle(ctx, cursorX, liveY, 12, C.gold, C.navy);
+  const times = d.sample_times_s;
+  const baseValues = d.baseline.recorded_rk4_v;
+  const mutantValues = d.mutation.recorded_rk4_v;
+  const markerCount = visiblePointCount(smooth((t - 8) / 5), times.length);
+  for (let i = 0; i < markerCount; i += 1) {
+    const px = frame.left + (times[i] / d.horizon_s) * frame.plotWidth;
+    const pyBase = frame.bottom - (baseValues[i] / d.parameters.vin) * frame.plotHeight;
+    const pyMutant = frame.bottom - (mutantValues[i] / d.parameters.vin) * frame.plotHeight;
+    circle(ctx, px, pyBase, 9, C.navy, C.mint);
+    if (t > 9) circle(ctx, px, pyMutant, 8, C.navy, C.coral);
+  }
+  rounded(ctx, 716, 295, 298, 500, 22, "#0b2434", "#315264");
+  label(ctx, "MODEL vs RECORDED", 744, 332, 16, C.muted, 800);
+  line(ctx, 744, 370, 784, 370, C.mint, 5);
+  label(ctx, "analytic oracle", 797, 370, 18, C.white);
+  circle(ctx, 764, 410, 7, C.navy, C.mint);
+  label(ctx, "RK4 checkpoints", 797, 410, 18, C.white);
+  line(ctx, 744, 446, 784, 446, C.coral, 5);
+  label(ctx, "doubled-τ mutation", 797, 446, 17, C.white);
+  label(ctx, `Live model time ${modelTime.toFixed(2)} s`, 744, 480, 17, C.gold, 700);
+  label(ctx, "Schematic charge · V / Vᵢₙ · not a fluid", 744, 514, 14, C.muted, 600);
+  rounded(ctx, 744, 533, 248, 13, 7, "#274859");
+  rounded(ctx, 744, 533, 248 * (liveVoltage / d.parameters.vin), 13, 7, C.mint);
+  const endpointAlpha = smooth((t - 11) / 2.5);
+  ctx.globalAlpha = endpointAlpha;
+  rounded(ctx, 736, 568, 256, 62, 15, "#123448");
+  label(ctx, `Baseline  ${d.baseline.recorded_rk4_v[3].toFixed(3)} V  ·  PASS`, 752, 599, 18, C.mint, 800);
+  rounded(ctx, 736, 638, 256, 62, 15, "#3b2a32");
+  label(ctx, `Doubled τ  ${d.mutation.recorded_rk4_v[3].toFixed(3)} V  ·  KILLED`, 752, 669, 16, C.coral, 800);
+  ctx.globalAlpha = 1;
+  const verdict = t > 15 ? smooth((t - 15) / 1.2) : 0;
+  ctx.globalAlpha = verdict;
+  rounded(ctx, 716, 720, 298, 56, 14, "#183d3c", "#55dfbd");
+  label(ctx, `${d.baseline.status}  →  ${d.mutation.status}`, 865, 748, 22, C.mint, 800, "center");
+  ctx.globalAlpha = 1;
+  label(ctx, "Curve = analytic reconstruction · hollow markers = recorded RK4 values at four checkpoints", 70, 850, 18, C.muted, 600);
+  label(ctx, "Synthetic circuit calculation · not a laboratory measurement", 70, 1005, 17, C.gold, 700);
+}
+
+function vessel(ctx, x, y, width, height, concentration, maximum, color, reveal, name, seconds) {
+  label(ctx, name, x + width / 2, y - 44, 18, C.white, 700, "center");
+  label(ctx, `${concentration.toFixed(3)} mol/L`, x + width / 2, y - 15, 18, color, 800, "center");
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(x, y, width, height, [18, 18, 32, 32]);
+  ctx.clip();
+  ctx.fillStyle = "#112f42";
+  ctx.fillRect(x, y, width, height);
+  ctx.fillStyle = "#326078";
+  ctx.fillRect(x, y + height * 0.22, width, height * 0.78);
+  const dotCount = Math.max(0, Math.round(24 * concentration / maximum));
+  for (let i = 0; i < dotCount; i += 1) {
+    const col = i % 6;
+    const row = Math.floor(i / 6);
+    const drift = Math.sin(seconds * 1.4 + i * 1.73) * 7;
+    const dx = x + 26 + col * ((width - 52) / 5) + drift;
+    const dy = y + height - 38 - row * 28 + Math.cos(seconds * 1.1 + i) * 5;
+    ctx.globalAlpha = reveal;
+    circle(ctx, dx, dy, 8, color);
+  }
+  ctx.restore();
+  ctx.globalAlpha = reveal;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.roundRect(x, y, width, height, [18, 18, 32, 32]);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+}
+
+function drawChemistry(ctx, data, t) {
+  const d = data.animations.chemistry;
+  base(ctx, "Rate mutation changes concentration.", "02 / Numerical evidence", t, C.gold);
+  label(ctx, "A′ = −k A²  ·  A(t) = A₀ / (1 + k A₀ t)", 70, 220, 25, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  label(ctx, `A₀ = ${d.parameters.a0_mol_l} mol/L · k = ${d.parameters.k_l_mol_s} L/(mol·s) · t = ${d.horizon_s.toFixed(2)} s`, 70, 258, 18, C.muted);
+  rounded(ctx, 66, 298, 948, 365, 22, "#0b2434", "#315264");
+  const modelTime = d.horizon_s * clamp((t - 1) / 16, 0, 1);
+  const baselineAtTime = secondOrderConcentration(modelTime, d.parameters.a0_mol_l, d.parameters.k_l_mol_s);
+  const mutationAtTime = secondOrderConcentration(modelTime, d.parameters.a0_mol_l, d.mutation.k_l_mol_s);
+  const appearBase = smooth((t - 1) / 2.5);
+  const appearMutant = smooth((t - 4.5) / 2.5);
+  label(ctx, "SAME VESSEL VOLUME · SOLUTE MARKERS ARE SCHEMATIC", 90, 333, 15, C.muted, 800);
+  label(ctx, `t = ${modelTime.toFixed(2)} s`, 986, 333, 16, C.gold, 700, "right");
+  vessel(ctx, 300, 392, 180, 190, baselineAtTime, d.parameters.a0_mol_l, C.mint, appearBase, "Baseline · k", modelTime);
+  vessel(ctx, 600, 392, 180, 190, mutationAtTime, d.parameters.a0_mol_l, C.coral, appearMutant, "Mutation · 2k", modelTime);
+  const frame = chartFrame(ctx, 66, 690, 948, 280, "time (s)", "mol/L", d.parameters.a0_mol_l, d.horizon_s);
+  const curveBase = (time) => secondOrderConcentration(time, d.parameters.a0_mol_l, d.parameters.k_l_mol_s);
+  const curveMutant = (time) => secondOrderConcentration(time, d.parameters.a0_mol_l, d.mutation.k_l_mol_s);
+  plotCurve(ctx, frame, curveBase, d.horizon_s, d.parameters.a0_mol_l, C.mint, smooth((t - 6) / 5));
+  plotCurve(ctx, frame, curveMutant, d.horizon_s, d.parameters.a0_mol_l, C.coral, smooth((t - 9) / 5));
+  const cursorX = frame.left + clamp(modelTime / d.horizon_s, 0, 1) * frame.plotWidth;
+  line(ctx, cursorX, frame.top, cursorX, frame.bottom, C.gold, 2, [7, 8]);
+  circle(ctx, cursorX, frame.bottom - (baselineAtTime / d.parameters.a0_mol_l) * frame.plotHeight, 10, C.gold, C.navy);
+  const count = visiblePointCount(smooth((t - 12) / 2.5), d.sample_times_s.length);
+  for (let i = 0; i < count; i += 1) {
+    const px = frame.left + ((d.sample_times_s[i] / d.horizon_s)) * frame.plotWidth;
+    const y0 = frame.bottom - (d.baseline.recorded_rk4_mol_l[i] / d.parameters.a0_mol_l) * frame.plotHeight;
+    const y1 = frame.bottom - (d.mutation.recorded_rk4_mol_l[i] / d.parameters.a0_mol_l) * frame.plotHeight;
+    circle(ctx, px, y0, 6, C.navy, C.mint);
+    if (t > 12.5) circle(ctx, px, y1, 6, C.navy, C.coral);
+  }
+  label(ctx, "Analytic curves · hollow rings are recorded RK4 checkpoints", 70, 1004, 17, C.muted, 600);
+  const verdict = smooth((t - 16.2) / 1.2);
+  ctx.globalAlpha = verdict;
+  rounded(ctx, 66, 610, 948, 44, 12, "#15384a", "#315264");
+  label(ctx, `Horizon values · baseline ${d.baseline.recorded_rk4_mol_l[3].toFixed(3)} PASS  →  2× rate ${d.mutation.recorded_rk4_mol_l[3].toFixed(3)} KILLED`, 540, 632, 17, C.white, 750, "center");
+  ctx.globalAlpha = 1;
+}
+
+function dotPosition(index, columns, x, y, size, gap) {
+  return { x: x + (index % columns) * gap, y: y + Math.floor(index / columns) * gap };
+}
+
+function drawHost(ctx, x, y, host, revealed, counts, labelText) {
+  rounded(ctx, x, y, 434, 548, 26, "#0b2434", "#315264");
+  label(ctx, labelText, x + 28, y + 38, 22, C.white, 800);
+  const px = x + 32;
+  const py = y + 95;
+  const categories = [
+    { key: "PASS", count: counts.PASS, color: C.mint },
+    { key: "KILLED", count: counts.KILLED, color: C.coral },
+    { key: "SURVIVED", count: counts.SURVIVED, color: C.gold },
+  ];
+  let index = 0;
+  for (const category of categories) {
+    for (let j = 0; j < category.count; j += 1) {
+      const point = dotPosition(index, 12, px, py, 7, 31);
+      if (index < revealed) circle(ctx, point.x, point.y, 8, category.color);
+      index += 1;
+    }
+  }
+  categories.forEach((category, i) => {
+    const yy = y + 468 + i * 26;
+    circle(ctx, x + 46, yy, 7, category.color);
+    label(ctx, `${category.key}  ${category.count}`, x + 68, yy, 16, C.muted, 700);
+  });
+  label(ctx, `${Math.min(revealed, host.variant_evaluations)} / ${host.variant_evaluations} variants`, x + 400, y + 38, 16, C.muted, 700, "right");
+}
+
+function drawCampaign(ctx, data, t) {
+  const d = data.animations.campaign;
+  base(ctx, "The same 84 variants on two hosts.", "03 / Paired campaign", t, C.coral);
+  const revealA = visiblePointCount(smooth((t - 1.1) / 8.5), d.per_host.variant_evaluations);
+  const revealB = visiblePointCount(smooth((t - 6.2) / 8.5), d.per_host.variant_evaluations);
+  drawHost(ctx, 66, 258, d.per_host, revealA, d.per_host.classification_counts, "macOS arm64");
+  drawHost(ctx, 580, 258, d.per_host, revealB, d.per_host.classification_counts, "Linux x86_64");
+  const linkAlpha = smooth((t - 12) / 1.2);
+  ctx.globalAlpha = linkAlpha;
+  line(ctx, 494, 520, 586, 520, C.gold, 5, [8, 8]);
+  circle(ctx, 540, 520, 13, C.gold);
+  ctx.globalAlpha = 1;
+  rounded(ctx, 66, 844, 948, 114, 22, "#123448", "#ffc56e");
+  label(ctx, `${d.per_host.variant_evaluations} paired variants`, 102, 888, 31, C.white, 800);
+  label(ctx, "84 per host · same variant set · not 168 distinct cases", 102, 928, 20, C.gold, 700);
+  label(ctx, "Color shows classification only; reveal order is a visual sequence, not runtime performance.", 70, 1005, 17, C.muted, 600);
+}
+
+function proofCard(ctx, x, y, title, value, type, status, color, alpha) {
+  ctx.globalAlpha = alpha;
+  rounded(ctx, x, y, 438, 340, 24, "#0b2434", color);
+  label(ctx, title, x + 30, y + 40, 21, color, 800);
+  label(ctx, "target : 0 = 0", x + 30, y + 104, 22, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  line(ctx, x + 30, y + 145, x + 400, y + 145, "#315264", 2);
+  label(ctx, "proof value", x + 30, y + 180, 17, C.muted, 600);
+  label(ctx, value, x + 30, y + 222, 26, C.white, 750, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  label(ctx, `value type: ${type}`, x + 30, y + 267, 17, color, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  rounded(ctx, x + 30, y + 292, 374, 34, 10, color);
+  label(ctx, status, x + 217, y + 309, 15, C.navy, 900, "center");
+  ctx.globalAlpha = 1;
+}
+
+function drawFormal(ctx, data, t) {
+  const d = data.animations.formal;
+  base(ctx, "Change the proof value—not the theorem.", "04 / Bounded formal control", t, C.blue);
+  label(ctx, "One fixture · one incompatible value mutation", 70, 220, 20, C.muted, 600);
+  const baselineAlpha = smooth((t - 0.8) / 2.2);
+  const mutantAlpha = smooth((t - 6.5) / 2.8);
+  proofCard(ctx, 66, 285, "BASELINE", "rfl", "0 = 0", "LEAN + NANODA ACCEPT", C.mint, baselineAlpha);
+  proofCard(ctx, 576, 285, "MUTANT", "True.intro", "True", "TYPE MISMATCH", C.coral, mutantAlpha);
+  const check = smooth((t - 10) / 2.2);
+  ctx.globalAlpha = check;
+  rounded(ctx, 66, 682, 948, 142, 22, "#152f40", "#315264");
+  label(ctx, "Lean diagnostic", 96, 721, 18, C.muted, 800);
+  label(ctx, "target has type True; expected 0 = 0", 96, 768, 24, C.coral, 800, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  ctx.globalAlpha = 1;
+  const derived = smooth((t - 13.2) / 1.5);
+  ctx.globalAlpha = derived;
+  rounded(ctx, 66, 858, 948, 116, 22, "#332d25", "#ffc56e");
+  label(ctx, "nanoda emitted an internal typechecking assertion; rejection is derived from pinned source", 96, 904, 19, C.gold, 700);
+  label(ctx, "The raw result remains pending classification · no fresh kernel run is implied", 96, 944, 17, C.muted, 600);
+  ctx.globalAlpha = 1;
+  label(ctx, `Recorded scope: ${d.record_count_each} exported records per fixture; only target.thm.value changed.`, 70, 1010, 16, C.muted, 600);
+}
+
+function drawThermometer(ctx, x, y, height, value, min, max, color, title) {
+  label(ctx, title, x + 12, y - 28, 17, color, 700, "center");
+  rounded(ctx, x, y, 24, height, 12, "#183849", "#abc0c8");
+  const ratio = clamp((value - min) / (max - min), 0, 1);
+  rounded(ctx, x + 6, y + height * (1 - ratio) + 6, 12, Math.max(8, height * ratio - 12), 6, color);
+  circle(ctx, x + 12, y + height + 10, 23, color);
+  label(ctx, `${value.toFixed(1)}°`, x + 12, y + height + 49, 17, C.white, 700, "center");
+}
+
+function drawCooling(ctx, data, t) {
+  const d = data.animations.cooling;
+  base(ctx, "A rate change slows the approach to ambient.", "05 / Numerical evidence", t, C.coral);
+  label(ctx, "T′ = −k(T − Tₐ)  ·  T(t) = Tₐ + (T₀ − Tₐ)e⁻ᵏᵗ", 70, 220, 24, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  label(ctx, `T₀ = ${d.parameters.t0_c}°C · Tₐ = ${d.parameters.ambient_c}°C · k = ${d.parameters.k_per_s} s⁻¹ · horizon ${d.horizon_s} s`, 70, 258, 18, C.muted);
+  const modelTime = d.horizon_s * clamp((t - 0.8) / 16.2, 0, 1);
+  const baselineTemp = coolingTemperature(modelTime, d.parameters.ambient_c, d.parameters.t0_c, d.parameters.k_per_s);
+  const mutationTemp = coolingTemperature(modelTime, d.parameters.ambient_c, d.parameters.t0_c, d.mutation.k_per_s);
+  rounded(ctx, 66, 298, 350, 470, 24, "#0b2434", "#315264");
+  label(ctx, `Ambient ${d.parameters.ambient_c}°C · model time ${modelTime.toFixed(2)} s`, 90, 336, 17, C.blue, 700);
+  const glow = ctx.createRadialGradient(235, 465, 18, 235, 465, 188);
+  const intensity = clamp((baselineTemp - d.parameters.ambient_c) / (d.parameters.t0_c - d.parameters.ambient_c), 0, 1);
+  glow.addColorStop(0, `rgba(251,129,118,${0.5 * intensity})`);
+  glow.addColorStop(1, "rgba(251,129,118,0)");
+  ctx.fillStyle = glow;
+  ctx.fillRect(72, 312, 338, 354);
+  const blockSize = 108;
+  const shift = Math.sin(t * 1.2) * 2;
+  rounded(ctx, 182 + shift, 424, blockSize, blockSize, 20, `rgb(${Math.round(105 + 130 * intensity)},${Math.round(82 - 18 * intensity)},${Math.round(55 - 9 * intensity)})`, C.coral);
+  label(ctx, `${baselineTemp.toFixed(1)}°C`, 236 + shift, 478, 22, C.white, 800, "center");
+  drawThermometer(ctx, 130, 620, 65, baselineTemp, d.parameters.ambient_c, d.parameters.t0_c, C.mint, "BASELINE");
+  drawThermometer(ctx, 270, 620, 65, mutationTemp, d.parameters.ambient_c, d.parameters.t0_c, C.coral, "½-RATE");
+  const chart = chartFrame(ctx, 442, 298, 572, 470, "time (s)", "temperature °C", d.parameters.t0_c, d.horizon_s);
+  plotCurve(ctx, chart, (time) => coolingTemperature(time, d.parameters.ambient_c, d.parameters.t0_c, d.parameters.k_per_s), d.horizon_s, d.parameters.t0_c, C.mint, smooth((t - 1) / 14));
+  plotCurve(ctx, chart, (time) => coolingTemperature(time, d.parameters.ambient_c, d.parameters.t0_c, d.mutation.k_per_s), d.horizon_s, d.parameters.t0_c, C.coral, smooth((t - 4.5) / 12));
+  const cursorX = chart.left + (modelTime / d.horizon_s) * chart.plotWidth;
+  line(ctx, cursorX, chart.top, cursorX, chart.bottom, C.gold, 2, [7, 8]);
+  circle(ctx, cursorX, chart.bottom - (baselineTemp / d.parameters.t0_c) * chart.plotHeight, 10, C.gold, C.navy);
+  const count = visiblePointCount(smooth((t - 11) / 3), d.sample_times_s.length);
+  for (let i = 0; i < count; i += 1) {
+    const px = chart.left + (d.sample_times_s[i] / d.horizon_s) * chart.plotWidth;
+    circle(ctx, px, chart.bottom - (d.baseline.recorded_rk4_c[i] / d.parameters.t0_c) * chart.plotHeight, 7, C.navy, C.mint);
+    if (t > 12) circle(ctx, px, chart.bottom - (d.mutation.recorded_rk4_c[i] / d.parameters.t0_c) * chart.plotHeight, 7, C.navy, C.coral);
+  }
+  const alpha = smooth((t - 16) / 1.2);
+  ctx.globalAlpha = alpha;
+  rounded(ctx, 66, 820, 948, 130, 22, "#122f42", "#315264");
+  label(ctx, `Recorded at 15 s: ${d.baseline.recorded_rk4_c[3].toFixed(2)}°C baseline  →  ${d.mutation.recorded_rk4_c[3].toFixed(2)}°C mutant`, 96, 864, 21, C.white, 800);
+  label(ctx, `Mutation invariants: ${d.mutation.invariants} · normalized oracle error ${d.mutation.normalized_error.toFixed(3)} > tolerance ${d.tolerance}`, 96, 912, 18, C.gold, 700);
+  ctx.globalAlpha = 1;
+  label(ctx, "Lumped synthetic cooling model · not an experiment or material measurement", 70, 1008, 16, C.muted, 600);
+}
+
+function drawAngleArc(ctx, x, y, radius, start, end, color, text, tx, ty) {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, start, end);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  label(ctx, text, tx, ty, 18, color, 800, "center");
+}
+
+function drawSnell(ctx, data, t) {
+  const d = data.animations.snell;
+  base(ctx, "Swapping refractive indices bends the ray too far.", "06 / Numerical evidence", t, C.blue);
+  label(ctx, "n₁ sin θ₁ = n₂ sin θ₂  ·  θ₂ = asin((n₁ / n₂) sin θ₁)", 70, 220, 23, C.white, 700, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  label(ctx, `n₁ = ${d.parameters.n1.toFixed(1)} · n₂ = ${d.parameters.n2.toFixed(1)} · incidence sweep 0.10–${d.parameters.max_incidence_rad.toFixed(1)} rad`, 70, 258, 18, C.muted);
+  const panelY = 294;
+  const interfaceY = 548;
+  rounded(ctx, 66, panelY, 948, 390, 24, "#0b2434", "#315264");
+  ctx.fillStyle = "#16384a";
+  ctx.fillRect(68, panelY + 2, 944, interfaceY - panelY - 2);
+  ctx.fillStyle = "#102c3d";
+  ctx.fillRect(68, interfaceY, 944, 134);
+  line(ctx, 68, interfaceY, 1012, interfaceY, C.white, 4);
+  const centerX = 540;
+  line(ctx, centerX, panelY + 20, centerX, panelY + 220, C.muted, 3, [8, 8]);
+  label(ctx, `n₂ = ${d.parameters.n2.toFixed(1)}`, 94, panelY + 36, 22, C.muted, 800);
+  label(ctx, `n₁ = ${d.parameters.n1.toFixed(1)}`, 94, interfaceY + 66, 22, C.muted, 800);
+  label(ctx, "normal", centerX + 18, panelY + 52, 15, C.muted, 700);
+  label(ctx, "interface", 910, interfaceY - 18, 15, C.white, 700);
+  const incidence = d.parameters.max_incidence_rad * clamp((t - 0.8) / 16.2, 0, 1);
+  const baselineAngle = snellAngle(incidence, d.parameters.n1, d.parameters.n2);
+  const mutantAngle = snellAngle(incidence, d.parameters.n2, d.parameters.n1);
+  const rayLength = 235;
+  const sourceX = centerX - rayLength * Math.sin(incidence);
+  const sourceY = interfaceY + rayLength * Math.cos(incidence);
+  line(ctx, sourceX, sourceY, centerX, interfaceY, C.gold, 8);
+  circle(ctx, centerX, interfaceY, 10, C.white);
+  line(ctx, centerX, interfaceY, centerX + rayLength * Math.sin(baselineAngle), interfaceY - rayLength * Math.cos(baselineAngle), C.mint, 8);
+  const mutationAlpha = smooth((t - 7.5) / 2);
+  ctx.globalAlpha = mutationAlpha;
+  line(ctx, centerX, interfaceY, centerX + rayLength * Math.sin(mutantAngle), interfaceY - rayLength * Math.cos(mutantAngle), C.coral, 7, [12, 8]);
+  ctx.globalAlpha = 1;
+  drawAngleArc(ctx, centerX, interfaceY, 62, Math.PI / 2, Math.PI / 2 + incidence, C.gold, `θ₁ ${incidence.toFixed(2)} rad`, centerX - 98, interfaceY + 88);
+  drawAngleArc(ctx, centerX, interfaceY, 66, -Math.PI / 2, -Math.PI / 2 + baselineAngle, C.mint, `θ₂ ${baselineAngle.toFixed(2)}`, centerX + 104, interfaceY - 85);
+  if (t > 9) label(ctx, `index swap · ${mutantAngle.toFixed(2)} rad`, centerX + 190, interfaceY - 178, 16, C.coral, 800, "center");
+  const chart = chartFrame(ctx, 66, 704, 948, 268, "incidence angle θ₁ (rad)", "refracted θ₂ (rad)", 0.7, d.parameters.max_incidence_rad);
+  plotCurve(ctx, chart, (angle) => snellAngle(angle, d.parameters.n1, d.parameters.n2), d.parameters.max_incidence_rad, 0.7, C.mint, smooth((t - 1) / 13));
+  plotCurve(ctx, chart, (angle) => snellAngle(angle, d.parameters.n2, d.parameters.n1), d.parameters.max_incidence_rad, 0.7, C.coral, smooth((t - 7) / 10), [9, 6]);
+  const points = visiblePointCount(smooth((t - 12) / 3), d.sample_incidence_rad.length);
+  for (let i = 0; i < points; i += 1) {
+    const px = chart.left + (d.sample_incidence_rad[i] / d.parameters.max_incidence_rad) * chart.plotWidth;
+    circle(ctx, px, chart.bottom - (d.baseline.recorded_refracted_rad[i] / 0.7) * chart.plotHeight, 7, C.navy, C.mint);
+    if (t > 13) circle(ctx, px, chart.bottom - (d.mutation.recorded_refracted_rad[i] / 0.7) * chart.plotHeight, 7, C.navy, C.coral);
+  }
+  const alpha = smooth((t - 16) / 1.2);
+  ctx.globalAlpha = alpha;
+  rounded(ctx, 66, 986, 948, 50, 14, "#332d25", "#ffc56e");
+  label(ctx, `Recorded endpoints: ${d.baseline.recorded_refracted_rad[3].toFixed(3)} rad → ${d.mutation.recorded_refracted_rad[3].toFixed(3)} rad · mutation error ${d.mutation.normalized_error.toFixed(3)} > ${d.tolerance}`, 540, 1011, 16, C.gold, 750, "center");
+  ctx.globalAlpha = 1;
+}
+
+function wrapLines(ctx, text, maxWidth) {
+  const words = text.split(" ");
+  const lines = [];
+  let current = "";
+  for (const word of words) {
+    const trial = current ? `${current} ${word}` : word;
+    if (ctx.measureText(trial).width > maxWidth && current) {
+      lines.push(current);
+      current = word;
+    } else current = trial;
+  }
+  if (current) lines.push(current);
+  return lines;
+}
+
+function narration(ctx, t, segments) {
+  let index = 0;
+  for (let i = 0; i < segments.length; i += 1) if (t >= segments[i][0]) index = i;
+  const [startAt, text] = segments[index];
+  const next = index + 1 < segments.length ? segments[index + 1][0] : 20.5;
+  const alpha = Math.min(smooth((t - startAt) / 0.5), smooth((next - t) / 0.4));
+  rounded(ctx, 66, 902, 948, 106, 18, "#0d2638", "#315264");
+  ctx.globalAlpha = alpha;
+  ctx.font = "650 23px Inter, Avenir Next, Arial, sans-serif";
+  const lines = wrapLines(ctx, text, 890);
+  lines.slice(0, 3).forEach((value, i) => label(ctx, value, 96, 955 + (i - (Math.min(lines.length, 3) - 1) / 2) * 31, 23, C.white, 650));
+  ctx.globalAlpha = 1;
+}
+
+function chip(ctx, x, y, w, h, fill, color, text, size = 15) {
+  rounded(ctx, x, y, w, h, h / 2.6, fill);
+  label(ctx, text, x + w / 2, y + h / 2 + 1, size, color, 900, "center");
+}
+
+function arrow(ctx, x1, y1, x2, y2, color, alpha = 1) {
+  ctx.globalAlpha = alpha;
+  line(ctx, x1, y1, x2 - 10, y2, color, 4);
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - 14, y2 - 9);
+  ctx.lineTo(x2 - 14, y2 + 9);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+function stepBox(ctx, x, y, w, h, heading, body, color, alpha) {
+  ctx.globalAlpha = alpha;
+  rounded(ctx, x, y, w, h, 18, "#0b2434", color);
+  label(ctx, heading, x + 20, y + 32, 19, color, 800);
+  body.forEach((text, i) => label(ctx, text, x + 20, y + 66 + i * 28, 17, C.white, 600));
+  ctx.globalAlpha = 1;
+}
+
+function minutes(seconds) {
+  if (seconds < 3600) return `${(seconds / 60).toFixed(1)} min`;
+  return `${Math.floor(seconds / 3600)} h ${Math.round((seconds % 3600) / 60)} min`;
+}
+
+function drawRerun(ctx, data, t) {
+  const d = data.animations.rerun;
+  base(ctx, "Rebuild from zero. Check again.", "07 / C·D revalidation · rerun", t, C.mint);
+  label(ctx, `OpenAI's Navier–Stokes and Euler proofs · commit ${d.source_commit}`, 70, 214, 19, C.muted, 600);
+  stepBox(ctx, 66, 244, 290, 196, "1 · SOURCE", ["OpenAI's Lean proof", "pinned commit", "+ Mathlib library"], C.blue, smooth((t - 0.3) / 0.8));
+  arrow(ctx, 360, 342, 392, 342, C.muted, smooth((t - 1.2) / 0.6));
+  const b = d.build;
+  const count = Math.round(b.built_mathlib_modules * clamp((t - 1.6) / 3.4, 0, 1));
+  stepBox(ctx, 396, 244, 300, 196, "2 · BUILD FROM ZERO", [`${count.toLocaleString("en-US")} Mathlib modules compiled`, `${b.fetched_or_unpacked} cache downloads`, `${b.jobs.toLocaleString("en-US")} jobs · ${minutes(b.elapsed_s)}`], C.gold, smooth((t - 1.4) / 0.8));
+  arrow(ctx, 700, 342, 732, 342, C.muted, smooth((t - 5.2) / 0.6));
+  stepBox(ctx, 736, 244, 278, 196, "3 · COMPARATOR", ["statements identical?", "only standard axioms?", "nanoda + Lean kernel"], C.mint, smooth((t - 5.4) / 0.8));
+  const tick = (x, y, start) => { const a = smooth((t - start) / 0.4); ctx.globalAlpha = a; label(ctx, "✓", x, y, 22, C.mint, 900); ctx.globalAlpha = 1; };
+  tick(984, 310, 6.4); tick(984, 338, 7.2); tick(984, 366, 8.0);
+  const gridAlpha = smooth((t - 9) / 0.8);
+  ctx.globalAlpha = gridAlpha;
+  rounded(ctx, 66, 468, 948, 410, 20, "#0b2434", "#315264");
+  label(ctx, "THREE RUNS", 92, 506, 17, C.gold, 800);
+  label(ctx, "Navier–Stokes (C, D)", 690, 506, 17, C.muted, 800, "center");
+  label(ctx, "Euler", 900, 506, 17, C.muted, 800, "center");
+  ctx.globalAlpha = 1;
+  d.rows.forEach((row, i) => {
+    const y = 572 + i * 104;
+    const alpha = smooth((t - 9.6 - i * 1.6) / 0.6);
+    ctx.globalAlpha = alpha;
+    rounded(ctx, 84, y - 38, 912, 82, 14, i === 2 ? "#163a3c" : "#102f43");
+    label(ctx, row.label, 106, y, 19, C.white, 750);
+    row.runs.forEach((run, j) => {
+      const x = j === 0 ? 690 : 900;
+      chip(ctx, x - 90, y - 18, 180, 32, run.verdict === "ACCEPTED" ? C.mint : C.gold, C.navy, run.verdict, 15);
+      label(ctx, minutes(run.elapsed_s), x, y + 30, 14, C.muted, 600, "center");
+    });
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "Start from OpenAI's published Lean proof at a pinned commit, with the exact Mathlib version it was written for."],
+    [1.6, "Rebuild everything from source with an empty cache: Mathlib is compiled on this machine, nothing is downloaded prebuilt."],
+    [5.4, "Comparator then compiles the official challenge and the solution separately and checks the statements match exactly."],
+    [8.6, "Two independent kernels, nanoda and Lean's own, re-check every proof step. The result is repeated three times."],
+    [15, "All three runs accept both challenges, the last one on the build compiled from zero."],
+  ]);
+}
+
+function highlightLine(ctx, text, other, x, y, size, color, markColor) {
+  let prefix = 0;
+  while (prefix < text.length && prefix < other.length && text[prefix] === other[prefix]) prefix += 1;
+  let suffix = 0;
+  while (suffix < text.length - prefix && suffix < other.length - prefix && text[text.length - 1 - suffix] === other[other.length - 1 - suffix]) suffix += 1;
+  const family = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  ctx.font = `600 ${size}px ${family}`;
+  const head = text.slice(0, prefix);
+  const mid = text.slice(prefix, text.length - suffix);
+  const startX = x + ctx.measureText(head).width;
+  const width = ctx.measureText(mid).width;
+  if (mid && markColor) rounded(ctx, startX - 4, y - size * 0.75, width + 8, size * 1.5, 6, markColor);
+  label(ctx, text, x, y, size, color, 600, "left", family);
+}
+
+function fitSize(ctx, texts, maxWidth, size) {
+  const family = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  let current = size;
+  for (const text of texts) {
+    ctx.font = `600 ${current}px ${family}`;
+    while (ctx.measureText(text).width > maxWidth && current > 11) {
+      current -= 1;
+      ctx.font = `600 ${current}px ${family}`;
+    }
+  }
+  return current;
+}
+
+function drawMutants(ctx, data, t) {
+  const items = data.animations.mutants.items;
+  base(ctx, "Change the statement. It must be refused.", "08 / C·D revalidation · mutants", t, C.coral);
+  label(ctx, "OpenAI's proof is never touched. Only the official challenge statement is edited.", 70, 214, 19, C.muted, 600);
+  const span = 15.4 / items.length;
+  const active = clamp(Math.floor((t - 1.2) / span), 0, items.length - 1);
+  const local = t - 1.2 - active * span;
+  const item = items[active];
+  const show = smooth(local / 0.4) * (t >= 1.2 ? 1 : 0);
+  ctx.globalAlpha = show;
+  rounded(ctx, 66, 246, 948, 330, 20, "#0b2434", "#315264");
+  label(ctx, `CASE ${active + 1} / ${items.length} · ${item.title}`, 92, 284, 19, C.gold, 800);
+  label(ctx, `in theorem ${item.theorem}`, 92, 316, 16, C.muted, 600, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  const size = fitSize(ctx, [item.before, item.after], 760, 20);
+  label(ctx, "ORIGINAL", 92, 372, 14, C.muted, 800);
+  if (item.before) highlightLine(ctx, item.before, item.after, 200, 372, size, C.white, "#5a2e33");
+  else label(ctx, "(nothing — the control only adds a line)", 200, 372, 18, C.muted, 600);
+  ctx.globalAlpha = show * smooth((local - 0.5) / 0.4);
+  label(ctx, "MUTANT", 92, 432, 14, C.gold, 800);
+  highlightLine(ctx, item.after, item.before, 200, 432, size, C.white, "#5b4a22");
+  const refused = item.verdict === "KILLED";
+  const ok = (item.expected === "reject" && refused) || (item.expected === "accept" && item.verdict.endsWith("ACCEPTED"));
+  ctx.globalAlpha = show * smooth((local - 1.1) / 0.3);
+  chip(ctx, 92, 480, 836, 56, refused ? C.coral : C.mint, C.navy, refused ? "REFUSED · challenge and solution statements do not match" : "ACCEPTED · only a comment changed, so the check still passes", 19);
+  if (!ok) label(ctx, "⚠ unexpected", 940, 508, 16, C.gold, 800, "right");
+  ctx.globalAlpha = 1;
+  items.forEach((entry, i) => {
+    const y = 618 + i * 38;
+    const reached = t >= 1.2 + i * span + 1.1;
+    rounded(ctx, 66, y - 16, 948, 32, 8, i === active ? "#163a4c" : "#0b2434");
+    label(ctx, entry.title, 90, y, 17, reached ? C.white : C.muted, 650);
+    if (reached) chip(ctx, 846, y - 12, 150, 24, entry.verdict === "KILLED" ? C.coral : C.mint, C.navy, entry.verdict === "KILLED" ? "REFUSED" : "ACCEPTED", 13);
+  });
+  narration(ctx, t, [
+    [0, "Comparator's job is to make sure a proof proves exactly the official statement. So we test that: change the statement, keep the proof."],
+    [1.2 + span * 0.9, "Control: adding a comment changes nothing in the mathematics, so Comparator must still accept. It does."],
+    [1.2 + span * 1.9, "Six real changes, one symbol each: force set to zero, a different domain, weaker viscosity, a dropped negation, a tighter bound."],
+    [1.2 + span * 4.5, "Every one is refused with 'statements do not match', in about 1.4 minutes each. The check is exact."],
+    [17.2, "A refusal does not mean the changed statement is false. The f = 0 cases say nothing about the open problems (A) and (B)."],
+  ]);
+}
+
+function drawReplay(ctx, data, t) {
+  const checks = data.animations.replay.checks;
+  base(ctx, "Replay every proof step from an empty start.", "09 / C·D revalidation · replay", t, C.blue);
+  label(ctx, "Comparator trusts compiled files. A fresh replay does not.", 70, 214, 19, C.muted, 600);
+  const timed = checks.filter((check) => check.elapsed_s);
+  const maxTime = Math.max(...timed.map((check) => check.elapsed_s));
+  rounded(ctx, 66, 246, 948, 250, 20, "#0b2434", "#315264");
+  label(ctx, "leanchecker --fresh · re-adds every declaration, Mathlib included, to an empty environment", 92, 284, 17, C.gold, 800);
+  timed.forEach((check, i) => {
+    const y = 350 + i * 82;
+    const grow = smooth((t - 1 - i * 2.4) / 3.2);
+    const name = check.title.includes("Euler") ? "Euler solution" : "Navier–Stokes solution";
+    label(ctx, name, 92, y - 22, 18, C.white, 700);
+    rounded(ctx, 92, y - 4, 700, 26, 13, "#183849");
+    rounded(ctx, 92, y - 4, 700 * grow * check.elapsed_s / maxTime, 26, 13, C.blue);
+    if (grow >= 0.999) {
+      label(ctx, minutes(check.elapsed_s), 810, y + 9, 17, C.white, 700);
+      chip(ctx, 896, y - 6, 96, 30, check.verdict === "OK" ? C.mint : C.gold, C.navy, check.verdict, 15);
+    }
+  });
+  const panel = smooth((t - 8.5) / 0.8);
+  ctx.globalAlpha = panel;
+  rounded(ctx, 66, 520, 948, 360, 20, "#0b2434", "#315264");
+  label(ctx, "WHICH KERNEL IMPLEMENTATIONS HAVE EXAMINED THE PROOFS?", 92, 558, 17, C.gold, 800);
+  ctx.globalAlpha = 1;
+  const lean4lean = checks.find((check) => check.id.startsWith("lean4lean"));
+  const kernels = [
+    ["nanoda", "written in Rust · inside every Comparator run", "EXAMINED · ACCEPTED", C.mint],
+    ["Lean kernel", "written in C++ · Comparator runs + leanchecker replay", "EXAMINED · ACCEPTED", C.mint],
+    ["lean4lean", "written in Lean · would be a third implementation", lean4lean && lean4lean.verdict === "OK" ? "EXAMINED · ACCEPTED" : "NOT RUN · could not be built for Lean 4.34", lean4lean && lean4lean.verdict === "OK" ? C.mint : C.gold],
+  ];
+  kernels.forEach(([name, note, status, color], i) => {
+    const y = 622 + i * 86;
+    const alpha = smooth((t - 9.4 - i * 1.4) / 0.6);
+    ctx.globalAlpha = alpha;
+    rounded(ctx, 84, y - 34, 912, 72, 14, "#102f43");
+    label(ctx, name, 106, y - 9, 21, C.white, 800);
+    label(ctx, note, 106, y + 18, 15, C.muted, 600);
+    chip(ctx, 560, y - 17, 420, 34, color === C.mint ? C.mint : "#3b3324", color === C.mint ? C.navy : C.gold, status, 14);
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "Comparator checks proofs as they were compiled. leanchecker --fresh throws that away and re-checks every single declaration from nothing."],
+    [5.6, "Both replays finish with no errors: about 20 minutes each, because all of Mathlib is re-checked too."],
+    [8.5, "But leanchecker uses Lean's own kernel again. It confirms the replay, not a new implementation."],
+    [13.8, "lean4lean, a third kernel written in Lean, could not even be built for Lean 4.34. It never looked at the proofs: a tooling gap, not a verdict."],
+  ]);
+}
+
+function drawProvenance(ctx, data, t) {
+  const d = data.animations.provenance;
+  base(ctx, "Did OpenAI write its own statement?", "10 / Statement provenance", t, C.gold);
+  label(ctx, "OpenAI's challenge vs Google DeepMind's public Formal Conjectures file", 70, 214, 19, C.muted, 600);
+  rounded(ctx, 66, 244, 948, 392, 20, "#0b2434", "#315264");
+  label(ctx, "IDENTICAL IN DEEPMIND 8bf45ed AND OPENAI f9e8bc5", 92, 278, 17, C.muted, 800);
+  const per = 6.5 / d.names.length;
+  d.names.forEach((name, i) => {
+    const column = i < 9 ? 0 : 1;
+    const row = i % 9;
+    const x = column === 0 ? 92 : 552;
+    const y = 316 + row * 32;
+    const alpha = smooth((t - 0.8 - i * per) / 0.3);
+    ctx.globalAlpha = alpha;
+    const theorem = name.startsWith("navier_stokes_breakdown");
+    label(ctx, "✓", x, y, 19, C.mint, 900);
+    label(ctx, name, x + 30, y, theorem ? 16 : 15, theorem ? C.gold : C.white, theorem ? 800 : 600, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+    ctx.globalAlpha = 1;
+  });
+  const diffs = smooth((t - 8) / 0.6);
+  ctx.globalAlpha = diffs;
+  label(ctx, `${d.identical} identical blocks · ${d.names.length} named declarations, including (C) and (D)`, 92, 616, 17, C.mint, 800);
+  rounded(ctx, 66, 652, 948, 112, 20, "#102f43", "#315264");
+  label(ctx, "ONLY DIFFERENCES", 92, 684, 16, C.gold, 800);
+  label(ctx, "import Mathlib instead of DeepMind's helper library · namespace renamed", 92, 714, 17, C.white, 600);
+  label(ctx, "ℝ^n and ℝ³ notation copied locally (same definitions) · (A) and (B) not included", 92, 742, 17, C.white, 600);
+  ctx.globalAlpha = 1;
+  const risk = smooth((t - 11.5) / 0.6);
+  ctx.globalAlpha = risk;
+  rounded(ctx, 66, 784, 948, 100, 20, "#332d25", "#ffc56e");
+  label(ctx, `NEXT QUESTION · does that statement match Clay's text? ${d.risk.rows} clauses reviewed`, 92, 816, 17, C.gold, 800);
+  const parts = [[`${d.risk.direct} direct`, C.mint], [`${d.risk.standard} standard facts`, C.blue], [`${d.risk.attention} needs attention · periodic pressure`, C.gold]];
+  let x = 92;
+  parts.forEach(([text, color]) => {
+    ctx.font = "900 15px Inter, Avenir Next, Arial, sans-serif";
+    const w = ctx.measureText(text).width + 30;
+    chip(ctx, x, 836, w, 32, "#0b2434", color, text, 15);
+    x += w + 12;
+  });
+  ctx.globalAlpha = 1;
+  narration(ctx, t, [
+    [0, "A prover could quietly weaken the statement it proves. So we compare OpenAI's challenge with DeepMind's public statement."],
+    [3.4, "Declaration by declaration, ignoring comments and spacing, every definition and both theorems (C) and (D) are identical."],
+    [8, "The only changes are packaging: imports, a renamed namespace and notation copied in with the same meaning."],
+    [11.5, "So the open question moves to DeepMind's statement versus Clay's text. A reading-based review finds one point that needs a human decision."],
+  ]);
+}
+
+function drawAnimation(ctx, data, id, seconds) {
+  const t = clamp(seconds, 0, 20);
+  ctx.clearRect(0, 0, W, H);
+  if (id === "rc") drawRc(ctx, data, t);
+  else if (id === "chemistry") drawChemistry(ctx, data, t);
+  else if (id === "campaign") drawCampaign(ctx, data, t);
+  else if (id === "formal") drawFormal(ctx, data, t);
+  else if (id === "cooling") drawCooling(ctx, data, t);
+  else if (id === "snell") drawSnell(ctx, data, t);
+  else if (id === "rerun") drawRerun(ctx, data, t);
+  else if (id === "mutants") drawMutants(ctx, data, t);
+  else if (id === "replay") drawReplay(ctx, data, t);
+  else if (id === "provenance") drawProvenance(ctx, data, t);
+  else throw new Error(`Unknown animation: ${id}`);
+}
+const PACKAGE=JSON.parse(document.getElementById("evidence-data").textContent);
+const ID="mutants";const DURATION=20;const FPS=24;
+const canvas=document.getElementById("scene");const context=canvas.getContext("2d",{alpha:false});
+const seek=document.getElementById("scrub");const timeOutput=document.getElementById("time");const toggle=document.getElementById("toggle");
+const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let elapsed=0;let playing=!reduced;let previous=0;let raf=0;
+function renderAt(seconds){elapsed=clamp(seconds,0,DURATION);drawAnimation(context,PACKAGE,ID,elapsed);seek.value=String(elapsed);timeOutput.value=elapsed.toFixed(1)+" / 20.0 s";timeOutput.textContent=timeOutput.value;}
+function tick(now){if(playing&&previous){elapsed=Math.min(DURATION,elapsed+(now-previous)/1000);if(elapsed>=DURATION)playing=false;}previous=now;renderAt(elapsed);toggle.textContent=playing?"Pause":"Play";toggle.setAttribute("aria-pressed",String(playing));raf=requestAnimationFrame(tick);}
+toggle.addEventListener("click",()=>{playing=!playing;if(playing&&elapsed>=DURATION)elapsed=0;previous=0;});
+document.getElementById("replay").addEventListener("click",()=>{elapsed=0;playing=true;previous=0;});
+seek.addEventListener("input",()=>{elapsed=Number(seek.value);playing=false;previous=0;renderAt(elapsed);toggle.textContent="Play";toggle.setAttribute("aria-pressed","false");});
+document.getElementById("accessible").textContent=JSON.stringify({animation:ID,data:PACKAGE.animations[ID],source_hashes:PACKAGE.source_hashes},null,2);
+window.renderAt=renderAt;renderAt(0);raf=requestAnimationFrame(tick);
+</script>
+</body>
+</html>

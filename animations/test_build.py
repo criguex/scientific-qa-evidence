@@ -61,7 +61,7 @@ class AnimationPackageTests(unittest.TestCase):
                 self.assertIn(f'data-id="{animation_id}"', gallery)
 
     def test_validation_verdicts_are_known_and_records_are_private(self):
-        validation = build.load_package()["animations"]["validation"]
+        validation = build.read_json(build.INPUTS["cd_validation"])
         allowed = {"PENDING", "ACCEPTED", "CONTROL_ACCEPTED", "CONTROL_FAILED", "KILLED", "SURVIVED", "REJECTED", "OK", "FAILED"}
         for check in validation["checks"]:
             self.assertTrue(check["verdict"] in allowed or check["verdict"].startswith(("INVALID", "KILLED_BUT", "FAILED", "TARBALL")), check)
@@ -73,6 +73,19 @@ class AnimationPackageTests(unittest.TestCase):
             if path.is_file():
                 text = path.read_text(encoding="utf-8")
                 self.assertNotRegex(text, r"/home/|/Users/|\b100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.")
+
+    def test_revalidation_scenes_are_data_derived(self):
+        animations = build.load_package()["animations"]
+        mutants = animations["mutants"]["items"]
+        self.assertEqual(len(mutants), 7)
+        self.assertEqual(sum(item["verdict"] == "KILLED" for item in mutants), 6)
+        self.assertTrue(all(item["after"] for item in mutants))
+        self.assertEqual(len(animations["rerun"]["rows"]), 3)
+        provenance = animations["provenance"]
+        self.assertIn("navier_stokes_breakdown_R3", provenance["names"])
+        self.assertIn("navier_stokes_breakdown_periodic", provenance["names"])
+        risk = provenance["risk"]
+        self.assertEqual(risk["direct"] + risk["standard"] + risk["attention"], risk["rows"])
 
 
 if __name__ == "__main__":

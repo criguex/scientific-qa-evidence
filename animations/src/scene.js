@@ -439,61 +439,273 @@ function drawSnell(ctx, data, t) {
   ctx.globalAlpha = 1;
 }
 
-const VALIDATION_GROUPS = [
-  ["comparator", "COMPARATOR RERUNS · expect accept"],
-  ["mutant", "STATEMENT MUTANTS · expect reject (control: accept)"],
-  ["build", "FROM-SCRATCH BUILD"],
-  ["replay", "FRESH KERNEL REPLAY"],
-];
-const EXPECTED_VERDICTS = { accept: ["ACCEPTED", "CONTROL_ACCEPTED"], reject: ["KILLED"], ok: ["OK"] };
-
-function verdictStyle(check) {
-  if (check.verdict === "PENDING") return { fill: "#173b4c", text: C.muted, word: "PENDING" };
-  if (check.verdict.startsWith("FAILED_TOOLCHAIN")) return { fill: "#173b4c", text: C.gold, word: "NOT RUN · TOOLCHAIN" };
-  if (!EXPECTED_VERDICTS[check.expected].includes(check.verdict)) return { fill: C.gold, text: C.navy, word: `⚠ ${check.verdict}` };
-  if (check.verdict === "KILLED") return { fill: C.coral, text: C.navy, word: "KILLED" };
-  return { fill: C.mint, text: C.navy, word: check.verdict === "CONTROL_ACCEPTED" ? "ACCEPTED" : check.verdict };
+function wrapLines(ctx, text, maxWidth) {
+  const words = text.split(" ");
+  const lines = [];
+  let current = "";
+  for (const word of words) {
+    const trial = current ? `${current} ${word}` : word;
+    if (ctx.measureText(trial).width > maxWidth && current) {
+      lines.push(current);
+      current = word;
+    } else current = trial;
+  }
+  if (current) lines.push(current);
+  return lines;
 }
 
-function drawValidation(ctx, data, t) {
-  const d = data.animations.validation;
-  base(ctx, "Run it again. Then try to break the statement.", "07 / C·D revalidation", t, C.mint);
-  const lean = (d.lean_version.match(/\d+\.\d+\.\d+(?:-rc\d+)?/) || [d.lean_version])[0];
-  label(ctx, `OpenAI ${d.source_commit} · Lean ${lean} · ${d.host_label}`, 70, 212, 18, C.muted, 600);
-  label(ctx, "Run 1 · 2026-10-20 · Navier–Stokes and Euler accepted (recorded reference)", 70, 246, 17, C.blue, 700);
-  let y = 282;
+function narration(ctx, t, segments) {
   let index = 0;
-  const total = d.checks.length;
-  for (const [group, heading] of VALIDATION_GROUPS) {
-    const rows = d.checks.filter((check) => check.group === group);
-    label(ctx, heading, 70, y, 15, C.gold, 800);
-    y += 27;
-    for (const check of rows) {
-      const appear = smooth((t - 0.8 - (index / total) * 11) / 0.8);
-      const decide = smooth((t - 1.4 - (index / total) * 11) / 0.8);
-      ctx.globalAlpha = appear;
-      rounded(ctx, 66, y - 15, 948, 29, 8, index % 2 ? "#0d2638" : "#0b2434");
-      label(ctx, check.title, 86, y, 17, C.white, 650);
-      if (check.elapsed_s) label(ctx, `${(check.elapsed_s / 60).toFixed(1)} min`, 800, y, 15, C.muted, 600, "right");
-      ctx.globalAlpha = appear * decide;
-      const style = verdictStyle(check);
-      rounded(ctx, 816, y - 12, 188, 24, 7, style.fill);
-      label(ctx, style.word, 910, y + 1, 14, style.text, 900, "center");
-      ctx.globalAlpha = 1;
-      y += 32;
-      index += 1;
-    }
-    y += 6;
-  }
-  const done = d.checks.filter((check) => check.verdict !== "PENDING");
-  const inconclusive = done.filter((check) => check.verdict.startsWith("FAILED_TOOLCHAIN"));
-  const unexpected = done.filter((check) => !EXPECTED_VERDICTS[check.expected].includes(check.verdict) && !inconclusive.includes(check));
-  const alpha = smooth((t - 14) / 1.4);
+  for (let i = 0; i < segments.length; i += 1) if (t >= segments[i][0]) index = i;
+  const [startAt, text] = segments[index];
+  const next = index + 1 < segments.length ? segments[index + 1][0] : 20.5;
+  const alpha = Math.min(smooth((t - startAt) / 0.5), smooth((next - t) / 0.4));
+  rounded(ctx, 66, 902, 948, 106, 18, "#0d2638", "#315264");
   ctx.globalAlpha = alpha;
-  rounded(ctx, 66, 922, 948, 76, 16, unexpected.length ? "#332d25" : "#183d3c", unexpected.length ? C.gold : C.mint);
-  label(ctx, `${done.length} / ${total} recorded · ${unexpected.length} unexpected · ${inconclusive.length} not run · ${d.state.replace("_", " ")}`, 540, 948, 21, unexpected.length ? C.gold : C.mint, 800, "center");
-  label(ctx, "Mutants test that the statement is compared exactly · they say nothing about forceless (A) or (B)", 540, 978, 15, C.muted, 600, "center");
+  ctx.font = "650 23px Inter, Avenir Next, Arial, sans-serif";
+  const lines = wrapLines(ctx, text, 890);
+  lines.slice(0, 3).forEach((value, i) => label(ctx, value, 96, 955 + (i - (Math.min(lines.length, 3) - 1) / 2) * 31, 23, C.white, 650));
   ctx.globalAlpha = 1;
+}
+
+function chip(ctx, x, y, w, h, fill, color, text, size = 15) {
+  rounded(ctx, x, y, w, h, h / 2.6, fill);
+  label(ctx, text, x + w / 2, y + h / 2 + 1, size, color, 900, "center");
+}
+
+function arrow(ctx, x1, y1, x2, y2, color, alpha = 1) {
+  ctx.globalAlpha = alpha;
+  line(ctx, x1, y1, x2 - 10, y2, color, 4);
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - 14, y2 - 9);
+  ctx.lineTo(x2 - 14, y2 + 9);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+function stepBox(ctx, x, y, w, h, heading, body, color, alpha) {
+  ctx.globalAlpha = alpha;
+  rounded(ctx, x, y, w, h, 18, "#0b2434", color);
+  label(ctx, heading, x + 20, y + 32, 19, color, 800);
+  body.forEach((text, i) => label(ctx, text, x + 20, y + 66 + i * 28, 17, C.white, 600));
+  ctx.globalAlpha = 1;
+}
+
+function minutes(seconds) {
+  if (seconds < 3600) return `${(seconds / 60).toFixed(1)} min`;
+  return `${Math.floor(seconds / 3600)} h ${Math.round((seconds % 3600) / 60)} min`;
+}
+
+function drawRerun(ctx, data, t) {
+  const d = data.animations.rerun;
+  base(ctx, "Rebuild from zero. Check again.", "07 / C·D revalidation · rerun", t, C.mint);
+  label(ctx, `OpenAI's Navier–Stokes and Euler proofs · commit ${d.source_commit}`, 70, 214, 19, C.muted, 600);
+  stepBox(ctx, 66, 244, 290, 196, "1 · SOURCE", ["OpenAI's Lean proof", "pinned commit", "+ Mathlib library"], C.blue, smooth((t - 0.3) / 0.8));
+  arrow(ctx, 360, 342, 392, 342, C.muted, smooth((t - 1.2) / 0.6));
+  const b = d.build;
+  const count = Math.round(b.built_mathlib_modules * clamp((t - 1.6) / 3.4, 0, 1));
+  stepBox(ctx, 396, 244, 300, 196, "2 · BUILD FROM ZERO", [`${count.toLocaleString("en-US")} Mathlib modules compiled`, `${b.fetched_or_unpacked} cache downloads`, `${b.jobs.toLocaleString("en-US")} jobs · ${minutes(b.elapsed_s)}`], C.gold, smooth((t - 1.4) / 0.8));
+  arrow(ctx, 700, 342, 732, 342, C.muted, smooth((t - 5.2) / 0.6));
+  stepBox(ctx, 736, 244, 278, 196, "3 · COMPARATOR", ["statements identical?", "only standard axioms?", "nanoda + Lean kernel"], C.mint, smooth((t - 5.4) / 0.8));
+  const tick = (x, y, start) => { const a = smooth((t - start) / 0.4); ctx.globalAlpha = a; label(ctx, "✓", x, y, 22, C.mint, 900); ctx.globalAlpha = 1; };
+  tick(984, 310, 6.4); tick(984, 338, 7.2); tick(984, 366, 8.0);
+  const gridAlpha = smooth((t - 9) / 0.8);
+  ctx.globalAlpha = gridAlpha;
+  rounded(ctx, 66, 468, 948, 410, 20, "#0b2434", "#315264");
+  label(ctx, "THREE RUNS", 92, 506, 17, C.gold, 800);
+  label(ctx, "Navier–Stokes (C, D)", 690, 506, 17, C.muted, 800, "center");
+  label(ctx, "Euler", 900, 506, 17, C.muted, 800, "center");
+  ctx.globalAlpha = 1;
+  d.rows.forEach((row, i) => {
+    const y = 572 + i * 104;
+    const alpha = smooth((t - 9.6 - i * 1.6) / 0.6);
+    ctx.globalAlpha = alpha;
+    rounded(ctx, 84, y - 38, 912, 82, 14, i === 2 ? "#163a3c" : "#102f43");
+    label(ctx, row.label, 106, y, 19, C.white, 750);
+    row.runs.forEach((run, j) => {
+      const x = j === 0 ? 690 : 900;
+      chip(ctx, x - 90, y - 18, 180, 32, run.verdict === "ACCEPTED" ? C.mint : C.gold, C.navy, run.verdict, 15);
+      label(ctx, minutes(run.elapsed_s), x, y + 30, 14, C.muted, 600, "center");
+    });
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "Start from OpenAI's published Lean proof at a pinned commit, with the exact Mathlib version it was written for."],
+    [1.6, "Rebuild everything from source with an empty cache: Mathlib is compiled on this machine, nothing is downloaded prebuilt."],
+    [5.4, "Comparator then compiles the official challenge and the solution separately and checks the statements match exactly."],
+    [8.6, "Two independent kernels, nanoda and Lean's own, re-check every proof step. The result is repeated three times."],
+    [15, "All three runs accept both challenges, the last one on the build compiled from zero."],
+  ]);
+}
+
+function highlightLine(ctx, text, other, x, y, size, color, markColor) {
+  let prefix = 0;
+  while (prefix < text.length && prefix < other.length && text[prefix] === other[prefix]) prefix += 1;
+  let suffix = 0;
+  while (suffix < text.length - prefix && suffix < other.length - prefix && text[text.length - 1 - suffix] === other[other.length - 1 - suffix]) suffix += 1;
+  const family = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  ctx.font = `600 ${size}px ${family}`;
+  const head = text.slice(0, prefix);
+  const mid = text.slice(prefix, text.length - suffix);
+  const startX = x + ctx.measureText(head).width;
+  const width = ctx.measureText(mid).width;
+  if (mid && markColor) rounded(ctx, startX - 4, y - size * 0.75, width + 8, size * 1.5, 6, markColor);
+  label(ctx, text, x, y, size, color, 600, "left", family);
+}
+
+function fitSize(ctx, texts, maxWidth, size) {
+  const family = "ui-monospace, SFMono-Regular, Menlo, monospace";
+  let current = size;
+  for (const text of texts) {
+    ctx.font = `600 ${current}px ${family}`;
+    while (ctx.measureText(text).width > maxWidth && current > 11) {
+      current -= 1;
+      ctx.font = `600 ${current}px ${family}`;
+    }
+  }
+  return current;
+}
+
+function drawMutants(ctx, data, t) {
+  const items = data.animations.mutants.items;
+  base(ctx, "Change the statement. It must be refused.", "08 / C·D revalidation · mutants", t, C.coral);
+  label(ctx, "OpenAI's proof is never touched. Only the official challenge statement is edited.", 70, 214, 19, C.muted, 600);
+  const span = 15.4 / items.length;
+  const active = clamp(Math.floor((t - 1.2) / span), 0, items.length - 1);
+  const local = t - 1.2 - active * span;
+  const item = items[active];
+  const show = smooth(local / 0.4) * (t >= 1.2 ? 1 : 0);
+  ctx.globalAlpha = show;
+  rounded(ctx, 66, 246, 948, 330, 20, "#0b2434", "#315264");
+  label(ctx, `CASE ${active + 1} / ${items.length} · ${item.title}`, 92, 284, 19, C.gold, 800);
+  label(ctx, `in theorem ${item.theorem}`, 92, 316, 16, C.muted, 600, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+  const size = fitSize(ctx, [item.before, item.after], 760, 20);
+  label(ctx, "ORIGINAL", 92, 372, 14, C.muted, 800);
+  if (item.before) highlightLine(ctx, item.before, item.after, 200, 372, size, C.white, "#5a2e33");
+  else label(ctx, "(nothing — the control only adds a line)", 200, 372, 18, C.muted, 600);
+  ctx.globalAlpha = show * smooth((local - 0.5) / 0.4);
+  label(ctx, "MUTANT", 92, 432, 14, C.gold, 800);
+  highlightLine(ctx, item.after, item.before, 200, 432, size, C.white, "#5b4a22");
+  const refused = item.verdict === "KILLED";
+  const ok = (item.expected === "reject" && refused) || (item.expected === "accept" && item.verdict.endsWith("ACCEPTED"));
+  ctx.globalAlpha = show * smooth((local - 1.1) / 0.3);
+  chip(ctx, 92, 480, 836, 56, refused ? C.coral : C.mint, C.navy, refused ? "REFUSED · challenge and solution statements do not match" : "ACCEPTED · only a comment changed, so the check still passes", 19);
+  if (!ok) label(ctx, "⚠ unexpected", 940, 508, 16, C.gold, 800, "right");
+  ctx.globalAlpha = 1;
+  items.forEach((entry, i) => {
+    const y = 618 + i * 38;
+    const reached = t >= 1.2 + i * span + 1.1;
+    rounded(ctx, 66, y - 16, 948, 32, 8, i === active ? "#163a4c" : "#0b2434");
+    label(ctx, entry.title, 90, y, 17, reached ? C.white : C.muted, 650);
+    if (reached) chip(ctx, 846, y - 12, 150, 24, entry.verdict === "KILLED" ? C.coral : C.mint, C.navy, entry.verdict === "KILLED" ? "REFUSED" : "ACCEPTED", 13);
+  });
+  narration(ctx, t, [
+    [0, "Comparator's job is to make sure a proof proves exactly the official statement. So we test that: change the statement, keep the proof."],
+    [1.2 + span * 0.9, "Control: adding a comment changes nothing in the mathematics, so Comparator must still accept. It does."],
+    [1.2 + span * 1.9, "Six real changes, one symbol each: force set to zero, a different domain, weaker viscosity, a dropped negation, a tighter bound."],
+    [1.2 + span * 4.5, "Every one is refused with 'statements do not match', in about 1.4 minutes each. The check is exact."],
+    [17.2, "A refusal does not mean the changed statement is false. The f = 0 cases say nothing about the open problems (A) and (B)."],
+  ]);
+}
+
+function drawReplay(ctx, data, t) {
+  const checks = data.animations.replay.checks;
+  base(ctx, "Replay every proof step from an empty start.", "09 / C·D revalidation · replay", t, C.blue);
+  label(ctx, "Comparator trusts compiled files. A fresh replay does not.", 70, 214, 19, C.muted, 600);
+  const timed = checks.filter((check) => check.elapsed_s);
+  const maxTime = Math.max(...timed.map((check) => check.elapsed_s));
+  rounded(ctx, 66, 246, 948, 250, 20, "#0b2434", "#315264");
+  label(ctx, "leanchecker --fresh · re-adds every declaration, Mathlib included, to an empty environment", 92, 284, 17, C.gold, 800);
+  timed.forEach((check, i) => {
+    const y = 350 + i * 82;
+    const grow = smooth((t - 1 - i * 2.4) / 3.2);
+    const name = check.title.includes("Euler") ? "Euler solution" : "Navier–Stokes solution";
+    label(ctx, name, 92, y - 22, 18, C.white, 700);
+    rounded(ctx, 92, y - 4, 700, 26, 13, "#183849");
+    rounded(ctx, 92, y - 4, 700 * grow * check.elapsed_s / maxTime, 26, 13, C.blue);
+    if (grow >= 0.999) {
+      label(ctx, minutes(check.elapsed_s), 810, y + 9, 17, C.white, 700);
+      chip(ctx, 896, y - 6, 96, 30, check.verdict === "OK" ? C.mint : C.gold, C.navy, check.verdict, 15);
+    }
+  });
+  const panel = smooth((t - 8.5) / 0.8);
+  ctx.globalAlpha = panel;
+  rounded(ctx, 66, 520, 948, 360, 20, "#0b2434", "#315264");
+  label(ctx, "WHICH KERNEL IMPLEMENTATIONS HAVE EXAMINED THE PROOFS?", 92, 558, 17, C.gold, 800);
+  ctx.globalAlpha = 1;
+  const lean4lean = checks.find((check) => check.id.startsWith("lean4lean"));
+  const kernels = [
+    ["nanoda", "written in Rust · inside every Comparator run", "EXAMINED · ACCEPTED", C.mint],
+    ["Lean kernel", "written in C++ · Comparator runs + leanchecker replay", "EXAMINED · ACCEPTED", C.mint],
+    ["lean4lean", "written in Lean · would be a third implementation", lean4lean && lean4lean.verdict === "OK" ? "EXAMINED · ACCEPTED" : "NOT RUN · could not be built for Lean 4.34", lean4lean && lean4lean.verdict === "OK" ? C.mint : C.gold],
+  ];
+  kernels.forEach(([name, note, status, color], i) => {
+    const y = 622 + i * 86;
+    const alpha = smooth((t - 9.4 - i * 1.4) / 0.6);
+    ctx.globalAlpha = alpha;
+    rounded(ctx, 84, y - 34, 912, 72, 14, "#102f43");
+    label(ctx, name, 106, y - 9, 21, C.white, 800);
+    label(ctx, note, 106, y + 18, 15, C.muted, 600);
+    chip(ctx, 560, y - 17, 420, 34, color === C.mint ? C.mint : "#3b3324", color === C.mint ? C.navy : C.gold, status, 14);
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "Comparator checks proofs as they were compiled. leanchecker --fresh throws that away and re-checks every single declaration from nothing."],
+    [5.6, "Both replays finish with no errors: about 20 minutes each, because all of Mathlib is re-checked too."],
+    [8.5, "But leanchecker uses Lean's own kernel again. It confirms the replay, not a new implementation."],
+    [13.8, "lean4lean, a third kernel written in Lean, could not even be built for Lean 4.34. It never looked at the proofs: a tooling gap, not a verdict."],
+  ]);
+}
+
+function drawProvenance(ctx, data, t) {
+  const d = data.animations.provenance;
+  base(ctx, "Did OpenAI write its own statement?", "10 / Statement provenance", t, C.gold);
+  label(ctx, "OpenAI's challenge vs Google DeepMind's public Formal Conjectures file", 70, 214, 19, C.muted, 600);
+  rounded(ctx, 66, 244, 948, 392, 20, "#0b2434", "#315264");
+  label(ctx, "IDENTICAL IN DEEPMIND 8bf45ed AND OPENAI f9e8bc5", 92, 278, 17, C.muted, 800);
+  const per = 6.5 / d.names.length;
+  d.names.forEach((name, i) => {
+    const column = i < 9 ? 0 : 1;
+    const row = i % 9;
+    const x = column === 0 ? 92 : 552;
+    const y = 316 + row * 32;
+    const alpha = smooth((t - 0.8 - i * per) / 0.3);
+    ctx.globalAlpha = alpha;
+    const theorem = name.startsWith("navier_stokes_breakdown");
+    label(ctx, "✓", x, y, 19, C.mint, 900);
+    label(ctx, name, x + 30, y, theorem ? 16 : 15, theorem ? C.gold : C.white, theorem ? 800 : 600, "left", "ui-monospace, SFMono-Regular, Menlo, monospace");
+    ctx.globalAlpha = 1;
+  });
+  const diffs = smooth((t - 8) / 0.6);
+  ctx.globalAlpha = diffs;
+  label(ctx, `${d.identical} identical blocks · ${d.names.length} named declarations, including (C) and (D)`, 92, 616, 17, C.mint, 800);
+  rounded(ctx, 66, 652, 948, 112, 20, "#102f43", "#315264");
+  label(ctx, "ONLY DIFFERENCES", 92, 684, 16, C.gold, 800);
+  label(ctx, "import Mathlib instead of DeepMind's helper library · namespace renamed", 92, 714, 17, C.white, 600);
+  label(ctx, "ℝ^n and ℝ³ notation copied locally (same definitions) · (A) and (B) not included", 92, 742, 17, C.white, 600);
+  ctx.globalAlpha = 1;
+  const risk = smooth((t - 11.5) / 0.6);
+  ctx.globalAlpha = risk;
+  rounded(ctx, 66, 784, 948, 100, 20, "#332d25", "#ffc56e");
+  label(ctx, `NEXT QUESTION · does that statement match Clay's text? ${d.risk.rows} clauses reviewed`, 92, 816, 17, C.gold, 800);
+  const parts = [[`${d.risk.direct} direct`, C.mint], [`${d.risk.standard} standard facts`, C.blue], [`${d.risk.attention} needs attention · periodic pressure`, C.gold]];
+  let x = 92;
+  parts.forEach(([text, color]) => {
+    ctx.font = "900 15px Inter, Avenir Next, Arial, sans-serif";
+    const w = ctx.measureText(text).width + 30;
+    chip(ctx, x, 836, w, 32, "#0b2434", color, text, 15);
+    x += w + 12;
+  });
+  ctx.globalAlpha = 1;
+  narration(ctx, t, [
+    [0, "A prover could quietly weaken the statement it proves. So we compare OpenAI's challenge with DeepMind's public statement."],
+    [3.4, "Declaration by declaration, ignoring comments and spacing, every definition and both theorems (C) and (D) are identical."],
+    [8, "The only changes are packaging: imports, a renamed namespace and notation copied in with the same meaning."],
+    [11.5, "So the open question moves to DeepMind's statement versus Clay's text. A reading-based review finds one point that needs a human decision."],
+  ]);
 }
 
 export function drawAnimation(ctx, data, id, seconds) {
@@ -505,6 +717,9 @@ export function drawAnimation(ctx, data, id, seconds) {
   else if (id === "formal") drawFormal(ctx, data, t);
   else if (id === "cooling") drawCooling(ctx, data, t);
   else if (id === "snell") drawSnell(ctx, data, t);
-  else if (id === "validation") drawValidation(ctx, data, t);
+  else if (id === "rerun") drawRerun(ctx, data, t);
+  else if (id === "mutants") drawMutants(ctx, data, t);
+  else if (id === "replay") drawReplay(ctx, data, t);
+  else if (id === "provenance") drawProvenance(ctx, data, t);
   else throw new Error(`Unknown animation: ${id}`);
 }

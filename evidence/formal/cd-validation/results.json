@@ -160,7 +160,8 @@
         "built_mathlib_modules": 8370,
         "built_total": 11030,
         "fetched_or_unpacked": 0,
-        "xdg_cache_contents": 0
+        "xdg_cache_contents": 0,
+        "jobs": 11432
       },
       "elapsed_s": 5201.0
     },
