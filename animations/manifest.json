@@ -80,6 +80,26 @@
     "experiment_seed": {
       "path": "experiments/blind-faults/SEED_COMMITMENT.md",
       "sha256": "d612c995e91b81306c257754b0804c8c5cdc4b6eebf94c34eae8e63a0f024008"
+    },
+    "bridges_table": {
+      "path": "evidence/formal/clay-lean-bridges.md",
+      "sha256": "d7799bcdfc1c923a4379ce8b2764fc5616d55f7f6fd38430b502ed6990d24258"
+    },
+    "bridges_receipt": {
+      "path": "bridges/README.md",
+      "sha256": "8182b92ae57d7b2212cb59f64343e1d6efec332485c6e4cfb85cc1c03ef49c0b"
+    },
+    "controls_expected": {
+      "path": "experiments/mathlib-controls/expected.json",
+      "sha256": "867906feab3d9151d6e4e1e986ec29d647c9c2dbdab00e2756a3bfd383111b4d"
+    },
+    "controls_receipts": {
+      "path": "experiments/mathlib-controls/results/receipts.jsonl",
+      "sha256": "e49cb2d61a5885ca9fb257f3c3d99ff916216f071ebb5ac3cc50d3171629839c"
+    },
+    "controls_verify": {
+      "path": "experiments/mathlib-controls/verify.py",
+      "sha256": "61e226185adfca7ea108cb06a19b4174f8ee6d22285da8b640490fed9590d81a"
     }
   },
   "animations": {
@@ -544,6 +564,143 @@
           "fixed_in": "v2.2"
         }
       ]
+    },
+    "bridges": {
+      "rows": {
+        "K0": "written",
+        "K1": "formal",
+        "P1": "formal",
+        "D1": "formal",
+        "D2": "formal",
+        "D3": "formal",
+        "D4": "formal",
+        "D5": "formal",
+        "D6": "formal",
+        "D7": "formal",
+        "S1": "formal",
+        "S2": "formal",
+        "S3": "formal",
+        "S4": "formal",
+        "S5": "formal",
+        "S6": "formal",
+        "S7": "interpretive",
+        "L1": "formal"
+      },
+      "formal": 16,
+      "total": 18,
+      "k1": [
+        "k1_C",
+        "k1_C_oneSided",
+        "k1_D",
+        "k1_D_oneSided"
+      ],
+      "standard_axioms_only": true,
+      "no_sorry": true
+    },
+    "controls": {
+      "rows": [
+        {
+          "id": "primes/orig",
+          "group": "Primes",
+          "statement": "∀ n, ∃ p, n < p ∧ p prime",
+          "comparator": "ACCEPTED",
+          "class": "ACCEPTED_BY_CHECKER",
+          "match": true
+        },
+        {
+          "id": "primes/defeq",
+          "group": "Primes",
+          "statement": "n + 1 ≤ p   (Lean: same as n < p)",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_EQUIVALENT",
+          "match": true
+        },
+        {
+          "id": "primes/reform",
+          "group": "Primes",
+          "statement": "n ≤ p instead of n < p",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_EQUIVALENT",
+          "match": true
+        },
+        {
+          "id": "primes/bounded",
+          "group": "Primes",
+          "statement": "only n ≤ 100   (checking examples)",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_WEAKER",
+          "match": true
+        },
+        {
+          "id": "primes/swap",
+          "group": "Primes",
+          "statement": "∃ p, ∀ n, n < p   (quantifiers swapped)",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_FALSE",
+          "match": true
+        },
+        {
+          "id": "cs/orig",
+          "group": "C–S",
+          "statement": "|⟨x, y⟩| ≤ ‖x‖ ‖y‖",
+          "comparator": "ACCEPTED",
+          "class": "ACCEPTED_BY_CHECKER",
+          "match": true
+        },
+        {
+          "id": "cs/reform",
+          "group": "C–S",
+          "statement": "⟨x, y⟩² ≤ ‖x‖² ‖y‖²",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_EQUIVALENT",
+          "match": true
+        },
+        {
+          "id": "cs/strict",
+          "group": "C–S",
+          "statement": "< instead of ≤",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_FALSE",
+          "match": true
+        },
+        {
+          "id": "dct/orig",
+          "group": "DCT",
+          "statement": "Mathlib's hypotheses",
+          "comparator": "ACCEPTED",
+          "class": "ACCEPTED_BY_CHECKER",
+          "match": true
+        },
+        {
+          "id": "dct/reform",
+          "group": "DCT",
+          "statement": "Integrable bound, unfolded",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_EQUIVALENT",
+          "match": true
+        },
+        {
+          "id": "dct/nodom",
+          "group": "DCT",
+          "statement": "domination removed",
+          "comparator": "REJECTED_STATEMENT",
+          "class": "CHANGED_FALSE",
+          "match": true
+        }
+      ],
+      "guard": [
+        {
+          "case": "PrimesReform",
+          "exit_code": 0,
+          "text": "guard: primes_reform_equiv uses none of the theorems under test (1485 constants checked)"
+        },
+        {
+          "case": "PrimesReformCheat",
+          "exit_code": 1,
+          "text": "guard: primes_reform_equiv_cheat depends on Nat.exists_infinite_primes"
+        }
+      ],
+      "controls_ok": true
     }
   }
 }

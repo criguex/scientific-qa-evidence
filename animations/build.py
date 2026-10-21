@@ -27,6 +27,11 @@ INPUTS = {
     "experiment_benchmark": "experiments/blind-faults/v2/benchmark_v2.json",
     "experiment_rounds": "experiments/blind-faults/review_rounds.json",
     "experiment_seed": "experiments/blind-faults/SEED_COMMITMENT.md",
+    "bridges_table": "evidence/formal/clay-lean-bridges.md",
+    "bridges_receipt": "bridges/README.md",
+    "controls_expected": "experiments/mathlib-controls/expected.json",
+    "controls_receipts": "experiments/mathlib-controls/results/receipts.jsonl",
+    "controls_verify": "experiments/mathlib-controls/verify.py",
 }
 PAGES = {
     "rc": ("RC circuit mutation", "The curve is reconstructed from the analytic model; hollow checkpoints are recorded RK4 outputs.", "Analytic equation curves; hollow ring markers are recorded 256-step RK4 results at four source fractions. The capacitor fill is normalized charge, not fluid."),
@@ -39,6 +44,8 @@ PAGES = {
     "mutants": ("Statement mutants", "Each mutant changes one symbol in the official challenge statement while OpenAI's proof stays untouched. Comparator must refuse every one, and a comment-only control must still pass.", "Original line on top, mutated line below with the change highlighted. A refusal shows the statement check is exact; it does not mean the mutated statement is false, and the f = 0 cases say nothing about (A) or (B)."),
     "replay": ("Fresh kernel replay", "leanchecker --fresh ignores the compiled files and re-checks every declaration, Mathlib included, from an empty environment.", "Bars show the recorded replay time. The kernel panel shows which kernel implementations have actually examined the proofs; lean4lean could not be built for Lean 4.34 and never examined them."),
     "provenance": ("Where the statement comes from", "OpenAI's challenge statement compared with Google DeepMind's public Formal Conjectures statement, declaration by declaration.", "Identical declarations light up one by one; the remaining differences are listed below them. The last panel summarizes the clause-by-clause Clay ↔ Lean risk review, which is reading-based and not yet reviewed by a mathematician."),
+    "bridges": ("From OpenAI's theorem to Clay's text", "OpenAI proved a formal statement; Clay's problem is a text. Lean bridges, one per clause, show that OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean.", "Top: the three layers. Middle: every bridge row, colored by its recorded status in clay-lean-bridges.md. Bottom: the four K1 theorems and their axioms. Relative to ClayLiteral, which nobody independent has reviewed yet; no mathematician has reviewed the bridges."),
+    "controls": ("Mathlib controls: changed is not false", "Correct, reformulated and broken statements of three theorems Mathlib already proves, checked by Comparator and then by a second route in Lean, with outcomes pre-registered.", "Each row is one registered case. The Comparator column comes from its receipt; the class is recomputed by verify.py from the published logs. The guard lines are copied from the real logs. Author-designed cases; no held-out cases yet."),
     "experiment": ("Blind-fault benchmark", "Faults planted in controlled cases, assigned by a committed seed, checked by both procedures before the key was opened, then reviewed in four rounds.", "Top: the chain that makes the run auditable. Middle: which procedure flags each planted fault, with the corrected v2.2 evaluator. Bottom: what each review round found. Planted faults over recorded artifacts, not live Lean and not a real-world rate."),
 }
 AUTHOR = "Cristian Guerra · QA Automation · Medellín, Colombia · @criguex"
@@ -170,6 +177,8 @@ def load_package():
             "replay": replay_data(validation),
             "provenance": provenance_data(provenance, risk_text),
             "experiment": experiment_data(),
+            "bridges": bridges_data(),
+            "controls": controls_data(),
         },
     }
 
@@ -256,6 +265,59 @@ def experiment_data():
         "classes": [{"id": key, "label": labels[key], "baseline": value["baseline"]["flagged"], "protocol": value["protocol"]["flagged"]}
                     for key, value in benchmark.items()],
         "rounds": [{"round": r["round"], "by": r["by"], "found": r["found"], "fixed_in": r["fixed_in"]} for r in rounds],
+    }
+
+
+def bridges_data():
+    text = (ROOT / INPUTS["bridges_table"]).read_text(encoding="utf-8")
+    rows = {}
+    for match in re.finditer(r"^\| (K0|K1|P1|D[1-7]|S[1-7]|L1) \|(.*)$", text, flags=re.M):
+        proof = [cell.strip() for cell in match.group(2).split(" | ")][2]
+        rows[match.group(1)] = "formal" if "**formal" in proof else ("written" if "**written" in proof else "interpretive")
+    receipt = (ROOT / INPUTS["bridges_receipt"]).read_text(encoding="utf-8")
+    claims = [key for key in rows if key != "K0"]
+    return {
+        "rows": rows,
+        "formal": sum(rows[key] == "formal" for key in claims),
+        "total": len(rows),
+        "k1": sorted(set(re.findall(r"`(k1_[A-Za-z_]+)`", receipt))),
+        "standard_axioms_only": "`[propext, Classical.choice, Quot.sound]`" in receipt,
+        "no_sorry": "contains no `sorry`" in receipt,
+    }
+
+
+CONTROL_LABELS = {
+    "primes/orig": ("Primes", "∀ n, ∃ p, n < p ∧ p prime"),
+    "primes/defeq": ("Primes", "n + 1 ≤ p   (Lean: same as n < p)"),
+    "primes/reform": ("Primes", "n ≤ p instead of n < p"),
+    "primes/bounded": ("Primes", "only n ≤ 100   (checking examples)"),
+    "primes/swap": ("Primes", "∃ p, ∀ n, n < p   (quantifiers swapped)"),
+    "cs/orig": ("C–S", "|⟨x, y⟩| ≤ ‖x‖ ‖y‖"),
+    "cs/reform": ("C–S", "⟨x, y⟩² ≤ ‖x‖² ‖y‖²"),
+    "cs/strict": ("C–S", "< instead of ≤"),
+    "dct/orig": ("DCT", "Mathlib's hypotheses"),
+    "dct/reform": ("DCT", "Integrable bound, unfolded"),
+    "dct/nodom": ("DCT", "domination removed"),
+}
+
+
+def controls_data():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("controls_verify", ROOT / INPUTS["controls_verify"])
+    verify = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(verify)
+    rows, guard_ok, signed_ok, guard_built = verify.evaluate()
+    receipts = verify.load_receipts()
+    guard = []
+    for name in ("PrimesReform", "PrimesReformCheat"):
+        receipt = receipts[("second_route", name)]
+        text = next(line for line in (receipt["stdout"] + receipt["stderr"]).splitlines() if "guard:" in line)
+        guard.append({"case": name, "exit_code": receipt["exit_code"], "text": text[text.index("guard:"):].replace("QAControls.SecondRoute.", "")})
+    return {
+        "rows": [{"id": r["id"], "group": CONTROL_LABELS[r["id"]][0], "statement": CONTROL_LABELS[r["id"]][1],
+                  "comparator": r["comparator"], "class": r["class"], "match": r["match"]} for r in rows],
+        "guard": guard,
+        "controls_ok": guard_ok and signed_ok and guard_built,
     }
 
 
@@ -377,7 +439,7 @@ def gallery_html(package):
 :root{color-scheme:dark;font:16px/1.55 Inter,"Avenir Next",Arial,sans-serif;background:#071b2b;color:#f4f7f5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 78% 0,#173b4c,#071b2b 55%)}main{max-width:1180px;margin:auto;padding:42px 24px 88px}h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;margin:.25em 0}h2{color:#55dfbd;font-size:1.6rem;margin:0 0 10px}p{color:#bfd0d5}a{color:#55dfbd}.eyebrow{color:#55dfbd;text-transform:uppercase;letter-spacing:.17em;font-weight:800;font-size:.8rem}.lead,.context,.sources{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:22px;margin:20px 0}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.fact{padding:16px;border-radius:14px;background:#102f43;border-left:4px solid #55dfbd}.fact strong{display:block;color:#f4f7f5;margin-bottom:8px}.fact:nth-child(2n){border-color:#ffc56e}.selectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}.selector{text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;padding:16px;border:1px solid #315264;border-radius:14px;background:#102f43;color:#f4f7f5;cursor:pointer;font:inherit}.selector strong{font-size:1rem}.selector span{color:#abc0c8;font-size:.87rem}.selector[aria-pressed=true]{border-color:#55dfbd;box-shadow:0 0 0 2px #55dfbd55}.selector:focus-visible,a:focus-visible{outline:3px solid #ffc56e;outline-offset:3px}.active{border:1px solid #315264;border-radius:20px;background:#0d2638;padding:18px}.active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.actions{display:flex;gap:12px;flex-wrap:wrap}iframe{display:block;width:100%;aspect-ratio:1;border:1px solid #315264;border-radius:14px;background:#071b2b;margin-top:14px}.badge{display:inline-block;border:1px solid #ffc56e;color:#ffc56e;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:800}.context img{display:block;width:min(100%,960px);border-radius:14px;background:#071b2b}summary{cursor:pointer;color:#55dfbd;font-weight:800}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#abc0c8;font-size:.82rem}code{color:#ffc56e}@media(max-width:600px){main{padding:28px 14px 64px}}
 </style></head><body><main>
 <div class="eyebrow">Evidence, in motion · local and offline</div><h1>What changed?<br>What did the checks see?</h1>
-<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Eleven supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
+<section class="lead"><p><strong>__AUTHOR__</strong></p><p>Thirteen supporting animation scenes turn recorded evidence into comparisons. Choose a scene, play or scrub its embedded HTML, then download the standalone file. The standalone HTML embeds its data and renderer; it does not fetch remote code.</p><div class="facts">__FACTS__</div></section>
 <nav class="selectors" aria-label="Choose an evidence animation">__BUTTONS__</nav>
 <section class="active"><div class="active-head"><div><h2 id="active-title">RC circuit mutation</h2><p id="active-description"></p><p id="active-note"></p><p><strong>__AUTHOR__</strong></p></div><div class="actions"><a id="html-link" download>Download standalone HTML</a></div></div><iframe id="active-frame" title="Selected evidence animation" src="rc.html"></iframe></section>
 <section class="context"><span class="badge">ILLUSTRATIVE CONTEXT · NOT CAMPAIGN DATA</span><h2 style="margin-top:14px">A separate 3D flow visualization</h2><p>This Taylor–Green visualization is only visual context. It is not the 84-variant campaign, evidence of blow-up, or a formal solution. No synthetic physics scene is generated here.</p><img src="../docs/assets/flow-preview.gif" alt="Illustrative Taylor–Green flow clip"></section>

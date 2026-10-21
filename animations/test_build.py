@@ -32,6 +32,23 @@ class AnimationPackageTests(unittest.TestCase):
         self.assertEqual(animations["formal"]["nanoda_mutant_raw"], "COLLECTED_PENDING_CLASSIFICATION")
         self.assertEqual(animations["formal"]["nanoda_mutant_derived"], "TYPECHECK_ASSERTION_REJECT_DERIVED")
 
+    def test_bridge_and_control_scenes_are_record_derived(self):
+        animations = build.load_package()["animations"]
+        bridges = animations["bridges"]
+        self.assertEqual(bridges["total"], 18)
+        self.assertEqual(bridges["rows"]["K1"], "formal")
+        self.assertEqual(bridges["rows"]["S7"], "interpretive")
+        self.assertEqual(bridges["rows"]["K0"], "written")
+        self.assertEqual(bridges["formal"], 16)
+        self.assertEqual(bridges["k1"], ["k1_C", "k1_C_oneSided", "k1_D", "k1_D_oneSided"])
+        self.assertTrue(bridges["standard_axioms_only"] and bridges["no_sorry"])
+        controls = animations["controls"]
+        self.assertEqual(len(controls["rows"]), 11)
+        self.assertTrue(all(row["match"] for row in controls["rows"]))
+        self.assertEqual(sum(row["comparator"] == "ACCEPTED" for row in controls["rows"]), 3)
+        self.assertEqual([entry["exit_code"] for entry in controls["guard"]], [0, 1])
+        self.assertTrue(controls["controls_ok"])
+
     def test_standalone_outputs_are_offline_accessible_and_deterministic(self):
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
             build.generate(Path(first))

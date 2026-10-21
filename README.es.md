@@ -1,18 +1,34 @@
 # Scientific QA Evidence
 
-**Una auditoría de QA independiente de las pruebas en Lean de OpenAI sobre la explosión en tiempo finito para Navier–Stokes y Euler, más una campaña de pruebas de mutación sobre nueve modelos numéricos.**
+Este repositorio contiene una auditoría de QA independiente de las formalizaciones en Lean 4 de [openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler), que acompañan a “[Finite time blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)” y “[Finite time blowup for the Euler equation](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)” de OpenAI, más una campaña de pruebas de mutación sobre nueve modelos numéricos. Las pruebas son de OpenAI. Este repositorio no demuestra nada nuevo, no reclama ningún resultado del Premio del Milenio y no es una revisión matemática: recompila los artefactos publicados, los vuelve a verificar con verificadores independientes, comprueba si la cadena de verificación detecta errores y publica cada paso con hashes.
 
-Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)) · [Read in English](README.md) · [Resumen en PDF de cinco páginas](docs/report/scientific-qa-evidence-report-v1.2.0.pdf) (en inglés)
+- [Leer el resumen de cinco páginas (PDF, en inglés)](docs/report/scientific-qa-evidence-report-v1.2.0.pdf)
+- [Leer cada afirmación con su evidencia y sus límites](CLAIMS.md) (en inglés)
+- [Ver las trece escenas de evidencia](animations/index.html)
+- [Read in English](README.md)
 
-> **Lee esto primero.** Las pruebas son de OpenAI ([openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler)). Este repositorio no demuestra nada nuevo, no reclama ningún resultado del Premio del Milenio y no es una revisión matemática. Es un estudio de QA de software: recompilar los artefactos publicados, volver a verificarlos con verificadores independientes, comprobar si la propia cadena de verificación detecta errores y publicar cada paso con hashes para que cualquiera lo pueda auditar.
+Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
 
-## Conclusiones
+## Navier–Stokes y Euler
 
-1. **Las pruebas de OpenAI para (C), (D) y Euler verifican, de forma repetida y desde cero.** Comparator, con nanoda y el kernel de Lean, aceptó los dos desafíos sobre cuatro compilaciones distintas, la última compilada entera desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel usado incluye todas las correcciones de solidez conocidas de 2026.
-2. **Comparator revisa el enunciado exacto.** Rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de DeepMind tras normalización textual (la resolución de nombres no se verificó).
-3. **Enunciado formal frente al texto de Clay.** Una prueba en Lean (Parte D) muestra que los teoremas de OpenAI implican la (C) y la (D) de Clay tal como están escritas literalmente en Lean en este repositorio, sin hipótesis. Quedan abiertas dos cosas: una revisión independiente de esa transcripción frente al PDF de Clay y una lectura, la presión periódica en (D), que necesita un matemático. Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance y lo disputa [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
-4. **Lo que aporta el protocolo.** En este caso mostró evidencia que el procedimiento documentado no produce ([FINDINGS.md](FINDINGS.md)), y en un benchmark prerregistrado sus checks marcaron cuatro clases de fallo sembradas que el procedimiento base deja pasar ([resultados](experiments/blind-faults/RESULTS.md)). Cuatro rondas de revisión encontraron 17 problemas en ese mismo experimento, todos corregidos y conservados en el registro.
-5. **Lo que no se afirma.** Novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)), una tasa de detección en el mundo real, ni ninguna parte de la prueba matemática, que pertenece a OpenAI.
+Sobre las pruebas de OpenAI en el commit `f9e8bc5`, comprobamos:
+
+- **Verifican desde cero:** Comparator, con los kernels de nanoda y de Lean, aceptó Navier–Stokes (C), (D) y Euler sobre cuatro compilaciones, la última compilada entera desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel incluye todas las correcciones de solidez conocidas de 2026.
+- **El enunciado es el exacto:** Comparator rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de Google DeepMind tras normalización textual (la resolución de nombres no se verificó).
+- **Fuera de alcance:** si la prueba en Lean sigue el artículo de OpenAI, algo que [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli y Hansen) disputa sin afirmar que algún teorema de Lean sea falso.
+
+## El enunciado del problema de Clay
+
+Los teoremas formales de OpenAI están escritos al estilo de DeepMind. La [descripción oficial](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf) de Clay es un texto. Escribimos literalmente en Lean las ecuaciones (1)–(11), las alternativas **(C)** y **(D)** y la errata de Clay, y probamos:
+
+- **Los teoremas de OpenAI implican la (C) y la (D) de Clay tal como están escritas aquí,** para toda viscosidad ν > 0, sin hipótesis y solo con los axiomas estándar, bajo las dos lecturas de la suavidad en t = 0 (`k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided` en [`bridges/`](bridges/README.md)).
+- **Abierto:** nadie independiente ha revisado todavía la transcripción literal frente al PDF de Clay ([14 puntos de revisión](bridges/K0_REVIEW.md)), y la (D) lee la errata de Clay sobre la presión periódica como condición sobre las soluciones; la (C) no la usa. Ningún matemático ha revisado los puentes.
+
+## La cadena de verificación
+
+- **Un rechazo no es una refutación:** con tres teoremas que Mathlib ya prueba, Comparator rechazó los ocho enunciados cambiados, incluso uno definicionalmente igual. Una segunda vía en Lean, con una guarda que impide usar el teorema bajo prueba, clasificó cada uno como equivalente, más débil o falso, todo según lo registrado de antemano ([controles Mathlib](experiments/mathlib-controls/RESULTS.md)).
+- **Fallos sembrados:** en un benchmark prerregistrado con semilla comprometida, el protocolo marcó cuatro clases de fallo que el procedimiento documentado de OpenAI deja pasar; cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([benchmark](experiments/blind-faults/v2/README.md)).
+- **Qué aporta este caso:** ocho hallazgos que el procedimiento de verificación documentado no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés). No se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)).
 
 ## Resultados en resumen
 
@@ -125,6 +141,8 @@ guard: QAControls.SecondRoute.primes_reform_equiv uses none of the theorems unde
 error: guard: QAControls.SecondRoute.primes_reform_equiv_cheat depends on Nat.exists_infinite_primes
 ```
 
+<a href="animations/controls.html"><img src="docs/assets/controls-preview.gif" width="380" alt="Once casos Mathlib: veredictos de Comparator, clases de la segunda vía y la guarda"></a><br><a href="docs/media/controls.mp4">▶ MP4 1080p</a>
+
 La segunda línea es una prueba tramposa a propósito, rechazada según lo registrado. Los 11 casos y los dos controles salieron según lo registrado de antemano. Cada paso tiene un recibo (comando, hashes de entrada y de salida, código de retorno), y `python3 experiments/mathlib-controls/verify.py` comprueba los registros contra ellos y recalcula cada clase; eso comprueba los registros, no vuelve a ejecutar Lean ([diseño](experiments/mathlib-controls/DESIGN.md), [resultados](experiments/mathlib-controls/RESULTS.md), en inglés). Faltan casos preparados por otra persona ([cómo contribuir](experiments/mathlib-controls/HOLDOUT.md)).
 
 ### Trabajos previos
@@ -147,6 +165,8 @@ theorem k1_D_oneSided (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltD_withErratum_o
 ```
 
 Los cuatro usan solo `propext`, `Classical.choice` y `Quot.sound`. Un control prueba que la solución cero cumple todas las condiciones de solución de Clay, así que «no existe solución» no es verdadero de forma vacía.
+
+<a href="animations/bridges.html"><img src="docs/assets/bridges-preview.gif" width="380" alt="Filas puente del teorema de OpenAI al texto de Clay y los cuatro teoremas K1"></a><br><a href="docs/media/bridges.mp4">▶ MP4 1080p</a>
 
 ### Cómo se une cada cláusula
 
@@ -172,7 +192,7 @@ Cada fila con su estado está en [clay-lean-bridges.md](evidence/formal/clay-lea
 
 ## Animaciones
 
-Once escenas offline, cada una como página HTML interactiva, GIF de vista previa y MP4 en 1080p. Abre la [galería](animations/index.html) o lee la [guía de animaciones](animations/README.md) (en inglés) con ecuaciones, parámetros y trazas de fuente.
+Trece escenas offline, cada una como página HTML interactiva, GIF de vista previa y MP4 en 1080p. Abre la [galería](animations/index.html) o lee la [guía de animaciones](animations/README.md) (en inglés) con ecuaciones, parámetros y trazas de fuente.
 
 | Modelos numéricos | Verificaciones formales |
 | --- | --- |
@@ -181,6 +201,8 @@ Once escenas offline, cada una como página HTML interactiva, GIF de vista previ
 | <a href="animations/cooling.html">Enfriamiento · constante a la mitad</a> · <a href="docs/media/cooling.mp4">▶ MP4</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Comparación de enfriamiento base y mutación"> | <a href="animations/mutants.html">C/D · mutantes del enunciado</a> · <a href="docs/media/mutants.mp4">▶ MP4</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Mutantes rechazados y control aceptado"> |
 | <a href="animations/snell.html">Snell · índices de refracción intercambiados</a> · <a href="docs/media/snell.mp4">▶ MP4</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Rayos de refracción y barrido de ángulo"> | <a href="animations/replay.html">C/D · revisión del kernel desde cero</a> · <a href="docs/media/replay.mp4">▶ MP4</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Revisión desde cero y kernels"> |
 | <a href="animations/campaign.html">Campaña · clasificaciones pareadas</a> · <a href="docs/media/campaign.mp4">▶ MP4</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Clasificaciones de la campaña por máquina"> | <a href="animations/provenance.html">Procedencia del enunciado · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Declaraciones que coinciden en OpenAI y DeepMind"> |
+| | <a href="animations/bridges.html">Puentes Clay ↔ Lean · K1</a> · <a href="docs/media/bridges.mp4">▶ MP4</a><br><img src="docs/assets/bridges-preview.gif" width="360" alt="Filas puente del teorema de OpenAI al texto de Clay y los cuatro teoremas K1"> |
+| | <a href="animations/controls.html">Controles Mathlib · rechazo no es refutación</a> · <a href="docs/media/controls.mp4">▶ MP4</a><br><img src="docs/assets/controls-preview.gif" width="360" alt="Once casos Mathlib: veredictos de Comparator y clases de la segunda vía"> |
 | | <a href="animations/experiment.html">Benchmark de fallos a ciegas</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Fallos sembrados detectados por cada procedimiento"> |
 
 ![Clip ilustrativo de flujo Taylor–Green, separado de las escenas de evidencia](docs/assets/flow-preview.gif)
@@ -224,14 +246,17 @@ evidence/
 experiments/blind-faults/ benchmark prerregistrado: semilla, diseño congelado, casos, resultados, erratas, evaluador v2
 experiments/mathlib-controls/ enunciado cambiado frente a teorema falso, con tres teoremas de Mathlib
 bridges/                  el texto de Clay en Lean y la prueba de que los teoremas de OpenAI lo implican
-animations/               once escenas offline, scripts de build y exportación, tests
+animations/               trece escenas offline, scripts de build y exportación, tests
 docs/                     GIF, videos MP4 y resumen en PDF
 .github/workflows/        CI que corre todas las comprobaciones en cada push
 ```
 
 ## Créditos, derechos y estado
 
-- **Pruebas originales:** sus autores de OpenAI. **Enunciado del desafío:** Formal Conjectures de Google DeepMind. **Herramientas:** Lean 4, Mathlib, Comparator, nanoda.
+- **Pruebas originales:** OpenAI, [openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) en `f9e8bc5` (Apache-2.0), con los artículos [Finite time blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf) y [for the Euler equation](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf).
+- **Enunciado del problema:** C. L. Fefferman, [Existence and smoothness of the Navier–Stokes equation](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf), Clay Mathematics Institute. **Enunciado del desafío:** Google DeepMind, [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) en `8bf45ed` (Apache-2.0).
+- **Herramientas, en las revisiones usadas:** [Lean 4](https://github.com/leanprover/lean4) v4.34.0-rc2 (`6a10ac8`), [Mathlib](https://github.com/leanprover-community/mathlib4) (`85e3a25`), [Comparator](https://github.com/leanprover/comparator) (`19e111e`), [lean4export](https://github.com/leanprover/lean4export) (`cacf989`), [nanoda](https://github.com/ammkrn/nanoda_lib) (`9d6964f`), todas Apache-2.0, y [landrun](https://github.com/Zouuup/landrun) (`ec104f6`, MIT). Se comprobó que cada revisión existe en su repositorio; los hashes de los binarios están en [`receipts/`](evidence/formal/cd-validation/receipts/).
+- **Análisis relacionado:** Bastounis, Circelli y Hansen, [arXiv:2610.08144](https://arxiv.org/abs/2610.08144); el resto de los trabajos previos está en [RELATED_WORK.md](RELATED_WORK.md).
 - **Este estudio de QA:** Cristian Guerra. Para citarlo, usa [CITATION.cff](CITATION.cff).
 - **Derechos:** la publicación está autorizada, pero no se concede ninguna licencia de código abierto. Ver [LICENSE_STATUS.md](LICENSE_STATUS.md).
 - **Estado:** última versión [v1.2.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.2.0); el trabajo semántico de la Parte D sigue en `main`.

@@ -20,11 +20,13 @@ OUTPUTS = {
     "replay": "replay-preview.gif",
     "provenance": "provenance-preview.gif",
     "experiment": "experiment-preview.gif",
+    "bridges": "bridges-preview.gif",
+    "controls": "controls-preview.gif",
 }
 FRAMES = 120
 FPS = 15
 DURATION = 20
-REALTIME = {"rerun", "mutants", "replay", "provenance", "experiment"}
+REALTIME = {"rerun", "mutants", "replay", "provenance", "experiment", "bridges", "controls"}
 REALTIME_FPS = 10
 
 

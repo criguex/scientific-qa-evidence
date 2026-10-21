@@ -769,6 +769,119 @@ function drawExperiment(ctx, data, t) {
   ]);
 }
 
+function drawBridges(ctx, data, t) {
+  const d = data.animations.bridges;
+  base(ctx, "From OpenAI's theorem to Clay's text.", "12 / Clay ↔ Lean bridges", t, C.mint);
+  label(ctx, "Does the formal statement OpenAI proved say what Clay's problem says? One direction per clause is enough.", 70, 214, 18, C.muted, 600);
+  stepBox(ctx, 66, 240, 290, 150, "OPENAI · PROVED", ["formal (C) and (D)", "DeepMind-style statement", "checked by Comparator"], C.blue, smooth((t - 0.3) / 0.8));
+  arrow(ctx, 360, 315, 392, 315, C.muted, smooth((t - 1.2) / 0.6));
+  stepBox(ctx, 396, 240, 290, 150, "BRIDGES · LEAN", ["data: OpenAI's ⇒ Clay's", "solutions: Clay's ⇒ formal", `${d.formal} of ${d.total - 1} claims proved`], C.gold, smooth((t - 1.4) / 0.8));
+  arrow(ctx, 690, 315, 722, 315, C.muted, smooth((t - 2.3) / 0.6));
+  stepBox(ctx, 726, 240, 288, 150, "CLAY · LITERAL", ["(1)–(11), (C), (D), erratum", "written in coordinates", "not yet reviewed"], C.mint, smooth((t - 2.5) / 0.8));
+  const groups = [
+    ["DATA SIDE · OpenAI's data meet Clay's conditions", ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]],
+    ["SOLUTION SIDE · every Clay solution is a formal one", ["S1", "S2", "S3", "S4", "S5", "S6", "S7"]],
+    ["COMPOSITION", ["P1", "L1", "K0", "K1"]],
+  ];
+  let k = 0;
+  groups.forEach(([heading, ids], g) => {
+    const y = 426 + g * 86;
+    ctx.globalAlpha = smooth((t - 3.2 - g * 1.6) / 0.5);
+    label(ctx, heading, 70, y, 15, C.gold, 800);
+    ctx.globalAlpha = 1;
+    ids.forEach((id, i) => {
+      const status = d.rows[id];
+      const a = smooth((t - 3.5 - g * 1.6 - i * 0.18) / 0.4);
+      ctx.globalAlpha = a;
+      const fill = status === "formal" ? C.mint : status === "written" ? C.blue : C.gold;
+      const text = status === "formal" ? `${id} ✓` : status === "written" ? `${id} written` : `${id} open`;
+      chip(ctx, 66 + i * 135, y + 18, 122, 36, fill, C.navy, text, 16);
+      ctx.globalAlpha = 1;
+      k += 1;
+    });
+  });
+  const legend = smooth((t - 8.2) / 0.5);
+  ctx.globalAlpha = legend;
+  label(ctx, "✓ proved in Lean   ·   written: Clay's text in Lean   ·   open: needs a human decision (periodic pressure, (D) only)", 70, 700, 15, C.muted, 700);
+  ctx.globalAlpha = 1;
+  const panel = smooth((t - 11.6) / 0.6);
+  ctx.globalAlpha = panel;
+  rounded(ctx, 66, 722, 948, 166, 18, "#0b2434", C.mint);
+  label(ctx, d.standard_axioms_only && d.no_sorry ? "K1 · NO HYPOTHESES · only propext, Classical.choice, Quot.sound · no sorry" : "K1 · CHECK THE RECEIPT", 92, 750, 16, C.mint, 800);
+  ctx.globalAlpha = 1;
+  const reading = { k1_C: "Clay's (C)", k1_D: "Clay's (D), erratum on solutions", k1_C_oneSided: "(C), smoothness at t = 0 read one-sided", k1_D_oneSided: "(D), smoothness at t = 0 read one-sided" };
+  d.k1.forEach((name, i) => {
+    ctx.globalAlpha = smooth((t - 12.2 - i * 0.6) / 0.4);
+    const x = 92 + (i % 2) * 462;
+    const y = 792 + Math.floor(i / 2) * 50;
+    label(ctx, `${name} : ∀ ν > 0, …`, x, y, 17, C.white, 700, "left", "SFMono-Regular, Menlo, Consolas, monospace");
+    label(ctx, reading[name] || "", x, y + 22, 14, C.muted, 650);
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "OpenAI proved a formal statement. Clay's problem is a text. The question is whether one implies the other."],
+    [3.2, "Each clause gets a bridge: OpenAI's data must meet Clay's conditions, and every Clay solution must count as a formal solution."],
+    [8.2, "OpenAI's witness has zero initial velocity and a force smooth everywhere, so it is its own smooth extension, even at t = 0."],
+    [11.6, "The K1 theorems compose the bridges, under both readings of smoothness at t = 0, with no extra hypotheses."],
+    [16.2, "Still open: periodic pressure, which affects (D) only, and an independent check of ClayLiteral against Clay's PDF."],
+  ]);
+}
+
+function drawControls(ctx, data, t) {
+  const d = data.animations.controls;
+  base(ctx, "A refusal is not a refutation.", "13 / Mathlib controls", t, C.gold);
+  label(ctx, "Theorems Mathlib already proves: correct, reformulated and broken statements, outcomes pre-registered", 70, 214, 18, C.muted, 600);
+  const head = smooth((t - 0.4) / 0.5);
+  ctx.globalAlpha = head;
+  label(ctx, "STATEMENT TRIED", 92, 250, 15, C.gold, 800);
+  label(ctx, "COMPARATOR", 655, 250, 15, C.gold, 800, "center");
+  label(ctx, "SECOND ROUTE IN LEAN", 885, 250, 15, C.gold, 800, "center");
+  ctx.globalAlpha = 1;
+  const classChip = { ACCEPTED_BY_CHECKER: [C.mint, "same statement"], CHANGED_EQUIVALENT: [C.blue, "equivalent · proved"], CHANGED_WEAKER: [C.gold, "weaker · both ways"], CHANGED_FALSE: [C.coral, "false · refuted"], CHANGED_NOT_EQUIVALENT: [C.gold, "not equivalent"], CHANGED_UNKNOWN: ["#173b4c", "unknown"] };
+  d.rows.forEach((row, i) => {
+    const y = 288 + i * 40;
+    const a = smooth((t - 1 - i * 0.42) / 0.4);
+    ctx.globalAlpha = a;
+    rounded(ctx, 76, y - 18, 928, 36, 9, i % 2 ? "#0d2638" : "#102f43");
+    if (i === 0 || d.rows[i - 1].group !== row.group) label(ctx, row.group, 92, y, 14, C.gold, 800);
+    label(ctx, row.statement, 168, y, 16, C.white, 650, "left", "SFMono-Regular, Menlo, Consolas, monospace");
+    const accepted = row.comparator === "ACCEPTED";
+    chip(ctx, 585, y - 13, 140, 26, accepted ? C.mint : C.coral, C.navy, accepted ? "ACCEPTED" : "REFUSED", 13);
+    ctx.globalAlpha = 1;
+    if (!accepted) {
+      const b = smooth((t - 7.6 - i * 0.32) / 0.4);
+      const [fill, text] = classChip[row.class] || classChip.CHANGED_UNKNOWN;
+      ctx.globalAlpha = b;
+      chip(ctx, 775, y - 13, 220, 26, fill, C.navy, text, 13);
+      ctx.globalAlpha = 1;
+    } else {
+      ctx.globalAlpha = smooth((t - 7.6) / 0.4);
+      label(ctx, "—", 885, y, 16, C.muted, 700, "center");
+      ctx.globalAlpha = 1;
+    }
+  });
+  const g = smooth((t - 12.6) / 0.6);
+  ctx.globalAlpha = g;
+  rounded(ctx, 66, 738, 948, 150, 18, "#0b2434", C.gold);
+  label(ctx, "GUARD · an equivalence counts only if its proof does not use the theorem under test", 92, 766, 15, C.gold, 800);
+  ctx.globalAlpha = 1;
+  d.guard.forEach((entry, i) => {
+    ctx.globalAlpha = smooth((t - 13.2 - i * 1.4) / 0.4);
+    const ok = entry.exit_code === 0;
+    label(ctx, ok ? "✓" : "✗", 96, 806 + i * 44, 22, ok ? C.mint : C.coral, 900);
+    label(ctx, entry.text.length > 92 ? entry.text.slice(0, 91) + "…" : entry.text, 124, 806 + i * 44, 14, ok ? C.white : C.coral, 650, "left", "SFMono-Regular, Menlo, Consolas, monospace");
+    label(ctx, `exit ${entry.exit_code}`, 1000, 806 + i * 44, 13, C.muted, 700, "right");
+    ctx.globalAlpha = 1;
+  });
+  narration(ctx, t, [
+    [0, "A statement checker answers one question: is the submitted theorem exactly the challenge statement?"],
+    [3.2, "It accepts the three correct statements and refuses all eight changes, even n + 1 ≤ p, which Lean defines as n < p."],
+    [7.6, "A refusal only says the statement changed. A second route in Lean tells equivalent, weaker and false apart, one proof per case."],
+    [12.6, "The guard walks every dependency of an equivalence proof. A deliberately cheating proof that used the theorem itself was rejected."],
+    [16.6, "All 11 cases matched the pre-registered outcomes, and every step has a receipt. Cases from someone else are still missing."],
+  ]);
+}
+
 export function drawAnimation(ctx, data, id, seconds) {
   const t = clamp(seconds, 0, 20);
   ctx.clearRect(0, 0, W, H);
@@ -783,5 +896,7 @@ export function drawAnimation(ctx, data, id, seconds) {
   else if (id === "replay") drawReplay(ctx, data, t);
   else if (id === "provenance") drawProvenance(ctx, data, t);
   else if (id === "experiment") drawExperiment(ctx, data, t);
+  else if (id === "bridges") drawBridges(ctx, data, t);
+  else if (id === "controls") drawControls(ctx, data, t);
   else throw new Error(`Unknown animation: ${id}`);
 }

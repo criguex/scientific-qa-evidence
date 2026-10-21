@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you reference this QA study, please cite it as below. The original proofs belong to OpenAI; cite their repository for the mathematics."
 type: dataset
-title: "Scientific QA Evidence: independent reproduction of OpenAI's Navier–Stokes and Euler Lean proofs, with numerical mutation testing"
+title: "Scientific QA Evidence: an independent QA audit of OpenAI's Navier–Stokes and Euler Lean proofs, with Lean bridges to Clay's problem statement and checker controls"
 authors:
   - family-names: Guerra
     given-names: Cristian
@@ -10,14 +10,18 @@ authors:
     country: CO
 repository-code: "https://github.com/criguex/scientific-qa-evidence"
 url: "https://github.com/criguex/scientific-qa-evidence"
-date-released: 2026-10-20
+version: "1.2.0"
+date-released: 2026-10-21
 abstract: >-
-  A software-QA reproduction package. It rebuilds OpenAI's Lean 4 formalizations
-  of finite-time blowup for Navier–Stokes (Clay alternatives C and D) and Euler
-  from a pinned commit, rechecks the configured challenges with Comparator using
-  the Lean kernel and nanoda, includes a wrong-proof control fixture, and reports
-  a paired macOS/Linux mutation-testing campaign over nine synthetic numerical
-  models (84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED). It claims no new
+  A software-QA audit package. It rebuilds OpenAI's Lean 4 formalizations of
+  finite-time blowup for Navier–Stokes (Clay alternatives C and D) and Euler from
+  a pinned commit, rechecks them with Comparator using the Lean kernel and nanoda
+  on four builds, tests the statement check with mutants, and proves in Lean that
+  OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean, a
+  rendering not yet independently reviewed. Pre-registered controls on three
+  Mathlib theorems separate a changed statement from a false one, and a paired
+  macOS/Linux mutation-testing campaign covers nine synthetic numerical models
+  (84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED). It claims no new
   theorem and no scientific certification.
 keywords:
   - software testing
@@ -29,14 +33,88 @@ keywords:
   - Navier–Stokes
 references:
   - type: software
-    title: "NavierStokesAndEuler: Lean certificates accompanying Navier–Stokes and Euler results"
+    title: "NavierStokesAndEuler: Lean certificates accompanying Navier-Stokes and Euler results"
     authors:
       - name: OpenAI
     repository-code: "https://github.com/openai/NavierStokesAndEuler"
     commit: f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+    license: Apache-2.0
+  - type: report
+    title: "Finite time blowup for Navier–Stokes"
+    authors:
+      - name: OpenAI
+    url: "https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf"
+  - type: report
+    title: "Finite time blowup for the Euler equation"
+    authors:
+      - name: OpenAI
+    url: "https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf"
+  - type: report
+    title: "Existence and smoothness of the Navier–Stokes equation"
+    authors:
+      - family-names: Fefferman
+        given-names: Charles L.
+    institution:
+      name: Clay Mathematics Institute
+    url: "https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf"
   - type: software
     title: "Formal Conjectures"
     authors:
       - name: Google DeepMind
     repository-code: "https://github.com/google-deepmind/formal-conjectures"
     commit: 8bf45ed70d48b2b2a501de9c00b26bfa38c573ee
+    license: Apache-2.0
+  - type: software
+    title: "Lean 4"
+    authors:
+      - name: Lean FRO and contributors
+    repository-code: "https://github.com/leanprover/lean4"
+    version: v4.34.0-rc2
+    commit: 6a10ac8c22beadecabdbb0919c2b50214762f91d
+    license: Apache-2.0
+  - type: software
+    title: "Mathlib"
+    authors:
+      - name: The Mathlib Community
+    repository-code: "https://github.com/leanprover-community/mathlib4"
+    commit: 85e3a25e006c
+    license: Apache-2.0
+  - type: software
+    title: "Comparator"
+    authors:
+      - name: Lean FRO
+    repository-code: "https://github.com/leanprover/comparator"
+    commit: 19e111e2141cf333c7daff0f64c5f24acc91dd2e
+    license: Apache-2.0
+  - type: software
+    title: "lean4export"
+    authors:
+      - name: Lean FRO
+    repository-code: "https://github.com/leanprover/lean4export"
+    commit: cacf989bd75f608700820f6afc595f32e7a99a4d
+    license: Apache-2.0
+  - type: software
+    title: "nanoda_lib"
+    authors:
+      - name: Chris Bailey
+    repository-code: "https://github.com/ammkrn/nanoda_lib"
+    commit: 9d6964f78d0fa4c93fd22fe956e17afe7e72a441
+    license: Apache-2.0
+  - type: software
+    title: "landrun"
+    authors:
+      - family-names: Ranjbar
+        given-names: Armin
+    repository-code: "https://github.com/Zouuup/landrun"
+    commit: ec104f6edc1e14d7fec6d31146f1ec6f9c192c5a
+    license: MIT
+  - type: article
+    title: "Navier-Stokes lost in translation: Why Lean verification of AI autoformalisation does not guarantee correct natural language proofs"
+    authors:
+      - family-names: Bastounis
+        given-names: Alexander
+      - family-names: Circelli
+        given-names: Fabian
+      - family-names: Hansen
+        given-names: Anders C.
+    url: "https://arxiv.org/abs/2610.08144"

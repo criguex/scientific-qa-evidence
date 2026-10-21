@@ -111,6 +111,24 @@ These four scenes play in real time (20 seconds) with a caption box that explain
 - **Does not show:** a real-world detection rate; the faults are planted in recorded artifacts, not live Lean.
 - **Trace:** [scene](experiment.html) · [results with errata](../experiments/blind-faults/RESULTS.md) · [v2 benchmark](../experiments/blind-faults/v2/README.md) · [review rounds data](../experiments/blind-faults/review_rounds.json).
 
+## Clay and checker-meaning scenes
+
+### 12. From OpenAI's theorem to Clay's text
+
+![Bridge rows from OpenAI's theorem to Clay's text and the four K1 theorems](../docs/assets/bridges-preview.gif)
+
+- **Shows:** the three layers (OpenAI's formal theorem, the Lean bridges, Clay's text written literally in Lean), every bridge row colored by the status recorded in the bridge table, and the four K1 theorems with their axioms.
+- **Does not show:** that the literal rendering is faithful to Clay's PDF, which is not yet independently reviewed, or any mathematician's review. S7, periodic pressure, affects (D) only.
+- **Trace:** [scene](bridges.html) · [bridge table](../evidence/formal/clay-lean-bridges.md) · [Lean files and receipt](../bridges/README.md) · [review sheet](../bridges/K0_REVIEW.md).
+
+### 13. Mathlib controls: a refusal is not a refutation
+
+![Eleven Mathlib cases: Comparator verdicts, second-route classes and the guard](../docs/assets/controls-preview.gif)
+
+- **Shows:** each pre-registered case, Comparator's verdict from its receipt, the class recomputed by `verify.py` from the published logs, and the two guard lines copied from the real logs.
+- **Does not show:** a detection rate; the cases are author-designed, and held-out cases are still missing.
+- **Trace:** [scene](controls.html) · [design](../experiments/mathlib-controls/DESIGN.md) · [results](../experiments/mathlib-controls/RESULTS.md) · [receipts](../experiments/mathlib-controls/results/receipts.jsonl).
+
 ## Separate 3D flow context
 
 ![Taylor–Green flow context clip, separate from the campaign and model animations](../docs/assets/flow-preview.gif)
