@@ -1,6 +1,6 @@
 # Publication status
 
-Updated 2026-10-20.
+Updated 2026-10-21.
 
 | Deliverable | Status | Notes |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ Updated 2026-10-20.
 | X introduction thread | Posted | [Opening post](https://x.com/criguex/status/2112679712157753441) with replies [1](https://x.com/criguex/status/2112679713659334688), [2](https://x.com/criguex/status/2112679715744231538), [3](https://x.com/criguex/status/2112679717954580901), and [4](https://x.com/criguex/status/2112679719292248576). The opening post includes the 20-second RC MP4. |
 | X animation previews | Posted as six GIF replies | [Chemistry](https://x.com/criguex/status/2112681973877727336), [cooling](https://x.com/criguex/status/2112682611445489945), [Snell refraction](https://x.com/criguex/status/2112682726700785965), [paired campaign](https://x.com/criguex/status/2112682812377805184), [formal control](https://x.com/criguex/status/2112682876819198184), and [separate illustrative flow context](https://x.com/criguex/status/2112682970029134277). These are animated previews, not the narrated V2 videos. |
 | YouTube / TikTok uploads | Not posted | No long-form YouTube video or TikTok short has been uploaded. |
+| Repository documentation | Updated 2026-10-21 | README rewritten for outside readers (context, results, one-minute verification, known limitations) and mirrored in Spanish as `README.es.md`; `CITATION.cff` added. |
 
 The author has authorized proceeding with the publication workflow. That authorization does not replace final review of rendered media, captions, claims, or third-party rights. The static-text V1 is superseded and is not approved for upload. No narrated V2 long video or short has been uploaded. See [`video/src/visual-v2/publication.json`](video/src/visual-v2/publication.json) for composition IDs and render targets.
 

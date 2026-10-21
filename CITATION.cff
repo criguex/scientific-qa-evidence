@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you reference this QA study, please cite it as below. The original proofs belong to OpenAI; cite their repository for the mathematics."
+type: dataset
+title: "Scientific QA Evidence: independent reproduction of OpenAI's Navier–Stokes and Euler Lean proofs, with numerical mutation testing"
+authors:
+  - family-names: Guerra
+    given-names: Cristian
+    alias: criguex
+    city: Medellín
+    country: CO
+repository-code: "https://github.com/criguex/scientific-qa-evidence"
+url: "https://github.com/criguex/scientific-qa-evidence"
+date-released: 2026-10-20
+abstract: >-
+  A software-QA reproduction package. It rebuilds OpenAI's Lean 4 formalizations
+  of finite-time blowup for Navier–Stokes (Clay alternatives C and D) and Euler
+  from a pinned commit, rechecks the configured challenges with Comparator using
+  the Lean kernel and nanoda, includes a wrong-proof control fixture, and reports
+  a paired macOS/Linux mutation-testing campaign over nine synthetic numerical
+  models (84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED). It claims no new
+  theorem and no scientific certification.
+keywords:
+  - software testing
+  - quality assurance
+  - reproducibility
+  - mutation testing
+  - formal verification
+  - Lean 4
+  - Navier–Stokes
+references:
+  - type: software
+    title: "NavierStokesAndEuler: Lean certificates accompanying Navier–Stokes and Euler results"
+    authors:
+      - name: OpenAI
+    repository-code: "https://github.com/openai/NavierStokesAndEuler"
+    commit: f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+  - type: software
+    title: "Formal Conjectures"
+    authors:
+      - name: Google DeepMind
+    repository-code: "https://github.com/google-deepmind/formal-conjectures"
+    commit: 8bf45ed70d48b2b2a501de9c00b26bfa38c573ee
