@@ -91,7 +91,13 @@ python3 animations/build.py
 python3 -m unittest discover -s animations -p 'test_*.py'
 ```
 
+The README previews in `docs/assets/` are exported from these same HTML scenes at full 1080 × 1080 resolution: 120 frames sampled evenly across the 20-second scene and played at 15 fps as an 8-second loop, with one global 256-color palette. Exporting needs Python Playwright with Chromium and FFmpeg:
 
-Repeat with the other composition IDs. MP4/GIF exports do not retain HTML seek controls. Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.
+```sh
+python3 animations/export_gifs.py              # all scenes
+python3 animations/export_gifs.py validation   # one scene
+```
+
+GIF exports do not retain HTML seek controls. Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.
 
 Attribution: **Cristian Guerra · QA Automation · Medellín, Colombia · @criguex**.
