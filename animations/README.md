@@ -125,6 +125,13 @@ python3 animations/export_gifs.py              # all scenes
 python3 animations/export_gifs.py mutants      # one scene
 ```
 
-GIF exports do not retain HTML seek controls. Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.
+GIF exports do not retain HTML seek controls.
+
+Full-quality MP4 versions of all ten scenes (1080 × 1080, 30 fps, H.264, 20 seconds each) are in [`docs/media/`](../docs/media/), exported frame by frame from the same HTML scenes:
+
+```sh
+python3 animations/export_mp4.py              # all scenes
+python3 animations/export_mp4.py mutants      # one scene
+``` Export dimensions are not a guarantee of acceptance by every platform; check the platform's current requirements before adapting or uploading. No animation upload is implied by these source and render instructions.
 
 Attribution: **Cristian Guerra · QA Automation · Medellín, Colombia · @criguex**.
