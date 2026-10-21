@@ -36,4 +36,4 @@ A prospective experiment, defined and frozen before it is run:
 3. **Both procedures on every copy:** the baseline and the protocol.
 4. **Metrics:** faults detected, false alarms on clean copies, and wall-clock cost.
 
-A result of that experiment, not this table, would support a claim that the protocol detects classes of problems the baseline does not.
+A result of that experiment, not this table, would support a claim that the protocol detects classes of problems the baseline does not. Its preparation is tracked in [experiments/blind-faults/STATUS.md](experiments/blind-faults/STATUS.md).
