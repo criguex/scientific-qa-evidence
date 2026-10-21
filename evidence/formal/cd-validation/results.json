@@ -425,7 +425,7 @@
       "original_sha256": {
         "build.log": "7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668"
       },
-      "elapsed_s": null,
+      "elapsed_s": 5362.0,
       "facts": {
         "jobs": 11424,
         "printed_built_lines": 11406,

@@ -55,7 +55,7 @@
     },
     "cd_validation": {
       "path": "evidence/formal/cd-validation/results.json",
-      "sha256": "91bc1e39519963d55e395da943dd4e092fade25a86c4fff0f64edc0f1dbfc8a1"
+      "sha256": "f1c25c095f657826bde8d70f20f112d43f067d83c056b944c0d0b8798fb868c5"
     },
     "comparator_run1": {
       "path": "evidence/formal/comparator/README.md",
@@ -273,7 +273,7 @@
         "fresh_prebuilt_packages": 7,
         "fresh_elapsed_s": 5201.0,
         "nocache_verdict": "OK",
-        "nocache_elapsed_s": null
+        "nocache_elapsed_s": 5362.0
       },
       "rows": [
         {

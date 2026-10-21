@@ -39,6 +39,7 @@ Each public file in this folder, the original record it comes from on the test h
 | `mutants/euler_tstar_half.diff` | `<RUN>/mutants/euler_tstar_half.diff` | `e48ebbcb1f68014ca841e65bb0c609624398a522828629eca379101ac5793f21` | sanitized |
 | `logs/clean_build.excerpt.log` | `<RUN>/clean/build.log` | `627f1474a9cf3ac698693aa295445574343239364b563a89975e4efbe8522011` | first 40 and last 15 lines, sanitized |
 | `logs/nocache_build.excerpt.log` | `<RUN>/nocache/build.log` | `7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668` | first 40 and last 15 lines, sanitized |
+| `receipts/nocache_build.time.txt` | `<RUN>/nocache/build.time.log` | `89f9962480bc96a04723b2ba84e71e11d2fda64cb69522efa54b0a89b1a26055` | GNU time lines kept: command, elapsed, max RSS, exit status |
 | `logs/leanchecker_fresh_NavierStokes.ComparatorSolution.log` | `<RUN>/leanchecker/NavierStokes.ComparatorSolution.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | copied byte for byte (empty: leanchecker prints nothing on success) |
 | `receipts/leanchecker_fresh_NavierStokes.ComparatorSolution.txt` | `<RUN>/leanchecker/NavierStokes.ComparatorSolution.time.log` | `df04cc36337ac6e8476d679bd69b599887a04abed2f76d0345da936a71c57fe2` | GNU time lines kept: command, elapsed, max RSS, exit status |
 | `logs/leanchecker_fresh_Euler.Solution.log` | `<RUN>/leanchecker/Euler.Solution.log` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | copied byte for byte (empty: leanchecker prints nothing on success) |

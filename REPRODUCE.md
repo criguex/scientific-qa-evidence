@@ -22,7 +22,7 @@ Requires git and Python 3.9 or newer. No third-party packages.
 ```sh
 git clone https://github.com/criguex/scientific-qa-evidence.git
 cd scientific-qa-evidence
-git checkout v1.0
+git checkout v1.0.1                                 # the tag of this release; later releases are listed on GitHub
 shasum -a 256 -c evidence/SHA256SUMS.txt          # on Linux, sha256sum -c also works
 python3 evidence/verify_numerical.py
 (cd evidence/numerical/source && python3 -m unittest -v test_runner)
@@ -32,7 +32,7 @@ python3 -m unittest discover -s animations -p 'test_*.py'
 (cd evidence/formal/statement-provenance && python3 -m unittest test_compare_statements)
 ```
 
-The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of tag `v1.0` link the successful run for that exact commit, with its logs.
+The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.0.1`) link the successful CI run for that exact commit, with its logs.
 
 To rerun the numerical suite into a new folder and inspect the raw output:
 

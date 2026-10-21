@@ -495,6 +495,7 @@ function stepBox(ctx, x, y, w, h, heading, body, color, alpha) {
 }
 
 function minutes(seconds) {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds)) return "—";
   if (seconds < 3600) return `${(seconds / 60).toFixed(1)} min`;
   return `${Math.floor(seconds / 3600)} h ${Math.round((seconds % 3600) / 60)} min`;
 }

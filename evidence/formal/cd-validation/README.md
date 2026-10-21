@@ -22,7 +22,7 @@ This record repeats and extends the [2026-10-20 Comparator record](../comparator
 | (D) drop ¬ · existence instead of breakdown | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'` | [log](logs/mutant_existence_not_breakdown_periodic.sanitized.log) · [diff](mutants/existence_not_breakdown_periodic.diff) |
 | Euler · tighten T* ≤ 1 to T* ≤ 1/2 | B2 | reject | **KILLED** | 1.4 min | `uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'` | [log](logs/mutant_euler_tstar_half.sanitized.log) · [diff](mutants/euler_tstar_half.diff) |
 | B3 · fresh build, Mathlib compiled locally | B3 | ok | **OK** | 1 h 27 min | — | [log](logs/clean_build.excerpt.log) |
-| B4 · no-cache build, everything compiled locally | B4 | ok | **OK** | — | — | [log](logs/nocache_build.excerpt.log) |
+| B4 · no-cache build, everything compiled locally | B4 | ok | **OK** | 1 h 29 min | — | [log](logs/nocache_build.excerpt.log) |
 | leanchecker --fresh · Navier–Stokes solution | B2 | ok | **OK** | 19.6 min | — | [log](logs/leanchecker_fresh_NavierStokes.ComparatorSolution.log) · [receipt](receipts/leanchecker_fresh_NavierStokes.ComparatorSolution.txt) |
 | leanchecker --fresh · Euler solution | B2 | ok | **OK** | 22.5 min | — | [log](logs/leanchecker_fresh_Euler.Solution.log) · [receipt](receipts/leanchecker_fresh_Euler.Solution.txt) |
 | lean4lean --fresh · Navier–Stokes solution (best effort) | B2 | ok | **FAILED_TOOLCHAIN_MISMATCH** | — | — | [log](logs/lean4lean_build.error-excerpt.log) · [receipt](receipts/lean4lean.txt) |
@@ -88,7 +88,7 @@ So B3 compiled **11,030 modules locally** (Mathlib and the project) and received
 ## B4 · no-cache build, 2026-10-21
 
 - **Command:** `XDG_CACHE_HOME=<RUN>/nocache/xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build` in a fresh extraction of the same archive.
-- **Started / finished (UTC):** 2026-10-21T17:45:04Z → 2026-10-21T19:14:27Z · exit code **0** · 11424 jobs.
+- **Started / finished (UTC):** 2026-10-21T17:45:04Z → 2026-10-21T19:14:27Z · 1 h 29 min (GNU `time`, [receipt](receipts/nocache_build.time.txt)) · exit code **0** · 11424 jobs.
 - **Downloads:** 0 `build.barrel` files in `.lake/packages`; 0 files in the empty cache directory afterwards.
 - **Log:** [excerpt](logs/nocache_build.excerpt.log), original SHA-256 `7afcff48807c0c231536bc825d6d338dd53390d6328677a8d1931b85dccd9668`. Versions: [receipt](receipts/nocache_build_versions.txt).
 
