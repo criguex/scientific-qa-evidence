@@ -27,20 +27,19 @@ Each case is a small, fast copy: a core-Lean project without Mathlib (a challeng
 | --- | --- | ---: | --- |
 | F1 | Prebuilt `.olean` files for a dependency placed in the build directory instead of compiling it | 3 | The build succeeds and Comparator accepts |
 | F2 | The challenge statement is weakened and the solution proves the weaker statement; the case's reference statement is unchanged | 3 | Comparator compares the solution with the challenge, and they match |
-| F3 | The toolchain is pinned to Lean v4.31.0, which has kernel bug #14576 (CVE-2026-72844, fixed in v4.32.2), and the solution uses the public proof-of-concept [`endrazine/lean-cve-poc`](https://github.com/endrazine/lean-cve-poc) to prove a false statement. Comparator and lean4export are used at their `v4.31.0` tags to match | 3 | Depends on the kernel and nanoda versions; this is measured, not assumed |
 | F4 | The numerical oracle raises an exception, and the harness reports the case as passing | 3 | The suite reports success |
 | F5 | A run receipt names a different build or log than the one actually used | 3 | B keeps no receipts |
 | F6 | Positive control: the solution uses `sorry` or a non-permitted axiom | 3 | It should not; Comparator rejects this, so both procedures should detect it |
 | C | Clean copies with no fault | 6 | Measures false alarms |
 
-**Total:** 24 cases, named `case-01` to `case-24`.
+**Total:** 21 cases, named `case-01` to `case-21`. Class F3 was withdrawn before freezing; see [F3_WITHDRAWN.md](F3_WITHDRAWN.md).
 
 F6 checks that the baseline works as intended; if B misses F6, the setup is broken. F5 cannot be detected by B by construction, and it is reported separately so it does not inflate the comparison.
 
 ## 3. Assignment and blinding
 
 1. The seed committed in [SEED_COMMITMENT.md](SEED_COMMITMENT.md) is the only source of randomness.
-2. `assign.py` (to be written and frozen with this design) builds the list of 24 slots above, shuffles it with Python's `random.Random(seed)`, plants each fault into its copy, and writes `key.json` mapping case to class.
+2. `assign.py` (to be written and frozen with this design) builds the list of 21 slots above, shuffles it with Python's `random.Random(seed)`, plants each fault into its copy, and writes `key.json` mapping case to class.
 3. The author runs `assign.py` on his machine and keeps `key.json` and the seed out of the assistant's reach until all results are recorded.
 4. The checks are run with case names only. Each result is committed before the key is opened.
 
@@ -60,21 +59,18 @@ F6 checks that the baseline works as intended; if B misses F6, the setup is brok
 
 ## 6. What it can and cannot support
 
-**Can support:** "On these 24 planted cases, the protocol detected classes F1–F5 that the baseline did not, with N false alarms on 6 clean cases, at a cost of T."
+**Can support:** "On these 21 planted cases, the protocol detected classes F1, F2, F4 and F5 that the baseline did not, with N false alarms on 6 clean cases, at a cost of T."
 
 **Cannot support:** detection rates for real-world faults, behavior on large projects, or superiority over procedures other than this baseline.
 
 ## Decisions taken (2026-10-21)
 
-1. Three instances per class, 24 cases in total.
-2. F3 is included. It runs a public exploit that proves a false statement on an old Lean version, on purpose, inside the test host's sandbox.
+1. Three instances per class, 21 cases in total.
+2. F3 was first included, then **withdrawn before freezing** after an automated safety filter stopped the assistant's work on it; see [F3_WITHDRAWN.md](F3_WITHDRAWN.md).
 3. F5 stays and is reported separately, because the baseline cannot detect it by construction.
 
 ## Feasibility checks before freezing
 
 | Item | Status |
 | --- | --- |
-| F3 exploit version | The proof-of-concept pins `leanprover/lean4:v4.31.0`; its README lists Lean ≤ v4.31.0 as affected and v4.32.2 as fixed. |
-| Comparator and lean4export for F3 | Both repositories have `v4.31.0` tags. |
-| F3 reproduces on the test host | Done: [reproduction](feasibility/f3-exploit-reproduction.md) |
 | `assign.py`, case templates and check scripts | Pending |
