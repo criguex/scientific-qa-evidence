@@ -43,5 +43,6 @@ jobs:
       - name: Blind-fault evaluator v2 (absent and incomplete evidence)
         working-directory: experiments/blind-faults/v2
         run: python3 -m unittest -v test_protocol_v2 fuzz_v2
-      - name: Mathlib controls (recompute classes from the logs)
-        run: python3 experiments/mathlib-controls/verify.py
+      - name: Mathlib controls (check receipts, recompute classes)
+        working-directory: experiments/mathlib-controls
+        run: python3 verify.py && python3 -m unittest -v test_verify

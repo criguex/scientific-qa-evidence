@@ -1,0 +1,7 @@
+{
+  "challenge_module": "QAControls.Challenge.DCTOrig",
+  "solution_module": "QAControls.Solution.DCT",
+  "enable_nanoda": true,
+  "theorem_names": ["QAControls.dominated_convergence"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

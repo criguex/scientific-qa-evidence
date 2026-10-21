@@ -1,0 +1,7 @@
+{
+  "challenge_module": "QAControls.Challenge.CSOrig",
+  "solution_module": "QAControls.Solution.CauchySchwarz",
+  "enable_nanoda": true,
+  "theorem_names": ["QAControls.cauchy_schwarz"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

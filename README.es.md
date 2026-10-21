@@ -42,6 +42,7 @@ shasum -a 256 -c evidence/SHA256SUMS.txt                           # cada archiv
 python3 evidence/verify_numerical.py                               # corridas guardadas intactas e idénticas entre máquinas
 (cd evidence/numerical/source && python3 -m unittest test_runner)  # vuelve a correr las 84 variantes numéricas
 python3 evidence/test_consistency.py                               # README, CLAIMS y registros coinciden
+python3 experiments/mathlib-controls/verify.py                     # comprueba recibos de los controles Mathlib y recalcula clases
 ```
 
 Las mismas comprobaciones, y los tests de todos los demás scripts, corren en [GitHub Actions](.github/workflows/verify.yml) en Ubuntu y macOS en cada push. [REPRODUCE.md](REPRODUCE.md) (en inglés) da las versiones, los pasos desde un checkout limpio y qué resultados se recalculan y cuáles solo se verifican por hash. Las compilaciones de Lean necesitan el repositorio de OpenAI y una máquina Linux; aquí sus registros se verifican por hash.
@@ -85,27 +86,89 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 | Oráculo independiente | Una solución programada aparte para cada modelo | Comparator con dos kernels, más una revisión con `leanchecker --fresh` |
 | Mutación deliberada | Dos errores conocidos por modelo y un cambio cerca del umbral | Un valor de prueba erróneo y seis mutantes del enunciado con un control |
 | Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre cuatro compilaciones |
-| Revisión de la especificación | El propio contrato | Procedencia del enunciado y revisión de riesgos frente a Clay |
+| Revisión de la especificación | El propio contrato | Procedencia del enunciado, revisión de riesgos frente a Clay y los puentes en Lean (Parte D) |
 
-**Hallazgos en este caso.** Frente al procedimiento de verificación del README de OpenAI, el protocolo produjo ocho hallazgos que ese procedimiento no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés).
+### Hallazgos en este caso
 
-**Benchmark.** Un experimento prerregistrado sembró fallos en casos controlados, asignados con una semilla comprometida. Con el evaluador corregido, los checks del protocolo marcan cuatro clases de fallo que el procedimiento base deja pasar, los dos marcan el control positivo y el caso limpio pasa los dos. La primera corrida se conserva con fe de erratas, y cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([resultados y erratas](experiments/blind-faults/RESULTS.md), [benchmark corregido](experiments/blind-faults/v2/README.md), en inglés).
+Frente al procedimiento de verificación del README de OpenAI, el protocolo produjo ocho hallazgos que ese procedimiento no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés).
 
-**Controles con Mathlib.** Con la infinitud de los primos, Cauchy–Schwarz y la convergencia dominada, cada uno con el enunciado correcto, reformulaciones equivalentes y errores deliberados, Comparator rechazó todos los enunciados cambiados, incluso uno definicionalmente igual (`n + 1 ≤ p` por `n < p`). Así que un rechazo solo significa "el enunciado cambió", y una aceptación es igualdad tal como la comprueba Comparator. Una segunda vía en Lean, con una guarda que rechaza cualquier prueba de equivalencia que use el teorema bajo prueba, clasificó luego cada caso como equivalente, más débil o falso. Los 11 casos y los dos controles salieron según lo registrado de antemano ([diseño](experiments/mathlib-controls/DESIGN.md), [resultados](experiments/mathlib-controls/RESULTS.md), en inglés).
+### Benchmark de fallos a ciegas
+
+Un experimento prerregistrado sembró fallos en casos controlados, asignados con una semilla comprometida. Con el evaluador corregido, los checks del protocolo marcan cuatro clases de fallo que el procedimiento base deja pasar, los dos marcan el control positivo y el caso limpio pasa los dos. La primera corrida se conserva con fe de erratas, y cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([resultados y erratas](experiments/blind-faults/RESULTS.md), [benchmark corregido](experiments/blind-faults/v2/README.md), en inglés).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Fallos sembrados detectados por cada procedimiento y cuatro rondas de revisión"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
 
-**Trabajos previos.** Análisis de mutación (DeMillo, Lipton y Sayward, 1978), mutación de especificaciones (1985, 2000), análisis de mutación de proyectos de verificación en Coq (mCoq, 2019), análisis de mutación de verificadores de benchmarks (2026), el criterio de De Bruijn, [Comparator](https://github.com/leanprover/comparator) y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind. El aporte es la combinación y su aplicación a la propia cadena de verificación; no se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md), en inglés).
+### Controles con Mathlib: «el enunciado cambió» no es «el teorema es falso»
+
+Un verificador de enunciados responde una sola pregunta: ¿el teorema entregado es exactamente el del desafío? Para ver qué significan sus respuestas, a tres teoremas que Mathlib ya prueba se les dio el enunciado correcto, reformulaciones equivalentes y errores deliberados, con el resultado esperado registrado antes de correr nada. Cada caso rechazado recibió luego una **segunda vía** en Lean: una prueba de equivalencia, una prueba de que es más débil (en las dos direcciones) o una refutación.
+
+| Teorema | Enunciado probado | Comparator | Segunda vía en Lean | Clase |
+| --- | --- | --- | --- | --- |
+| Primos | `∀ n, ∃ p, n < p ∧ p.Prime` | ✅ aceptado | — | aceptado por el verificador |
+| | `n + 1 ≤ p` en vez de `n < p` | ❌ rechazado | `Iff.rfl`: la misma definición | equivalente |
+| | `n ≤ p` en vez de `n < p` | ❌ rechazado | equivalencia para todo predicado `P`, no solo primos | equivalente |
+| | `∀ n ≤ 100, …` (comprobar ejemplos) | ❌ rechazado | completo ⇒ acotado; acotado ⇏ completo (con `P p := p = 101`) | más débil |
+| | `∃ p, ∀ n, n < p ∧ p.Prime` (cuantificadores invertidos) | ❌ rechazado | refutado: tomar n = p | falso |
+| Cauchy–Schwarz | `abs ⟪x, y⟫ ≤ ‖x‖ * ‖y‖` | ✅ aceptado | — | aceptado por el verificador |
+| | `⟪x, y⟫ ^ 2 ≤ ‖x‖ ^ 2 * ‖y‖ ^ 2` | ❌ rechazado | `abs a ≤ bc ↔ a² ≤ b²c²` si b, c ≥ 0 | equivalente |
+| | `<` en vez de `≤` | ❌ rechazado | refutado con x = y = 1 | falso |
+| Convergencia dominada | hipótesis de Mathlib | ✅ aceptado | — | aceptado por el verificador |
+| | `Integrable bound` como «medible y ∫⁻ ofReal bound < ∞» | ❌ rechazado | equivalente solo porque la dominación obliga a bound ≥ 0 | equivalente |
+| | sin dominación | ❌ rechazado | refutado: (n+1) en (0, 1/(n+1)) tiende a 0 y cada integral vale 1 | falso |
+
+**Qué muestra.** Un rechazo solo significa «el enunciado cambió»: Comparator rechazó los ocho cambios, incluso `n + 1 ≤ p`, que para Lean es por definición lo mismo que `n < p`. Una aceptación es igualdad tal como la comprueba Comparator, no la prueba de nada más. Distinguir equivalente, más débil y falso exigió una prueba aparte en cada caso.
+
+**La guarda.** Dos enunciados verdaderos cualesquiera son trivialmente «equivalentes», así que una equivalencia solo cuenta si su prueba no usa el teorema bajo prueba. Un comando de Lean recorre todas las dependencias transitivas de la prueba:
+
+```text
+guard: QAControls.SecondRoute.primes_reform_equiv uses none of the theorems under test (1485 constants checked)
+error: guard: QAControls.SecondRoute.primes_reform_equiv_cheat depends on Nat.exists_infinite_primes
+```
+
+La segunda línea es una prueba tramposa a propósito, rechazada según lo registrado. Los 11 casos y los dos controles salieron según lo registrado de antemano. Cada paso tiene un recibo (comando, hashes de entrada y de salida, código de retorno), y `python3 experiments/mathlib-controls/verify.py` comprueba los registros contra ellos y recalcula cada clase; eso comprueba los registros, no vuelve a ejecutar Lean ([diseño](experiments/mathlib-controls/DESIGN.md), [resultados](experiments/mathlib-controls/RESULTS.md), en inglés). Faltan casos preparados por otra persona ([cómo contribuir](experiments/mathlib-controls/HOLDOUT.md)).
+
+### Trabajos previos
+
+Análisis de mutación (DeMillo, Lipton y Sayward, 1978), mutación de especificaciones (1985, 2000), análisis de mutación de proyectos de verificación en Coq (mCoq, 2019), análisis de mutación de verificadores de benchmarks (2026), el criterio de De Bruijn, [Comparator](https://github.com/leanprover/comparator) y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind. El aporte es la combinación y su aplicación a la propia cadena de verificación; no se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md), en inglés).
 
 ## Parte D · Del teorema de OpenAI al texto de Clay
 
-Para concluir que la (C) y la (D) formales implican las de Clay basta una dirección por cláusula: los datos formales implican los de Clay, y las soluciones de Clay implican las formales. El plan está en [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md) (en inglés), como una tabla de afirmación → lema → prueba → revisión → pendiente.
+OpenAI prueba un enunciado formal escrito al estilo de Google DeepMind. ¿Dice lo mismo que el texto de Clay? Para obtener de él la (C) y la (D) de Clay basta una dirección por cláusula: los datos de OpenAI deben cumplir las condiciones de Clay, y toda solución de Clay debe ser una solución formal. Así, si existiera una solución de Clay sería una solución formal, y el teorema de OpenAI lo descarta.
 
-- Las ecuaciones (1)–(11), (C), (D) y la errata de Clay están escritas literalmente en Lean en [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), con un estilo independiente del de DeepMind, y compilan contra el mismo Lean y Mathlib de la auditoría. Falta revisarlas contra el PDF.
-- **K1 está probado en Lean sin hipótesis:** para todo ν > 0, los teoremas probados de OpenAI implican `AltC ν` y `AltD_withErratum ν`, la (C) y la (D) de Clay tal como están en `ClayLiteral` ([`bridges/`](bridges/README.md)). Usa solo los tres axiomas estándar, y un control comprueba que las condiciones de solución de Clay se pueden cumplir, así que el resultado no es vacío. **Nada de esto lo ha revisado un matemático.**
-- **La suavidad en t = 0 no lo decide:** K1 está probado bajo las dos lecturas de C^∞(ℝ³ × [0, ∞)), como restricción de una función C^∞ y como derivadas continuas hasta t = 0. **La (C) no usa la errata de Clay;** la cuestión de la presión periódica afecta solo a la (D).
-- El resultado solo es tan fiel como `ClayLiteral`, cuya fidelidad al PDF aún necesita revisión independiente; los 14 puntos a revisar están en [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md) (en inglés). El lado de los datos usó el testigo concreto de OpenAI: u₀ = 0 y una fuerza suave en todo ℝ × ℝ³, que es su propia extensión suave (D4).
-- Dos puntos necesitan una decisión humana: qué significa C^∞ en un conjunto cerrado (S4) y la presión periódica en (D) (S7). El 2026-10-21 se envió una pregunta sobre S7 al Clay Mathematics Institute; las respuestas se registrarán aquí.
+### Qué está probado
+
+Las ecuaciones (1)–(11), la (C), la (D) y la errata de Clay están escritas literalmente en Lean, en coordenadas y con derivadas temporales laterales, en [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean). Luego [`bridges/Bridges.lean`](bridges/Bridges.lean) prueba, a partir de los teoremas de OpenAI y sin hipótesis:
+
+```lean
+theorem k1_C          (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltC ν               -- la (C) de Clay
+theorem k1_D          (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltD_withErratum ν   -- la (D) de Clay
+theorem k1_C_oneSided (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltC_oneSided ν      -- (C), otra lectura de C^∞ en t = 0
+theorem k1_D_oneSided (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltD_withErratum_oneSided ν
+```
+
+Los cuatro usan solo `propext`, `Classical.choice` y `Quot.sound`. Un control prueba que la solución cero cumple todas las condiciones de solución de Clay, así que «no existe solución» no es verdadero de forma vacía.
+
+### Cómo se une cada cláusula
+
+| Texto de Clay (como en `ClayLiteral`) | Versión formal de OpenAI | Puente en Lean |
+| --- | --- | --- |
+| u° suave, `div u° = 0`, decaimiento (4) | el testigo de OpenAI tiene u₀ = 0 | `d1_zero`, `d2_zero`, `d3_zero` |
+| f suave en ℝ³ × [0, ∞), con cualquiera de las dos lecturas en t = 0 | la fuerza de OpenAI es suave en todo ℝ × ℝ³, así que es su propia extensión | `witness_C`, `witness_D` |
+| decaimiento (5) y (9) de cada derivada mixta ∂x^α ∂t^m f | una cota de la norma de la derivada m-ésima | `d5`, `d7`: una parcial es esa derivada aplicada a vectores unitarios (`clay_bound`) |
+| ecuación (1) en coordenadas, con Σⱼ uⱼ∂ⱼuᵢ y Σₖ ∂ₖ² | la ecuación vectorial con `Δ` y `gradient` de Mathlib | `s1` |
+| (2): Σᵢ ∂uᵢ/∂xᵢ = 0 | traza del jacobiano = 0 | `s2` |
+| (3) condición inicial | la misma | `s3` |
+| (6), (11): u, p ∈ C^∞(ℝ³ × [0, ∞)) | `ContDiffOn` en el semiespacio cerrado | `s4` |
+| (7): ∫ abs(u)² dx < C de Lebesgue | `MemLp 2` y una cota de la integral de Bochner | `s5` |
+| (8), (10), errata: periodicidad | `IsOnePeriodic` | `d6`, `s6`, `s7_formal_side` |
+
+Cada fila con su estado está en [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md) (en inglés); el recibo de compilación está en [`bridges/README.md`](bridges/README.md).
+
+### Qué falta
+
+- **Fidelidad de `ClayLiteral`.** El resultado solo es tan fiel como la transcripción literal, que nadie independiente ha revisado frente al PDF. En particular, `SmoothOneSided` está definido directamente como el `ContDiffOn` de Mathlib en el semiespacio cerrado; su nombre no demuestra que esa sea la suavidad que usa Clay, y esa correspondencia es en sí un punto de revisión. Los 14 puntos a revisar, primero la suavidad en t = 0, están en [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md) (en inglés).
+- **Presión periódica, solo en (D).** K1 para la (D) lee la errata de Clay como condición sobre las soluciones; la (C) no la usa. El 2026-10-21 se envió una pregunta al Clay Mathematics Institute; las respuestas se registrarán aquí.
+- **Ningún matemático ha revisado nada de esto.**
 
 ## Animaciones
 
@@ -137,6 +200,7 @@ Un informe de QA solo sirve si dice lo que no probó.
 - **Los mutantes del enunciado prueban la igualdad del enunciado**, no que la prueba fallaría si estuviera mal. Hay un solo fixture de prueba errónea, no una campaña de mutación sobre las pruebas de OpenAI.
 - **Límites numéricos.** Los 54 KILLED cuentan casos, no los 51 comportamientos eliminados distintos; los mutantes son gruesos, así que no se mide el umbral de detección; todos los modelos son sintéticos.
 - **El benchmark usa fallos sembrados** sobre artefactos grabados, no Lean en vivo, y no da una tasa de detección en el mundo real.
+- **Los controles con Mathlib son pocos y los diseñó el autor:** 11 casos con tres teoremas, todavía sin casos de otra persona.
 
 ## Cómo se usó la IA
 

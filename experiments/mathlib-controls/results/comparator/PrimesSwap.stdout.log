@@ -1,5 +1,5 @@
 Building QAControls.Challenge.PrimesSwap
-⚠ [8763/8763] Built QAControls.Challenge.PrimesSwap (3.0s)
+⚠ [8763/8763] Replayed QAControls.Challenge.PrimesSwap
 warning: QAControls/Challenge/PrimesSwap.lean:5:8: declaration uses `sorry`
 Build completed successfully (8763 jobs).
 Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, QAControls.primes_infinite, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from QAControls.Challenge.PrimesSwap

@@ -42,6 +42,7 @@ shasum -a 256 -c evidence/SHA256SUMS.txt                           # every curat
 python3 evidence/verify_numerical.py                               # saved runs intact and identical across hosts
 (cd evidence/numerical/source && python3 -m unittest test_runner)  # reruns all 84 numerical variants
 python3 evidence/test_consistency.py                               # README, CLAIMS and records agree
+python3 experiments/mathlib-controls/verify.py                     # check Mathlib-control receipts, recompute classes
 ```
 
 The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here.
@@ -85,27 +86,89 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 | Independent oracle | A separately coded solution per model | Comparator with two kernels, plus a `leanchecker --fresh` replay |
 | Deliberate mutation | Two known bugs per model, plus one near-threshold change | A wrong proof value and six statement mutants with a control |
 | Repetition | The same 84 variants on two hosts | Comparator on four builds |
-| Specification check | The contract itself | Statement provenance and the Clay risk review |
+| Specification check | The contract itself | Statement provenance, the Clay risk review and the Lean bridges (Part D) |
 
-**Findings in this case.** Compared with the verification procedure in OpenAI's README, the protocol produced eight findings that procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)).
+### Findings in this case
 
-**Benchmark.** A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
+Compared with the verification procedure in OpenAI's README, the protocol produced eight findings that procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)).
 
-**Mathlib controls.** On infinitude of primes, Cauchy–Schwarz and dominated convergence, each with the correct statement, equivalent reformulations and deliberate errors, Comparator refused every changed statement, even one that is definitionally equal (`n + 1 ≤ p` for `n < p`). So a refusal means only "the statement changed", and an acceptance is equality as Comparator checks it. A second route in Lean, with a guard that rejects any equivalence proof using the theorem under test, then classified each case as equivalent, weaker or false. All 11 cases and both controls came out as pre-registered ([design](experiments/mathlib-controls/DESIGN.md), [results](experiments/mathlib-controls/RESULTS.md)).
+### Blind-fault benchmark
+
+A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
 
-**Prior work.** Mutation analysis (DeMillo, Lipton and Sayward, 1978), specification mutation (1985, 2000), mutation analysis of Coq verification projects (mCoq, 2019), mutation analysis of benchmark checkers (2026), the de Bruijn criterion, [Comparator](https://github.com/leanprover/comparator) and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures). The contribution is the combination and its application to the verification pipeline itself; methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
+### Mathlib controls: "the statement changed" is not "the theorem is false"
+
+A statement checker answers one question: is the submitted theorem exactly the challenge? To see what its answers mean, three theorems Mathlib already proves were each given the correct statement, equivalent reformulations and deliberate errors, with the expected outcome registered before any run. Every refused case then got a **second route** in plain Lean: an equivalence proof, a proof that it is weaker (both directions), or a refutation.
+
+| Theorem | Statement tried | Comparator | Second route in Lean | Class |
+| --- | --- | --- | --- | --- |
+| Primes | `∀ n, ∃ p, n < p ∧ p.Prime` | ✅ accepted | — | accepted by the checker |
+| | `n + 1 ≤ p` instead of `n < p` | ❌ refused | `Iff.rfl`: the same definition | equivalent |
+| | `n ≤ p` instead of `n < p` | ❌ refused | equivalence for every predicate `P`, not just primes | equivalent |
+| | `∀ n ≤ 100, …` (checking examples) | ❌ refused | full ⇒ bounded; bounded ⇏ full (take `P p := p = 101`) | weaker |
+| | `∃ p, ∀ n, n < p ∧ p.Prime` (quantifiers swapped) | ❌ refused | refuted: take n = p | false |
+| Cauchy–Schwarz | `abs ⟪x, y⟫ ≤ ‖x‖ * ‖y‖` | ✅ accepted | — | accepted by the checker |
+| | `⟪x, y⟫ ^ 2 ≤ ‖x‖ ^ 2 * ‖y‖ ^ 2` | ❌ refused | `abs a ≤ bc ↔ a² ≤ b²c²` when b, c ≥ 0 | equivalent |
+| | `<` instead of `≤` | ❌ refused | refuted with x = y = 1 | false |
+| Dominated convergence | Mathlib's hypotheses | ✅ accepted | — | accepted by the checker |
+| | `Integrable bound` as "measurable and ∫⁻ ofReal bound < ∞" | ❌ refused | equivalent only because domination forces bound ≥ 0 | equivalent |
+| | domination removed | ❌ refused | refuted: (n+1) on (0, 1/(n+1)) tends to 0, every integral is 1 | false |
+
+**What it shows.** A refusal only means "the statement changed": Comparator refused all eight changes, even `n + 1 ≤ p`, which Lean treats as identical to `n < p` by definition. An acceptance is equality as Comparator checks it, not a proof of anything else. Telling equivalent, weaker and false apart took a separate proof each time.
+
+**The guard.** Any two true statements are trivially "equivalent", so an equivalence counts only if its proof does not use the theorem under test. A Lean command walks every transitive dependency of the proof:
+
+```text
+guard: QAControls.SecondRoute.primes_reform_equiv uses none of the theorems under test (1485 constants checked)
+error: guard: QAControls.SecondRoute.primes_reform_equiv_cheat depends on Nat.exists_infinite_primes
+```
+
+The second line is a deliberately cheating proof, rejected as registered. All 11 cases and both controls came out as pre-registered. Every step has a receipt (command, input hashes, output hashes, exit code), and `python3 experiments/mathlib-controls/verify.py` checks the records against them and recomputes every class; that checks the records, it does not rerun Lean ([design](experiments/mathlib-controls/DESIGN.md), [results](experiments/mathlib-controls/RESULTS.md)). Cases prepared by someone else are still needed ([how to contribute](experiments/mathlib-controls/HOLDOUT.md)).
+
+### Prior work
+
+Mutation analysis (DeMillo, Lipton and Sayward, 1978), specification mutation (1985, 2000), mutation analysis of Coq verification projects (mCoq, 2019), mutation analysis of benchmark checkers (2026), the de Bruijn criterion, [Comparator](https://github.com/leanprover/comparator) and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures). The contribution is the combination and its application to the verification pipeline itself; methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
 
 ## Part D · From OpenAI's theorem to Clay's text
 
-To conclude that the formal (C) and (D) imply Clay's, one direction per clause is enough: formal data imply Clay data, and Clay solutions imply formal solutions. The plan is in [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md), as a table of claim → lemma → proof → review → pending.
+OpenAI proves a formal statement written in Google DeepMind's style. Does it say what Clay's text says? To get Clay's (C) and (D) from it, one direction per clause is enough: OpenAI's data must satisfy Clay's conditions, and any Clay solution must be a formal solution. Then, if a Clay solution existed, it would be a formal one, which OpenAI's theorem rules out.
 
-- Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean in [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), independent of DeepMind's style, and typecheck against the same Lean and Mathlib as the audit. It awaits review against the PDF.
-- **K1 is proved in Lean with no hypotheses:** for every ν > 0, OpenAI's proved theorems imply `AltC ν` and `AltD_withErratum ν`, Clay's (C) and (D) as written in `ClayLiteral` ([`bridges/`](bridges/README.md)). It uses only the three standard axioms, and a control checks that Clay's solution conditions are satisfiable, so the result is not vacuous. **None of it has been reviewed by a mathematician.**
-- **Smoothness at t = 0 does not decide it:** K1 is proved under both readings of C^∞(ℝ³ × [0, ∞)), as a restriction of a C^∞ function and as derivatives continuous up to t = 0. **(C) does not use Clay's erratum;** the periodic-pressure question affects (D) only.
-- The result is only as faithful as `ClayLiteral`, whose fidelity to the PDF still needs independent review; the 14 points to check are in [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md). The data side used OpenAI's concrete witness: u₀ = 0 and a force smooth on all of ℝ × ℝ³, which is its own smooth extension (D4).
-- Two points need a human decision: the meaning of C^∞ on a closed set (S4) and periodic pressure in (D) (S7). A question on S7 was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
+### What is proved
+
+Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean, in coordinates and with one-sided time derivatives, in [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean). Then [`bridges/Bridges.lean`](bridges/Bridges.lean) proves, from OpenAI's theorems, with no hypotheses:
+
+```lean
+theorem k1_C          (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltC ν               -- Clay's (C)
+theorem k1_D          (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltD_withErratum ν   -- Clay's (D)
+theorem k1_C_oneSided (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltC_oneSided ν      -- (C), other reading of C^∞ at t = 0
+theorem k1_D_oneSided (ν : ℝ) (hν : 0 < ν) : ClayLiteral.AltD_withErratum_oneSided ν
+```
+
+All four use only `propext`, `Classical.choice` and `Quot.sound`. A control proves that the zero solution meets every Clay solution condition, so "no solution exists" is not vacuously true.
+
+### How each clause is bridged
+
+| Clay's text (as in `ClayLiteral`) | OpenAI's formal version | Lean bridge |
+| --- | --- | --- |
+| u° smooth, `div u° = 0`, decay (4) | OpenAI's witness has u₀ = 0 | `d1_zero`, `d2_zero`, `d3_zero` |
+| f smooth on ℝ³ × [0, ∞), in either reading at t = 0 | OpenAI's force is smooth on all of ℝ × ℝ³, so it is its own extension | `witness_C`, `witness_D` |
+| decay (5) and (9) of every mixed partial ∂x^α ∂t^m f | a bound on the norm of the m-th derivative | `d5`, `d7`: a partial is that derivative applied to unit vectors (`clay_bound`) |
+| equation (1) in coordinates, with Σⱼ uⱼ∂ⱼuᵢ and Σₖ ∂ₖ² | the vector equation with Mathlib's `Δ` and `gradient` | `s1` |
+| (2): Σᵢ ∂uᵢ/∂xᵢ = 0 | trace of the Jacobian = 0 | `s2` |
+| (3) initial condition | the same | `s3` |
+| (6), (11): u, p ∈ C^∞(ℝ³ × [0, ∞)) | `ContDiffOn` on the closed half-space | `s4` |
+| (7): Lebesgue ∫ abs(u)² dx < C | `MemLp 2` and a bound on the Bochner integral | `s5` |
+| (8), (10), erratum: periodicity | `IsOnePeriodic` | `d6`, `s6`, `s7_formal_side` |
+
+Every row with its status is in [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md); the build receipt is in [`bridges/README.md`](bridges/README.md).
+
+### What remains
+
+- **Fidelity of `ClayLiteral`.** The result is only as faithful as the literal rendering, which nobody independent has reviewed against the PDF. In particular, `SmoothOneSided` is defined directly as Mathlib's `ContDiffOn` on the closed half-space; its name does not show that this is the smoothness Clay means, and that correspondence is itself a review point. The 14 points to check, smoothness at t = 0 first, are in [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md).
+- **Periodic pressure, (D) only.** K1 for (D) reads Clay's erratum as a condition on solutions; (C) does not use it. A question was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
+- **No mathematician has reviewed any of this.**
 
 ## Animations
 
@@ -137,6 +200,7 @@ A QA report is only useful if it says what it did not test.
 - **Statement mutants test statement equality**, not whether the proof would fail if it were wrong. There is one wrong-proof fixture, not a mutation campaign over OpenAI's proofs.
 - **Numerical limits.** The 54 KILLED count cases, not 51 distinct killed behaviors; the mutants are coarse, so the detection threshold is not measured; all models are synthetic.
 - **The benchmark uses planted faults** over recorded artifacts, not live Lean, and gives no real-world detection rate.
+- **The Mathlib controls are small and author-designed:** 11 cases on three theorems, no held-out cases from someone else yet.
 
 ## How AI was used
 

@@ -1,0 +1,7 @@
+{
+  "challenge_module": "QAControls.Challenge.PrimesReform",
+  "solution_module": "QAControls.Solution.Primes",
+  "enable_nanoda": true,
+  "theorem_names": ["QAControls.primes_infinite"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

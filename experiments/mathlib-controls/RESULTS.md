@@ -1,8 +1,10 @@
 # Mathlib controls: results
 
-Run on 2026-10-21 on the same Linux host and with the same checker binaries as the main audit (Comparator `19e111e` with nanoda and the Lean kernel, Lean 4.34.0-rc2, Mathlib `85e3a25`; hashes in [`results/tools.sha256`](results/tools.sha256), identical to [`tools.tsv`](../../evidence/formal/cd-validation/receipts/tools.tsv)). The statements that ran are byte-identical to the registered ones ([`results/inputs.sha256`](results/inputs.sha256)). Design and expectations: [`DESIGN.md`](DESIGN.md), registered in commit `046a128` and amended once before any run (`c1c6a0b`).
+Run on 2026-10-21 on the same Linux host and with the same checker binaries as the main audit (Comparator `19e111e` with nanoda and the Lean kernel, Lean 4.34.0-rc2, Mathlib `85e3a25`; hashes in [`results/tools.sha256`](results/tools.sha256), identical to [`tools.tsv`](../../evidence/formal/cd-validation/receipts/tools.tsv)). Every step has a receipt in [`results/receipts.jsonl`](results/receipts.jsonl): the command, the SHA-256 of each input file (identical to the files in [`lean/`](lean/), including the registered statements), the SHA-256 of its sanitized stdout and stderr, and its exit code. Design and expectations: [`DESIGN.md`](DESIGN.md), registered in commit `046a128` and amended once before any run (`c1c6a0b`).
 
-**All 11 cases and both controls came out as registered.** Recompute the classification from the logs with `python3 experiments/mathlib-controls/verify.py`; CI runs it on every push.
+**All 11 cases and both controls came out as registered.** `python3 experiments/mathlib-controls/verify.py` checks every log and input against its receipt, requires exit code 0 for each second route, and recomputes the classes; CI runs it and its tests on every push. **It checks the published records; it is not an independent rerun of the theorems.**
+
+**Record history.** The first run (commit `ac195f7`) kept no exit codes for the second routes, and its verifier missed Lean's real sorry warning, which uses backticks. Both were found by an outside reviewer. The steps were rerun with receipts on the same day, with the same verdicts; the first run's logs remain in the git history. `test_verify.py` now covers the backtick warning, an empty log with and without exit code 0, a missing receipt, and tampered logs and inputs.
 
 | Case | Comparator | Second route | Class | As registered |
 | --- | --- | --- | --- | --- |
@@ -32,4 +34,4 @@ Run on 2026-10-21 on the same Linux host and with the same checker binaries as t
 
 ## Limits
 
-The author chose every case and wrote the second-route proofs after registration, together with the assistant. The run is small (three theorems, eleven cases) and gives no detection rate. Held-out cases from someone else are still missing ([`HOLDOUT.md`](HOLDOUT.md)). Comparator logs are sanitized only to replace host paths with `<path>`; each Comparator run took 17–45 s.
+The author chose every case and wrote the second-route proofs after registration, together with the assistant. The run is small (three theorems, eleven cases) and gives no detection rate. Held-out cases from someone else are still missing ([`HOLDOUT.md`](HOLDOUT.md)). Logs are sanitized only to replace host paths with `<path>`, and the receipt hashes are of the sanitized files; each Comparator run took 17–45 s.
