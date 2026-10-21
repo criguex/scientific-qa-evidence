@@ -33,6 +33,10 @@ The nanoda used by Comparator is `ammkrn/nanoda_lib` at `9d6964f78d0fa4c93fd22fe
 
 **Not covered.** The fix was located from the postmortem's date, not by identifying the fixing commit in nanoda's history.
 
+## Positive control
+
+The public exploit for #14576 ([`endrazine/lean-cve-poc`](https://github.com/endrazine/lean-cve-poc) at `db52dfd`) proves `0 = 1` with no axioms on Lean v4.31.0, and is refused by the kernel of the v4.34.0-rc2 toolchain used here (exit 1, the forged declaration is not admitted). Details: [F3 reproduction](../../experiments/blind-faults/feasibility/f3-exploit-reproduction.md).
+
 ## What this does not change
 
 Two agreeing kernels rule out a bug in only one of them passing a false proof. They do not rule out a shared bug, or two coincident bugs, which is what happened in July 2026. Being current with known fixes says nothing about unknown ones.

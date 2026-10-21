@@ -76,5 +76,5 @@ F6 checks that the baseline works as intended; if B misses F6, the setup is brok
 | --- | --- |
 | F3 exploit version | The proof-of-concept pins `leanprover/lean4:v4.31.0`; its README lists Lean ≤ v4.31.0 as affected and v4.32.2 as fixed. |
 | Comparator and lean4export for F3 | Both repositories have `v4.31.0` tags. |
-| F3 reproduces on the test host | Pending |
+| F3 reproduces on the test host | Done: [reproduction](feasibility/f3-exploit-reproduction.md) |
 | `assign.py`, case templates and check scripts | Pending |
