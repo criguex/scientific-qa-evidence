@@ -99,8 +99,8 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 To conclude that the formal (C) and (D) imply Clay's, one direction per clause is enough: formal data imply Clay data, and Clay solutions imply formal solutions. The plan is in [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md), as a table of claim → lemma → proof → review → pending.
 
 - Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean in [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), independent of DeepMind's style, and typecheck against the same Lean and Mathlib as the audit. It awaits review against the PDF.
-- **5 of 18 bridge claims are proved in Lean**, and **K1, the full implication from OpenAI's proved theorem to Clay's (C) and (D) as written in `ClayLiteral`, is proved conditionally**: each unproved bridge is an explicit hypothesis ([`bridges/`](bridges/README.md)). The result stays conditional until those are proved. **None has been reviewed by a mathematician.**
-- The chosen reading of C^∞ on a closed set moves the extension work to D4: OpenAI's force must extend smoothly to all of ℝ³ × ℝ, either by an extension theorem or by checking the concrete forces in OpenAI's proof.
+- **9 of 18 bridge claims are proved in Lean**, and **K1, the full implication from OpenAI's proved theorem to Clay's (C) and (D) as written in `ClayLiteral`, is proved conditionally**: each unproved bridge is an explicit hypothesis ([`bridges/`](bridges/README.md)). The result stays conditional until those are proved. **None has been reviewed by a mathematician.**
+- What remains for K1: the decay of the force in Clay's coordinates (D5, D7) and the solution side (S1, S2, S5). The data side closed through OpenAI's concrete witness: u₀ = 0 and a force smooth on all of ℝ × ℝ³, which is its own smooth extension (D4).
 - Two points need a human decision: the meaning of C^∞ on a closed set (S4) and periodic pressure in (D) (S7). A question on S7 was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
 
 ## Animations
