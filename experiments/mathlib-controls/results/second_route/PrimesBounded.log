@@ -1,0 +1,2 @@
+guard: QAControls.SecondRoute.bounded_of_full uses none of the theorems under test (24 constants checked)
+guard: QAControls.SecondRoute.bounded_not_imp_full uses none of the theorems under test (1401 constants checked)

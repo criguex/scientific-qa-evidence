@@ -1,0 +1,8 @@
+QAControls/SecondRoute/DCTReform.lean:45:10: warning: This simp argument is unused:
+  Real.volume_univ
+
+Hint: Omit it from the simp argument list.
+  [apply] simp at h2
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+guard: QAControls.SecondRoute.dct_reform_equiv uses none of the theorems under test (24991 constants checked)

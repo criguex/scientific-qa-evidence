@@ -27,6 +27,7 @@ By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://g
 | Does the formal statement match Clay's text? | Of 16 clauses, 6 match directly, 9 match through standard facts, 1 needs a human decision. In Lean, OpenAI's theorems imply a literal rendering of Clay's (C) and (D); that rendering is not yet independently reviewed. | [risk review](evidence/formal/clay-lean-risk.md), [bridges](bridges/README.md) |
 | Do the numerical tests catch bugs? | 27 PASS · 54 KILLED · 3 SURVIVED per host, identical on macOS arm64 and Linux x86_64. | [numerical](evidence/README.md) |
 | Does the protocol catch what the baseline misses? | On planted faults, yes: four fault classes flagged by the protocol and passed by the baseline. | [benchmark](experiments/blind-faults/v2/README.md) |
+| Does a refusal mean the theorem is false? | No. On three Mathlib theorems, Comparator refused all 8 changed statements, including 3 equivalent ones; a separate Lean route classified each one as equivalent, weaker or false, all as pre-registered. | [Mathlib controls](experiments/mathlib-controls/RESULTS.md) |
 
 Every claim with its evidence, result and limitation is in [CLAIMS.md](CLAIMS.md).
 
@@ -89,6 +90,8 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 **Findings in this case.** Compared with the verification procedure in OpenAI's README, the protocol produced eight findings that procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)).
 
 **Benchmark.** A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
+
+**Mathlib controls.** On infinitude of primes, Cauchy–Schwarz and dominated convergence, each with the correct statement, equivalent reformulations and deliberate errors, Comparator refused every changed statement, even one that is definitionally equal (`n + 1 ≤ p` for `n < p`). So a refusal means only "the statement changed", and an acceptance is equality as Comparator checks it. A second route in Lean, with a guard that rejects any equivalence proof using the theorem under test, then classified each case as equivalent, weaker or false. All 11 cases and both controls came out as pre-registered ([design](experiments/mathlib-controls/DESIGN.md), [results](experiments/mathlib-controls/RESULTS.md)).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
 
@@ -154,6 +157,7 @@ evidence/
   numerical/              frozen contract, source and tests, 84-case runs for macOS and Linux
   SHA256SUMS.txt          checksums for every curated file
 experiments/blind-faults/ pre-registered benchmark: seed, frozen design, cases, results, errata, v2 evaluator
+experiments/mathlib-controls/ statement changed vs theorem false, on three Mathlib theorems
 bridges/                  Clay's text in Lean and the proof that OpenAI's theorems imply it
 animations/               eleven offline scenes, build and export scripts, tests
 docs/                     GIF previews, MP4 videos, PDF summary

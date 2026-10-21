@@ -1,0 +1,83 @@
+{
+  "cases": [
+    {
+      "id": "primes/orig",
+      "comparator": "ACCEPTED",
+      "class": "ACCEPTED_BY_CHECKER",
+      "expected": "ACCEPTED_BY_CHECKER",
+      "match": true
+    },
+    {
+      "id": "primes/defeq",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_EQUIVALENT",
+      "expected": "CHANGED_EQUIVALENT",
+      "match": true
+    },
+    {
+      "id": "primes/reform",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_EQUIVALENT",
+      "expected": "CHANGED_EQUIVALENT",
+      "match": true
+    },
+    {
+      "id": "primes/bounded",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_WEAKER",
+      "expected": "CHANGED_WEAKER",
+      "match": true
+    },
+    {
+      "id": "primes/swap",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_FALSE",
+      "expected": "CHANGED_FALSE",
+      "match": true
+    },
+    {
+      "id": "cs/orig",
+      "comparator": "ACCEPTED",
+      "class": "ACCEPTED_BY_CHECKER",
+      "expected": "ACCEPTED_BY_CHECKER",
+      "match": true
+    },
+    {
+      "id": "cs/reform",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_EQUIVALENT",
+      "expected": "CHANGED_EQUIVALENT",
+      "match": true
+    },
+    {
+      "id": "cs/strict",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_FALSE",
+      "expected": "CHANGED_FALSE",
+      "match": true
+    },
+    {
+      "id": "dct/orig",
+      "comparator": "ACCEPTED",
+      "class": "ACCEPTED_BY_CHECKER",
+      "expected": "ACCEPTED_BY_CHECKER",
+      "match": true
+    },
+    {
+      "id": "dct/reform",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_EQUIVALENT",
+      "expected": "CHANGED_EQUIVALENT",
+      "match": true
+    },
+    {
+      "id": "dct/nodom",
+      "comparator": "REJECTED_STATEMENT",
+      "class": "CHANGED_FALSE",
+      "expected": "CHANGED_FALSE",
+      "match": true
+    }
+  ],
+  "guard_control": true,
+  "signed_bound_control": true
+}

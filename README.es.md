@@ -27,6 +27,7 @@ Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://
 | ¿El enunciado formal coincide con el texto de Clay? | De 16 cláusulas, 6 coinciden directamente, 9 por hechos estándar y 1 necesita una decisión humana. En Lean, los teoremas de OpenAI implican una transcripción literal de la (C) y la (D) de Clay; esa transcripción aún no tiene revisión independiente. | [revisión de riesgos](evidence/formal/clay-lean-risk.md), [puentes](bridges/README.md) |
 | ¿Las pruebas numéricas detectan errores? | 27 PASS · 54 KILLED · 3 SURVIVED por máquina, idénticos en macOS arm64 y Linux x86_64. | [numérica](evidence/README.md) |
 | ¿El protocolo detecta lo que el procedimiento base deja pasar? | Con fallos sembrados, sí: cuatro clases de fallo que el protocolo marca y el procedimiento base deja pasar. | [benchmark](experiments/blind-faults/v2/README.md) |
+| ¿Un rechazo significa que el teorema es falso? | No. Con tres teoremas de Mathlib, Comparator rechazó los 8 enunciados cambiados, incluidos 3 equivalentes; una vía aparte en Lean clasificó cada uno como equivalente, más débil o falso, todo según lo registrado de antemano. | [controles Mathlib](experiments/mathlib-controls/RESULTS.md) |
 
 Cada afirmación con su evidencia, resultado y limitación está en [CLAIMS.md](CLAIMS.md) (en inglés).
 
@@ -89,6 +90,8 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 **Hallazgos en este caso.** Frente al procedimiento de verificación del README de OpenAI, el protocolo produjo ocho hallazgos que ese procedimiento no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés).
 
 **Benchmark.** Un experimento prerregistrado sembró fallos en casos controlados, asignados con una semilla comprometida. Con el evaluador corregido, los checks del protocolo marcan cuatro clases de fallo que el procedimiento base deja pasar, los dos marcan el control positivo y el caso limpio pasa los dos. La primera corrida se conserva con fe de erratas, y cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([resultados y erratas](experiments/blind-faults/RESULTS.md), [benchmark corregido](experiments/blind-faults/v2/README.md), en inglés).
+
+**Controles con Mathlib.** Con la infinitud de los primos, Cauchy–Schwarz y la convergencia dominada, cada uno con el enunciado correcto, reformulaciones equivalentes y errores deliberados, Comparator rechazó todos los enunciados cambiados, incluso uno definicionalmente igual (`n + 1 ≤ p` por `n < p`). Así que un rechazo solo significa "el enunciado cambió", y una aceptación es igualdad tal como la comprueba Comparator. Una segunda vía en Lean, con una guarda que rechaza cualquier prueba de equivalencia que use el teorema bajo prueba, clasificó luego cada caso como equivalente, más débil o falso. Los 11 casos y los dos controles salieron según lo registrado de antemano ([diseño](experiments/mathlib-controls/DESIGN.md), [resultados](experiments/mathlib-controls/RESULTS.md), en inglés).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Fallos sembrados detectados por cada procedimiento y cuatro rondas de revisión"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
 
@@ -155,6 +158,7 @@ evidence/
   numerical/              contrato congelado, fuente y tests, corridas de 84 casos en macOS y Linux
   SHA256SUMS.txt          checksums de cada archivo curado
 experiments/blind-faults/ benchmark prerregistrado: semilla, diseño congelado, casos, resultados, erratas, evaluador v2
+experiments/mathlib-controls/ enunciado cambiado frente a teorema falso, con tres teoremas de Mathlib
 bridges/                  el texto de Clay en Lean y la prueba de que los teoremas de OpenAI lo implican
 animations/               once escenas offline, scripts de build y exportación, tests
 docs/                     GIF, videos MP4 y resumen en PDF
