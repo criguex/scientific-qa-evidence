@@ -67,7 +67,7 @@
     },
     "clay_risk": {
       "path": "evidence/formal/clay-lean-risk.md",
-      "sha256": "a47cd334e8169587bd4de3cefd2215ec875263b8312ed23fdbff0a52021d6567"
+      "sha256": "d0d8c336302b3c97dc62936afa7742db1e15157ccda1491b41e963cddb148fce"
     },
     "experiment_benchmark": {
       "path": "experiments/blind-faults/v2/benchmark_v2.json",

@@ -1,216 +1,169 @@
 # Scientific QA Evidence
 
-**An independent QA reproduction of OpenAI's Lean proofs of finite-time blowup for Navier–Stokes and Euler, plus a mutation-testing campaign on nine numerical models.**
+**An independent QA audit of OpenAI's Lean proofs of finite-time blowup for Navier–Stokes and Euler, plus a mutation-testing campaign on nine numerical models.**
 
-By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)) · [Leer en español](README.es.md)
+By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)) · [Leer en español](README.es.md) · [Five-page PDF summary](docs/report/scientific-qa-evidence-report-v1.2.0.pdf)
 
-> **Read this first.** The proofs belong to OpenAI ([openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler)). This repository proves nothing new, claims no Millennium Prize result, and is not a mathematical review. It is a software-QA exercise: rebuild the published artifacts from pinned sources, recheck them with two independent proof checkers, confirm that a checker rejects a deliberately wrong proof, and publish every result with hashes so anyone can audit it.
-
-## Why this exists
-
-In September 2026 OpenAI published Lean 4 formalizations for alternatives (C) and (D) of the Clay Navier–Stokes problem (breakdown with forcing on ℝ³ and on the periodic torus), and a separate finite-time singularity result for the 3D Euler equation ([blog post](https://openai.com/index/navier-stokes-solution/)). A machine-checked proof can only be trusted as far as the build, the statement and the checker behind it. Those are testing questions:
-
-1. Does it build from a pinned, clean checkout?
-2. Do independent kernels accept it against the official challenge statement?
-3. Would the checkers notice if a proof were wrong?
-4. Does the testing method itself catch mistakes? This is the numerical mutation campaign.
-
-## Results at a glance
-
-| Question | What was done | Result |
-| --- | --- | --- |
-| Does it build from pinned source? | Builds of OpenAI commit `f9e8bc5`, Lean 4.34.0-rc2 ([builds and receipts](evidence/formal/cd-validation/README.md#builds-used-by-each-run)) | 2026-10-20 (B1): exit 0, 11,424 jobs, dependency caches reused. 2026-10-21 (B3): exit 0, 11,432 jobs; Mathlib and the project compiled locally (11,030 modules), but 7 smaller dependencies arrived as prebuilt Reservoir archives. 2026-10-21 (B4, `lake --no-cache build`): exit 0, 11,424 jobs in 1 h 29 min, with Mathlib, every dependency and the project compiled locally: no prebuilt archives were found and every `.olean` is newer than the build start. |
-| Do independent checkers accept it? | [Comparator](https://github.com/leanprover/comparator) with the Lean kernel and [nanoda](https://github.com/ammkrn/nanoda_lib) on the configured challenges | Navier–Stokes and Euler: both kernels accept (`Your solution is okay!`, exit 0) in all four runs, one per build: B1, B2, B3 and the no-cache build B4 |
-| Does the statement match the Clay text? | Clause-by-clause table against the Clay PDF and the DeepMind [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) statement at `8bf45ed` | Correspondence mapped and a [clause-by-clause risk review](evidence/formal/clay-lean-risk.md): 6 direct, 9 via standard facts, 1 needing a human decision (periodic pressure in D). Reading-based, not an expert equivalence proof. |
-| Does OpenAI's challenge text match the public statement? | Declaration-by-declaration comparison with DeepMind's Formal Conjectures file at `8bf45ed` ([provenance](evidence/formal/statement-provenance/README.md)) | The 18 declarations match after textual normalization; name resolution was not verified. Includes (C) and (D). Semantic identity was not checked. |
-| Does Comparator check the exact statement? | Statement mutants of the challenge file, OpenAI's proof unchanged, plus a comment-only control ([revalidation](evidence/formal/cd-validation/README.md)) | 6 of 6 mutants refused as statement mismatches; comment-only control accepted |
-| Are the checkers current with known soundness fixes? | Lean `src/kernel` tree compared across release tags; nanoda commit date ([kernel currency](evidence/formal/kernel-currency.md)) | Kernel source identical to v4.33.1–v4.34.1, which include every 2026 kernel soundness fix; nanoda postdates its fix. Runtime fixes of v4.34.1 not included. |
-| Do the checkers reject a wrong proof? | A fixture whose proof value is wrong but keeps the declared type | Lean reports a type mismatch; nanoda stops with an assertion rejection |
-| Do the numerical tests catch bugs? | 9 synthetic models × 3 configurations, each baseline plus known mutations: 84 variants | 27 PASS · 54 KILLED · 3 SURVIVED per host |
-| Is it reproducible across machines? | The same 84 variants on macOS arm64 and Linux x86_64 | Identical classifications; maximum scaled difference 1.11 × 10⁻¹⁶ |
+> **Read this first.** The proofs belong to OpenAI ([openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler)). This repository proves nothing new, claims no Millennium Prize result, and is not a mathematical review. It is a software-QA study: rebuild the published artifacts, recheck them with independent checkers, test whether the checking pipeline itself catches errors, and publish every step with hashes so anyone can audit it.
 
 ## Conclusions
 
 1. **OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.** Comparator, with nanoda and the Lean kernel, accepted both challenges on four different builds, the last compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel used includes every known 2026 soundness fix.
 2. **Comparator checks the exact statement.** It refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match DeepMind's public statement after textual normalization (name resolution not verified).
-3. **What this does not settle.** Whether the formal statement says exactly what Clay's text says is a reading-based review with one point, periodic pressure in (D), that needs a mathematician. Whether the Lean proof follows OpenAI's paper is out of scope and disputed by [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
+3. **What this does not settle.** Whether the formal statement says exactly what Clay's text says is still open: a reading-based review leaves one point, periodic pressure in (D), that needs a mathematician, and the formal bridge work has only begun (Part D). Whether the Lean proof follows OpenAI's paper is out of scope and disputed by [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
 4. **What the protocol adds.** In this case it surfaced evidence the documented procedure does not produce ([FINDINGS.md](FINDINGS.md)), and in a pre-registered benchmark its checks flagged four planted fault classes the baseline passes ([results](experiments/blind-faults/RESULTS.md)). Four review rounds found 17 issues in that experiment itself, all corrected and kept in the record.
 5. **What is not claimed.** Methodological novelty ([RELATED_WORK.md](RELATED_WORK.md)), a real-world detection rate, or any part of the mathematical proof, which belongs to OpenAI.
 
+## Results at a glance
+
+| Question | Result | Record |
+| --- | --- | --- |
+| Does it build from source? | Yes. Four builds; the last (B4, `lake --no-cache build`) exit 0, 11,424 jobs, 1 h 29 min, every dependency compiled locally. | [builds](evidence/formal/cd-validation/README.md#builds-used-by-each-run) |
+| Do independent kernels accept it? | Yes. Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all four runs, one per build. | [revalidation](evidence/formal/cd-validation/README.md) |
+| Does Comparator check the exact statement? | Yes. 6 of 6 statement mutants refused; comment-only control accepted. | [mutants](evidence/formal/cd-validation/mutants/) |
+| Is the challenge the public statement? | The 18 declarations match after textual normalization; name resolution was not verified. | [provenance](evidence/formal/statement-provenance/README.md) |
+| Are the checkers current? | The kernel source includes every 2026 kernel soundness fix; nanoda postdates its fix. | [kernel currency](evidence/formal/kernel-currency.md) |
+| Do the checkers reject a wrong proof? | Yes. Lean reports a type mismatch; nanoda stops with an assertion rejection. | [kernel mutation](evidence/formal/kernel-mutation/) |
+| Does the formal statement match Clay's text? | Open. Of 16 clauses, 6 match directly, 9 match through standard facts, 1 needs a human decision. | [risk review](evidence/formal/clay-lean-risk.md) |
+| Do the numerical tests catch bugs? | 27 PASS · 54 KILLED · 3 SURVIVED per host, identical on macOS arm64 and Linux x86_64. | [numerical](evidence/README.md) |
+| Does the protocol catch what the baseline misses? | On planted faults, yes: four fault classes flagged by the protocol and passed by the baseline. | [benchmark](experiments/blind-faults/v2/README.md) |
+
+Every claim with its evidence, result and limitation is in [CLAIMS.md](CLAIMS.md).
+
 ## Verify it yourself
 
-Python 3 only, no dependencies, about a minute:
+Python 3.9 or newer, no dependencies, about a minute:
 
 ```sh
 git clone https://github.com/criguex/scientific-qa-evidence.git
 cd scientific-qa-evidence
-shasum -a 256 -c evidence/SHA256SUMS.txt     # on Linux: sha256sum -c
-python3 evidence/verify_numerical.py
-python3 -m unittest discover -s animations -p 'test_*.py'
-(cd evidence/numerical/source && python3 -m unittest test_runner)   # reruns all 84 variants
+shasum -a 256 -c evidence/SHA256SUMS.txt                           # every curated file is the published one
+python3 evidence/verify_numerical.py                               # saved runs intact and identical across hosts
+(cd evidence/numerical/source && python3 -m unittest test_runner)  # reruns all 84 numerical variants
+python3 evidence/test_consistency.py                               # README, CLAIMS and records agree
 ```
 
-The same checks, plus the tests of the log sanitizer and the statement comparator, run in [GitHub Actions](.github/workflows/verify.yml) on every push. [REPRODUCE.md](REPRODUCE.md) lists the versions needed, the steps from a clean checkout, and which results are recomputed versus only verified by hash.
+The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here.
 
-The numerical verifier should print:
-
-```text
-PASS: 2 summaries, 168 case records, 2 x 756 observation rows, 738 finite pairs, 18 null pairs; max scaled delta 1.1102230246251565e-16.
-```
-
-Those commands check the integrity and consistency of the saved evidence; they do not recompute it. To recompute the whole numerical campaign from scratch (under a second), pass an output directory that does not exist yet:
-
-```sh
-cd evidence/numerical/source
-python3 runner.py --out /tmp/sqe-rerun
-```
-
-It should report 84 variants with `KILLED: 54, PASS: 27, SURVIVED: 3`. Rebuilding the Lean project and rerunning Comparator needs the OpenAI repository and a Lean toolchain; the pins and the recorded procedure are in [`evidence/formal/clean-build/`](evidence/formal/clean-build/README.md).
-
-## Track 1: formal reproduction and controls
+## Part A · Formal audit of (C), (D) and Euler
 
 ```mermaid
 flowchart LR
-    A[OpenAI-authored original proofs] --> B[Pinned source checkout]
-    B --> C[Clean source build<br/>11,424 jobs · exit 0]
-    C --> D[Comparator challenge run]
-    D --> E[Navier–Stokes<br/>nanoda + Lean accept]
-    D --> F[Euler<br/>nanoda + Lean accept]
-    G[Separate controlled fixture<br/>valid proof value] --> H[Lean accepts]
-    G --> I[Wrong proof value] --> J[Lean type mismatch]
-    I --> K[nanoda assertion rejection<br/>classification derived from pinned source]
+    A[OpenAI's proofs<br/>pinned commit f9e8bc5] --> B[Four builds<br/>B4: nothing prebuilt]
+    B --> C[Comparator]
+    C --> D[nanoda + Lean kernel<br/>accept in all runs]
+    A --> E[Statement mutants<br/>6/6 refused]
+    A --> F[leanchecker --fresh<br/>replay OK]
+    A --> G[Statement provenance<br/>matches DeepMind]
 ```
 
-Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). Each challenge was run once after the source build; the 2026-10-21 revalidation below adds a second run. Sanitized transcripts, timings and the hashes of the raw originals are in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The wrong-proof fixture and the raw and derived classifications are in [`evidence/formal/kernel-mutation/`](evidence/formal/kernel-mutation/). The Clay correspondence table is [`evidence/formal/clay-lean-fidelity.md`](evidence/formal/clay-lean-fidelity.md).
-
-### Revalidation of (C) and (D), 2026-10-21
-
-A second pass was run to close the gaps under [Known limitations](#known-limitations). All 18 checks finished: none produced an unexpected result, and one could not run. Each animation plays one idea in real time, with a plain-language caption.
+Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). The first run (2026-10-20) is in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The revalidation of 2026-10-21 added three more runs, statement mutants and a fresh replay. All 18 checks finished: none produced an unexpected result, and one could not run.
 
 | Animation | What it shows |
 | --- | --- |
-| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Comparator runs on different builds, all accepted"></a><br><a href="docs/media/rerun.mp4">▶ MP4 1080p</a> | **1. Rebuild, check again.** Comparator accepted Navier–Stokes (C, D) and Euler on three different builds: the 2026-10-20 record (B1), the audit build whose Mathlib came from the prebuilt cache (B2), and a fresh 2026-10-21 build (B3). B3 compiled Mathlib and the project on the machine, 11,030 modules in 1 h 27 min with exit 0. **Correction:** Lake also fetched 7 smaller dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives without logging them, so an earlier "0 cache downloads" claim was wrong. The full `lake --no-cache build` (B4) then compiled everything locally, dependencies included: exit 0, 11,424 jobs, no prebuilt archives. Run 4 on B4 accepted both Navier–Stokes and Euler. The Lean toolchain and checker binaries were reused. |
-| <a href="animations/mutants.html"><img src="docs/assets/mutants-preview.gif" width="380" alt="Six statement mutants refused and a comment-only control accepted"></a><br><a href="docs/media/mutants.mp4">▶ MP4 1080p</a> | **2. Change the statement; it must be refused.** OpenAI's proof is never touched. Six one-symbol edits to the official challenge were all refused with `Challenge and solution theorem statement do not match`: `f = 0` in (C) and in (D), ℝ³ decay data swapped for periodic data, `nu > 0` weakened to `nu ≥ 0`, the negation dropped from (D), and Euler's `T* ≤ 1` tightened to `T* ≤ 1/2`. A comment-only control was accepted, so the refusals come from the changed statement. |
-| <a href="animations/replay.html"><img src="docs/assets/replay-preview.gif" width="380" alt="Fresh kernel replay and which kernel implementations examined the proofs"></a><br><a href="docs/media/replay.mp4">▶ MP4 1080p</a> | **3. Replay every step from an empty start.** `leanchecker --fresh` re-added every declaration, Mathlib included, to an empty environment and accepted both solutions (19.6 and 22.5 minutes). It reuses Lean's kernel, so it is a from-scratch replay, not a third implementation. `lean4lean` could not be built on Lean 4.34 (its Batteries dependency fails), so it never examined the proofs: a tooling gap, not a verdict. |
+| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Comparator runs on four builds, all accepted"></a><br><a href="docs/media/rerun.mp4">▶ MP4 1080p</a> | **Rebuild, check again.** Four builds: the 2026-10-20 record (B1), an audit build whose Mathlib came from the prebuilt cache (B2), a fresh build (B3), and a full `lake --no-cache build` (B4) with every dependency compiled locally. Comparator accepted both challenges on each. B3 had silently received 7 small dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives, which is why B4 exists. The Lean toolchain and checker binaries were reused. |
+| <a href="animations/mutants.html"><img src="docs/assets/mutants-preview.gif" width="380" alt="Six statement mutants refused and a comment-only control accepted"></a><br><a href="docs/media/mutants.mp4">▶ MP4 1080p</a> | **Change the statement; it must be refused.** OpenAI's proof is never touched. Six one-symbol edits to the challenge were all refused with `Challenge and solution theorem statement do not match`; a comment-only control was accepted. A refused mutant says nothing about whether the mutated statement is true, and the `f = 0` mutants say nothing about (A) or (B). |
+| <a href="animations/replay.html"><img src="docs/assets/replay-preview.gif" width="380" alt="Fresh kernel replay and which kernel implementations examined the proofs"></a><br><a href="docs/media/replay.mp4">▶ MP4 1080p</a> | **Replay every step from an empty start.** `leanchecker --fresh` accepted both solutions. It reuses Lean's kernel, so it is not a third implementation. `lean4lean` could not be built for Lean 4.34 and never examined the proofs. |
+| <a href="animations/provenance.html"><img src="docs/assets/provenance-preview.gif" width="380" alt="OpenAI's challenge text matches DeepMind's public statement"></a><br><a href="docs/media/provenance.mp4">▶ MP4 1080p</a> | **Where the statement comes from.** The 18 declarations match after textual normalization; name resolution was not verified. The remaining differences with Google DeepMind's Formal Conjectures file are the import, the namespace, notation copied in with the same definition, and (A)/(B) left out. |
 
-A refused mutant says nothing about whether the mutated statement is true. The `f = 0` mutants are not evidence about the forceless alternatives (A) and (B). Verdicts, sanitized logs and every mutant diff are in [`evidence/formal/cd-validation/`](evidence/formal/cd-validation/README.md).
+**Against Clay's text.** (C) and (D) say "there exist data for which no solution exists", so the formal version could only be easier if it allowed data Clay forbids or demanded more of solutions than Clay does. Of 16 clauses, 6 match directly, 9 match through standard analysis facts, and 1 needs a human decision: Clay's erratum asks for periodic pressure "in Eqn (8)", the data list, while the formalization requires it of solutions in (D). See the [risk review](evidence/formal/clay-lean-risk.md) and Part D.
 
-### Where the statement comes from, and how it compares with Clay
+## Part B · Numerical mutation testing
 
-<a href="animations/provenance.html"><img src="docs/assets/provenance-preview.gif" width="380" alt="OpenAI's challenge statement matches DeepMind's public statement"></a><br><a href="docs/media/provenance.mp4">▶ MP4 1080p</a>
+Mutation testing asks whether a test suite notices when the code is deliberately broken. The contract and its tolerance (10⁻⁶) were frozen before any run ([`CONTRACT.md`](evidence/numerical/source/CONTRACT.md)), and every model has an independent oracle that shares no solver code with the implementation under test. The nine models are RC circuit, Newton cooling, second-order chemical kinetics, Beer–Lambert attenuation, logistic response, Snell refraction, thin lens, acoustic interface and Fechner response.
 
-- **OpenAI's challenge text matches the public statement.** The 18 declarations match after textual normalization; name resolution was not verified. Compared with Google DeepMind's Formal Conjectures file at `8bf45ed`, all 18 named declarations, including the theorems (C) and (D), are textually the same. The remaining differences are the import, the namespace, notation copied in with the same definition, and (A)/(B) left out. [Method, hashes and a script to reproduce it](evidence/formal/statement-provenance/README.md).
-- **Clause-by-clause risk review against Clay's text.** (C) and (D) say "there exist data for which no solution exists", so the formal version could only be easier if it allowed data Clay forbids or demanded more of solutions than Clay does. Of 16 clauses, 6 match directly, 9 match through standard analysis facts that are named but not yet formalized, and **1 needs a human decision**: Clay's erratum asks for periodic pressure "in Eqn (8)", the data list, while the formalization requires it of solutions in (D). That reading is the only one that constrains anything, but it makes the formal (D) a statement about the amended problem. [Full review](evidence/formal/clay-lean-risk.md). It is reading-based and not reviewed by a mathematician.
+Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 paired variants**, not 168 distinct ones; the maximum scaled difference between hosts is 1.11 × 10⁻¹⁶. The 54 KILLED are cases, not behaviors: two acoustic mutants give identical outputs, leaving 51 distinct killed behaviors. The three survivors are a deliberately tiny RC change, kept visible on purpose. All models and inputs are synthetic; none of this is an empirical measurement.
 
-## Track 2: numerical mutation testing
-
-```mermaid
-flowchart LR
-    A[Contract + tolerance 10⁻⁶] --> B[Model-specific oracle]
-    B --> C[Baseline implementation]
-    B --> D[Synthetic mutation]
-    C --> E[Fixed configurations and solver steps]
-    D --> E
-    E --> F[PASS / KILLED / SURVIVED]
-    F --> G[Pair the same 84 variants<br/>macOS arm64]
-    F --> H[Pair the same 84 variants<br/>Linux x86_64]
-    G --> I[Compare outputs and classifications]
-    H --> I
-```
-
-Mutation testing asks whether a test suite notices when the code is deliberately broken. The contract and its tolerance were frozen before any run ([`CONTRACT.md`](evidence/numerical/source/CONTRACT.md)). Every model has an independent oracle that does not share solver code with the implementation under test. The nine models are RC circuit, Newton cooling, second-order chemical kinetics, Beer–Lambert attenuation, logistic response, Snell refraction, thin lens, acoustic interface and Fechner response.
-
-Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 paired variants**, not 168 distinct ones. The comparison covered 738 finite values and 18 non-finite values (stored as null). The three survivors are the deliberately tiny RC mutation, kept visible on purpose. All models and inputs are synthetic; none of this is an empirical measurement.
-
-## Method: what this study adds
+## Part C · What the protocol adds
 
 **Research question.** Can ordinary software-QA techniques (a frozen contract, an independent oracle, deliberate mutations and repeated runs) give an outside reader verifiable confidence in a machine-checked proof and in scientific code, without trusting the original authors' setup?
-
-**What the author designed.** One protocol, applied at two levels. The author chose the questions, froze the contracts, decided what counts as evidence and directed the work, with AI assistance as disclosed in [AUTHORSHIP.md](AUTHORSHIP.md).
 
 | Element | Numerical code | Formal proof pipeline |
 | --- | --- | --- |
 | Contract, frozen first | [`CONTRACT.md`](evidence/numerical/source/CONTRACT.md), tolerance 10⁻⁶ | The official challenge statement and the permitted axioms |
-| Independent oracle | A separately coded analytic, bisection or linear-system solution per model | Comparator with two kernels (nanoda, Lean), plus a `leanchecker --fresh` replay |
-| Deliberate mutation | Two known bugs per model, plus one near-threshold RC change | A wrong proof value, which the checker must reject, and six statement mutants with a comment-only control, which Comparator must refuse or accept |
-| Repetition | The same 84 variants on two hosts | Comparator on four builds, the last one with nothing prebuilt |
-| Specification check | The contract itself | [Statement provenance](evidence/formal/statement-provenance/README.md) and the [Clay risk review](evidence/formal/clay-lean-risk.md) |
+| Independent oracle | A separately coded solution per model | Comparator with two kernels, plus a `leanchecker --fresh` replay |
+| Deliberate mutation | Two known bugs per model, plus one near-threshold change | A wrong proof value and six statement mutants with a control |
+| Repetition | The same 84 variants on two hosts | Comparator on four builds |
+| Specification check | The contract itself | Statement provenance and the Clay risk review |
 
-**What the results support.** Numerically, every coarse mutant was killed and the deliberately tiny one survived where expected, with identical classifications on both hosts. Formally, the wrong proof value was rejected, all six statement mutants were refused while the control passed, the acceptance repeated across builds, and the challenge's 18 declarations match DeepMind's public statement after textual normalization (name resolution not verified).
+**Findings in this case.** Compared with the verification procedure in OpenAI's README, the protocol produced eight findings that procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)).
 
-**Prior techniques it builds on.** Mutation analysis (DeMillo, Lipton and Sayward, 1978); independent test oracles and cross-platform differential testing; the de Bruijn criterion of small, independent proof checkers (nanoda, leanchecker, lean4lean); [Comparator](https://github.com/leanprover/comparator) for statement-exact checking; and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) for the statement. What this study contributes is the combination and its application: mutation analysis aimed at the verification pipeline itself, the checker and the specification, as well as the code under test, with every step published with hashes so the audit can be audited. A [targeted literature search](RELATED_WORK.md) found close prior work, notably mCoq (mutation analysis of Coq verification projects, 2019), specification mutation (1985, 2000) and mutation analysis of benchmark checkers (2026), so **methodological novelty is not claimed**. The question this study can answer instead is what the protocol detected that the previously documented procedure does not show: [FINDINGS.md](FINDINGS.md) lists eight such findings in this case. A deterministic regression benchmark then showed the protocol's checks flag four planted fault classes the baseline passes; a first run is kept with errata, since review found evaluator defects that invalidate its "0 false alarms" ([v2 benchmark](experiments/blind-faults/v2/README.md), [v1 with errata](experiments/blind-faults/RESULTS.md)).
+**Benchmark.** A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
 
-**Limits of the method.** Statement mutants test that the statement is compared exactly, not whether the proof would fail if it were wrong. All formal runs used one host. The Clay comparison is reading-based. The numerical mutants are coarse and all models are synthetic.
+<a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
+
+**Prior work.** Mutation analysis (DeMillo, Lipton and Sayward, 1978), specification mutation (1985, 2000), mutation analysis of Coq verification projects (mCoq, 2019), mutation analysis of benchmark checkers (2026), the de Bruijn criterion, [Comparator](https://github.com/leanprover/comparator) and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures). The contribution is the combination and its application to the verification pipeline itself; methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
+
+## Part D · Open work: equivalence with Clay's text
+
+To conclude that the formal (C) and (D) imply Clay's, one direction per clause is enough: formal data imply Clay data, and Clay solutions imply formal solutions. The plan is in [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md), as a table of claim → lemma → proof → review → pending.
+
+- Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean in [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), independent of DeepMind's style, and typecheck against the same Lean and Mathlib as the audit. It awaits review against the PDF.
+- **5 of 18 bridge claims are proved in Lean**, and **K1, the full implication from OpenAI's proved theorem to Clay's (C) and (D) as written in `ClayLiteral`, is proved conditionally**: each unproved bridge is an explicit hypothesis ([`bridges/`](bridges/README.md)). The result stays conditional until those are proved. **None has been reviewed by a mathematician.**
+- The chosen reading of C^∞ on a closed set moves the extension work to D4: OpenAI's force must extend smoothly to all of ℝ³ × ℝ, either by an extension theorem or by checking the concrete forces in OpenAI's proof.
+- Two points need a human decision: the meaning of C^∞ on a closed set (S4) and periodic pressure in (D) (S7). A question on S7 was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
 
 ## Animations
 
-Open the [offline gallery](animations/index.html), or read the [animation guide](animations/README.md) for equations, parameters, outcomes and source traces.
+Eleven offline scenes, each as an interactive HTML page, a GIF preview and a 1080p MP4. Open the [gallery](animations/index.html), or read the [animation guide](animations/README.md) for equations, parameters and source traces.
 
 | Numerical models | Formal checks |
 | --- | --- |
-| <a href="animations/rc.html">RC · doubled time constant</a> · <a href="docs/media/rc.mp4">▶ MP4 1080p</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="RC baseline and mutation comparison"> | <a href="animations/formal.html">Formal · proof-value typecheck control</a> · <a href="docs/media/formal.mp4">▶ MP4 1080p</a><br><img src="docs/assets/formal-preview.gif" width="360" alt="Baseline proof value accepted and wrong-type mutation rejected"> |
-| <a href="animations/chemistry.html">Chemistry · doubled reaction rate</a> · <a href="docs/media/chemistry.mp4">▶ MP4 1080p</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Second-order concentration comparison at fixed volume"> | <a href="animations/rerun.html">C/D · rebuild from zero and recheck</a> · <a href="docs/media/rerun.mp4">▶ MP4 1080p</a><br><img src="docs/assets/rerun-preview.gif" width="360" alt="Rebuild from zero and three Comparator runs"> |
-| <a href="animations/cooling.html">Cooling · halved rate constant</a> · <a href="docs/media/cooling.mp4">▶ MP4 1080p</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Cooling baseline and rate mutation comparison"> | <a href="animations/mutants.html">C/D · statement mutants</a> · <a href="docs/media/mutants.mp4">▶ MP4 1080p</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Statement mutants refused and control accepted"> |
-| <a href="animations/snell.html">Snell · swapped refractive indices</a> · <a href="docs/media/snell.mp4">▶ MP4 1080p</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Refraction rays and incidence-angle sweep"> | <a href="animations/replay.html">C/D · fresh kernel replay</a> · <a href="docs/media/replay.mp4">▶ MP4 1080p</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Fresh kernel replay and kernel implementations"> |
-| <a href="animations/campaign.html">Campaign · paired classifications</a> · <a href="docs/media/campaign.mp4">▶ MP4 1080p</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Per-host mutation campaign classifications"> | <a href="animations/provenance.html">Statement provenance · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4 1080p</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Identical declarations in OpenAI's and DeepMind's statements"> |
-| | <a href="animations/experiment.html">Blind-fault benchmark · baseline vs protocol</a> · <a href="docs/media/experiment.mp4">▶ MP4 1080p</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"> |
+| <a href="animations/rc.html">RC · doubled time constant</a> · <a href="docs/media/rc.mp4">▶ MP4</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="RC baseline and mutation comparison"> | <a href="animations/formal.html">Formal · proof-value typecheck control</a> · <a href="docs/media/formal.mp4">▶ MP4</a><br><img src="docs/assets/formal-preview.gif" width="360" alt="Baseline proof value accepted and wrong-type mutation rejected"> |
+| <a href="animations/chemistry.html">Chemistry · doubled reaction rate</a> · <a href="docs/media/chemistry.mp4">▶ MP4</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Second-order concentration comparison at fixed volume"> | <a href="animations/rerun.html">C/D · rebuild and recheck</a> · <a href="docs/media/rerun.mp4">▶ MP4</a><br><img src="docs/assets/rerun-preview.gif" width="360" alt="Comparator runs on four builds"> |
+| <a href="animations/cooling.html">Cooling · halved rate constant</a> · <a href="docs/media/cooling.mp4">▶ MP4</a><br><img src="docs/assets/cooling-preview.gif" width="360" alt="Cooling baseline and rate mutation comparison"> | <a href="animations/mutants.html">C/D · statement mutants</a> · <a href="docs/media/mutants.mp4">▶ MP4</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Statement mutants refused and control accepted"> |
+| <a href="animations/snell.html">Snell · swapped refractive indices</a> · <a href="docs/media/snell.mp4">▶ MP4</a><br><img src="docs/assets/snell-preview.gif" width="360" alt="Refraction rays and incidence-angle sweep"> | <a href="animations/replay.html">C/D · fresh kernel replay</a> · <a href="docs/media/replay.mp4">▶ MP4</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Fresh kernel replay and kernel implementations"> |
+| <a href="animations/campaign.html">Campaign · paired classifications</a> · <a href="docs/media/campaign.mp4">▶ MP4</a><br><img src="docs/assets/campaign-preview.gif" width="360" alt="Per-host mutation campaign classifications"> | <a href="animations/provenance.html">Statement provenance · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Declarations matching in OpenAI's and DeepMind's statements"> |
+| | <a href="animations/experiment.html">Blind-fault benchmark</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Planted faults flagged by baseline and protocol"> |
 
 ![Illustrative Taylor–Green flow clip, separate from the evidence scenes](docs/assets/flow-preview.gif)
 
-The 3D flow clip is visual context only. It is not campaign data, evidence of blowup, or a formal construction; its provenance is in [SOURCE_PROVENANCE.md](evidence/SOURCE_PROVENANCE.md).
+The 3D flow clip is visual context only, not campaign data, evidence of blowup or a formal construction; its provenance is in [SOURCE_PROVENANCE.md](evidence/SOURCE_PROVENANCE.md).
 
 ## Known limitations
 
 A QA report is only useful if it says what it did not test.
 
-- **Bootstrap scope.** B4 (`lake --no-cache build`, 2026-10-21) compiled Mathlib, all its dependencies and OpenAI's project locally: no prebuilt archives were found and every `.olean` is newer than the build start. The earlier B3 had taken 7 smaller dependencies (399 modules) as prebuilt Reservoir archives. Every build reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries, whose hashes are [recorded](evidence/formal/cd-validation/README.md#reused-tools).
-- **Repeated runs, one host.** Comparator has run four times per challenge, each time on a different build: B1 (the 2026-10-20 record), B2 (Mathlib from the prebuilt cache), B3 (fresh build) and B4 (no-cache build). The mutants and the leanchecker replay used B2. All runs used one Linux host. Raw transcripts are not distributed; sanitized copies and the hashes of the originals are ([provenance](evidence/formal/cd-validation/PROVENANCE.md)).
-- **Proof correspondence with OpenAI's paper is not tested.** This study checks that the formal theorems are accepted, not that the Lean proof follows the argument of OpenAI's natural-language paper. [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli and Hansen, 2026) argues that it does not; its abstract does not claim that any Lean theorem is false or that the final statement differs from Clay's. See [RELATED_WORK.md](RELATED_WORK.md#where-this-study-sits).
-- **Known kernel bugs only.** The Lean kernel source used matches v4.34.1 and includes every kernel soundness fix released in 2026, and nanoda postdates its July fix ([kernel currency](evidence/formal/kernel-currency.md)). In July 2026 a Lean bug and a separate nanoda bug let the same false proof through, so agreement between two kernels says nothing about unknown bugs.
-- **Two kernel implementations.** Only the Lean kernel and nanoda have accepted the proofs so far. `leanchecker --fresh` replayed both solutions from an empty environment without errors; it reuses the Lean kernel, so it is a from-scratch replay, not a third implementation. [lean4lean](https://github.com/digama0/lean4lean) failed to build on Lean 4.34 (its Batteries dependency does not compile), so no third kernel implementation has checked the proofs.
-- **Standalone Comparator.** The run used the standalone tool pinned at `19e111e`. Comparator has since been merged into Lean core as `lake comparator` and `lake check` (Lean v4.35.0); the result has not been repeated with those.
-- **A single wrong-proof fixture.** The formal control shows that the checkers reject one wrong proof value. It is not a mutation campaign over the OpenAI proofs. The 2026-10-21 statement mutants test the challenge side instead: they show that Comparator refuses a changed statement, not that the proof would fail if it were broken.
-- **The Clay comparison is reading-based.** The [risk review](evidence/formal/clay-lean-risk.md) locates every gap clause by clause, but the standard-fact bridges are not formalized and no mathematician has reviewed it. One point, periodic pressure in (D), depends on how Clay's erratum is read.
-- **54 KILLED counts cases, not distinct behaviors.** In the acoustic model, `pressure_boundary_sign` and `impedance_swap` produce identical outputs in all three configurations, so there are 51 distinct killed behaviors.
-- **The mutants are coarse.** The smallest killed mutant has a normalized error of 0.12, about 120,000 times the 10⁻⁶ tolerance. The only near-threshold mutant (RC `tau_tiny`, a relative change of 5 × 10⁻⁸) survives roughly 56 to 68 times below tolerance. Sizes in between were not sampled, so the campaign does not locate where detection starts.
-- **Synthetic models and oracles.** No laboratory data, real system or scientific result is validated here.
-- **The verifier is an integrity check.** `verify_numerical.py` compares saved records against their original hashes and across hosts; recomputation is the separate `runner.py` step above.
-
-Each claim, its exact wording and its evidence file are mapped in [CLAIMS.md](CLAIMS.md).
+- **One host, reused tools.** All formal runs used one Linux host. Every build reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries, whose hashes are [recorded](evidence/formal/cd-validation/README.md#reused-tools).
+- **Two kernel implementations.** Only the Lean kernel and nanoda have examined the proofs. `leanchecker` reuses the Lean kernel, and `lean4lean` could not be built for Lean 4.34.
+- **Known kernel bugs only.** The checkers are current with the known 2026 fixes, but in July 2026 a Lean bug and a separate nanoda bug let the same false proof through, so agreement between two kernels says nothing about unknown bugs.
+- **Standalone Comparator.** The runs used the tool pinned at `19e111e`, not the later `lake check` of Lean v4.35.0.
+- **Proof correspondence not tested.** Whether the Lean proof follows OpenAI's paper is out of scope; [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) argues it does not, without claiming any Lean theorem is false.
+- **The Clay comparison is open.** The risk review is reading-based, the bridges are mostly unproved, and no mathematician has reviewed them.
+- **Statement mutants test statement equality**, not whether the proof would fail if it were wrong. There is one wrong-proof fixture, not a mutation campaign over OpenAI's proofs.
+- **Numerical limits.** The 54 KILLED count cases, not 51 distinct killed behaviors; the mutants are coarse, so the detection threshold is not measured; all models are synthetic.
+- **The benchmark uses planted faults** over recorded artifacts, not live Lean, and gives no real-world detection rate.
 
 ## How AI was used
 
-The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent: under the author's direction it prepared code, ran builds and renders and drafted documents. Anthropic's Claude Code made the later documentation and cleanup changes. Each commit names the agent involved in a `Co-Authored-By` trailer. AI assistants also helped with analysis, translation and review. Cristian Guerra chose the questions, froze the contract, decided what counts as evidence, reran the verifiers and is responsible for every claim. Details are in [AUTHORSHIP.md](AUTHORSHIP.md).
+The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent at first, and Anthropic's Claude Code made the later audit, documentation and experiment changes. Each commit names the agent in a `Co-Authored-By` trailer. Cristian Guerra chose the questions, froze the contracts, decided what counts as evidence and is responsible for every claim. Details, including a mid-session change of the assistant's reported model, are in [AUTHORSHIP.md](AUTHORSHIP.md).
 
 ## Repository map
 
 ```text
+README.md, README.es.md   this overview, in English and Spanish
+CLAIMS.md                 every claim → evidence → result → limitation
+FINDINGS.md               what the protocol found that the documented procedure does not show
+RELATED_WORK.md           prior work and novelty assessment
+REPRODUCE.md              versions, steps, recomputed vs hash-verified
+AUTHORSHIP.md             authorship and AI disclosure
 evidence/
-  formal/
-    cd-validation/          2026-10-21 revalidation: builds, receipts, logs, provenance
-    statement-provenance/   OpenAI's challenge compared with DeepMind's statement
-    clay-lean-risk.md       clause-by-clause risk review against Clay's text
-    kernel-currency.md      Lean and nanoda versions against the 2026 soundness fixes
-    …                       clean build, Comparator logs, wrong-proof fixture, Clay–Lean table
-  numerical/           frozen contract, source and runner tests, 84-case runs for macOS and Linux
-  verify_numerical.py  integrity and cross-host check of the saved runs
-  SHA256SUMS.txt       checksums for every curated file
-animations/            ten offline HTML scenes, build and GIF export scripts, tests
-.github/workflows/     CI that runs every check on each push
-docs/assets/           GIF previews used in this README
-CLAIMS.md              claim → evidence → result → limitation
-REPRODUCE.md           steps, versions, recomputed vs hash-verified
-RELATED_WORK.md        prior work, where this study sits, novelty assessment
-FINDINGS.md            what the protocol found that the documented procedure does not show
-AUTHORSHIP.md          authorship and AI disclosure
-CONTRIBUTING.md        rules for changing the evidence
+  formal/                 builds, Comparator runs, mutants, replays, provenance, kernel currency,
+                          Clay risk review and bridge plan (cd-validation/ holds the 2026-10-21 records)
+  numerical/              frozen contract, source and tests, 84-case runs for macOS and Linux
+  SHA256SUMS.txt          checksums for every curated file
+experiments/blind-faults/ pre-registered benchmark: seed, frozen design, cases, results, errata, v2 evaluator
+bridges/                  Clay's text in Lean and the first bridge lemmas
+animations/               eleven offline scenes, build and export scripts, tests
+docs/                     GIF previews, MP4 videos, PDF summary
+.github/workflows/        CI that runs every check on each push
 ```
 
 ## Credit, rights and status
 
-- **Original proofs:** their OpenAI authors. **Challenge statement:** Google DeepMind Formal Conjectures. **Tools:** Lean 4, mathlib, Comparator, nanoda.
+- **Original proofs:** their OpenAI authors. **Challenge statement:** Google DeepMind Formal Conjectures. **Tools:** Lean 4, Mathlib, Comparator, nanoda.
 - **This QA study:** Cristian Guerra. To cite it, use [CITATION.cff](CITATION.cff).
 - **Rights:** publication is authorized, but no open-source license is granted. See [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Status:** an introductory thread with animation previews is posted on [X](https://x.com/criguex/status/2112679712157753441).
+- **Status:** latest release [v1.2.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.2.0); the semantic work of Part D continues on `main`.
 
 No theorem discovery, scientific certification, empirical validation or proof about a real-world system is claimed.

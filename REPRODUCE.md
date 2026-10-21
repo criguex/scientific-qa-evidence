@@ -30,6 +30,8 @@ python3 evidence/test_consistency.py -v
 python3 -m unittest discover -s animations -p 'test_*.py'
 (cd evidence/formal/comparator && python3 -m unittest test_sanitize_comparator_logs)
 (cd evidence/formal/statement-provenance && python3 -m unittest test_compare_statements)
+(cd experiments/blind-faults && python3 -m unittest test_protocol)          # benchmark v1, frozen
+(cd experiments/blind-faults/v2 && python3 -m unittest test_protocol_v2 fuzz_v2)  # corrected evaluator + fuzzer
 ```
 
 The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.2.0`) link the successful CI run for that exact commit, with its logs.
@@ -84,6 +86,14 @@ lake env leanchecker --fresh Euler.Solution
 
 A statement mutant is a one-line edit to `ComparatorChallenges/NavierStokes.lean` or `Euler.lean`, followed by the Comparator command. The exact edits are the diffs in [`evidence/formal/cd-validation/mutants/`](evidence/formal/cd-validation/mutants/). Every recorded run, its build, its times, exit code and the SHA-256 of its original log are in [`evidence/formal/cd-validation/README.md`](evidence/formal/cd-validation/README.md) and [`PROVENANCE.md`](evidence/formal/cd-validation/PROVENANCE.md).
 
-## 5. Optional: GIF previews
+## 5. The bridge lemmas (Lean)
+
+`bridges/ClayLiteral.lean` and `bridges/Bridges.lean` are checked against the same Lean 4.34.0-rc2 and Mathlib as the formal runs, from a built `openai/NavierStokesAndEuler` tree; the exact commands and the `#print axioms` receipt are in [`bridges/README.md`](bridges/README.md).
+
+## 6. Blind-fault benchmark
+
+The assignment is reproducible from the revealed seed; the commands are in [`experiments/blind-faults/RESULTS.md`](experiments/blind-faults/RESULTS.md#reproduce-the-assignment).
+
+## 7. Optional: GIF previews
 
 `python3 animations/export_gifs.py` needs Python Playwright with Chromium and FFmpeg. GIFs are not part of the evidence; they are previews of the HTML scenes.
