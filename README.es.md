@@ -10,7 +10,7 @@ Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://
 
 1. **Las pruebas de OpenAI para (C), (D) y Euler verifican, de forma repetida y desde cero.** Comparator, con nanoda y el kernel de Lean, aceptó los dos desafíos sobre cuatro compilaciones distintas, la última compilada entera desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel usado incluye todas las correcciones de solidez conocidas de 2026.
 2. **Comparator revisa el enunciado exacto.** Rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de DeepMind tras normalización textual (la resolución de nombres no se verificó).
-3. **Lo que esto no resuelve.** Si el enunciado formal dice exactamente lo mismo que el texto de Clay sigue abierto: una revisión de lectura deja un punto, la presión periódica en (D), que necesita un matemático, y el trabajo formal de puentes apenas empieza (Parte D). Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance y lo disputa [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
+3. **Enunciado formal frente al texto de Clay.** Una prueba en Lean (Parte D) muestra que los teoremas de OpenAI implican la (C) y la (D) de Clay tal como están escritas literalmente en Lean en este repositorio, sin hipótesis. Quedan abiertas dos cosas: una revisión independiente de esa transcripción frente al PDF de Clay y una lectura, la presión periódica en (D), que necesita un matemático. Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance y lo disputa [arXiv:2610.08144](https://arxiv.org/abs/2610.08144).
 4. **Lo que aporta el protocolo.** En este caso mostró evidencia que el procedimiento documentado no produce ([FINDINGS.md](FINDINGS.md)), y en un benchmark prerregistrado sus checks marcaron cuatro clases de fallo sembradas que el procedimiento base deja pasar ([resultados](experiments/blind-faults/RESULTS.md)). Cuatro rondas de revisión encontraron 17 problemas en ese mismo experimento, todos corregidos y conservados en el registro.
 5. **Lo que no se afirma.** Novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)), una tasa de detección en el mundo real, ni ninguna parte de la prueba matemática, que pertenece a OpenAI.
 
@@ -24,7 +24,7 @@ Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://
 | ¿El desafío es el enunciado público? | Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. | [procedencia](evidence/formal/statement-provenance/README.md) |
 | ¿Los verificadores están al día? | El código del kernel incluye todas las correcciones de solidez de 2026; nanoda es posterior a su corrección. | [vigencia del kernel](evidence/formal/kernel-currency.md) |
 | ¿Rechazan una prueba errónea? | Sí. Lean reporta un error de tipos; nanoda se detiene con un rechazo por aserción. | [mutación del kernel](evidence/formal/kernel-mutation/) |
-| ¿El enunciado formal coincide con el texto de Clay? | Abierto. De 16 cláusulas, 6 coinciden directamente, 9 por hechos estándar y 1 necesita una decisión humana. | [revisión de riesgos](evidence/formal/clay-lean-risk.md) |
+| ¿El enunciado formal coincide con el texto de Clay? | De 16 cláusulas, 6 coinciden directamente, 9 por hechos estándar y 1 necesita una decisión humana. En Lean, los teoremas de OpenAI implican una transcripción literal de la (C) y la (D) de Clay; esa transcripción aún no tiene revisión independiente. | [revisión de riesgos](evidence/formal/clay-lean-risk.md), [puentes](bridges/README.md) |
 | ¿Las pruebas numéricas detectan errores? | 27 PASS · 54 KILLED · 3 SURVIVED por máquina, idénticos en macOS arm64 y Linux x86_64. | [numérica](evidence/README.md) |
 | ¿El protocolo detecta lo que el procedimiento base deja pasar? | Con fallos sembrados, sí: cuatro clases de fallo que el protocolo marca y el procedimiento base deja pasar. | [benchmark](experiments/blind-faults/v2/README.md) |
 
@@ -94,13 +94,13 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 
 **Trabajos previos.** Análisis de mutación (DeMillo, Lipton y Sayward, 1978), mutación de especificaciones (1985, 2000), análisis de mutación de proyectos de verificación en Coq (mCoq, 2019), análisis de mutación de verificadores de benchmarks (2026), el criterio de De Bruijn, [Comparator](https://github.com/leanprover/comparator) y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind. El aporte es la combinación y su aplicación a la propia cadena de verificación; no se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md), en inglés).
 
-## Parte D · Trabajo abierto: equivalencia con el texto de Clay
+## Parte D · Del teorema de OpenAI al texto de Clay
 
 Para concluir que la (C) y la (D) formales implican las de Clay basta una dirección por cláusula: los datos formales implican los de Clay, y las soluciones de Clay implican las formales. El plan está en [clay-lean-bridges.md](evidence/formal/clay-lean-bridges.md) (en inglés), como una tabla de afirmación → lema → prueba → revisión → pendiente.
 
 - Las ecuaciones (1)–(11), (C), (D) y la errata de Clay están escritas literalmente en Lean en [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean), con un estilo independiente del de DeepMind, y compilan contra el mismo Lean y Mathlib de la auditoría. Falta revisarlas contra el PDF.
-- **9 de las 18 afirmaciones puente están probadas en Lean**, y **K1, la implicación completa desde el teorema probado de OpenAI hasta la (C) y la (D) de Clay tal como están en `ClayLiteral`, está probada de forma condicional**: cada puente sin probar es una hipótesis explícita ([`bridges/`](bridges/README.md)). El resultado sigue siendo condicional hasta probarlas. **Ninguna la ha revisado un matemático.**
-- Lo que falta para K1: el decaimiento de la fuerza en las coordenadas de Clay (D5, D7) y el lado de las soluciones (S1, S2, S5). El lado de los datos se cerró con el testigo concreto de OpenAI: u₀ = 0 y una fuerza suave en todo ℝ × ℝ³, que es su propia extensión suave (D4).
+- **K1 está probado en Lean sin hipótesis:** para todo ν > 0, los teoremas probados de OpenAI implican `AltC ν` y `AltD_withErratum ν`, la (C) y la (D) de Clay tal como están en `ClayLiteral` ([`bridges/`](bridges/README.md)). Usa solo los tres axiomas estándar, y un control comprueba que las condiciones de solución de Clay se pueden cumplir, así que el resultado no es vacío. **Nada de esto lo ha revisado un matemático.**
+- El resultado solo es tan fiel como `ClayLiteral`, cuyas tres lecturas declaradas y fidelidad línea por línea al PDF aún necesitan revisión independiente. El lado de los datos usó el testigo concreto de OpenAI: u₀ = 0 y una fuerza suave en todo ℝ × ℝ³, que es su propia extensión suave (D4).
 - Dos puntos necesitan una decisión humana: qué significa C^∞ en un conjunto cerrado (S4) y la presión periódica en (D) (S7). El 2026-10-21 se envió una pregunta sobre S7 al Clay Mathematics Institute; las respuestas se registrarán aquí.
 
 ## Animaciones
@@ -129,7 +129,7 @@ Un informe de QA solo sirve si dice lo que no probó.
 - **Solo bugs de kernel conocidos.** Los verificadores están al día con las correcciones conocidas de 2026, pero en julio de 2026 un bug de Lean y otro distinto de nanoda dejaron pasar la misma prueba falsa, así que el acuerdo entre dos kernels no dice nada sobre bugs desconocidos.
 - **Comparator independiente.** Las corridas usaron la herramienta fijada en `19e111e`, no el posterior `lake check` de Lean v4.35.0.
 - **No se prueba la correspondencia con el artículo.** Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance; [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) sostiene que no, sin afirmar que algún teorema de Lean sea falso.
-- **La comparación con Clay está abierta.** La revisión de riesgos es de lectura, los puentes están mayormente sin probar y ningún matemático los ha revisado.
+- **La comparación con Clay no está revisada.** La implicación en Lean es relativa a la transcripción literal del texto de Clay de este repositorio, que nadie independiente ha revisado, y deja abierta la (D) sin la errata sobre soluciones.
 - **Los mutantes del enunciado prueban la igualdad del enunciado**, no que la prueba fallaría si estuviera mal. Hay un solo fixture de prueba errónea, no una campaña de mutación sobre las pruebas de OpenAI.
 - **Límites numéricos.** Los 54 KILLED cuentan casos, no los 51 comportamientos eliminados distintos; los mutantes son gruesos, así que no se mide el umbral de detección; todos los modelos son sintéticos.
 - **El benchmark usa fallos sembrados** sobre artefactos grabados, no Lean en vivo, y no da una tasa de detección en el mundo real.
@@ -154,7 +154,7 @@ evidence/
   numerical/              contrato congelado, fuente y tests, corridas de 84 casos en macOS y Linux
   SHA256SUMS.txt          checksums de cada archivo curado
 experiments/blind-faults/ benchmark prerregistrado: semilla, diseño congelado, casos, resultados, erratas, evaluador v2
-bridges/                  el texto de Clay en Lean y los primeros lemas puente
+bridges/                  el texto de Clay en Lean y la prueba de que los teoremas de OpenAI lo implican
 animations/               once escenas offline, scripts de build y exportación, tests
 docs/                     GIF, videos MP4 y resumen en PDF
 .github/workflows/        CI que corre todas las comprobaciones en cada push

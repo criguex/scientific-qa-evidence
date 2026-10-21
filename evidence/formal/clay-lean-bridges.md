@@ -2,7 +2,7 @@
 
 This table turns the [risk review](clay-lean-risk.md) into a work plan for semantic and independent mathematical verification. Each row is one claim needed to conclude that the formal (C) and (D) proved by OpenAI imply Clay's (C) and (D). It records what would establish the claim, whether that exists, who has reviewed it, and what is missing. It is not a count of passing tests.
 
-**State on 2026-10-21: nine rows are formally proved in Lean (P1, D1, D2, D3, D4, D6, S3, S4 under the restriction reading, S6), plus the formal side of S7, and K1 is proved conditionally: starting from OpenAI's proved theorems, it derives Clay's (C) and (D) as written in ClayLiteral, with every unproved bridge as an explicit named hypothesis. D1–D4 are proved for OpenAI's concrete witness (u₀ = 0 and a force smooth on all of ℝ × ℝ³), not for arbitrary formal data, which is all K1 needs. The result is therefore conditional on those hypotheses. No row has been reviewed by a mathematician, and ClayLiteral itself awaits independent review.** Lean files and build receipt: [`bridges/`](../../bridges/README.md). The "Proof" column says how far each claim has got: *reading* means a written argument in this repository only.
+**State on 2026-10-21: K1 is proved in Lean without hypotheses: for every ν > 0, OpenAI's proved theorems imply Clay's (C) and Clay's (D), as written in `ClayLiteral`, with the erratum read as a condition on solutions. All 18 rows except S7 are formally proved, D1–D5 and D7 for OpenAI's concrete witness. Everything uses only the axioms `propext`, `Classical.choice` and `Quot.sound`. This is relative to ClayLiteral's three stated readings (C^∞ on a closed set as a restriction, K real, the erratum on solutions), ClayLiteral itself has not been reviewed against the PDF by anyone independent, and no row has been reviewed by a mathematician.** Lean files and build receipt: [`bridges/`](../../bridges/README.md). The "Proof" column says how far each claim has got: *reading* means a written argument in this repository only.
 
 ## How the claims combine
 
@@ -19,33 +19,34 @@ To state any of these as Lean lemmas, Clay's text must first be written in Lean 
 
 | ID | Claim | Definition or lemma | Proof | Review | Pending |
 | --- | --- | --- | --- | --- | --- |
-| K0 | A literal Lean rendering of Clay's (1)–(11), (C), (D) and the erratum exists | [`bridges/ClayLiteral.lean`](../../bridges/ClayLiteral.lean), against the pinned Mathlib, independent of DeepMind's style | **written; typechecks** | none | Review it line by line against the Clay PDF |
-| K1 | Formal (C) ⇒ Clay (C), and the same for (D) | `Bridges.k1_C`, `Bridges.k1_D`: from OpenAI's proved theorems (`NavierStokesR3.theorem_1_1`, `PeriodicPaper.periodic_corollary`), with their concrete witness, to `AltC` / `AltD_withErratum` | **formal, conditional** on D5, S1, S2, S5 for (C) and D7, S1, S2 for (D) | none | Discharge each hypothesis; until then the implication is conditional |
-| P1 | For every ν > 0 and n = 3, as Clay requires | Specialize the formal `∀ nu > 0` to Clay's ν: `Bridges.p1` | **formal** (standard axioms) | none | Review |
-| D1 | Formal `ContDiff ℝ ∞ u₀` ⇒ Clay "u° smooth" | For OpenAI's witness u₀ = 0: `Bridges.d1_zero` | **formal for the witness** | none | General lemma not needed for K1 |
-| D2 | Formal divergence-free ⇒ Clay `div u° = 0` | For u₀ = 0: `Bridges.d2_zero`. In general, `(fderiv ℝ v x).trace = Σᵢ ∂ᵢvᵢ(x)`, which S2 still needs | **formal for the witness** | none | The general trace lemma, for S2 |
-| D3 | Formal decay (4) ⇒ Clay decay (4) | For u₀ = 0 every derivative is 0: `Bridges.dx_zero`, `Bridges.d3_zero` | **formal for the witness** | none | General lemma not needed for K1 |
-| D4 | Formal `ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0)` ⇒ Clay "f smooth on ℝ³ × [0, ∞)" | Under ClayLiteral's reading this needs a smooth **extension** to ℝ³ × ℝ. Closed by route (ii): OpenAI's internal theorems give `ContDiff ℝ ∞ f` on all of ℝ × ℝ³ (`CandidateProperties.force_smooth`, in both the whole-space and periodic constructions), so the force is its own extension: `Bridges.witness_C`, `Bridges.witness_D` | **formal for the witness** | none | The general statement for arbitrary formal forces would need an extension theorem (Whitney or Seeley), not known to be in Mathlib; K1 does not need it |
-| D5 | Formal decay (5) ⇒ Clay decay (5) | As D3, for mixed partials `∂x^α ∂t^k` of `↿f` within the half-space; the basis vectors of ℝ³ × ℝ have norm 1 in Mathlib's product norm | reading | none | Lean lemma, as D3 plus D4 |
-| D6 | Formal periodic data ⇒ Clay (8) | `IsOnePeriodic u₀` and `∀ t ≥ 0, IsOnePeriodic (f · t)` unfold to `f(x + eᵢ) = f(x)`: `Bridges.d6` | **formal** (standard axioms) | none | Review |
-| D7 | Formal decay (9) ⇒ Clay decay (9) | As D5 with `(1 + t)^-K`; Clay's `abs(t)` equals `t` for `t ≥ 0` | reading | none | Lean lemma, as D5 |
-| S1 | Clay solution of (1) ⇒ formal `navier_stokes` | One-sided time derivative = `derivWithin … (Ici 0)`; Σⱼ uⱼ∂ⱼuᵢ = `fderiv ℝ (v · t) x (v x t)` componentwise; Mathlib's `Δ` = Σᵢ ∂ᵢ²; `gradient` components = ∂ᵢp | reading | none | Three Lean lemmas: Laplacian, gradient and convective term in coordinates |
-| S2 | Clay (2) ⇒ formal `div_free` | D2 applied to `v(·, t)` | reading | none | Follows from D2 |
-| S3 | Clay (3) ⇒ formal `initial_condition` | Same statement: `Bridges.s3` | **formal** (standard axioms) | none | Review |
-| S4 | Clay (6), (11) ⇒ formal `velocity_smooth`, `pressure_smooth` | `Bridges.s4`: from the restriction of a C^∞ function to `ContDiffOn ℝ ∞` within `univ ×ˢ Ici 0` | **formal** under the restriction reading | none | Which reading Clay intends is a review question. Under the other reading (continuous one-sided derivatives of every order), S4 would need an extension theorem and D4 would become easy; the difficulty moves, it does not disappear |
-| S5 | Clay (7) ⇒ formal `integrable` and `globally_bounded_energy` | `u(·, t)` continuous, hence measurable; finite Lebesgue integral of `‖u‖²` gives `MemLp 2`; the Bochner integral then equals the Lebesgue integral; Mathlib's volume on `EuclideanSpace` is Lebesgue measure | reading | none | Lean lemma chaining these Mathlib facts |
-| S6 | Clay (10) ⇒ formal `isOnePeriodic_velocity` | Same statement, with the equation reversed: `Bridges.s6` | **formal** (standard axioms) | none | Review |
-| S7 | A Clay solution of (D) has periodic pressure | Clay's erratum: "p(x + eⱼ, t) = p(x, t) should be made explicit in Eqn (8)" | interpretive; formal side proved (`Bridges.s7_formal_side`) | none | **Needs a human decision.** If the erratum is read as a solution condition, S7 holds by definition. If not, the formal (D) is weaker, since non-periodic pressures p = q + c(t)·x are excluded. Ask Clay or a PDE specialist; optionally test whether OpenAI's construction also rules out such pressures |
-| L1 | The formal and Clay statements have the same logical shape | `∃ u₀ f, data ∧ ¬ ∃ v p, solution` versus "there exist u°, f … for which there exist no solutions (p, u)" | reading | none | Covered by K1 |
+| K0 | A literal Lean rendering of Clay's (1)–(11), (C), (D) and the erratum exists | [`bridges/ClayLiteral.lean`](../../bridges/ClayLiteral.lean), against the pinned Mathlib, independent of DeepMind's style. Non-vacuity control: the zero solution satisfies every solution condition for zero data (`Bridges.zero_solution_C`, `_D`) | **written; typechecks; non-vacuous** | none | Independent line-by-line review against the Clay PDF |
+| K1 | Formal (C) ⇒ Clay (C), and the same for (D) | `Bridges.k1_C : ∀ ν, 0 < ν → AltC ν`, `Bridges.k1_D : ∀ ν, 0 < ν → AltD_withErratum ν`, from OpenAI's `NavierStokesR3.theorem_1_1` and `PeriodicPaper.periodic_corollary` | **formal, no hypotheses** (relative to K0) | none | Review; (D) without the erratum is not covered (S7) |
+| P1 | For every ν > 0 and n = 3, as Clay requires | `Bridges.p1`; K1 is stated for every ν > 0 | **formal** | none | Review |
+| D1 | OpenAI's u₀ is smooth in Clay's sense | u₀ = 0: `Bridges.d1_zero` | **formal for the witness** | none | Review |
+| D2 | OpenAI's u₀ has `div u° = 0` | u₀ = 0: `Bridges.d2_zero` | **formal for the witness** | none | Review |
+| D3 | OpenAI's u₀ satisfies Clay's (4) | Every derivative of 0 is 0: `Bridges.dx_zero`, `Bridges.d3_zero` | **formal for the witness** | none | Review |
+| D4 | OpenAI's force is C^∞ on ℝ³ × [0, ∞) in Clay's sense | Under the restriction reading this needs a smooth extension. OpenAI's construction gives `ContDiff ℝ ∞` on all of ℝ × ℝ³ (`CandidateProperties.force_smooth`, both constructions), so the force is its own extension: `Bridges.witness_C`, `Bridges.witness_D` | **formal for the witness** | none | A general version for arbitrary formal forces would need an extension theorem (Whitney or Seeley); K1 does not need it |
+| D5 | OpenAI's force satisfies Clay's (5) | Clay's mixed partial `∂x^α ∂t^m f` equals the iterated derivative applied to unit vectors (`Bridges.dirDeriv_eq`, `dt_eq`, `dxt_eq`), so it is bounded by the formal norm (`Bridges.clay_bound`); then the formal decay gives (5): `Bridges.d5` | **formal** for any force with a globally smooth extension | none | Review |
+| D6 | Formal periodic data ⇒ Clay (8) | `Bridges.d6` | **formal** | none | Review |
+| D7 | OpenAI's periodic force satisfies Clay's (9) | As D5, with `(1 + abs(t))^-K`: `Bridges.d7` | **formal** for any force with a globally smooth extension | none | Review |
+| S1 | Clay solution of (1) ⇒ formal `navier_stokes` | Componentwise: time derivative, convective term (basis expansion), Laplacian (OpenAI's `laplacian_eq`), gradient (`inner_gradient_right`): `Bridges.s1` | **formal** | none | Review |
+| S2 | Clay (2) ⇒ formal `div_free` | Trace in the standard basis (OpenAI's `divergence_eq`) and coordinates of the derivative: `Bridges.s2` | **formal** | none | Review |
+| S3 | Clay (3) ⇒ formal `initial_condition` | `Bridges.s3` | **formal** | none | Review |
+| S4 | Clay (6), (11) ⇒ formal `velocity_smooth`, `pressure_smooth` | `Bridges.s4`, under the restriction reading of C^∞ on a closed set | **formal** under that reading | none | Which reading Clay intends is a review question. Under the other reading (continuous one-sided derivatives of every order), S4 would need an extension theorem for arbitrary Clay solutions |
+| S5 | Clay (7) ⇒ formal `integrable` and `globally_bounded_energy` | Continuity gives measurability; a finite Lebesgue integral gives `Integrable` and `MemLp 2`; the Bochner integral is the real part of the Lebesgue one: `Bridges.s5` | **formal** | none | Review |
+| S6 | Clay (10) ⇒ formal `isOnePeriodic_velocity` | `Bridges.s6` | **formal** | none | Review |
+| S7 | A Clay solution of (D) has periodic pressure | Clay's erratum: "p(x + eⱼ, t) = p(x, t) should be made explicit in Eqn (8)" | interpretive; formal side proved (`Bridges.s7_formal_side`), used by K1 for (D) | none | **Needs a human decision.** If the erratum is a solution condition, K1 for (D) is the full result. If not, the formal (D) is weaker: non-periodic pressures p = q + c(t)·x are excluded. Question sent to the Clay Mathematics Institute on 2026-10-21 |
+| L1 | The formal and Clay statements have the same logical shape | Discharged by K1 | **formal** (via K1) | none | — |
 
-**Count:** 18 rows. Formally proved: 9 (P1, D1–D4 for OpenAI's witness, D6, S3, S4, S6), plus the formal side of S7, K0 written, and K1 proved conditionally on D5, S1, S2, S5 for (C) and D7, S1, S2 for (D). Reviewed: 0. Needing a human decision: S7, and the reading of C^∞ on a closed set (under the other reading, S4 would need the extension instead).
+**Count:** 18 rows. Formally proved: 16 (K1, P1, D1–D7, S1–S6, L1), D1–D4 for OpenAI's witness. K0 written and checked non-vacuous. S7 interpretive, formal side proved. Reviewed: 0.
+
+**What K1 does not establish.** It does not show that `ClayLiteral` is a faithful rendering of Clay's PDF; that is K0's review. It does not cover (D) with the erratum read only as a condition on data. It inherits trust in OpenAI's proof, which rests on the kernel checks in [cd-validation](cd-validation/README.md), and it says nothing about whether OpenAI's Lean proof follows OpenAI's paper.
 
 ## Plan
 
-1. **K0:** write `ClayLiteral.lean` from the PDF and publish it for review before proving anything, so the bridges cannot shape it.
-2. **Easy rows first:** P1, D6, S3, S6, then D2, D3, D5, D7 and S2. These are short Lean proofs against the pinned Mathlib, checked on the same toolchain as the main study.
-3. **Mid rows:** D1, D4, S1, S5.
-4. **S4 and S7:** take them to independent review (the Lean Zulip and a PDE specialist) with the precise question each raises. Record the reviewer, date and answer in the Review column.
-5. **K1:** prove the composition once the rows it depends on are closed or explicitly assumed.
+1. **Done:** K0, every D- and S-row except S7, and K1.
+2. **Independent review of K0**, line by line against the PDF, by someone other than the author and the assistant; record the reviewer, date and answer in the Review column.
+3. **S7 and the reading of C^∞ on a closed set:** take both to a PDE specialist and the Lean Zulip; record the answers.
+4. **Mathematical review** of the bridge rows.
 
 A row moves to "formal" only when its Lean proof builds and is published with hashes, and to "reviewed" only when a named person other than the author and the assistant has checked it.
