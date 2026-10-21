@@ -110,5 +110,55 @@ class ReviewRound2Tests(unittest.TestCase):
         self.assertIn("P6:receipt-step-missing-comparator", V2.protocol(case)[1])
 
 
+class Round4SemanticTests(unittest.TestCase):
+    """Round 4: false accepts and false alarms found by the assistant's semantic review."""
+
+    def assertRejected(self, case):
+        self.assertFalse(V2.protocol(case)[0], V2.protocol(case))
+
+    def assertAccepted(self, case):
+        self.assertEqual(V2.protocol(case), (True, []))
+
+    def test_every_axioms_line_is_checked(self):
+        case = V2.clean_case()
+        case["axioms.txt"] += "'other_thm' depends on axioms: [propext, sorryAx]\n"
+        self.assertRejected(case)
+
+    def test_axioms_must_cover_the_proved_theorem(self):
+        case = V2.clean_case()
+        case["axioms.txt"] = "'unrelated' depends on axioms: [propext]\n"
+        self.assertIn("B:axioms-missing-for-demo_breakdown", V2.baseline(case)[1])
+
+    def test_comparator_failure_beside_ok_line_is_rejected(self):
+        case = V2.clean_case()
+        case["comparator.log"] += "uncaught exception: Challenge and solution theorem statement do not match\n"
+        self.assertRejected(case)
+
+    def test_build_error_beside_success_line_is_rejected(self):
+        case = V2.clean_case()
+        case["build.log"] = "error: Foo.lean:3:1: unknown identifier\n" + case["build.log"]
+        self.assertRejected(case)
+
+    def test_invalid_oracle_is_rejected_even_if_complete(self):
+        case = V2.clean_case()
+        case["numeric_summary.json"] = json.dumps({"collection_complete": True, "oracle_valid": False, "export_errors": []})
+        self.assertRejected(case)
+
+    def test_bom_and_crlf_do_not_change_the_verdict(self):
+        case = V2.clean_case()
+        case = {k: "\ufeff" + v.replace("\n", "\r\n") for k, v in case.items()}
+        self.assertAccepted(case)
+
+    def test_comment_in_statement_is_not_a_difference(self):
+        case = V2.clean_case()
+        case["solution_statement.lean"] = "-- the challenge statement\n" + case["solution_statement.lean"]
+        self.assertAccepted(case)
+
+    def test_statement_change_still_detected_after_comment_stripping(self):
+        case = V2.inject(V2.clean_case(), "F2")
+        case["solution_statement.lean"] = "/- note -/\n" + case["solution_statement.lean"]
+        self.assertIn("P2:statement-differs-from-reference", V2.protocol(case)[1])
+
+
 if __name__ == "__main__":
     unittest.main()

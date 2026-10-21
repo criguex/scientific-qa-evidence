@@ -17,7 +17,20 @@ from pathlib import Path
 PERMITTED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 REQUIRED = ["build.log", "comparator.log", "oleans.tsv", "solution_statement.lean",
             "reference.lean", "axioms.txt", "receipt.tsv", "numeric_summary.json"]
-AXIOMS_LINE = re.compile(r"depends on axioms: \[([^\]]*)\]\s*$", re.M)
+AXIOMS_LINE = re.compile(r"^'?([^'\s]+)'? depends on axioms: \[([^\]]*)\]\s*$", re.M)
+AXIOMS_ANY = re.compile(r"depends on axioms", re.M)
+THEOREM_NAME = re.compile(r"\btheorem\s+(\S+)")
+FAILURE_MARKERS = ("uncaught exception", "does not match", "rejects", "error:", "error(", "\u2716")
+
+
+def normalize(text):
+    """Remove a UTF-8 BOM and normalize line endings, so encoding does not change a verdict."""
+    return (text or "").lstrip("\ufeff").replace("\r\n", "\n").replace("\r", "\n")
+
+
+def strip_comments(src):
+    src = re.sub(r"/-.*?-/", "", src, flags=re.S)
+    return re.sub(r"--[^\n]*", "", src)
 
 
 def clean_case():
@@ -44,12 +57,22 @@ def _missing(case):
     return [f"missing:{name}" for name in REQUIRED if name not in case or not case[name].strip()]
 
 
-def _axioms_flags(text, prefix):
-    match = AXIOMS_LINE.search(text or "")
-    if not match:
+def _axioms_flags(text, prefix, theorem=None):
+    text = normalize(text)
+    matches = AXIOMS_LINE.findall(text)
+    if not matches or len(matches) != len(AXIOMS_ANY.findall(text)):
         return [f"{prefix}:axioms-incomplete"]
-    used = {a.strip() for a in match.group(1).split(",") if a.strip()}
-    return [] if used <= PERMITTED_AXIOMS else [f"{prefix}:axioms"]
+    flags = []
+    for _, used in matches:
+        if not {a.strip() for a in used.split(",") if a.strip()} <= PERMITTED_AXIOMS:
+            flags.append(f"{prefix}:axioms")
+    if theorem and theorem not in {name for name, _ in matches}:
+        flags.append(f"{prefix}:axioms-missing-for-{theorem}")
+    return sorted(set(flags))
+
+
+def _failure_lines(text):
+    return [line for line in normalize(text).splitlines() if any(m in line for m in FAILURE_MARKERS)]
 
 
 RECEIPT_HEADER = "step\tcommand\tlog\texit"
@@ -59,7 +82,7 @@ REQUIRED_STEPS = {"build", "comparator"}
 
 def _summary(case):
     try:
-        value = json.loads(case.get("numeric_summary.json", ""))
+        value = json.loads(normalize(case.get("numeric_summary.json")))
     except ValueError:
         return {}, ["numeric-summary-unparseable"]
     if not isinstance(value, dict):
@@ -68,7 +91,7 @@ def _summary(case):
 
 
 def _rows(text, header, label):
-    lines = [line for line in (text or "").splitlines() if line.strip()]
+    lines = [line for line in normalize(text).splitlines() if line.strip()]
     if not lines or lines[0] != header:
         return [], [f"{label}-bad-header"]
     if len(lines) == 1:
@@ -79,11 +102,12 @@ def _rows(text, header, label):
 def baseline(case):
     """Documented procedure, failing closed on missing or incomplete evidence."""
     flags = [f"B:{m}" for m in _missing(case)]
-    if "Build completed successfully" not in case.get("build.log", ""):
+    if "Build completed successfully" not in normalize(case.get("build.log")) or _failure_lines(case.get("build.log")):
         flags.append("B:build-failed")
-    if "Your solution is okay!" not in case.get("comparator.log", ""):
+    if "Your solution is okay!" not in normalize(case.get("comparator.log")) or _failure_lines(case.get("comparator.log")):
         flags.append("B:comparator-not-ok")
-    flags += _axioms_flags(case.get("axioms.txt"), "B")
+    name = THEOREM_NAME.search(strip_comments(normalize(case.get("solution_statement.lean"))))
+    flags += _axioms_flags(case.get("axioms.txt"), "B", name.group(1) if name else None)
     summary, errors = _summary(case)
     flags += [f"B:{e}" for e in errors]
     if summary.get("collection_complete") is not True:
@@ -92,7 +116,7 @@ def baseline(case):
 
 
 def _norm(src):
-    return [" ".join(line.split()) for line in (src or "").splitlines() if line.strip()]
+    return [" ".join(line.split()) for line in strip_comments(normalize(src)).splitlines() if line.strip()]
 
 
 def protocol(case):
@@ -110,6 +134,8 @@ def protocol(case):
     summary, _ = _summary(case)
     if summary.get("export_errors") and summary.get("collection_complete"):
         flags.append("P5:oracle-failure-hidden")
+    if summary and summary.get("oracle_valid") is not True:
+        flags.append("P5:oracle-not-valid")
     present = set(case)
     receipt_rows, errors = _rows(case.get("receipt.tsv"), RECEIPT_HEADER, "P6:receipt")
     flags += errors

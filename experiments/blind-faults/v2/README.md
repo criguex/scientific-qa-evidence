@@ -25,6 +25,29 @@ A second review found three more cases where v2 did not fail closed. Each now ha
 
 15 tests in total. The benchmark outcome is unchanged.
 
+### Review rounds 3 and 4 (2026-10-21, by the assistant)
+
+| Round | Method | Found | Fixed in | Evidence |
+| --- | --- | --- | --- | --- |
+| 3 · robustness | Deterministic fuzzer ([`fuzz_v2.py`](fuzz_v2.py), seed 20261021): 8,000 evaluations of mutated artifacts (truncation, garbage, CRLF, BOM, shuffled, duplicated and dropped lines, non-object JSON). Invariant: never raise. | **0 crashes** in v2.1. The fuzzer is not weak: against v2 (`793ff3b`) it finds 52 crashes, the round-2 `[]` defect. | — | `python3 fuzz_v2.py`; runs in CI |
+| 4 · semantics | Targeted attempts to make bad evidence pass and good evidence fail | **7 defects**, below | v2.2 | 8 tests in `Round4SemanticTests`; 7 fail against v2.1 (`94244a4`) |
+
+Round 4 defects:
+
+| # | Kind | Input | v2.1 | v2.2 |
+| --- | --- | --- | --- | --- |
+| 1 | False accept | A second axioms line listing `sorryAx` | Only the first line was read | Every axioms line is checked |
+| 2 | False accept | An axioms report for a different theorem | Theorem name ignored | The proved theorem must have its own axioms line |
+| 3 | False accept | Comparator log with `Your solution is okay!` and also a failure | Accepted | Any failure marker rejects |
+| 4 | False accept | Build log with an `error:` line and the success line | Accepted | Any error line rejects |
+| 5 | False accept | Summary with `oracle_valid: false` but marked complete | Accepted | Rejected: `oracle-not-valid` |
+| 6 | False alarm | A receipt starting with a UTF-8 BOM | Rejected as a bad header | BOM and CRLF are normalized away |
+| 7 | False alarm | A harmless comment in the proved statement | Flagged as a different statement | Comments are stripped before comparing; a real change is still flagged (guard test) |
+
+Resisted in round 4 without changes: CRLF line endings, axioms in a different order, a duplicated receipt whose second run failed, and an inconsistent `.olean` row.
+
+**Total: 24 tests** (23 unit tests plus the fuzzer). The benchmark outcome is unchanged in every round.
+
 ## v2 applied to the v1 cases
 
 Running v2 over the 21 published v1 cases ([`v2_on_v1_cases.json`](v2_on_v1_cases.json)) flags **all 21, including the 6 clean ones**: their receipts name a `comparator.log` that does not exist, and they contain no Comparator output. So the v1 result of "0 false alarms on clean cases" depended on the v1 evaluator assuming evidence that was not there. The v1 clean cases were incomplete, not clean.
