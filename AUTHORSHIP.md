@@ -16,3 +16,5 @@ For full traceability of who produced which commits, the environment's stated id
 - From commit `aa47c98` onward the trailer is `Co-Authored-By: Claude Opus 4.8`, after a system notice changed the reported model to `claude-opus-4-8` with a January 2026 knowledge cutoff.
 
 This is recorded as an observable fact. The assistant runs on the identity its environment declares and cannot verify from inside which label is accurate, so no claim of intent or deception is made here. The per-commit `Co-Authored-By` trailers in `git log` are the authoritative record of which label was active for each change. Human authorship, responsibility and the release decision remain with Cristian Guerra regardless of the assistant label.
+
+Later the same day the author ran Claude Code's `/model` command, which set the model to Opus 5.5, and the commit trailers from `ae55a24` onward say `Claude Opus 5.5` again. This shows the model is selectable in the client, which is the most likely explanation for the earlier change: a model switch in the session, not a deception.

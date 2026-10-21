@@ -1,0 +1,224 @@
+{
+  "baseline_false_alarms_on_clean": 0,
+  "classes_only_protocol_detected": [
+    "F1",
+    "F2",
+    "F4",
+    "F5"
+  ],
+  "note": "valid is false unless F6 (positive control) is detected by both procedures",
+  "per_class": {
+    "C": {
+      "baseline_detected": 0,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": false,
+          "case": "case-04",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-08",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-10",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-11",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-13",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-15",
+          "protocol_flagged": false,
+          "protocol_flags": []
+        }
+      ],
+      "n": 6,
+      "protocol_detected": 0,
+      "protocol_false_alarm": 0
+    },
+    "F1": {
+      "baseline_detected": 0,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": false,
+          "case": "case-01",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P1:prebuilt-batteries"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-12",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P1:prebuilt-batteries"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-21",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P1:prebuilt-batteries"
+          ]
+        }
+      ],
+      "n": 3,
+      "protocol_detected": 3,
+      "protocol_false_alarm": 0
+    },
+    "F2": {
+      "baseline_detected": 0,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": false,
+          "case": "case-05",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P2:statement-mismatch"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-14",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P2:statement-mismatch"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-19",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P2:statement-mismatch"
+          ]
+        }
+      ],
+      "n": 3,
+      "protocol_detected": 3,
+      "protocol_false_alarm": 0
+    },
+    "F4": {
+      "baseline_detected": 0,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": false,
+          "case": "case-06",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P5:oracle-failure-hidden"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-09",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P5:oracle-failure-hidden"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-18",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P5:oracle-failure-hidden"
+          ]
+        }
+      ],
+      "n": 3,
+      "protocol_detected": 3,
+      "protocol_false_alarm": 0
+    },
+    "F5": {
+      "baseline_detected": 0,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": false,
+          "case": "case-16",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P6:receipt-log-other-build.log"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-17",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P6:receipt-log-other-build.log"
+          ]
+        },
+        {
+          "baseline_flagged": false,
+          "case": "case-20",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "P6:receipt-log-other-build.log"
+          ]
+        }
+      ],
+      "n": 3,
+      "protocol_detected": 3,
+      "protocol_false_alarm": 0
+    },
+    "F6": {
+      "baseline_detected": 3,
+      "baseline_false_alarm": 0,
+      "cases": [
+        {
+          "baseline_flagged": true,
+          "case": "case-02",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "B:axioms"
+          ]
+        },
+        {
+          "baseline_flagged": true,
+          "case": "case-03",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "B:axioms"
+          ]
+        },
+        {
+          "baseline_flagged": true,
+          "case": "case-07",
+          "protocol_flagged": true,
+          "protocol_flags": [
+            "B:axioms"
+          ]
+        }
+      ],
+      "n": 3,
+      "protocol_detected": 3,
+      "protocol_false_alarm": 0
+    }
+  },
+  "protocol_false_alarms_on_clean": 0,
+  "valid": true
+}

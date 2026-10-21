@@ -11,14 +11,10 @@
 | Design and scripts frozen (hash in `FROZEN.md`) | Done 2026-10-21 | [FROZEN.md](FROZEN.md) |
 | Author runs the assignment with the seed | Done 2026-10-21; seed hash matched the commitment | commit `ae55a24` (21 case folders, key withheld) |
 | Blind checks on 21 cases, results committed before the key | Done: baseline flagged 3 of 21, protocol 15 of 21; scripts matched FROZEN.md hashes | [results.json](results.json) |
-| Key opened, results counted and published | Pending | — |
+| Key revealed, results scored and published | Done: valid; protocol detected F1, F2, F4, F5 (3/3 each), baseline none; F6 caught by both; 0/6 false alarms | [RESULTS.md](RESULTS.md) |
 
-No results exist yet. Nothing in this folder is evidence about the protocol until the design is frozen and the blind phase is complete.
+The blind phase is complete; see [RESULTS.md](RESULTS.md).
 
-## Next step (author)
+## Remaining (author)
 
-Reveal the key so the results can be scored. In the same terminal, in this folder:
-
-```sh
-git add -f key.json && git commit -m "reveal: blind-fault key" && git push origin HEAD:main
-```
+Reveal the seed file so anyone can rerun `assign.py` and reproduce `key.json` exactly ([SEED_COMMITMENT.md](SEED_COMMITMENT.md), rule 3).

@@ -27,6 +27,7 @@ The protocol was implemented and evaluated reproducibly on the documented cases.
 
 | Claim | What is missing |
 | --- | --- |
+| The protocol detects fault classes the documented baseline does not. | `experiments/blind-faults/RESULTS.md`; `scoreboard.json` | Blind, pre-registered, 21 cases: protocol 3/3 on each of F1, F2, F4, F5 where the baseline scored 0/3; both caught the positive control; 0/6 false alarms. | Controlled planted faults over recorded artifacts, not live Lean and not a real-world rate. Each fault sits in an artifact the baseline does not read, so the result confirms the checks cover those gaps rather than measuring general superiority. |
 | The method is novel. | A [targeted search](RELATED_WORK.md) found close prior work (specification mutation, mCoq, mutation analysis of benchmark checkers), so novelty is not claimed. Only the statement-mutant control for a statement-equality checker was not found in the sources searched; a systematic review would be needed to say more. |
 | The Lean proof follows OpenAI's paper. | Out of scope here. [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) argues that the formal proof does not correspond to the natural-language proof. |
 | The method is better than alternatives. | A predefined comparative experiment, ideally with blind faults, measuring detection, false alarms and cost. |
