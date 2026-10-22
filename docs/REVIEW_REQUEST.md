@@ -1,4 +1,4 @@
-# Request for review: receipt-to-artifact checks
+# Request for review: a case study of integrity controls for Lean evidence
 
 This page asks for review of one narrow result about the **traceability of evidence** in a reproducible Lean verification workflow. It is not about the mathematics: OpenAI's proof was accepted in every run.
 
@@ -14,7 +14,9 @@ On the same authentic files (a from-source build of [openai/NavierStokesAndEuler
 
 Byte-identical means: in case 1, the clean and missing-log runs; in case 2, the missing-log and stale-log runs, which also match case 1. Case 2's clean run has 13 extra `Built …` lines, because its first Comparator call in a fresh copy also built the Comparator executable.
 
-**Conclusion.** In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by comparing it with the hash recorded when the step ran. This supports the added value of hash-bound receipts for the traceability of evidence. **It does not mean Comparator accepted a false proof.**
+**Conclusion.** In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by comparing it with the hash recorded when the step ran. **It does not mean Comparator accepted a false proof.**
+
+**Not a new technique.** Binding each step's command, inputs and outputs to recorded hashes is established practice in software supply-chain security: [in-toto](https://in-toto.io/) records, for every step, the command, the hashes of its input and output files, its return value and its standard output and error, signs them and verifies them against a layout, and [SLSA provenance](https://slsa.dev/provenance/v1) records how a build was made and from which hashed dependencies. Both faults tested here are of the kind in-toto already detects. This is therefore a **case study of integrity controls for Lean evidence**; a fair comparison with in-toto or SLSA has not been done, and any added value in integration, Lean-specific diagnostics or ease of use would still have to be shown.
 
 Both cases were pre-registered before running, with an aborted first attempt and one amendment recorded: [case 1](../experiments/receipt-check/RESULTS.md), [case 2](../experiments/receipt-check/RESULTS2.md), [status](../experiments/receipt-check/STATUS.md).
 
@@ -25,11 +27,16 @@ Both cases were pre-registered before running, with an aborted first attempt and
 
 ## The question
 
-**Does binding each receipt to the hash of the artifact it names add a useful traceability guarantee to a reproducible verification workflow, or is it redundant with what Lake and Comparator already ensure?**
+Hash-bound receipts are not new, so the questions are narrower:
+
+1. Is this a fair and useful **case study** of integrity controls applied to Lean verification evidence?
+2. What would a fair comparison with in-toto or SLSA provenance on the same steps and faults look like, and which Lean-specific faults (statement changes, axioms, prebuilt artifacts, oracle harness failures) would such tools not see without domain checks?
+3. Is there a contribution worth demonstrating in integration, diagnostics or ease of use, and how should it be measured?
 
 ## Objections already known
 
-- The published procedure does not claim to check receipts, so "it does not detect it" is expected. The point is that the published verifier does not by itself check that a receipt corresponds to the log it references, and a cheap check closes that gap.
+- **Prior art.** in-toto already records each step's command, input and output hashes, return value and output, and verifies them; SLSA describes build provenance. Detecting a changed log by SHA-256 is not a new technique, and the comparison here is only with Comparator, not with those tools.
+- The published procedure does not claim to check receipts, so "it does not detect it" is expected. The point is that the published verifier does not by itself check that a receipt corresponds to the log it references, and a check of the kind in-toto provides closes that gap.
 - P6, this study's own check, only tests that a named log exists; case 2 shows it misses a substituted log, and that a second check catches it. Documenting where the study's own check fails is part of the result.
 - The hash check detects a change relative to a trusted reference value, here the hash recorded when the step ran. It does not authenticate where a log came from if someone can replace both the file and that recorded value.
 - Two cases on one host, designed by the author. No detection rate is claimed.

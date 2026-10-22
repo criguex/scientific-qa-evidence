@@ -16,6 +16,10 @@ Z's output for F5 and F7 is byte-identical, and identical to F5 in case 1. C's o
 
 It shows the value of binding receipts to artifact hashes, and a limit of P6, which checks only that the named log exists. **Limit of the hash check:** it detects a change relative to a trusted reference value, here the hash recorded when the step ran; it does not authenticate where a log came from if someone can replace both the file and that recorded value. One case.
 
+## Prior art
+
+**Not a new technique.** Binding each step's command, inputs and outputs to recorded hashes is established practice in software supply-chain security: [in-toto](https://in-toto.io/) records, for every step, the command, the hashes of its input and output files, its return value and its standard output and error, signs them and verifies them against a layout, and [SLSA provenance](https://slsa.dev/provenance/v1) records how a build was made and from which hashed dependencies. Both faults tested here are of the kind in-toto already detects. This is therefore a **case study of integrity controls for Lean evidence**; a fair comparison with in-toto or SLSA has not been done, and any added value in integration, Lean-specific diagnostics or ease of use would still have to be shown.
+
 ## Notes
 
 - Before the registration commit, `check_hash.py` was tried on case 1's bundles C and F5 to see that it ran; F7 was not tried before the run.

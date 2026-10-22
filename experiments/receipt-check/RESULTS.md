@@ -23,7 +23,7 @@ Every step's command, the SHA-256 of its sanitized log, its exit code and its ti
 
 > **In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result.** A receipt naming a log that is not in the evidence bundle was flagged by P6, while OpenAI's published procedure, run on the same files, exited 0 with byte-identical output, because it does not read receipts.
 
-This supports the added value of that check for the traceability of the evidence. **It does not mean that Comparator accepted a false proof:** the proof is the same in both variants and was accepted in both. It does not say P6 catches every error, that the published procedure fails at its own job of checking the proof, or anything about the Millennium Prize. It is one case.
+This shows a traceability gap in the published procedure, closed by a check of a kind that supply-chain tools such as in-toto already provide (see [RESULTS2](RESULTS2.md#prior-art)); it is not a new technique. **It does not mean that Comparator accepted a false proof:** the proof is the same in both variants and was accepted in both. It does not say P6 catches every error, that the published procedure fails at its own job of checking the proof, or anything about the Millennium Prize. It is one case.
 
 **Question for reviewers:** does a check that receipts correspond to the artifacts they name add a useful traceability guarantee to a reproducible verification workflow?
 

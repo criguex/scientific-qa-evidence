@@ -1,4 +1,4 @@
-# Receipt check on authentic records
+# Receipt check on authentic records: a case study of integrity controls
 
 Does a check that each receipt corresponds to the artifact it names catch evidence faults that OpenAI's published verification procedure does not, on the same authentic files? Two pre-registered cases.
 
@@ -15,4 +15,4 @@ Does a check that each receipt corresponds to the artifact it names catch eviden
 | [`test_results.py`](test_results.py) | Recomputes both checks on the published bundles and checks that the procedure's output did not change; runs in CI |
 | [`results/`](results/), [`results2/`](results2/) | Receipts, bundles, logs and outputs of the two runs |
 
-**Conclusion.** In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by the hash check. It does not mean Comparator accepted a false proof. Review request: [`docs/REVIEW_REQUEST.md`](../../docs/REVIEW_REQUEST.md).
+**Conclusion.** In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by the hash check. It does not mean Comparator accepted a false proof. Binding steps to hashes is established practice ([in-toto](https://in-toto.io/), [SLSA provenance](https://slsa.dev/provenance/v1)); this is a case study, not a new technique, and no comparison with those tools has been made. Review request: [`docs/REVIEW_REQUEST.md`](../../docs/REVIEW_REQUEST.md).
