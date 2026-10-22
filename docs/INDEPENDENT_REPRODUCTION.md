@@ -14,7 +14,18 @@ Every run recorded in this repository was made by its author, with an AI assista
 
 ## Steps
 
-Linux x86_64 with about 30 GB of free disk and 16 GB of memory is enough; our build took 1 h 15 min on 12 cores. Record the start time, end time and exit code of every step.
+Linux x86_64 with about 30 GB of free disk and 16 GB of memory is enough; our build took 1 h 15 min on 12 cores. Run every step in Bash, from the project directory, after defining this helper. It sends each command's output to a log and records the command's own exit code (not that of `tee`) with its start and end time in `../exit_codes.tsv`:
+
+```
+set -o pipefail
+step() {
+  local name=$1 start rc; shift
+  start=$(date -u +%FT%TZ)
+  "$@" 2>&1 | tee "../$name.log"; rc=${PIPESTATUS[0]}
+  printf '%s\t%s\t%s\t%s\n' "$name" "$start" "$(date -u +%FT%TZ)" "$rc" >> ../exit_codes.tsv
+  return "$rc"
+}
+```
 
 1. **Get the source and check it.**
    ```
@@ -25,13 +36,14 @@ Linux x86_64 with about 30 GB of free disk and 16 GB of memory is enough; our bu
    Expected: `95bb21c9…52e95fc`. (On macOS use `shasum -a 256` for both `sha256sum`.)
 2. **Build from source, with no prebuilt files.**
    ```
-   mkdir -p ../xdg && XDG_CACHE_HOME=$PWD/../xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build 2>&1 | tee ../build.log
+   mkdir -p ../xdg
+   step build env XDG_CACHE_HOME=$PWD/../xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build
    ```
    Expected: exit 0. Ours: 11,424 jobs.
 3. **Run Comparator on both challenges.**
    ```
-   lake env <path-to-comparator> ComparatorChallenges/NavierStokes.json 2>&1 | tee ../comparator_NavierStokes.log
-   lake env <path-to-comparator> ComparatorChallenges/Euler.json 2>&1 | tee ../comparator_Euler.log
+   step comparator_NavierStokes lake env <path-to-comparator> ComparatorChallenges/NavierStokes.json
+   step comparator_Euler lake env <path-to-comparator> ComparatorChallenges/Euler.json
    ```
    Expected: exit 0 and `Your solution is okay!` for each.
 4. **Compile the Clay bridges against your build and print their axioms.** Copy `ClayLiteral.lean` and `Bridges.lean` from this repository into the project root, check their SHA-256, and create `Axioms.lean` there:
@@ -46,11 +58,11 @@ Linux x86_64 with about 30 GB of free disk and 16 GB of memory is enough; our bu
    ```
    Then:
    ```
-   lake env lean -o .lake/build/lib/lean/ClayLiteral.olean ClayLiteral.lean
-   lake env lean -o .lake/build/lib/lean/Bridges.olean Bridges.lean
-   lake env lean Axioms.lean
+   step clay lake env lean -o .lake/build/lib/lean/ClayLiteral.olean ClayLiteral.lean
+   step bridges lake env lean -o .lake/build/lib/lean/Bridges.olean Bridges.lean
+   step axioms lake env lean Axioms.lean
    ```
-   Expected: exit 0 for all three, and `depends on axioms: [propext, Classical.choice, Quot.sound]` for each of the six theorems. These exact commands were tested on 2026-10-22 against build B4.
+   Expected: exit 0 for all three, and `depends on axioms: [propext, Classical.choice, Quot.sound]` for each of the six theorems. The three `lake env lean` commands were tested on 2026-10-22 against build B4.
 5. **Record the versions,** inside the project directory: `lean --version`, `lake --version`, `uname -a`, and the SHA-256 of `lean`, `lake` and each checker binary.
 
 ## What to publish
@@ -71,6 +83,7 @@ Checker binaries:      <name, revision, SHA-256 for comparator, lean4export, nan
 | comparator NavierStokes | ... | | | | <last line> |
 | comparator Euler | ... | | | | <last line> |
 | bridges | ... | | | | <axioms printed> |
+exit_codes.tsv:         <contents>
 Full logs or their SHA-256:
 Differences from the expected results, if any:
 Deviations from this guide, if any:
