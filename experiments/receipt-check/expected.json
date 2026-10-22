@@ -1,0 +1,31 @@
+{
+  "registered": "2026-10-22",
+  "procedure_Z": "OpenAI's published steps: lake exe cache get; lake build; lake exe comparator ComparatorChallenges/NavierStokes.json",
+  "check_X": "P6 from experiments/blind-faults/v2/protocol_lib_v2.py, unchanged since v2.2 (sha256 291b9b6e0f057035d9023cb8304dd6a176483170cd572a23bcba6671fd3a04e2)",
+  "variants": {
+    "C": {
+      "change": "none",
+      "Z": {
+        "exit": 0,
+        "line": "Your solution is okay!"
+      },
+      "X": {
+        "exit": 0,
+        "p6_flags": []
+      }
+    },
+    "F5": {
+      "change": "receipt.tsv: the comparator row names comparator-run.log instead of comparator.log; nothing else changes",
+      "Z": {
+        "exit": 0,
+        "line": "Your solution is okay!"
+      },
+      "X": {
+        "exit": 1,
+        "p6_flags": [
+          "P6:receipt-log-missing-comparator-run.log"
+        ]
+      }
+    }
+  }
+}
