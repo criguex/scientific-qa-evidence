@@ -12,6 +12,6 @@ On 2026-10-21/22 OpenAI's repository was built again from the pinned tarball, wi
 
 **Nothing was prebuilt** ([`build_facts.txt`](build_facts.txt)): 0 Reservoir barrels, 0 files in the build cache directory, and every one of the 11,406 `.olean` files (Mathlib 8,371, project 2,659, dependencies 376) is newer than the build start. The bridge inputs have the same SHA-256 as in [`bridges/README.md`](../../../bridges/README.md) ([`inputs.sha256`](inputs.sha256)).
 
-Records: [`receipts.tsv`](receipts.tsv), [`versions.txt`](versions.txt), [`build.time.txt`](build.time.txt), the SHA-256 of the full build log ([`build.log.sha256`](build.log.sha256); the log itself is not published), Comparator stdout, stderr and timing per challenge, and the Lean compile and axiom logs. Host paths are replaced with `<path>`.
+Records: [`receipts.tsv`](receipts.tsv), [`versions.txt`](versions.txt) (**empty**: the wrapper ran the version commands outside the project, where no toolchain is configured; the versions, recorded afterwards from the same binaries, whose hashes match the B4 record, are in [`versions-recorded-after.txt`](versions-recorded-after.txt)), [`build.time.txt`](build.time.txt), the SHA-256 of the full build log ([`build.log.sha256`](build.log.sha256); the log itself is not published), Comparator stdout, stderr and timing per challenge, and the Lean compile and axiom logs. Host paths are replaced with `<path>`.
 
 **Limits.** Same single Linux host and the same reused Lean toolchain and checker binaries as B1–B4; an outside rebuild remains the stronger check.

@@ -23,18 +23,19 @@ record_toolchain $T $W/out/toolchain.txt
 { git -C $CLONE log -1 --format='qa clone %H'; sha256sum $(readlink -f $W/bin/*) | sed 's|/home/nse/[^ ]*/||'; } > $W/out/versions.txt
 E=$W/evidence; mkdir -p $E
 printf 'step\tcommand\tlog\texit\n' > $E/receipt.tsv
-step bundle cache_get $E/cache_get.log lake exe cache get; printf 'cache_get\tlake exe cache get\tcache_get.log\t%s\n' $? >> $E/receipt.tsv
-step bundle build $E/build.log lake build; printf 'build\tlake build\tbuild.log\t%s\n' $? >> $E/receipt.tsv
-step bundle comparator $E/comparator.log lake exe comparator ComparatorChallenges/NavierStokes.json; printf 'comparator\tlake exe comparator ComparatorChallenges/NavierStokes.json\tcomparator.log\t%s\n' $? >> $E/receipt.tsv
+step bundle cache_get $E/cache_get.log lake exe cache get; rc=$?; printf 'cache_get\tlake exe cache get\tcache_get.log\t%s\n' $rc >> $E/receipt.tsv; expect $rc "bundle step cache_get" 0
+step bundle build $E/build.log lake build; rc=$?; printf 'build\tlake build\tbuild.log\t%s\n' $rc >> $E/receipt.tsv; expect $rc "bundle step build" 0
+step bundle comparator $E/comparator.log lake exe comparator ComparatorChallenges/NavierStokes.json; rc=$?; printf 'comparator\tlake exe comparator ComparatorChallenges/NavierStokes.json\tcomparator.log\t%s\n' $rc >> $E/receipt.tsv; expect $rc "bundle step comparator" 0
 check_comparator_exe $T
 for v in C F5; do
-  rm -rf $W/out/$v; cp -r $E $W/out/$v
-  if [ $v = F5 ]; then sed -i 's|\tcomparator.log\t|\tcomparator-run.log\t|' $W/out/$v/receipt.tsv; fi
-  diff $E/receipt.tsv $W/out/$v/receipt.tsv > $W/out/$v.receipt.diff
-  rm -rf $T/qa-evidence; cp -r $W/out/$v $T/qa-evidence
-  step $v Z_comparator $W/out/$v.Z.log lake exe comparator ComparatorChallenges/NavierStokes.json
+  rm -rf $W/out/$v; cp -r $E $W/out/$v || die "copy of the bundle failed ($v)"
+  if [ $v = F5 ]; then sed -i 's|\tcomparator.log\t|\tcomparator-run.log\t|' $W/out/$v/receipt.tsv || die "receipt edit failed"; fi
+  diff $E/receipt.tsv $W/out/$v/receipt.tsv > $W/out/$v.receipt.diff; expect $? "receipt diff ($v)" 0 1
+  rm -rf $T/qa-evidence; cp -r $W/out/$v $T/qa-evidence || die "placing the bundle failed ($v)"
+  step $v Z_comparator $W/out/$v.Z.log lake exe comparator ComparatorChallenges/NavierStokes.json; expect $? "Z_comparator ($v)" 0
   t0=$(now); python3 $CLONE/experiments/receipt-check/check_p6.py $W/out/$v > $W/out/$v.X.json 2>&1; rc=$?
   printf '{"variant": "%s", "step": "X_p6", "command": "python3 experiments/receipt-check/check_p6.py <bundle>", "log_sha256": "%s", "exit_code": %s, "started": "%s", "finished": "%s"}\n' $v "$(sha $W/out/$v.X.json)" $rc "$t0" "$(now)" >> $J
+  expect $rc "check_p6 ($v)" 0 1
 done
 rm -rf $T/qa-evidence
 echo DONE

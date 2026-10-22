@@ -1,0 +1,17 @@
+Recorded on 2026-10-22T17:57:10Z, after build B5, because B5's own versions.txt is empty
+(its wrapper ran `lake --version` and `lean --version` outside the project directory, where
+no default toolchain is configured, so both commands failed and wrote nothing).
+
+Same host, same installed toolchain, run inside the build-B4 tree of the same pinned tarball:
+
+lean-toolchain: leanprover/lean4:v4.34.0-rc2
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+
+SHA-256 of the toolchain binaries:
+e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550  lean
+6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d  lake
+
+Both hashes equal those recorded during build B4 on 2026-10-21
+(evidence/formal/cd-validation/receipts/nocache_build_versions.txt), and the toolchain
+directory has not been modified since 2026-10-20, so B5 used these binaries.

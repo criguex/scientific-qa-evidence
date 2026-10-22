@@ -3,6 +3,7 @@ OPS=/home/nse/ns08_validation_20261020_a5YGak
 OLD=/home/nse/nse_audit_20261020/NavierStokesAndEuler
 PS=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
 die() { echo "ABORT: $*" >&2; exit 3; }
+expect() { local rc=$1 what=$2 ok; shift 2; for ok in "$@"; do [ "$rc" = "$ok" ] && return 0; done; die "$what exited $rc, expected one of: $*"; }
 now() { date -u +%FT%TZ; }
 sha() { sha256sum "$1" | cut -c1-64; }
 guard() {
