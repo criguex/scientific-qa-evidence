@@ -1,6 +1,6 @@
 # Animation guide
 
-The six standalone HTML scenes and their animated preview loops are committed in this directory's parent `docs/assets/` folder. The scenes are offline, interactive, and read the same evidence-derived manifest ([`manifest.json`](manifest.json)). Open [`index.html`](index.html) for the gallery, or open an individual scene directly. Each page has playback/seek controls, an accessible text summary, and its embedded data. The HTML and plotted curves are visual explanations; the evidence remains the saved fixtures and case records linked below.
+The thirteen standalone HTML scenes are in this directory; their GIF previews are in `docs/assets/` and their MP4 versions in `docs/media/`. The scenes are offline, interactive, and read the same evidence-derived manifest ([`manifest.json`](manifest.json)). Open [`index.html`](index.html) for the gallery, or open an individual scene directly. Each page has playback/seek controls, an accessible text summary, and its embedded data. The HTML and plotted curves are visual explanations; the evidence remains the saved fixtures and case records linked below.
 
 ## Numerical scenes
 
@@ -73,9 +73,9 @@ These four scenes play in real time (20 seconds) with a caption box that explain
 
 ### 7. Rebuild from zero, check again
 
-![Rebuild from zero and three Comparator runs](../docs/assets/rerun-preview.gif)
+![Rebuild from zero and four Comparator runs](../docs/assets/rerun-preview.gif)
 
-- **Shows:** source → from-scratch build (Mathlib modules compiled, cache downloads, jobs, time) → Comparator's three checks, then a grid of the three Comparator runs for Navier–Stokes (C, D) and Euler with recorded times.
+- **Shows:** source → from-scratch build (Mathlib modules compiled, cache downloads, jobs, time) → Comparator's three checks, then a grid of the four Comparator runs (builds B1–B4) for Navier–Stokes (C, D) and Euler with recorded times. Build B5, made later, is not in this scene ([B5 record](../evidence/formal/b5/README.md)).
 - **Does not show:** that the formal statement matches Clay's text, or anything about (A) and (B).
 - **Trace:** [scene](rerun.html) · [results](../evidence/formal/cd-validation/README.md).
 
@@ -153,7 +153,7 @@ python3 animations/export_gifs.py mutants      # one scene
 
 GIF exports do not retain HTML seek controls.
 
-Full-quality MP4 versions of all ten scenes (1080 × 1080, 30 fps, H.264, 20 seconds each) are in [`docs/media/`](../docs/media/), exported frame by frame from the same HTML scenes:
+Full-quality MP4 versions of all thirteen scenes (1080 × 1080, 30 fps, H.264, 20 seconds each) are in [`docs/media/`](../docs/media/), exported frame by frame from the same HTML scenes:
 
 ```sh
 python3 animations/export_mp4.py              # all scenes

@@ -22,7 +22,7 @@ Requires git and Python 3.9 or newer. No third-party packages.
 ```sh
 git clone https://github.com/criguex/scientific-qa-evidence.git
 cd scientific-qa-evidence
-git checkout v1.2.0                                 # the tag of this release; later releases are listed on GitHub
+git checkout v1.3.1                                 # the tag of this release; later releases are listed on GitHub
 shasum -a 256 -c evidence/SHA256SUMS.txt          # on Linux, sha256sum -c also works
 python3 evidence/verify_numerical.py
 (cd evidence/numerical/source && python3 -m unittest -v test_runner)
@@ -32,9 +32,11 @@ python3 -m unittest discover -s animations -p 'test_*.py'
 (cd evidence/formal/statement-provenance && python3 -m unittest test_compare_statements)
 (cd experiments/blind-faults && python3 -m unittest test_protocol)          # benchmark v1, frozen
 (cd experiments/blind-faults/v2 && python3 -m unittest test_protocol_v2 fuzz_v2)  # corrected evaluator + fuzzer
+(cd experiments/mathlib-controls && python3 verify.py && python3 -m unittest test_verify)  # receipts of the Mathlib controls
+(cd experiments/receipt-check && python3 -m unittest test_results)  # receipt checks on authentic bundles
 ```
 
-The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.2.0`) link the successful CI run for that exact commit, with its logs.
+The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.3.1`) link the successful CI run for that exact commit, with its logs.
 
 To rerun the numerical suite into a new folder and inspect the raw output:
 
@@ -86,7 +88,7 @@ lake env leanchecker --fresh Euler.Solution
 
 A statement mutant is a one-line edit to `ComparatorChallenges/NavierStokes.lean` or `Euler.lean`, followed by the Comparator command. The exact edits are the diffs in [`evidence/formal/cd-validation/mutants/`](evidence/formal/cd-validation/mutants/). Every recorded run, its build, its times, exit code and the SHA-256 of its original log are in [`evidence/formal/cd-validation/README.md`](evidence/formal/cd-validation/README.md) and [`PROVENANCE.md`](evidence/formal/cd-validation/PROVENANCE.md).
 
-A full run of these steps from a fresh clone, with its results, is in [`evidence/FROM_ZERO.md`](evidence/FROM_ZERO.md).
+A run from a fresh clone of the Python checks, the Lean bridges and the Mathlib-control steps, with its results, is in [`evidence/FROM_ZERO.md`](evidence/FROM_ZERO.md); it did not repeat the OpenAI build, which was repeated separately as build B5 ([record](evidence/formal/b5/README.md)).
 
 ## 5. The bridge lemmas (Lean)
 

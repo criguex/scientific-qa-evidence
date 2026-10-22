@@ -27,7 +27,7 @@ Run on 2026-10-21 on the same Linux host and with the same checker binaries as t
 
 ## What this shows
 
-1. **Comparator's refusal means "the statement changed", nothing more.** It refused all eight changes, including three equivalent ones and one weaker but true one. Telling them apart took a separate Lean proof each time.
+1. **Comparator's refusal means "the statement changed", nothing more.** It refused all eight changes, including four equivalent ones (one of them definitionally equal) and one weaker but true one. Telling them apart took a separate Lean proof each time.
 2. **Comparator compares statements structurally.** It refused `n + 1 ≤ p`, which Lean reduces to `n < p` by definition (`Iff.rfl`). So an acceptance is equality as Comparator checks it, and a mathematical equivalence has to be proved separately.
 3. **The guard matters.** Without it, any two true statements are "equivalent". It caught the deliberately cheating proof.
 4. **A version limited to examples is not the theorem.** `∀ n ≤ 100` holds, is implied by the full statement, and does not imply it as a schema.

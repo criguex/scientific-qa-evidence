@@ -29,7 +29,7 @@ This record repeats and extends the [2026-10-20 Comparator record](../comparator
 
 ## Builds used by each run
 
-Four different builds are involved. They differ in where Mathlib and the smaller dependencies came from, so each run is labeled with its build.
+Four different builds are involved in this record. They differ in where Mathlib and the smaller dependencies came from, so each run is labeled with its build. A fifth build, B5, was made later from source for release v1.3.0 and is recorded in [`../b5/`](../b5/README.md).
 
 | Build | Command | Where the compiled libraries came from | Used by |
 | --- | --- | --- | --- |

@@ -2,7 +2,7 @@
 
 This repository contains an independent QA audit of the Lean 4 formalizations in [openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler), which accompany “[Finite time blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)” and “[Finite time blowup for the Euler equation](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)” by OpenAI, plus a mutation-testing campaign on nine numerical models. The proofs belong to OpenAI. This repository proves nothing new, claims no Millennium Prize result and is not a mathematical review: it rebuilds the published artifacts, rechecks them with independent checkers, tests whether the checking pipeline catches errors, and publishes every step with hashes.
 
-- [Read the five-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.3.0.pdf)
+- [Read the seven-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.3.1.pdf)
 - [Read every claim with its evidence and limits](CLAIMS.md)
 - [Watch the thirteen evidence scenes](animations/index.html)
 - [Review one concrete result: receipt-to-artifact checks](docs/REVIEW_REQUEST.md)
@@ -15,7 +15,7 @@ By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://g
 For OpenAI's proofs at commit `f9e8bc5`, we checked:
 
 - **They check from scratch:** Comparator, with the nanoda and Lean kernels, accepted Navier–Stokes (C), (D) and Euler on five builds, the last two compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel includes every known 2026 soundness fix.
-- **The statement is the exact one:** Comparator refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public statement after textual normalization (name resolution not verified).
+- **Comparator checks the exact challenge statement:** it refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public statement after textual normalization (name resolution not verified).
 - **Not covered:** whether the Lean proof follows OpenAI's paper, which [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli and Hansen) disputes without claiming any Lean theorem is false.
 
 ## Clay's problem statement
@@ -28,7 +28,7 @@ OpenAI's formal theorems are written in DeepMind's style. Clay's [official probl
 ## The checking pipeline
 
 - **A refusal is not a refutation:** on three theorems Mathlib already proves, Comparator refused all eight changed statements, even a definitionally equal one. A second route in Lean, guarded against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered ([Mathlib controls](experiments/mathlib-controls/RESULTS.md)).
-- **Planted faults:** in a pre-registered benchmark with a committed seed, the protocol flagged four fault classes that OpenAI's documented procedure passes; four review rounds found 17 issues in the experiment itself ([benchmark](experiments/blind-faults/v2/README.md)).
+- **Planted faults:** in a deterministic regression benchmark (the corrected v2 evaluator, written after review of the pre-registered v1 run), the protocol's checks flag four fault classes that a simulated baseline, modelled on OpenAI's documented procedure, passes; four review rounds found 17 issues in the experiment itself ([benchmark](experiments/blind-faults/v2/README.md)).
 - **One concrete comparison:** on the same authentic files, a receipt that names a log missing from the evidence passes OpenAI's published procedure with identical output, while the receipt check P6 flags it; the clean control passes both, as pre-registered ([receipt check](experiments/receipt-check/RESULTS.md)). A claim about traceability of evidence, not about the proof.
 - **What this case adds:** eight findings the documented verification procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)). Methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
 
@@ -41,11 +41,12 @@ OpenAI's formal theorems are written in DeepMind's style. Clay's [official probl
 | Does Comparator check the exact statement? | Yes. 6 of 6 statement mutants refused; comment-only control accepted. | [mutants](evidence/formal/cd-validation/mutants/) |
 | Is the challenge the public statement? | The 18 declarations match after textual normalization; name resolution was not verified. | [provenance](evidence/formal/statement-provenance/README.md) |
 | Are the checkers current? | The kernel source includes every 2026 kernel soundness fix; nanoda postdates its fix. | [kernel currency](evidence/formal/kernel-currency.md) |
-| Do the checkers reject a wrong proof? | Yes. Lean reports a type mismatch; nanoda stops with an assertion rejection. | [kernel mutation](evidence/formal/kernel-mutation/) |
+| Do the checkers reject a wrong proof? | Yes. Lean reports a type mismatch; nanoda stops with an internal assertion, classified as a rejection from its pinned source (its raw status is still pending). | [kernel mutation](evidence/formal/kernel-mutation/) |
 | Does the formal statement match Clay's text? | Of 16 clauses, 6 match directly, 9 match through standard facts, 1 needs a human decision. In Lean, OpenAI's theorems imply a literal rendering of Clay's (C) and (D); that rendering is not yet independently reviewed. | [risk review](evidence/formal/clay-lean-risk.md), [bridges](bridges/README.md) |
 | Do the numerical tests catch bugs? | 27 PASS · 54 KILLED · 3 SURVIVED per host, identical on macOS arm64 and Linux x86_64. | [numerical](evidence/README.md) |
-| Does the protocol catch what the baseline misses? | On planted faults, yes: four fault classes flagged by the protocol and passed by the baseline. | [benchmark](experiments/blind-faults/v2/README.md) |
-| Does a refusal mean the theorem is false? | No. On three Mathlib theorems, Comparator refused all 8 changed statements, including 3 equivalent ones; a separate Lean route classified each one as equivalent, weaker or false, all as pre-registered. | [Mathlib controls](experiments/mathlib-controls/RESULTS.md) |
+| Does the protocol catch what the baseline misses? | On planted faults in a deterministic benchmark, yes: four fault classes flagged by the protocol and passed by a simulated baseline. | [benchmark](experiments/blind-faults/v2/README.md) |
+| Does a refusal mean the theorem is false? | No. On three Mathlib theorems, Comparator refused all 8 changed statements, including 4 equivalent ones (one definitionally equal); a separate Lean route classified each one as equivalent, weaker or false, all as pre-registered. | [Mathlib controls](experiments/mathlib-controls/RESULTS.md) |
+| Does the published procedure check its own evidence? | No. On the same authentic files, a receipt naming a missing log and a stale log under the right name both left its output byte-identical; P6 caught the first, only a hash-bound check caught both. | [receipt check](experiments/receipt-check/RESULTS.md), [case 2](experiments/receipt-check/RESULTS2.md) |
 
 Every claim with its evidence, result and limitation is in [CLAIMS.md](CLAIMS.md).
 
@@ -61,9 +62,10 @@ python3 evidence/verify_numerical.py                               # saved runs 
 (cd evidence/numerical/source && python3 -m unittest test_runner)  # reruns all 84 numerical variants
 python3 evidence/test_consistency.py                               # README, CLAIMS and records agree
 python3 experiments/mathlib-controls/verify.py                     # check Mathlib-control receipts, recompute classes
+(cd experiments/receipt-check && python3 -m unittest test_results)  # recompute the receipt checks on the published bundles
 ```
 
-The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here. A complete run from a fresh clone is recorded in [FROM_ZERO.md](evidence/FROM_ZERO.md).
+The same checks, and the tests of every other script, run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS on every push. [REPRODUCE.md](REPRODUCE.md) gives the versions, the steps from a clean checkout, and which results are recomputed versus only verified by hash. The Lean builds need OpenAI's repository and a Linux host; their records are verified by hash here. A run of the Python checks, the Lean bridges and the Mathlib-control steps from a fresh clone (not the OpenAI build itself) is recorded in [FROM_ZERO.md](evidence/FROM_ZERO.md).
 
 ## Part A · Formal audit of (C), (D) and Euler
 
@@ -81,7 +83,7 @@ Comparator checks that the submitted solution proves exactly the theorem stated 
 
 | Animation | What it shows |
 | --- | --- |
-| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Comparator runs on four builds, all accepted"></a><br><a href="docs/media/rerun.mp4">▶ MP4 1080p</a> | **Rebuild, check again.** Four builds: the 2026-10-20 record (B1), an audit build whose Mathlib came from the prebuilt cache (B2), a fresh build (B3), and a full `lake --no-cache build` (B4) with every dependency compiled locally. Comparator accepted both challenges on each. B3 had silently received 7 small dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives, which is why B4 exists. The Lean toolchain and checker binaries were reused. |
+| <a href="animations/rerun.html"><img src="docs/assets/rerun-preview.gif" width="380" alt="Comparator runs on four builds, all accepted"></a><br><a href="docs/media/rerun.mp4">▶ MP4 1080p</a> | **Rebuild, check again.** Four builds: the 2026-10-20 record (B1), an audit build whose Mathlib came from the prebuilt cache (B2), a fresh build (B3), and a full `lake --no-cache build` (B4) with every dependency compiled locally. Comparator accepted both challenges on each; a fifth build, B5, came later and is not in this scene. B3 had silently received 7 small dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives, which is why B4 exists. The Lean toolchain and checker binaries were reused. |
 | <a href="animations/mutants.html"><img src="docs/assets/mutants-preview.gif" width="380" alt="Six statement mutants refused and a comment-only control accepted"></a><br><a href="docs/media/mutants.mp4">▶ MP4 1080p</a> | **Change the statement; it must be refused.** OpenAI's proof is never touched. Six one-symbol edits to the challenge were all refused with `Challenge and solution theorem statement do not match`; a comment-only control was accepted. A refused mutant says nothing about whether the mutated statement is true, and the `f = 0` mutants say nothing about (A) or (B). |
 | <a href="animations/replay.html"><img src="docs/assets/replay-preview.gif" width="380" alt="Fresh kernel replay and which kernel implementations examined the proofs"></a><br><a href="docs/media/replay.mp4">▶ MP4 1080p</a> | **Replay every step from an empty start.** `leanchecker --fresh` accepted both solutions. It reuses Lean's kernel, so it is not a third implementation. `lean4lean` could not be built for Lean 4.34 and never examined the proofs. |
 | <a href="animations/provenance.html"><img src="docs/assets/provenance-preview.gif" width="380" alt="OpenAI's challenge text matches DeepMind's public statement"></a><br><a href="docs/media/provenance.mp4">▶ MP4 1080p</a> | **Where the statement comes from.** The 18 declarations match after textual normalization; name resolution was not verified. The remaining differences with Google DeepMind's Formal Conjectures file are the import, the namespace, notation copied in with the same definition, and (A)/(B) left out. |
@@ -112,7 +114,7 @@ Compared with the verification procedure in OpenAI's README, the protocol produc
 
 ### Blind-fault benchmark
 
-A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
+An experiment planted faults in controlled cases, assigned by a committed seed and pre-registered (v1). After review it is presented as a deterministic regression benchmark: with the corrected v2 evaluator, written after that review, the protocol's checks flag four fault classes that a simulated baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
 
@@ -251,16 +253,22 @@ FINDINGS.md               what the protocol found that the documented procedure 
 RELATED_WORK.md           prior work and novelty assessment
 REPRODUCE.md              versions, steps, recomputed vs hash-verified
 AUTHORSHIP.md             authorship and AI disclosure
+CITATION.cff, LICENSE_STATUS.md, CONTRIBUTING.md   how to cite, rights, contributions
 evidence/
   formal/                 builds, Comparator runs, mutants, replays, provenance, kernel currency,
-                          Clay risk review and bridge plan (cd-validation/ holds the 2026-10-21 records)
+                          Clay fidelity and risk reviews, bridge table, CMI correspondence
+    cd-validation/        the 2026-10-21 revalidation (builds B1–B4, runs 1–4, mutants, replays)
+    b5/                   build B5 and run 5, for release v1.3.0
   numerical/              frozen contract, source and tests, 84-case runs for macOS and Linux
+  FROM_ZERO.md            checks rerun from a fresh clone
   SHA256SUMS.txt          checksums for every curated file
-experiments/blind-faults/ pre-registered benchmark: seed, frozen design, cases, results, errata, v2 evaluator
-experiments/mathlib-controls/ statement changed vs theorem false, on three Mathlib theorems
-bridges/                  Clay's text in Lean and the proof that OpenAI's theorems imply it
+experiments/
+  blind-faults/           benchmark: committed seed and frozen v1, errata, corrected v2 evaluator
+  mathlib-controls/       statement changed vs theorem false, on three Mathlib theorems
+  receipt-check/          receipts vs artifacts on authentic records, two cases
+bridges/                  Clay's text in Lean, the proof that OpenAI's theorems imply it, review sheet
 animations/               thirteen offline scenes, build and export scripts, tests
-docs/                     GIF previews, MP4 videos, PDF summary
+docs/                     GIF previews, MP4 videos, PDF summaries, review request
 .github/workflows/        CI that runs every check on each push
 ```
 
@@ -272,6 +280,6 @@ docs/                     GIF previews, MP4 videos, PDF summary
 - **Related analysis:** Bastounis, Circelli and Hansen, [arXiv:2610.08144](https://arxiv.org/abs/2610.08144); the rest of the prior work is in [RELATED_WORK.md](RELATED_WORK.md).
 - **This QA study:** Cristian Guerra. To cite it, use [CITATION.cff](CITATION.cff).
 - **Rights:** publication is authorized, but no open-source license is granted. See [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Status:** latest release [v1.3.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.0), which adds the Lean bridges to Clay's text, the Mathlib controls and build B5.
+- **Status:** latest release [v1.3.1](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.1), which adds the receipt check on authentic records and the CMI correspondence to v1.3.0 (Lean bridges to Clay's text, Mathlib controls, build B5).
 
 No theorem discovery, scientific certification, empirical validation or proof about a real-world system is claimed.

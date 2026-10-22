@@ -10,7 +10,7 @@ authors:
     country: CO
 repository-code: "https://github.com/criguex/scientific-qa-evidence"
 url: "https://github.com/criguex/scientific-qa-evidence"
-version: "1.3.0"
+version: "1.3.1"
 date-released: 2026-10-22
 abstract: >-
   A software-QA audit package. It rebuilds OpenAI's Lean 4 formalizations of
@@ -19,7 +19,8 @@ abstract: >-
   on five builds, tests the statement check with mutants, and proves in Lean that
   OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean, a
   rendering not yet independently reviewed. Pre-registered controls on three
-  Mathlib theorems separate a changed statement from a false one, and a paired
+  Mathlib theorems separate a changed statement from a false one, a receipt check
+  on authentic records tests the traceability of the evidence, and a paired
   macOS/Linux mutation-testing campaign covers nine synthetic numerical models
   (84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED). It claims no new
   theorem and no scientific certification.

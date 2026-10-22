@@ -2,7 +2,7 @@
 
 A reading-based risk review of the formal statement that OpenAI proved, whose 18 declarations match Google DeepMind's public statement after textual normalization, with name resolution not verified ([provenance](statement-provenance/README.md)). It compares each clause of the official Clay text (Fefferman, [PDF](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf), SHA-256 `c1b5f27b…a06d0c`) with the Lean declarations at OpenAI commit `f9e8bc5`.
 
-> **Status:** written by a QA engineer with AI assistance on 2026-10-21. It has **not** been reviewed by a mathematician, and the "standard fact" rows are not formalized here. It refines the [fidelity table](clay-lean-fidelity.md); it does not replace an expert review.
+> **Status:** written by a QA engineer with AI assistance on 2026-10-21. It has **not** been reviewed by a mathematician. The "standard fact" rows were later formalized as Lean bridge lemmas ([bridge table](clay-lean-bridges.md), [`bridges/`](../../bridges/README.md)), relative to a literal rendering of Clay's text that is not yet independently reviewed. It refines the [fidelity table](clay-lean-fidelity.md); it does not replace an expert review.
 
 ## Why direction matters
 
@@ -17,7 +17,7 @@ A clause that is stricter than Clay on the data side, or looser on the solution 
 
 ## Clause by clause
 
-Status: **direct** means the same condition when read literally. **Standard fact** means equal by a textbook result that is named but not formalized here. **Attention** means it depends on interpretation.
+Status: **direct** means the same condition when read literally. **Standard fact** means equal by a textbook result; when this review was written it was named but not formalized, and it is now proved in Lean in [`bridges/`](../../bridges/README.md). **Attention** means it depends on interpretation.
 
 | Clay clause | Side | Lean | Reading | Status |
 | --- | --- | --- | --- | --- |
@@ -52,9 +52,9 @@ This is a solution-side restriction, so it matters for (D):
 
 So the formal (D) proves the problem as amended by the erratum. (C) is on ℝ³ and is not affected. Whether the amended statement is the intended prize problem is a question for Clay and expert reviewers, not one this review can settle.
 
-## Bridges that remain
+## Bridges (now formalized)
 
 The work plan for these bridges, as a claim → lemma → proof → review → pending table, is [clay-lean-bridges.md](clay-lean-bridges.md).
 
 
-The standard facts (a)–(e) are the [open bridges](clay-lean-fidelity.md#open-bridges-to-equivalence) of the fidelity table, now located clause by clause. They are textbook analysis, and all are statable in Mathlib, so the natural next step is to prove them as Lean lemmas instead of citing them. The erratum point needs a human decision, not a proof.
+The standard facts (a)–(e) are the [open bridges](clay-lean-fidelity.md#open-bridges-to-equivalence) of the fidelity table, now located clause by clause. They are textbook analysis, and all are statable in Mathlib, and they have since been proved as Lean lemmas instead of cited (see the [bridge table](clay-lean-bridges.md)). The erratum point needs a human decision, not a proof.

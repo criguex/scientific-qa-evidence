@@ -9,12 +9,12 @@ Work for the semantic plan in [`evidence/formal/clay-lean-bridges.md`](../eviden
 
 ## Readings chosen in ClayLiteral (to be reviewed)
 
-| Reading | Choice made | Alternative left open |
+| Reading | Choice made | How K1 handles it |
 | --- | --- | --- |
-| C^∞(ℝ³ × [0, ∞)), row S4 | Restriction of a C^∞ function on ℝ³ × ℝ | Continuous one-sided derivatives of every order up to t = 0 |
-| The erratum, row S7 | (D) stated both with and without periodic pressure on solutions | — |
-| Exponent K in (4), (5), (9) | Ranges over the reals | Natural numbers only (a weaker requirement) |
-| Multi-index α | A list of directions, so order and repetition are explicit | — |
+| C^∞(ℝ³ × [0, ∞)), rows D4 and S4 | Two renderings: restriction of a C^∞ function on ℝ³ × ℝ (`SmoothUpToBoundary`), and derivatives of every order continuous up to t = 0 (`SmoothOneSided`, Mathlib's `ContDiffOn`) | Proved under both (`k1_*` and `k1_*_oneSided`); whether either is Clay's meaning is review point 1 in [`K0_REVIEW.md`](K0_REVIEW.md) |
+| The erratum, row S7 | (D) stated both with and without periodic pressure on solutions | K1 proves the version with the erratum on solutions; the other is open |
+| Exponent K in (4), (5), (9) | Ranges over the reals | A stronger requirement on data than natural K, so the data side is not weakened |
+| Multi-index α | A list of directions, so order and repetition are explicit | For smooth functions the order of partials does not matter |
 
 ## Build receipt (2026-10-21)
 
@@ -29,23 +29,9 @@ Built on the Linux test host against the no-cache build B4 of OpenAI's `f9e8bc5`
 | `ClayLiteral.lean` | typechecks, exit 0 |
 | `Bridges.lean` | typechecks, exit 0 |
 
-`#print axioms` for every theorem proved so far:
+`#print axioms` was run on every theorem in `Bridges.lean` and on the sanity theorem in `ClayLiteral.lean`; each depends only on `propext`, `Classical.choice` and `Quot.sound`. The theorems are `p1`, `d1_zero`, `d2_zero`, `d3_zero`, `witness_C`, `witness_D`, `d5`, `d6`, `d7`, `clay_bound`, `s1`–`s6`, `s7_formal_side`, `k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided`, `zero_solution_C`, `zero_solution_D` and `ClayLiteral.altD_withoutErratum_imp_withErratum`. The same check was repeated from a fresh clone ([FROM_ZERO](../evidence/FROM_ZERO.md)) and against build B5 ([axioms log](../evidence/formal/b5/axioms.log)).
 
-| Theorem | Row | Axioms |
-| --- | --- | --- |
-| `Bridges.d6` | D6 | propext, Classical.choice, Quot.sound |
-| `Bridges.s3` | S3 | propext, Classical.choice, Quot.sound |
-| `Bridges.s6` | S6 | propext, Classical.choice, Quot.sound |
-| `Bridges.p1` | P1 | propext, Classical.choice, Quot.sound |
-| `Bridges.s4` | S4, restriction reading | propext, Classical.choice, Quot.sound |
-| `Bridges.d1_zero`, `d2_zero`, `d3_zero` | D1, D2, D3 for u₀ = 0 | propext, Classical.choice, Quot.sound |
-| `Bridges.witness_C`, `witness_D` | D4 for OpenAI's forces | propext, Classical.choice, Quot.sound |
-| `Bridges.k1_C` | K1 for (C), no hypotheses | propext, Classical.choice, Quot.sound |
-| `Bridges.k1_D` | K1 for (D), no hypotheses | propext, Classical.choice, Quot.sound |
-| `Bridges.s7_formal_side` | S7 (formal side only) | propext, Classical.choice, Quot.sound |
-| `ClayLiteral.altD_withoutErratum_imp_withErratum` | sanity | propext, Classical.choice, Quot.sound |
-
-No `sorry`, no extra axioms. `k1_C` and `k1_D` use OpenAI's proved theorems, which are sorry-free, so the standard axioms above are the whole trust base apart from the named hypotheses.
+No `sorry`, no extra axioms, and no hypotheses in the K1 theorems. They use OpenAI's proved theorems, which are sorry-free, so the three standard axioms are the whole trust base, together with the fidelity of `ClayLiteral` to the PDF.
 
 ## What K1 does and does not establish
 

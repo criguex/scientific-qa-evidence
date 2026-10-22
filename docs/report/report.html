@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Scientific QA Evidence — Report v1.3.0</title>
+<title>Scientific QA Evidence — Report v1.3.1</title>
 <style>
   @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
   body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10.2pt; line-height: 1.45; color: #14212b; }
@@ -28,7 +28,7 @@
 <body>
 
 <h1>Scientific QA Evidence</h1>
-<div class="sub">An independent QA audit of OpenAI's Lean proofs for Navier–Stokes alternatives (C) and (D) and the Euler singularity, with Lean bridges to Clay's text and checker controls · Report for release <b>v1.3.0</b> · 21 October 2026<br>
+<div class="sub">An independent QA audit of OpenAI's Lean proofs for Navier–Stokes alternatives (C) and (D) and the Euler singularity, with Lean bridges to Clay's text and checker controls · Report for release <b>v1.3.1</b> · 22 October 2026<br>
 Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com/criguex/scientific-qa-evidence</div>
 
 <div class="box warn"><b>Read this first.</b> The proofs belong to OpenAI (<code>openai/NavierStokesAndEuler</code>). This work proves nothing new, claims no Millennium Prize result and is not a mathematical review. It is a software-QA study: rebuild the published artifacts, recheck them with independent checkers, test whether the checking pipeline itself catches errors, and publish every step with hashes.</div>
@@ -38,7 +38,7 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 <li><b>OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.</b> Comparator, with nanoda and the Lean kernel, accepted both challenges on five different builds, the last two compiled entirely from source with nothing prebuilt (<code>lake --no-cache build</code>, exit 0, 11,424 jobs, 1 h 29 min and 1 h 16 min). A fresh <code>leanchecker</code> replay agreed, and the kernel source used includes every known 2026 kernel soundness fix.</li>
 <li><b>Comparator checks the exact statement.</b> It refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public Formal Conjectures statement after textual normalization (name resolution not verified).</li>
 <li><b>OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean,</b> for every ν &gt; 0, with no hypotheses and only the standard axioms, under both readings of smoothness at t = 0 (<code>k1_C</code>, <code>k1_D</code>, <code>k1_C_oneSided</code>, <code>k1_D_oneSided</code>). This is relative to the literal rendering <code>ClayLiteral</code>, which nobody independent has reviewed against the PDF; (D) reads the erratum on periodic pressure as a solution condition, and (C) does not use it.</li>
-<li><b>A refusal is not a refutation.</b> On three Mathlib theorems, Comparator refused all eight changed statements, including three equivalent ones and a definitionally equal one. A second route in Lean, with a guard against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered.</li>
+<li><b>A refusal is not a refutation.</b> On three Mathlib theorems, Comparator refused all eight changed statements, including four equivalent ones, one of them definitionally equal. A second route in Lean, with a guard against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered.</li>
 <li><b>Not settled here.</b> Whether the Lean proof follows OpenAI's paper is out of scope and is disputed by Bastounis, Circelli and Hansen (arXiv:2610.08144). No mathematician has reviewed the bridges.</li>
 <li><b>What the protocol adds.</b> In this case it surfaced eight findings that the documented verification procedure does not produce, three of them corrected defects in this study's own work. In a pre-registered benchmark its checks flagged four planted fault classes that the baseline passes. Four review rounds found and fixed 17 issues in that experiment itself.</li>
 <li><b>Not claimed.</b> Methodological novelty (a targeted literature search found close prior work), a real-world detection rate, or any part of the mathematical proof.</li>
@@ -75,7 +75,7 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 <p class="small">Findings 1, 3 and 8 were defects in this study's own work, caught by the protocol and corrected in the open. One case is not a rate.</p>
 
 <h2>5. Pre-registered blind-fault benchmark</h2>
-<p>Seed committed by hash before the design was frozen; design and scripts frozen by hash; 21 cases drawn by the author; blind results committed before the key; key and seed revealed, and the draw reproduced byte for byte. After review it is presented as a <b>deterministic regression benchmark</b>; commit order is not taken as proof of blinding.</p>
+<p>The baseline is a Python model of OpenAI's documented procedure over recorded artifacts, not the procedure run live (the receipt check in Section 8 does run it live). Seed committed by hash before the design was frozen; design and scripts frozen by hash; 21 cases drawn by the author; blind results committed before the key; key and seed revealed, and the draw reproduced byte for byte. After review it is presented as a <b>deterministic regression benchmark</b>; commit order is not taken as proof of blinding.</p>
 <table>
 <tr><th>Planted fault</th><th>Baseline</th><th>Protocol</th></tr>
 <tr><td>Clean</td><td class="ok">passes</td><td class="ok">passes</td></tr>
@@ -105,7 +105,7 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 <tr><td>(6), (11) smoothness; (7) Lebesgue energy bound</td><td><code>ContDiffOn</code> on the closed half-space; <code>MemLp 2</code> and Bochner bound</td><td><code>s4</code>, <code>s5</code></td></tr>
 <tr><td>(8), (10), erratum: periodicity</td><td><code>IsOnePeriodic</code></td><td><code>d6</code>, <code>s6</code>, <code>s7_formal_side</code></td></tr>
 </table>
-<p><b>State:</b> 16 of 17 claims proved in Lean; K0 written and checked non-vacuous (the zero solution meets every Clay solution condition); S7 interpretive. All theorems use only <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>. <b>Open:</b> an independent review of <code>ClayLiteral</code> against the PDF (14 points, smoothness at t = 0 first; <code>SmoothOneSided</code> is a definition and its name proves nothing), Clay's answer on periodic pressure (D only), and a mathematician's review.</p>
+<p><b>State:</b> 16 of 17 claims proved in Lean; K0 written and checked non-vacuous (the zero solution meets every Clay solution condition); S7 interpretive. All theorems use only <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>. <b>Open:</b> an independent review of <code>ClayLiteral</code> against the PDF (14 points, smoothness at t = 0 first; <code>SmoothOneSided</code> is a definition and its name proves nothing), the reading of periodic pressure in (D), on which CMI's president, asked, said only that (B) and (D) are problems in the periodic (toral) setting, without interpreting the erratum; and a mathematician's review.</p>
 
 <h2>7. Mathlib controls: a changed statement is not a false one</h2>
 <p>Pre-registered (commit <code>046a128</code>, amended once before any run after outside review). Correct statements, reformulations and deliberate errors for three theorems Mathlib already proves.</p>
@@ -117,9 +117,19 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 </table>
 <p>All 11 cases and both controls (a cheating equivalence rejected by the dependency guard; a signed bound showing the DCT reformulation needs domination) came out as registered. Every step has a receipt with command, input and output hashes and exit code; <code>verify.py</code> checks the records against them and has regression tests for two verifier defects found by an outside reviewer. Limits: author-designed cases, no held-out cases yet, three theorems only.</p>
 
-<h2 class="pb">8. Reproducibility and traceability</h2>
+<h2>8. Receipt check on authentic records</h2>
+<p>Pre-registered, two cases. On a copy of a from-source build tree, OpenAI's published procedure (<code>lake exe cache get</code>, <code>lake build</code>, <code>lake exe comparator ComparatorChallenges/NavierStokes.json</code>) was recorded step by step; then only the evidence bundle was altered, and Comparator was rerun once per variant.</p>
+<table>
+<tr><th>Variant</th><th>Published procedure</th><th>P6 (log exists)</th><th>Hash check</th></tr>
+<tr><td>Clean</td><td>exit 0</td><td>pass</td><td>pass</td></tr>
+<tr><td>Receipt names a missing log</td><td>exit 0, byte-identical output</td><td class="no">flags</td><td class="no">flags</td></tr>
+<tr><td>Stale log from another run, right name</td><td>exit 0, byte-identical output</td><td>passes</td><td class="no">flags</td></tr>
+</table>
+<p><b>Conclusion:</b> in this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by the hash check. It does not mean Comparator accepted a false proof. Limits: two cases, one host; the published procedure does not claim to check receipts.</p>
+
+<h2 class="pb">9. Reproducibility and traceability</h2>
 <ul>
-<li>Release <b>v1.3.0</b>, content commit <code>b3fd34d</code>; CI green on Ubuntu and macOS, Python 3.9 and 3.12.</li>
+<li>Release <b>v1.3.1</b>, content commit __COMMIT__; CI green on Ubuntu and macOS, Python 3.9 and 3.12. An independent automated audit of the READMEs against the records was run before this release, and its confirmed findings were fixed.</li>
 <li><b>Validation from a fresh clone:</b> every hash, rerun, consistency check and test passes on macOS; on the Linux host the Lean bridges compile from the clone into an empty directory and all 21 Mathlib-control steps reproduce their exit codes and input hashes (<code>evidence/FROM_ZERO.md</code>). A fifth build, B5, repeated the full build from source and Comparator accepted both challenges again (<code>evidence/formal/b5/</code>).</li>
 <li>Every cited repository, pinned commit, path, paper and URL was checked against its source; <code>CITATION.cff</code> lists them with revisions and licenses and validates against CFF 1.2.0.</li>
 <li>Every curated file has a SHA-256 in <code>evidence/SHA256SUMS.txt</code>; every public log is traced to its original's hash in <code>PROVENANCE.md</code>.</li>
