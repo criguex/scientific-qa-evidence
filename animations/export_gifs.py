@@ -22,12 +22,14 @@ OUTPUTS = {
     "experiment": "experiment-preview.gif",
     "bridges": "bridges-preview.gif",
     "controls": "controls-preview.gif",
+    "flow": "flow-scene.gif",
 }
 FRAMES = 120
 FPS = 15
 DURATION = 20
-REALTIME = {"rerun", "mutants", "replay", "provenance", "experiment", "bridges", "controls"}
+REALTIME = {"rerun", "mutants", "replay", "provenance", "experiment", "bridges", "controls", "flow"}
 REALTIME_FPS = 10
+LIGHT = {"flow": "scale=720:-1:flags=lanczos,"}
 
 
 def export(page, animation_id, destination):
@@ -39,7 +41,8 @@ def export(page, animation_id, destination):
             page.evaluate(f"renderAt({DURATION * index / (frame_count - 1)})")
             data = page.evaluate("document.getElementById('scene').toDataURL('image/png')")
             Path(frames, f"f{index:03d}.png").write_bytes(base64.b64decode(data.split(",", 1)[1]))
-        palette = "split[a][b];[a]palettegen=max_colors=256:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle"
+        colors = 128 if animation_id in LIGHT else 256
+        palette = LIGHT.get(animation_id, "") + f"split[a][b];[a]palettegen=max_colors={colors}:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(fps), "-i", f"{frames}/f%03d.png", "-vf", palette, "-loop", "0", str(destination)], check=True)
 
 

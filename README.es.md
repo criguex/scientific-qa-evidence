@@ -211,7 +211,7 @@ Cada fila con su estado está en [clay-lean-bridges.md](evidence/formal/clay-lea
 
 ## Animaciones
 
-Trece escenas offline, cada una como página HTML interactiva, GIF de vista previa y MP4 en 1080p. Abre la [galería](animations/index.html) o lee la [guía de animaciones](animations/README.md) (en inglés) con ecuaciones, parámetros y trazas de fuente.
+Trece escenas de evidencia y una ilustrativa, todas offline, cada una como página HTML interactiva, GIF de vista previa y MP4 en 1080p. Abre la [galería](animations/index.html) o lee la [guía de animaciones](animations/README.md) (en inglés) con ecuaciones, parámetros y trazas de fuente.
 
 <table>
 <tr><td valign="top"><a href="animations/rc.html">RC · constante de tiempo duplicada</a> · <a href="docs/media/rc.mp4">▶ MP4</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="Comparación RC base y mutación"></td><td valign="top"><a href="animations/chemistry.html">Química · tasa de reacción duplicada</a> · <a href="docs/media/chemistry.mp4">▶ MP4</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Comparación de concentración de segundo orden"></td></tr>
@@ -220,10 +220,10 @@ Trece escenas offline, cada una como página HTML interactiva, GIF de vista prev
 <tr><td valign="top"><a href="animations/rerun.html">C/D · recompilar y verificar</a> · <a href="docs/media/rerun.mp4">▶ MP4</a><br><img src="docs/assets/rerun-preview.gif" width="360" alt="Corridas de Comparator sobre cuatro compilaciones"></td><td valign="top"><a href="animations/mutants.html">C/D · mutantes del enunciado</a> · <a href="docs/media/mutants.mp4">▶ MP4</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Mutantes rechazados y control aceptado"></td></tr>
 <tr><td valign="top"><a href="animations/replay.html">C/D · revisión del kernel desde cero</a> · <a href="docs/media/replay.mp4">▶ MP4</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Revisión desde cero y kernels"></td><td valign="top"><a href="animations/provenance.html">Procedencia del enunciado · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Declaraciones que coinciden en OpenAI y DeepMind"></td></tr>
 <tr><td valign="top"><a href="animations/bridges.html">Puentes Clay ↔ Lean · K1</a> · <a href="docs/media/bridges.mp4">▶ MP4</a><br><img src="docs/assets/bridges-preview.gif" width="360" alt="Filas puente del teorema de OpenAI al texto de Clay y los cuatro teoremas K1"></td><td valign="top"><a href="animations/controls.html">Controles Mathlib · rechazo no es refutación</a> · <a href="docs/media/controls.mp4">▶ MP4</a><br><img src="docs/assets/controls-preview.gif" width="360" alt="Once casos Mathlib: veredictos de Comparator y clases de la segunda vía"></td></tr>
-<tr><td valign="top"><a href="animations/experiment.html">Benchmark de fallos a ciegas</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Fallos sembrados detectados por cada procedimiento"></td><td valign="top"><b>Solo ilustrativo, no es evidencia · flujo Taylor–Green</b><br><img src="docs/assets/flow-preview.gif" width="360" alt="Clip ilustrativo de flujo Taylor–Green, separado de las escenas de evidencia"></td></tr>
+<tr><td valign="top"><a href="animations/experiment.html">Benchmark de fallos a ciegas</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Fallos sembrados detectados por cada procedimiento"></td><td valign="top"><a href="animations/flow.html">Solo ilustrativo, no es evidencia · flujo Taylor–Green</a> · <a href="docs/media/flow.mp4">▶ MP4</a><br><img src="docs/assets/flow-scene.gif" width="360" alt="Exact 2D Taylor–Green flow with decaying energy, illustrative only"></td></tr>
 </table>
 
-El clip de flujo 3D es solo contexto visual, no dato de la campaña, ni evidencia de explosión, ni una construcción formal; su procedencia está en [SOURCE_PROVENANCE.md](evidence/SOURCE_PROVENANCE.md).
+La escena de Taylor–Green es solo contexto visual: la solución analítica exacta de un flujo 2D suave que decae, no dato de la campaña, ni evidencia de explosión, ni la construcción de OpenAI.
 
 ## Limitaciones conocidas
 
@@ -267,7 +267,7 @@ experiments/
   mathlib-controls/       enunciado cambiado frente a teorema falso, con tres teoremas de Mathlib
   receipt-check/          recibos frente a artefactos con registros auténticos, dos casos
 bridges/                  el texto de Clay en Lean, la prueba de que los teoremas de OpenAI lo implican, hoja de revisión
-animations/               trece escenas offline, scripts de build y exportación, tests
+animations/               trece escenas de evidencia y una ilustrativa, scripts de build y exportación, tests
 docs/                     GIF, videos MP4, resúmenes en PDF, solicitud de revisión
 .github/workflows/        CI que corre todas las comprobaciones en cada push
 ```

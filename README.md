@@ -211,7 +211,7 @@ Every row with its status is in [clay-lean-bridges.md](evidence/formal/clay-lean
 
 ## Animations
 
-Thirteen offline scenes, each as an interactive HTML page, a GIF preview and a 1080p MP4. Open the [gallery](animations/index.html), or read the [animation guide](animations/README.md) for equations, parameters and source traces.
+Thirteen evidence scenes and one illustrative scene, each offline as an interactive HTML page, a GIF preview and a 1080p MP4. Open the [gallery](animations/index.html), or read the [animation guide](animations/README.md) for equations, parameters and source traces.
 
 <table>
 <tr><td valign="top"><a href="animations/rc.html">RC · doubled time constant</a> · <a href="docs/media/rc.mp4">▶ MP4</a><br><img src="docs/assets/rc-mutation.gif" width="360" alt="RC baseline and mutation comparison"></td><td valign="top"><a href="animations/chemistry.html">Chemistry · doubled reaction rate</a> · <a href="docs/media/chemistry.mp4">▶ MP4</a><br><img src="docs/assets/chemistry-preview.gif" width="360" alt="Second-order concentration comparison at fixed volume"></td></tr>
@@ -220,10 +220,10 @@ Thirteen offline scenes, each as an interactive HTML page, a GIF preview and a 1
 <tr><td valign="top"><a href="animations/rerun.html">C/D · rebuild and recheck</a> · <a href="docs/media/rerun.mp4">▶ MP4</a><br><img src="docs/assets/rerun-preview.gif" width="360" alt="Comparator runs on four builds"></td><td valign="top"><a href="animations/mutants.html">C/D · statement mutants</a> · <a href="docs/media/mutants.mp4">▶ MP4</a><br><img src="docs/assets/mutants-preview.gif" width="360" alt="Statement mutants refused and control accepted"></td></tr>
 <tr><td valign="top"><a href="animations/replay.html">C/D · fresh kernel replay</a> · <a href="docs/media/replay.mp4">▶ MP4</a><br><img src="docs/assets/replay-preview.gif" width="360" alt="Fresh kernel replay and kernel implementations"></td><td valign="top"><a href="animations/provenance.html">Statement provenance · OpenAI vs DeepMind</a> · <a href="docs/media/provenance.mp4">▶ MP4</a><br><img src="docs/assets/provenance-preview.gif" width="360" alt="Declarations matching in OpenAI's and DeepMind's statements"></td></tr>
 <tr><td valign="top"><a href="animations/bridges.html">Clay ↔ Lean bridges · K1</a> · <a href="docs/media/bridges.mp4">▶ MP4</a><br><img src="docs/assets/bridges-preview.gif" width="360" alt="Bridge rows from OpenAI's theorem to Clay's text and the four K1 theorems"></td><td valign="top"><a href="animations/controls.html">Mathlib controls · refusal is not refutation</a> · <a href="docs/media/controls.mp4">▶ MP4</a><br><img src="docs/assets/controls-preview.gif" width="360" alt="Eleven Mathlib cases: Comparator verdicts and second-route classes"></td></tr>
-<tr><td valign="top"><a href="animations/experiment.html">Blind-fault benchmark</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Planted faults flagged by baseline and protocol"></td><td valign="top"><b>Illustrative only, not evidence · Taylor–Green flow</b><br><img src="docs/assets/flow-preview.gif" width="360" alt="Illustrative Taylor–Green flow clip, separate from the evidence scenes"></td></tr>
+<tr><td valign="top"><a href="animations/experiment.html">Blind-fault benchmark</a> · <a href="docs/media/experiment.mp4">▶ MP4</a><br><img src="docs/assets/experiment-preview.gif" width="360" alt="Planted faults flagged by baseline and protocol"></td><td valign="top"><a href="animations/flow.html">Illustrative only, not evidence · Taylor–Green flow</a> · <a href="docs/media/flow.mp4">▶ MP4</a><br><img src="docs/assets/flow-scene.gif" width="360" alt="Exact 2D Taylor–Green flow with decaying energy, illustrative only"></td></tr>
 </table>
 
-The 3D flow clip is visual context only, not campaign data, evidence of blowup or a formal construction; its provenance is in [SOURCE_PROVENANCE.md](evidence/SOURCE_PROVENANCE.md).
+The Taylor–Green scene is visual context only: the exact analytic solution of a smooth, decaying 2D flow, not campaign data, not evidence of blowup and not OpenAI's construction.
 
 ## Known limitations
 
@@ -267,7 +267,7 @@ experiments/
   mathlib-controls/       statement changed vs theorem false, on three Mathlib theorems
   receipt-check/          receipts vs artifacts on authentic records, two cases
 bridges/                  Clay's text in Lean, the proof that OpenAI's theorems imply it, review sheet
-animations/               thirteen offline scenes, build and export scripts, tests
+animations/               thirteen evidence scenes and one illustrative scene, build and export scripts, tests
 docs/                     GIF previews, MP4 videos, PDF summaries, review request
 .github/workflows/        CI that runs every check on each push
 ```

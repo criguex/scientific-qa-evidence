@@ -882,6 +882,101 @@ function drawControls(ctx, data, t) {
   ]);
 }
 
+function drawFlow(ctx, data, t) {
+  const d = data.animations.flow;
+  base(ctx, "A smooth flow, for context only.", "Illustrative context · not evidence", t, C.gold);
+  label(ctx, "Exact 2D Taylor–Green solution of Navier–Stokes: it decays smoothly and never blows up.", 70, 214, 18, C.muted, 600);
+  const x0 = 66, y0 = 240, size = 560, two = Math.PI * 2;
+  const tau = t * d.time_scale;
+  const decay = Math.exp(-2 * d.nu * Math.floor(tau / 1.2) * 1.2);
+  rounded(ctx, x0 - 4, y0 - 4, size + 8, size + 8, 16, "#0b2434", "#315264");
+  const cells = 40, cs = size / cells;
+  for (let i = 0; i < cells; i += 1) for (let k = 0; k < cells; k += 1) {
+    const x = (i + 0.5) / cells * two, y = (k + 0.5) / cells * two;
+    const speed = decay * Math.sqrt((Math.sin(x) * Math.cos(y)) ** 2 + (Math.cos(x) * Math.sin(y)) ** 2);
+    ctx.globalAlpha = 0.05 + 0.55 * speed;
+    ctx.fillStyle = C.blue;
+    ctx.fillRect(x0 + i * cs, y0 + size - (k + 1) * cs, cs + 0.5, cs + 0.5);
+  }
+  ctx.globalAlpha = 1;
+  const vel = (x, y) => [Math.sin(x) * Math.cos(y), -Math.cos(x) * Math.sin(y)];
+  const arrows = 12, as = size / arrows;
+  for (let i = 0; i < arrows; i += 1) for (let k = 0; k < arrows; k += 1) {
+    const x = (i + 0.5) / arrows * two, y = (k + 0.5) / arrows * two;
+    const [u, v] = vel(x, y);
+    const len = as * 0.42 * decay * Math.hypot(u, v);
+    if (len < 2) continue;
+    const ang = Math.atan2(-v, u), cx = x0 + (i + 0.5) * as, cy = y0 + size - (k + 0.5) * as;
+    const ex = cx + Math.cos(ang) * len, ey = cy + Math.sin(ang) * len;
+    ctx.globalAlpha = 0.55;
+    line(ctx, cx - Math.cos(ang) * len, cy - Math.sin(ang) * len, ex, ey, C.gold, 2);
+    ctx.beginPath();
+    ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - 7 * Math.cos(ang - 0.45), ey - 7 * Math.sin(ang - 0.45));
+    ctx.lineTo(ex - 7 * Math.cos(ang + 0.45), ey - 7 * Math.sin(ang + 0.45));
+    ctx.closePath(); ctx.fillStyle = C.gold; ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  let seed = 7;
+  const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  const steps = Math.round(t * 30);
+  const h = d.time_scale / 30;
+  for (let n = 0; n < d.particles; n += 1) {
+    let x = rand() * two, y = rand() * two;
+    const trail = [];
+    for (let s2 = 0; s2 < steps; s2 += 1) {
+      const e = Math.exp(-2 * d.nu * s2 * h);
+      const [u1, v1] = vel(x, y);
+      const [u2, v2] = vel(x + 0.5 * h * e * u1, y + 0.5 * h * e * v1);
+      x += h * e * u2; y += h * e * v2;
+      if (s2 >= steps - 8) trail.push([x, y]);
+    }
+    trail.push([x, y]);
+    const px = (p) => x0 + (((p[0] % two) + two) % two) / two * size;
+    const py = (p) => y0 + size - (((p[1] % two) + two) % two) / two * size;
+    trail.forEach((p, i) => {
+      ctx.globalAlpha = (i + 1) / trail.length * 0.9;
+      circle(ctx, px(p), py(p), i === trail.length - 1 ? 2.6 : 1.5, i === trail.length - 1 ? C.mint : C.white);
+    });
+  }
+  ctx.globalAlpha = 1;
+  label(ctx, "x ∈ [0, 2π]", x0 + size / 2, y0 + size + 22, 15, C.muted, 700, "center");
+  const rx = 660, rw = 354;
+  rounded(ctx, rx, 240, rw, 196, 16, "#0b2434", "#315264");
+  label(ctx, "EXACT SOLUTION", rx + 20, 268, 15, C.gold, 800);
+  label(ctx, "u =  sin x cos y · e^(−2νt)", rx + 20, 304, 17, C.white, 700, "left", "SFMono-Regular, Menlo, Consolas, monospace");
+  label(ctx, "v = −cos x sin y · e^(−2νt)", rx + 20, 334, 17, C.white, 700, "left", "SFMono-Regular, Menlo, Consolas, monospace");
+  label(ctx, `ν = ${d.nu} · periodic box [0, 2π]²`, rx + 20, 368, 15, C.muted, 650);
+  label(ctx, `model time t = ${tau.toFixed(1)}`, rx + 20, 400, 15, C.muted, 650);
+  rounded(ctx, rx, 452, rw, 230, 16, "#0b2434", "#315264");
+  label(ctx, "KINETIC ENERGY  E(t) / E(0) = e^(−4νt)", rx + 20, 480, 14, C.gold, 800);
+  const gx = rx + 40, gy = 506, gw = rw - 64, gh = 140, tmax = 20 * d.time_scale;
+  line(ctx, gx, gy + gh, gx + gw, gy + gh, "#315264", 2);
+  line(ctx, gx, gy, gx, gy + gh, "#315264", 2);
+  ctx.beginPath();
+  for (let i = 0; i <= 100; i += 1) {
+    const tt = tmax * i / 100, e = Math.exp(-4 * d.nu * tt);
+    const X = gx + gw * i / 100, Y = gy + gh * (1 - e);
+    if (i === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+  }
+  ctx.strokeStyle = C.mint; ctx.lineWidth = 3; ctx.stroke();
+  const e = Math.exp(-4 * d.nu * tau);
+  circle(ctx, gx + gw * tau / tmax, gy + gh * (1 - e), 6, C.gold);
+  label(ctx, "1", gx - 14, gy, 13, C.muted, 700, "center");
+  label(ctx, "0", gx - 14, gy + gh, 13, C.muted, 700, "center");
+  label(ctx, `now ${(e * 100).toFixed(0)} %`, gx + gw, gy + gh + 24, 14, C.gold, 800, "right");
+  rounded(ctx, rx, 698, rw, 102, 16, "#2a2410", C.gold);
+  label(ctx, "ILLUSTRATIVE CONTEXT · NOT EVIDENCE", rx + 20, 726, 14, C.gold, 900);
+  label(ctx, "Not OpenAI's construction, not a blowup,", rx + 20, 754, 15, C.white, 650);
+  label(ctx, "not campaign data.", rx + 20, 778, 15, C.white, 650);
+  narration(ctx, t, [
+    [0, "This is not part of the evidence. It shows what a well-behaved Navier–Stokes flow looks like, for context."],
+    [5, "Particles follow the exact Taylor–Green velocity field: four vortex cells that keep their shape while they slow down."],
+    [11, "Viscosity drains the energy smoothly and exponentially. Nothing becomes infinite: this flow never blows up."],
+    [16, "OpenAI's theorems are about forced flows that do blow up in finite time; that construction is not drawn here."],
+  ]);
+}
+
 export function drawAnimation(ctx, data, id, seconds) {
   const t = clamp(seconds, 0, 20);
   ctx.clearRect(0, 0, W, H);
@@ -898,5 +993,6 @@ export function drawAnimation(ctx, data, id, seconds) {
   else if (id === "experiment") drawExperiment(ctx, data, t);
   else if (id === "bridges") drawBridges(ctx, data, t);
   else if (id === "controls") drawControls(ctx, data, t);
+  else if (id === "flow") drawFlow(ctx, data, t);
   else throw new Error(`Unknown animation: ${id}`);
 }

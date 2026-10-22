@@ -77,7 +77,9 @@ class AnimationPackageTests(unittest.TestCase):
             gallery = (Path(output) / "index.html").read_text(encoding="utf-8")
             self.assertEqual(gallery.count("<iframe"), 1)
             self.assertIn("id=\"active-note\"", gallery)
-            self.assertIn("../docs/assets/flow-preview.gif", gallery)
+            self.assertIn("../docs/assets/flow-scene.gif", gallery)
+            self.assertIn('data-id="flow"', gallery)
+            self.assertNotIn("flow-preview.gif", gallery)
             self.assertNotIn("media/animations/", gallery)
             for animation_id in build.PAGES:
                 self.assertIn(f'data-id="{animation_id}"', gallery)

@@ -701,6 +701,12 @@
         }
       ],
       "controls_ok": true
+    },
+    "flow": {
+      "nu": 0.05,
+      "time_scale": 0.6,
+      "particles": 300,
+      "kind": "analytic Taylor-Green solution, illustrative only"
     }
   }
 }
