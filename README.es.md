@@ -10,6 +10,8 @@ Este repositorio contiene una auditoría de QA independiente de las formalizacio
 
 Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
 
+**El aporte, desde Medellín para quien quiera comprobarlo:** una auditoría independiente y reproducible de uno de los resultados verificados por computador más visibles de 2026, hecha con los métodos del QA de software; una prueba en Lean que conecta los teoremas de OpenAI con el texto del propio Instituto Clay; y un registro público de cada comando, versión, hash y código de salida, incluidos los errores encontrados y corregidos, para que cualquiera pueda repetirlo y discrepar con evidencia. La matemática es de OpenAI; la comprobación queda abierta a todos.
+
 ## En un minuto
 
 OpenAI publicó pruebas en Lean de que, para las ecuaciones de Navier–Stokes, hay datos iniciales y fuerzas suaves para los que no existe solución suave global, y de una singularidad en tiempo finito para las ecuaciones de Euler. Este repositorio revisa esas pruebas como un ingeniero de QA revisaría cualquier entrega importante: recompilarlas desde la fuente, volver a verificarlas con herramientas independientes, intentar que las verificaciones fallen a propósito y dejar cada paso reproducible.

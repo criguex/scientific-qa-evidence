@@ -10,6 +10,8 @@ This repository contains an independent QA audit of the Lean 4 formalizations in
 
 By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
 
+**The contribution, from Medellín to anyone who wants to check:** an independent, reproducible audit of one of the most visible machine-checked results of 2026, made with the methods of software QA; a Lean proof connecting OpenAI's theorems to the Clay Institute's own wording; and a public record of every command, version, hash and exit code, including the mistakes found and fixed, so that anyone can rerun it and disagree with evidence. The mathematics is OpenAI's; the checking is open to all.
+
 ## In one minute
 
 OpenAI published Lean proofs that, for the Navier–Stokes equations, there are smooth starting data and forces for which no global smooth solution exists, and a finite-time singularity for the Euler equations. This repository checks those proofs the way a QA engineer would check any important release: rebuild them from source, recheck them with independent tools, try to make the checks fail on purpose, and keep every step reproducible.
