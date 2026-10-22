@@ -67,7 +67,7 @@
     },
     "clay_risk": {
       "path": "evidence/formal/clay-lean-risk.md",
-      "sha256": "d0d8c336302b3c97dc62936afa7742db1e15157ccda1491b41e963cddb148fce"
+      "sha256": "82d3da9b750ff99dfc5565c22d75b0aff46635aa3d166442c866d97da3c1d1a4"
     },
     "experiment_benchmark": {
       "path": "experiments/blind-faults/v2/benchmark_v2.json",
@@ -83,11 +83,11 @@
     },
     "bridges_table": {
       "path": "evidence/formal/clay-lean-bridges.md",
-      "sha256": "6072612a6a1129f23f264ab975e0bc787dcd2d248a67b161d5b248d1b311446d"
+      "sha256": "ec4e5f8ae8f0053697e90c3183e56ac950c358058d21593a1d98b1b6f82dfad2"
     },
     "bridges_receipt": {
       "path": "bridges/README.md",
-      "sha256": "8182b92ae57d7b2212cb59f64343e1d6efec332485c6e4cfb85cc1c03ef49c0b"
+      "sha256": "b9eaf23561aef408bb0609f45f8ec96c91e1baa9c94cdd908133c2d33c48eb97"
     },
     "controls_expected": {
       "path": "experiments/mathlib-controls/expected.json",

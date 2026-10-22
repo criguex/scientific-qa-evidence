@@ -29,9 +29,9 @@ Built on the Linux test host against the no-cache build B4 of OpenAI's `f9e8bc5`
 | `ClayLiteral.lean` | typechecks, exit 0 |
 | `Bridges.lean` | typechecks, exit 0 |
 
-`#print axioms` was run on every theorem in `Bridges.lean` and on the sanity theorem in `ClayLiteral.lean`; each depends only on `propext`, `Classical.choice` and `Quot.sound`. The theorems are `p1`, `d1_zero`, `d2_zero`, `d3_zero`, `witness_C`, `witness_D`, `d5`, `d6`, `d7`, `clay_bound`, `s1`–`s6`, `s7_formal_side`, `k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided`, `zero_solution_C`, `zero_solution_D` and `ClayLiteral.altD_withoutErratum_imp_withErratum`. The same check was repeated from a fresh clone ([FROM_ZERO](../evidence/FROM_ZERO.md)) and against build B5 ([axioms log](../evidence/formal/b5/axioms.log)).
+`#print axioms` was run on every theorem in `Bridges.lean` and on the sanity theorem in `ClayLiteral.lean`; the output for each is `[propext, Classical.choice, Quot.sound]`. The theorems are `p1`, `d1_zero`, `d2_zero`, `d3_zero`, `witness_C`, `witness_D`, `d5`, `d6`, `d7`, `clay_bound`, `s1`–`s6`, `s7_formal_side`, `k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided`, `zero_solution_C`, `zero_solution_D` and `ClayLiteral.altD_withoutErratum_imp_withErratum`. The same check was repeated from a fresh clone ([FROM_ZERO](../evidence/FROM_ZERO.md)) and against build B5 ([axioms log](../evidence/formal/b5/axioms.log)).
 
-No `sorry`, no extra axioms, and no hypotheses in the K1 theorems. They use OpenAI's proved theorems, which are sorry-free, so the three standard axioms are the whole trust base, together with the fidelity of `ClayLiteral` to the PDF.
+`Bridges.lean` contains no `sorry`, there are no extra axioms, and the K1 theorems have no hypotheses. They use OpenAI's proved theorems, which are sorry-free, so the three standard axioms are the whole trust base, together with the fidelity of `ClayLiteral` to the PDF.
 
 ## What K1 does and does not establish
 
