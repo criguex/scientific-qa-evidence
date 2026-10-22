@@ -334,6 +334,6 @@ docs/                     GIF previews, MP4 videos, PDF summaries, review reques
 - **Related analysis:** Bastounis, Circelli and Hansen, [arXiv:2610.08144](https://arxiv.org/abs/2610.08144); the rest of the prior work is in [RELATED_WORK.md](RELATED_WORK.md).
 - **This QA study:** Cristian Guerra. To cite it, use [CITATION.cff](CITATION.cff).
 - **Rights:** publication is authorized, but no open-source license is granted. See [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Status:** latest release [v1.3.1](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.1), which adds the receipt check on authentic records and the CMI correspondence to v1.3.0 (Lean bridges to Clay's text, Mathlib controls, build B5).
+- **Status:** latest release [v1.3.2](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.2), which fixes the state after outside review: the claim scoped to "no defect found in this scope", an [independent reproduction guide](docs/INDEPENDENT_REPRODUCTION.md), the [Clay review sheet](bridges/K0_REVIEW.md) with page, equation and line citations, and three closed tooling findings. It adds no mathematical validation. Earlier: v1.3.1 (receipt check on authentic records, CMI correspondence) and v1.3.0 (Lean bridges to Clay's text, Mathlib controls, build B5). The seven-page PDF summarizes v1.3.1.
 
 No theorem discovery, scientific certification, empirical validation or proof about a real-world system is claimed.
