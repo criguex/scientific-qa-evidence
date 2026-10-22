@@ -1,0 +1,15 @@
+diff -r C/comparator.log F7/comparator.log
+1,13d0
+< ✔ [2/5] Built Comparator.Util (259ms)
+< ✔ [6/17] Built Comparator.Util:c.o (92ms)
+< ✔ [7/17] Built Export.Parse (945ms)
+< ✔ [8/17] Built Comparator.Axioms (375ms)
+< ✔ [9/17] Built Comparator.Axioms:c.o (185ms)
+< ✔ [10/17] Built Comparator.Compare (431ms)
+< ✔ [11/17] Built Comparator (277ms)
+< ✔ [12/17] Built Comparator.Compare:c.o (233ms)
+< ✔ [13/17] Built Comparator:c.o (39ms)
+< ✔ [14/17] Built Export.Parse:c.o (1.8s)
+< ✔ [15/17] Built Main (2.8s)
+< ✔ [16/17] Built Main:c.o (518ms)
+< ✔ [17/17] Built comparator:exe (628ms)

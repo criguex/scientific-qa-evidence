@@ -1,6 +1,6 @@
 # Case 2: a substituted log, and the limit of P6
 
-**Pre-registered on 2026-10-22, before any run.** Expected outcomes: [`expected2.json`](expected2.json); scripts: [`run2.sh`](run2.sh), [`check_hash.py`](check_hash.py), [`check_p6.py`](check_p6.py).
+**Pre-registered on 2026-10-22, before any run.** **Results: [RESULTS2.md](RESULTS2.md)** — all nine outcomes as registered. Expected outcomes: [`expected2.json`](expected2.json); scripts: [`run2.sh`](run2.sh), [`check_hash.py`](check_hash.py), [`check_p6.py`](check_p6.py).
 
 ## Why a second case
 

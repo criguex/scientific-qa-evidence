@@ -9,6 +9,8 @@ Run on 2026-10-22, after the [pre-registration](DESIGN.md) (`8478f68`) and [amen
 | C, clean control | nothing | exit 0, `Your solution is okay!` | exit 0, no flag |
 | F5, known fault | one receipt row names `comparator-run.log` instead of `comparator.log` | exit 0, `Your solution is okay!`; output byte-identical to C | **exit 1**, `P6:receipt-log-missing-comparator-run.log` |
 
+**What was repeated.** The project was built once, when the bundle was written (the three steps below). For each variant only the Comparator step of Z was run again, on the same tree with that variant's bundle in it; the build was not repeated per variant.
+
 | Step of Z, recorded in the bundle | Command | Exit |
 | --- | --- | --- |
 | cache | `lake exe cache get` | 0 |
@@ -19,9 +21,9 @@ Every step's command, the SHA-256 of its sanitized log, its exit code and its ti
 
 ## The claim
 
-> **In this case, the receipt-to-log correspondence check (P6) detected a receipt naming a log that is not in the evidence bundle, and OpenAI's published procedure, run on the same files, did not: it exited 0 with the same output, because it does not read receipts.**
+> **In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result.** A receipt naming a log that is not in the evidence bundle was flagged by P6, while OpenAI's published procedure, run on the same files, exited 0 with byte-identical output, because it does not read receipts.
 
-This is about the traceability of the evidence, not about the proof: the proof was accepted in both variants and is the same. It does not say P6 catches every error, that the published procedure fails at its own job of checking the proof, or anything about the Millennium Prize. It is one case.
+This supports the added value of that check for the traceability of the evidence. **It does not mean that Comparator accepted a false proof:** the proof is the same in both variants and was accepted in both. It does not say P6 catches every error, that the published procedure fails at its own job of checking the proof, or anything about the Millennium Prize. It is one case.
 
 **Question for reviewers:** does a check that receipts correspond to the artifacts they name add a useful traceability guarantee to a reproducible verification workflow?
 

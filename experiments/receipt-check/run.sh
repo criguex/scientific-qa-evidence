@@ -1,25 +1,15 @@
 #!/bin/bash
 set -u
-B4=/home/nse/validacion_cd_20261021/nocache
-PS=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
-host_free_gb() { $PS -NoProfile -Command '[math]::Floor((Get-PSDrive C).Free/1GB)' | tr -d '\r'; }
-guard() { local f=$(host_free_gb); if [ "$f" -lt "$1" ]; then echo "ABORT: host drive has ${f} GB free, need $1" >&2; exit 3; fi; }
-W=/home/nse/receipt_check_20261022
-OPS=/home/nse/ns08_validation_20261020_a5YGak
-OLD=/home/nse/nse_audit_20261020/NavierStokesAndEuler
+QA_COMMIT=${QA_COMMIT:?set QA_COMMIT to the commit of scientific-qa-evidence to run}
+W=/home/nse/receipt_check_case1
 CLONE=$W/qa
-rm -rf $W; mkdir -p $W/bin $W/out
-git clone -q https://github.com/criguex/scientific-qa-evidence.git $CLONE
-ln -s $OPS/tools/landrun/landrun $W/bin/landrun
-ln -s $OLD/.lake/packages/lean4export/.lake/build/bin/lean4export $W/bin/lean4export
-ln -s $OPS/tools/nanoda/target/release/nanoda_bin $W/bin/nanoda_bin
+rm -rf $W; mkdir -p $W/out || { echo "ABORT: cannot create $W" >&2; exit 3; }
+git clone -q https://github.com/criguex/scientific-qa-evidence.git $CLONE </dev/null && git -C $CLONE checkout -q $QA_COMMIT || { echo "ABORT: cannot check out $QA_COMMIT" >&2; exit 3; }
+. $CLONE/experiments/receipt-check/preflight.sh
+link_tools $W/bin
 export PATH=$W/bin:/home/nse/.elan/bin:/usr/bin:/bin
-guard 40
-cp -a $B4/NavierStokesAndEuler-* $W/tree
-guard 15
+copy_tree $W/tree
 T=$W/tree
-now() { date -u +%FT%TZ; }
-sha() { sha256sum "$1" | cut -c1-64; }
 J=$W/out/receipts.jsonl
 step() {
   local variant=$1 name=$2 log=$3; shift 3
@@ -29,12 +19,14 @@ step() {
   printf '{"variant": "%s", "step": "%s", "command": "%s", "log_sha256": "%s", "exit_code": %s, "started": "%s", "finished": "%s"}\n' "$variant" "$name" "$*" "$(sha $log)" "$rc" "$t0" "$(now)" >> $J
   return $rc
 }
-{ lake --version; lean --version; git -C $CLONE log -1 --format='qa clone %H'; sha256sum $W/bin/* $(readlink -f $W/bin/*) 2>/dev/null | sed 's|/home/nse/[^ ]*/||'; } > $W/out/versions.txt
+record_toolchain $T $W/out/toolchain.txt
+{ git -C $CLONE log -1 --format='qa clone %H'; sha256sum $(readlink -f $W/bin/*) | sed 's|/home/nse/[^ ]*/||'; } > $W/out/versions.txt
 E=$W/evidence; mkdir -p $E
 printf 'step\tcommand\tlog\texit\n' > $E/receipt.tsv
 step bundle cache_get $E/cache_get.log lake exe cache get; printf 'cache_get\tlake exe cache get\tcache_get.log\t%s\n' $? >> $E/receipt.tsv
 step bundle build $E/build.log lake build; printf 'build\tlake build\tbuild.log\t%s\n' $? >> $E/receipt.tsv
 step bundle comparator $E/comparator.log lake exe comparator ComparatorChallenges/NavierStokes.json; printf 'comparator\tlake exe comparator ComparatorChallenges/NavierStokes.json\tcomparator.log\t%s\n' $? >> $E/receipt.tsv
+check_comparator_exe $T
 for v in C F5; do
   rm -rf $W/out/$v; cp -r $E $W/out/$v
   if [ $v = F5 ]; then sed -i 's|\tcomparator.log\t|\tcomparator-run.log\t|' $W/out/$v/receipt.tsv; fi

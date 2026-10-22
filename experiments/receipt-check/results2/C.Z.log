@@ -1,0 +1,30 @@
+✔ [2/5] Built Comparator.Util (238ms)
+✔ [6/17] Built Comparator.Util:c.o (158ms)
+✔ [7/17] Built Export.Parse (1.2s)
+✔ [8/17] Built Comparator.Axioms (387ms)
+✔ [9/17] Built Comparator.Axioms:c.o (178ms)
+✔ [10/17] Built Comparator.Compare (436ms)
+✔ [11/17] Built Comparator (279ms)
+✔ [12/17] Built Comparator.Compare:c.o (240ms)
+✔ [13/17] Built Comparator:c.o (43ms)
+✔ [14/17] Built Export.Parse:c.o (1.8s)
+✔ [15/17] Built Main (3.9s)
+✔ [16/17] Built Main:c.o (515ms)
+✔ [17/17] Built comparator:exe (873ms)
+Building ComparatorChallenges.NavierStokes
+⚠ [8763/8763] Replayed ComparatorChallenges.NavierStokes
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.NavierStokes
+Building NavierStokes.ComparatorSolution
+ℹ [9371/9371] Replayed NavierStokes.ComparatorSolution
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (9371 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from NavierStokes.ComparatorSolution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+Your solution is okay!

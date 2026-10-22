@@ -1,0 +1,5 @@
+diff -r C/receipt.tsv F5/receipt.tsv
+4c4
+< comparator	lake exe comparator ComparatorChallenges/NavierStokes.json	comparator.log	0
+---
+> comparator	lake exe comparator ComparatorChallenges/NavierStokes.json	comparator-run.log	0

@@ -123,8 +123,9 @@ The benchmark's case C/F5 was moved from synthetic records to real ones. On a co
 | --- | --- | --- |
 | Clean | exit 0, `Your solution is okay!` | exit 0, no flag |
 | Receipt names `comparator-run.log` | exit 0, same output byte for byte | exit 1, `P6:receipt-log-missing-comparator-run.log` |
+| Stale log from another run under the right name (case 2) | exit 0, same output byte for byte | **passes: P6 only checks that the log exists**; a check against the hash recorded when the step ran flags it |
 
-**In this case, P6 detected a receipt naming a log that is not in the evidence, and the published procedure, run on the same files, did not, because it does not read receipts.** That is a claim about the traceability of the evidence, not about the proof, which was accepted in both. Pre-registered, with commands, versions, outputs and exit codes ([design](experiments/receipt-check/DESIGN.md), [results](experiments/receipt-check/RESULTS.md)).
+**In this experiment, P6 detects a traceability inconsistency that does not change Comparator's result:** the published procedure, run on the same files, exited 0 with identical output because it does not read receipts. That supports the added value of the check for the traceability of the evidence; it does not mean Comparator accepted a false proof, since the proof was the same and accepted in both. Case 2 shows the limit of P6: a stale log under the right name passes it, and only binding each receipt to the hash recorded when the step ran catches it. Both cases were pre-registered, with commands, versions, outputs and exit codes ([case 1](experiments/receipt-check/RESULTS.md), [case 2](experiments/receipt-check/RESULTS2.md), [status and amendments](experiments/receipt-check/STATUS.md)).
 
 ### Mathlib controls: "the statement changed" is not "the theorem is false"
 

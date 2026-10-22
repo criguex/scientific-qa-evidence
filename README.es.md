@@ -123,8 +123,9 @@ El caso C/F5 del benchmark pasó de registros sintéticos a registros reales. So
 | --- | --- | --- |
 | Limpia | exit 0, `Your solution is okay!` | exit 0, sin marcas |
 | El recibo nombra `comparator-run.log` | exit 0, misma salida byte a byte | exit 1, `P6:receipt-log-missing-comparator-run.log` |
+| Log viejo de otra corrida con el nombre correcto (caso 2) | exit 0, misma salida byte a byte | **pasa: P6 solo comprueba que el log exista**; una comprobación contra el hash registrado al correr el paso lo marca |
 
-**En este caso, P6 detectó un recibo que nombra un log que no está en la evidencia, y el procedimiento publicado, corrido sobre los mismos archivos, no lo detectó, porque no lee recibos.** Es una afirmación sobre la trazabilidad de la evidencia, no sobre la prueba, que fue aceptada en ambas variantes. Prerregistrado, con comandos, versiones, salidas y códigos de retorno ([diseño](experiments/receipt-check/DESIGN.md), [resultados](experiments/receipt-check/RESULTS.md), en inglés).
+**En este experimento, P6 detecta una inconsistencia de trazabilidad que no cambia el resultado de Comparator:** el procedimiento publicado, corrido sobre los mismos archivos, salió con 0 y salida idéntica porque no lee recibos. Eso respalda el valor adicional de la comprobación para la trazabilidad de la evidencia; no significa que Comparator aceptara una demostración falsa, porque la prueba era la misma y fue aceptada en ambas variantes. El caso 2 muestra el límite de P6: un log viejo con el nombre correcto lo pasa, y solo atar cada recibo al hash registrado al correr el paso lo detecta. Los dos casos se registraron de antemano, con comandos, versiones, salidas y códigos de retorno ([caso 1](experiments/receipt-check/RESULTS.md), [caso 2](experiments/receipt-check/RESULTS2.md), [estado y enmiendas](experiments/receipt-check/STATUS.md), en inglés).
 
 ### Controles con Mathlib: «el enunciado cambió» no es «el teorema es falso»
 
