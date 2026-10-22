@@ -57,6 +57,24 @@ Neither result is new mathematics, and nothing here claims a Millennium Prize re
 
 If you know Lean or the Navier–Stokes problem: **is [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) a faithful transcription of Clay's official problem statement?** The [review sheet](bridges/K0_REVIEW.md) lists the 14 places to compare with the PDF, starting with smoothness at time zero. Answers will be recorded there, with your name if you wish.
 
+## The method: QA with scientific rigour
+
+The testing method used here follows the scientific method, and every element has a record in this repository:
+
+| Element of the scientific method | How this study applies it |
+| --- | --- |
+| Hypotheses that can fail | Before each experiment the expected outcome was written down, for example "Comparator must refuse these six changes" |
+| Pre-registration | The planted-fault benchmark, the Mathlib controls and the receipt check were published with their expected results before any run ([benchmark](experiments/blind-faults/SEED_COMMITMENT.md), [Mathlib](experiments/mathlib-controls/DESIGN.md), [receipts](experiments/receipt-check/DESIGN.md)) |
+| Controls | A clean control, a comment-only control, a `sorry` positive control, a deliberately cheating proof for the dependency guard |
+| Attempts at refutation | Statement mutants, planted faults, deliberately broken numerical code: changes that should make the checks fail |
+| Reproducibility | Commands, versions, hashes and exit codes for every step; rerun from a fresh clone ([FROM_ZERO](evidence/FROM_ZERO.md)) and in a fifth full build ([B5](evidence/formal/b5/README.md)) |
+| Reporting what fails | Where this study's own check misses a fault ([case 2](experiments/receipt-check/RESULTS2.md)), errata kept, corrections made in public |
+| Outside review | Four review rounds on the benchmark, an outside reviewer's corrections applied, a review of the Clay transcription requested ([sheet](bridges/K0_REVIEW.md)) |
+
+**How it complements Lean.** Lean checks that each proof step is valid. It does not check how the proof was built, whether the statement checked is the intended one, whether it matches the problem as Clay wrote it, or whether the published evidence is the evidence that was produced. This method covers those: it rebuilds from source, tests that the statement check reacts to changes, connects the formal statement to Clay's text, and binds the recorded evidence to what actually ran. With this complement, the claim "OpenAI's Lean proofs check, and they answer Clay's questions (C) and (D)" can be validated by anyone from public records, up to the one point that still needs an expert: the fidelity of the Clay transcription.
+
+**What can be claimed.** A QA method applied with scientific rigour (registered hypotheses, controls, attempts at refutation, full reproducibility) to the audit of a high-profile mathematical result. **What cannot be claimed yet** is that the method detects more than other methods in general. That would need cases prepared by someone else, a fair comparison with established tools such as in-toto and SLSA on the same faults, more than one project, and an independent replication.
+
 ## Results at a glance
 
 | Question | Result | Record |

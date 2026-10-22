@@ -57,6 +57,24 @@ Ninguno de los dos es matemática nueva, y nada aquí reclama un resultado del P
 
 Si conoces Lean o el problema de Navier–Stokes: **¿es [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) una transcripción fiel del enunciado oficial de Clay?** La [hoja de revisión](bridges/K0_REVIEW.md) (en inglés) lista los 14 puntos a comparar con el PDF, empezando por la suavidad en el tiempo cero. Las respuestas se registrarán ahí, con tu nombre si quieres.
 
+## El método: QA con rigor científico
+
+El método de prueba usado aquí sigue el método científico, y cada elemento tiene su registro en este repositorio:
+
+| Elemento del método científico | Cómo lo aplica este estudio |
+| --- | --- |
+| Hipótesis que pueden fallar | Antes de cada experimento se escribió el resultado esperado, por ejemplo "Comparator debe rechazar estos seis cambios" |
+| Registro previo | El benchmark de fallos sembrados, los controles con Mathlib y la comprobación de recibos se publicaron con su resultado esperado antes de correr ([benchmark](experiments/blind-faults/SEED_COMMITMENT.md), [Mathlib](experiments/mathlib-controls/DESIGN.md), [recibos](experiments/receipt-check/DESIGN.md)) |
+| Controles | Un control limpio, un control de solo comentario, un control positivo con `sorry`, una prueba tramposa a propósito para la guarda de dependencias |
+| Intentos de refutación | Mutantes del enunciado, fallos sembrados, código numérico roto a propósito: cambios que deberían hacer fallar las verificaciones |
+| Reproducibilidad | Comandos, versiones, hashes y códigos de salida de cada paso; repetido desde un clon nuevo ([FROM_ZERO](evidence/FROM_ZERO.md)) y en una quinta compilación completa ([B5](evidence/formal/b5/README.md)) |
+| Reportar lo que falla | Dónde la propia comprobación de este estudio no detecta un fallo ([caso 2](experiments/receipt-check/RESULTS2.md)), erratas conservadas, correcciones hechas en público |
+| Revisión externa | Cuatro rondas de revisión del benchmark, correcciones de un revisor externo aplicadas, revisión de la transcripción de Clay solicitada ([hoja](bridges/K0_REVIEW.md)) |
+
+**Cómo complementa a Lean.** Lean comprueba que cada paso de la demostración es válido. No comprueba cómo se compiló la prueba, si el enunciado verificado es el que se pretendía, si coincide con el problema tal como lo escribió Clay, ni si la evidencia publicada es la que realmente se produjo. Este método cubre eso: recompila desde la fuente, prueba que la verificación del enunciado reacciona a los cambios, conecta el enunciado formal con el texto de Clay y ata la evidencia registrada a lo que realmente se ejecutó. Con este complemento, la afirmación "las pruebas en Lean de OpenAI verifican y responden a las preguntas (C) y (D) de Clay" puede validarla cualquiera a partir de registros públicos, salvo el único punto que aún necesita un experto: la fidelidad de la transcripción de Clay.
+
+**Qué se puede afirmar.** Un método de QA aplicado con rigor científico (hipótesis registradas, controles, intentos de refutación, reproducibilidad completa) a la auditoría de un resultado matemático de alto perfil. **Lo que aún no se puede afirmar** es que el método detecte más que otros métodos en general. Para eso harían falta casos preparados por otra persona, una comparación justa con herramientas establecidas como in-toto y SLSA sobre los mismos fallos, más de un proyecto y una réplica independiente.
+
 ## Resultados en resumen
 
 | Pregunta | Resultado | Registro |
