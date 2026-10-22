@@ -29,7 +29,7 @@ FPS = 15
 DURATION = 20
 REALTIME = {"rerun", "mutants", "replay", "provenance", "experiment", "bridges", "controls", "flow"}
 REALTIME_FPS = 10
-LIGHT = {"flow": "scale=720:-1:flags=lanczos,"}
+LIGHT = {"flow": "scale=720:-1:flags=lanczos,format=rgb24,"}
 
 
 def export(page, animation_id, destination):
