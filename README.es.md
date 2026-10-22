@@ -187,7 +187,7 @@ Cada fila con su estado está en [clay-lean-bridges.md](evidence/formal/clay-lea
 ### Qué falta
 
 - **Fidelidad de `ClayLiteral`.** El resultado solo es tan fiel como la transcripción literal, que nadie independiente ha revisado frente al PDF. En particular, `SmoothOneSided` está definido directamente como el `ContDiffOn` de Mathlib en el semiespacio cerrado; su nombre no demuestra que esa sea la suavidad que usa Clay, y esa correspondencia es en sí un punto de revisión. Los 14 puntos a revisar, primero la suavidad en t = 0, están en [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md) (en inglés).
-- **Presión periódica, solo en (D).** K1 para la (D) lee la errata de Clay como condición sobre las soluciones; la (C) no la usa. El 2026-10-21 se envió una pregunta al Clay Mathematics Institute; las respuestas se registrarán aquí.
+- **Presión periódica, solo en (D).** K1 para la (D) lee la errata de Clay como condición sobre las soluciones; la (C) no la usa. Ante la pregunta, el presidente del CMI respondió el 2026-10-22 que debe evitar interpretar los enunciados oficiales más allá del texto oficial, y dijo solo que (B) y (D) son problemas en el contexto periódico (toral). Eso no resuelve la lectura de la errata, así que sigue abierta; no es un aval de esta lectura, de la formalización ni de ninguna solución ([registro](evidence/formal/clay-correspondence.md), en inglés).
 - **Ningún matemático ha revisado nada de esto.**
 
 ## Animaciones

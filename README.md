@@ -187,7 +187,7 @@ Every row with its status is in [clay-lean-bridges.md](evidence/formal/clay-lean
 ### What remains
 
 - **Fidelity of `ClayLiteral`.** The result is only as faithful as the literal rendering, which nobody independent has reviewed against the PDF. In particular, `SmoothOneSided` is defined directly as Mathlib's `ContDiffOn` on the closed half-space; its name does not show that this is the smoothness Clay means, and that correspondence is itself a review point. The 14 points to check, smoothness at t = 0 first, are in [`bridges/K0_REVIEW.md`](bridges/K0_REVIEW.md).
-- **Periodic pressure, (D) only.** K1 for (D) reads Clay's erratum as a condition on solutions; (C) does not use it. A question was sent to the Clay Mathematics Institute on 2026-10-21; answers will be recorded here.
+- **Periodic pressure, (D) only.** K1 for (D) reads Clay's erratum as a condition on solutions; (C) does not use it. Asked about it, CMI's president replied on 2026-10-22 that he must avoid interpreting the official statements beyond the official account, and said only that (B) and (D) are problems in the periodic (toral) setting. That does not settle the erratum reading, so it stays open; it is not an endorsement of this reading, the formalization or any solution ([record](evidence/formal/clay-correspondence.md)).
 - **No mathematician has reviewed any of this.**
 
 ## Animations
