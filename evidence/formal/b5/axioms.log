@@ -1,0 +1,6 @@
+'Bridges.k1_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Bridges.k1_D' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Bridges.k1_C_oneSided' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Bridges.k1_D_oneSided' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Bridges.zero_solution_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Bridges.zero_solution_D' depends on axioms: [propext, Classical.choice, Quot.sound]

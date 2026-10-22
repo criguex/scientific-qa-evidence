@@ -1,0 +1,3 @@
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:37.52
+	Maximum resident set size (kbytes): 8569632
+	Exit status: 0

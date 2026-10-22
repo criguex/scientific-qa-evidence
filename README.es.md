@@ -2,7 +2,7 @@
 
 Este repositorio contiene una auditoría de QA independiente de las formalizaciones en Lean 4 de [openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler), que acompañan a “[Finite time blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)” y “[Finite time blowup for the Euler equation](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)” de OpenAI, más una campaña de pruebas de mutación sobre nueve modelos numéricos. Las pruebas son de OpenAI. Este repositorio no demuestra nada nuevo, no reclama ningún resultado del Premio del Milenio y no es una revisión matemática: recompila los artefactos publicados, los vuelve a verificar con verificadores independientes, comprueba si la cadena de verificación detecta errores y publica cada paso con hashes.
 
-- [Leer el resumen de cinco páginas (PDF, en inglés)](docs/report/scientific-qa-evidence-report-v1.2.0.pdf)
+- [Leer el resumen de cinco páginas (PDF, en inglés)](docs/report/scientific-qa-evidence-report-v1.3.0.pdf)
 - [Leer cada afirmación con su evidencia y sus límites](CLAIMS.md) (en inglés)
 - [Ver las trece escenas de evidencia](animations/index.html)
 - [Read in English](README.md)
@@ -13,7 +13,7 @@ Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://
 
 Sobre las pruebas de OpenAI en el commit `f9e8bc5`, comprobamos:
 
-- **Verifican desde cero:** Comparator, con los kernels de nanoda y de Lean, aceptó Navier–Stokes (C), (D) y Euler sobre cuatro compilaciones, la última compilada entera desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel incluye todas las correcciones de solidez conocidas de 2026.
+- **Verifican desde cero:** Comparator, con los kernels de nanoda y de Lean, aceptó Navier–Stokes (C), (D) y Euler sobre cinco compilaciones, las dos últimas compiladas enteras desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel incluye todas las correcciones de solidez conocidas de 2026.
 - **El enunciado es el exacto:** Comparator rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de Google DeepMind tras normalización textual (la resolución de nombres no se verificó).
 - **Fuera de alcance:** si la prueba en Lean sigue el artículo de OpenAI, algo que [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli y Hansen) disputa sin afirmar que algún teorema de Lean sea falso.
 
@@ -34,8 +34,8 @@ Los teoremas formales de OpenAI están escritos al estilo de DeepMind. La [descr
 
 | Pregunta | Resultado | Registro |
 | --- | --- | --- |
-| ¿Compila desde la fuente? | Sí. Cuatro compilaciones; la última (B4, `lake --no-cache build`) exit 0, 11.424 jobs, 1 h 29 min, todas las dependencias compiladas localmente. | [compilaciones](evidence/formal/cd-validation/README.md#builds-used-by-each-run) |
-| ¿La aceptan kernels independientes? | Sí. Comparator con nanoda y el kernel de Lean aceptó Navier–Stokes (C, D) y Euler en las cuatro corridas, una por compilación. | [revalidación](evidence/formal/cd-validation/README.md) |
+| ¿Compila desde la fuente? | Sí. Cinco compilaciones; las dos últimas (B4 y B5, `lake --no-cache build`) exit 0, 11.424 jobs, 1 h 29 min y 1 h 16 min, todas las dependencias compiladas localmente. | [compilaciones](evidence/formal/cd-validation/README.md#builds-used-by-each-run), [B5](evidence/formal/b5/README.md) |
+| ¿La aceptan kernels independientes? | Sí. Comparator con nanoda y el kernel de Lean aceptó Navier–Stokes (C, D) y Euler en las cinco corridas, una por compilación. | [revalidación](evidence/formal/cd-validation/README.md) |
 | ¿Comparator revisa el enunciado exacto? | Sí. 6 de 6 mutantes del enunciado rechazados; control de solo comentario aceptado. | [mutantes](evidence/formal/cd-validation/mutants/) |
 | ¿El desafío es el enunciado público? | Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. | [procedencia](evidence/formal/statement-provenance/README.md) |
 | ¿Los verificadores están al día? | El código del kernel incluye todas las correcciones de solidez de 2026; nanoda es posterior a su corrección. | [vigencia del kernel](evidence/formal/kernel-currency.md) |
@@ -67,7 +67,7 @@ Las mismas comprobaciones, y los tests de todos los demás scripts, corren en [G
 
 ```mermaid
 flowchart LR
-    A[Pruebas de OpenAI<br/>commit fijado f9e8bc5] --> B[Cuatro compilaciones<br/>B4: nada precompilado]
+    A[Pruebas de OpenAI<br/>commit fijado f9e8bc5] --> B[Cinco compilaciones<br/>B4, B5: nada precompilado]
     B --> C[Comparator]
     C --> D[nanoda + kernel de Lean<br/>aceptan en todas las corridas]
     A --> E[Mutantes del enunciado<br/>6/6 rechazados]
@@ -75,7 +75,7 @@ flowchart LR
     A --> G[Procedencia del enunciado<br/>coincide con DeepMind]
 ```
 
-Comparator comprueba que la solución prueba exactamente el teorema del archivo de desafío, usando solo los axiomas permitidos (`propext`, `Quot.sound`, `Classical.choice`). La primera corrida (2026-10-20) está en [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). La revalidación del 2026-10-21 añadió tres corridas más, mutantes del enunciado y una revisión desde cero. Terminaron las 18 pruebas: ninguna dio un resultado inesperado y una no pudo correr.
+Comparator comprueba que la solución prueba exactamente el teorema del archivo de desafío, usando solo los axiomas permitidos (`propext`, `Quot.sound`, `Classical.choice`). La primera corrida (2026-10-20) está en [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). La revalidación del 2026-10-21 añadió tres corridas más, mutantes del enunciado y una revisión desde cero. Terminaron las 18 pruebas: ninguna dio un resultado inesperado y una no pudo correr. Una quinta compilación, B5, repitió la compilación completa desde la fuente para la versión v1.3.0, y Comparator volvió a aceptar los dos desafíos ([registro de B5](evidence/formal/b5/README.md), en inglés).
 
 | Animación | Qué muestra |
 | --- | --- |
@@ -101,7 +101,7 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 | Contrato, congelado primero | [`CONTRACT.md`](evidence/numerical/source/CONTRACT.md), tolerancia 10⁻⁶ | El enunciado oficial del desafío y los axiomas permitidos |
 | Oráculo independiente | Una solución programada aparte para cada modelo | Comparator con dos kernels, más una revisión con `leanchecker --fresh` |
 | Mutación deliberada | Dos errores conocidos por modelo y un cambio cerca del umbral | Un valor de prueba erróneo y seis mutantes del enunciado con un control |
-| Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre cuatro compilaciones |
+| Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre cinco compilaciones |
 | Revisión de la especificación | El propio contrato | Procedencia del enunciado, revisión de riesgos frente a Clay y los puentes en Lean (Parte D) |
 
 ### Hallazgos en este caso
@@ -259,6 +259,6 @@ docs/                     GIF, videos MP4 y resumen en PDF
 - **Análisis relacionado:** Bastounis, Circelli y Hansen, [arXiv:2610.08144](https://arxiv.org/abs/2610.08144); el resto de los trabajos previos está en [RELATED_WORK.md](RELATED_WORK.md).
 - **Este estudio de QA:** Cristian Guerra. Para citarlo, usa [CITATION.cff](CITATION.cff).
 - **Derechos:** la publicación está autorizada, pero no se concede ninguna licencia de código abierto. Ver [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Estado:** última versión [v1.2.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.2.0); el trabajo semántico de la Parte D sigue en `main`.
+- **Estado:** última versión [v1.3.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.0), que añade los puentes en Lean hacia el texto de Clay, los controles con Mathlib y la compilación B5.
 
 No se afirma ningún descubrimiento de teoremas, certificación científica, validación empírica ni prueba sobre un sistema del mundo real.

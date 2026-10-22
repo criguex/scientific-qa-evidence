@@ -1,0 +1,16 @@
+barrels=0
+xdg_files=0
+jobs_line=Build completed successfully (11424 jobs)
+window_start=2026-10-21T23:56:44Z
+oleans Cli total=0 older_than_build_start=0
+oleans Comparator total=0 older_than_build_start=0
+oleans LeanSearchClient total=4 older_than_build_start=0
+oleans Qq total=14 older_than_build_start=0
+oleans aesop total=132 older_than_build_start=0
+oleans batteries total=190 older_than_build_start=0
+oleans importGraph total=10 older_than_build_start=0
+oleans lean4export total=0 older_than_build_start=0
+oleans mathlib total=8371 older_than_build_start=0
+oleans plausible total=13 older_than_build_start=0
+oleans proofwidgets total=13 older_than_build_start=0
+oleans _project total=2659 older_than_build_start=0

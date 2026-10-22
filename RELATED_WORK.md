@@ -24,7 +24,7 @@ A passing Lean check involves separate questions:
 
 | Layer | Question | This study |
 | --- | --- | --- |
-| Kernel acceptance | Does the Lean proof derive the formal statement? | Tested: four builds, two kernels, a fresh replay, kernel currency |
+| Kernel acceptance | Does the Lean proof derive the formal statement? | Tested: five builds, two kernels, a fresh replay, kernel currency |
 | Statement fidelity | Is the formal statement the intended problem? | Partly: textual provenance against DeepMind's statement and a reading-based review against Clay's text |
 | Proof correspondence | Does the Lean proof follow the paper's argument? | **Not tested.** arXiv:2610.08144 argues it does not. Its abstract does not claim that any Lean theorem is false or that the final statement differs from Clay's. |
 

@@ -1,0 +1,4 @@
+build	XDG_CACHE_HOME=<RUN>/xdg MATHLIB_NO_CACHE_ON_UPDATE=1 lake --no-cache build	2026-10-21T23:56:44Z	2026-10-22T01:12:24Z	0
+comparator5_NavierStokes	lake env <comparator> ComparatorChallenges/NavierStokes.json (cwd: B5)	2026-10-22T01:12:24Z	2026-10-22T01:19:02Z	0
+comparator5_Euler	lake env <comparator> ComparatorChallenges/Euler.json (cwd: B5)	2026-10-22T01:19:02Z	2026-10-22T01:30:08Z	0
+bridges	lean --root=. ClayLiteral.lean and Bridges.lean against B5	2026-10-22T01:30:09Z	2026-10-22T01:30:17Z	0

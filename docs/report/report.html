@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Scientific QA Evidence — Report v1.2.0</title>
+<title>Scientific QA Evidence — Report v1.3.0</title>
 <style>
   @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
   body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10.2pt; line-height: 1.45; color: #14212b; }
@@ -28,16 +28,18 @@
 <body>
 
 <h1>Scientific QA Evidence</h1>
-<div class="sub">An independent QA reproduction of OpenAI's Lean proofs for Navier–Stokes alternatives (C) and (D) and the Euler singularity · Report for release <b>v1.2.0</b> + bridge plan (commit <code>c400a6b</code>) · 21 October 2026<br>
+<div class="sub">An independent QA audit of OpenAI's Lean proofs for Navier–Stokes alternatives (C) and (D) and the Euler singularity, with Lean bridges to Clay's text and checker controls · Report for release <b>v1.3.0</b> · 21 October 2026<br>
 Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com/criguex/scientific-qa-evidence</div>
 
 <div class="box warn"><b>Read this first.</b> The proofs belong to OpenAI (<code>openai/NavierStokesAndEuler</code>). This work proves nothing new, claims no Millennium Prize result and is not a mathematical review. It is a software-QA study: rebuild the published artifacts, recheck them with independent checkers, test whether the checking pipeline itself catches errors, and publish every step with hashes.</div>
 
 <h2>1. Conclusions</h2>
 <ol>
-<li><b>OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.</b> Comparator, with nanoda and the Lean kernel, accepted both challenges on four different builds, the last compiled entirely from source with nothing prebuilt (<code>lake --no-cache build</code>, exit 0, 11,424 jobs, 1 h 29 min). A fresh <code>leanchecker</code> replay agreed, and the kernel source used includes every known 2026 kernel soundness fix.</li>
+<li><b>OpenAI's (C), (D) and Euler proofs check, repeatedly and from scratch.</b> Comparator, with nanoda and the Lean kernel, accepted both challenges on five different builds, the last two compiled entirely from source with nothing prebuilt (<code>lake --no-cache build</code>, exit 0, 11,424 jobs, 1 h 29 min and 1 h 16 min). A fresh <code>leanchecker</code> replay agreed, and the kernel source used includes every known 2026 kernel soundness fix.</li>
 <li><b>Comparator checks the exact statement.</b> It refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public Formal Conjectures statement after textual normalization (name resolution not verified).</li>
-<li><b>Not settled here.</b> Whether the formal statement says exactly what Clay's text says: a reading-based review leaves one interpretive point (periodic pressure in D) and a semantic work plan with 18 bridge claims, none yet formally proved or independently reviewed. Whether the Lean proof follows OpenAI's paper is out of scope and is disputed by arXiv:2610.08144.</li>
+<li><b>OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean,</b> for every ν &gt; 0, with no hypotheses and only the standard axioms, under both readings of smoothness at t = 0 (<code>k1_C</code>, <code>k1_D</code>, <code>k1_C_oneSided</code>, <code>k1_D_oneSided</code>). This is relative to the literal rendering <code>ClayLiteral</code>, which nobody independent has reviewed against the PDF; (D) reads the erratum on periodic pressure as a solution condition, and (C) does not use it.</li>
+<li><b>A refusal is not a refutation.</b> On three Mathlib theorems, Comparator refused all eight changed statements, including three equivalent ones and a definitionally equal one. A second route in Lean, with a guard against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered.</li>
+<li><b>Not settled here.</b> Whether the Lean proof follows OpenAI's paper is out of scope and is disputed by Bastounis, Circelli and Hansen (arXiv:2610.08144). No mathematician has reviewed the bridges.</li>
 <li><b>What the protocol adds.</b> In this case it surfaced eight findings that the documented verification procedure does not produce, three of them corrected defects in this study's own work. In a pre-registered benchmark its checks flagged four planted fault classes that the baseline passes. Four review rounds found and fixed 17 issues in that experiment itself.</li>
 <li><b>Not claimed.</b> Methodological novelty (a targeted literature search found close prior work), a real-world detection rate, or any part of the mathematical proof.</li>
 </ol>
@@ -45,8 +47,8 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 <h2>2. Formal results</h2>
 <table>
 <tr><th>Question</th><th>Result</th><th>Limitation</th></tr>
-<tr><td>Does it build from source?</td><td>B1 (2026-10-20) exit 0; B3 exit 0 (Mathlib and project local, 7 small dependencies prebuilt from Reservoir); <b>B4 <code>--no-cache</code> exit 0, every <code>.olean</code> newer than the build start</b></td><td>Lean toolchain and checker binaries reused; one Linux host</td></tr>
-<tr><td>Do independent kernels accept it?</td><td>Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all four runs, one per build</td><td>Standalone Comparator <code>19e111e</code>; one host</td></tr>
+<tr><td>Does it build from source?</td><td>B1 (2026-10-20) exit 0; B3 exit 0 (Mathlib and project local, 7 small dependencies prebuilt from Reservoir); <b>B4 <code>--no-cache</code> exit 0, every <code>.olean</code> newer than the build start</b>; <b>B5 <code>--no-cache</code> (for v1.3.0) exit 0, 11,424 jobs, 1 h 16 min, nothing prebuilt</b></td><td>Lean toolchain and checker binaries reused; one Linux host</td></tr>
+<tr><td>Do independent kernels accept it?</td><td>Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all five runs, one per build</td><td>Standalone Comparator <code>19e111e</code>; one host</td></tr>
 <tr><td>Fresh replay</td><td><code>leanchecker --fresh</code> exit 0 for both solutions (19.6 and 22.5 min)</td><td>Same Lean kernel; lean4lean could not be built for Lean 4.34 and never examined the proofs</td></tr>
 <tr><td>Statement mutants</td><td>6/6 refused (<i>statements do not match</i>); comment-only control accepted</td><td>Tests statement equality only; says nothing about (A)/(B)</td></tr>
 <tr><td>Kernel currency</td><td>Lean <code>src/kernel</code> tree of v4.34.0-rc2 identical to v4.33.1–v4.34.1 (all 2026 kernel fixes); nanoda postdates its fix; a public exploit for #14576 is refused by the kernel used</td><td>Known bugs only; v4.34.1 runtime fixes not included</td></tr>
@@ -92,23 +94,34 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 </table>
 <p class="small">Limits: planted faults over recorded artifacts, not live Lean; not a real-world rate; each fault sits in an artifact the baseline does not read. Class F3 (kernel exploit) was withdrawn before freezing after an automated safety filter stopped the assistant's work on it; the reason is recorded.</p>
 
-<h2 class="pb">6. Next stage: semantic and independent mathematical verification</h2>
-<p>To conclude that the formal (C) and (D) imply Clay's, one direction per clause suffices: formal data imply Clay data, and Clay solutions imply formal solutions. Plan: write Clay's text literally in Lean (<code>ClayLiteral.lean</code>), publish it for review before proving anything, then prove the bridge lemmas against the same pinned Mathlib.</p>
+<h2 class="pb">6. From OpenAI's theorem to Clay's text</h2>
+<p>To get Clay's (C) and (D) from OpenAI's formal theorem, one direction per clause is enough: OpenAI's data must meet Clay's conditions, and any Clay solution must be a formal solution. Clay's equations (1)–(11), (C), (D) and the erratum are written literally in Lean, in coordinates and with one-sided time derivatives (<code>ClayLiteral.lean</code>); <code>Bridges.lean</code> proves each clause and composes them.</p>
 <table>
-<tr><th>Rows</th><th>Content</th><th>Proof</th><th>Review</th></tr>
-<tr><td>K0</td><td>Literal Lean rendering of Clay's (1)–(11), (C), (D), erratum</td><td>in progress</td><td>none</td></tr>
-<tr><td>P1, D6, S3, S6, L1</td><td>Definitional or immediate</td><td>reading</td><td>none</td></tr>
-<tr><td>D1–D5, D7, S2</td><td>Smoothness, divergence and decay bounds (data side)</td><td>reading</td><td>none</td></tr>
-<tr><td>S1, S5</td><td>Equation in coordinates; energy and integrability (solution side)</td><td>reading</td><td>none</td></tr>
-<tr><td><b>S4</b></td><td>C<sup>∞</sup> up to the boundary vs <code>ContDiffOn</code>: depends on the meaning of C<sup>∞</sup> on a closed set</td><td>reading</td><td><b>needs a decision</b></td></tr>
-<tr><td><b>S7</b></td><td>Periodic pressure in (D): Clay's erratum read as a solution condition</td><td>interpretive</td><td><b>needs a decision</b></td></tr>
-<tr><td>K1</td><td>Composition: formal (C)/(D) ⇒ Clay (C)/(D)</td><td>reading</td><td>none</td></tr>
+<tr><th>Clay's text</th><th>OpenAI's formal version</th><th>Lean</th></tr>
+<tr><td>u° smooth, div u° = 0, decay (4)</td><td>OpenAI's witness has u₀ = 0</td><td><code>d1_zero</code>, <code>d2_zero</code>, <code>d3_zero</code></td></tr>
+<tr><td>f smooth on ℝ³ × [0, ∞), either reading at t = 0</td><td>OpenAI's force is smooth on all of ℝ × ℝ³, its own extension</td><td><code>witness_C</code>, <code>witness_D</code></td></tr>
+<tr><td>decay (5), (9) of each mixed partial</td><td>bound on the norm of the m-th derivative</td><td><code>d5</code>, <code>d7</code> via <code>clay_bound</code></td></tr>
+<tr><td>(1) in coordinates; (2); (3)</td><td>vector equation with Mathlib's Δ and gradient; trace of the Jacobian; initial condition</td><td><code>s1</code>, <code>s2</code>, <code>s3</code></td></tr>
+<tr><td>(6), (11) smoothness; (7) Lebesgue energy bound</td><td><code>ContDiffOn</code> on the closed half-space; <code>MemLp 2</code> and Bochner bound</td><td><code>s4</code>, <code>s5</code></td></tr>
+<tr><td>(8), (10), erratum: periodicity</td><td><code>IsOnePeriodic</code></td><td><code>d6</code>, <code>s6</code>, <code>s7_formal_side</code></td></tr>
 </table>
-<p><b>State:</b> 18 claims, 0 formally proved, 0 independently reviewed.</p>
+<p><b>State:</b> 16 of 17 claims proved in Lean; K0 written and checked non-vacuous (the zero solution meets every Clay solution condition); S7 interpretive. All theorems use only <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>. <b>Open:</b> an independent review of <code>ClayLiteral</code> against the PDF (14 points, smoothness at t = 0 first; <code>SmoothOneSided</code> is a definition and its name proves nothing), Clay's answer on periodic pressure (D only), and a mathematician's review.</p>
 
-<h2>7. Reproducibility and traceability</h2>
+<h2>7. Mathlib controls: a changed statement is not a false one</h2>
+<p>Pre-registered (commit <code>046a128</code>, amended once before any run after outside review). Correct statements, reformulations and deliberate errors for three theorems Mathlib already proves.</p>
+<table>
+<tr><th>Theorem</th><th>Statements tried</th><th>Comparator</th><th>Second route in Lean</th></tr>
+<tr><td>Infinitude of primes</td><td>correct; <code>n + 1 ≤ p</code>; <code>n ≤ p</code>; only n ≤ 100; quantifiers swapped</td><td>accepted; refused ×4</td><td>equivalent (<code>Iff.rfl</code>); equivalent (for every predicate); weaker (both directions); false</td></tr>
+<tr><td>Cauchy–Schwarz</td><td>correct; squared form; strict &lt;</td><td>accepted; refused ×2</td><td>equivalent; false (x = y = 1)</td></tr>
+<tr><td>Dominated convergence</td><td>correct; <code>Integrable</code> unfolded; domination removed</td><td>accepted; refused ×2</td><td>equivalent only because domination gives bound ≥ 0; false ((n+1) on (0, 1/(n+1)))</td></tr>
+</table>
+<p>All 11 cases and both controls (a cheating equivalence rejected by the dependency guard; a signed bound showing the DCT reformulation needs domination) came out as registered. Every step has a receipt with command, input and output hashes and exit code; <code>verify.py</code> checks the records against them and has regression tests for two verifier defects found by an outside reviewer. Limits: author-designed cases, no held-out cases yet, three theorems only.</p>
+
+<h2 class="pb">8. Reproducibility and traceability</h2>
 <ul>
-<li>Release <b>v1.2.0</b>, commit <code>29c51a3</code>; CI green on Ubuntu and macOS, Python 3.9 and 3.12 (run 39683103016).</li>
+<li>Release <b>v1.3.0</b>, commit __COMMIT__; CI green on Ubuntu and macOS, Python 3.9 and 3.12.</li>
+<li><b>Validation from a fresh clone:</b> every hash, rerun, consistency check and test passes on macOS; on the Linux host the Lean bridges compile from the clone into an empty directory and all 21 Mathlib-control steps reproduce their exit codes and input hashes (<code>evidence/FROM_ZERO.md</code>). A fifth build, B5, repeated the full build from source and Comparator accepted both challenges again (<code>evidence/formal/b5/</code>).</li>
+<li>Every cited repository, pinned commit, path, paper and URL was checked against its source; <code>CITATION.cff</code> lists them with revisions and licenses and validates against CFF 1.2.0.</li>
 <li>Every curated file has a SHA-256 in <code>evidence/SHA256SUMS.txt</code>; every public log is traced to its original's hash in <code>PROVENANCE.md</code>.</li>
 <li><code>REPRODUCE.md</code> separates what is recomputed (numerical campaign, statement comparison, benchmark) from what is only verified by hash (formal logs).</li>
 <li>Related work, findings, claims with limitations, and errata are all in the repository: <code>RELATED_WORK.md</code>, <code>FINDINGS.md</code>, <code>CLAIMS.md</code>, <code>experiments/blind-faults/</code>.</li>

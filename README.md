@@ -2,7 +2,7 @@
 
 This repository contains an independent QA audit of the Lean 4 formalizations in [openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler), which accompany “[Finite time blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)” and “[Finite time blowup for the Euler equation](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)” by OpenAI, plus a mutation-testing campaign on nine numerical models. The proofs belong to OpenAI. This repository proves nothing new, claims no Millennium Prize result and is not a mathematical review: it rebuilds the published artifacts, rechecks them with independent checkers, tests whether the checking pipeline catches errors, and publishes every step with hashes.
 
-- [Read the five-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.2.0.pdf)
+- [Read the five-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.3.0.pdf)
 - [Read every claim with its evidence and limits](CLAIMS.md)
 - [Watch the thirteen evidence scenes](animations/index.html)
 - [Leer en español](README.es.md)
@@ -13,7 +13,7 @@ By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://g
 
 For OpenAI's proofs at commit `f9e8bc5`, we checked:
 
-- **They check from scratch:** Comparator, with the nanoda and Lean kernels, accepted Navier–Stokes (C), (D) and Euler on four builds, the last compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel includes every known 2026 soundness fix.
+- **They check from scratch:** Comparator, with the nanoda and Lean kernels, accepted Navier–Stokes (C), (D) and Euler on five builds, the last two compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel includes every known 2026 soundness fix.
 - **The statement is the exact one:** Comparator refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public statement after textual normalization (name resolution not verified).
 - **Not covered:** whether the Lean proof follows OpenAI's paper, which [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli and Hansen) disputes without claiming any Lean theorem is false.
 
@@ -34,8 +34,8 @@ OpenAI's formal theorems are written in DeepMind's style. Clay's [official probl
 
 | Question | Result | Record |
 | --- | --- | --- |
-| Does it build from source? | Yes. Four builds; the last (B4, `lake --no-cache build`) exit 0, 11,424 jobs, 1 h 29 min, every dependency compiled locally. | [builds](evidence/formal/cd-validation/README.md#builds-used-by-each-run) |
-| Do independent kernels accept it? | Yes. Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all four runs, one per build. | [revalidation](evidence/formal/cd-validation/README.md) |
+| Does it build from source? | Yes. Five builds; the last two (B4 and B5, `lake --no-cache build`) exit 0, 11,424 jobs, 1 h 29 min and 1 h 16 min, every dependency compiled locally. | [builds](evidence/formal/cd-validation/README.md#builds-used-by-each-run), [B5](evidence/formal/b5/README.md) |
+| Do independent kernels accept it? | Yes. Comparator with nanoda and the Lean kernel accepted Navier–Stokes (C, D) and Euler in all five runs, one per build. | [revalidation](evidence/formal/cd-validation/README.md) |
 | Does Comparator check the exact statement? | Yes. 6 of 6 statement mutants refused; comment-only control accepted. | [mutants](evidence/formal/cd-validation/mutants/) |
 | Is the challenge the public statement? | The 18 declarations match after textual normalization; name resolution was not verified. | [provenance](evidence/formal/statement-provenance/README.md) |
 | Are the checkers current? | The kernel source includes every 2026 kernel soundness fix; nanoda postdates its fix. | [kernel currency](evidence/formal/kernel-currency.md) |
@@ -67,7 +67,7 @@ The same checks, and the tests of every other script, run in [GitHub Actions](.g
 
 ```mermaid
 flowchart LR
-    A[OpenAI's proofs<br/>pinned commit f9e8bc5] --> B[Four builds<br/>B4: nothing prebuilt]
+    A[OpenAI's proofs<br/>pinned commit f9e8bc5] --> B[Five builds<br/>B4, B5: nothing prebuilt]
     B --> C[Comparator]
     C --> D[nanoda + Lean kernel<br/>accept in all runs]
     A --> E[Statement mutants<br/>6/6 refused]
@@ -75,7 +75,7 @@ flowchart LR
     A --> G[Statement provenance<br/>matches DeepMind]
 ```
 
-Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). The first run (2026-10-20) is in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The revalidation of 2026-10-21 added three more runs, statement mutants and a fresh replay. All 18 checks finished: none produced an unexpected result, and one could not run.
+Comparator checks that the submitted solution proves exactly the theorem stated in the challenge file, using only the permitted axioms (`propext`, `Quot.sound`, `Classical.choice`). The first run (2026-10-20) is in [`evidence/formal/comparator/`](evidence/formal/comparator/README.md). The revalidation of 2026-10-21 added three more runs, statement mutants and a fresh replay. All 18 checks finished: none produced an unexpected result, and one could not run. A fifth build, B5, repeated the full build from source for release v1.3.0, and Comparator accepted both challenges again ([B5 record](evidence/formal/b5/README.md)).
 
 | Animation | What it shows |
 | --- | --- |
@@ -101,7 +101,7 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 | Contract, frozen first | [`CONTRACT.md`](evidence/numerical/source/CONTRACT.md), tolerance 10⁻⁶ | The official challenge statement and the permitted axioms |
 | Independent oracle | A separately coded solution per model | Comparator with two kernels, plus a `leanchecker --fresh` replay |
 | Deliberate mutation | Two known bugs per model, plus one near-threshold change | A wrong proof value and six statement mutants with a control |
-| Repetition | The same 84 variants on two hosts | Comparator on four builds |
+| Repetition | The same 84 variants on two hosts | Comparator on five builds |
 | Specification check | The contract itself | Statement provenance, the Clay risk review and the Lean bridges (Part D) |
 
 ### Findings in this case
@@ -258,6 +258,6 @@ docs/                     GIF previews, MP4 videos, PDF summary
 - **Related analysis:** Bastounis, Circelli and Hansen, [arXiv:2610.08144](https://arxiv.org/abs/2610.08144); the rest of the prior work is in [RELATED_WORK.md](RELATED_WORK.md).
 - **This QA study:** Cristian Guerra. To cite it, use [CITATION.cff](CITATION.cff).
 - **Rights:** publication is authorized, but no open-source license is granted. See [LICENSE_STATUS.md](LICENSE_STATUS.md).
-- **Status:** latest release [v1.2.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.2.0); the semantic work of Part D continues on `main`.
+- **Status:** latest release [v1.3.0](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.0), which adds the Lean bridges to Clay's text, the Mathlib controls and build B5.
 
 No theorem discovery, scientific certification, empirical validation or proof about a real-world system is claimed.
