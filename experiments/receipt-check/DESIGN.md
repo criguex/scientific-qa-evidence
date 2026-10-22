@@ -1,6 +1,6 @@
 # One concrete comparison: receipt-to-log correspondence on authentic records
 
-**Pre-registered on 2026-10-22, before any run.** The expected outcomes are in [`expected.json`](expected.json), and the scripts are [`run.sh`](run.sh) and [`check_p6.py`](check_p6.py).
+**Pre-registered on 2026-10-22, before any run.** **Results: [RESULTS.md](RESULTS.md)** — both variants came out as registered. The expected outcomes are in [`expected.json`](expected.json), and the scripts are [`run.sh`](run.sh) and [`check_p6.py`](check_p6.py).
 
 ## Question
 

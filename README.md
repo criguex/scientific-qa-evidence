@@ -28,6 +28,7 @@ OpenAI's formal theorems are written in DeepMind's style. Clay's [official probl
 
 - **A refusal is not a refutation:** on three theorems Mathlib already proves, Comparator refused all eight changed statements, even a definitionally equal one. A second route in Lean, guarded against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered ([Mathlib controls](experiments/mathlib-controls/RESULTS.md)).
 - **Planted faults:** in a pre-registered benchmark with a committed seed, the protocol flagged four fault classes that OpenAI's documented procedure passes; four review rounds found 17 issues in the experiment itself ([benchmark](experiments/blind-faults/v2/README.md)).
+- **One concrete comparison:** on the same authentic files, a receipt that names a log missing from the evidence passes OpenAI's published procedure with identical output, while the receipt check P6 flags it; the clean control passes both, as pre-registered ([receipt check](experiments/receipt-check/RESULTS.md)). A claim about traceability of evidence, not about the proof.
 - **What this case adds:** eight findings the documented verification procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)). Methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
 
 ## Results at a glance
@@ -113,6 +114,17 @@ Compared with the verification procedure in OpenAI's README, the protocol produc
 A pre-registered experiment planted faults in controlled cases, assigned by a committed seed. With the corrected evaluator, the protocol's checks flag four fault classes the baseline passes, both flag the positive control, and the clean case passes both. The first run is kept with errata, and four review rounds found 17 issues in the experiment itself ([results and errata](experiments/blind-faults/RESULTS.md), [corrected benchmark](experiments/blind-faults/v2/README.md)).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Planted faults flagged by the baseline and by the protocol, and four review rounds"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
+
+### One concrete comparison on authentic records
+
+The benchmark's case C/F5 was moved from synthetic records to real ones. On a copy of a from-source build tree, OpenAI's published procedure (`lake exe cache get`, `lake build`, `lake exe comparator ComparatorChallenges/NavierStokes.json`) was recorded step by step, and then run again on a clean bundle and on one whose receipt names a log that does not exist.
+
+| Variant | OpenAI's published procedure | Check P6 |
+| --- | --- | --- |
+| Clean | exit 0, `Your solution is okay!` | exit 0, no flag |
+| Receipt names `comparator-run.log` | exit 0, same output byte for byte | exit 1, `P6:receipt-log-missing-comparator-run.log` |
+
+**In this case, P6 detected a receipt naming a log that is not in the evidence, and the published procedure, run on the same files, did not, because it does not read receipts.** That is a claim about the traceability of the evidence, not about the proof, which was accepted in both. Pre-registered, with commands, versions, outputs and exit codes ([design](experiments/receipt-check/DESIGN.md), [results](experiments/receipt-check/RESULTS.md)).
 
 ### Mathlib controls: "the statement changed" is not "the theorem is false"
 

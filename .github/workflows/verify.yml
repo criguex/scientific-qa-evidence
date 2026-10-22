@@ -46,3 +46,6 @@ jobs:
       - name: Mathlib controls (check receipts, recompute classes)
         working-directory: experiments/mathlib-controls
         run: python3 verify.py && python3 -m unittest -v test_verify
+      - name: Receipt check on authentic records (recompute P6)
+        working-directory: experiments/receipt-check
+        run: python3 -m unittest -v test_results

@@ -28,6 +28,7 @@ Los teoremas formales de OpenAI están escritos al estilo de DeepMind. La [descr
 
 - **Un rechazo no es una refutación:** con tres teoremas que Mathlib ya prueba, Comparator rechazó los ocho enunciados cambiados, incluso uno definicionalmente igual. Una segunda vía en Lean, con una guarda que impide usar el teorema bajo prueba, clasificó cada uno como equivalente, más débil o falso, todo según lo registrado de antemano ([controles Mathlib](experiments/mathlib-controls/RESULTS.md)).
 - **Fallos sembrados:** en un benchmark prerregistrado con semilla comprometida, el protocolo marcó cuatro clases de fallo que el procedimiento documentado de OpenAI deja pasar; cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([benchmark](experiments/blind-faults/v2/README.md)).
+- **Una comparación concreta:** sobre los mismos archivos auténticos, un recibo que nombra un log ausente pasa el procedimiento publicado de OpenAI con salida idéntica, mientras que la comprobación de recibos P6 lo marca; el control limpio pasa ambos, según lo registrado de antemano ([comprobación de recibos](experiments/receipt-check/RESULTS.md), en inglés). Es una afirmación sobre la trazabilidad de la evidencia, no sobre la prueba.
 - **Qué aporta este caso:** ocho hallazgos que el procedimiento de verificación documentado no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés). No se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)).
 
 ## Resultados en resumen
@@ -113,6 +114,17 @@ Frente al procedimiento de verificación del README de OpenAI, el protocolo prod
 Un experimento prerregistrado sembró fallos en casos controlados, asignados con una semilla comprometida. Con el evaluador corregido, los checks del protocolo marcan cuatro clases de fallo que el procedimiento base deja pasar, los dos marcan el control positivo y el caso limpio pasa los dos. La primera corrida se conserva con fe de erratas, y cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([resultados y erratas](experiments/blind-faults/RESULTS.md), [benchmark corregido](experiments/blind-faults/v2/README.md), en inglés).
 
 <a href="animations/experiment.html"><img src="docs/assets/experiment-preview.gif" width="380" alt="Fallos sembrados detectados por cada procedimiento y cuatro rondas de revisión"></a><br><a href="docs/media/experiment.mp4">▶ MP4 1080p</a>
+
+### Una comparación concreta con registros auténticos
+
+El caso C/F5 del benchmark pasó de registros sintéticos a registros reales. Sobre una copia de un árbol compilado desde la fuente se registró paso a paso el procedimiento publicado por OpenAI (`lake exe cache get`, `lake build`, `lake exe comparator ComparatorChallenges/NavierStokes.json`), y luego se corrió otra vez sobre un paquete limpio y sobre uno cuyo recibo nombra un log que no existe.
+
+| Variante | Procedimiento publicado de OpenAI | Comprobación P6 |
+| --- | --- | --- |
+| Limpia | exit 0, `Your solution is okay!` | exit 0, sin marcas |
+| El recibo nombra `comparator-run.log` | exit 0, misma salida byte a byte | exit 1, `P6:receipt-log-missing-comparator-run.log` |
+
+**En este caso, P6 detectó un recibo que nombra un log que no está en la evidencia, y el procedimiento publicado, corrido sobre los mismos archivos, no lo detectó, porque no lee recibos.** Es una afirmación sobre la trazabilidad de la evidencia, no sobre la prueba, que fue aceptada en ambas variantes. Prerregistrado, con comandos, versiones, salidas y códigos de retorno ([diseño](experiments/receipt-check/DESIGN.md), [resultados](experiments/receipt-check/RESULTS.md), en inglés).
 
 ### Controles con Mathlib: «el enunciado cambió» no es «el teorema es falso»
 

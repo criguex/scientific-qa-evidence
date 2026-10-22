@@ -1,0 +1,4 @@
+step	command	log	exit
+cache_get	lake exe cache get	cache_get.log	0
+build	lake build	build.log	0
+comparator	lake exe comparator ComparatorChallenges/NavierStokes.json	comparator-run.log	0

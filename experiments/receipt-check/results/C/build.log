@@ -1,0 +1,72 @@
+✔ [10524/11205] Built Mathlib.Combinatorics.SimpleGraph.Walks.Operations (1.8s)
+✔ [11268/11424] Built Mathlib.Combinatorics.SimpleGraph.Walk.Maps (2.3s)
+✔ [11269/11424] Built Mathlib.Combinatorics.SimpleGraph.Walks.Maps (578ms)
+✔ [11270/11424] Built Mathlib.Combinatorics.SimpleGraph.Walk.Subwalks (2.3s)
+✔ [11271/11424] Built Mathlib.Combinatorics.SimpleGraph.Walks.Subwalks (575ms)
+✔ [11272/11424] Built Mathlib.Combinatorics.SimpleGraph.Walk.Decomp (1.2s)
+✔ [11273/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.WalkDecomp (660ms)
+✔ [11274/11424] Built Mathlib.Combinatorics.SimpleGraph.Walks.Decomp (662ms)
+✔ [11275/11424] Built Mathlib.Combinatorics.SimpleGraph.Paths (2.2s)
+✔ [11276/11424] Built Mathlib.Combinatorics.SimpleGraph.Trails (1.1s)
+✔ [11277/11424] Built Mathlib.Combinatorics.SimpleGraph.Walk.Counting (1.5s)
+✔ [11278/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected (2.2s)
+✔ [11279/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.WalkCounting (809ms)
+✔ [11280/11424] Built Mathlib.Combinatorics.SimpleGraph.Walks.Counting (808ms)
+✔ [11281/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.Finite (1.7s)
+✔ [11282/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.EdgeConnectivity (1.8s)
+✔ [11283/11424] Built Mathlib.Combinatorics.SimpleGraph.Clique (4.2s)
+✔ [11284/11424] Built Mathlib.Combinatorics.SimpleGraph.Metric (2.3s)
+✔ [11285/11424] Built Mathlib.Combinatorics.SimpleGraph.Ends.Defs (2.3s)
+✔ [11286/11424] Built Mathlib.Combinatorics.SimpleGraph.AdjMatrix (3.6s)
+✔ [11287/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.Represents (2.1s)
+✔ [11288/11424] Built Mathlib.Combinatorics.SimpleGraph.Ends.Properties (1.7s)
+✔ [11289/11424] Built Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph (4.2s)
+✔ [11290/11424] Built Mathlib.Combinatorics.SimpleGraph.Hamiltonian (2.4s)
+✔ [11291/11424] Built Mathlib.Combinatorics.SimpleGraph.VertexCover (2.4s)
+✔ [11292/11424] Built Mathlib.Combinatorics.SimpleGraph.Diam (2.2s)
+✔ [11293/11424] Built Mathlib.Combinatorics.SimpleGraph.Triangle.Counting (3.0s)
+✔ [11294/11424] Built Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex (3.4s)
+✔ [11295/11424] Built Mathlib.Combinatorics.SimpleGraph.Triangle.Basic (3.6s)
+✔ [11296/11424] Built Mathlib.Combinatorics.SimpleGraph.Extremal.Turan (3.9s)
+✔ [11297/11424] Built Mathlib.Combinatorics.SimpleGraph.Coloring (1.2s)
+✔ [11298/11424] Built Mathlib.Combinatorics.SimpleGraph.Coloring.VertexColoring (1.2s)
+✔ [11299/11424] Built Mathlib.Combinatorics.SimpleGraph.StronglyRegular (2.2s)
+✔ [11300/11424] Built Mathlib.Combinatorics.SimpleGraph.Partition (1.5s)
+✔ [11301/11424] Built Mathlib.Combinatorics.SimpleGraph.Matching (3.6s)
+✔ [11302/11424] Built Mathlib.Combinatorics.SimpleGraph.LapMatrix (5.2s)
+✔ [11303/11424] Built Mathlib.Combinatorics.SimpleGraph.Sum (2.9s)
+✔ [11304/11424] Built Mathlib.Combinatorics.SimpleGraph.Triangle.Tripartite (2.8s)
+✔ [11305/11424] Built Mathlib.Combinatorics.SimpleGraph.UniversalVerts (1.0s)
+✔ [11306/11424] Built Mathlib.Combinatorics.SimpleGraph.Bipartite (3.6s)
+✔ [11307/11424] Built Mathlib.Combinatorics.SimpleGraph.Triangle.Removal (3.5s)
+✔ [11308/11424] Built Mathlib.Combinatorics.SimpleGraph.Hall (1.6s)
+✔ [11309/11424] Built Mathlib.Combinatorics.SimpleGraph.Extremal.Zarankiewicz (1.6s)
+✔ [11310/11424] Built Mathlib.Combinatorics.Extremal.RuzsaSzemeredi (2.4s)
+✔ [11311/11424] Built Mathlib.Combinatorics.SimpleGraph.Prod (2.9s)
+✔ [11312/11424] Built Mathlib.Combinatorics.Additive.Corner.Roth (2.2s)
+✔ [11313/11424] Built Mathlib.Combinatorics.SimpleGraph.Tutte (2.0s)
+✔ [11314/11424] Built Mathlib.Combinatorics.SimpleGraph.Hasse (1.4s)
+✔ [11315/11424] Built Mathlib.Combinatorics.SimpleGraph.CycleGraph (1.4s)
+✔ [11316/11424] Built Mathlib.Combinatorics.SimpleGraph.CompleteMultipartite (1.9s)
+✔ [11317/11424] Built Mathlib.Combinatorics.SimpleGraph.Circulant (889ms)
+✔ [11318/11424] Built Mathlib.Combinatorics.SimpleGraph.Coloring.Constructions (1.5s)
+✔ [11319/11424] Built Mathlib.Combinatorics.SimpleGraph.Acyclic (2.3s)
+✔ [11320/11424] Built Mathlib.Combinatorics.SimpleGraph.ConcreteColorings (738ms)
+✔ [11321/11424] Built Mathlib.Combinatorics.SimpleGraph.Extremal.ErdosStoneSimonovits (2.7s)
+✔ [11322/11424] Built Mathlib.Combinatorics.SimpleGraph.Star (912ms)
+✔ [11323/11424] Built Mathlib.Combinatorics.SimpleGraph.Girth (1.2s)
+✔ [11324/11424] Built Mathlib.Combinatorics.SimpleGraph.FiveWheelLike (3.4s)
+✔ [11325/11424] Built Mathlib (6.4s)
+ℹ [11343/11424] Replayed NavierStokes.ComparatorSolution
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [11418/11424] Replayed Euler.Solution
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [11420/11424] Replayed ComparatorChallenges.Euler
+warning: ComparatorChallenges/Euler.lean:85:8: declaration uses `sorry`
+warning: ComparatorChallenges/Euler.lean:170:8: declaration uses `sorry`
+⚠ [11421/11424] Replayed ComparatorChallenges.NavierStokes
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+Build completed successfully (11424 jobs).
