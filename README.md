@@ -5,6 +5,7 @@ This repository contains an independent QA audit of the Lean 4 formalizations in
 - [Read the five-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.3.0.pdf)
 - [Read every claim with its evidence and limits](CLAIMS.md)
 - [Watch the thirteen evidence scenes](animations/index.html)
+- [Review one concrete result: receipt-to-artifact checks](docs/REVIEW_REQUEST.md)
 - [Leer en español](README.es.md)
 
 By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).

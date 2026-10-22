@@ -5,6 +5,7 @@ Este repositorio contiene una auditoría de QA independiente de las formalizacio
 - [Leer el resumen de cinco páginas (PDF, en inglés)](docs/report/scientific-qa-evidence-report-v1.3.0.pdf)
 - [Leer cada afirmación con su evidencia y sus límites](CLAIMS.md) (en inglés)
 - [Ver las trece escenas de evidencia](animations/index.html)
+- [Revisar un resultado concreto: comprobación de recibos frente a artefactos](docs/REVIEW_REQUEST.md) (en inglés)
 - [Read in English](README.md)
 
 Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
