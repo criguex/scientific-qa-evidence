@@ -53,9 +53,11 @@ Neither result is new mathematics, and nothing here claims a Millennium Prize re
 - The first version of the planted-fault experiment had evaluator defects; four review rounds found 17 issues, all fixed and kept with errata.
 - A results verifier missed Lean's real `sorry` warning and accepted logs without exit codes; a release was first published on a failing build. Each was fixed, tested and recorded.
 
-## One review we are asking for
+## Two things we are asking for
 
-If you know Lean or the Navier–Stokes problem: **is [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) a faithful transcription of Clay's official problem statement?** The [review sheet](bridges/K0_REVIEW.md) lists the 14 places to compare with the PDF, starting with smoothness at time zero. Answers will be recorded there, with your name if you wish.
+If you know Lean or the Navier–Stokes problem: **is [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) a faithful transcription of Clay's official problem statement?** The [review sheet](bridges/K0_REVIEW.md) lists 14 places to compare with the PDF, each with its page, equation and Lean line. They are points to check, not known defects: we found no concrete error. What helps most is a point-by-point answer (agree, object or unsure, with the citation and the argument), especially for (C); the sheet explains the format. Answers will be recorded there as received.
+
+**An independent reproduction.** Every run here was made by the author. If you can rebuild OpenAI's proofs from the fixed version and publish your commit, environment, commands, outputs, exit codes and axioms, the [reproduction guide](docs/INDEPENDENT_REPRODUCTION.md) has the exact steps and a report template. A result that differs from ours is just as useful.
 
 ## The method: QA with scientific rigour
 

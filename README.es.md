@@ -53,9 +53,11 @@ Ninguno de los dos es matemática nueva, y nada aquí reclama un resultado del P
 - La primera versión del experimento de fallos sembrados tenía defectos en su evaluador; cuatro rondas de revisión encontraron 17 problemas, todos corregidos y conservados con erratas.
 - Un verificador de resultados no detectaba el aviso real de `sorry` de Lean y aceptaba logs sin código de salida; una versión se publicó primero sobre un CI en rojo. Cada caso se corrigió, se probó y quedó registrado.
 
-## La única revisión que pedimos
+## Dos cosas que pedimos
 
-Si conoces Lean o el problema de Navier–Stokes: **¿es [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) una transcripción fiel del enunciado oficial de Clay?** La [hoja de revisión](bridges/K0_REVIEW.md) (en inglés) lista los 14 puntos a comparar con el PDF, empezando por la suavidad en el tiempo cero. Las respuestas se registrarán ahí, con tu nombre si quieres.
+Si conoces Lean o el problema de Navier–Stokes: **¿es [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) una transcripción fiel del enunciado oficial de Clay?** La [hoja de revisión](bridges/K0_REVIEW.md) (en inglés) lista 14 puntos a comparar con el PDF, cada uno con su página, ecuación y línea de Lean. Son puntos a revisar, no defectos conocidos: no encontramos ningún error concreto. Lo que más ayuda es una respuesta punto por punto (de acuerdo, objeción o duda, con la cita y el argumento), sobre todo para (C); la hoja explica el formato. Las respuestas se registrarán ahí tal como lleguen.
+
+**Una reproducción independiente.** Todas las ejecuciones de este repositorio las hizo su autor. Si puedes recompilar las pruebas de OpenAI desde la versión fija y publicar tu commit, entorno, comandos, salidas, códigos de salida y axiomas, la [guía de reproducción](docs/INDEPENDENT_REPRODUCTION.md) (en inglés) tiene los pasos exactos y una plantilla de informe. Un resultado distinto del nuestro es igual de útil.
 
 ## El método: QA con rigor científico
 

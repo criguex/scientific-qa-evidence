@@ -26,4 +26,4 @@ Everything below started from `git clone https://github.com/criguex/scientific-q
 ## Not repeated here
 
 - The OpenAI and Mathlib build itself. These checks used build B4, which was compiled from source with `lake --no-cache build` earlier the same day (1 h 29 min, [record](formal/cd-validation/README.md#builds-used-by-each-run)), and the checker binaries recorded in [`receipts/`](formal/cd-validation/receipts/).
-- An independent person's run. This was done by the author with the assistant on the same two machines; an outside rebuild is the stronger check.
+- An independent person's run. This was done by the author with the assistant on the same two machines; an outside rebuild is the stronger check. The [independent reproduction guide](../docs/INDEPENDENT_REPRODUCTION.md) gives the steps and a report template.
