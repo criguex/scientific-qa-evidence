@@ -122,10 +122,10 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 <table>
 <tr><th>Variant</th><th>Published procedure</th><th>P6 (log exists)</th><th>Hash check</th></tr>
 <tr><td>Clean</td><td>exit 0</td><td>pass</td><td>pass</td></tr>
-<tr><td>Receipt names a missing log</td><td>exit 0, byte-identical output</td><td class="no">flags</td><td class="no">flags</td></tr>
-<tr><td>Stale log from another run, right name</td><td>exit 0, byte-identical output</td><td>passes</td><td class="no">flags</td></tr>
+<tr><td>Receipt names a missing log</td><td>exit 0, output byte-identical to the clean run</td><td class="no">flags</td><td class="no">flags</td></tr>
+<tr><td>Stale log from another run, right name</td><td>exit 0, output byte-identical to the missing-log run</td><td>passes</td><td class="no">flags</td></tr>
 </table>
-<p><b>Conclusion:</b> in this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by the hash check. It does not mean Comparator accepted a false proof. Limits: two cases, one host; the published procedure does not claim to check receipts.</p>
+<p><b>Conclusion:</b> in this experiment, P6 detects a traceability inconsistency that does not change Comparator's result, and a stale log under the right name is caught only by the hash check. It does not mean Comparator accepted a false proof. Limits: two cases, one host; the published verifier does not claim to check that receipts correspond to the logs they reference; the hash check detects changes relative to a trusted recorded value but does not authenticate origin if both the file and that value can be replaced. In case 2 the clean run has 13 extra build lines, because its first Comparator call also built the executable.</p>
 
 <h2 class="pb">9. Reproducibility and traceability</h2>
 <ul>

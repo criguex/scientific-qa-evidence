@@ -14,7 +14,7 @@ Z's output for F5 and F7 is byte-identical, and identical to F5 in case 1. C's o
 
 > **In this experiment, a stale log under the right name passed OpenAI's published procedure and this study's existence check P6, and was flagged only by comparing it with the hash recorded when the step ran.** Like case 1, this is a traceability inconsistency that does not change Comparator's result, not an accepted false proof.
 
-It shows the value of binding receipts to artifact hashes, and a limit of P6, which checks only that the named log exists. One case.
+It shows the value of binding receipts to artifact hashes, and a limit of P6, which checks only that the named log exists. **Limit of the hash check:** it detects a change relative to a trusted reference value, here the hash recorded when the step ran; it does not authenticate where a log came from if someone can replace both the file and that recorded value. One case.
 
 ## Notes
 

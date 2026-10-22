@@ -8,7 +8,7 @@ Does a check that each receipt corresponds to the artifact it names catch eviden
 | [`DESIGN2.md`](DESIGN2.md), [`expected2.json`](expected2.json) | Case 2, pre-registered: a stale log from another run under the right name |
 | [`STATUS.md`](STATUS.md) | Timeline: an aborted first attempt, one amendment, both runs, the scripts as run, and the hardening after review |
 | [`RESULTS.md`](RESULTS.md), [`RESULTS2.md`](RESULTS2.md) | Outcomes, the claim each supports, and recording notes |
-| [`run.sh`](run.sh), [`run2.sh`](run2.sh) | Run the published procedure on a copy of a from-source build tree, write the evidence bundle and evaluate each variant; need `QA_COMMIT` and a Linux host with that tree |
+| [`run.sh`](run.sh), [`run2.sh`](run2.sh) | Run the published procedure on a copy of a from-source build tree, write the evidence bundle and evaluate each variant; need `QA_COMMIT`; as written they run under WSL on a Windows host, measuring the Windows drive with PowerShell and using that host's local paths |
 | [`preflight.sh`](preflight.sh) | Shared checks: host disk space, pinned toolchain, `lake-manifest.json` revisions, tool and Comparator binary hashes; aborts on any mismatch |
 | [`check_p6.py`](check_p6.py) | Check X1: P6 from the frozen evaluator v2.2, which tests that each log named by a receipt exists and that steps exited 0 |
 | [`check_hash.py`](check_hash.py) | Check X2: each named log must also match the SHA-256 recorded when its step ran |
