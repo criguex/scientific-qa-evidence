@@ -129,7 +129,7 @@ Author: <b>Cristian Guerra</b>, QA Automation, Medellín, Colombia · github.com
 
 <h2 class="pb">9. Reproducibility and traceability</h2>
 <ul>
-<li>Release <b>v1.3.1</b>, content commit __COMMIT__; CI green on Ubuntu and macOS, Python 3.9 and 3.12. An independent automated audit of the READMEs against the records was run before this release, and its confirmed findings were fixed.</li>
+<li>Release <b>v1.3.1</b>, content commit <code>5a2f452</code>; CI green on Ubuntu and macOS, Python 3.9 and 3.12. An independent automated audit of the READMEs against the records was run before this release, and its confirmed findings were fixed.</li>
 <li><b>Validation from a fresh clone:</b> every hash, rerun, consistency check and test passes on macOS; on the Linux host the Lean bridges compile from the clone into an empty directory and all 21 Mathlib-control steps reproduce their exit codes and input hashes (<code>evidence/FROM_ZERO.md</code>). A fifth build, B5, repeated the full build from source and Comparator accepted both challenges again (<code>evidence/formal/b5/</code>).</li>
 <li>Every cited repository, pinned commit, path, paper and URL was checked against its source; <code>CITATION.cff</code> lists them with revisions and licenses and validates against CFF 1.2.0.</li>
 <li>Every curated file has a SHA-256 in <code>evidence/SHA256SUMS.txt</code>; every public log is traced to its original's hash in <code>PROVENANCE.md</code>.</li>
