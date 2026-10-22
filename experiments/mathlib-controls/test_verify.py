@@ -60,5 +60,20 @@ class Records(unittest.TestCase):
                 verify.load_receipts(verify.RES, lean)
 
 
+
+class PublishedLogs(unittest.TestCase):
+    def test_every_logged_hash_has_a_published_file(self):
+        import hashlib
+        import json
+        from pathlib import Path
+        res = Path(__file__).resolve().parent / "results"
+        published = {hashlib.sha256(p.read_bytes()).hexdigest() for p in res.rglob("*.log")}
+        for name in ("receipts.jsonl", "rerun-from-clone.receipts.jsonl"):
+            for line in (res / name).read_text().splitlines():
+                r = json.loads(line)
+                for key in ("stdout_sha256", "stderr_sha256"):
+                    self.assertIn(r[key], published, f"{name}: {r['case']} {key}")
+
+
 if __name__ == "__main__":
     unittest.main()

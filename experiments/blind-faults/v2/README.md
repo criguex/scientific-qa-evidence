@@ -71,7 +71,7 @@ A deterministic regression benchmark, not a blind trial: one case per class buil
 
 | What | Measured |
 | --- | --- |
-| Evaluating one case's artifacts | Baseline ≈ 3–4 µs, protocol ≈ 8–9 µs on the author's Mac (`seconds_per_case` in `benchmark_v2.json`) |
+| Evaluating one case's artifacts | Baseline ≈ 10–11 µs, protocol ≈ 20 µs on the author's Mac (`seconds_per_case` in the current `benchmark_v2.json`, from the v2.2 run, commit `2a73983`). The first v2 run (`793ff3b`) recorded about 3–4 and 8–9 µs; these timings vary between runs and with machine load, so only their order of magnitude means anything |
 | Producing the evidence the protocol reads | Not measured by this benchmark. From the main study: a no-cache Lean build took 1 h 29 min, each Comparator run 7–11 min, and each `leanchecker --fresh` replay about 20 min ([cd-validation](../../../evidence/formal/cd-validation/README.md)). |
 
 The microsecond figures are the cost of checking artifacts that already exist. They say nothing about the cost of generating them, which dominates in practice.

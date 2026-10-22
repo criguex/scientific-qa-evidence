@@ -78,3 +78,54 @@ class SubstitutedLog(unittest.TestCase):
             self.assertEqual(got[(v, "Z_comparator")], e["Z"]["exit"])
             self.assertEqual(got[(v, "X1_p6")], e["X1"]["exit"])
             self.assertEqual(got[(v, "X2_hash")], e["X2"]["exit"])
+
+
+class HashCheckStandalone(unittest.TestCase):
+    def bundle(self, receipt=None, drop=None):
+        import shutil
+        import tempfile
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d)
+        shutil.copytree(RES2 / "C", d / "b")
+        if drop:
+            (d / "b" / drop).unlink()
+        if receipt is not None:
+            (d / "b" / "receipt.tsv").write_text(receipt)
+        return d / "b"
+
+    def flags(self, **kwargs):
+        import check_hash
+        return check_hash.hash_flags(self.bundle(**kwargs))
+
+    def rows(self):
+        return (RES2 / "C" / "receipt.tsv").read_text().splitlines()
+
+    def test_empty_receipt_is_rejected(self):
+        self.assertEqual(self.flags(receipt=""), ["H:receipt-header"])
+
+    def test_header_only_receipt_reports_every_step_missing(self):
+        self.assertEqual(self.flags(receipt=self.rows()[0] + "\n"),
+                         ["H:step-missing-cache_get", "H:step-missing-build", "H:step-missing-comparator"])
+
+    def test_missing_receipt_is_rejected(self):
+        self.assertEqual(self.flags(drop="receipt.tsv"), ["H:receipt-missing"])
+
+    def test_wrong_header_is_rejected(self):
+        self.assertEqual(self.flags(receipt="\n".join(["a\tb\tc\td"] + self.rows()[1:]) + "\n"), ["H:receipt-header"])
+
+    def test_malformed_row_is_reported(self):
+        r = self.rows()
+        self.assertEqual(self.flags(receipt="\n".join(r[:3] + ["comparator only three\tfields\there"]) + "\n"),
+                         ["H:receipt-row-malformed-4", "H:step-missing-comparator"])
+
+    def test_dropped_row_is_reported(self):
+        r = self.rows()
+        self.assertEqual(self.flags(receipt="\n".join(r[:3]) + "\n"), ["H:step-missing-comparator"])
+
+    def test_duplicated_row_is_reported(self):
+        r = self.rows()
+        self.assertEqual(self.flags(receipt="\n".join(r + [r[3]]) + "\n"), ["H:step-duplicate-comparator"])
+
+    def test_unexpected_step_is_reported(self):
+        r = self.rows()
+        self.assertEqual(self.flags(receipt="\n".join(r + ["extra\tx\tbuild.log\t0"]) + "\n"), ["H:step-unexpected-extra"])
