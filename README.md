@@ -4,33 +4,58 @@ This repository contains an independent QA audit of the Lean 4 formalizations in
 
 - [Read the seven-page summary (PDF)](docs/report/scientific-qa-evidence-report-v1.3.1.pdf)
 - [Read every claim with its evidence and limits](CLAIMS.md)
-- [Watch the thirteen evidence scenes](animations/index.html)
-- [Review one concrete result: receipt-to-artifact checks](docs/REVIEW_REQUEST.md)
+- [Watch the evidence scenes](animations/index.html)
+- [Help review the transcription of Clay's text](bridges/K0_REVIEW.md)
 - [Leer en español](README.es.md)
 
 By **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
 
-## Navier–Stokes and Euler
+## In one minute
 
-For OpenAI's proofs at commit `f9e8bc5`, we checked:
+OpenAI published Lean proofs that, for the Navier–Stokes equations, there are smooth starting data and forces for which no global smooth solution exists, and a finite-time singularity for the Euler equations. This repository checks those proofs the way a QA engineer would check any important release: rebuild them from source, recheck them with independent tools, try to make the checks fail on purpose, and keep every step reproducible.
 
-- **They check from scratch:** Comparator, with the nanoda and Lean kernels, accepted Navier–Stokes (C), (D) and Euler on five builds, the last two compiled entirely from source with nothing prebuilt. A fresh `leanchecker` replay agreed, and the kernel includes every known 2026 soundness fix.
-- **Comparator checks the exact challenge statement:** it refused all six one-symbol changes to the challenge and accepted a comment-only control. The challenge's 18 declarations match Google DeepMind's public statement after textual normalization (name resolution not verified).
-- **Not covered:** whether the Lean proof follows OpenAI's paper, which [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli and Hansen) disputes without claiming any Lean theorem is false.
+Two results stand out:
 
-## Clay's problem statement
+1. **OpenAI's proofs check, every time and from scratch,** on five builds, two of them compiled entirely from source, with two independent proof checkers.
+2. **A Lean proof that OpenAI's theorems imply the Clay Institute's own wording** of the two Navier–Stokes problems (C) and (D), with that wording transcribed literally into Lean. This holds only if the transcription is faithful, and **no independent person has checked that yet.** That check is the one review this project asks for.
 
-OpenAI's formal theorems are written in DeepMind's style. Clay's [official problem description](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf) is a text. We wrote Clay's equations (1)–(11), alternatives **(C)** and **(D)** and the erratum literally in Lean, and proved:
+Neither result is new mathematics, and nothing here claims a Millennium Prize result.
 
-- **OpenAI's theorems imply Clay's (C) and (D) as written here,** for every viscosity ν > 0, with no hypotheses and only the standard axioms, under both readings of smoothness at t = 0 (`k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided` in [`bridges/`](bridges/README.md)).
-- **Open:** nobody independent has yet checked the literal rendering against Clay's PDF ([14 review points](bridges/K0_REVIEW.md)), and (D) reads Clay's erratum on periodic pressure as a condition on solutions; (C) does not use it. No mathematician has reviewed the bridges.
+## What we found
 
-## The checking pipeline
+**About OpenAI's proofs**
 
-- **A refusal is not a refutation:** on three theorems Mathlib already proves, Comparator refused all eight changed statements, even a definitionally equal one. A second route in Lean, guarded against using the theorem under test, classified each as equivalent, weaker or false, all as pre-registered ([Mathlib controls](experiments/mathlib-controls/RESULTS.md)).
-- **Planted faults:** in a deterministic regression benchmark (the corrected v2 evaluator, written after review of the pre-registered v1 run), the protocol's checks flag four fault classes that a simulated baseline, modelled on OpenAI's documented procedure, passes; four review rounds found 17 issues in the experiment itself ([benchmark](experiments/blind-faults/v2/README.md)).
-- **A case study of integrity controls, not a new technique:** on the same authentic files, a receipt that names a log missing from the evidence does not change the result of OpenAI's published procedure, while the receipt check P6 flags it; the clean control passes both, as pre-registered ([receipt check](experiments/receipt-check/RESULTS.md)). Binding steps to hashes is established practice (in-toto, SLSA), and no comparison with those tools has been made yet.
-- **What this case adds:** eight findings the documented verification procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](FINDINGS.md)). Methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
+- They compile from OpenAI's pinned source and pass Comparator, the Lean tool that checks a submitted proof against a fixed challenge statement, with two independent proof checkers (Lean's own kernel and nanoda), on five builds; the last two were compiled from source with nothing prebuilt. A fresh replay of every proof step from an empty start agreed.
+- The checked statement is exactly the published challenge: changing one symbol of it in six different ways made Comparator refuse every time, while a change to a comment only was accepted. The challenge text matches Google DeepMind's public formal statement of the problem.
+- The checkers used include every Lean kernel soundness fix known in 2026, and a deliberately wrong proof is rejected.
+- One build that looked clean had silently received seven prebuilt dependencies; its log did not show it, and only comparing file dates with the build start revealed it. A later build with caching disabled confirmed a fully local build.
+- Not checked here: whether the Lean proof follows OpenAI's written paper, which [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) disputes.
+
+**About the Clay Institute's wording**
+
+- OpenAI's theorems are stated in DeepMind's formal style, not in Clay's words. We transcribed Clay's equations and the two problems into Lean, clause by clause, and proved in Lean that OpenAI's theorems imply them, for every viscosity, using only Lean's standard axioms.
+- Clay's "smooth up to time zero" can be read in two ways; the implication holds under both.
+- A control shows the transcription is not vacuous: the zero flow satisfies all its conditions for zero data, so "no solution exists" is a real statement.
+- Open: whether the transcription is faithful to Clay's PDF, and, for the periodic problem (D) only, whether Clay's erratum on periodic pressure applies to solutions. Asked about the erratum, the Clay Institute's president said only that the periodic problems are posed on the torus.
+
+**About the checking tools**
+
+- Comparator compares statements by their exact form: it refused a reformulation that Lean considers identical by definition. So a refusal means only "the statement changed". Telling equivalent, weaker and false changes apart needed a separate proof each time, shown on three theorems Mathlib already proves.
+- OpenAI's published procedure does not check that its logs match the record of what was run; a substituted log left its output unchanged, while a check against hashes recorded at run time caught it. This is standard practice in software supply-chain security ([in-toto](https://in-toto.io/), [SLSA](https://slsa.dev/provenance/v1)); here it is a case study, not a new technique.
+
+**About the numerical models**
+
+- On nine synthetic models, the tests flagged all 54 deliberately broken variants (51 distinct behaviours, since two broken variants give identical output), passed the 27 correct ones, and missed 3 deliberately tiny changes, identically on macOS and Linux.
+
+**Our own mistakes, found and corrected in the open**
+
+- A published claim of "no cache downloads" was false (seven prebuilt dependencies), two runs were mislabeled as the same build, and the numerical runner reported a valid reference when it had failed.
+- The first version of the planted-fault experiment had evaluator defects; four review rounds found 17 issues, all fixed and kept with errata.
+- A results verifier missed Lean's real `sorry` warning and accepted logs without exit codes; a release was first published on a failing build. Each was fixed, tested and recorded.
+
+## One review we are asking for
+
+If you know Lean or the Navier–Stokes problem: **is [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) a faithful transcription of Clay's official problem statement?** The [review sheet](bridges/K0_REVIEW.md) lists the 14 places to compare with the PDF, starting with smoothness at time zero. Answers will be recorded there, with your name if you wish.
 
 ## Results at a glance
 
@@ -171,6 +196,13 @@ The second line is a deliberately cheating proof, rejected as registered. All 11
 Mutation analysis (DeMillo, Lipton and Sayward, 1978), specification mutation (1985, 2000), mutation analysis of Coq verification projects (mCoq, 2019), mutation analysis of benchmark checkers (2026), the de Bruijn criterion, [Comparator](https://github.com/leanprover/comparator) and Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures). The contribution is the combination and its application to the verification pipeline itself; methodological novelty is not claimed ([RELATED_WORK.md](RELATED_WORK.md)).
 
 ## Part D · From OpenAI's theorem to Clay's text
+
+### In plain words
+
+Clay's problem (C) asks for this: show that, for some smooth, fast-decaying starting velocity and force, the Navier–Stokes equations have no smooth solution with bounded energy for all time. OpenAI's Lean theorem says the same thing in DeepMind's formal language. The two texts could differ in small ways, and a difference in the wrong direction would make OpenAI's version easier than Clay's.
+
+So, for each condition in Clay's text, we proved one direction in Lean: the data OpenAI uses satisfy Clay's conditions, and anything Clay would accept as a solution is also a solution in OpenAI's sense. Then the argument closes: if Clay's problem had a solution for OpenAI's data, it would be a solution of OpenAI's problem, which OpenAI's theorem rules out. Lean checks every step. What Lean cannot check is whether our Lean transcription of Clay's words is faithful, and that is the review asked for above.
+
 
 OpenAI proves a formal statement written in Google DeepMind's style. Does it say what Clay's text says? To get Clay's (C) and (D) from it, one direction per clause is enough: OpenAI's data must satisfy Clay's conditions, and any Clay solution must be a formal solution. Then, if a Clay solution existed, it would be a formal one, which OpenAI's theorem rules out.
 

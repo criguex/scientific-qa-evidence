@@ -4,33 +4,58 @@ Este repositorio contiene una auditoría de QA independiente de las formalizacio
 
 - [Leer el resumen de siete páginas (PDF, en inglés)](docs/report/scientific-qa-evidence-report-v1.3.1.pdf)
 - [Leer cada afirmación con su evidencia y sus límites](CLAIMS.md) (en inglés)
-- [Ver las trece escenas de evidencia](animations/index.html)
-- [Revisar un resultado concreto: comprobación de recibos frente a artefactos](docs/REVIEW_REQUEST.md) (en inglés)
+- [Ver las escenas de evidencia](animations/index.html)
+- [Ayudar a revisar la transcripción del texto de Clay](bridges/K0_REVIEW.md) (en inglés)
 - [Read in English](README.md)
 
 Por **Cristian Guerra**, QA Automation, Medellín, Colombia ([@criguex](https://github.com/criguex)).
 
-## Navier–Stokes y Euler
+## En un minuto
 
-Sobre las pruebas de OpenAI en el commit `f9e8bc5`, comprobamos:
+OpenAI publicó pruebas en Lean de que, para las ecuaciones de Navier–Stokes, hay datos iniciales y fuerzas suaves para los que no existe solución suave global, y de una singularidad en tiempo finito para las ecuaciones de Euler. Este repositorio revisa esas pruebas como un ingeniero de QA revisaría cualquier entrega importante: recompilarlas desde la fuente, volver a verificarlas con herramientas independientes, intentar que las verificaciones fallen a propósito y dejar cada paso reproducible.
 
-- **Verifican desde cero:** Comparator, con los kernels de nanoda y de Lean, aceptó Navier–Stokes (C), (D) y Euler sobre cinco compilaciones, las dos últimas compiladas enteras desde la fuente sin nada precompilado. Una revisión nueva con `leanchecker` coincidió, y el kernel incluye todas las correcciones de solidez conocidas de 2026.
-- **Comparator comprueba el enunciado exacto del desafío:** rechazó los seis cambios de un símbolo al desafío y aceptó un control de solo comentario. Las 18 declaraciones del desafío coinciden con el enunciado público de Google DeepMind tras normalización textual (la resolución de nombres no se verificó).
-- **Fuera de alcance:** si la prueba en Lean sigue el artículo de OpenAI, algo que [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) (Bastounis, Circelli y Hansen) disputa sin afirmar que algún teorema de Lean sea falso.
+Destacan dos resultados:
 
-## El enunciado del problema de Clay
+1. **Las pruebas de OpenAI verifican siempre y desde cero,** en cinco compilaciones, dos de ellas hechas enteramente desde la fuente, con dos verificadores de pruebas independientes.
+2. **Una prueba en Lean de que los teoremas de OpenAI implican la redacción del propio Instituto Clay** de los dos problemas de Navier–Stokes (C) y (D), con esa redacción transcrita literalmente a Lean. Esto vale solo si la transcripción es fiel, y **ninguna persona independiente lo ha comprobado todavía.** Esa es la única revisión que pide este proyecto.
 
-Los teoremas formales de OpenAI están escritos al estilo de DeepMind. La [descripción oficial](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf) de Clay es un texto. Escribimos literalmente en Lean las ecuaciones (1)–(11), las alternativas **(C)** y **(D)** y la errata de Clay, y probamos:
+Ninguno de los dos es matemática nueva, y nada aquí reclama un resultado del Premio del Milenio.
 
-- **Los teoremas de OpenAI implican la (C) y la (D) de Clay tal como están escritas aquí,** para toda viscosidad ν > 0, sin hipótesis y solo con los axiomas estándar, bajo las dos lecturas de la suavidad en t = 0 (`k1_C`, `k1_D`, `k1_C_oneSided`, `k1_D_oneSided` en [`bridges/`](bridges/README.md)).
-- **Abierto:** nadie independiente ha revisado todavía la transcripción literal frente al PDF de Clay ([14 puntos de revisión](bridges/K0_REVIEW.md)), y la (D) lee la errata de Clay sobre la presión periódica como condición sobre las soluciones; la (C) no la usa. Ningún matemático ha revisado los puentes.
+## Lo que encontramos
 
-## La cadena de verificación
+**Sobre las pruebas de OpenAI**
 
-- **Un rechazo no es una refutación:** con tres teoremas que Mathlib ya prueba, Comparator rechazó los ocho enunciados cambiados, incluso uno definicionalmente igual. Una segunda vía en Lean, con una guarda que impide usar el teorema bajo prueba, clasificó cada uno como equivalente, más débil o falso, todo según lo registrado de antemano ([controles Mathlib](experiments/mathlib-controls/RESULTS.md)).
-- **Fallos sembrados:** en un benchmark de regresión determinista (el evaluador v2 corregido, escrito después de revisar la corrida v1 prerregistrada), los checks del protocolo marcan cuatro clases de fallo que un procedimiento base simulado, modelado según el procedimiento documentado de OpenAI, deja pasar; cuatro rondas de revisión encontraron 17 problemas en el propio experimento ([benchmark](experiments/blind-faults/v2/README.md)).
-- **Un estudio de caso de controles de integridad, no una técnica nueva:** sobre los mismos archivos auténticos, un recibo que nombra un log ausente no cambia el resultado del procedimiento publicado de OpenAI, mientras que la comprobación de recibos P6 lo marca; el control limpio pasa ambos, según lo registrado de antemano ([comprobación de recibos](experiments/receipt-check/RESULTS.md), en inglés). Atar los pasos a hashes es práctica establecida (in-toto, SLSA), y aún no se ha comparado con esas herramientas.
-- **Qué aporta este caso:** ocho hallazgos que el procedimiento de verificación documentado no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](FINDINGS.md), en inglés). No se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md)).
+- Compilan desde la fuente fijada de OpenAI y pasan Comparator, la herramienta de Lean que comprueba una prueba frente a un enunciado de desafío fijo, con dos verificadores de pruebas independientes (el kernel de Lean y nanoda), en cinco compilaciones; las dos últimas se compilaron desde la fuente sin nada precompilado. Una revisión de cada paso de la prueba desde un entorno vacío coincidió.
+- El enunciado verificado es exactamente el desafío publicado: al cambiar un símbolo de seis formas distintas Comparator lo rechazó siempre, y un cambio solo en un comentario fue aceptado. El texto del desafío coincide con el enunciado formal público de Google DeepMind.
+- Los verificadores usados incluyen todas las correcciones de solidez del kernel de Lean conocidas en 2026, y una prueba deliberadamente errónea se rechaza.
+- Una compilación que parecía limpia había recibido en silencio siete dependencias precompiladas; su log no lo mostraba, y solo comparar las fechas de los archivos con el inicio de la compilación lo reveló. Una compilación posterior sin caché confirmó una compilación totalmente local.
+- No se revisa aquí: si la prueba en Lean sigue el artículo escrito de OpenAI, algo que [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) disputa.
+
+**Sobre la redacción del Instituto Clay**
+
+- Los teoremas de OpenAI están escritos en el estilo formal de DeepMind, no con las palabras de Clay. Transcribimos a Lean, cláusula por cláusula, las ecuaciones de Clay y los dos problemas, y probamos en Lean que los teoremas de OpenAI los implican, para toda viscosidad, usando solo los axiomas estándar de Lean.
+- El "suave hasta el tiempo cero" de Clay puede leerse de dos maneras; la implicación vale en ambas.
+- Un control muestra que la transcripción no es vacía: el flujo nulo cumple todas sus condiciones con datos nulos, así que "no existe solución" es una afirmación real.
+- Abierto: si la transcripción es fiel al PDF de Clay y, solo para el problema periódico (D), si la errata de Clay sobre la presión periódica se aplica a las soluciones. Ante la pregunta sobre la errata, el presidente del Instituto Clay dijo solo que los problemas periódicos se plantean en el toro.
+
+**Sobre las herramientas de verificación**
+
+- Comparator compara los enunciados por su forma exacta: rechazó una reformulación que Lean considera idéntica por definición. Así que un rechazo solo significa "el enunciado cambió". Distinguir cambios equivalentes, más débiles y falsos exigió una prueba aparte en cada caso, mostrado con tres teoremas que Mathlib ya prueba.
+- El procedimiento publicado por OpenAI no comprueba que sus logs coincidan con el registro de lo que se corrió; un log sustituido dejó su salida sin cambios, mientras que una comprobación contra hashes registrados al correr lo detectó. Es práctica estándar en la seguridad de la cadena de suministro de software ([in-toto](https://in-toto.io/), [SLSA](https://slsa.dev/provenance/v1)); aquí es un estudio de caso, no una técnica nueva.
+
+**Sobre los modelos numéricos**
+
+- En nueve modelos sintéticos, las pruebas marcaron las 54 variantes rotas a propósito (51 comportamientos distintos, porque dos variantes rotas dan la misma salida), aprobaron las 27 correctas y dejaron pasar 3 cambios deliberadamente diminutos, igual en macOS y en Linux.
+
+**Nuestros propios errores, encontrados y corregidos en público**
+
+- Una afirmación publicada de "cero descargas de caché" era falsa (siete dependencias precompiladas), dos corridas se etiquetaron mal como la misma compilación y el runner numérico daba por válida una referencia que había fallado.
+- La primera versión del experimento de fallos sembrados tenía defectos en su evaluador; cuatro rondas de revisión encontraron 17 problemas, todos corregidos y conservados con erratas.
+- Un verificador de resultados no detectaba el aviso real de `sorry` de Lean y aceptaba logs sin código de salida; una versión se publicó primero sobre un CI en rojo. Cada caso se corrigió, se probó y quedó registrado.
+
+## La única revisión que pedimos
+
+Si conoces Lean o el problema de Navier–Stokes: **¿es [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) una transcripción fiel del enunciado oficial de Clay?** La [hoja de revisión](bridges/K0_REVIEW.md) (en inglés) lista los 14 puntos a comparar con el PDF, empezando por la suavidad en el tiempo cero. Las respuestas se registrarán ahí, con tu nombre si quieres.
 
 ## Resultados en resumen
 
@@ -171,6 +196,13 @@ La segunda línea es una prueba tramposa a propósito, rechazada según lo regis
 Análisis de mutación (DeMillo, Lipton y Sayward, 1978), mutación de especificaciones (1985, 2000), análisis de mutación de proyectos de verificación en Coq (mCoq, 2019), análisis de mutación de verificadores de benchmarks (2026), el criterio de De Bruijn, [Comparator](https://github.com/leanprover/comparator) y [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) de Google DeepMind. El aporte es la combinación y su aplicación a la propia cadena de verificación; no se afirma novedad metodológica ([RELATED_WORK.md](RELATED_WORK.md), en inglés).
 
 ## Parte D · Del teorema de OpenAI al texto de Clay
+
+### En palabras simples
+
+El problema (C) de Clay pide esto: mostrar que, para alguna velocidad inicial y alguna fuerza suaves y que decaen rápido, las ecuaciones de Navier–Stokes no tienen solución suave con energía acotada para todo tiempo. El teorema de OpenAI en Lean dice lo mismo en el lenguaje formal de DeepMind. Los dos textos podrían diferir en detalles, y una diferencia en la dirección equivocada haría la versión de OpenAI más fácil que la de Clay.
+
+Por eso, para cada condición del texto de Clay, probamos en Lean una dirección: los datos que usa OpenAI cumplen las condiciones de Clay, y todo lo que Clay aceptaría como solución también es solución en el sentido de OpenAI. Entonces el argumento se cierra: si el problema de Clay tuviera solución para los datos de OpenAI, sería una solución del problema de OpenAI, y el teorema de OpenAI lo descarta. Lean comprueba cada paso. Lo que Lean no puede comprobar es si nuestra transcripción a Lean de las palabras de Clay es fiel, y esa es la revisión que se pide arriba.
+
 
 OpenAI prueba un enunciado formal escrito al estilo de Google DeepMind. ¿Dice lo mismo que el texto de Clay? Para obtener de él la (C) y la (D) de Clay basta una dirección por cláusula: los datos de OpenAI deben cumplir las condiciones de Clay, y toda solución de Clay debe ser una solución formal. Así, si existiera una solución de Clay sería una solución formal, y el teorema de OpenAI lo descarta.
 
