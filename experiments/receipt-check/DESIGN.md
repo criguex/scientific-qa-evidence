@@ -10,7 +10,7 @@ The blind-fault benchmark (case C/F5) showed this on synthetic records, with a P
 
 ## Setup
 
-- **Files:** a copy of build B5's tree of `openai/NavierStokesAndEuler` at `f9e8bc5` ([B5 record](../../evidence/formal/b5/README.md)), the same Lean 4.34.0-rc2 toolchain, and the same Comparator, lean4export, nanoda and landrun binaries.
+- **Files:** a copy of a from-source build tree of `openai/NavierStokesAndEuler` at `f9e8bc5` (B5 as registered; B4 after amendment 1, see [STATUS](STATUS.md)), the same Lean 4.34.0-rc2 toolchain, and the same Comparator, lean4export, nanoda and landrun binaries.
 - **Procedure Z**, exactly as OpenAI publishes it, with the three tools on `PATH`: `lake exe cache get`, `lake build`, `lake exe comparator ComparatorChallenges/NavierStokes.json`.
 - **Evidence bundle:** a thin wrapper records each step of Z as `receipt.tsv` (step, command, log, exit code), with the logs next to it, in the format P6 reads.
 - **Check X:** P6 from [`protocol_lib_v2.py`](../blind-faults/v2/protocol_lib_v2.py), unchanged since evaluator v2.2. `check_p6.py` calls `protocol()` and reports only the P6 flags.

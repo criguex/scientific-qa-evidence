@@ -1,6 +1,9 @@
 #!/bin/bash
 set -u
-B5=/home/nse/validacion_b5_20261021
+B4=/home/nse/validacion_cd_20261021/nocache
+PS=/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+host_free_gb() { $PS -NoProfile -Command '[math]::Floor((Get-PSDrive C).Free/1GB)' | tr -d '\r'; }
+guard() { local f=$(host_free_gb); if [ "$f" -lt "$1" ]; then echo "ABORT: host drive has ${f} GB free, need $1" >&2; exit 3; fi; }
 W=/home/nse/receipt_check_20261022
 OPS=/home/nse/ns08_validation_20261020_a5YGak
 OLD=/home/nse/nse_audit_20261020/NavierStokesAndEuler
@@ -11,7 +14,9 @@ ln -s $OPS/tools/landrun/landrun $W/bin/landrun
 ln -s $OLD/.lake/packages/lean4export/.lake/build/bin/lean4export $W/bin/lean4export
 ln -s $OPS/tools/nanoda/target/release/nanoda_bin $W/bin/nanoda_bin
 export PATH=$W/bin:/home/nse/.elan/bin:/usr/bin:/bin
-cp -a $B5/NavierStokesAndEuler-* $W/tree
+guard 40
+cp -a $B4/NavierStokesAndEuler-* $W/tree
+guard 15
 T=$W/tree
 now() { date -u +%FT%TZ; }
 sha() { sha256sum "$1" | cut -c1-64; }
