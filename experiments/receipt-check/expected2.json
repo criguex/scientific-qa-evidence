@@ -1,0 +1,15 @@
+{
+  "registered": "2026-10-22",
+  "case": 2,
+  "bundle": "results/C from case 1, whose step log hashes were recorded when the bundle was written (results/receipts.jsonl, variant \"bundle\")",
+  "checks": {
+    "Z": "OpenAI's published procedure: lake exe comparator ComparatorChallenges/NavierStokes.json, on a fresh copy of build B4's tree with the variant bundle in it",
+    "X1": "P6 from the frozen protocol_lib_v2.py (existence of the named log and exit codes)",
+    "X2": "check_hash.py: each log named by receipt.tsv must exist and match the SHA-256 recorded when the bundle was written"
+  },
+  "variants": {
+    "C": {"change": "none", "Z": {"exit": 0}, "X1": {"exit": 0, "flags": []}, "X2": {"exit": 0, "flags": []}},
+    "F5": {"change": "as in case 1: receipt row names comparator-run.log", "Z": {"exit": 0}, "X1": {"exit": 1, "flags": ["P6:receipt-log-missing-comparator-run.log"]}, "X2": {"exit": 1, "flags": ["H:log-missing-comparator-run.log"]}},
+    "F7": {"change": "comparator.log replaced by the authentic Comparator log of another run of the same step (build B5, evidence/formal/b5/comparator5_NavierStokes.stdout.log); receipt unchanged", "Z": {"exit": 0}, "X1": {"exit": 0, "flags": []}, "X2": {"exit": 1, "flags": ["H:log-hash-mismatch-comparator.log"]}}
+  }
+}
