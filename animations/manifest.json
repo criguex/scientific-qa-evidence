@@ -83,7 +83,7 @@
     },
     "bridges_table": {
       "path": "evidence/formal/clay-lean-bridges.md",
-      "sha256": "d7799bcdfc1c923a4379ce8b2764fc5616d55f7f6fd38430b502ed6990d24258"
+      "sha256": "6072612a6a1129f23f264ab975e0bc787dcd2d248a67b161d5b248d1b311446d"
     },
     "bridges_receipt": {
       "path": "bridges/README.md",

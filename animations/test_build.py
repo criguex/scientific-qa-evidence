@@ -32,6 +32,11 @@ class AnimationPackageTests(unittest.TestCase):
         self.assertEqual(animations["formal"]["nanoda_mutant_raw"], "COLLECTED_PENDING_CLASSIFICATION")
         self.assertEqual(animations["formal"]["nanoda_mutant_derived"], "TYPECHECK_ASSERTION_REJECT_DERIVED")
 
+    def test_committed_manifest_matches_its_sources(self):
+        import json
+        committed = json.loads((build.ANIMATIONS / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(committed, build.load_package(), "animations are stale: run python3 animations/build.py")
+
     def test_bridge_and_control_scenes_are_record_derived(self):
         animations = build.load_package()["animations"]
         bridges = animations["bridges"]
