@@ -12,7 +12,7 @@ Los trailers `Co-Authored-By` del historial Git describen contribuciones técnic
 
 ADV-050 es un estudio de QA/reproducción sobre artefactos concretos. No reclama autoría del repositorio formal upstream, sus teoremas o sus demostraciones. Ninguna herramienta de IA es coautora o codescubridora de esos resultados. Cristian Guerra es responsable de la atribución de este estudio; la revisión matemática/editorial final de los materiales requiere aprobación humana expresa.
 
-Los registros de herramientas y sesiones son parciales, no una transcripción exhaustiva. La evidencia primaria reproducible y sus límites están enlazados en la [acta de validación](evidence/new_validation/README.md), los informes de campaña y los manifiestos hash. Los datos privados de conversación y ejecución se conservan fuera de los documentos de presentación y no deben publicarse sin revisión de privacidad.
+Los registros de herramientas y sesiones son parciales, no una transcripción exhaustiva. La evidencia primaria reproducible y sus límites están enlazados en la [acta de validación](../formal-controls/README.md), los informes de campaña y los manifiestos hash. Los datos privados de conversación y ejecución se conservan fuera de los documentos de presentación y no deben publicarse sin revisión de privacidad.
 
 ## Referencias de política
 

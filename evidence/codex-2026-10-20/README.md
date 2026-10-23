@@ -7,10 +7,11 @@ The imported reports are in Spanish, as written at the time. Their internal link
 ## How the files were copied
 
 1. Each group below was copied from the private repository by a script, in one pass.
-2. **Local paths were replaced** with placeholders in 663 of the 1,885 published files: `<WIN_HOME>` (the Windows user folder), `<WIN_HOME_WSL>` (the same folder seen from WSL), `<WSL_HOME>` (the Linux user folder on WAR), `<HOME>` (the Mac user folder), `<TMP>` (temporary folders) and `<mac-host>` (the Mac's network name). Nothing else was edited.
+2. **Local paths were replaced** with placeholders, and relative links in the imported reports were rewritten to this folder's layout or to the newer public files that supersede them. 676 of the 1,886 published files were edited this way. The placeholders are: `<WIN_HOME>` (the Windows user folder), `<WIN_HOME_WSL>` (the same folder seen from WSL), `<WSL_HOME>` (the Linux user folder on WAR), `<HOME>` (the Mac user folder), `<TMP>` (temporary folders) and `<mac-host>` (the Mac's network name). Nothing else was edited.
 3. **Not copied:** 361 images, videos, audio files and `.npz` arrays (about 100 MB), and 385 binary members of three archives. Voice and audio outputs stay private on purpose.
 4. **[`MANIFEST.tsv`](MANIFEST.tsv)** lists, for every published file, its source path, the SHA-256 of the original bytes, the SHA-256 of the published bytes, and whether it was sanitized. Files with `sanitized = no` are byte-identical to the originals, so any hash recorded inside the runs can be checked directly. For sanitized files, a hash recorded inside a run refers to the original bytes, which stay private; the manifest pairs the two.
-5. A scan of everything published found no keys, tokens, passwords or private keys. 11 JSON files written by PowerShell start with a UTF-8 byte-order mark; they are kept as written and read with `utf-8-sig`.
+5. 43 links inside the imported reports still have no target, on purpose: they point to rendered images and videos, render and montage summaries, video scripts, the voice check and one superseded source archive, none of which is scientific evidence.
+6. A scan of everything published found no keys, tokens, passwords or private keys. 11 JSON files written by PowerShell start with a UTF-8 byte-order mark; they are kept as written and read with `utf-8-sig`.
 
 All results below are synthetic calculations under explicit software contracts. They test whether code and checks behave as specified. They are not physical measurements, and none of them verifies the Euler or Navier–Stokes theorems.
 
@@ -67,7 +68,7 @@ The script `build_on_5070.sh`, the hash preflight, the launcher log, `audit_stat
 
 ### 9. [`provenance/`](provenance/): generation trail
 
-`TRAZABILIDAD_GENERACION.md`, `PROCEDENCIA_IA_Y_APORTES.md` (the AI disclosure written at the time) and `NS08_PROPUESTA_NO_EJECUTADA.md`. The last one is a proposal that, as its name says, was **not executed**.
+`TRAZABILIDAD_GENERACION.md`, `PROCEDENCIA_IA_Y_APORTES.md` (the AI disclosure written at the time), `NS08_PROPUESTA_NO_EJECUTADA.md`, and `images_gpt/no_todo_es_agua_v1.json`, the prompt and provenance of an illustration made with GPT, which the reports label as illustrative, not as a result. The last one is a proposal that, as its name says, was **not executed**.
 
 ## What is not here
 

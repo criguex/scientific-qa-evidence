@@ -33,7 +33,7 @@ Runner02 conserva comandos, stdout/stderr, código, UTC, duración y hashes. SHA
 
 El intento clean01 terminó antes de ejecutar el build, pero su resumen inicial indicó erróneamente PASS. Se reclasifica como fallo del harness / inconcluso: no hubo `build.exit_code`, timestamp final ni log de compilación. El journal mostró que systemd detuvo la unidad y el proceso shell recibió `Terminated` al cerrarse WSL.
 
-Clean02 clasificó `INFRA_INCONCLUSIVE`; el preflight rechazó un socket heredado asociado a stdout/stderr de systemd y no se relajó el guard. Clean03 corrigió el arranque y finalizó como PASS de compilación de fuentes: 11 424 jobs, código 0. El resumen saneado, logs y manifiesto están en [`evidence/new_validation/clean_build03/`](../../evidence/new_validation/clean_build03/); detalle del límite y verificación en el [acta](../../evidence/new_validation/README.md). Clean01/02 no se reescriben. Estas incidencias no son evidencia matemática ni de rechazo de kernels.
+Clean02 clasificó `INFRA_INCONCLUSIVE`; el preflight rechazó un socket heredado asociado a stdout/stderr de systemd y no se relajó el guard. Clean03 corrigió el arranque y finalizó como PASS de compilación de fuentes: 11 424 jobs, código 0. El resumen saneado, logs y manifiesto están en [`evidence/new_validation/clean_build03/`](../../formal-controls/clean_build03/); detalle del límite y verificación en el [acta](../README.md). Clean01/02 no se reescriben. Estas incidencias no son evidencia matemática ni de rechazo de kernels.
 
 ## Control positivo periódico (D)
 
@@ -41,10 +41,10 @@ El control compiló con Lean, código 0. Sobre el toro, construyó explícitamen
 
 Las condiciones de `InitialVelocityConditionPeriodic` piden suavidad, divergencia nula y periodicidad; las de fuerza periódica piden suavidad, periodicidad y decaimiento temporal. No piden energía finita ni decaimiento espacial. Esta constante no nula no sirve como control global de energía finita en ℝ³.
 
-Un campo constante no nulo no tiene energía finita en todo ℝ³. Este control periódico comprueba una instancia concreta y no demuestra fidelidad de todas las hipótesis del problema de Clay, no cierra EU-06 ni establece la alternativa de ruptura. Véase la [tabla de correspondencia documental Clay–Lean](../../docs/TABLA_FIDELIDAD_CLAY_LEAN.md) y sus puentes aún no probados.
+Un campo constante no nulo no tiene energía finita en todo ℝ³. Este control periódico comprueba una instancia concreta y no demuestra fidelidad de todas las hipótesis del problema de Clay, no cierra EU-06 ni establece la alternativa de ruptura. Véase la [tabla de correspondencia documental Clay–Lean](../../../formal/clay-lean-fidelity.md) y sus puentes aún no probados.
 
 ## Autoría y límites de atribución
 
-La atribución aprobada se detalla en [`PROCEDENCIA_IA_Y_APORTES.md`](../../PROCEDENCIA_IA_Y_APORTES.md). La aceptación de la identidad no equivale a revisar cada output ni a consentimiento editorial final.
+La atribución aprobada se detalla en [`PROCEDENCIA_IA_Y_APORTES.md`](../../provenance/PROCEDENCIA_IA_Y_APORTES.md). La aceptación de la identidad no equivale a revisar cada output ni a consentimiento editorial final.
 
-No se ha reescrito ningún informe V4 ni se ha hecho pública esta evidencia. Los resultados descritos están confirmados y limitados a los artefactos indicados; la atribución aprobada se rige por [`PROCEDENCIA_IA_Y_APORTES.md`](../../PROCEDENCIA_IA_Y_APORTES.md), sin implicar revisión humana de todos los outputs ni consentimiento editorial final.
+No se ha reescrito ningún informe V4 ni se ha hecho pública esta evidencia. Los resultados descritos están confirmados y limitados a los artefactos indicados; la atribución aprobada se rige por [`PROCEDENCIA_IA_Y_APORTES.md`](../../provenance/PROCEDENCIA_IA_Y_APORTES.md), sin implicar revisión humana de todos los outputs ni consentimiento editorial final.

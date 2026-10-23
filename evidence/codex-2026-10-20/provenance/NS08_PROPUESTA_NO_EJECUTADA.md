@@ -56,4 +56,4 @@ Para cada desafío se requiere salida cero, registro de aceptación por nanoda y
 
 Si falla el preflight o la comprobación, conservar todo y registrar el punto de fallo como infraestructura, rechazo del contrato o resultado inconcluyente según la evidencia. No ampliar privilegios, axiomas ni alcance automáticamente. Volver al estado anterior significa detener la tarea y dejar intacta la evidencia original; esta propuesta no necesita borrar ni restaurar archivos.
 
-Un resultado satisfactorio reforzaría la verificación de términos y declaraciones. No decidiría por sí solo la fidelidad del enunciado a una intención externa, la procedencia del desafío de Euler ni las brechas EU-06 y NS-09 descritas en [el plan V2](PLAN_VALIDACION_V2.md).
+Un resultado satisfactorio reforzaría la verificación de términos y declaraciones. No decidiría por sí solo la fidelidad del enunciado a una intención externa, la procedencia del desafío de Euler ni las brechas EU-06 y NS-09 descritas en [el plan V2](../scenarios-v2/PLAN_VALIDACION_V2.md).

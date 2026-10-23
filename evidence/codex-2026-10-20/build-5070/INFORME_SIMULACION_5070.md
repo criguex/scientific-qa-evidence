@@ -4,11 +4,11 @@
 Corrida visualizada: 20 de octubre de 2026, `16:40:04.371397Z–16:40:56.439570Z`.  
 Duración del cálculo 32³: **52,068 segundos**. Los tiempos del video son diferentes del tiempo físico simulado.
 
-Se calculó la evolución de un campo de velocidad tridimensional y se produjeron imágenes a partir de sus valores. La comparación utiliza el mismo dato inicial en Euler y Navier–Stokes, sin fuerza externa en ambos casos. Navier–Stokes incorpora viscosidad `ν = 0,04`; Euler usa `ν = 0`. La máquina, tiempos y parámetros constan en el [registro real de la corrida 32³](simulation/simulation_results/simulation_summary.json).
+Se calculó la evolución de un campo de velocidad tridimensional y se produjeron imágenes a partir de sus valores. La comparación utiliza el mismo dato inicial en Euler y Navier–Stokes, sin fuerza externa en ambos casos. Navier–Stokes incorpora viscosidad `ν = 0,04`; Euler usa `ν = 0`. La máquina, tiempos y parámetros constan en el [registro real de la corrida 32³](../fluid-3d/simulation_results/simulation_summary.json).
 
-La simulación terminó y sus controles analíticos, temporales e invariantes pasaron. **La prueba espacial detectó una limitación importante: al pasar de 32³ a 64³, la velocidad final de Euler difiere un 16,7 % y su máximo de vorticidad casi se duplica. La malla visualizada de Euler no resuelve bien las estructuras finas a `t = 4`, aunque conserve energía.** En Navier–Stokes, la diferencia de velocidad es mucho menor: `0,0535 %`. Son diferencias entre aproximaciones, no errores medidos contra una solución exacta. La evidencia está en el [comparador real 32³/64³](simulation/grid_comparison.json).
+La simulación terminó y sus controles analíticos, temporales e invariantes pasaron. **La prueba espacial detectó una limitación importante: al pasar de 32³ a 64³, la velocidad final de Euler difiere un 16,7 % y su máximo de vorticidad casi se duplica. La malla visualizada de Euler no resuelve bien las estructuras finas a `t = 4`, aunque conserve energía.** En Navier–Stokes, la diferencia de velocidad es mucho menor: `0,0535 %`. Son diferencias entre aproximaciones, no errores medidos contra una solución exacta. La evidencia está en el [comparador real 32³/64³](../fluid-3d/grid_comparison.json).
 
-Esto permite mostrar e inspeccionar un caso concreto y sus limitaciones con evidencia reproducible. **No demuestra una singularidad, regularidad global ni los teoremas de la auditoría Lean.** La ejecución formal separada terminó a las `17:02:18 UTC`: build correcto y cuatro teoremas con axiomas estándar, sin `sorryAx`; comparadores y segundo kernel omitidos. Ese resultado se respalda en sus [logs y resumen derivado](evidence/derived_verification_summary.json), no en el video de fluidos.
+Esto permite mostrar e inspeccionar un caso concreto y sus limitaciones con evidencia reproducible. **No demuestra una singularidad, regularidad global ni los teoremas de la auditoría Lean.** La ejecución formal separada terminó a las `17:02:18 UTC`: build correcto y cuatro teoremas con axiomas estándar, sin `sorryAx`; comparadores y segundo kernel omitidos. Ese resultado se respalda en sus [logs y resumen derivado](../formal-controls/derived_verification_summary.json), no en el video de fluidos.
 
 ## 1. Cómo leer lo que ves
 
@@ -110,7 +110,7 @@ En `t = 4`, las superficies de Euler son más complejas y ocupan visualmente gra
 | Enstrofía `Z = ½ media(|ω|²)` | 0,375 | 1,5700736466820184 | 0,375 | 0,16457561163715306 |
 | Máximo de `|ω|` en la malla | 2 | 7,1667570384816335 | 2 | 0,956057966198048 |
 
-Fuente de esta tabla y los diagnósticos siguientes: [resumen numérico 32³](simulation/simulation_results/simulation_summary.json) y [serie temporal CSV completa](simulation/simulation_results/metrics.csv).
+Fuente de esta tabla y los diagnósticos siguientes: [resumen numérico 32³](../fluid-3d/simulation_results/simulation_summary.json) y [serie temporal CSV completa](../fluid-3d/simulation_results/metrics.csv).
 
 En Euler, la energía de la aproximación se mantiene casi constante mientras aumenta la intensidad del giro y aparecen estructuras más finas. La deriva relativa máxima de energía fue `1,558275730673131 × 10⁻¹¹`.
 
@@ -130,7 +130,7 @@ La mayor acumulación relativa de Euler cerca del corte justifica comprobar sens
 
 ![Resultados de las comprobaciones numéricas](simulation/render/pruebas.png)
 
-Se ejecutaron 18 comprobaciones internas antes de la corrida. Todas pasaron. No son 18 demostraciones matemáticas independientes: incluyen comparaciones analíticas, controles de funciones auxiliares, verificaciones de rechazo y refinamiento temporal. Los valores y umbrales completos están en [numerical_controls.json](simulation/simulation_results/numerical_controls.json).
+Se ejecutaron 18 comprobaciones internas antes de la corrida. Todas pasaron. No son 18 demostraciones matemáticas independientes: incluyen comparaciones analíticas, controles de funciones auxiliares, verificaciones de rechazo y refinamiento temporal. Los valores y umbrales completos están en [numerical_controls.json](../fluid-3d/simulation_results/numerical_controls.json).
 
 | Cobertura de pruebas | Resultado o evidencia | Qué queda fuera |
 |---|---|---|
@@ -190,7 +190,7 @@ Estos son **controles negativos internos**. No se ejecutaron cinco versiones com
 
 ## 6. Sensibilidad espacial: 32³ frente a 64³
 
-Se ejecutó una segunda corrida con el mismo dato inicial, viscosidades, paso temporal y tiempo final, pero con 64 puntos por eje. Terminó en WAR a las `16:51:39 UTC`, tras `504,035 segundos` de cálculo. El comparador real terminó a las `16:51:54 UTC`. El [registro de 64³](simulation/simulation_results_n64/simulation_summary.json) y el [resultado de comparación](simulation/grid_comparison.json) conservan los parámetros, valores y hashes.
+Se ejecutó una segunda corrida con el mismo dato inicial, viscosidades, paso temporal y tiempo final, pero con 64 puntos por eje. Terminó en WAR a las `16:51:39 UTC`, tras `504,035 segundos` de cálculo. El comparador real terminó a las `16:51:54 UTC`. El [registro de 64³](../fluid-3d/simulation_results_n64/simulation_summary.json) y el [resultado de comparación](../fluid-3d/grid_comparison.json) conservan los parámetros, valores y hashes.
 
 ![Sensibilidad espacial real entre las mallas 32³ y 64³](simulation/render/resolucion.png)
 
@@ -223,7 +223,7 @@ La narración se sintetizó en español con la voz estándar Paulina de macOS y 
 
 El render de los 201 fotogramas terminó en WAR a las `16:53:59 UTC`, en `507,809 segundos`. Las láminas de controles y límites se actualizaron a las `16:55:10 UTC` para incorporar la comparación de mallas, conservando los fotogramas ya calculados. El [registro del render](simulation/render/render_summary.json) y el [registro de láminas](simulation/render/slides_summary.json) fijan sus fuentes, parámetros y procedencia. Se entregan los fotogramas 0, 100 y 200 como revisión estática; el conjunto de 201 queda en WAR y puede reproducirse desde los datos guardados.
 
-El montaje final añade recuadros y rótulos temporales solo en capítulos estáticos; conserva íntegro el plano animado. Tras la reconstrucción histórica aparece un cierre narrado con el resultado formal final. `VIDEO_COMPLETO_5070_MONTAJE.mp4` dura 470,700 s y pasó decodificación completa sin errores; mide −15,58 LUFS y pico verdadero −4,14 dBTP. El [QA audiovisual](evidence/qa_audiovisual_final.json) y la [trazabilidad de generación](TRAZABILIDAD_GENERACION.md) separan esas comprobaciones de una escucha humana completa, que no se afirma.
+El montaje final añade recuadros y rótulos temporales solo en capítulos estáticos; conserva íntegro el plano animado. Tras la reconstrucción histórica aparece un cierre narrado con el resultado formal final. `VIDEO_COMPLETO_5070_MONTAJE.mp4` dura 470,700 s y pasó decodificación completa sin errores; mide −15,58 LUFS y pico verdadero −4,14 dBTP. El [QA audiovisual](evidence/qa_audiovisual_final.json) y la [trazabilidad de generación](../provenance/TRAZABILIDAD_GENERACION.md) separan esas comprobaciones de una escucha humana completa, que no se afirma.
 
 | Software observado | Versión |
 |---|---|

@@ -316,15 +316,19 @@ evidence/
     cd-validation/        the 2026-10-21 revalidation (builds B1–B4, runs 1–4, mutants, replays)
     b5/                   build B5 and run 5, for release v1.3.0
   numerical/              frozen contract, source and tests, 84-case runs for macOS and Linux
+  codex-2026-10-20/       evidence Codex produced on 2026-10-20: scenarios, ODE, 3D fluid, controls,
+                          first RTX 5070 build; local paths replaced, manifest of original hashes
   FROM_ZERO.md            checks rerun from a fresh clone
-  SHA256SUMS.txt          checksums for every curated file
+  SHA256SUMS.txt          checksums for every curated file (animations/ is regenerated and
+                          checked by its own test instead)
 experiments/
   blind-faults/           benchmark: committed seed and frozen v1, errata, corrected v2 evaluator
   mathlib-controls/       statement changed vs theorem false, on three Mathlib theorems
   receipt-check/          receipts vs artifacts on authentic records, two cases
 bridges/                  Clay's text in Lean, the proof that OpenAI's theorems imply it, review sheet
 animations/               thirteen evidence scenes and one illustrative scene, build and export scripts, tests
-docs/                     GIF previews, MP4 videos, PDF summaries, review request
+docs/                     GIF previews, MP4 videos, PDF summaries, review request,
+                          independent reproduction guide, Codex work log
 .github/workflows/        CI that runs every check on each push
 ```
 

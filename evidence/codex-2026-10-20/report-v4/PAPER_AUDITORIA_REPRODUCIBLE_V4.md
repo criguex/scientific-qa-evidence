@@ -64,7 +64,7 @@ El usuario declara más de ocho años de experiencia en QA automation e infraest
 | Anthropic Claude | Reconstrucción documental actual, Claude Code CLI 2.1.143, Sonnet 4.6 (uso auxiliar reportado de Haiku 4.5); no es sesión histórica | No se recuperó conversación histórica pertinente. La reconstrucción se basó en el repositorio actual y no es corroboración independiente |
 | Revisión humana | Pendiente para revisión matemática y validación final de narración | ASR, compiladores y asistentes de IA no sustituyen la responsabilidad humana de revisar y defender cada afirmación |
 
-La [nota de procedencia y aportes](PROCEDENCIA_IA_Y_APORTES.md) contiene el registro observado de Claude/Gemini, transcripciones manuales acotadas y vacíos de atribución. La declaración de uso de herramientas no implica aprobación, autoría académica automática ni verificación por los proveedores. Antes de publicación se debe completar un registro reproducible de modelos/versiones, tareas, prompts o referencias, cambios aceptados/rechazados y revisión humana. Las personas autoras deben confirmar que leyeron las fuentes citadas y pueden defender el contenido.
+La [nota de procedencia y aportes](../provenance/PROCEDENCIA_IA_Y_APORTES.md) contiene el registro observado de Claude/Gemini, transcripciones manuales acotadas y vacíos de atribución. La declaración de uso de herramientas no implica aprobación, autoría académica automática ni verificación por los proveedores. Antes de publicación se debe completar un registro reproducible de modelos/versiones, tareas, prompts o referencias, cambios aceptados/rechazados y revisión humana. Las personas autoras deben confirmar que leyeron las fuentes citadas y pueden defender el contenido.
 
 ## Trabajo relacionado y posición de la contribución
 
@@ -72,10 +72,10 @@ Li et al. describen en su preprint [*A semantic mutation metric for metamorphic 
 
 ## Reproducibilidad y artefactos
 
-- [Informe técnico V3](INFORME_FISICA_QUIMICA_V3.md), [resumen de campaña](evidence/ode_v3/campaign_summary.json), [mediciones cuantitativas](evidence/ode_v3/quantitative_measurements.json) y [contratos congelados](skills/escenarios-verificables/references/contratos-ode-v3.md).
-- [Acta formal poscorte](evidence/report_v4/ACTA_VERIFICACION_FORMAL_POSCORTE.md), [logs terminales seleccionados](evidence/report_v4/ns08_terminales/) y [bundle operativo NS08](evidence/report_v4/ns08_ops_bundle.tar.gz).
-- [Acta de calibración Comparator](evidence/report_v4/ACTA_CALIBRACION_COMPARATOR.md), [bundle inicial](evidence/report_v4/COMPARATOR_CALIBRATION_BUNDLE.tar.gz) y [extensión](evidence/report_v4/COMPARATOR_CALIBRATION_EXTENSION_BUNDLE.tar.gz); verificar los SHA consignados en el acta.
-- [Resumen derivado V1](evidence/report_v4/qa/formal_derived.json) y [resumen derivado V3](evidence/report_v4/qa/ode_derived.json) son comprobaciones de artefactos preservados, no ejecuciones científicas nuevas.
+- [Informe técnico V3](../ode-v3/INFORME_FISICA_QUIMICA_V3.md), [resumen de campaña](../ode-v3/ode_v3/campaign_summary.json), [mediciones cuantitativas](../ode-v3/ode_v3/quantitative_measurements.json) y [contratos congelados](../scenario-runners/escenarios-verificables/references/contratos-ode-v3.md).
+- [Acta formal poscorte](../report-v4/report_v4/ACTA_VERIFICACION_FORMAL_POSCORTE.md), [logs terminales seleccionados](../report-v4/report_v4/ns08_terminales/) y [bundle operativo NS08](../report-v4/report_v4/ns08_ops_bundle/).
+- [Acta de calibración Comparator](../report-v4/report_v4/ACTA_CALIBRACION_COMPARATOR.md), [bundle inicial](../report-v4/report_v4/COMPARATOR_CALIBRATION_BUNDLE/) y [extensión](../report-v4/report_v4/COMPARATOR_CALIBRATION_EXTENSION_BUNDLE/); verificar los SHA consignados en el acta.
+- [Resumen derivado V1](../report-v4/report_v4/qa/formal_derived.json) y [resumen derivado V3](../report-v4/report_v4/qa/ode_derived.json) son comprobaciones de artefactos preservados, no ejecuciones científicas nuevas.
 - [Guion base V4](video/guion_v4_escenas.json) y [anexo 12](video/guion_v4_anexo12_poscorte.json) mantienen su corte y SHA congelados. El montaje técnico final `INFORME_VISUAL_ADV050_V4.mp4` y su sidecar VTT están disponibles en el paquete privado de entrega; el QA de decodificación/metadatos y dos fotogramas codificados no equivale a revisión humana completa de movimiento o voz.
 
 Desde la raíz del repositorio, las comprobaciones de paquete disponibles son:

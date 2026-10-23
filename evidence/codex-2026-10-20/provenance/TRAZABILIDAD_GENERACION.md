@@ -31,9 +31,9 @@ La cámara, el umbral `|ω|=0,8` y la escala de color de los cortes permanecen f
 
 Evidencia vinculada:
 
-- [Resumen 32³](simulation/simulation_results/simulation_summary.json).
-- [Resumen 64³](simulation/simulation_results_n64/simulation_summary.json).
-- [Comparación espacial](simulation/grid_comparison.json).
+- [Resumen 32³](../fluid-3d/simulation_results/simulation_summary.json).
+- [Resumen 64³](../fluid-3d/simulation_results_n64/simulation_summary.json).
+- [Comparación espacial](../fluid-3d/grid_comparison.json).
 - [Procedencia del render](simulation/render/render_summary.json).
 - [Actualización de las láminas](simulation/render/slides_summary.json).
 
@@ -81,7 +81,7 @@ La narración se normaliza hacia −16 LUFS con objetivo de pico verdadero −1,
 
 ## 6. Reproducción en WAR
 
-El entorno Python se creó aislado del software de producción. Los pasos de cálculo y render se documentan en el [informe numérico](INFORME_SIMULACION_5070.md). Para revisar únicamente los focos sobre los capítulos existentes:
+El entorno Python se creó aislado del software de producción. Los pasos de cálculo y render se documentan en el [informe numérico](../build-5070/INFORME_SIMULACION_5070.md). Para revisar únicamente los focos sobre los capítulos existentes:
 
 ```sh
 python render_simulation.py --montage-only --preview-only --input simulation_render --output simulation_videos --process-video PROCESO_5070.mp4 --audio audio --verification-summary derived_verification_summary.json

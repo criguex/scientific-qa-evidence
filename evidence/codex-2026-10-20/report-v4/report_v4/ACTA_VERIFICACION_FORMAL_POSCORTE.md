@@ -52,7 +52,7 @@ matemático; queda documentado en el bundle operativo.
 Los logs terminales de cada ejecución se conservan sin modificar en
 [`ns08_terminales/`](ns08_terminales/). El bundle operativo sanitizado contiene
 los scripts, el intento NS interrumpido y registros de preflight/operación:
-[`ns08_ops_bundle.tar.gz`](ns08_ops_bundle.tar.gz), SHA-256
+[`ns08_ops_bundle.tar.gz`](../../report-v4/report_v4/ns08_ops_bundle/), SHA-256
 `5a29b7740ac7aa7b41811cc694a1775f0dc4eb514a841f938bedaed87a8bd6fb`.
 
 SHA-256 de los terminales seleccionados:

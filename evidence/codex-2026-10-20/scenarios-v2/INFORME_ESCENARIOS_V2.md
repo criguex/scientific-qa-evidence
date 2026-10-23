@@ -1,6 +1,6 @@
 # Tres fenómenos distintos: calor, transporte y ondas
 
-La campaña real terminó en WAR y GUERRA: **42 ejecuciones, seis referencias correctas y 36 ejecuciones de mutantes**. En cada máquina hubo 13 mutantes detectados, dos sobrevivientes y tres algebraicamente equivalentes. Se verificaron 294 hashes de archivos; no se descartaron los sobrevivientes. [Resumen de campaña](evidence/scenarios_v2/campaign_summary.json).
+La campaña real terminó en WAR y GUERRA: **42 ejecuciones, seis referencias correctas y 36 ejecuciones de mutantes**. En cada máquina hubo 13 mutantes detectados, dos sobrevivientes y tres algebraicamente equivalentes. Se verificaron 294 hashes de archivos; no se descartaron los sobrevivientes. [Resumen de campaña](scenarios_v2/campaign_summary.json).
 
 Esto calibra tres implementaciones pequeñas con oráculos analíticos. No verifica por extensión los teoremas de Euler o Navier–Stokes.
 
@@ -16,7 +16,7 @@ Clips individuales: [calor](simulation/analytic_render/01_CALOR.mp4), [transport
 
 ![Ilustración didáctica generada con IA: calor, transporte y ondas. No es un resultado de simulación.](evidence/images_gpt/no_todo_es_agua_v1.png)
 
-Esta lámina fue generada con GPT para explicar conceptos. No contiene campos calculados ni constituye evidencia experimental. Su [prompt y procedencia](evidence/images_gpt/no_todo_es_agua_v1.json) se conservan separados de los datos científicos.
+Esta lámina fue generada con GPT para explicar conceptos. No contiene campos calculados ni constituye evidencia experimental. Su [prompt y procedencia](../provenance/images_gpt/no_todo_es_agua_v1.json) se conservan separados de los datos científicos.
 
 ## Cómo leer las animaciones analíticas
 
@@ -48,13 +48,13 @@ Cada referencia utilizó diferencias centradas y RK4 en `N = 32, 64, 128`, más 
 
 | Caso | Error RMS en N128 | Orden observado 64→128 | Diferencia RMS al dividir dt por dos, N64 |
 |---|---:|---:|---:|
-| [Calor en WAR](evidence/scenarios_v2/war/heat_baseline/run.json) | 2,93253 × 10⁻⁵ | 1,99926 | 9,16432 × 10⁻¹³ |
-| [Transporte en WAR](evidence/scenarios_v2/war/advection_baseline/run.json) | 5,77593 × 10⁻⁴ | 1,99822 | 5,51746 × 10⁻⁹ |
-| [Onda en WAR](evidence/scenarios_v2/war/wave_baseline/run.json) | 1,29854 × 10⁻⁴ | 1,99951 | 2,80664 × 10⁻⁹ |
+| [Calor en WAR](scenarios_v2/war/heat_baseline/run.json) | 2,93253 × 10⁻⁵ | 1,99926 | 9,16432 × 10⁻¹³ |
+| [Transporte en WAR](scenarios_v2/war/advection_baseline/run.json) | 5,77593 × 10⁻⁴ | 1,99822 | 5,51746 × 10⁻⁹ |
+| [Onda en WAR](scenarios_v2/war/wave_baseline/run.json) | 1,29854 × 10⁻⁴ | 1,99951 | 2,80664 × 10⁻⁹ |
 
-Las referencias de [calor](evidence/scenarios_v2/guerra/heat_baseline/run.json), [transporte](evidence/scenarios_v2/guerra/advection_baseline/run.json) y [onda](evidence/scenarios_v2/guerra/wave_baseline/run.json) en GUERRA también pasaron y registraron los mismos errores RMS finales N128. Los detalles completos, incluidos medias e invariantes, están en cada JSON y su CSV contiguo. La concordancia entre máquinas comprueba reproducibilidad de este código, no independencia algorítmica.
+Las referencias de [calor](scenarios_v2/guerra/heat_baseline/run.json), [transporte](scenarios_v2/guerra/advection_baseline/run.json) y [onda](scenarios_v2/guerra/wave_baseline/run.json) en GUERRA también pasaron y registraron los mismos errores RMS finales N128. Los detalles completos, incluidos medias e invariantes, están en cada JSON y su CSV contiguo. La concordancia entre máquinas comprueba reproducibilidad de este código, no independencia algorítmica.
 
-Los umbrales se fijaron antes de observar mutantes: error final menor que `10⁻³`, orden entre `1,7` y `2,3`, consistencia temporal y límites de deriva de medias e invariantes. No se interpreta la pequeña diferencia temporal como una medición del orden cuatro de RK4 cuando domina el error espacial. [Contrato completo](skills/escenarios-verificables/references/contratos-1d.md).
+Los umbrales se fijaron antes de observar mutantes: error final menor que `10⁻³`, orden entre `1,7` y `2,3`, consistencia temporal y límites de deriva de medias e invariantes. No se interpreta la pequeña diferencia temporal como una medición del orden cuatro de RK4 cuando domina el error espacial. [Contrato completo](../scenario-runners/escenarios-verificables/references/contratos-1d.md).
 
 ## Mutantes: también importan los que sobreviven
 
@@ -71,32 +71,32 @@ La tabla es igual en ambos hosts:
 
 El desplazamiento de N posiciones es la identidad algebraica de un arreglo periódico. No se declaró equivalente porque simplemente pasara las pruebas.
 
-Los cambios pequeños de [calor](evidence/scenarios_v2/war/heat_tiny_coefficient/run.json) y [transporte](evidence/scenarios_v2/war/advection_tiny_coefficient/run.json) sobrevivieron: el contrato no distingue esa alteración con sus tolerancias. **No son equivalentes al problema original.** En [onda](evidence/scenarios_v2/war/wave_tiny_coefficient/run.json), la misma escala de alteración produjo deriva energética relativa de `3,19124 × 10⁻⁷`, superior al límite `10⁻⁷`, y fue detectada por ese criterio.
+Los cambios pequeños de [calor](scenarios_v2/war/heat_tiny_coefficient/run.json) y [transporte](scenarios_v2/war/advection_tiny_coefficient/run.json) sobrevivieron: el contrato no distingue esa alteración con sus tolerancias. **No son equivalentes al problema original.** En [onda](scenarios_v2/war/wave_tiny_coefficient/run.json), la misma escala de alteración produjo deriva energética relativa de `3,19124 × 10⁻⁷`, superior al límite `10⁻⁷`, y fue detectada por ese criterio.
 
 Por máquina: `13 / 15 ≈ 86,7 %` de detección entre mutantes no equivalentes evaluables. Los tres equivalentes quedan fuera de ese denominador. No hubo `INFRA_FAIL` ni `INCONCLUSIVE` en esta campaña. La cifra no es una probabilidad de corrección de la teoría ni una cobertura universal de errores.
 
 ## Un contraste adicional del fluido 3D original
 
-Además de las 42 ejecuciones 1D, GUERRA realizó dos integraciones Taylor–Green a malla fija `32³`, horizonte `T = 4` y pasos `dt = 0,01` y `0,005`. Ambas finalizaron con salida cero y pasaron sus controles. Los tiempos de simulación registrados fueron 100,23 y 203,56 segundos. Se conservaron fuente, logs, campos, parámetros y [control de ejecución](evidence/fluid_temporal_v2/remote/run-control.json).
+Además de las 42 ejecuciones 1D, GUERRA realizó dos integraciones Taylor–Green a malla fija `32³`, horizonte `T = 4` y pasos `dt = 0,01` y `0,005`. Ambas finalizaron con salida cero y pasaron sus controles. Los tiempos de simulación registrados fueron 100,23 y 203,56 segundos. Se conservaron fuente, logs, campos, parámetros y [control de ejecución](../fluid-3d/fluid_temporal_v2/remote/run-control.json).
 
 | Modelo | Diferencia RMS de velocidad final | Diferencia relativa L2 |
 |---|---:|---:|
 | Euler | 3,32228 × 10⁻¹⁰ | 1,15087 × 10⁻⁹ |
 | Navier–Stokes | 1,22411 × 10⁻¹² | 7,59940 × 10⁻¹² |
 
-La diferencia relativa usa como denominador la norma del campo refinado, `dt = 0,005`, sobre las tres componentes y todas las celdas. Las integraciones usaron NumPy 2.2.6 en GUERRA; el análisis posterior de sus archivos utilizó NumPy 2.0.2 en el entorno local. Se conservan los [comandos exactos de comparación](evidence/fluid_temporal_v2/comparison-commands.txt).
+La diferencia relativa usa como denominador la norma del campo refinado, `dt = 0,005`, sobre las tres componentes y todas las celdas. Las integraciones usaron NumPy 2.2.6 en GUERRA; el análisis posterior de sus archivos utilizó NumPy 2.0.2 en el entorno local. Se conservan los [comandos exactos de comparación](../fluid-3d/fluid_temporal_v2/comparison-commands.txt).
 
-La deriva relativa máxima de energía de Euler bajó de `1,55828 × 10⁻¹¹` a `9,29812 × 10⁻¹³`. La [comparación temporal](evidence/fluid_temporal_v2/temporal-comparison.json) registra 14 de 14 hashes remotos correctos y conserva los diagnósticos de ambos modelos.
+La deriva relativa máxima de energía de Euler bajó de `1,55828 × 10⁻¹¹` a `9,29812 × 10⁻¹³`. La [comparación temporal](../fluid-3d/fluid_temporal_v2/temporal-comparison.json) registra 14 de 14 hashes remotos correctos y conserva los diagnósticos de ambos modelos.
 
 **El resultado acota una diferencia temporal observada en esta malla, no el error respecto a una solución continua exacta.** Dos pasos no establecen un orden temporal observado. La pequeña diferencia no corrige el cambio de velocidad de Euler de 16,7 % entre 32³ y 64³: sensibilidad temporal y espacial son preguntas distintas.
 
-La corrida GUERRA `dt = 0,01` produjo arrays guardados exactamente iguales a los de WAR con los mismos parámetros. Los archivos NPZ no son idénticos byte a byte, pero sus arrays sí lo fueron en la [comparación entre hosts](evidence/fluid_temporal_v2/war-guerra-comparison.json). Las fuentes difieren en una sola cadena de diagnóstico que sustituye el texto fijo «32³» por el valor de `n`; no cambia el cálculo. Se conserva el [diff de fuente](evidence/fluid_temporal_v2/war-original-source-diff.txt). Es reproducibilidad del mismo esquema, no contraste con un solver independiente.
+La corrida GUERRA `dt = 0,01` produjo arrays guardados exactamente iguales a los de WAR con los mismos parámetros. Los archivos NPZ no son idénticos byte a byte, pero sus arrays sí lo fueron en la [comparación entre hosts](../fluid-3d/fluid_temporal_v2/war-guerra-comparison.json). Las fuentes difieren en una sola cadena de diagnóstico que sustituye el texto fijo «32³» por el valor de `n`; no cambia el cálculo. Se conserva el [diff de fuente](../fluid-3d/fluid_temporal_v2/war-original-source-diff.txt). Es reproducibilidad del mismo esquema, no contraste con un solver independiente.
 
 ## Trazabilidad y reproducción
 
-- [Skill reutilizable](skills/escenarios-verificables/SKILL.md): protocolo dominio-agnóstico, no motor universal.
-- [Runner de experimentos](skills/escenarios-verificables/scripts/run_scenario.py): SHA256 `cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9`.
-- [Agregador](controls/summarize_scenarios.py): verifica matriz de casos, identidad de referencias, versiones y hashes antes de resumir.
+- [Skill reutilizable](../scenario-runners/escenarios-verificables/SKILL.md): protocolo dominio-agnóstico, no motor universal.
+- [Runner de experimentos](../scenario-runners/escenarios-verificables/scripts/run_scenario.py): SHA256 `cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9`.
+- [Agregador](../scenarios-v2/summarize_scenarios.py): verifica matriz de casos, identidad de referencias, versiones y hashes antes de resumir.
 - [Renderer analítico](simulation/render_analytic_scenarios.py): evalúa las fórmulas, contrasta el oráculo guardado a `T = 0,7`, revisa datos iniciales, periodicidad y retorno temporal.
 
 WAR utilizó Python 3.10.11 y GUERRA Python 3.12.3; ambos, NumPy 2.2.6 y Matplotlib 3.10.8. Cada ejecución solicita un hilo y usa CPU. En el video, Matplotlib calcula la representación en CPU; NVENC usa la GPU para codificar, no para resolver estas ecuaciones.

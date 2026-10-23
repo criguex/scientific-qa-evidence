@@ -12,7 +12,7 @@ El mutante que añade fuerza cero fue rechazado, pero el resultado tiene **alcan
 
 El archivo `PROCESO_5070.mp4` es una **reconstrucción explicativa narrada**, elaborada a partir de la configuración y de los logs auténticos disponibles. No es una grabación histórica de todas las pulsaciones de teclado. Conserva el corte de las 11:25; el video completo añade **al final** una tarjeta y narración de actualización para que ese estado histórico no se confunda con el resultado final. La simulación física aparece primero y se documenta en `INFORME_SIMULACION_5070.md`.
 
-Evidencia final: [log de ejecución](evidence/resultados_5070/run.log), [axiomas de los cuatro teoremas](evidence/resultados_5070/axioms.txt), [fallo del mutante](evidence/resultados_5070/mutant_force_zero.log) y [resumen derivado sin claves duplicadas](evidence/derived_verification_summary.json).
+Evidencia final: [log de ejecución](../build-5070/resultados_5070/run.log), [axiomas de los cuatro teoremas](../build-5070/resultados_5070/axioms.txt), [fallo del mutante](../build-5070/resultados_5070/mutant_force_zero.log) y [resumen derivado sin claves duplicadas](../formal-controls/derived_verification_summary.json).
 
 ![Actualización final de la ejecución formal](simulation/render/focused/final_update.png)
 
@@ -118,7 +118,7 @@ Estos ocho hashes proceden del manifiesto existente. No son un manifiesto exhaus
 | `build_on_5070.sh` original | `906beffeec5c9265ecdb658c5106e785d2ffaae56bc43846f5962520dd079473` |
 | `audit_static.json` | `2cf2a09b8bfbe85a2d30c06b61ccfe9038f48eb4b2fdb35188e9a4e27b542fa5` |
 
-La copia del script realmente ejecutado se recuperó de WAR y se conserva en [evidence/build_on_5070.sh](evidence/build_on_5070.sh). Una versión local modificada posteriormente no debe atribuirse a esta ejecución por compartir el nombre: la identidad de esta corrida es la copia preservada y su hash.
+La copia del script realmente ejecutado se recuperó de WAR y se conserva en [evidence/build_on_5070.sh](../build-5070/build_on_5070.sh). Una versión local modificada posteriormente no debe atribuirse a esta ejecución por compartir el nombre: la identidad de esta corrida es la copia preservada y su hash.
 
 ## 4. Qué hace el trabajo principal
 
@@ -368,9 +368,9 @@ Es un fallo reproducible relacionado con el endurecimiento introducido, no un OO
 
 ### Corrección del resumen, sin modificar el original
 
-El `summary.json` original repite la clave `commit`: primero contiene el SHA y después `"OK"`. Un lector JSON habitual conserva solo la última aparición. Por eso se preservó el [archivo original](evidence/resultados_5070/summary.json) y se generó [derived_verification_summary.json](evidence/derived_verification_summary.json), con campos distintos `commit_sha` y `commit_status`, las dos apariciones originales y hashes de los logs fuente.
+El `summary.json` original repite la clave `commit`: primero contiene el SHA y después `"OK"`. Un lector JSON habitual conserva solo la última aparición. Por eso se preservó el [archivo original](resultados_5070/summary.json) y se generó [derived_verification_summary.json](../formal-controls/derived_verification_summary.json), con campos distintos `commit_sha` y `commit_status`, las dos apariciones originales y hashes de los logs fuente.
 
-El script [`derive_verification_summary.py`](controls/derive_verification_summary.py) comprueba el SHA contra el manifiesto, el éxito de build, los cuatro listados de axiomas y los diagnósticos exactos del mutante. No reescribe los logs ni constituye un segundo kernel.
+El script [`derive_verification_summary.py`](../formal-controls/derive_verification_summary.py) comprueba el SHA contra el manifiesto, el éxito de build, los cuatro listados de axiomas y los diagnósticos exactos del mutante. No reescribe los logs ni constituye un segundo kernel.
 
 ## 9. Archivos y trazabilidad
 

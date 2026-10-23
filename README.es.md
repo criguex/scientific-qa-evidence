@@ -316,15 +316,20 @@ evidence/
     cd-validation/        la revalidación del 2026-10-21 (compilaciones B1–B4, corridas 1–4, mutantes, revisiones)
     b5/                   compilación B5 y corrida 5, para la versión v1.3.0
   numerical/              contrato congelado, fuente y tests, corridas de 84 casos en macOS y Linux
+  codex-2026-10-20/       evidencia que produjo Codex el 2026-10-20: escenarios, EDO, fluido 3D,
+                          controles, primera compilación en la RTX 5070; rutas locales reemplazadas,
+                          manifiesto con los hashes originales
   FROM_ZERO.md            comprobaciones repetidas desde un clon nuevo
-  SHA256SUMS.txt          checksums de cada archivo curado
+  SHA256SUMS.txt          checksums de cada archivo curado (animations/ se regenera y lo
+                          comprueba su propio test)
 experiments/
   blind-faults/           benchmark: semilla comprometida y v1 congelada, erratas, evaluador v2 corregido
   mathlib-controls/       enunciado cambiado frente a teorema falso, con tres teoremas de Mathlib
   receipt-check/          recibos frente a artefactos con registros auténticos, dos casos
 bridges/                  el texto de Clay en Lean, la prueba de que los teoremas de OpenAI lo implican, hoja de revisión
 animations/               trece escenas de evidencia y una ilustrativa, scripts de build y exportación, tests
-docs/                     GIF, videos MP4, resúmenes en PDF, solicitud de revisión
+docs/                     GIF, videos MP4, resúmenes en PDF, solicitud de revisión,
+                          guía de reproducción independiente, registro de Codex
 .github/workflows/        CI que corre todas las comprobaciones en cada push
 ```
 

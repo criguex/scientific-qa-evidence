@@ -32,7 +32,7 @@ Esto demuestra únicamente que la ruta configurada produjo las respuestas espera
 
 El bundle operativo incluye los tres intentos, fixtures, lanzadores, resultados por caso, estado y propiedades de la unidad, tiempos, logs, hashes por archivo, pins y versiones. No contiene los binarios de toolchain, cachés `.lake` ni directorios `.git`.
 
-- [Bundle de calibración](COMPARATOR_CALIBRATION_BUNDLE.tar.gz), SHA-256 `6a5a56631a0e82dbb91791ac8b640596656d1cea283aaca3f470356d676d117e`.
+- [Bundle de calibración](../../report-v4/report_v4/COMPARATOR_CALIBRATION_BUNDLE/), SHA-256 `6a5a56631a0e82dbb91791ac8b640596656d1cea283aaca3f470356d676d117e`.
 - SHA-256 del conjunto de resultados del intento 3, valor registrado en su manifiesto: `b973ebee4152fff9a7442223834ba20d6e896b6c9b2a208a2e94942924a5f8e0`.
 - El README y los manifiestos internos del bundle preservan los hashes de lanzadores, fuentes, binarios, archivos de salida y cada resultado.
 
@@ -50,7 +50,7 @@ El 2026-10-20 entre 20:06:16 y 20:06:22 UTC se ejecutó una extensión separada 
 
 Sumando ambas tandas hay seis controles: dos positivos aceptados por ambos kernels y cuatro rechazos de Comparator anteriores a los kernels. Esta suma describe únicamente los fixtures enumerados; no es una tasa de falsos positivos, ni una puntuación general de seguridad, ni se suma a los cuatro teoremas formales o a las 150 ejecuciones numéricas.
 
-El [bundle de extensión](COMPARATOR_CALIBRATION_EXTENSION_BUNDLE.tar.gz) preserva salidas, estados, perfiles activos y hashes de la segunda tanda. SHA-256: `ccbe70b9418a11c3198800d26b79395412665ff2cd16ffff58d9009c7cb58e4f`. Su archivo de resultados crudos exportados de WSL tiene SHA-256 `7367f7dbbeef93287b21e4e7db0efb02fd3b202b302c8e444440f97cbb1dff89`.
+El [bundle de extensión](../../report-v4/report_v4/COMPARATOR_CALIBRATION_EXTENSION_BUNDLE/) preserva salidas, estados, perfiles activos y hashes de la segunda tanda. SHA-256: `ccbe70b9418a11c3198800d26b79395412665ff2cd16ffff58d9009c7cb58e4f`. Su archivo de resultados crudos exportados de WSL tiene SHA-256 `7367f7dbbeef93287b21e4e7db0efb02fd3b202b302c8e444440f97cbb1dff89`.
 
 La segunda tanda tampoco fue un arranque adversarial limpio: se reutilizaron el checkout y las herramientas fijadas. No establece cero falsos positivos fuera de los seis fixtures. El bundle separa esa extensión de los intentos 1–3 de la primera tanda.
 
