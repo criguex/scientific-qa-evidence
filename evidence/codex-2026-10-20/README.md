@@ -8,12 +8,25 @@ The imported reports are in Spanish, as written at the time. Their internal link
 
 1. Each group below was copied from the private repository by a script, in one pass.
 2. **Local paths were replaced** with placeholders, and relative links in the imported reports were rewritten to this folder's layout or to the newer public files that supersede them. 676 of the 1,886 published files were edited this way. The placeholders are: `<WIN_HOME>` (the Windows user folder), `<WIN_HOME_WSL>` (the same folder seen from WSL), `<WSL_HOME>` (the Linux user folder on WAR), `<HOME>` (the Mac user folder), `<TMP>` (temporary folders) and `<mac-host>` (the Mac's network name). Nothing else was edited.
-3. **Not copied:** 361 images, videos, audio files and `.npz` arrays (about 100 MB), and 385 binary members of three archives. Voice and audio outputs stay private on purpose.
+3. **Not copied into Git:** 361 images, videos, audio files and `.npz` arrays (about 100 MB), and 385 binary members of three archives. The `.npz` arrays are published separately, as shown below; voice and audio outputs stay private on purpose.
 4. **[`MANIFEST.tsv`](MANIFEST.tsv)** lists, for every published file, its source path, the SHA-256 of the original bytes, the SHA-256 of the published bytes, and whether it was sanitized. Files with `sanitized = no` are byte-identical to the originals, so any hash recorded inside the runs can be checked directly. For sanitized files, a hash recorded inside a run refers to the original bytes, which stay private; the manifest pairs the two.
 5. 43 links inside the imported reports still have no target, on purpose: they point to rendered images and videos, render and montage summaries, video scripts, the voice check and one superseded source archive, none of which is scientific evidence.
 6. A scan of everything published found no keys, tokens, passwords or private keys. 11 JSON files written by PowerShell start with a UTF-8 byte-order mark; they are kept as written and read with `utf-8-sig`.
 
 All results below are synthetic calculations under explicit software contracts. They test whether code and checks behave as specified. They are not physical measurements, and none of them verifies the Euler or Navier–Stokes theorems.
+
+## The original arrays (`.npz`)
+
+The 197 NumPy arrays these runs wrote (83 MB, 70 MB of them the 64³ fluid run) are not in Git, so that every clone stays small. They are attached to release [v1.3.3](https://github.com/criguex/scientific-qa-evidence/releases/tag/v1.3.3) as `codex-2026-10-20-npz.tar` (SHA-256 `8e8cda9717068e2485cd78bf934ac16be9b24ed85ca06b6faa0e98b9a756b266`), with paths that match this folder.
+
+These are the original files, not a rerun: the SHA-256 of every array equals the hash its run recorded when it wrote the file, and [`NPZ_MANIFEST.tsv`](NPZ_MANIFEST.tsv) names, for each array, the published file where that hash was recorded. To fetch and check them:
+
+```sh
+gh release download v1.3.3 -R criguex/scientific-qa-evidence -p codex-2026-10-20-npz.tar
+shasum -a 256 codex-2026-10-20-npz.tar          # 8e8cda97…
+tar -xf codex-2026-10-20-npz.tar -C evidence/codex-2026-10-20
+cd evidence/codex-2026-10-20 && awk -F'\t' 'NR>1 {print $3"  "$1}' NPZ_MANIFEST.tsv | shasum -a 256 -c
+```
 
 ## What is here
 
