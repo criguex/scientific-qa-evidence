@@ -1,0 +1,55 @@
+name: Review or reproduction report
+description: Point out a mistake, review a point of the Clay transcription, or report a reproduction.
+title: "[Review] "
+labels: ["review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time. Any comment helps, even a single sentence, and a result that differs from ours is just as useful.
+        For the Clay transcription, the points to compare are in `bridges/K0_REVIEW.md`; for a rebuild, the steps are in `docs/INDEPENDENT_REPRODUCTION.md`.
+  - type: dropdown
+    id: area
+    attributes:
+      label: What did you look at?
+      options:
+        - The Clay transcription (bridges/ClayLiteral.lean, a K0 point)
+        - An independent reproduction (build, Comparator, axioms)
+        - The numerical or scenario experiments
+        - The plain-language summary or the claims
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Verdict
+      options:
+        - Agree
+        - Object
+        - Unsure
+        - Reproduction report
+    validations:
+      required: true
+  - type: textarea
+    id: citation
+    attributes:
+      label: What you rely on
+      description: The PDF page and equation, the file and line, or the commit and commands you used.
+  - type: textarea
+    id: argument
+    attributes:
+      label: Your comment
+      description: Why the text does or does not say what it should, or what you got when you ran it.
+    validations:
+      required: true
+  - type: textarea
+    id: resolution
+    attributes:
+      label: Suggested fix (optional)
+      description: If you object, the change you propose or the reading you think is intended.
+  - type: input
+    id: credit
+    attributes:
+      label: How should we credit you? (optional)
+      description: Leave empty to stay anonymous.
