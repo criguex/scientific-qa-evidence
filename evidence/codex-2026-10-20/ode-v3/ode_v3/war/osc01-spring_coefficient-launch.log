@@ -1,0 +1,1 @@
+﻿{"case": "oscillator", "scenario": "osc01", "mutant": "spring_coefficient", "status": "KILLED", "reason": "el mutante ejecutado viola el contrato num├®rico", "output": "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc01\\spring_coefficient"}

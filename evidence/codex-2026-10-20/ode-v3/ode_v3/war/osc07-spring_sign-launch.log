@@ -1,0 +1,1 @@
+﻿{"case": "oscillator", "scenario": "osc07", "mutant": "spring_sign", "status": "KILLED", "reason": "el mutante ejecutado viola el contrato num├®rico", "output": "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc07\\spring_sign"}

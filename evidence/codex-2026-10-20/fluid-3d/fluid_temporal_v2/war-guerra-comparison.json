@@ -1,0 +1,111 @@
+{
+  "comparison": "WAR versus GUERRA at n32 dt0.01 T4",
+  "parameters_equal": true,
+  "source_sha256": {
+    "war": "23d42d339f84387c714e30723ca1607181193989913751d8c1a8c0960cdaae44",
+    "guerra": "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50"
+  },
+  "source_difference": "Only limits display string fixed32 versus interpolated n; arithmetic unchanged (see saved diff)",
+  "versions": {
+    "war": {
+      "python": "3.10.11",
+      "numpy": "2.2.6"
+    },
+    "guerra": {
+      "python": "3.12.3",
+      "numpy": "2.2.6"
+    },
+    "comparison_numpy": "2.0.2"
+  },
+  "arrays": {
+    "times": {
+      "shape_war": [
+        201
+      ],
+      "shape_guerra": [
+        201
+      ],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    },
+    "omega_magnitude": {
+      "shape_war": [
+        2,
+        201,
+        32,
+        32,
+        32
+      ],
+      "shape_guerra": [
+        2,
+        201,
+        32,
+        32,
+        32
+      ],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    },
+    "initial_velocity": {
+      "shape_war": [
+        3,
+        32,
+        32,
+        32
+      ],
+      "shape_guerra": [
+        3,
+        32,
+        32,
+        32
+      ],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    },
+    "final_velocity": {
+      "shape_war": [
+        2,
+        3,
+        32,
+        32,
+        32
+      ],
+      "shape_guerra": [
+        2,
+        3,
+        32,
+        32,
+        32
+      ],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    },
+    "viscosities": {
+      "shape_war": [
+        2
+      ],
+      "shape_guerra": [
+        2
+      ],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    },
+    "n": {
+      "shape_war": [],
+      "shape_guerra": [],
+      "array_equal": true,
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0
+    }
+  },
+  "input_fields_sha256": {
+    "war": "9adab406c424e2d36bc3e0c9ee666561a7085d4a429498c197119eaf16943f6d",
+    "guerra": "3b996d1c5ecf0b1b4c51e28bd8f3b5dbcca337c85677e041692bfcaef1c7084f"
+  },
+  "scope": "Cross-host reproduction only; not spatial convergence or independent solver verification"
+}

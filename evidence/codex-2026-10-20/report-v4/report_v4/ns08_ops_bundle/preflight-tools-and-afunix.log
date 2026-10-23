@@ -1,0 +1,95 @@
+2026-10-20T18:33:27Z
+<WSL_HOME>/.elan/bin:
+total 91988
+drwxr-xr-x 2 nse nse     4096 Oct 20 11:15 .
+drwxr-xr-x 5 nse nse     4096 Oct 20 11:16 ..
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 elan
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 lake
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 lean
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 leanc
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 leanchecker
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 leanmake
+-rwxr-xr-x 7 nse nse 13452832 Oct 20 11:15 leanpkg
+
+<WSL_HOME>/.elan/toolchains:
+total 12
+drwxr-xr-x 3 nse nse 4096 Oct 20 11:16 .
+drwxr-xr-x 5 nse nse 4096 Oct 20 11:16 ..
+drwxr-xr-x 7 nse nse 4096 Oct 20 11:16 leanprover--lean4---v4.34.0-rc2
+<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+total 10128
+drwxr-xr-x 2 nse nse    4096 Oct 20 11:16 .
+drwxr-xr-x 7 nse nse    4096 Oct 20 11:16 ..
+-rwxr-xr-x 1 nse nse 1111624 Aug 21 05:30 cadical
+-rwxr-xr-x 1 nse nse  119320 Aug 21 05:29 clang
+-rwxr-xr-x 1 nse nse   13840 Aug 21 05:37 lake
+-rwxr-xr-x 1 nse nse 6001368 Aug 21 05:29 ld.lld
+-rwxr-xr-x 1 nse nse    9024 Aug 21 05:37 lean
+-rwxr-xr-x 1 nse nse   36896 Aug 21 05:37 leanc
+-rwxr-xr-x 1 nse nse   51080 Aug 21 05:37 leanchecker
+-rwxr-xr-x 1 nse nse  220464 Aug 21 05:37 leanir
+-rwxr-xr-x 1 nse nse     839 Aug 21 05:29 leanmake
+-rwxr-xr-x 1 nse nse 2692960 Jun 27 09:25 leantar
+-rwxr-xr-x 1 nse nse   76888 Aug 21 05:29 llvm-ar
+total 159016
+drwxr-xr-x 5 nse nse     4096 Oct 20 11:16 .
+drwxr-xr-x 7 nse nse     4096 Oct 20 11:16 ..
+-rw-r--r-- 1 nse nse     1304 Aug 21 05:29 Mcrt1.o
+-rw-r--r-- 1 nse nse     3896 Aug 21 05:29 Scrt1.o
+drwxr-xr-x 3 nse nse     4096 Oct 20 11:16 clang
+-rw-r--r-- 1 nse nse     3896 Aug 21 05:29 crt1.o
+-rw-r--r-- 1 nse nse     2608 Aug 21 05:29 crti.o
+-rw-r--r-- 1 nse nse     2336 Aug 21 05:29 crtn.o
+-rw-r--r-- 1 nse nse     6184 Aug 21 05:29 gcrt1.o
+drwxr-xr-x 2 nse nse     4096 Oct 20 11:16 glibc
+drwxr-xr-x 6 nse nse     4096 Oct 20 11:16 lean
+lrwxrwxrwx 1 nse nse       15 Aug 21 05:37 libLLVM-22.so -> libLLVM.so.22.1
+lrwxrwxrwx 1 nse nse       15 Aug 21 05:37 libLLVM.so -> libLLVM.so.22.1
+-rw-r--r-- 1 nse nse 77258216 Aug 21 05:29 libLLVM.so.22.1
+lrwxrwxrwx 1 nse nse       18 Aug 21 05:37 libatomic.so -> libatomic.so.1.2.0
+lrwxrwxrwx 1 nse nse       18 Aug 21 05:37 libatomic.so.1 -> libatomic.so.1.2.0
+-rw-r--r-- 1 nse nse    26416 Aug 21 05:29 libatomic.so.1.2.0
+-rw-r--r-- 1 nse nse  2452640 Aug 21 05:29 libc++.a
+-rw-r--r-- 1 nse nse      561 Aug 21 05:29 libc++.modules.json
+-rw-r--r-- 1 nse nse       37 Aug 21 05:29 libc++.so
+lrwxrwxrwx 1 nse nse       13 Aug 21 05:37 libc++.so.1 -> libc++.so.1.0
+-rw-r--r-- 1 nse nse  1337744 Aug 21 05:29 libc++.so.1.0
+-rw-r--r-- 1 nse nse   718702 Aug 21 05:29 libc++abi.a
+lrwxrwxrwx 1 nse nse       14 Aug 21 05:37 libc++abi.so -> libc++abi.so.1
+lrwxrwxrwx 1 nse nse       16 Aug 21 05:37 libc++abi.so.1 -> libc++abi.so.1.0
+-rw-r--r-- 1 nse nse   408152 Aug 21 05:29 libc++abi.so.1.0
+lrwxrwxrwx 1 nse nse       20 Aug 21 05:37 libclang-cpp.so -> libclang-cpp.so.22.1
+-rw-r--r-- 1 nse nse 65075176 Aug 21 05:29 libclang-cpp.so.22.1
+-rw-r--r-- 1 nse nse 10990460 Aug 21 05:29 libcrypto.a
+-rw-r--r-- 1 nse nse      132 Aug 21 05:29 libgcc_s.so
+-rw-r--r-- 1 nse nse   102664 Aug 21 05:29 libgcc_s.so.1
+-rw-r--r-- 1 nse nse  1668288 Aug 21 05:29 libgmp.a
+-rw-r--r-- 1 nse nse  2031304 Aug 21 05:29 libssl.a
+-rw-r--r-- 1 nse nse   137702 Aug 21 05:29 libunwind.a
+lrwxrwxrwx 1 nse nse       14 Aug 21 05:37 libunwind.so -> libunwind.so.1
+lrwxrwxrwx 1 nse nse       16 Aug 21 05:37 libunwind.so.1 -> libunwind.so.1.0
+-rw-r--r-- 1 nse nse    69928 Aug 21 05:29 libunwind.so.1.0
+-rw-r--r-- 1 nse nse   362414 Aug 21 05:29 libuv.a
+lrwxrwxrwx 1 nse nse       14 Aug 21 05:37 libz.so -> libz.so.1.2.11
+lrwxrwxrwx 1 nse nse       14 Aug 21 05:37 libz.so.1 -> libz.so.1.2.11
+-rw-r--r-- 1 nse nse   100640 Aug 21 05:29 libz.so.1.2.11
+dpkg-query: no packages found matching gcc
+dpkg-query: no packages found matching g++
+dpkg-query: no packages found matching clang
+dpkg-query: no packages found matching libc6-dev
+dpkg-query: no packages found matching linux-libc-dev
+dpkg-query: no packages found matching build-essential
+make  unknown ok not-installed
+BASELINE_AF_UNIX_ALLOWED
+Running as unit: ns08-afunix-probe-a5ygak.service; invocation ID: a0e88ee709a84e1e88c329d862d59428
+AF_UNIX_DENIED 97 [Errno 97] Address family not supported by protocol
+AF_INET_SOCKET_CREATION_ALLOWED
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 17ms
+CPU time consumed: 17ms
+Memory peak: 256.0K
+Memory swap peak: 0B
+BASELINE_EXIT=0 RESTRICTED_EXIT=0
+2026-10-20T18:33:27Z

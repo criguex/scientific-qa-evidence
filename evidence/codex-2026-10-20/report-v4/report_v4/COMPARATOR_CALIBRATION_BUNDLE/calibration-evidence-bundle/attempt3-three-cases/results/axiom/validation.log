@@ -1,0 +1,1 @@
+two builds and both exports recorded in stdout; one expected Comparator-stage diagnostic appears; pinned code order runs compare/check only after build/export returns; no kernel was invoked

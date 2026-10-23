@@ -1,0 +1,46 @@
+UTC start: 2026-10-20T18:48:12Z
+Landrun SHA256: e3d26ebf2f7c786f8d34b7051ad2c655329aeadbb863404e3dd05d3a97b0518a  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+Landlock ABI (correct query): 7
+All commands omit --best-effort and execute the real pinned Landrun directly.
+Positive read command:
+Running as unit: ns08-lr-nobe-read-a5ygak.service; invocation ID: c94fea66f2b64d85a3d9edbf764ec634
+[landrun:error] 2026/10/20 13:48:12 Failed to apply sandbox: failed to apply Landlock restrictions: missing kernel Landlock support. Got Landlock ABI v7, wanted {Landlock V10; FS: all; Net: all; Scoped: all}
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 5ms
+CPU time consumed: 5ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+Positive read exit: 1
+Negative write command:
+Running as unit: ns08-lr-nobe-write-a5ygak.service; invocation ID: cfb5c149f8a44d38a14f85516790c4e1
+[landrun:error] 2026/10/20 13:48:12 Failed to apply sandbox: failed to apply Landlock restrictions: missing kernel Landlock support. Got Landlock ABI v7, wanted {Landlock V10; FS: all; Net: all; Scoped: all}
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 4ms
+CPU time consumed: 5ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+Negative write exit: 1; denied path exists: no
+Positive TCP command for port 52963:
+Running as unit: ns08-lr-nobe-tcp-allow-a5ygak.service; invocation ID: ff9450296b3a42329fd221d4d06ba008
+[landrun:error] 2026/10/20 13:48:12 Failed to apply sandbox: failed to apply Landlock restrictions: missing kernel Landlock support. Got Landlock ABI v7, wanted {Landlock V10; FS: all; Net: all; Scoped: all}
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 5ms
+CPU time consumed: 6ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+Positive TCP exit: 1
+Negative TCP command for port 52963:
+Running as unit: ns08-lr-nobe-tcp-deny-a5ygak.service; invocation ID: 2ab9a936b8664f0582aecc87d70942a1
+[landrun:error] 2026/10/20 13:48:12 Failed to apply sandbox: failed to apply Landlock restrictions: missing kernel Landlock support. Got Landlock ABI v7, wanted {Landlock V10; FS: all; Net: all; Scoped: all}
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 5ms
+CPU time consumed: 5ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+Negative TCP exit: 1
+Summary: read=1 write=1 tcp-allow=1 tcp-deny=1
+UTC end: 2026-10-20T18:48:12Z

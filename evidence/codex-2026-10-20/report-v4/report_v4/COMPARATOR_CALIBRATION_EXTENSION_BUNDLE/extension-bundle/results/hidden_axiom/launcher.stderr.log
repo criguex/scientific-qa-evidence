@@ -1,0 +1,7 @@
+Running as unit: ns08-extra-hidden_axiom-20261020t2002z-5r9k2m.service; invocation ID: 39c9dfc5b69e490eb70b4d63c3f09782
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 1.543s
+CPU time consumed: 1.535s
+Memory peak: 42.4M
+Memory swap peak: 0B

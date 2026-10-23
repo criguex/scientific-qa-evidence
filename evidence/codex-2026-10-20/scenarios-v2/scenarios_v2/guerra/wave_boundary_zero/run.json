@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "case": "wave",
+  "mutant": "boundary_zero",
+  "status": "KILLED",
+  "reason": "el mutante ejecutado viola el contrato numérico",
+  "operator_change": "sustituir por cero los vecinos que cruzan los bordes",
+  "started_utc": "2026-10-20T17:44:30.081753+00:00",
+  "finished_utc": "2026-10-20T17:44:30.993643+00:00",
+  "monotonic_start_ns": 69816605228300,
+  "monotonic_finish_ns": 69817516385300,
+  "wall_seconds": 0.911157,
+  "source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "coefficient": 0.8,
+    "equation": "u_t = v; v_t = c^2 u_xx",
+    "T": 0.7,
+    "domain": "periodic [0,2*pi)",
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\skill-cc925999\\scripts\\run_scenario.py",
+    "--worker",
+    "--case",
+    "wave",
+    "--mutant",
+    "boundary_zero",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\results-cc925999\\wave_boundary_zero"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 180,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "f88a69b79f36ef74b46f38805d489cfae29be2e34af78a70027172467fb48753",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": false,
+    "checks": {
+      "mean_n64": {
+        "actual": 0.0706425084389901,
+        "criterion": "< 1e-10",
+        "passed": false
+      },
+      "discrete_invariant_n64": {
+        "actual": 0.22544878442995267,
+        "criterion": "< 1e-7",
+        "passed": false
+      },
+      "oracle_n64": {
+        "actual": 0.18748869477940489,
+        "criterion": "< .005",
+        "passed": false
+      }
+    },
+    "runs": [
+      {
+        "n": 64,
+        "dt": 0.02413793103448276,
+        "steps": 29,
+        "rms_error": 0.18748869477940489,
+        "mean_drift_max": 0.0706425084389901,
+        "invariant_relative_drift_max": 0.22544878442995267,
+        "invariant_increase_max": 0.008353339456162262
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "contrato de calibración 1D; no prueba de una teoría general",
+    "invariantes no sustituyen precisión",
+    "SURVIVED no significa equivalencia"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "229741b6f336642930e562f279ab8345ae4bc6d68097ef2154e63433a35c5949",
+    "fields.npz": "42d269ba5ad6681c3696014fd7d1f426259b801a0d5f48df928a1dc5a737c0f4",
+    "metrics.csv": "ab67ef2dd7b23850890471a80d4b67a2b87f3b9b7d27af5842377e3bd0e90e19",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "25dbc6333ba7912cd91121529c82e563917d45f0cfa9efc6c431b2d26b816f91"
+  }
+}

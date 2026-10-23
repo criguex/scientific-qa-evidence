@@ -1,0 +1,42 @@
+{
+  "completed": true,
+  "all_contracts_passed": false,
+  "checks": {
+    "energy_relative_drift_h0.0125": {
+      "actual": 15330.923710648574,
+      "criterion": "<= 1e-6",
+      "passed": false
+    },
+    "oracle_fine": {
+      "actual": 80.37341903952188,
+      "criterion": "< 1e-6",
+      "passed": false
+    }
+  },
+  "runs": [
+    {
+      "dt": 0.0125,
+      "steps": 320,
+      "common_sample_count": 81,
+      "maximum_rms_error_common_times": 80.37341903952188
+    }
+  ],
+  "versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "all_values_finite": true,
+  "initial_state_is_exact_equilibrium": false,
+  "equivalence_reason": null,
+  "environment": {
+    "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_implementation": "CPython",
+    "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "numpy_version": "2.2.6",
+    "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+    "machine_architecture": "AMD64",
+    "byteorder": "little",
+    "dtype": "float64"
+  }
+}

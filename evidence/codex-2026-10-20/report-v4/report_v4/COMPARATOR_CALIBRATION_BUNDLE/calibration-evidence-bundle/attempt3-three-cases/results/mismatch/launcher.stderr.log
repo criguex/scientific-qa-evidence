@@ -1,0 +1,7 @@
+Running as unit: ns08-cal-mismatch-20261020t1957z-3p8kza.service; invocation ID: b2dc97155e534b74966a4eda29a271c8
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 1.465s
+CPU time consumed: 1.469s
+Memory peak: 1000.0K
+Memory swap peak: 0B

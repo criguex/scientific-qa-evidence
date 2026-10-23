@@ -1,0 +1,1 @@
+{"case": "reaction", "scenario": "rxn04", "mutant": "forward_coefficient", "status": "EQUIVALENT", "reason": "kf=0: el término directo modificado es cero para todos los estados", "output": "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient"}

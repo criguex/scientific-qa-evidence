@@ -1,0 +1,40 @@
+{
+  "transfer_verification": [
+    {
+      "file": "contacts_summary.json",
+      "matches": true
+    },
+    {
+      "file": "QUIMICA_REACCIONES_V3.png",
+      "matches": true
+    },
+    {
+      "file": "render-operation.json",
+      "matches": true
+    },
+    {
+      "file": "render-reaction-v2.stderr.log",
+      "matches": true
+    },
+    {
+      "file": "render-reaction-v2.stdout.log",
+      "matches": true
+    }
+  ],
+  "all_hashes_match": true,
+  "exit_code": 0,
+  "source_before": "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+  "source_after": "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+  "summary_source": "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "host": "guerra",
+  "references": 9,
+  "new_integration_performed": false,
+  "png_sha256": {
+    "QUIMICA_REACCIONES_V3.png": "472a9406c4e824d53eebb4d8eacb87dd93248341564e9d37e956ab8e85dac4ec"
+  }
+}

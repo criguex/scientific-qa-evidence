@@ -1,0 +1,7 @@
+Running as unit: adv050-clean-build-20261020T205743Z-361.service; invocation ID: e3e9d2faf3ae4d2e80a9066264f0ccfc
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 41min 33.257s
+CPU time consumed: 4h 4min 341ms
+Memory peak: 10.5G
+Memory swap peak: 0B

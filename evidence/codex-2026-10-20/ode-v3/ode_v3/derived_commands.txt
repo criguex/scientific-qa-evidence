@@ -1,0 +1,51 @@
+Comandos efectivamente ejecutados por el orquestador en el Mac.
+Las salidas son diagnósticos derivados de datos existentes; no son nuevas integraciones.
+Los criterios de aceptación del contrato congelado no se modificaron.
+
+COMPARACIÓN CRUZADA
+
+env PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=<HOME>/.cache/uv/archive-v0/tXyTf_NLV2jB6U41 /opt/homebrew/opt/python@3.12/bin/python3.12 -c 'import pathlib,json,hashlib,collections,numpy as np; root=pathlib.Path("<TMP>"); war={}; guerra={}
+for path in (root/"war").rglob("run.json"):
+ d=json.loads(path.read_text()); war[(d["case"],d["scenario"],d["mutant"])]=(path,d)
+for sub in ("guerra/raw/results","guerra/cross/results_cross_oscillator"):
+ for path in (root/sub).rglob("run.json"):
+  d=json.loads(path.read_text()); guerra[(d["case"],d["scenario"],d["mutant"])]=(path,d)
+rows=[]; hashes=0
+for key in sorted(set(war)&set(guerra)):
+ wp,w=war[key]; gp,g=guerra[key]
+ for field in ("case","scenario","mutant","status","parameters","source_sha256","contract_sha256","dependencies"): assert w[field]==g[field],(key,field)
+ for path,d in ((wp,w),(gp,g)):
+  for name,digest in d["artifact_sha256"].items():
+   assert hashlib.sha256((path.parent/name).read_bytes()).hexdigest()==digest; hashes+=1
+ with np.load(wp.parent/"fields.npz",allow_pickle=False) as wa,np.load(gp.parent/"fields.npz",allow_pickle=False) as ga:
+  assert set(wa.files)==set(ga.files)
+  exact=all(np.array_equal(wa[n],ga[n]) for n in wa.files)
+  difference=max(float(np.max(np.abs(wa[n]-ga[n]))) for n in wa.files)
+ rows.append({"case":key[0],"scenario":key[1],"mutant":key[2],"status":w["status"],"arrays_exactly_equal":exact,"maximum_absolute_difference":difference,"war_report_sha256":hashlib.sha256(wp.read_bytes()).hexdigest(),"guerra_report_sha256":hashlib.sha256(gp.read_bytes()).hexdigest()})
+assert len(rows)==30
+print(json.dumps({"purpose":"cross_host_replication_not_new_scenarios","paired_runs":len(rows),"matched_statuses":len(rows),"all_arrays_exactly_equal":all(r["arrays_exactly_equal"] for r in rows),"maximum_absolute_difference":max(r["maximum_absolute_difference"] for r in rows),"verified_artifacts":hashes,"comparison_numpy":np.__version__,"rows":rows},indent=2))' | tee <TMP>/cross_host_comparison.json
+
+MEDICIONES CUANTITATIVAS
+
+env PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=<HOME>/.cache/uv/archive-v0/tXyTf_NLV2jB6U41 /opt/homebrew/opt/python@3.12/bin/python3.12 -c 'import pathlib,json,math,numpy as np; root=pathlib.Path("<TMP>"); rows=[]; examples=[]
+for family,base in (("oscillator",root/"war/results"),("reaction",root/"guerra/raw/results")):
+ for path in sorted(base.rglob("run.json")):
+  d=json.loads(path.read_text()); r=d["result"]
+  if d["mutant"]=="baseline":
+   with np.load(path.parent/"fields.npz",allow_pickle=False) as a:
+    y=a["states_2"]; exact=a["oracle_2"]; error=np.sqrt(np.mean((y-exact)**2,axis=1)); p=d["parameters"]
+    row={"case":family,"scenario":d["scenario"],"parameters":p,"error_common_81":r["checks"]["oracle_fine"]["actual"],"error_all_321":float(error.max()),"time_of_max_error_all":float(a["times_2"][error.argmax()]),"error_tolerance":1e-6,"fraction_of_error_tolerance":r["checks"]["oracle_fine"]["actual"]/1e-6,"observed_orders":[r["checks"][f"order_pair_{i}"] for i in range(2)],"initial_state":y[0].tolist(),"final_state":y[-1].tolist(),"checks":r["checks"]}
+    if family=="oscillator":
+     e=.5*(y[:,1]**2+p["omega"]**2*y[:,0]**2); row.update({"initial_energy":float(e[0]),"final_energy":float(e[-1]),"final_energy_over_initial":float(e[-1]/e[0]),"max_energy_increment_fine":float(np.max(np.diff(e)))})
+    else:
+     q=p["kf"]+p["kr"]; total=p["A0"]+p["B0"]; row.update({"initial_total":total,"final_total":float(y[-1].sum()),"maximum_total_drift_fine":float(abs(y.sum(axis=1)-total).max()),"minimum_concentration":float(y.min()),"relaxation_rate":q,"relaxation_time":1/q if q else None,"A_equilibrium":p["kr"]*total/q if q else None,"time_to_reduce_nonequilibrium_deviation_95_percent":math.log(20)/q if q else None})
+    rows.append(row)
+  if (d["scenario"],d["mutant"]) in (("osc04","damping_sign"),("rxn05","mass_leak"),("rxn05","frozen"),("rxn08","frozen"),("rxn09","frozen")):
+   with np.load(path.parent/"fields.npz",allow_pickle=False) as a:
+    y=a["states_0"]; p=d["parameters"]; ex={"case":family,"scenario":d["scenario"],"mutant":d["mutant"],"status":d["status"],"error":r["checks"]["oracle_fine"]["actual"],"checks":r["checks"],"final_state":y[-1].tolist()}
+    if family=="oscillator":
+     e=.5*(y[:,1]**2+p["omega"]**2*y[:,0]**2);ex.update({"initial_energy":float(e[0]),"final_energy":float(e[-1]),"final_energy_over_initial":float(e[-1]/e[0])})
+    else:ex.update({"final_total":float(y[-1].sum()),"initial_total":p["A0"]+p["B0"]})
+    examples.append(ex)
+summary={"baseline_count":len(rows),"max_error_common":max(x["error_common_81"] for x in rows),"max_error_all_steps":max(x["error_all_321"] for x in rows),"max_reaction_total_drift_fine":max(x.get("maximum_total_drift_fine",0) for x in rows),"examples":examples,"baselines":rows,"diagnostic_note":"Derived diagnostics; acceptance thresholds unchanged from frozen contract; all units dimensionless."}
+print(json.dumps(summary,indent=2))' | tee <TMP>/quantitative_measurements.json

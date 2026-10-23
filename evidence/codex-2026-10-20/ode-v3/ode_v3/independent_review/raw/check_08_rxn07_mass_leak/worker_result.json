@@ -1,0 +1,51 @@
+{
+  "completed": true,
+  "all_contracts_passed": false,
+  "checks": {
+    "mass_drift_h0.0125": {
+      "actual": 742.7751029759645,
+      "criterion": "<= 1e-12",
+      "passed": false
+    },
+    "nonnegative_h0.0125": {
+      "actual": 0.4,
+      "criterion": ">= -1e-12",
+      "passed": true
+    },
+    "bounded_h0.0125": {
+      "actual": 408.02295031049755,
+      "criterion": "<= initial_total + 1e-12",
+      "passed": false
+    },
+    "oracle_fine": {
+      "actual": 373.1510652913047,
+      "criterion": "< 1e-6",
+      "passed": false
+    }
+  },
+  "runs": [
+    {
+      "dt": 0.0125,
+      "steps": 320,
+      "common_sample_count": 81,
+      "maximum_rms_error_common_times": 373.1510652913047
+    }
+  ],
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.5.4"
+  },
+  "all_values_finite": true,
+  "initial_state_is_exact_equilibrium": false,
+  "equivalence_reason": null,
+  "environment": {
+    "python_version": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "python_implementation": "CPython",
+    "python_executable": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "numpy_version": "2.5.4",
+    "numpy_location": "<HOME>/.cache/uv/archive-v0/tXyTf_NLV2jB6U41/numpy/__init__.py",
+    "machine_architecture": "arm64",
+    "byteorder": "little",
+    "dtype": "float64"
+  }
+}

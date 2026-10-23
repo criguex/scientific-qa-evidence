@@ -1,0 +1,11 @@
+formal_commit=f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+comparator_commit=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+lean4export_commit=cacf989bd75f608700820f6afc595f32e7a99a4d
+nanoda_commit=9d6964f78d0fa4c93fd22fe956e17afe7e72a441
+landrun_commit=ec104f6edc1e14d7fec6d31146f1ec6f9c192c5a
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+lean_binary=<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+landrun version 0.1.18
+3:name = "nanoda_lib"
+4:version = "0.4.25"

@@ -1,0 +1,33 @@
+{
+  "artifact_kind": "derived_summary",
+  "scope": "nonzero periodic Navier-Stokes definition control (D) on the torus",
+  "captured_utc": {
+    "started": "2026-10-20T21:11:19Z",
+    "finished": "2026-10-20T21:11:24Z",
+    "elapsed_seconds": 5.44
+  },
+  "private_evidence_bundle_sha256": "295508f4480f78f00d5341dfee83f0948117768b8aee0f03fdd21ebdd2726cfa",
+  "public_files_manifest_sha256": "4ae56de3ad17aec36b1be9be700472fd8e7621d929a6a13da18258edf9dc816c",
+  "source_sha256": "907c81c5b301e7745cf92a8bc74c7f16bbc9b2c83a85b521da2b51331defa51d",
+  "lean_return_code": 0,
+  "constructed_fields": {
+    "domain": "periodic torus definition",
+    "initial_velocity": "constant nonzero vector c",
+    "velocity": "same constant c for all x,t",
+    "pressure": 0,
+    "force": 0,
+    "viscosity": 1
+  },
+  "axioms_reported_by_print_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "interpretation": "the constructed data inhabit the periodic initial-velocity, force, and existence/smoothness structures; the nonzero constant is explicit",
+  "limits": [
+    "the constant nonzero field does not have finite energy on R3",
+    "does not close EU-06",
+    "does not establish Euler regularity or blow-up",
+    "not a general result about Navier-Stokes solutions"
+  ]
+}

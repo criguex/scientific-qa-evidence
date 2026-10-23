@@ -1,0 +1,120 @@
+{
+  "schema_version": 3,
+  "case": "oscillator",
+  "scenario": "osc01",
+  "mutant": "damping_sign",
+  "status": "EQUIVALENT",
+  "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+  "operator_change": "cambiar -2*zeta*omega*v por +2*zeta*omega*v",
+  "started_utc": "2026-10-20T18:10:10.216238+00:00",
+  "finished_utc": "2026-10-20T18:10:10.436906+00:00",
+  "monotonic_start_ns": 1984756173673875,
+  "monotonic_finish_ns": 1984756394224958,
+  "wall_seconds": 0.220551083,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "<mac-host>",
+    "platform": "Darwin-25.2.0-arm64-arm-64bit",
+    "processor": "arm",
+    "logical_cpus": 10
+  },
+  "parameters": {
+    "omega": 0.8,
+    "zeta": 0.0,
+    "x0": 0.7,
+    "v0": -0.2,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "/opt/homebrew/opt/python@3.12/bin/python3.12",
+    "<TMP>/skills/escenarios-verificables/scripts/run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "oscillator",
+    "--scenario",
+    "osc01",
+    "--mutant",
+    "damping_sign",
+    "--output",
+    "<TMP>/check_00_osc01_damping_sign",
+    "--no-plot"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "959dae2e77b9674b8b4df08140764f90f932fcb256492e884b4dbbc7bb36fea4",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "energy_relative_drift_h0.0125": {
+        "actual": 4.444973800797042e-12,
+        "criterion": "<= 1e-6",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 1.1666202169658196e-10,
+        "criterion": "< 1e-6",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 1.1666202169658196e-10
+      }
+    ],
+    "versions": {
+      "python": "3.12.13",
+      "numpy": "2.5.4"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": false,
+    "equivalence_reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+    "environment": {
+      "python_version": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+      "python_implementation": "CPython",
+      "python_executable": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "numpy_version": "2.5.4",
+      "numpy_location": "<HOME>/.cache/uv/archive-v0/tXyTf_NLV2jB6U41/numpy/__init__.py",
+      "machine_architecture": "arm64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "fields.npz": "daa22ba98b180ed9248cfe0180ba7edb742202bcf74ca4e742d190a761bbda44",
+    "metrics.csv": "e84297f528c9b5e6ced084d2c76846adc92fc5e880e74d00dd6e7e5f3e901c04",
+    "returncode.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "f70605684130b743195eebc3f0e34932f62b871d18f276d24796bbf5a38f0356"
+  }
+}

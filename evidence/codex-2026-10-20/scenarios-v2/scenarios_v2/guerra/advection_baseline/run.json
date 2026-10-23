@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "case": "advection",
+  "mutant": "baseline",
+  "status": "BASELINE_PASS",
+  "reason": "referencia satisface el contrato",
+  "operator_change": "operador sin cambios",
+  "started_utc": "2026-10-20T17:44:19.357105+00:00",
+  "finished_utc": "2026-10-20T17:44:20.211758+00:00",
+  "monotonic_start_ns": 69805879981100,
+  "monotonic_finish_ns": 69806734647100,
+  "wall_seconds": 0.854666,
+  "source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "coefficient": 1.3,
+    "equation": "u_t = -c u_x",
+    "T": 0.7,
+    "domain": "periodic [0,2*pi)",
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\skill-cc925999\\scripts\\run_scenario.py",
+    "--worker",
+    "--case",
+    "advection",
+    "--mutant",
+    "baseline",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\results-cc925999\\advection_baseline"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 180,
+  "baseline_valid": false,
+  "baseline_validation_reason": "no se proporcionó referencia",
+  "baseline_file_sha256": null,
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "mean_n32": {
+        "actual": 5.551115123125783e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n32": {
+        "actual": 3.8018654113548745e-09,
+        "criterion": "< 1e-7",
+        "passed": true
+      },
+      "mean_n64": {
+        "actual": 2.7755575615628914e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n64": {
+        "actual": 1.456303592184065e-10,
+        "criterion": "< 1e-7",
+        "passed": true
+      },
+      "mean_n128": {
+        "actual": 5.551115123125783e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n128": {
+        "actual": 4.920936014618637e-12,
+        "criterion": "< 1e-7",
+        "passed": true
+      },
+      "oracle_n128": {
+        "actual": 0.0005775933796499576,
+        "criterion": "< 1e-3",
+        "passed": true
+      },
+      "spatial_order_32_64": {
+        "actual": 1.9928250682961106,
+        "criterion": "1.7 <= p <= 2.3",
+        "passed": true
+      },
+      "spatial_order_64_128": {
+        "actual": 1.9982238374111845,
+        "criterion": "1.7 <= p <= 2.3",
+        "passed": true
+      },
+      "temporal_consistency": {
+        "actual": 5.517455909332364e-09,
+        "criterion": "< 1e-6 and < .02 * E64",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "n": 32,
+        "dt": 0.029166666666666664,
+        "steps": 24,
+        "rms_error": 0.00918433341828312,
+        "mean_drift_max": 5.551115123125783e-17,
+        "invariant_relative_drift_max": 3.8018654113548745e-09,
+        "invariant_increase_max": 0.0
+      },
+      {
+        "n": 64,
+        "dt": 0.014893617021276595,
+        "steps": 47,
+        "rms_error": 0.0023075308707267263,
+        "mean_drift_max": 2.7755575615628914e-17,
+        "invariant_relative_drift_max": 1.456303592184065e-10,
+        "invariant_increase_max": 0.0
+      },
+      {
+        "n": 128,
+        "dt": 0.007526881720430107,
+        "steps": 93,
+        "rms_error": 0.0005775933796499576,
+        "mean_drift_max": 5.551115123125783e-17,
+        "invariant_relative_drift_max": 4.920936014618637e-12,
+        "invariant_increase_max": 0.0
+      },
+      {
+        "n": 64,
+        "dt": 0.007446808510638297,
+        "steps": 94,
+        "rms_error": 0.0023075256671424324,
+        "mean_drift_max": 5.551115123125783e-17,
+        "invariant_relative_drift_max": 4.551477113995019e-12,
+        "invariant_increase_max": 0.0
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "contrato de calibración 1D; no prueba de una teoría general",
+    "invariantes no sustituyen precisión",
+    "SURVIVED no significa equivalencia"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "2c5bef421c74de3bf0ef975b8eb84ab44507cb20af155366377796d8509e79c2",
+    "fields.npz": "c93a5d7c60bea220ec400c6bbc89ac06df619fbc329ac7eebea68420dad4f7c7",
+    "metrics.csv": "27a964da2dfb72f67df05b58ca8fed862eca8c8820c1b35a83dfb859dd18829f",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "bc2fc218401aaf18c90ac4694c08a5626cb3cb8a88c7543557d260c5d43e0dd7"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "case": "wave",
+  "mutant": "equivalent_periodic_shift",
+  "status": "EQUIVALENT",
+  "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+  "operator_change": "aplicar roll de exactamente N nodos al estado antes del operador",
+  "started_utc": "2026-10-20T17:44:31.142531+00:00",
+  "finished_utc": "2026-10-20T17:44:32.059152+00:00",
+  "monotonic_start_ns": 69817666211700,
+  "monotonic_finish_ns": 69818581978900,
+  "wall_seconds": 0.9157672,
+  "source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "coefficient": 0.8,
+    "equation": "u_t = v; v_t = c^2 u_xx",
+    "T": 0.7,
+    "domain": "periodic [0,2*pi)",
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\skill-cc925999\\scripts\\run_scenario.py",
+    "--worker",
+    "--case",
+    "wave",
+    "--mutant",
+    "equivalent_periodic_shift",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\results-cc925999\\wave_equivalent_periodic_shift"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 180,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "f88a69b79f36ef74b46f38805d489cfae29be2e34af78a70027172467fb48753",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "mean_n64": {
+        "actual": 3.3176586478056436e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n64": {
+        "actual": 2.5453486264843285e-10,
+        "criterion": "< 1e-7",
+        "passed": true
+      },
+      "oracle_n64": {
+        "actual": 0.0005192376626020179,
+        "criterion": "< .005",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "n": 64,
+        "dt": 0.02413793103448276,
+        "steps": 29,
+        "rms_error": 0.0005192376626020179,
+        "mean_drift_max": 3.3176586478056436e-17,
+        "invariant_relative_drift_max": 2.5453486264843285e-10,
+        "invariant_increase_max": 0.0
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "contrato de calibración 1D; no prueba de una teoría general",
+    "invariantes no sustituyen precisión",
+    "SURVIVED no significa equivalencia"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "9200748809d02cf78b8ba897ff987fd2dd60f46fbcc9c3e5ec08e8b09c99ae59",
+    "fields.npz": "299c5d43bbc83c497d323c6894921d83bc28d96d56ef41a9e1481fa216e76811",
+    "metrics.csv": "dcba9465fb2921f1574665c14af4c2749ce7c4a61458c39fed07577025c6530b",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "954a491f016f01ac5fe09ce6ac843e2de7d0f33e7fb09db0483fab7093e17e10"
+  }
+}

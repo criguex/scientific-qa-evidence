@@ -1,0 +1,72 @@
+{
+  "kind": "derived_summary_from_preserved_raw_evidence_not_independent_kernel",
+  "derived_utc": "2026-10-20T18:39:54.925592+00:00",
+  "finished_utc": "2026-10-20T17:02:18Z",
+  "commit_sha": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+  "commit_status": "OK",
+  "raw_duplicate_keys": [
+    "commit"
+  ],
+  "raw_commit_values_preserved": [
+    "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+    "OK"
+  ],
+  "raw_summary_unchanged": true,
+  "build": "OK",
+  "build_seconds": 2342,
+  "build_used_mathlib_cache": true,
+  "theorem_axioms": {
+    "NavierStokes.Comparator.navier_stokes_breakdown_R3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "NavierStokes.Comparator.navier_stokes_breakdown_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Euler.euler_breakdown_R3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Euler.exists_compact_smooth_euler_singularity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "criteria": {
+    "NS-06": "CLOSED_BUILD_OK",
+    "NS-07": "CLOSED_TWO_NS_STANDARD_AXIOMS_NO_SORRY",
+    "EU-05": "CLOSED_EULER_SOLUTION_AND_TWO_THEOREMS_STANDARD_AXIOMS_NO_SORRY",
+    "NS-09": "LIMITED_DETECTED_CONSTRUCTOR_SHAPE_AND_UNPROVIDED_ZERO_FORCE_FIELD",
+    "NS-08": "OPEN_COMPARATORS_SKIPPED_NO_SECOND_KERNEL",
+    "EU-06": "NOT_EXECUTED"
+  },
+  "mutation_interpretation": {
+    "raw_status": "KILLED",
+    "observed": "constructor changes from two fields to three; existing proof lacks new zero-force field and leaves toComparator f = 0",
+    "not_proven": [
+      "force_is_essential",
+      "proof_cannot_be_repaired",
+      "unforced_theorem_is_false"
+    ]
+  },
+  "preflight_hash_count": 8,
+  "preflight_has_euler_files": false,
+  "limitations": [
+    "Euler hashes recorded without prefixed external expected values",
+    "Euler statement provenance limitation not resolved",
+    "compiled formal theorem is not a conclusion from the fluid animation"
+  ],
+  "source_sha256": {
+    "resultados_5070/summary.json": "02ff15d601d0c5e54a1b4d10c357c91376c757daa73e9f2084899f5218f48d0d",
+    "resultados_5070/run.log": "82f1d3b542084c96fcc58b228fbe001b18bc14f05e6a6d097b06f750559c51d8",
+    "resultados_5070/axioms.txt": "9541bf7330a65b29d0ddf8a4e03ddb887741fd78d7bfe008de790e524e7bc847",
+    "resultados_5070/mutant_force_zero.log": "62311f14fbf93efa57eef8405cdc0d3c7ec43d3dc87176decd8dfa9cce9b6c43",
+    "audit_static.json": "2cf2a09b8bfbe85a2d30c06b61ccfe9038f48eb4b2fdb35188e9a4e27b542fa5",
+    "build_on_5070.sh": "906beffeec5c9265ecdb658c5106e785d2ffaae56bc43846f5962520dd079473"
+  }
+}

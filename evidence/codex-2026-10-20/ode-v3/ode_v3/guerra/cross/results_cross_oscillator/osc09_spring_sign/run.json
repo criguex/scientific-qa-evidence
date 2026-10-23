@@ -1,0 +1,121 @@
+{
+  "schema_version": 3,
+  "case": "oscillator",
+  "scenario": "osc09",
+  "mutant": "spring_sign",
+  "status": "EQUIVALENT",
+  "reason": "omega=0: el término de resorte es cero para todos los estados",
+  "operator_change": "cambiar -omega^2*x por +omega^2*x en la aceleración",
+  "started_utc": "2026-10-20T18:12:21.813712+00:00",
+  "finished_utc": "2026-10-20T18:12:22.799218+00:00",
+  "monotonic_start_ns": 71488340680300,
+  "monotonic_finish_ns": 71489326396700,
+  "wall_seconds": 0.9857164,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "omega": 0.0,
+    "zeta": 0.0,
+    "x0": 0.4,
+    "v0": 0.3,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "oscillator",
+    "--scenario",
+    "osc09",
+    "--mutant",
+    "spring_sign",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results_cross_oscillator\\osc09_spring_sign"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "a37f7e194b62f6622b3e2e1fe109c066d23839c2dbe991f85c232d7a00f06f1d",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "energy_relative_drift_h0.0125": {
+        "actual": 0.0,
+        "criterion": "<= 1e-6",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 6.594388326471855e-15,
+        "criterion": "< 1e-6",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 6.594388326471855e-15
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": false,
+    "equivalence_reason": "omega=0: el término de resorte es cero para todos los estados",
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "eb4d6b959bec3ad512a5bcace96d292f116f5dbc62347723e1ba2ead803182af",
+    "fields.npz": "db78b04f16181d93cf03b5198b422ae7a9d4d14f8a89faa42b8402bdce0402f7",
+    "metrics.csv": "00e6b9959ff84ef0b79bc35ea80f118dc052284b900ce388ad411556a8d34acb",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "80988f6934adacee59f31bb8578288a8223503ef58b47de7cbc0851086c0ff83"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "label": "lean_mutant",
+  "command": [
+    "<LAKE>",
+    "env",
+    "<LEAN>",
+    "--run",
+    "<HARNESS>",
+    "<MUTANT>"
+  ],
+  "started_utc": "2026-10-20T21:02:39Z",
+  "finished_utc": "2026-10-20T21:02:41Z",
+  "duration_seconds": 1.66147,
+  "returncode": 2,
+  "launch_error": null,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "4adf687d5a6c5de598d551a82748b57d3f316dfec495d2ae5ee83ea8a46e7b10",
+  "command_sha256": "3fbfa5aa880c04f26149440b4a6fa2c4013714bb3a81995a2ab103724c2b4a16",
+  "kernel": "Lean",
+  "case": "mutant",
+  "export_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1",
+  "classification": "KERNEL_TYPE_MISMATCH_REJECT"
+}

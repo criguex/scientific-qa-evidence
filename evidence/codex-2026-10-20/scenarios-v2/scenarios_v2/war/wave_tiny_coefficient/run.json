@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "case": "wave",
+  "mutant": "tiny_coefficient",
+  "status": "KILLED",
+  "reason": "el mutante ejecutado viola el contrato numérico",
+  "operator_change": "multiplicar por 1.000001 el coeficiente del RHS; en onda solo c^2",
+  "started_utc": "2026-10-20T17:45:34.384342+00:00",
+  "finished_utc": "2026-10-20T17:45:34.841369+00:00",
+  "monotonic_start_ns": 65851680979500,
+  "monotonic_finish_ns": 65852137888600,
+  "wall_seconds": 0.4569091,
+  "source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12
+  },
+  "parameters": {
+    "coefficient": 0.8,
+    "equation": "u_t = v; v_t = c^2 u_xx",
+    "T": 0.7,
+    "domain": "periodic [0,2*pi)",
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\nse-audit-20261020\\skill-cc925999\\scripts\\run_scenario.py",
+    "--worker",
+    "--case",
+    "wave",
+    "--mutant",
+    "tiny_coefficient",
+    "--output",
+    "<WIN_HOME>\\nse-audit-20261020\\results-cc925999\\wave_tiny_coefficient"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 180,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "494032e16ca1dc30f897c540ab1faf747a2f3f1b7621933436617ad21fbcbe56",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": false,
+    "checks": {
+      "mean_n64": {
+        "actual": 5.2150124496552763e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n64": {
+        "actual": 3.1912431531931146e-07,
+        "criterion": "< 1e-7",
+        "passed": false
+      },
+      "oracle_n64": {
+        "actual": 0.0005190223343615253,
+        "criterion": "< .005",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "n": 64,
+        "dt": 0.02413793103448276,
+        "steps": 29,
+        "rms_error": 0.0005190223343615253,
+        "mean_drift_max": 5.2150124496552763e-17,
+        "invariant_relative_drift_max": 3.1912431531931146e-07,
+        "invariant_increase_max": 3.629979761221591e-09
+      }
+    ],
+    "versions": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "environment": {
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "contrato de calibración 1D; no prueba de una teoría general",
+    "invariantes no sustituyen precisión",
+    "SURVIVED no significa equivalencia"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "5f53bc300e05df73a5735c27cfaf8419fac2cbde74fae740997ea6b7476af8b4",
+    "fields.npz": "42b8a32ec5f2777c00bf0b63d4a36498895e7973621c3c4d77f3634d21dce393",
+    "metrics.csv": "d944b891770b3c7c34fda9413ce1873e1237ad6b0a97cd256d5ecd5358e32711",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "7956f1c11d7b2bef57f5110999e60ae634fe8be1e9cec507363f7d5f5c8e0ba5"
+  }
+}

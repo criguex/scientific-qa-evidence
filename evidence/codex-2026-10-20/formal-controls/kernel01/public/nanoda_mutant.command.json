@@ -1,0 +1,20 @@
+{
+  "label": "nanoda_mutant",
+  "command": [
+    "<NANODA>",
+    "<OUTPUT>/raw/nanoda_mutant.config.json"
+  ],
+  "started_utc": "2026-10-20T21:02:41Z",
+  "finished_utc": "2026-10-20T21:02:41Z",
+  "duration_seconds": 0.008172,
+  "returncode": 101,
+  "launch_error": null,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "d82ea641389d3b3e78b5819da1252e0177513507199b8564018bb403a9e756d0",
+  "command_sha256": "5bda978428f530d607658bcaee3ba0e5448505b738dd3b2bec3e7f45b7324502",
+  "kernel": "nanoda",
+  "case": "mutant",
+  "export_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1",
+  "config_sha256": "35e71d517f969236d8547bd226a2813cbcbfe4aab7c9aa440d34cd1670819075",
+  "classification": "NONZERO_UNCLASSIFIED"
+}

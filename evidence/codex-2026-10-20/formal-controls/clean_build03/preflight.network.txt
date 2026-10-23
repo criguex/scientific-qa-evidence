@@ -1,0 +1,6 @@
+CapEff=0
+NoNewPrivs=1
+Seccomp=2
+AF_INET=EPERM
+AF_UNIX=EPERM
+inherited_socket_fds=0

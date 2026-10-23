@@ -1,0 +1,47 @@
+UTC start: 2026-10-20T18:46:17Z
+Landrun binary SHA256: e3d26ebf2f7c786f8d34b7051ad2c655329aeadbb863404e3dd05d3a97b0518a  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+Landrun version: landrun version 0.1.18
+Landlock ABI: -1
+Landrun modes use --best-effort because host ABI is 7; only filesystem and TCP rules are exercised.
+Positive filesystem control, unit property RestrictAddressFamilies=~AF_UNIX:
+Running as unit: ns08-landrun-read-a5ygak.service; invocation ID: 0477dfcaf80f403ca4408acbca0bf367
+War
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 6ms
+CPU time consumed: 7ms
+Memory peak: 256.0K
+Memory swap peak: 0B
+Positive filesystem exit: 0
+Negative filesystem command: landrun --best-effort --ldd --add-exec --rw <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun-control-allowed /usr/bin/touch <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun-control-denied/should-not-exist
+Running as unit: ns08-landrun-write-a5ygak.service; invocation ID: bc8a4f839adb498381e713a9373e1ded
+/usr/bin/touch: cannot touch '<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun-control-denied/should-not-exist': Permission denied
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 5ms
+CPU time consumed: 7ms
+Memory peak: 256.0K
+Memory swap peak: 0B
+Negative filesystem exit: 1; outside file exists: no
+TCP test port: 52963
+Network probe SHA256: d2d88793fb600921bae6dccc153389ada9850209a8f5af705d1a8792f7f10a5f  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun-network-probe
+Positive TCP control with `--bind-tcp 52963` under AF_UNIX restriction:
+Running as unit: ns08-landrun-tcp-allow-a5ygak.service; invocation ID: 406b45efb99d449aa289947925b8da6a
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 4ms
+CPU time consumed: 5ms
+Memory peak: 256.0K
+Memory swap peak: 0B
+Positive TCP exit: 0
+Negative TCP control without `--bind-tcp` under AF_UNIX restriction:
+Running as unit: ns08-landrun-tcp-deny-a5ygak.service; invocation ID: 1741cb81a2c84c9cb33d09cbf71531f2
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=42
+Service runtime: 5ms
+CPU time consumed: 7ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+Negative TCP exit: 42
+Control summary: read_rc=0 write_rc=1 tcp_allow_rc=0 tcp_deny_rc=42
+UTC end: 2026-10-20T18:46:17Z

@@ -1,0 +1,122 @@
+{
+  "scope": "Temporal sensitivity at fixed n32,T4 on GUERRA only; two steps cannot establish observed temporal order; no spatial convergence",
+  "dt": [
+    0.01,
+    0.005
+  ],
+  "source_sha256": "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50",
+  "same_source": true,
+  "same_times": true,
+  "same_initial_velocity": true,
+  "all_numerical_checks_passed": [
+    true,
+    true
+  ],
+  "wall_seconds_simulation": [
+    100.23475880001206,
+    203.56053119999706
+  ],
+  "divergence_max": [
+    1.7014902155302333e-16,
+    1.564413160697221e-16
+  ],
+  "euler_energy_drift_max": [
+    1.558275730673131e-11,
+    9.298117831235686e-13
+  ],
+  "model_comparison": {
+    "Euler": {
+      "final_velocity_max_abs_difference": 2.8043043442949056e-09,
+      "final_velocity_rms_difference": 3.322279352074892e-10,
+      "final_velocity_relative_l2_difference": 1.1508713269466777e-09,
+      "omega_max_endpoints": [
+        7.1667570384816335,
+        7.166757039760105
+      ],
+      "energy_endpoints": [
+        0.12499999999805216,
+        0.12499999999988377
+      ],
+      "enstrophy_endpoints": [
+        1.5700736466820184,
+        1.5700736474091501
+      ]
+    },
+    "NavierStokes": {
+      "final_velocity_max_abs_difference": 4.468383996147907e-12,
+      "final_velocity_rms_difference": 1.224109510742713e-12,
+      "final_velocity_relative_l2_difference": 7.599401024612825e-12,
+      "omega_max_endpoints": [
+        0.956057966198048,
+        0.9560579661887605
+      ],
+      "energy_endpoints": [
+        0.03892002202084956,
+        0.038920022020926016
+      ],
+      "enstrophy_endpoints": [
+        0.16457561163715306,
+        0.1645756116365963
+      ]
+    }
+  },
+  "remote_manifest_verification": [
+    {
+      "file": "fluid_solver.py",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4.stderr.log",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4.stdout.log",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4.stderr.log",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4.stdout.log",
+      "matches": true
+    },
+    {
+      "file": "run-control.json",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4\\fields.npz",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4\\metrics.csv",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4\\numerical_controls.json",
+      "matches": true
+    },
+    {
+      "file": "n32-dt0005-T4\\simulation_summary.json",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4\\fields.npz",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4\\metrics.csv",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4\\numerical_controls.json",
+      "matches": true
+    },
+    {
+      "file": "n32-dt001-T4\\simulation_summary.json",
+      "matches": true
+    }
+  ],
+  "all_remote_hashes_match": true
+}

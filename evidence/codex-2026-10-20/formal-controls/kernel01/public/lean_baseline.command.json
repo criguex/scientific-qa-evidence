@@ -1,0 +1,23 @@
+{
+  "label": "lean_baseline",
+  "command": [
+    "<LAKE>",
+    "env",
+    "<LEAN>",
+    "--run",
+    "<HARNESS>",
+    "<BASELINE>"
+  ],
+  "started_utc": "2026-10-20T21:02:37Z",
+  "finished_utc": "2026-10-20T21:02:39Z",
+  "duration_seconds": 2.164859,
+  "returncode": 0,
+  "launch_error": null,
+  "stdout_sha256": "e6bac3da9d88d78e45e90cc8fccc22263a4a1142567104aa71f3300059cb387b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "command_sha256": "b22ec8e64f8173c76d7dedcf7e2bbdb60607f7866723b5991b2d802399dd7512",
+  "kernel": "Lean",
+  "case": "baseline",
+  "export_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+  "classification": "ACCEPT"
+}

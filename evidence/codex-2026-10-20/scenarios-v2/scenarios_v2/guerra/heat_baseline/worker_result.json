@@ -1,0 +1,110 @@
+{
+  "completed": true,
+  "all_contracts_passed": true,
+  "checks": {
+    "mean_n32": {
+      "actual": 0.0,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "variance_monotone_n32": {
+      "actual": 0.0,
+      "criterion": "<= 1e-12",
+      "passed": true
+    },
+    "mean_n64": {
+      "actual": 0.0,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "variance_monotone_n64": {
+      "actual": 0.0,
+      "criterion": "<= 1e-12",
+      "passed": true
+    },
+    "mean_n128": {
+      "actual": 2.220446049250313e-16,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "variance_monotone_n128": {
+      "actual": 0.0,
+      "criterion": "<= 1e-12",
+      "passed": true
+    },
+    "oracle_n128": {
+      "actual": 2.93252655114345e-05,
+      "criterion": "< 1e-3",
+      "passed": true
+    },
+    "spatial_order_32_64": {
+      "actual": 1.9970291474990551,
+      "criterion": "1.7 <= p <= 2.3",
+      "passed": true
+    },
+    "spatial_order_64_128": {
+      "actual": 1.9992595564582099,
+      "criterion": "1.7 <= p <= 2.3",
+      "passed": true
+    },
+    "temporal_consistency": {
+      "actual": 9.164320203282143e-13,
+      "criterion": "< 1e-6 and < .02 * E64",
+      "passed": true
+    }
+  },
+  "runs": [
+    {
+      "n": 32,
+      "dt": 0.05833333333333333,
+      "steps": 12,
+      "rms_error": 0.0004679987834499973,
+      "mean_drift_max": 0.0,
+      "invariant_relative_drift_max": 0.21373228726504892,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 64,
+      "dt": 0.014583333333333332,
+      "steps": 48,
+      "rms_error": 0.00011724087432299375,
+      "mean_drift_max": 0.0,
+      "invariant_relative_drift_max": 0.2145140937151708,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 128,
+      "dt": 0.0037037037037037034,
+      "steps": 189,
+      "rms_error": 2.93252655114345e-05,
+      "mean_drift_max": 2.220446049250313e-16,
+      "invariant_relative_drift_max": 0.21470967200179603,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 64,
+      "dt": 0.007291666666666666,
+      "steps": 96,
+      "rms_error": 0.00011724087342469464,
+      "mean_drift_max": 1.1102230246251565e-16,
+      "invariant_relative_drift_max": 0.21451409371642793,
+      "invariant_increase_max": 0.0
+    }
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "all_values_finite": true,
+  "environment": {
+    "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+    "python_implementation": "CPython",
+    "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "numpy_version": "2.2.6",
+    "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+    "machine_architecture": "AMD64",
+    "byteorder": "little",
+    "dtype": "float64"
+  }
+}

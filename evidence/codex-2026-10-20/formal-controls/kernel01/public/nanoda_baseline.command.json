@@ -1,0 +1,20 @@
+{
+  "label": "nanoda_baseline",
+  "command": [
+    "<NANODA>",
+    "<OUTPUT>/raw/nanoda_baseline.config.json"
+  ],
+  "started_utc": "2026-10-20T21:02:39Z",
+  "finished_utc": "2026-10-20T21:02:39Z",
+  "duration_seconds": 0.004437,
+  "returncode": 0,
+  "launch_error": null,
+  "stdout_sha256": "8c47c86e002dd56420ac0f9b98c749be2bc26a4b0ff7dbf9383369e7a9740c2b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "command_sha256": "5b29478fa632c95ff3367ce146be70c206de0f11cf00ced789ed7c4a707ff29b",
+  "kernel": "nanoda",
+  "case": "baseline",
+  "export_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+  "config_sha256": "8264cd46fc9b216b4e5c2c6d22f15c79f7808139295c0ccbdc3b6d5cc8e63641",
+  "classification": "SUCCESS_MARKER_MISSING"
+}

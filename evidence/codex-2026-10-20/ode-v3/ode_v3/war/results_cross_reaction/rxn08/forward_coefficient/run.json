@@ -1,0 +1,131 @@
+{
+  "schema_version": 3,
+  "case": "reaction",
+  "scenario": "rxn08",
+  "mutant": "forward_coefficient",
+  "status": "KILLED",
+  "reason": "el mutante ejecutado viola el contrato numérico",
+  "operator_change": "multiplicar kf por 1.25 en ambas ecuaciones",
+  "started_utc": "2026-10-20T18:10:36.045731+00:00",
+  "finished_utc": "2026-10-20T18:10:36.508016+00:00",
+  "monotonic_start_ns": 67353350057500,
+  "monotonic_finish_ns": 67353812134800,
+  "wall_seconds": 0.4620773,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12
+  },
+  "parameters": {
+    "kf": 0.3,
+    "kr": 0.7,
+    "A0": 0.7,
+    "B0": 0.3,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "A'=-kf*A+kr*B; B'=kf*A-kr*B",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "reaction",
+    "--scenario",
+    "rxn08",
+    "--mutant",
+    "forward_coefficient",
+    "--output",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\forward_coefficient"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "aaf0c708efeda46078b90ba16e6091058aff54540912a3f3eb40c60f26bbefd0",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": false,
+    "checks": {
+      "mass_drift_h0.0125": {
+        "actual": 4.440892098500626e-16,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "nonnegative_h0.0125": {
+        "actual": 0.3,
+        "criterion": ">= -1e-12",
+        "passed": true
+      },
+      "bounded_h0.0125": {
+        "actual": 0.7,
+        "criterion": "<= initial_total + 1e-12",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 0.04817455874513282,
+        "criterion": "< 1e-6",
+        "passed": false
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 0.04817455874513282
+      }
+    ],
+    "versions": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": true,
+    "equivalence_reason": null,
+    "environment": {
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "50cf27cad499ccc3953f20730167856b15f6cb098cd9a69abbe5bed523b5a4e5",
+    "fields.npz": "0c182310f7271943dd43f451883ec8ef63f3c9395c8622cefe7b189cb7c53646",
+    "metrics.csv": "c87f77501251aa62e08886033fc978ce2378262335420c55bc63123e6590caaa",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "5a486c456502bf5828b56f7c4f96ce575fd84f386bfaa3f71b5ea9799a8b4729"
+  }
+}

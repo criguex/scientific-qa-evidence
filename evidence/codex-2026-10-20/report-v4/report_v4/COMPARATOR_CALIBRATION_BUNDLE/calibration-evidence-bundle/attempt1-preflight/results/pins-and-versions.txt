@@ -1,0 +1,6 @@
+formal_commit=f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+comparator_commit=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+lean4export_commit=cacf989bd75f608700820f6afc595f32e7a99a4d
+nanoda_commit=9d6964f78d0fa4c93fd22fe956e17afe7e72a441
+landrun_commit=ec104f6edc1e14d7fec6d31146f1ec6f9c192c5a
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.

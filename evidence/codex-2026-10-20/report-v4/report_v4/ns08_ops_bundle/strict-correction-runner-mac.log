@@ -1,0 +1,51 @@
+UTC runner start: 2026-10-20T18:58:40Z
+Runner inherited sockets:
+[]
+runner_socket_inspection_exit=0
+Exact transient command properties:
+--property=RestrictAddressFamilies=\~AF_UNIX --property=SystemCallArchitectures=native --property=SystemCallFilter=\~@network-io\ io_uring_setup\ io_uring_enter\ io_uring_register --property=NoNewPrivileges=yes --property=SystemCallErrorNumber=EPERM --property=MemoryMax=28991029248 --property=CPUQuota=800% --property=RuntimeMaxSec=8h 
+Running as unit: ns08-strict-correction-20261020-a5ygak.service; invocation ID: b91801e5bc9043058d1190398d6655b9
+UTC start: 2026-10-20T18:58:40Z
+landrun version: landrun version 0.1.18
+lean version: Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+outer process socket descriptors:
+[]
+outer_socket_inspection_exit=0
+CapEff=0000000000000000
+inherited_socket_fds=[]
+tcp_socket=DENIED errno=1 Operation not permitted
+udp_socket=DENIED errno=1 Operation not permitted
+unix_socket=DENIED errno=1 Operation not permitted
+socketpair=DENIED errno=1 Operation not permitted
+io_uring_setup_rc=-1 errno=1
+io_uring_enter_rc=-1 errno=1
+io_uring_register_rc=-1 errno=1
+socket_syscall_controls_exit=0
+Landrun best-effort allowed read:
+landrun-read-control-a5ygak
+landrun_allowed_read_exit=0
+Landrun best-effort allowed write:
+landrun_allowed_write_exit=0
+Landrun best-effort denied outside write:
+/usr/bin/touch: cannot touch '<WSL_HOME>/ns08_validation_20261020_a5YGak/ops/strict-correction-185840/deny/outside.txt': Permission denied
+landrun_outside_write_exit=1
+Lean trivial run under the same unit:
+lean_probe_exit=0
+CapEff recheck:
+CapEff=0000000000000000
+capeff_exit=0
+Binary hashes:
+e3d26ebf2f7c786f8d34b7051ad2c655329aeadbb863404e3dd05d3a97b0518a  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550  <WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean
+CONTROL_SUMMARY=PASS
+UTC end: 2026-10-20T18:58:42Z
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 1.500s
+CPU time consumed: 752ms
+Memory peak: 768.0K
+Memory swap peak: 0B
+systemd_run_exit=0
+Unit journal:
+2026-10-20T13:58:40.713682-05:00 War systemd[325]: Started ns08-strict-correction-20261020-a5ygak.service - /usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/strict-correction-controls-20261020.sh.
+UTC runner end: 2026-10-20T18:58:42Z

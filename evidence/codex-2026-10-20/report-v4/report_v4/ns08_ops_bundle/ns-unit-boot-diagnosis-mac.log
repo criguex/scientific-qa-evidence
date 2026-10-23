@@ -1,0 +1,143 @@
+UTC now: 2026-10-20T19:03:42Z
+boot_id=4335f650-ac13-4a3c-beec-17c3d064fb59
+uptime=652.49 7678.40
+2026-10-20 13:52:50
+         system boot  2026-10-20 14:03
+boots:
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
+ -6 ca28eec1826446dc8528cae4abf22b92 Tue 2026-10-20 11:13:03 -05 Tue 2026-10-20 11:13:22 -05
+ -5 eba1e01a36d045b3a5bdb960e8c1f902 Tue 2026-10-20 11:14:53 -05 Tue 2026-10-20 12:03:27 -05
+ -4 e74bc0e3f10141c3ae844a93db057046 Tue 2026-10-20 12:38:04 -05 Tue 2026-10-20 12:39:19 -05
+ -3 8e954a6401004764b26d1f3d78670106 Tue 2026-10-20 13:31:49 -05 Tue 2026-10-20 13:32:05 -05
+ -2 35b32bdbd45e48cfb4f00a42f0612e7f Tue 2026-10-20 13:33:26 -05 Tue 2026-10-20 13:33:42 -05
+ -1 77aecf45166f49dab484538bd5a0d0ea Tue 2026-10-20 13:36:11 -05 Tue 2026-10-20 13:48:44 -05
+  0 4335f650ac134a3cbeec17c3d064fb59 Tue 2026-10-20 13:52:52 -05 Tue 2026-10-20 14:03:42 -05
+last boot journal around unit:
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+2026-10-20T14:03:03.189102-05:00 War systemd[331]: Removed slice app.slice - User Application Slice.
+2026-10-20T14:03:03.189167-05:00 War systemd[331]: Reached target shutdown.target - Shutdown.
+2026-10-20T14:03:03.189298-05:00 War systemd[331]: Finished systemd-exit.service - Exit the Session.
+2026-10-20T14:03:03.189321-05:00 War systemd[331]: Reached target exit.target - Exit the Session.
+2026-10-20T14:03:03.210429-05:00 War (sd-pam)[332]: pam_unix(systemd-user:session): session closed for user nse
+2026-10-20T14:03:16.246178-05:00 War systemd[308]: Queued start job for default target default.target.
+2026-10-20T14:03:16.262058-05:00 War systemd[308]: Created slice app.slice - User Application Slice.
+2026-10-20T14:03:16.262101-05:00 War systemd[308]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.
+2026-10-20T14:03:16.262111-05:00 War systemd[308]: Reached target paths.target - Paths.
+2026-10-20T14:03:16.262120-05:00 War systemd[308]: Reached target timers.target - Timers.
+2026-10-20T14:03:16.262803-05:00 War systemd[308]: Starting dbus.socket - D-Bus User Message Bus Socket...
+2026-10-20T14:03:16.262932-05:00 War systemd[308]: Listening on dirmngr.socket - GnuPG network certificate management daemon.
+2026-10-20T14:03:16.262987-05:00 War systemd[308]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+2026-10-20T14:03:16.263032-05:00 War systemd[308]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).
+2026-10-20T14:03:16.263615-05:00 War systemd[308]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...
+2026-10-20T14:03:16.263713-05:00 War systemd[308]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+2026-10-20T14:03:16.263963-05:00 War systemd[308]: Listening on keyboxd.socket - GnuPG public key management service.
+2026-10-20T14:03:16.264065-05:00 War systemd[308]: Listening on pk-debconf-helper.socket - debconf communication socket.
+2026-10-20T14:03:16.264157-05:00 War systemd[308]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.
+2026-10-20T14:03:16.264825-05:00 War systemd[308]: Starting wslg-session.service - WSLg user service...
+2026-10-20T14:03:16.270777-05:00 War systemd[308]: Listening on dbus.socket - D-Bus User Message Bus Socket.
+2026-10-20T14:03:16.276637-05:00 War systemd[308]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+2026-10-20T14:03:16.276702-05:00 War systemd[308]: Reached target sockets.target - Sockets.
+2026-10-20T14:03:16.276710-05:00 War systemd[308]: Reached target basic.target - Basic System.
+2026-10-20T14:03:16.276733-05:00 War systemd[308]: Reached target default.target - Main User Target.
+2026-10-20T14:03:16.287099-05:00 War systemd[308]: Finished wslg-session.service - WSLg user service.
+2026-10-20T14:03:16.287154-05:00 War systemd[308]: Startup finished in 93ms.
+2026-10-20T14:03:31.454660-05:00 War systemd[308]: Activating special unit exit.target...
+2026-10-20T14:03:31.454713-05:00 War systemd[308]: Stopped target default.target - Main User Target.
+2026-10-20T14:03:31.454722-05:00 War systemd[308]: Stopped target basic.target - Basic System.
+2026-10-20T14:03:31.454728-05:00 War systemd[308]: Stopped target paths.target - Paths.
+2026-10-20T14:03:31.454733-05:00 War systemd[308]: Stopped target sockets.target - Sockets.
+2026-10-20T14:03:31.454738-05:00 War systemd[308]: Stopped target timers.target - Timers.
+2026-10-20T14:03:31.454744-05:00 War systemd[308]: Stopped launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.
+2026-10-20T14:03:31.454972-05:00 War systemd[308]: Closed dbus.socket - D-Bus User Message Bus Socket.
+2026-10-20T14:03:31.455035-05:00 War systemd[308]: Closed dirmngr.socket - GnuPG network certificate management daemon.
+2026-10-20T14:03:31.455090-05:00 War systemd[308]: Closed gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+2026-10-20T14:03:31.455144-05:00 War systemd[308]: Closed gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).
+2026-10-20T14:03:31.477276-05:00 War systemd[308]: Stopping gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...
+2026-10-20T14:03:31.477857-05:00 War systemd[308]: Closed gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+2026-10-20T14:03:31.477974-05:00 War systemd[308]: Closed keyboxd.socket - GnuPG public key management service.
+2026-10-20T14:03:31.478069-05:00 War systemd[308]: Closed pk-debconf-helper.socket - debconf communication socket.
+2026-10-20T14:03:31.478192-05:00 War systemd[308]: Closed snapd.session-agent.socket - REST API socket for snapd user session agent.
+2026-10-20T14:03:31.486504-05:00 War systemd[308]: Closed gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+2026-10-20T14:03:31.487084-05:00 War systemd[308]: Removed slice app.slice - User Application Slice.
+2026-10-20T14:03:31.487118-05:00 War systemd[308]: Reached target shutdown.target - Shutdown.
+2026-10-20T14:03:31.487214-05:00 War systemd[308]: Finished systemd-exit.service - Exit the Session.
+2026-10-20T14:03:31.487257-05:00 War systemd[308]: Reached target exit.target - Exit the Session.
+2026-10-20T14:03:42.645658-05:00 War systemd[323]: Queued start job for default target default.target.
+2026-10-20T14:03:42.674053-05:00 War systemd[323]: Created slice app.slice - User Application Slice.
+2026-10-20T14:03:42.674094-05:00 War systemd[323]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.
+2026-10-20T14:03:42.674105-05:00 War systemd[323]: Reached target paths.target - Paths.
+2026-10-20T14:03:42.674114-05:00 War systemd[323]: Reached target timers.target - Timers.
+2026-10-20T14:03:42.674852-05:00 War systemd[323]: Starting dbus.socket - D-Bus User Message Bus Socket...
+2026-10-20T14:03:42.674980-05:00 War systemd[323]: Listening on dirmngr.socket - GnuPG network certificate management daemon.
+2026-10-20T14:03:42.675083-05:00 War systemd[323]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+2026-10-20T14:03:42.675181-05:00 War systemd[323]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).
+2026-10-20T14:03:42.675772-05:00 War systemd[323]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...
+2026-10-20T14:03:42.675867-05:00 War systemd[323]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+2026-10-20T14:03:42.676239-05:00 War systemd[323]: Listening on keyboxd.socket - GnuPG public key management service.
+2026-10-20T14:03:42.676437-05:00 War systemd[323]: Listening on pk-debconf-helper.socket - debconf communication socket.
+2026-10-20T14:03:42.676620-05:00 War systemd[323]: Listening on snapd.session-agent.socket - REST API socket for snapd user session agent.
+2026-10-20T14:03:42.677387-05:00 War systemd[323]: Starting wslg-session.service - WSLg user service...
+2026-10-20T14:03:42.681931-05:00 War systemd[323]: Listening on dbus.socket - D-Bus User Message Bus Socket.
+2026-10-20T14:03:42.687812-05:00 War systemd[323]: Listening on gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+2026-10-20T14:03:42.687878-05:00 War systemd[323]: Reached target sockets.target - Sockets.
+2026-10-20T14:03:42.687886-05:00 War systemd[323]: Reached target basic.target - Basic System.
+2026-10-20T14:03:42.687912-05:00 War systemd[323]: Reached target default.target - Main User Target.
+2026-10-20T14:03:42.699545-05:00 War systemd[323]: Finished wslg-session.service - WSLg user service.
+2026-10-20T14:03:42.699600-05:00 War systemd[323]: Startup finished in 106ms.
+exact runner and command metadata:
+c459d39d14b34b55980e48f01f98e7d39595a980971fdd6731a8b6615e312f38  <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh
+set -u
+OPS=<WSL_HOME>/ns08_validation_20261020_a5YGak
+REPO=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler
+RUNDIR="$OPS/results/comparator-ns-20261020-1901"
+if test ! -d "$RUNDIR" || test ! -f "$RUNDIR/command.txt"; then
+  echo "run directory/command metadata missing: $RUNDIR"
+  exit 90
+fi
+date -u +%FT%TZ > "$RUNDIR/start_utc.txt"
+echo 'Runner socket descriptors:'
+python3 -c 'import os; p="/proc/"+str(os.getpid())+"/fd"; a=[]
+for n in os.listdir(p):
+ try:
+  t=os.readlink(p+"/"+n)
+  if t.startswith("socket:"): a.append((n,t))
+ except OSError: pass
+print(repr(a)); raise SystemExit(bool(a))'
+SOCKET_RC=$?
+echo "runner_socket_inspection_exit=$SOCKET_RC"
+CAP=$(awk '/^CapEff:/ {print $2}' /proc/self/status)
+echo "CapEff=$CAP"
+if test "$SOCKET_RC" != 0 || test "$CAP" != 0000000000000000; then
+  echo "pre-exec guard failed: socket_exit=$SOCKET_RC CapEff=$CAP" > "$RUNDIR/status.txt"
+  exit 91
+fi
+set +e
+/usr/bin/time -v -o "$RUNDIR/time.log" \
+  <WSL_HOME>/.elan/bin/lake env \
+  "$REPO/.lake/packages/Comparator/.lake/build/bin/comparator" \
+  ComparatorChallenges/NavierStokes.json \
+  > "$RUNDIR/stdout.log" 2> "$RUNDIR/stderr.log"
+RUN_RC=$?
+set -e
+date -u +%FT%TZ > "$RUNDIR/end_utc.txt"
+printf 'exit_code=%s\n' "$RUN_RC" > "$RUNDIR/status.txt"
+printf 'UTC start: '; cat "$RUNDIR/start_utc.txt"
+printf 'UTC end: '; cat "$RUNDIR/end_utc.txt"
+echo "comparator_exit=$RUN_RC"
+echo "stdout=$RUNDIR/stdout.log"
+echo "stderr=$RUNDIR/stderr.log"
+echo "time=$RUNDIR/time.log"
+exit "$RUN_RC"
+UTC run id: ns08-comparator-ns-20261020-1901
+WorkingDirectory=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler
+PATH=<WSL_HOME>/.elan/bin:/usr/bin:/bin
+COMPARATOR_LANDRUN=<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+COMPARATOR_LEAN4EXPORT=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export
+COMPARATOR_NANODA=<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin
+/usr/bin/time -v -o <WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/time.log <WSL_HOME>/.elan/bin/lake env <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator ComparatorChallenges/NavierStokes.json > <WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/stdout.log 2> <WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/stderr.log
+still-live related processes:

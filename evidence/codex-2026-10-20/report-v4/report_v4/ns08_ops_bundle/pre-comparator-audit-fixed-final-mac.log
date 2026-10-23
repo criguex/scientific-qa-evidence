@@ -1,0 +1,60 @@
+UTC audit: 2026-10-20T19:00:33Z
+repo=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler
+repository pins:
+9:   "name": "Comparator",
+24:  {"url": "https://github.com/leanprover/lean4export",
+29:   "name": "lean4export",
+pins_exact_and_worktrees_clean=PASS
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/NavierStokes.json: enable_nanoda=True permitted_axioms=['propext', 'Quot.sound', 'Classical.choice']
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/Euler.json: enable_nanoda=True permitted_axioms=['propext', 'Quot.sound', 'Classical.choice']
+7610ecead7b390d80ff7f4229a3ff8f18d630e046f7ad1de4f92c7e8e76845b8  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/NavierStokes.json
+56bc185a931f68d9a0f0265a3c00cb12771dccc85384eaf6546b37844b8adc84  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/Euler.json
+expected binary hashes:
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, with debug_info, not stripped
+514de8d2acbd6e0102575cd2c575e336b7c4a40daf3ae66abe97cef5e1e6b02a  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, with debug_info, not stripped
+4fa9e14cada304109e85da5048bcd411cf781a03539b3e50953e5c537074bd9e  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export
+<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.0.0, stripped
+ccda52587ef42760dff9bc2de26edca0cb6ad207c8719cfffcd1e7daab22ccfb  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin
+<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.0.0, Go BuildID=vEu1B74MxrllL0kmw0kn/Re4mgzm6z5hiJlZVqhiQ/Y3zDHuJ3MGmORadfK1kh/TpnC7OFQoZKynMZoyLoh, BuildID[sha1]=eb27a345fd30f7cd1e8e02894ed7fd632d327934, with debug_info, not stripped
+e3d26ebf2f7c786f8d34b7051ad2c655329aeadbb863404e3dd05d3a97b0518a  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+tool versions:
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+3:name = "nanoda_lib"
+4:version = "0.4.25"
+landrun version 0.1.18
+Comparator pinned source command construction:
+79-
+80-def buildLandrunArgs (spawnArgs : LandrunArgs) : Array String :=
+81:  let args := #["--best-effort", "--ro", "/", "--rw", "/dev", "-ldd", "-add-exec"]
+82-  let args := spawnArgs.envPass.foldl (init := args) (fun acc env => acc ++ #["--env", env])
+83-  let args := spawnArgs.readablePaths.foldl (init := args) (fun acc path => acc ++ #["--ro", path.toString])
+--
+315-  definition_names : Option (Array String) := none
+316-  permitted_axioms : Array String
+317:  enable_nanoda? : Option Bool
+318-  external_kernels? : Option (Std.TreeMap String (Array String))
+319-  deriving Lean.FromJson, Lean.ToJson, Repr
+--
+324-  let gitLocation ← queryGitLocation
+325-  let whichLean4Export := (← IO.getEnv "COMPARATOR_LEAN4EXPORT").getD "lean4export"
+326:  let whichLandrun := (← IO.getEnv "COMPARATOR_LANDRUN").getD "landrun"
+327-  let mut externalKernels := cfg.external_kernels?.getD {}
+328-  let defaultNanoda := "nanoda_bin"
+329:  let nanodaOverride? ← IO.getEnv "COMPARATOR_NANODA"
+330-
+331:  if cfg.enable_nanoda?.getD false && !externalKernels.isEmpty then
+332:    throw <| .userError "Cannot use enable_nanoda and an external kernel list at the same time, register nanoda in the list instead."
+333-
+334-  for (kernelName, kernelCommand) in externalKernels do
+--
+336-      throw <| .userError s!"{kernelName} has an empty command"
+337-
+338:  if cfg.enable_nanoda?.getD false then
+339-    let whichNanoda := nanodaOverride?.getD defaultNanoda
+340-    externalKernels := externalKernels.insert "nanoda" #[whichNanoda]
+capability/ABI:
+landlock_abi=7
+CapEff=0000000000000000
+UTC audit end: 2026-10-20T19:00:33Z

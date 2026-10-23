@@ -1,0 +1,5 @@
+systemd_run_exit=1
+systemd_result=exit-code
+exec_main_status=1
+comparator_exit=1
+gnu_time_exit_status=1

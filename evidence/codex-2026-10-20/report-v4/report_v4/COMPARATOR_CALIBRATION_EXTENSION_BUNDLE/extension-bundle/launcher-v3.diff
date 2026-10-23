@@ -1,0 +1,70 @@
+--- <TMP>/calibration-evidence-bundle/launchers/attempt3.sh	2026-10-20 14:58:28
++++ <TMP>/run-calibration-remote.sh	2026-10-20 15:01:31
+@@ -4,7 +4,7 @@
+ 
+ OPS=<WSL_HOME>/ns08_validation_20261020_a5YGak
+ REPO=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler
+-ROOT="$OPS/calibration_20261020T1957Z_ns08cal_3p8kza"
++ROOT="$OPS/calibration_20261020T2002Z_ns08extra_5r9k2m"
+ COMPARATOR="$REPO/.lake/packages/Comparator/.lake/build/bin/comparator"
+ LEAN4EXPORT="$REPO/.lake/packages/lean4export/.lake/build/bin/lean4export"
+ NANODA="$OPS/tools/nanoda/target/release/nanoda_bin"
+@@ -82,23 +82,23 @@
+ check_hash "$LAKE" 6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d
+ check_hash "$LEAN" e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550
+ 
+-check_hash "$ROOT/cases/positive/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
+-check_hash "$ROOT/cases/positive/lakefile.toml" 5a865f30cd848c96af7ae145335d1206b440cbf2bf72f3fbf9b1f1b4056ee724
+-check_hash "$ROOT/cases/positive/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
+-check_hash "$ROOT/cases/positive/Challenge.lean" 0d4a77ab995c3ebb09c58fb2a82db3eb48b5898907c65df29688694d07aba4d6
+-check_hash "$ROOT/cases/positive/Solution.lean" 0d4a77ab995c3ebb09c58fb2a82db3eb48b5898907c65df29688694d07aba4d6
++check_hash "$ROOT/cases/alpha/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
++check_hash "$ROOT/cases/alpha/lakefile.toml" 1777143b89750f339e0939ec2f0d5f5ccb62b2325bf665205b27f5625e86bbcb
++check_hash "$ROOT/cases/alpha/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
++check_hash "$ROOT/cases/alpha/Challenge.lean" 5fe9c19b704c80e11ca9e7eabfc87bb79bb4febd804daa9e12d8376dd1015378
++check_hash "$ROOT/cases/alpha/Solution.lean" c031af40a580ebd3a2175e7a33a3895848d14f42e5e6b15dbece62a6df8dc0c3
+ 
+-check_hash "$ROOT/cases/mismatch/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
+-check_hash "$ROOT/cases/mismatch/lakefile.toml" 485eacc8c74ecddd45d5259bedacde6883a85d5ccec556b4724ec8ad02fc0bf9
+-check_hash "$ROOT/cases/mismatch/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
+-check_hash "$ROOT/cases/mismatch/Challenge.lean" 0d4a77ab995c3ebb09c58fb2a82db3eb48b5898907c65df29688694d07aba4d6
+-check_hash "$ROOT/cases/mismatch/Solution.lean" 4420c80f4e3248c5e03ebf62e2add2d4d94b620726bcd2bf1e108e65707b98d4
++check_hash "$ROOT/cases/hidden_axiom/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
++check_hash "$ROOT/cases/hidden_axiom/lakefile.toml" 5f82a87d48b3c4ae88537e36e81c6e3295b3d8e993346ea4b2cde8555922780e
++check_hash "$ROOT/cases/hidden_axiom/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
++check_hash "$ROOT/cases/hidden_axiom/Challenge.lean" ad777397fec00027e82304d9b5261e1d75154822b50b4581b5c9e6e0c64f8cf7
++check_hash "$ROOT/cases/hidden_axiom/Solution.lean" 1f35b78a32fe876d8fb5bce06badbae98a2dd8a9f1047789f9e584598abddc6a
+ 
+-check_hash "$ROOT/cases/axiom/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
+-check_hash "$ROOT/cases/axiom/lakefile.toml" 183ef39ee7b79c5e17d9fcae9cdcea724eb0c2566c81e8d3998c0ba627e96396
+-check_hash "$ROOT/cases/axiom/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
+-check_hash "$ROOT/cases/axiom/Challenge.lean" ad777397fec00027e82304d9b5261e1d75154822b50b4581b5c9e6e0c64f8cf7
+-check_hash "$ROOT/cases/axiom/Solution.lean" d7fbcda73f36af87f525becd5bd8f814fa8ef3d0e1dfb62323f8260e7e30feec
++check_hash "$ROOT/cases/weakened_condition/lean-toolchain" 8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88
++check_hash "$ROOT/cases/weakened_condition/lakefile.toml" 6d8b383f393fc1793386e4c0a83a2d8ebd54391299f990c4a4eeaec816e1acaf
++check_hash "$ROOT/cases/weakened_condition/config.json" 4fff5bf4ebcb5666c718d6a774b392fd6a43cad0c8c5e1ca6c51ea850db082bc
++check_hash "$ROOT/cases/weakened_condition/Challenge.lean" 7575be4c4e052916e34aa9c07360efe8f488bf02c65a1df9850db6e9f3e88ed5
++check_hash "$ROOT/cases/weakened_condition/Solution.lean" c4ad1a3264af21a197987e02c16b0b34fc2805314ef365f8e2b1d2156f947593
+ 
+ mkdir -m 700 "$ROOT/results"
+ finalize_results() {
+@@ -218,7 +218,7 @@
+ 
+ run_case() {
+   local case_name=$1 expected=$2 case_dir="$ROOT/cases/$1" result_dir="$ROOT/results/$1"
+-  local unit="ns08-cal-${case_name}-20261020t1957z-3p8kza"
++  local unit="ns08-extra-${case_name}-20261020t2002z-5r9k2m"
+   local stdout="$result_dir/comparator.stdout.log" stderr="$result_dir/comparator.stderr.log"
+   local time_log="$result_dir/time.log" unit_out="$result_dir/unit.stdout.log" unit_err="$result_dir/unit.stderr.log"
+   local service_rc show_rc result exec_status comparator_exit time_exit journal_rc active_state profile_rc=1
+@@ -381,7 +381,7 @@
+   return "$case_rc"
+ }
+ 
+-run_case positive positive
+-run_case mismatch mismatch
+-run_case axiom axiom
++run_case alpha positive
++run_case hidden_axiom axiom
++run_case weakened_condition mismatch
+ printf 'CALIBRATION_COMPLETE: review all three classifications and logs; not mathematical certification.\n'

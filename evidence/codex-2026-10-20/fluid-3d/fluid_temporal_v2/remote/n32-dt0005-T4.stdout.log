@@ -1,0 +1,64 @@
+{"self_tests_passed": true}
+simulation step=0/800 t=0.00
+simulation step=80/800 t=0.40
+simulation step=160/800 t=0.80
+simulation step=240/800 t=1.20
+simulation step=320/800 t=1.60
+simulation step=400/800 t=2.00
+simulation step=480/800 t=2.40
+simulation step=560/800 t=2.80
+simulation step=640/800 t=3.20
+simulation step=720/800 t=3.60
+simulation step=800/800 t=4.00
+{
+  "all_numerical_checks_passed": true,
+  "diagnostics": {
+    "divergence_linf_max": 1.564413160697221e-16,
+    "euler_energy_relative_drift_max": 9.298117831235686e-13,
+    "ns_energy_increase_max": -0.0002641584343637468,
+    "cfl_max": 0.03690247233194362,
+    "euler_spectral_tail_fraction_max": 0.019282676602194834,
+    "ns_spectral_tail_fraction_max": 5.217778075913768e-06,
+    "euler_initial": {
+      "t": 0.0,
+      "model": "Euler",
+      "energy": 0.125,
+      "enstrophy": 0.37500000000000006,
+      "omega_max": 2.000000000000005,
+      "divergence_linf": 3.195436935620405e-31,
+      "cfl": 0.025464790894703267,
+      "spectral_tail_fraction": 1.225410512190911e-32
+    },
+    "euler_final": {
+      "t": 4.0,
+      "model": "Euler",
+      "energy": 0.12499999999988377,
+      "enstrophy": 1.5700736474091501,
+      "omega_max": 7.166757039760105,
+      "divergence_linf": 1.4575482858997707e-16,
+      "cfl": 0.03690247233194362,
+      "spectral_tail_fraction": 0.019282676602194834
+    },
+    "ns_initial": {
+      "t": 0.0,
+      "model": "NavierStokes",
+      "energy": 0.125,
+      "enstrophy": 0.37500000000000006,
+      "omega_max": 2.000000000000005,
+      "divergence_linf": 3.195436935620405e-31,
+      "cfl": 0.025464790894703267,
+      "spectral_tail_fraction": 1.225410512190911e-32
+    },
+    "ns_final": {
+      "t": 4.0,
+      "model": "NavierStokes",
+      "energy": 0.038920022020926016,
+      "enstrophy": 0.1645756116365963,
+      "omega_max": 0.9560579661887605,
+      "divergence_linf": 1.7775773880333506e-17,
+      "cfl": 0.01401322593394104,
+      "spectral_tail_fraction": 4.6628223180928665e-06
+    },
+    "snapshot_count_per_model": 201
+  }
+}

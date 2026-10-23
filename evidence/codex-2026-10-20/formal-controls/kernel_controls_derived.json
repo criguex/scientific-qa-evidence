@@ -1,0 +1,55 @@
+{
+  "artifact_kind": "derived_summary",
+  "scope": "fixture-only kernel acceptance and type-mismatch rejection; not universal validation",
+  "collection_window_utc": {
+    "started": "2026-10-20T21:04:39Z",
+    "finished": "2026-10-20T21:04:42Z"
+  },
+  "private_evidence_bundle_sha256": "5e575e3a3a817cf4c0cb8a83ef20fe890e9a6adb082a7b0875aacfca3ccd7a91",
+  "public_files_manifest_sha256": "aa06f3a83515180fdeb95629c0446cc27786939ceeff31c019adb444f07127c9",
+  "fixture": {
+    "baseline_export_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+    "mutant_export_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1",
+    "record_count_each": 212,
+    "only_semantic_change": "target.thm.value; target.type and target.all unchanged",
+    "expr_ids": {
+      "target_type": 140,
+      "baseline_value": 143,
+      "mutant_value": 146
+    }
+  },
+  "results": [
+    {
+      "kernel": "Lean default kernel replay",
+      "baseline": "ACCEPT",
+      "baseline_return_code": 0,
+      "mutant": "KERNEL_TYPE_MISMATCH_REJECT",
+      "mutant_return_code": 2,
+      "mutant_diagnostic": "declaration type mismatch: target has type True; expected @Eq Nat 0 0"
+    },
+    {
+      "kernel": "nanoda",
+      "baseline": "ACCEPT",
+      "baseline_return_code": 0,
+      "baseline_diagnostic": "Checked 18 declarations with no errors",
+      "mutant": "TYPECHECK_ASSERTION_REJECT_DERIVED",
+      "mutant_return_code": 101,
+      "mutant_diagnostic": "assertion failed: self.def_eq(u, v)",
+      "classification_basis": "pinned source infers the declaration value type then assert_def_eq compares it with the expected type; the binary output itself does not emit a structured reject category"
+    }
+  ],
+  "nanoda_source": {
+    "commit": "9d6964f78d0fa4c93fd22fe956e17afe7e72a441",
+    "tc_rs_sha256": "d6126a91f3bf13928be8fd0f5dd051d064c1a4c99d6677cd2bd8996d132fb436"
+  },
+  "prior_attempts_not_credited": [
+    "Mutant v1 was rejected during export parsing because Expr 146 appeared after target; not kernel evidence.",
+    "Nanoda runner01 baseline had a pretty-printer error despite return code 0; not acceptance evidence.",
+    "ReplayExport v1 used incorrect Lean APIs; development failure, not kernel evidence."
+  ],
+  "limits": [
+    "one minimal fixture and one incompatible proof-value mutation only",
+    "does not establish universal kernel correctness",
+    "does not prove any Navier-Stokes or Euler theorem"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "completed": true,
+  "all_contracts_passed": true,
+  "checks": {
+    "mean_n32": {
+      "actual": 5.551115123125783e-17,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "discrete_invariant_n32": {
+      "actual": 3.8018654113548745e-09,
+      "criterion": "< 1e-7",
+      "passed": true
+    },
+    "mean_n64": {
+      "actual": 2.7755575615628914e-17,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "discrete_invariant_n64": {
+      "actual": 1.456303592184065e-10,
+      "criterion": "< 1e-7",
+      "passed": true
+    },
+    "mean_n128": {
+      "actual": 5.551115123125783e-17,
+      "criterion": "< 1e-10",
+      "passed": true
+    },
+    "discrete_invariant_n128": {
+      "actual": 4.920936014618637e-12,
+      "criterion": "< 1e-7",
+      "passed": true
+    },
+    "oracle_n128": {
+      "actual": 0.0005775933796499576,
+      "criterion": "< 1e-3",
+      "passed": true
+    },
+    "spatial_order_32_64": {
+      "actual": 1.9928250682961104,
+      "criterion": "1.7 <= p <= 2.3",
+      "passed": true
+    },
+    "spatial_order_64_128": {
+      "actual": 1.9982238374111847,
+      "criterion": "1.7 <= p <= 2.3",
+      "passed": true
+    },
+    "temporal_consistency": {
+      "actual": 5.517455909332364e-09,
+      "criterion": "< 1e-6 and < .02 * E64",
+      "passed": true
+    }
+  },
+  "runs": [
+    {
+      "n": 32,
+      "dt": 0.029166666666666664,
+      "steps": 24,
+      "rms_error": 0.00918433341828312,
+      "mean_drift_max": 5.551115123125783e-17,
+      "invariant_relative_drift_max": 3.8018654113548745e-09,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 64,
+      "dt": 0.014893617021276595,
+      "steps": 47,
+      "rms_error": 0.0023075308707267263,
+      "mean_drift_max": 2.7755575615628914e-17,
+      "invariant_relative_drift_max": 1.456303592184065e-10,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 128,
+      "dt": 0.007526881720430107,
+      "steps": 93,
+      "rms_error": 0.0005775933796499576,
+      "mean_drift_max": 5.551115123125783e-17,
+      "invariant_relative_drift_max": 4.920936014618637e-12,
+      "invariant_increase_max": 0.0
+    },
+    {
+      "n": 64,
+      "dt": 0.007446808510638297,
+      "steps": 94,
+      "rms_error": 0.0023075256671424324,
+      "mean_drift_max": 5.551115123125783e-17,
+      "invariant_relative_drift_max": 4.551477113995019e-12,
+      "invariant_increase_max": 0.0
+    }
+  ],
+  "versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "all_values_finite": true,
+  "environment": {
+    "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_implementation": "CPython",
+    "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "numpy_version": "2.2.6",
+    "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+    "machine_architecture": "AMD64",
+    "byteorder": "little",
+    "dtype": "float64"
+  }
+}

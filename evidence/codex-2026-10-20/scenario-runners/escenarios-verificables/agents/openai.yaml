@@ -1,0 +1,6 @@
+interface:
+  display_name: "Escenarios verificables"
+  short_description: "Contratos, oráculos y mutantes reproducibles"
+  default_prompt: "Usa $escenarios-verificables para diseñar escenarios reproducibles, contrastar un modelo y documentar qué prueban y qué no."
+policy:
+  allow_implicit_invocation: true

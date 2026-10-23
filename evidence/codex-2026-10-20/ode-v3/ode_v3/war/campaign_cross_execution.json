@@ -1,0 +1,342 @@
+﻿{
+    "started_utc":  "2026-10-20T18:10:32.2431879Z",
+    "finished_utc":  "2026-10-20T18:10:40.2017318Z",
+    "wall_seconds":  7.9456988,
+    "hostname":  "WAR",
+    "case":  "reaction",
+    "campaign_role":  "cross_host_replication",
+    "expected_runs":  15,
+    "completed_runs":  15,
+    "failure":  null,
+    "source_hashes":  {
+                          "references\\contratos-ode-v3.md":  "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+                          "scripts\\run_scenario.py":  "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+                          "scripts\\run_ode_scenario.py":  "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8"
+                      },
+    "runs":  [
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn07",
+                                     "--mutant",
+                                     "baseline",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\baseline"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:32.2592762Z",
+                     "finished_utc":  "2026-10-20T18:10:32.8321030Z",
+                     "returncode":  0,
+                     "status":  "BASELINE_PASS",
+                     "scenario":  "rxn07",
+                     "mutant":  "baseline"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn07",
+                                     "--mutant",
+                                     "reverse_sign",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\reverse_sign",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:32.8321030Z",
+                     "finished_utc":  "2026-10-20T18:10:33.3704357Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn07",
+                     "mutant":  "reverse_sign"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn07",
+                                     "--mutant",
+                                     "forward_coefficient",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\forward_coefficient",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:33.3704357Z",
+                     "finished_utc":  "2026-10-20T18:10:33.9041534Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn07",
+                     "mutant":  "forward_coefficient"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn07",
+                                     "--mutant",
+                                     "mass_leak",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\mass_leak",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:33.9041534Z",
+                     "finished_utc":  "2026-10-20T18:10:34.4306804Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn07",
+                     "mutant":  "mass_leak"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn07",
+                                     "--mutant",
+                                     "frozen",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\frozen",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn07\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:34.4306804Z",
+                     "finished_utc":  "2026-10-20T18:10:34.9571883Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn07",
+                     "mutant":  "frozen"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn08",
+                                     "--mutant",
+                                     "baseline",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\baseline"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:34.9571883Z",
+                     "finished_utc":  "2026-10-20T18:10:35.4919622Z",
+                     "returncode":  0,
+                     "status":  "BASELINE_PASS",
+                     "scenario":  "rxn08",
+                     "mutant":  "baseline"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn08",
+                                     "--mutant",
+                                     "reverse_sign",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\reverse_sign",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:35.4919622Z",
+                     "finished_utc":  "2026-10-20T18:10:36.0086200Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn08",
+                     "mutant":  "reverse_sign"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn08",
+                                     "--mutant",
+                                     "forward_coefficient",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\forward_coefficient",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:36.0086200Z",
+                     "finished_utc":  "2026-10-20T18:10:36.5439029Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn08",
+                     "mutant":  "forward_coefficient"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn08",
+                                     "--mutant",
+                                     "mass_leak",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\mass_leak",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:36.5439029Z",
+                     "finished_utc":  "2026-10-20T18:10:37.0750084Z",
+                     "returncode":  0,
+                     "status":  "KILLED",
+                     "scenario":  "rxn08",
+                     "mutant":  "mass_leak"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn08",
+                                     "--mutant",
+                                     "frozen",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\frozen",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn08\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:37.0750084Z",
+                     "finished_utc":  "2026-10-20T18:10:37.6012347Z",
+                     "returncode":  0,
+                     "status":  "SURVIVED",
+                     "scenario":  "rxn08",
+                     "mutant":  "frozen"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn09",
+                                     "--mutant",
+                                     "baseline",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\baseline"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:37.6012347Z",
+                     "finished_utc":  "2026-10-20T18:10:38.1229080Z",
+                     "returncode":  0,
+                     "status":  "BASELINE_PASS",
+                     "scenario":  "rxn09",
+                     "mutant":  "baseline"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn09",
+                                     "--mutant",
+                                     "reverse_sign",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\reverse_sign",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:38.1229080Z",
+                     "finished_utc":  "2026-10-20T18:10:38.6388071Z",
+                     "returncode":  0,
+                     "status":  "SURVIVED",
+                     "scenario":  "rxn09",
+                     "mutant":  "reverse_sign"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn09",
+                                     "--mutant",
+                                     "forward_coefficient",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\forward_coefficient",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:38.6388071Z",
+                     "finished_utc":  "2026-10-20T18:10:39.1681033Z",
+                     "returncode":  0,
+                     "status":  "SURVIVED",
+                     "scenario":  "rxn09",
+                     "mutant":  "forward_coefficient"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn09",
+                                     "--mutant",
+                                     "mass_leak",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\mass_leak",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:39.1686134Z",
+                     "finished_utc":  "2026-10-20T18:10:39.6861067Z",
+                     "returncode":  0,
+                     "status":  "SURVIVED",
+                     "scenario":  "rxn09",
+                     "mutant":  "mass_leak"
+                 },
+                 {
+                     "command":  [
+                                     "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+                                     "--case",
+                                     "reaction",
+                                     "--scenario",
+                                     "rxn09",
+                                     "--mutant",
+                                     "frozen",
+                                     "--output",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\frozen",
+                                     "--baseline",
+                                     "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results_cross_reaction\\rxn09\\baseline\\run.json"
+                                 ],
+                     "started_utc":  "2026-10-20T18:10:39.6861067Z",
+                     "finished_utc":  "2026-10-20T18:10:40.2017318Z",
+                     "returncode":  0,
+                     "status":  "SURVIVED",
+                     "scenario":  "rxn09",
+                     "mutant":  "frozen"
+                 }
+             ]
+}

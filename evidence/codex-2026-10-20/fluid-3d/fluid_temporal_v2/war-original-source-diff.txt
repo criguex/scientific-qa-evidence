@@ -1,0 +1,11 @@
+--- <HOME>/Projects/adv-050-auditoria/evidence/fluid_solver_32_original.py	2026-10-20 11:43:03
++++ <TMP>/simulation/fluid_solver.py	2026-10-20 11:42:55
+@@ -277,7 +277,7 @@
+         "all_numerical_checks_passed": all_passed,
+         "limits": [
+             "No convergencia espacial medida.",
+-            "Malla 32^3 ilustrativa; las escalas cercanas al corte espectral pueden no resolverse.",
++            f"Malla {n}^3 ilustrativa; las escalas cercanas al corte espectral pueden no resolverse.",
+             "Dominio periodico y dato Taylor-Green: diferentes de datos compactos en R3.",
+             "Tiempo finito muestreado no prueba regularidad global ni singularidad.",
+         ],

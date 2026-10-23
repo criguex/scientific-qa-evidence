@@ -298,7 +298,7 @@ Un informe de QA solo sirve si dice lo que no probó.
 
 ## Cómo se usó la IA
 
-El trabajo fue asistido por IA y dirigido por una persona. OpenAI Codex fue al principio el agente principal de código, y Claude Code de Anthropic hizo los cambios posteriores de auditoría, documentación y experimento. Cada commit nombra al agente en un trailer `Co-Authored-By`. Cristian Guerra eligió las preguntas, congeló los contratos, decidió qué cuenta como evidencia y responde por cada afirmación. Los detalles, incluido un cambio a mitad de sesión del modelo reportado del asistente, están en [AUTHORSHIP.md](AUTHORSHIP.md).
+El trabajo fue asistido por IA y dirigido por una persona. OpenAI Codex fue al principio el agente principal de código, y Claude Code de Anthropic hizo los cambios posteriores de auditoría, documentación y experimento. Cada commit nombra al agente en un trailer `Co-Authored-By`. Cristian Guerra eligió las preguntas, congeló los contratos, decidió qué cuenta como evidencia y responde por cada afirmación. Los detalles, incluido un cambio a mitad de sesión del modelo reportado del asistente, están en [AUTHORSHIP.md](AUTHORSHIP.md). Lo que hizo Codex, sesión por sesión, está en [`docs/CODEX_WORK_LOG.md`](docs/CODEX_WORK_LOG.md) (en inglés); la evidencia que produjo está en [`evidence/codex-2026-10-20/`](evidence/codex-2026-10-20/).
 
 ## Mapa del repositorio
 

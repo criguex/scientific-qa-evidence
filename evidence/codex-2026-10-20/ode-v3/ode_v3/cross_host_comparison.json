@@ -1,0 +1,311 @@
+{
+  "purpose": "cross_host_replication_not_new_scenarios",
+  "paired_runs": 30,
+  "matched_statuses": 30,
+  "all_arrays_exactly_equal": true,
+  "maximum_absolute_difference": 0.0,
+  "verified_artifacts": 420,
+  "comparison_numpy": "2.5.4",
+  "rows": [
+    {
+      "case": "oscillator",
+      "scenario": "osc06",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "9429d493e50884a9050df7185ae0233986ad09267b6374d3f1b7c7addf771c68",
+      "guerra_report_sha256": "f229f44d60a93fd8eabeb429e676da27d5f919bdf13f5d898d485bdf69b833ef"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc06",
+      "mutant": "damping_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "3a13d5e31d6aa811d20856d81f7281afec524e39111c542707e051916a188887",
+      "guerra_report_sha256": "f2854e17c5ec1a59698406585ae2d1579af743dd0585b25137d25d9b59c0c78d"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc06",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "789256b996af52f06ad992ae66ffb63d4c239ed9d8f36346282d73ee8d4194fb",
+      "guerra_report_sha256": "edb7b7629cbe687d9b1bb1a5ceed08d00edce97c85bc9de9f4c47b18c33b7d95"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc06",
+      "mutant": "spring_coefficient",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "01834fdf6d01baaff39f806b595fd0e6d5a6dd8946ebf519a29586bd9c970402",
+      "guerra_report_sha256": "e6c6557bc0779173b34c01447c5a4c0f57bebc4be750fc7a3705d1d31984698a"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc06",
+      "mutant": "spring_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "0fe5979125e78b9a0917619fc446e65812b4ae59dcbe3830f09c803bb6a221e3",
+      "guerra_report_sha256": "6263d4a297f1f80c3134184ae4eac0a34ad16ee31e4bd46d302f7ee517f387de"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc08",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "9fd687fa370d9741cba5da3417cad0e967a08fce5d2e84a061e56a437ee37447",
+      "guerra_report_sha256": "f8aa2eb65a338c62b3b72c5aa598a88308547df512b17ffa10099dc23846b8e3"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc08",
+      "mutant": "damping_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "884a8222d6e04e1ad11643ef49aa7d1e5d0228913de79bc57bc1fa80a59426fc",
+      "guerra_report_sha256": "8bffd105fc964f5e5b4a37f02b6d6674b5af8464cdaace7f3bed04321868e163"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc08",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "5bfe1ac02e6de7b62ab796783b5b7b85a89e804c1750cf918cce7acd64d67184",
+      "guerra_report_sha256": "d27a00dadf6f7eb3eaeb8d71da6b9c0116d01fa63c61324a1d866d27d14a124d"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc08",
+      "mutant": "spring_coefficient",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "0d9152ef13dc52c7b7da592dff5f9d841e90ea750f92592d986a63adc2b870a0",
+      "guerra_report_sha256": "3b53bebc0b53776c093f8daf5e446e96e0e5439fde09968743115283f1403bf5"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc08",
+      "mutant": "spring_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "806cf42bd83ec4a6216a406760930c93eebb121b260a4555073ed6a9a44b2a84",
+      "guerra_report_sha256": "059510a6d7a5269f521b517e2764534485eda58d5b20fef47de765688846e326"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc09",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "166722a623e34808a852d6ff5781dcd194df049d1bbf4154efe4f6d0c63179ae",
+      "guerra_report_sha256": "a37f7e194b62f6622b3e2e1fe109c066d23839c2dbe991f85c232d7a00f06f1d"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc09",
+      "mutant": "damping_sign",
+      "status": "EQUIVALENT",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "3874a12dd87b4f49b32baac37ce987084cbccde87abe9692016a158e0f417806",
+      "guerra_report_sha256": "ae16d352cae5b8c8762efed634bc0ec8979aeb1c004fafc59bdd00c4bd7b5910"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc09",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "07104d402d4c872162048b65b9bdda98dc84c0734684cabd03ef109471575c85",
+      "guerra_report_sha256": "c37b6a72711bfc5b08598fc408e24a2b24346ca0e5cf6b331d5ae5c6f8e8af8d"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc09",
+      "mutant": "spring_coefficient",
+      "status": "EQUIVALENT",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "40b5be97f3e4368584d2b8ebc0b635f149ad26489a8b9a69e79e2b36a65cde34",
+      "guerra_report_sha256": "3d4f3ba91d29438b47e051afe3452416eff30222d80b7f53433bea42d1a22848"
+    },
+    {
+      "case": "oscillator",
+      "scenario": "osc09",
+      "mutant": "spring_sign",
+      "status": "EQUIVALENT",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "dfbdc6c5d49f245b1e5e2dc65e2c3dd65759b6e929980595a2967d2721ea092e",
+      "guerra_report_sha256": "8964b9707f39fe2fb93934a605c9b6e84c872d837c4861a32c0dbe51ab5663bc"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn07",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "b9e8b02fe4a64a6dbf8a83216412f12bfc4093f0593f5a2d41543b46cbeae657",
+      "guerra_report_sha256": "1c7acca3805d799791655f6c1c6269287768c44c5619c57348e60638603421d1"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn07",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "51a1e64c83aa07eed348e3d74139b7f2e02080b7b8ae068b08ffbe42d51723af",
+      "guerra_report_sha256": "6860ec0319a57c63c983a7e9b721e90ad0d39074c49e3ae181ade27795971212"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn07",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "9d7d6821f591647b9c0585f63540fef8cea0732a231df6107eab7b14990d3b16",
+      "guerra_report_sha256": "1b9d407d38a047ea64edef9aa98693ed0f168325734161822395c231f25212ce"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn07",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "55a7c6b98b1c1dbf9b45fdf978a20d7f4cd473ca4201836026381c01d55bbb37",
+      "guerra_report_sha256": "48d28766a3fafe6c70c273515d0c7d049635bba8cd78e9de29cffebb25cf0a15"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn07",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "1f6264270af995f5a04c7a66b2754c5b73d7f83a7259d334365613b53c84c016",
+      "guerra_report_sha256": "ed4ee5353ef4e906cb2721535aa0191cc971152b0af34ecdcb9e9087595f7946"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn08",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "aaf0c708efeda46078b90ba16e6091058aff54540912a3f3eb40c60f26bbefd0",
+      "guerra_report_sha256": "e8dd98f1d6618306d78d6a1ea96d89f071bc696700ef5835765bac332c47babd"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn08",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "adcff7bafe2eec6bc6536d979e990f616250760acfea8924e11e536fae4fde17",
+      "guerra_report_sha256": "09822186c8bcba11e8fbf4e12b294b6cc32a95699d46d901d1e5ecaa4cc519cd"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn08",
+      "mutant": "frozen",
+      "status": "SURVIVED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "e8c78261ae0ba6a04b468c4f9bfaf4ecdc09e5160127e90aae7fcc806d3b0883",
+      "guerra_report_sha256": "89bb29f4a4bb6140660cc57728ec4e33c44011d214c58034ab551453ce13cc8e"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn08",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "1ca2fb24511384c90bd3ee67894b34c62bed8e5776e23f1113b9bdf3ca05592b",
+      "guerra_report_sha256": "0fd5ea9c3ea07d453089ac030571af2dbcbd96d355dd0e2a4f7ff6b032b02a33"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn08",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "3bc0f36c6713bd0c39d8328c5137f63c28b2bd6f1e706d63849053611bd7d9f6",
+      "guerra_report_sha256": "728c60d0b2ad56f9f91bc6706b4cbd4957d9d24ed77ead1e9d0db3e86c228156"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn09",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "e402e072ff8ce308b5ca8df084a48d11edba8605092f54a81c12aab60d55fcb0",
+      "guerra_report_sha256": "0cd5b7ea3424bf4796dc0259a192775c892f783fcdbc57f0dc6df0848ce4f143"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn09",
+      "mutant": "forward_coefficient",
+      "status": "SURVIVED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "2449983ca0d85d7d2e8a2b0ab5507b3fc7f02c4d58f7ab0d86d1413e09687c21",
+      "guerra_report_sha256": "b0f306e3e7328d6eb28ea3d09f72a222b80d657dcc18b73d84bff7270259561a"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn09",
+      "mutant": "frozen",
+      "status": "SURVIVED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "e33684c05bff2d6d0c27aea818a218479d4b1852f8e86732d865473af97acd0b",
+      "guerra_report_sha256": "c26da7a1e65f504decb8db7b8e7f16f2d7f4a1883d577196a65bb1ead313260b"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn09",
+      "mutant": "mass_leak",
+      "status": "SURVIVED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "37dfd5fc4ca9c9878f31e42ba3669da97815077174f8c030d658bb71a4a084bb",
+      "guerra_report_sha256": "4c31ed43951cb2066b68fa6e81746669eb1047904df2d8c1b22c5c7c2c8c9241"
+    },
+    {
+      "case": "reaction",
+      "scenario": "rxn09",
+      "mutant": "reverse_sign",
+      "status": "SURVIVED",
+      "arrays_exactly_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "war_report_sha256": "b39da2b09fe842bb824a0e2d25d3e72146e546bda4faebfe0ec2c44a12b4af19",
+      "guerra_report_sha256": "d777b960ed87d39cc0b26c4ac7c62d0500e5430b820b0c84b7cb446823132714"
+    }
+  ]
+}

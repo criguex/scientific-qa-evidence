@@ -1,0 +1,20 @@
+﻿{
+    "command":  [
+                    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+                    "-u",
+                    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\render_ode_contacts_e379be05.py",
+                    "--case",
+                    "reaction",
+                    "--results",
+                    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results",
+                    "--output",
+                    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2"
+                ],
+    "started_utc":  "2026-10-20T18:17:36.4507455Z",
+    "finished_utc":  "2026-10-20T18:17:37.5639971Z",
+    "exit_code":  0,
+    "timed_out":  false,
+    "source_sha256_before":  "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+    "source_sha256_after":  "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+    "new_integration_performed":  false
+}

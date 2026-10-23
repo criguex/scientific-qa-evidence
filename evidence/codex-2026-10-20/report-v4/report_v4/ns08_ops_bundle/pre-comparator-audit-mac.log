@@ -1,0 +1,44 @@
+UTC audit: 2026-10-20T18:59:58Z
+repo=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler
+f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+lake manifest pins:
+dependency commits:
+bash: line 8: rg: command not found
+19e111e2141cf333c7daff0f64c5f24acc91dd2e
+cacf989bd75f608700820f6afc595f32e7a99a4d
+9d6964f78d0fa4c93fd22fe956e17afe7e72a441
+ec104f6edc1e14d7fec6d31146f1ec6f9c192c5a
+Challenge JSON files:
+Euler.json
+NavierStokes.json
+7610ecead7b390d80ff7f4229a3ff8f18d630e046f7ad1de4f92c7e8e76845b8  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/NavierStokes.json
+bash: line 23: jq: command not found
+56bc185a931f68d9a0f0265a3c00cb12771dccc85384eaf6546b37844b8adc84  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/ComparatorChallenges/Euler.json
+Expected comparator and helper binaries:
+bash: line 23: jq: command not found
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, with debug_info, not stripped
+514de8d2acbd6e0102575cd2c575e336b7c4a40daf3ae66abe97cef5e1e6b02a  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator
+<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, with debug_info, not stripped
+4fa9e14cada304109e85da5048bcd411cf781a03539b3e50953e5c537074bd9e  <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export
+<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.0.0, stripped
+ccda52587ef42760dff9bc2de26edca0cb6ad207c8719cfffcd1e7daab22ccfb  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin
+<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.0.0, Go BuildID=vEu1B74MxrllL0kmw0kn/Re4mgzm6z5hiJlZVqhiQ/Y3zDHuJ3MGmORadfK1kh/TpnC7OFQoZKynMZoyLoh, BuildID[sha1]=eb27a345fd30f7cd1e8e02894ed7fd632d327934, with debug_info, not stripped
+e3d26ebf2f7c786f8d34b7051ad2c655329aeadbb863404e3dd05d3a97b0518a  <WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun
+Tool versions:
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
+nanoda_bin 0.4.25
+
+A type checker for the Lean 4 programming language and theorem prover
+
+get more help at https://github.com/ammkrn/nanoda_lib
+landrun version 0.1.18
+Comparator source command construction:
+bash: line 41: rg: command not found
+Current sandbox and unit manager:
+landlock_abi=7
+CapEff=0000000000000000
+systemd status and manager:
+systemd 255 (255.4-1ubuntu8.17)
+running
+UTC audit end: 2026-10-20T18:59:58Z

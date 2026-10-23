@@ -1,0 +1,1838 @@
+﻿[
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\campaign-cli.json",
+        "Hash":  "A8DF3199CB1FDBA9940D42CFC2B04B95E5E0E8844D4CC10393254C3029F53944"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\self-check.exit.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\self-check.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\self-check.stdout.log",
+        "Hash":  "8D9E35EFD8E56E4901056EF2C4FFCE37C3E734469FED56B9699CF97D8EDA9D88"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\verified-source-hashes.json",
+        "Hash":  "4105F8D035038B752BA4E287060FC43F1A9F867590C7BD41C391C30CD5835A7F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_baseline.stdout.log",
+        "Hash":  "C74CA1ED6E3E0014F8322D33F679A60C667C8BACD2886FB8F69E96CF33124090"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_forward_coefficient.stdout.log",
+        "Hash":  "7F757BFA940E69710D666BD5AFB8C9AF7689C75BE8ED1A96E82DB883F8AC16FA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_frozen.stdout.log",
+        "Hash":  "13FA26403E8484415428A9EFC6C3F88C8C9691D5A585A40B722CBC622E946C3F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_mass_leak.stdout.log",
+        "Hash":  "872123E5F702A1A5103984C1B2F04D50322DED7A9FB7D7AA4E1088D181419F94"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn01_reverse_sign.stdout.log",
+        "Hash":  "F1DE83F089A940144D657F3D5FCFDDFE5F7033C7103A78523F446F48BC9ADC3E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_baseline.stdout.log",
+        "Hash":  "AC996F95D746D561B8CD5319A82D15AD7C71FD4A7FC3EE1288CAA9FA7F8C8280"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_forward_coefficient.stdout.log",
+        "Hash":  "CCB05B0335E44E05C4B4039307E0FCC976A4B8A496DC9B52CD987F1810EA9AF8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_frozen.stdout.log",
+        "Hash":  "114784BF87ECA85382ACBD2C14AA8625A79D86AAD1F9578F1CDA438FE91CDDF1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_mass_leak.stdout.log",
+        "Hash":  "8D9604707E8F92A234257FC8D32ED4E09DB84A9BFB168D0C7B71E80D1105F8A4"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn02_reverse_sign.stdout.log",
+        "Hash":  "C7552C7531C77CA74DD421A016CF0BDC019AFDC96CA552F5A1D3F55F88146ADE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_baseline.stdout.log",
+        "Hash":  "4C8C890E34C5C6F4A4F7CCA7CEAE79AB672CFA4156C79EFCA41E61F98E3FC4D6"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_forward_coefficient.stdout.log",
+        "Hash":  "A4005481F4E87830DD1AB1D52F2846EAE358A33C644C634719BDD7744350F3B1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_frozen.stdout.log",
+        "Hash":  "39F72C99C15963A1E6814B066C97B90F88D31B1AE70963A289B7341F4E4D744C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_mass_leak.stdout.log",
+        "Hash":  "40E2BE129C5F857AA2515931458801CCBCCDC423FC74EE659080E119D09E3964"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn03_reverse_sign.stdout.log",
+        "Hash":  "BAFCAAB54773A39DA1EE0BFCEA06CD7628873AEC830EC6DCB46E18EC4187783C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_baseline.stdout.log",
+        "Hash":  "48137B699C658DAF83D3264C88C2EC1B54D49CA6819ED399935DDA7E3D9F0A75"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_forward_coefficient.stdout.log",
+        "Hash":  "6A06AC1707229EFA1C982C4F268708A855FF22B5500A3A4158939A3E659FB8F6"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_frozen.stdout.log",
+        "Hash":  "C362609E576A57A2E126538749C37FEC4BCB9091C2DB0B9A353CEDA31E6F9F2B"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_mass_leak.stdout.log",
+        "Hash":  "E3B7C7733A60A4AA9120C804EBD74DF0A5862DB63874D51E9D5F9A3931676C0D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn04_reverse_sign.stdout.log",
+        "Hash":  "BEE5C4E2DAB5D70EE41C329EE9528D906BF7FD4EB8CA487E32C9D9D7504CF9D2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_baseline.stdout.log",
+        "Hash":  "27C18E610F309285B0D67CFF9EFC8E9AA20DFFE41F0D30866CE62DF9CDE98757"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_forward_coefficient.stdout.log",
+        "Hash":  "D23006CA766C577AAD05E7739AC2467E271423B99BE509485DC02305063511A2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_frozen.stdout.log",
+        "Hash":  "29CE3F3F070563CC60BB4CAA94D553C3EA873F68A029D3C44C80BECCF8CDF888"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_mass_leak.stdout.log",
+        "Hash":  "A700743B33BCA08E939469D7858987F462E866E928A1E1670EDEABC655C91858"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn05_reverse_sign.stdout.log",
+        "Hash":  "68F70E491D32A79F2BEE3035779782D3BED0E1F98024BE402851124A87BF1E55"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_baseline.stdout.log",
+        "Hash":  "052C7516C5BABACDD1A8D655E8E6D6D0C83AEBE92098BC576BBD0AE887799B65"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_forward_coefficient.stdout.log",
+        "Hash":  "5B00B7EE4294FE6F815BE75079F678F381DDEC57E33F49B2210E570ACA991407"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_frozen.stdout.log",
+        "Hash":  "85F695D60E69AE1F8C728F9758A16C1DC5CF52B8403ED747247D9493363B0735"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_mass_leak.stdout.log",
+        "Hash":  "12FD81831E25A1419F005EF222F9433AF4A8691FAB819C9AC8E1C6BDBEB37A14"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn06_reverse_sign.stdout.log",
+        "Hash":  "B7B0E520B113E7A5A34BFDD3B90428C733B5CD64EEB0865E4673360D1070B21C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_baseline.stdout.log",
+        "Hash":  "83FAC48A9E83D82100790601A3BEC478723C78402E9C42C2769F9C0B04122C5E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_forward_coefficient.stdout.log",
+        "Hash":  "041C805DF6039C03C6A04A8304EE0DAD0A14D0FA27D20A3496E1CFA8D35E3648"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_frozen.stdout.log",
+        "Hash":  "36D11A2C5210B4D610FDAF4BC20535EA3B9429FEC66DE79FED69F39C7503EA87"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_mass_leak.stdout.log",
+        "Hash":  "ED655D478A8BE9E2EB3A46F1E94573C1CA7968602496018DACFE33510C454F03"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn07_reverse_sign.stdout.log",
+        "Hash":  "DCDB400B2265620AC7EC1FBF783B6132C1AAB83F73E89CFB32E067DB6B505D58"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_baseline.stdout.log",
+        "Hash":  "57E68E18DCB44F4E0F6CD145E9F3A9ABD9DA512A9F478433F62EF245FB21BA4A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_forward_coefficient.stdout.log",
+        "Hash":  "6EB0F8B6AD2CAFC9B45AA46E47717D587E7F76F4D8276559EE8FE5DB182E1E14"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_frozen.stdout.log",
+        "Hash":  "9ED73B3C83359E5810FD3E6E10C5F4FEDBDA4C77E81DDC8FA7CE5484767A7FF7"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_mass_leak.stdout.log",
+        "Hash":  "98333779D80348ED07E07A33A41DF5F214DAF61E0061131E5960604BE988B22D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn08_reverse_sign.stdout.log",
+        "Hash":  "50F3914E66398624A3E904D457C3471C4F1C74665E3160E8117451427F2E7F4A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_baseline.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_baseline.stdout.log",
+        "Hash":  "03163520A1B96E40CC2AC0134C77C5E835DB543D3B9059F7B26623583D75EF06"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_forward_coefficient.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_forward_coefficient.stdout.log",
+        "Hash":  "4BE17603DF8A024716CB1E26622FFB4D67DDD96676917F8CF0AF2F57E6D6C87E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_frozen.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_frozen.stdout.log",
+        "Hash":  "AC07508D2FA6F0CFA58DDD12C6C63BAA7B7CF47C7E8E1173350E60B06A839D2D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_mass_leak.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_mass_leak.stdout.log",
+        "Hash":  "B5892671DB84FFD58C6AD41D1516D16386F221E7ECC4D9252573BB66F1C6A937"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_reverse_sign.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\cli-logs\\rxn09_reverse_sign.stdout.log",
+        "Hash":  "7568BBE50A6CA08FC2A90095476402E96AA61F6473B26F4782D91EED5FA36D2F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\mpl-cache\\fontlist-v390.json",
+        "Hash":  "1B8B4469E39A46DBACED842028B8A6E89E035EF1D0E4D59C4AE945D5DF80ED8C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\references\\contratos-ode-v3.md",
+        "Hash":  "CEE74957DDAB6F5FA196D06840CFA642F5C08C15EB7B70540EB7E56C9BF5ED06"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\comparison.png",
+        "Hash":  "2EABE0DA120FA91BB5A79888E833D9196EE01BAE4FD6C0A00D99B8FF7DB8CA36"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\fields.npz",
+        "Hash":  "7D903A0058954A7A1865676C60233A8F83D2BC38028881CCB897CE56A194B265"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\metrics.csv",
+        "Hash":  "EA5BD5646AB62D6455C5A6B71E2C29D441BEF5557DF885683834BFEA6E3327FC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\run.json",
+        "Hash":  "F1DCC9E897807D3542771C9EE6227BE3826FF1D45ECFFBEA9FF2E0CFAC67D3EC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_baseline\\worker_result.json",
+        "Hash":  "AE119E66466D28967687B1DC4AF4BE0B5709B29A319666F08B0DA66C02231914"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\comparison.png",
+        "Hash":  "CE9A6C811A434CA4A1CDEB98237A04262D19F2256270A17275777D5C62429902"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\fields.npz",
+        "Hash":  "D71A9C9E99BA1855647396003A947E2CA9C3D1607F5083F812193578CE9E6BAF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\metrics.csv",
+        "Hash":  "2E16AF2BEA7F0CDFA086969FA2F2AAC2852C2B1BEE700B94B0D803A4AA430EC2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\run.json",
+        "Hash":  "A102D25D01464407681D1BE08AD5886A6B6420D258174DDBABBD1DFAFB971F81"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_forward_coefficient\\worker_result.json",
+        "Hash":  "57E3A32E372E83888391107F09B1FDAC1474A4E15F2DE8E7D3674B5803471DD1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\comparison.png",
+        "Hash":  "50DDCDA6C9F59E2CCD26D102863CDE4D168545BA93B21E5872FB19FB73AEFE66"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\fields.npz",
+        "Hash":  "D71A9C9E99BA1855647396003A947E2CA9C3D1607F5083F812193578CE9E6BAF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\metrics.csv",
+        "Hash":  "2E16AF2BEA7F0CDFA086969FA2F2AAC2852C2B1BEE700B94B0D803A4AA430EC2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\run.json",
+        "Hash":  "5C0AC2E42F565444BC330F1603C62AAF8F6CA97647A2B9DAAE7198AEE0DC8170"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_frozen\\worker_result.json",
+        "Hash":  "81E434EB4B989EAC274AA56B0CB9EDF8F245F41B67CA3059B20D78FF593AC08D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\comparison.png",
+        "Hash":  "77E04983676CC1D870E3BD4D352C6FC0002456EC3046541F39E24F6C6F50C232"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\fields.npz",
+        "Hash":  "D71A9C9E99BA1855647396003A947E2CA9C3D1607F5083F812193578CE9E6BAF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\metrics.csv",
+        "Hash":  "2E16AF2BEA7F0CDFA086969FA2F2AAC2852C2B1BEE700B94B0D803A4AA430EC2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\run.json",
+        "Hash":  "CC68F1FFB7E9A4614AFA4B378287CD1D1EC5A50C59006C5AA1C33C3C7C1AD784"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_mass_leak\\worker_result.json",
+        "Hash":  "79233D79A1B62A0DC31344CE65CA7D9938340C6AEEB1B02677108FC5DDA09C36"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\comparison.png",
+        "Hash":  "71FC3415D630EFB37C40789BF075718429E54C3CBBB0C2A076F6C88797DB60DD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\fields.npz",
+        "Hash":  "D71A9C9E99BA1855647396003A947E2CA9C3D1607F5083F812193578CE9E6BAF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\metrics.csv",
+        "Hash":  "2E16AF2BEA7F0CDFA086969FA2F2AAC2852C2B1BEE700B94B0D803A4AA430EC2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\run.json",
+        "Hash":  "12FE8533CF7CF036A3ED4A0E3DF56C279C7D4937A8EBE3369EE676DD9184CECC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn01_reverse_sign\\worker_result.json",
+        "Hash":  "79233D79A1B62A0DC31344CE65CA7D9938340C6AEEB1B02677108FC5DDA09C36"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\comparison.png",
+        "Hash":  "6B64BB14692B7429CECB9AEB2C92293014055CCE573092758C6B0EFB50BF656F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\fields.npz",
+        "Hash":  "117A7F57C74B1F249AECF65DE02BE7DD121F2449EFC2685A6FE0F05F6C7D4B02"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\metrics.csv",
+        "Hash":  "8DB6E9A675B3469701FE727865700029C6E37975F9024430F9571C298897914E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\run.json",
+        "Hash":  "70AC84D88BC7B2CFA2044050DE41AAC91435DFCA4850E0C6B3B5474071A1DE2F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_baseline\\worker_result.json",
+        "Hash":  "B8530D047532A6BF777ED4BA60E97E8B9777ED6F7C4D90C762326896A867AE75"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\comparison.png",
+        "Hash":  "3AE35369FB9C5F764A04878A2E1EF6F4B50BB057F1A645704D3C6D574D466A13"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\fields.npz",
+        "Hash":  "87151B5B8D2AD0D489938B44B06221E13889F360993B2DCD48EEB84F1F4ABA0E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\metrics.csv",
+        "Hash":  "EE94BC1FC04A5B863D48BBAADF74FCCC351A62EE5C839B6F6D4CE1903E086E6E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\run.json",
+        "Hash":  "62D1FAA8624A747CBDF9DEF5FAC13D3D522D427656A91516FA5CBAB2AFCB5EA9"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient\\worker_result.json",
+        "Hash":  "E2FFBA7799ABC3A39C12B4F746E4698982D1997EA2606633CC49DD11A379A365"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\comparison.png",
+        "Hash":  "9BA43CE1B5F5A25B169CC775E2460336551842C09D5EF85E8FBC0EA4FD27FD84"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\fields.npz",
+        "Hash":  "87151B5B8D2AD0D489938B44B06221E13889F360993B2DCD48EEB84F1F4ABA0E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\metrics.csv",
+        "Hash":  "EE94BC1FC04A5B863D48BBAADF74FCCC351A62EE5C839B6F6D4CE1903E086E6E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\run.json",
+        "Hash":  "0DF979507BAABCD6B3BE28766E1C8C1C0508FA8D12F38D260D64055D637F23FA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_frozen\\worker_result.json",
+        "Hash":  "15662171D002DB7EDA672ACED89BAB9F3DBEABD1A981735081B68E356FF2FFC3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\comparison.png",
+        "Hash":  "E9C6535C5E049386EDAE18A9EABEE07E9534C968D683F56648F19DC0273EE2C8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\fields.npz",
+        "Hash":  "87151B5B8D2AD0D489938B44B06221E13889F360993B2DCD48EEB84F1F4ABA0E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\metrics.csv",
+        "Hash":  "EE94BC1FC04A5B863D48BBAADF74FCCC351A62EE5C839B6F6D4CE1903E086E6E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\run.json",
+        "Hash":  "51E4080F64A18B3DCD3441929CDC411C7D785BA74D7D601D534F1BAF69D529C9"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_mass_leak\\worker_result.json",
+        "Hash":  "4434A07AE98AD7AA5DB217BDE6AE5FDB3DF08266A863772B0592B91C098E8CA1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\comparison.png",
+        "Hash":  "8042E9187B3627AE32F37413DFD16E7552ED13E110ACAC5DB338C1EB9C9B60C6"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\fields.npz",
+        "Hash":  "87151B5B8D2AD0D489938B44B06221E13889F360993B2DCD48EEB84F1F4ABA0E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\metrics.csv",
+        "Hash":  "EE94BC1FC04A5B863D48BBAADF74FCCC351A62EE5C839B6F6D4CE1903E086E6E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\run.json",
+        "Hash":  "9DB0CBE28700B1BA1B7A95401A53D770DA500FEFDF314AD597E61346B697A55F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_reverse_sign\\worker_result.json",
+        "Hash":  "4434A07AE98AD7AA5DB217BDE6AE5FDB3DF08266A863772B0592B91C098E8CA1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\comparison.png",
+        "Hash":  "6405772DC847672D79A4D04C27ED562CBBC5459E4B30EB12887A859C7AD08692"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\fields.npz",
+        "Hash":  "87CD4535AA40D35EDE1DFB03F1A54A0A91113EC285B6FAD6F1669203A4B40DE4"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\metrics.csv",
+        "Hash":  "19B18405332545A32C0801B3F3FEE21B4BFF9380F759E265D536F0B27759B208"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\run.json",
+        "Hash":  "5874E14880F0EF6F691A628B6712067E9698EBA554AD1C6D59FFC265B2B2BF4F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_baseline\\worker_result.json",
+        "Hash":  "F977414700B3E6BC2BB4E88A0F7946E4CA0EF939F20A96ADDB24D6BC9305AAF2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\comparison.png",
+        "Hash":  "5191CF1BA48A3DAACA6F24334BCB7CB14F70C422DA22EAB0CFCDD55C0DD18103"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\fields.npz",
+        "Hash":  "F457849E0C26C59A9D12EBAB18C5E57634DD6B6C07ADDC4CF9EC295BF9D494CD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\metrics.csv",
+        "Hash":  "966DD07718862662E9050FB61542AB2498D5901A195E97F892350B236FA410C5"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\run.json",
+        "Hash":  "F82A2575A106838136D11DB8A7CE31AA074D2A3452A35ECE6D6795E0958C0EA5"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_forward_coefficient\\worker_result.json",
+        "Hash":  "0C88184B33D2D7DC991CEC6F545278B29D14E75ACEC88B660A6C4F3AA91DCEB3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\comparison.png",
+        "Hash":  "F6AF33ABC40D2A930643E09A53F16F3F0D032E1235F0A03F06829E0B217B04C1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\fields.npz",
+        "Hash":  "CDDB6D9518D3869C7BBCE1FE9AC4A25A2F0DF80E8672EA44325012F59316C71D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\metrics.csv",
+        "Hash":  "DD405A53F8CCC8DDD2F1CC99574CF808DE13BD1CE2AA5DF210CD5D6DA9E420A7"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\run.json",
+        "Hash":  "C7CD8B8DF28C10770D866ADE9EA8311C9853C53A7CC0BF9FF590A0154603CF37"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen\\worker_result.json",
+        "Hash":  "DB33A2757750E210FEFC9842F729911710146F26F1C5F2854A7B2A0085442244"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\comparison.png",
+        "Hash":  "3FE0C5F797A3992AFEC34B896EE63E5C965B0F926A9ACAE217BADA00AB6DF29D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\fields.npz",
+        "Hash":  "33D9ED4DAB35922A67F92CC52B4D010DD4A277E010242A7BDBDC058902867C87"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\metrics.csv",
+        "Hash":  "FBD0B3C31A231B686CC3D6182AA500BFBA09F5C4504E4E6563B64BF5B95FF2EA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\run.json",
+        "Hash":  "FB5FDE439F561713ED0CDB2E0C6440D14AEFC9DB53E2AF9032A8D5C546267416"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_mass_leak\\worker_result.json",
+        "Hash":  "3EB5B00A65CA4EB3DF68EDA281A28DA7AB777865FDE686864AFE172282DC6C83"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\comparison.png",
+        "Hash":  "A7C20D8DF370875C4CBABD398A831ECB64F9AC31CE3FD6001F2753E156B43E06"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\fields.npz",
+        "Hash":  "33D9ED4DAB35922A67F92CC52B4D010DD4A277E010242A7BDBDC058902867C87"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\metrics.csv",
+        "Hash":  "FBD0B3C31A231B686CC3D6182AA500BFBA09F5C4504E4E6563B64BF5B95FF2EA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\run.json",
+        "Hash":  "333AFC5DD79A4D4B2BA4811F5C820ADD9C05703688B9A1E2C916495CBD535DB7"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_reverse_sign\\worker_result.json",
+        "Hash":  "3EB5B00A65CA4EB3DF68EDA281A28DA7AB777865FDE686864AFE172282DC6C83"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\comparison.png",
+        "Hash":  "807FB31F9AFB9CE3E55F2DA632ABFC9C28AFD1813FF302F5F42D39576FBBAFED"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\fields.npz",
+        "Hash":  "BF3127D16AA80805CD783AE5719CE7743D1D67EB7F96B6344AC3AB09273E646E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\metrics.csv",
+        "Hash":  "5A981D031A966B7F2491E5F4FEEA46E08E024511899B976E150593C8A58E74CE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\run.json",
+        "Hash":  "325B61C2C1576DFE995C63118E4D0E30F511C162715A7C5FAB9B8053E53A41E8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_baseline\\worker_result.json",
+        "Hash":  "5C8E24EA966DD56F01C62DD575D352B52EA5E1ED169414B6E609A5B716C61CC3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\comparison.png",
+        "Hash":  "6E2F9E32CC73A4204D2B96CE9DF94A659D5CEC52B944E463294593F915EDF803"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\fields.npz",
+        "Hash":  "2E266BB67494F5CF7E222A5A5D7C9A9CE4514FD281C882E029BCCC42D6C380FD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\metrics.csv",
+        "Hash":  "CC6C05B523A74943B39C8C9C21FE58B56D7125AD43596A4C49C014A18F13052C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\run.json",
+        "Hash":  "E0BDA74437752D792DC2E69DC8A9308B93C4718A0D37789BCAF8D2CBF2737CB3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_forward_coefficient\\worker_result.json",
+        "Hash":  "C254BE137CFBBB28984D519B9D06DB37B74712A712DF9E9CF8268017AA49BA90"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\comparison.png",
+        "Hash":  "81828A62C9E74CE3DC1B37FF9A2879887754D6060489E07EB792E82F8FD61D7B"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\fields.npz",
+        "Hash":  "E7023CF61661E4E7EA4EFC3F09033F2259022C986673E5D0DE49A780041B14CF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\metrics.csv",
+        "Hash":  "4C7D9042A0370494C4B040B65E017C503B559B1A571F7A6C705F6BB1E4D3965D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\run.json",
+        "Hash":  "CC34AE2B01E9B7482E77E6C80FBC9433216F03A49E5D716696E87224C9AFBD50"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_frozen\\worker_result.json",
+        "Hash":  "8775C833D34A5BD9FE1521ECAD430D82B7C9F695872DF2F4454AC7BEBDD7EF9F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\comparison.png",
+        "Hash":  "0851F32C722EDA797739264B60AFFCA5DF618DB77AFD4EF0204F3ADB137B0CE9"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\fields.npz",
+        "Hash":  "B88AA5601B09DFA7CFD3B1AFE279EB88083071907C4DB194EEBE470A76364998"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\metrics.csv",
+        "Hash":  "3F877E00ABABC71B7FB3586DC2E3B54E0021468BB87947C3262114E2D862408C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\run.json",
+        "Hash":  "BDF40DC67DBC472DD7C385CF26E1B9D4D61A2C8A5A589B65F24B19E13FB61525"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_mass_leak\\worker_result.json",
+        "Hash":  "8073131D046D7CB51C068B910268555A007B8A11547A3E771791130F48E4ADFA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\comparison.png",
+        "Hash":  "487CCA06B7403E0210759AB65918A7B21D26C56DA8310AB610C35F32C38EB555"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\fields.npz",
+        "Hash":  "1AA93C0B0EDA7E65F859AF7C3464AC632F9EDF679EE62AAC3B3FCC7CAAC36660"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\metrics.csv",
+        "Hash":  "2F3149270AB6E1484137F92B2BA6D78CAF36BBA3FA7E56798BAB3D757F3AFB89"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\run.json",
+        "Hash":  "5FD71652545E8478EFCE8668F68310A0D36CA7535C2AFF30C255070A10797633"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn04_reverse_sign\\worker_result.json",
+        "Hash":  "FC5C1944E5A2718DE7AB75FB6B76654CC253C409B3A0CC2B415859D0CD3A85AC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\comparison.png",
+        "Hash":  "20B43E8AD510120FB65DFFC70F24E57067258E22801DF6603512E62DE9679B22"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\fields.npz",
+        "Hash":  "FC01D1B4461F373EE7BF7A56A29CCF60A37B2B99ED2675409AE8A1C16595CC3C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\metrics.csv",
+        "Hash":  "91F2F03B310D7600C2B0BD14778D4C6B22622924DD57ABC5C2C50A955A9F5D2C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\run.json",
+        "Hash":  "6A3F5788962B634EBD3676B12CB7128699C4111302D92C15AB09C163CC9036D6"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_baseline\\worker_result.json",
+        "Hash":  "CE662AE843F7261B89E753E68658AAAEA134624F9C094FF1CE1A8BE8C0932264"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\comparison.png",
+        "Hash":  "C74AA1AD4A03DEAF7E84DDB7D7EFB81ACD36DDA5863CA7F4E7585F2CE20B10CE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\fields.npz",
+        "Hash":  "4EDE893711D3EE0CBFA677323C1B58B255F8F0B6B2EE04877080A7FC471FB48E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\metrics.csv",
+        "Hash":  "AD92C5970CCF55419985D0ADD11C51ABF7A60CD0B4639FF328AA4F9C7B386A87"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\run.json",
+        "Hash":  "C90ED660EEEDD8F2310A2C27DA77E65439D0030A404AD723B2DC1719D6167B48"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_forward_coefficient\\worker_result.json",
+        "Hash":  "9FD22139EA0A2AE0F8CCDE76DDC2F3B80669F194BA83E1AE1C050CE92DABA08A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\comparison.png",
+        "Hash":  "783C43B5FFFC72672007542564FA12AAC1FB19E94074C3E088264C1C5F0300B0"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\fields.npz",
+        "Hash":  "58F2BADD1F5F8B773B49F1E1A3B8D39560A7BC174E70B9BD40543CCD80851962"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\metrics.csv",
+        "Hash":  "731EC8A53FCB9A914A0EF479DFE685E8D39E91AFD3811595F74875F4062A228A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\run.json",
+        "Hash":  "F6D7F878963B3E6129A48D46C39A01B2F97DCEBC09409BAEAECF9C8D8B3A6D4C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_frozen\\worker_result.json",
+        "Hash":  "BF5959D16F1A75E7143DC475DE46232460E35E50AE326D5CEA2705D191F25716"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\comparison.png",
+        "Hash":  "1710C742E4B18AE322EE03FAF002D1F2E5D40EB6894E63F5F0F931141935CAAB"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\fields.npz",
+        "Hash":  "14C8E51059FB797EA55D2C5BEFBC550E856F0984FC767B2E30FD063A582F9D01"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\metrics.csv",
+        "Hash":  "981DDFEE961F3F08D7233791D92DABCE97ACC15F1E74D460CF2A246D638F9C5C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\run.json",
+        "Hash":  "D7F9BF105A9E18D7D6E86E0E137FAB37CBA546A51CD8E14DB2EED9612708BD8C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_mass_leak\\worker_result.json",
+        "Hash":  "F6BA4939565926CC0DBA11E576C6D6AF09DE2990521072FFA2E5CEB2D9644F7A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\comparison.png",
+        "Hash":  "03AB4AA41405EA0A173A9B1734AF7C4EFB6399AD65D2E5EEFCBD322ECBB3C3CD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\fields.npz",
+        "Hash":  "ECD295D8BACE4C5FB53F860FBD9D1ED547C3E186F0582DE92D8FD665B38DB9AD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\metrics.csv",
+        "Hash":  "9B6F97A829F7C8A50C88DED622BEA24B3C4BCCF70C52AAD5AB93B7DD946680F6"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\run.json",
+        "Hash":  "096D14503B18816670C8970AABB227285BBDB074D3807B068A72B4C8F0B28479"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn05_reverse_sign\\worker_result.json",
+        "Hash":  "3EB182E23C2359ACBBFC0D2ACF2495E04839396072FDA6FFB0FC55CEAE1C15BC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\comparison.png",
+        "Hash":  "125B3AB603D8E96CCABB45DBAB44772621D2FF1D3DD798FF7AAFF149B9EF8113"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\fields.npz",
+        "Hash":  "F8CA6D84452E500399AD0ED2CFD484B6BCAE1FE3A4C0F5B498F2F8CB6580F075"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\metrics.csv",
+        "Hash":  "E478078D1A70DE06026B2745FFE540DA5387E00213886935D46544D559770446"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\run.json",
+        "Hash":  "7E3A55BB89DFF47E4C8837AD7B6E4D314129CD5F047838EF20785DAA8EE4D600"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_baseline\\worker_result.json",
+        "Hash":  "20D7B2708DC6489A9981352169ECE2CC78EBB62A66EC0A294DFBA941CAFFDD0B"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\comparison.png",
+        "Hash":  "2FCFCFA590350AFD824DB8085FD789FDE9DFF4BA31394094F1ED253187FB1368"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\fields.npz",
+        "Hash":  "66862E88D856EA57710185E0BC756D9E494A0D7F3E36C28608274E48E53AF81A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\metrics.csv",
+        "Hash":  "C1C3B08EDEE967A4AF0BBD50D669606520148486E22624DABB0604BCD23D6CFA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\run.json",
+        "Hash":  "515882661CF5936416B89628A296E7AC803CFC30E642FD7F37B26F5D71536F7D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_forward_coefficient\\worker_result.json",
+        "Hash":  "D105180B21898EE69CEB3A15C0C6FE2EA40F9209BD64FA9EED37B10AB20C54A0"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\comparison.png",
+        "Hash":  "CB29F4903BBA28F4E0E91BCE6B581CF435934D8B124479A51AE00F05529532B8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\fields.npz",
+        "Hash":  "F655A3928BEEDFA48240720FDAE05B4B083DE0572CC3476E899700168BAFBAD1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\metrics.csv",
+        "Hash":  "3AADB1D6D03E3903DF76E4B10DD50419A687777B69B575FF6B203CF0F95B7760"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\run.json",
+        "Hash":  "0E915894392BD84AC90F214BF58F6110640BFB1E9E71CCDAA047824EADC9DD0E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_frozen\\worker_result.json",
+        "Hash":  "28A349C45989642339019D86F8FEA97F8A91647067672B2E18CDA817CC7C34A8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\comparison.png",
+        "Hash":  "3F3634870DEBF627461DBD04DA4AB48A553C25B123A59C1B272887A00130FFF3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\fields.npz",
+        "Hash":  "9BD5B2114B9193B450A64DFAA073E75276C17210663625F274F4366D467E3DEE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\metrics.csv",
+        "Hash":  "F837BD348B793A933D94EDEAE87D1FFFEE06EE8FC2DA690B47BCB166D461947A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\run.json",
+        "Hash":  "D996C1FA871911C857DA4B9F4B5F8327D2A7483617449715FDFBDAA130B6ACDA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_mass_leak\\worker_result.json",
+        "Hash":  "19929C2CE6D328E1543B36C8364B6BFB9DD2C59C763C68A8B4F2CAE9F111BB49"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\comparison.png",
+        "Hash":  "D77CDC636C4C7372DB9BA566A12B9C925C5F29F803D038F310058944416F5CEB"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\fields.npz",
+        "Hash":  "983A9A1A2D2767F2026E771D2B22BCCC1BC31D6D7A0FB8494BB80F519996F390"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\metrics.csv",
+        "Hash":  "D9F4FB4E4384908EFA56FBE3A0E90857F63075FBA682C2A2EAE4EFC543EF687F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\run.json",
+        "Hash":  "09A2B9326CC198796950F97DC522124EDD3337EED3007C4C5723DFEBA2BE1532"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn06_reverse_sign\\worker_result.json",
+        "Hash":  "ACDB4BCF2C7A0D2632CF7DF27B6AAD0E04B0E1593422121000D55B4CE716E975"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\comparison.png",
+        "Hash":  "CB9A9E76798501C6E982B7750E8B2E8CED177A0C4C6E26CF492FCEDCA650E899"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\fields.npz",
+        "Hash":  "C4E824F3A0FFDDFE6FD0BC4AB59E78B2B027A7555E05E00942DBBF437DDA4E76"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\metrics.csv",
+        "Hash":  "B0B7388958ACBC23CE8D10A030AF5C51B39525C0C52639ED4564F2CC701A37FF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\run.json",
+        "Hash":  "1C7ACCA3805D799791655F6C1C6269287768C44C5619C57348E60638603421D1"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_baseline\\worker_result.json",
+        "Hash":  "43958C395142A16C824663B4484B221B9A32810DE78F04C47DD3671E0E2B3D30"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\comparison.png",
+        "Hash":  "A9F27B9319CB280AD540873022864C7DE3A0168183B1806172DD2A2162D0CC63"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\fields.npz",
+        "Hash":  "929B9F1D9731D200AF66455A2444E83CDA5B0849B75BCB4F7402317E564154E3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\metrics.csv",
+        "Hash":  "4BDB8148FE7F905E369FB48A73176F01DAC23FF632981E086EF7610CCF36A6F8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\run.json",
+        "Hash":  "6860EC0319A57C63C983A7E9B721E90AD0D39074C49E3AE181ADE27795971212"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_forward_coefficient\\worker_result.json",
+        "Hash":  "7619D568D010401164132A335859D7538A3990CB519413F2A7D1FDD08E273AFF"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\comparison.png",
+        "Hash":  "44E79F027FDBB95191E8FF96675A044DD0A7B91836918966BA5E2B3064CFDB1E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\fields.npz",
+        "Hash":  "683FC33EC2AB4F8DC34C8B9D6B98D619D5C0A0C53A85E561E71457A2D7882B04"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\metrics.csv",
+        "Hash":  "163C918093A5E8D9AB1372B997113596429EA3EBAF849867C946BE20FAD3C270"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\run.json",
+        "Hash":  "1B9D407D38A047EA64EDEF9AA98693ED0F168325734161822395C231F25212CE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_frozen\\worker_result.json",
+        "Hash":  "EA38C2E4CEFC2DC0BF52F75B52E05BC50958E0C2CD17B8386A4DA112F7D53695"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\comparison.png",
+        "Hash":  "AB0AAB2C13E63258124EF384CBB24580D69058FAA5188B7A87692FBD47CBECD2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\fields.npz",
+        "Hash":  "02CCF79432EA1CD1738BFA0EAF9E79DB074BAFAB560D0B96285F42202864DB89"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\metrics.csv",
+        "Hash":  "BCCD68CB99ED0D1148FA38F65B7220D19B883E4E3A9457DEE890633EE1E39075"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\run.json",
+        "Hash":  "48D28766A3FAFE6C70C273515D0C7D049635BBA8CD78E9DE29CFFEBB25CF0A15"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_mass_leak\\worker_result.json",
+        "Hash":  "698CADC75E873BF81DAD38D3F598454DA5FCB34FDBC772C3EB6036BFAFEB11C5"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\comparison.png",
+        "Hash":  "5C190E42D5669BA1A120FF334D304BE13560481485FF0DA4F1F7A9DDBA362B1D"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\fields.npz",
+        "Hash":  "6388851378A43CB723AC59FCF301EEF923CB4560AA186F9D4302376AEC9103A9"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\metrics.csv",
+        "Hash":  "4C9F4231B8D01B5A49FB20815694FF1A0094018099CF5B7179E8619425ABB6DA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\run.json",
+        "Hash":  "ED4EE5353EF4E906CB2721535AA0191CC971152B0AF34ECDCB9E9087595F7946"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn07_reverse_sign\\worker_result.json",
+        "Hash":  "E2B9A194FF0B605F9D48DD292E6A47D6F7AA774C5457150A03E5ADD49E3EA38C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\comparison.png",
+        "Hash":  "ED7A44EBC33E1E7AA4450F231F997A0A9EE92324D040F1EEC52BEBEDC976F8BE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\fields.npz",
+        "Hash":  "4508C6E9455A73AE3650F95C70CC6DEC02222F3B6D576E7EC177BBC8624BC173"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\metrics.csv",
+        "Hash":  "4AB6550EE4A57A26EE5686F7525611FC502231F7874E1E733570A62FDE96DC19"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\run.json",
+        "Hash":  "E8DD98F1D6618306D78D6A1EA96D89F071BC696700EF5835765BAC332C47BABD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline\\worker_result.json",
+        "Hash":  "0BE8108226F32FDB3E94952411391378A194C90F4F5FCAF85138C60ED941078E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\comparison.png",
+        "Hash":  "50CF27CAD499CCC3953F20730167856B15F6CB098CD9A69ABBE5BED523B5A4E5"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\fields.npz",
+        "Hash":  "3B10F83F173418FA5655226B54A399F1A674F8EDE2467C35D9136F5A91DCEA25"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\metrics.csv",
+        "Hash":  "C87F77501251AA62E08886033FC978CE2378262335420C55BC63123E6590CAAA"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\run.json",
+        "Hash":  "09822186C8BCBA11E8FBF4E12B294B6CC32A95699D46D901D1E5ECAA4CC519CD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_forward_coefficient\\worker_result.json",
+        "Hash":  "02A2278F84B5AF7F6C11289A7D588061E587EE2BCD46ABADA2B2E12C2AB7CF09"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\comparison.png",
+        "Hash":  "C0679B405E43192713975C801DC67E9007E609CD953B5947F1059E78626F00FC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\fields.npz",
+        "Hash":  "C15D70C3A6870557F5D566C3EDCF42297663197FBFC24A04929005CA58869BDE"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\metrics.csv",
+        "Hash":  "DBED88726B10955D8D4F875CD4581575628FD5FE6F30F7C210E1EF8A4E508542"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\run.json",
+        "Hash":  "89BB29F4A4BB6140660CC57728EC4E33C44011D214C58034AB551453CE13CC8E"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_frozen\\worker_result.json",
+        "Hash":  "96223006B3889FB497C8C773D6B562DA000E859D621B412625AD6A561E1F0FCD"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\comparison.png",
+        "Hash":  "415A85BC0D1D37559CE6518D06DAE9B1EAD3D09FD575F4006295AC880FFB6835"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\fields.npz",
+        "Hash":  "1330FF854944B0FED679B81F14DAF98E43896BFF97747C328265A984897F54C4"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\metrics.csv",
+        "Hash":  "DA6E48D16F8A2D0866A642FA1CFD3F4C242F4A282D6509D90DAF446B2F177C72"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\run.json",
+        "Hash":  "0FD5EA9C3EA07D453089AC030571AF2DBCBD96D355DD0E2A4F7FF6B032B02A33"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_mass_leak\\worker_result.json",
+        "Hash":  "61F885552FEE4C3673B6C85456CEE6969B70009AB04803233CF2D71B534E06C4"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\comparison.png",
+        "Hash":  "1BF050B886F1AFFA9D49644453D80279DE6E047DCB6236E765EB6F8EFCC209C3"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\fields.npz",
+        "Hash":  "6EADB7DA84CAE4B5C7EBFD25BD70EA52ADE20E933B61B1DB6E68563544A3DE65"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\metrics.csv",
+        "Hash":  "17B22E92D48D224FE8E18BD01E7EE2762EA137FD92C6A9EABF18E6FD25CC7C6C"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\run.json",
+        "Hash":  "728C60D0B2AD56F9F91BC6706B4CBD4957D9D24ED77EAD1E9D0DB3E86C228156"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_reverse_sign\\worker_result.json",
+        "Hash":  "1CE433868DA483B1A6FFEE9B6C1307810A2D1E1C050C2B355D58EF4D3878282A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\comparison.png",
+        "Hash":  "F97A38A3663076A48F36D6B567D6E91F37014E618B9219F5AAD1FCFD096DFAD2"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\fields.npz",
+        "Hash":  "3E95D4597DB3D06615E522FF079816214B6B918A531C8A98F8D60BC29DD9F01F"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\metrics.csv",
+        "Hash":  "E336E21744E5B13B0E5D837E9380722F5C413434189E075C7A4ACC098BD27603"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\run.json",
+        "Hash":  "0CD5B7EA3424BF4796DC0259A192775C892F783FCDBC57F0DC6DF0848CE4F143"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_baseline\\worker_result.json",
+        "Hash":  "C568DE8CFDF74D5A38A3A8744CA3692508081CC117F564F7BA661169159FD63A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\comparison.png",
+        "Hash":  "32B96885231779C15EF2D9FAD3593ACE149E4A34C31907970725B34F63D39336"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\fields.npz",
+        "Hash":  "6242535D7DA08EF174106F5571DCEBA99AAA4ADBD9F893ADD0020D5677253084"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\metrics.csv",
+        "Hash":  "D9D8096BAB2E7671664548DA2BAE5C3D74D286B878BA1E8271C070F4C1D5C1B8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\run.json",
+        "Hash":  "B0F306E3E7328D6EB28EA3D09F72A222B80D657DCC18B73D84BFF7270259561A"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_forward_coefficient\\worker_result.json",
+        "Hash":  "B4BF68E9B15F7DFC80435DCA6DF5FCC3EF4EF698868FFEB974A50B3E50610107"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\comparison.png",
+        "Hash":  "052697E533075BC6ACC65BE277D9726E6A69011BCEAF0BEC0946881743918138"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\fields.npz",
+        "Hash":  "6242535D7DA08EF174106F5571DCEBA99AAA4ADBD9F893ADD0020D5677253084"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\metrics.csv",
+        "Hash":  "D9D8096BAB2E7671664548DA2BAE5C3D74D286B878BA1E8271C070F4C1D5C1B8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\run.json",
+        "Hash":  "C26DA7A1E65F504DECB8DB7B8E7F16F2D7F4A1883D577196A65BB1EAD313260B"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_frozen\\worker_result.json",
+        "Hash":  "B4BF68E9B15F7DFC80435DCA6DF5FCC3EF4EF698868FFEB974A50B3E50610107"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\comparison.png",
+        "Hash":  "9D664A261C99D6BC291D127AEB7B2FBF6FE2FC8EDEE9DFCA6C569A03C4E6C521"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\fields.npz",
+        "Hash":  "6242535D7DA08EF174106F5571DCEBA99AAA4ADBD9F893ADD0020D5677253084"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\metrics.csv",
+        "Hash":  "D9D8096BAB2E7671664548DA2BAE5C3D74D286B878BA1E8271C070F4C1D5C1B8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\run.json",
+        "Hash":  "4C31ED43951CB2066B68FA6E81746669EB1047904DF2D8C1B22C5C7C2C8C9241"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak\\worker_result.json",
+        "Hash":  "B4BF68E9B15F7DFC80435DCA6DF5FCC3EF4EF698868FFEB974A50B3E50610107"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\comparison.png",
+        "Hash":  "21287646135608248EA065398225C52E2F346E555CB51F2693044BED2B62AFD0"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\fields.npz",
+        "Hash":  "6242535D7DA08EF174106F5571DCEBA99AAA4ADBD9F893ADD0020D5677253084"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\metrics.csv",
+        "Hash":  "D9D8096BAB2E7671664548DA2BAE5C3D74D286B878BA1E8271C070F4C1D5C1B8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\returncode.txt",
+        "Hash":  "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\run.json",
+        "Hash":  "D777B960ED87D39CC0B26C4AC7C62D0500E5430B820B0C84B7CB446823132714"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\stdout.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_reverse_sign\\worker_result.json",
+        "Hash":  "B4BF68E9B15F7DFC80435DCA6DF5FCC3EF4EF698868FFEB974A50B3E50610107"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\scripts\\run_ode_scenario.py",
+        "Hash":  "F118929E692F90FF86CC9BDA0F1E3A5288ABD0191DCEAAE432EAFAF0C00DB9A8"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\scripts\\run_scenario.py",
+        "Hash":  "CC9259992EEE682D9EBB7C368E0CB91454B3F777D4B41AE3A87BAF72E19094B9"
+    }
+]

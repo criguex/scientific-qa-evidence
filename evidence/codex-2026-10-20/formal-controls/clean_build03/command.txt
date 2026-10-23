@@ -1,0 +1,5 @@
+invocation=/mnt/c/<USER>/adv050-clean03-1siJVW.sh --repo <SOURCE_CHECKOUT> --private-root <PRIVATE_ROOT> --evidence-dir <PRIVATE_ROOT>/outpublic --toolchain-bin <LEAN_TOOLCHAIN_BIN> 
+systemd_run=systemd-run --user --wait --unit=adv050-clean-build-20261020T205743Z-361 --property=RestrictAddressFamilies=~AF_UNIX --property=SystemCallArchitectures=native --property=SystemCallFilter=~@network-io,io_uring_setup,io_uring_enter,io_uring_register --property=SystemCallErrorNumber=EPERM --property=NoNewPrivileges=yes --property=MemoryMax=25769803776 --property=CPUQuota=600% --property=RuntimeMaxSec=2h --property=StandardInput=null --property=StandardOutput=append:<PRIVATE_ROOT>/raw/service.stdout.log --property=StandardError=append:<PRIVATE_ROOT>/raw/service.stderr.log
+service_command=/usr/bin/bash /mnt/c/<USER>/adv050-clean03-1siJVW.sh --service <CLEAN_WORKSPACE> <PRIVATE_ROOT>/raw <LEAN_TOOLCHAIN_BIN>
+inner_command=<LEAN_TOOLCHAIN_BIN>/lake --no-cache build
+LEAN_NUM_THREADS=6

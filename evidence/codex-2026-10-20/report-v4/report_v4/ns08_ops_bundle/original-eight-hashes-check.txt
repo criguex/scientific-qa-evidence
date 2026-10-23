@@ -1,0 +1,8 @@
+ComparatorChallenges/Euler.lean: OK
+ComparatorChallenges/NavierStokes.lean: OK
+Euler/Solution.lean: OK
+NavierStokes/ComparatorDefinitions.lean: OK
+NavierStokes/ComparatorSolution.lean: OK
+lake-manifest.json: OK
+lakefile.toml: OK
+lean-toolchain: OK

@@ -1,0 +1,7 @@
+Running as unit: ns08-extra-weakened_condition-20261020t2002z-5r9k2m.service; invocation ID: 71eec5c66b554547b683c04c868cca40
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 1.482s
+CPU time consumed: 1.475s
+Memory peak: 1.0M
+Memory swap peak: 0B

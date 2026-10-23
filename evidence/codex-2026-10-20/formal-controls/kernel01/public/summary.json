@@ -1,0 +1,116 @@
+{
+  "scope": "fixture-only kernel acceptance/replay controls; not universal validation",
+  "started_utc": "2026-10-20T21:02:37Z",
+  "finished_utc": "2026-10-20T21:02:41Z",
+  "collection_complete": true,
+  "status": "COLLECTED_PENDING_CLASSIFICATION",
+  "all_expected_responses": null,
+  "mutation": {
+    "target_type_expr_id": 140,
+    "baseline_value_expr_id": 143,
+    "mutant_value_expr_id": 146
+  },
+  "input_sha256": {
+    "baseline_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+    "mutant_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1"
+  },
+  "tool_sha256": {
+    "lake_sha256": "6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d",
+    "lean_sha256": "e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550",
+    "nanoda_sha256": "ccda52587ef42760dff9bc2de26edca0cb6ad207c8719cfffcd1e7daab22ccfb"
+  },
+  "code_sha256": {
+    "fixture_source_sha256": "10839136a8412011f617d4e57924a159cd58a680020cb3c5774c63c748923c27",
+    "replay_harness_sha256": "1e8427a0886471e4d55974acd8d567258480f66a57e233d2d46526f6c637b16b",
+    "runner_sha256": "26a4c935bb5f95c980ecbd4fdd98042ccd40d9871e2e21bf407a8463fc96b3a3",
+    "mutator_sha256": "6c8712ea4054cecc5678c8c09d01aefed26e9f5d3b286f136fb69e2cd0ccac77"
+  },
+  "runs": [
+    {
+      "label": "lean_baseline",
+      "command": [
+        "<LAKE>",
+        "env",
+        "<LEAN>",
+        "--run",
+        "<HARNESS>",
+        "<BASELINE>"
+      ],
+      "started_utc": "2026-10-20T21:02:37Z",
+      "finished_utc": "2026-10-20T21:02:39Z",
+      "duration_seconds": 2.164859,
+      "returncode": 0,
+      "launch_error": null,
+      "stdout_sha256": "e6bac3da9d88d78e45e90cc8fccc22263a4a1142567104aa71f3300059cb387b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command_sha256": "b22ec8e64f8173c76d7dedcf7e2bbdb60607f7866723b5991b2d802399dd7512",
+      "kernel": "Lean",
+      "case": "baseline",
+      "export_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+      "classification": "ACCEPT"
+    },
+    {
+      "label": "nanoda_baseline",
+      "command": [
+        "<NANODA>",
+        "<OUTPUT>/raw/nanoda_baseline.config.json"
+      ],
+      "started_utc": "2026-10-20T21:02:39Z",
+      "finished_utc": "2026-10-20T21:02:39Z",
+      "duration_seconds": 0.004437,
+      "returncode": 0,
+      "launch_error": null,
+      "stdout_sha256": "8c47c86e002dd56420ac0f9b98c749be2bc26a4b0ff7dbf9383369e7a9740c2b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command_sha256": "5b29478fa632c95ff3367ce146be70c206de0f11cf00ced789ed7c4a707ff29b",
+      "kernel": "nanoda",
+      "case": "baseline",
+      "export_sha256": "3b19256d433ca5fec9ebdfeb2f2721968a72d6a75c5cf522a41c601fc7b12520",
+      "config_sha256": "8264cd46fc9b216b4e5c2c6d22f15c79f7808139295c0ccbdc3b6d5cc8e63641",
+      "classification": "SUCCESS_MARKER_MISSING"
+    },
+    {
+      "label": "lean_mutant",
+      "command": [
+        "<LAKE>",
+        "env",
+        "<LEAN>",
+        "--run",
+        "<HARNESS>",
+        "<MUTANT>"
+      ],
+      "started_utc": "2026-10-20T21:02:39Z",
+      "finished_utc": "2026-10-20T21:02:41Z",
+      "duration_seconds": 1.66147,
+      "returncode": 2,
+      "launch_error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "4adf687d5a6c5de598d551a82748b57d3f316dfec495d2ae5ee83ea8a46e7b10",
+      "command_sha256": "3fbfa5aa880c04f26149440b4a6fa2c4013714bb3a81995a2ab103724c2b4a16",
+      "kernel": "Lean",
+      "case": "mutant",
+      "export_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1",
+      "classification": "KERNEL_TYPE_MISMATCH_REJECT"
+    },
+    {
+      "label": "nanoda_mutant",
+      "command": [
+        "<NANODA>",
+        "<OUTPUT>/raw/nanoda_mutant.config.json"
+      ],
+      "started_utc": "2026-10-20T21:02:41Z",
+      "finished_utc": "2026-10-20T21:02:41Z",
+      "duration_seconds": 0.008172,
+      "returncode": 101,
+      "launch_error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d82ea641389d3b3e78b5819da1252e0177513507199b8564018bb403a9e756d0",
+      "command_sha256": "5bda978428f530d607658bcaee3ba0e5448505b738dd3b2bec3e7f45b7324502",
+      "kernel": "nanoda",
+      "case": "mutant",
+      "export_sha256": "db631fa73c15dd2eb454a744873a677ac3184400a3d0f44e24686c21eff155e1",
+      "config_sha256": "35e71d517f969236d8547bd226a2813cbcbfe4aab7c9aa440d34cd1670819075",
+      "classification": "NONZERO_UNCLASSIFIED"
+    }
+  ]
+}

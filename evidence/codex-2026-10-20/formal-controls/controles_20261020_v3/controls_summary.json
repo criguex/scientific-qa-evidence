@@ -1,0 +1,170 @@
+{
+  "scope": "CONTROLES DEL VERIFICADOR; NO SON UNA PRUEBA DE NS NI EULER",
+  "started_utc": "2026-10-20T16:24:46.347895+00:00",
+  "machine": {
+    "hostname": "War",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3"
+  },
+  "repo": "<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler",
+  "manifest": "<WIN_HOME_WSL>/nse-audit-20261020/audit_static.json",
+  "manifest_sha256": "2cf2a09b8bfbe85a2d30c06b61ccfe9038f48eb4b2fdb35188e9a4e27b542fa5",
+  "lean_binary": "<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+  "self_check_passed": true,
+  "controls": {
+    "manifest_commit": {
+      "expected": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+      "actual": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+      "passed": true
+    },
+    "commit": {
+      "expected": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+      "actual": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+      "execution": {
+        "command": [
+          "git",
+          "-C",
+          "<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    "hashes": {
+      "files": {
+        "lean-toolchain": {
+          "expected": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88",
+          "actual": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88",
+          "passed": true
+        },
+        "lakefile.toml": {
+          "expected": "97b2804da5b9a2cd0aaf44ce42b7c39e9947beff9d2ac01a11e0d3d867af1c09",
+          "actual": "97b2804da5b9a2cd0aaf44ce42b7c39e9947beff9d2ac01a11e0d3d867af1c09",
+          "passed": true
+        },
+        "lake-manifest.json": {
+          "expected": "5ec1dc8e009008d0efb9601cd38f6ba54e753fd538b0e5f8c3e6c5ec72ee1e09",
+          "actual": "5ec1dc8e009008d0efb9601cd38f6ba54e753fd538b0e5f8c3e6c5ec72ee1e09",
+          "passed": true
+        },
+        "formalization.yaml": {
+          "expected": "d9866d5c1fdc16832f098e5f2affa96baf0b156a5f34b9be015d793e1abe2fdd",
+          "actual": "d9866d5c1fdc16832f098e5f2affa96baf0b156a5f34b9be015d793e1abe2fdd",
+          "passed": true
+        },
+        "ComparatorChallenges/NavierStokes.lean": {
+          "expected": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+          "actual": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+          "passed": true
+        },
+        "ComparatorChallenges/NavierStokes.json": {
+          "expected": "7610ecead7b390d80ff7f4229a3ff8f18d630e046f7ad1de4f92c7e8e76845b8",
+          "actual": "7610ecead7b390d80ff7f4229a3ff8f18d630e046f7ad1de4f92c7e8e76845b8",
+          "passed": true
+        },
+        "NavierStokes/ComparatorDefinitions.lean": {
+          "expected": "8d90e0f9eee14f8b01773852083a02fd58bda59d4de2abb60d1787bbc9f6ebf4",
+          "actual": "8d90e0f9eee14f8b01773852083a02fd58bda59d4de2abb60d1787bbc9f6ebf4",
+          "passed": true
+        },
+        "NavierStokes/ComparatorSolution.lean": {
+          "expected": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227",
+          "actual": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227",
+          "passed": true
+        }
+      },
+      "expected_count": 8,
+      "actual_count": 8,
+      "passed": true
+    },
+    "hash_mutation": {
+      "expected": "rechazar contenido con exactamente un byte modificado",
+      "method": "XOR 1 del primer byte en memoria; copias y sha256sum -c fuera del repo",
+      "original_sha256": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88",
+      "mutated_sha256": "ca3ca5d8d9db5b4fd339e8abd0004d3c6e1cf7653d8c31b2467a2402b585805b",
+      "changed_bytes": 1,
+      "original_check": {
+        "command": [
+          "sha256sum",
+          "-c",
+          "hash_original.sha256"
+        ],
+        "returncode": 0,
+        "stdout": "hash_original.bin: OK\n",
+        "stderr": ""
+      },
+      "mutated_check": {
+        "command": [
+          "sha256sum",
+          "-c",
+          "hash_mutated.sha256"
+        ],
+        "returncode": 1,
+        "stdout": "hash_mutated.bin: FAILED\n",
+        "stderr": "sha256sum: WARNING: 1 computed checksum did NOT match\n"
+      },
+      "passed": true
+    },
+    "toolchain": {
+      "expected": "Lean 4.34.0-rc2; commit 6a10ac8c22beadecabdbb0919c2b50214762f91d",
+      "execution": {
+        "command": [
+          "<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+          "--version"
+        ],
+        "returncode": 0,
+        "stdout": "Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    "positive": {
+      "expected": "exit 0; control_true no depende de axiomas",
+      "fixture_sha256": "accb45c9cf9e017fbd414bed87d560d41c8636024b53a5f462974e4f990f5702",
+      "execution": {
+        "command": [
+          "<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+          "<WIN_HOME_WSL>/nse-audit-20261020/controls/positive.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'control_true' does not depend on any axioms\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    "negative": {
+      "expected": "exit no cero por error lógico de trivial ante False",
+      "fixture_sha256": "3682207160a25c87fc74f34c86da9b115f8477e3b71158b116e35052c3ee22ab",
+      "execution": {
+        "command": [
+          "<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+          "<WIN_HOME_WSL>/nse-audit-20261020/controls/negative.lean"
+        ],
+        "returncode": 1,
+        "stdout": "<WIN_HOME_WSL>/nse-audit-20261020/controls/negative.lean:1:36: error: Tactic `assumption` failed\n\n⊢ False\n",
+        "stderr": ""
+      },
+      "passed": true
+    },
+    "sorry": {
+      "expected": "exit 0 y #print axioms revela sorryAx",
+      "fixture_sha256": "24ec2bad721bb4539a3f2e73c85d6116b6d8dafca7f106136f74ce572e1c6102",
+      "execution": {
+        "command": [
+          "<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean",
+          "<WIN_HOME_WSL>/nse-audit-20261020/controls/sorry.lean"
+        ],
+        "returncode": 0,
+        "stdout": "<WIN_HOME_WSL>/nse-audit-20261020/controls/sorry.lean:1:8: warning: declaration uses `sorry`\n'control_sorry' depends on axioms: [sorryAx]\n",
+        "stderr": ""
+      },
+      "passed": true
+    }
+  },
+  "all_controls_passed": true,
+  "finished_utc": "2026-10-20T16:24:46.992411+00:00"
+}

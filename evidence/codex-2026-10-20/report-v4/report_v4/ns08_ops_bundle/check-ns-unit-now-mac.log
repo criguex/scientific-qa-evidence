@@ -1,0 +1,26 @@
+UTC inspection: 2026-10-20T19:02:08Z
+RuntimeMaxUSec=8h
+MainPID=424
+Result=success
+ControlGroup=/user.slice/user-1000.slice/user@1000.service/app.slice/ns08-comparator-ns-20261020-1901.service
+MemoryPeak=2991706112
+CPUUsageNSec=15629209000
+ActiveState=active
+SubState=running
+ControlGroup=/user.slice/user-1000.slice/user@1000.service/app.slice/ns08-comparator-ns-20261020-1901.service
+pid=424 cmd=/usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh  CapEff=0000000000000000 socket_fds=[]
+pid=429 cmd=/usr/bin/time -v -o <WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/time.log <WSL_HOME>/.elan/bin/lake env <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator ComparatorChallenges/NavierStokes.json  CapEff=0000000000000000 socket_fds=[]
+pid=430 cmd=<WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lake env <WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator ComparatorChallenges/NavierStokes.json  CapEff=0000000000000000 socket_fds=[]
+pid=484 cmd=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/Comparator/.lake/build/bin/comparator ComparatorChallenges/NavierStokes.json  CapEff=0000000000000000 socket_fds=[]
+pid=575 cmd=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export ComparatorChallenges.NavierStokes -- Nat String String.mk Char Quot Quot.mk Quot.lift Quot.ind NavierStokes.Comparator.navier_stokes_breakdown_R3 NavierStokes.Comparator.navier_stokes_breakdown_periodic propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce  CapEff=0000000000000000 socket_fds=[]
+Run files:
+command.txt 922 bytes
+inputs.sha256.txt 920 bytes
+requested_start_utc.txt 21 bytes
+start_utc.txt 21 bytes
+stderr.log 0 bytes
+stdout.log 304 bytes
+time.log 0 bytes
+unit-properties.txt 493 bytes
+unit-stderr.log 0 bytes
+unit-stdout.log 86 bytes

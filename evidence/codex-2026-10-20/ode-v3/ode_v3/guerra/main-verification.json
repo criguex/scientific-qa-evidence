@@ -1,0 +1,598 @@
+{
+  "campaign": "GUERRA primary reaction V3",
+  "expected_runs": 45,
+  "actual_runs": 45,
+  "remote_manifest_files_verified": 459,
+  "run_artifact_hashes_verified": 315,
+  "all_verified": true,
+  "issues": [],
+  "status_counts": {
+    "BASELINE_PASS": 9,
+    "EQUIVALENT": 11,
+    "KILLED": 20,
+    "SURVIVED": 5
+  },
+  "baseline_max_fine_error": 9.856225779980576e-09,
+  "rows": [
+    {
+      "scenario": "rxn01",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        "order_pair_1": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn01",
+      "mutant": "forward_coefficient",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kf=0: el término directo modificado es cero para todos los estados"
+    },
+    {
+      "scenario": "rxn01",
+      "mutant": "frozen",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kf=kr=0: el operador original es cero para todos los estados"
+    },
+    {
+      "scenario": "rxn01",
+      "mutant": "mass_leak",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn01",
+      "mutant": "reverse_sign",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn02",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        "order_pair_1": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn02",
+      "mutant": "forward_coefficient",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kf=0: el término directo modificado es cero para todos los estados"
+    },
+    {
+      "scenario": "rxn02",
+      "mutant": "frozen",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kf=kr=0: el operador original es cero para todos los estados"
+    },
+    {
+      "scenario": "rxn02",
+      "mutant": "mass_leak",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn02",
+      "mutant": "reverse_sign",
+      "status": "EQUIVALENT",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn03",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 1.923988747901597e-12,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.012043434366982,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.006033368631895,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn03",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.0819171923775815,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn03",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.7981034820053446,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn03",
+      "mutant": "mass_leak",
+      "status": "EQUIVALENT",
+      "fine_error": 1.923988747901597e-12,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn03",
+      "mutant": "reverse_sign",
+      "status": "EQUIVALENT",
+      "fine_error": 1.923988747901597e-12,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kr=0: los términos inversos modificados son cero para todos los estados"
+    },
+    {
+      "scenario": "rxn04",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 9.76030367891287e-12,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.0180443689937215,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.009013958969653,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn04",
+      "mutant": "forward_coefficient",
+      "status": "EQUIVALENT",
+      "fine_error": 9.76030367891287e-12,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "kf=0: el término directo modificado es cero para todos los estados"
+    },
+    {
+      "scenario": "rxn04",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.9092820467105875,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn04",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "fine_error": 1.234713298043226,
+      "failed_checks": [
+        "mass_drift_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn04",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "fine_error": 10.932458426658972,
+      "failed_checks": [
+        "nonnegative_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn05",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 1.8807733222391156e-12,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.01503070008391,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.007619180436514,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn05",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.058314495855146004,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn05",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.3458658867053549,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn05",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "fine_error": 0.2226950587579659,
+      "failed_checks": [
+        "mass_drift_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn05",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "fine_error": 0.6377835085771618,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn06",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 2.3185064993955487e-12,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.0240641323714135,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.012014140406407,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn06",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.02408279629411699,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn06",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.07194283470162248,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn06",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "fine_error": 0.268253015945897,
+      "failed_checks": [
+        "mass_drift_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn06",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "fine_error": 0.2614605824234748,
+      "failed_checks": [
+        "nonnegative_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn07",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 9.856225779980576e-09,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.150961140934146,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.075308062634788,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn07",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.05454545417379805,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn07",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.19999999958776926,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn07",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "fine_error": 373.1510652913047,
+      "failed_checks": [
+        "mass_drift_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn07",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "fine_error": 139.55518997143633,
+      "failed_checks": [
+        "nonnegative_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn08",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 3.925231146709438e-17,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        "order_pair_1": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn08",
+      "mutant": "forward_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.04817455874513282,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn08",
+      "mutant": "frozen",
+      "status": "SURVIVED",
+      "fine_error": 3.925231146709438e-17,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias"
+    },
+    {
+      "scenario": "rxn08",
+      "mutant": "mass_leak",
+      "status": "KILLED",
+      "fine_error": 1.1584437117524644,
+      "failed_checks": [
+        "mass_drift_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn08",
+      "mutant": "reverse_sign",
+      "status": "KILLED",
+      "fine_error": 4.150684045571704,
+      "failed_checks": [
+        "nonnegative_h0.0125",
+        "bounded_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "rxn09",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        "order_pair_1": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "rxn09",
+      "mutant": "forward_coefficient",
+      "status": "SURVIVED",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias"
+    },
+    {
+      "scenario": "rxn09",
+      "mutant": "frozen",
+      "status": "SURVIVED",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias"
+    },
+    {
+      "scenario": "rxn09",
+      "mutant": "mass_leak",
+      "status": "SURVIVED",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias"
+    },
+    {
+      "scenario": "rxn09",
+      "mutant": "reverse_sign",
+      "status": "SURVIVED",
+      "fine_error": 0.0,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias"
+    }
+  ],
+  "scope": "Nine stipulated reaction configurations, not experimental chemistry; equivalence is parameter-specific; survivors expose coverage limits."
+}

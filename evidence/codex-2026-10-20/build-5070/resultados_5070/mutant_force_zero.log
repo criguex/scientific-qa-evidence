@@ -1,0 +1,20 @@
+✔ [9354/9371] Built NavierStokes.ComparatorDefinitions (16s)
+✔ [9355/9371] Built NavierStokes.ComparatorBridge (4.0s)
+✔ [9356/9371] Built NavierStokes.PeriodicViscosityUniqueness (3.4s)
+✔ [9357/9371] Built NavierStokes.ComparatorR3Bridge (3.6s)
+✖ [9358/9371] Building NavierStokes.CompactSpatialForceDecay (3.8s)
+trace: .> LEAN_PATH=<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/Cli/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/batteries/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/Qq/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/aesop/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/proofwidgets/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/importGraph/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/LeanSearchClient/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/plausible/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/lean4export/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/mathlib/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/packages/Comparator/.lake/build/lib/lean:<WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/build/lib/lean <WSL_HOME>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean <WSL_HOME>/nse_audit_20261020/mutant_force_zero/NavierStokes/CompactSpatialForceDecay.lean -o <WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/build/lib/lean/NavierStokes/CompactSpatialForceDecay.olean -i <WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/build/lib/lean/NavierStokes/CompactSpatialForceDecay.ilean -c <WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/build/ir/NavierStokes/CompactSpatialForceDecay.c --setup <WSL_HOME>/nse_audit_20261020/mutant_force_zero/.lake/build/ir/NavierStokes/CompactSpatialForceDecay.setup.json --json
+error: NavierStokes/CompactSpatialForceDecay.lean:89:9: Insufficient number of fields for `⟨...⟩` constructor: Constructor `NavierStokes.Comparator.ForceConditionDecay.mk` has 3 explicit field, but only 2 were provided
+error: NavierStokes/CompactSpatialForceDecay.lean:90:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+S : Set Space
+hS : IsCompact S
+f : VelocityField
+hf : ContDiffOn ℝ ∞ f futureDomain
+hs : SupportedIn S f
+htime : CompactFutureTimeSupport f
+⊢ ComparatorBridge.toComparator f = 0
+✔ [9366/9371] Built NavierStokes.PeriodicViscosity (2.9s)
+Some required targets logged failures:
+- NavierStokes.CompactSpatialForceDecay
+error: build failed

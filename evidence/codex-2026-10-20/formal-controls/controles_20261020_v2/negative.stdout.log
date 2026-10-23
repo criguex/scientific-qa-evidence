@@ -1,0 +1,3 @@
+<WIN_HOME_WSL>/nse-audit-20261020/controls/negative.lean:1:36: error: Tactic `assumption` failed
+
+⊢ False

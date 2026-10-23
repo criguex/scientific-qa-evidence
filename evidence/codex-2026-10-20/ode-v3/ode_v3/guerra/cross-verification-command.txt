@@ -1,0 +1,29 @@
+python3 -c 'import pathlib,json,hashlib,collections
+root=pathlib.Path("<TMP>/guerra/cross")
+remote=pathlib.PureWindowsPath("<WIN_HOME>/adv050-scenarios-20261020/ode-v3-f118929e-reaction-BcbRyZ")
+manifest=json.loads((root/"cross-artifact-hashes.json").read_text(encoding="utf-8-sig"))
+issues=[]
+for item in manifest:
+    rel=pathlib.PureWindowsPath(item["Path"]).relative_to(remote); path=root/pathlib.Path(*rel.parts)
+    if hashlib.sha256(path.read_bytes()).hexdigest()!=item["Hash"].lower(): issues.append("remote hash: "+str(rel))
+reports=[(p,json.loads(p.read_text())) for p in sorted((root/"results_cross_oscillator").glob("*/run.json"))]
+rows=[]
+for path,r in reports:
+    for name,expected in r["artifact_sha256"].items():
+        if pathlib.Path(name).name!=name or hashlib.sha256((path.parent/name).read_bytes()).hexdigest()!=expected: issues.append("run hash: "+str(path.parent/name))
+    if json.loads((path.parent/"worker_result.json").read_text())!=r["result"]: issues.append("worker mismatch: "+str(path))
+    p=r["parameters"]; m=r["mutant"]; passed=r["result"]["all_contracts_passed"]
+    eq=(m in ("spring_sign","spring_coefficient") and p["omega"]==0) or (m=="damping_sign" and p["omega"]*p["zeta"]==0)
+    expected="BASELINE_PASS" if m=="baseline" and passed else ("KILLED" if not passed else ("EQUIVALENT" if eq else "SURVIVED"))
+    if r["status"]!=expected: issues.append("classification: "+str(path))
+    if r["returncode"]!=0 or not r["result"]["completed"]: issues.append("execution: "+str(path))
+    if r["source_sha256"]!="f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8" or r["contract_sha256"]!="cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06" or r["dependencies"]["run_scenario.py"]!="cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9": issues.append("provenance: "+str(path))
+    if m!="baseline":
+        bp=root/"results_cross_oscillator"/(r["scenario"]+"_baseline")/"run.json"; b=json.loads(bp.read_text())
+        if not r["baseline_valid"] or r["baseline_file_sha256"]!=hashlib.sha256(bp.read_bytes()).hexdigest() or b["parameters"]!=r["parameters"] or b["machine"]["hostname"]!=r["machine"]["hostname"] or b["result"]["environment"]!=r["result"]["environment"]: issues.append("baseline: "+str(path))
+    rows.append({"scenario":r["scenario"],"mutant":m,"status":r["status"],"fine_error":r["result"]["runs"][-1]["maximum_rms_error_common_times"],"failed_checks":[k for k,v in r["result"]["checks"].items() if not v["passed"]],"orders":{k:v for k,v in r["result"]["checks"].items() if k.startswith("order_pair")},"reason":r["reason"]})
+cli=json.loads((root/"cross-campaign-cli.json").read_text(encoding="utf-8-sig"))
+if len(reports)!=15 or len(cli)!=15: issues.append("count not15")
+if any(c["cli_returncode"]!=0 or c["external_timeout"] for c in cli): issues.append("CLI failed/timeout")
+print(json.dumps({"campaign":"GUERRA cross-host oscillator replication V3","expected_runs":15,"actual_runs":len(reports),"remote_manifest_files_verified":len(manifest),"run_artifact_hashes_verified":sum(len(r["artifact_sha256"]) for _,r in reports),"all_verified":not issues,"issues":issues,"status_counts":dict(collections.Counter(r["status"] for _,r in reports)),"rows":rows,"scope":"Replications of osc06,osc08,osc09 using same sources and local GUERRA baselines; not new scenarios; comparison against WAR still separate"},indent=2,ensure_ascii=False))
+' | tee <TMP>/guerra/cross-verification.json

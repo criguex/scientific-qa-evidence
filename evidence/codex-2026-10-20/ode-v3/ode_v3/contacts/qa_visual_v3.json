@@ -1,0 +1,42 @@
+{
+  "record_type": "derived_record_of_tool_results_and_agent_visual_review",
+  "review_date": "2026-10-20",
+  "not_external_certification": true,
+  "renderer_sha256": "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+  "integrator_sha256_unchanged": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256_unchanged": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "preliminary_issue": "El pie y las etiquetas temporales de la última fila se solapaban en el render preliminar 19913f43.",
+  "correction": "Solo márgenes y alturas de paneles/pie; no cambió el cálculo, los parámetros ni los datos.",
+  "final_review": {
+    "physics": {
+      "reviewer": "agente coordinador",
+      "nine_panels_visible": true,
+      "footer_and_axis_labels_no_overlap": true,
+      "artifact": "physics/FISICA_OSCILADORES_V3.png",
+      "sha256": "7b0f9d595c3bd6ebe76951d112db7eed95242556cf898411ae8c973e5a814da7",
+      "exit_code": 0,
+      "command": "ssh war <WIN_HOME>/nse-audit-20261020/simulation-venv/Scripts/python.exe <WIN_HOME>/nse-audit-20261020/ode-v3-f118929e/render_ode_contacts_e379be05.py --case oscillator --results <WIN_HOME>/nse-audit-20261020/ode-v3-f118929e/results --output <WIN_HOME>/nse-audit-20261020/ode-v3-f118929e/visual_oscillator_v2",
+      "reported_tool_wall_seconds": 0.9033,
+      "duration_note": "Incluye SSH; no es una medición aislada del tiempo de render.",
+      "summary": "physics/contacts_summary.json"
+    },
+    "chemistry": {
+      "reviewers": ["agente de operaciones", "agente coordinador"],
+      "nine_panels_visible": true,
+      "footer_and_axis_labels_no_overlap": true,
+      "artifact": "chemistry/QUIMICA_REACCIONES_V3.png",
+      "sha256": "472a9406c4e824d53eebb4d8eacb87dd93248341564e9d37e956ab8e85dac4ec",
+      "exit_code": 0,
+      "operation": "chemistry/render-operation.json",
+      "verification": "chemistry/visual-reaction-v2-verification.json",
+      "summary": "chemistry/contacts_summary.json"
+    }
+  },
+  "new_integration_performed_for_contacts": false,
+  "limits": [
+    "Revisión visual de agentes, no certificación externa ni revisión humana afirmada.",
+    "La legibilidad de un gráfico no prueba la corrección de las ecuaciones.",
+    "Las escalas de error son diferentes por panel y están rotuladas.",
+    "No se inventa un timestamp de inicio para el render físico no registrado."
+  ]
+}

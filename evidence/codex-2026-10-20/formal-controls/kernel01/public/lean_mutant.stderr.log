@@ -1,0 +1,5 @@
+LEAN_KERNEL_REJECT: while replaying declaration 'target':
+(kernel) declaration type mismatch, 'target' has type
+  True
+but it is expected to have type
+  @Eq Nat 0 0

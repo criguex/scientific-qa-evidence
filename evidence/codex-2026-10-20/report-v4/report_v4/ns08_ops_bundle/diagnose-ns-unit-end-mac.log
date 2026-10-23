@@ -1,0 +1,56 @@
+UTC diagnosis: 2026-10-20T19:03:16Z
+Unit ns08-comparator-ns-20261020-1901.service could not be found.
+MainPID=0
+Result=success
+ExecMainStartTimestamp=
+ExecMainExitTimestamp=
+ExecMainCode=0
+ExecMainStatus=0
+ControlGroup=
+MemoryPeak=[not set]
+CPUUsageNSec=[not set]
+StandardOutput=inherit
+StandardError=inherit
+ActiveState=inactive
+SubState=dead
+Journal:
+2026-10-20T14:01:56.233432-05:00 War systemd[335]: Started ns08-comparator-ns-20261020-1901.service - /usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh.
+2026-10-20T14:02:36.355699-05:00 War systemd[335]: Stopping ns08-comparator-ns-20261020-1901.service - /usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh...
+2026-10-20T14:02:36.356141-05:00 War systemd[335]: Stopped ns08-comparator-ns-20261020-1901.service - /usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh.
+2026-10-20T14:02:36.356229-05:00 War systemd[335]: ns08-comparator-ns-20261020-1901.service: Consumed 35.806s CPU time, 9.3G memory peak, 0B memory swap peak.
+Processes:
+Run dir listing:
+command.txt 922 bytes
+inputs.sha256.txt 920 bytes
+requested_start_utc.txt 21 bytes
+start_utc.txt 21 bytes
+stderr.log 0 bytes
+stdout.log 797 bytes
+time.log 0 bytes
+unit-properties.txt 493 bytes
+unit-stderr.log 0 bytes
+unit-stdout.log 86 bytes
+=== stdout.log ===
+Building ComparatorChallenges.NavierStokes
+⚠ [8763/8763] Replayed ComparatorChallenges.NavierStokes
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.NavierStokes
+Building NavierStokes.ComparatorSolution
+
+=== stderr.log ===
+
+=== time.log ===
+
+=== start_utc.txt ===
+2026-10-20T19:01:56Z
+
+=== unit-stdout.log ===
+Runner socket descriptors:
+[]
+runner_socket_inspection_exit=0
+CapEff=0000000000000000
+
+=== unit-stderr.log ===
+

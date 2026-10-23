@@ -1,0 +1,36 @@
+﻿[
+    {
+        "name":  "n32-dt001-T4",
+        "n":  32,
+        "dt":  0.01,
+        "T":  4,
+        "threads":  1,
+        "pid":  11204,
+        "started_utc":  "2026-10-20T17:51:49.8203815Z",
+        "finished_utc":  "2026-10-20T17:53:32.8461225Z",
+        "exit_code":  0,
+        "timed_out":  false,
+        "source_sha256":  "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50",
+        "python":  "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+        "output":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt001-T4",
+        "stdout":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt001-T4.stdout.log",
+        "stderr":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt001-T4.stderr.log"
+    },
+    {
+        "name":  "n32-dt0005-T4",
+        "n":  32,
+        "dt":  0.005,
+        "T":  4,
+        "threads":  1,
+        "pid":  5140,
+        "started_utc":  "2026-10-20T17:53:32.9151409Z",
+        "finished_utc":  "2026-10-20T17:56:59.7144711Z",
+        "exit_code":  0,
+        "timed_out":  false,
+        "source_sha256":  "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50",
+        "python":  "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+        "output":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt0005-T4",
+        "stdout":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt0005-T4.stdout.log",
+        "stderr":  "<WIN_HOME>\\adv050-scenarios-20261020\\fluid-dt-os278u\\n32-dt0005-T4.stderr.log"
+    }
+]

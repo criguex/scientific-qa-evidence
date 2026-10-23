@@ -1,0 +1,4 @@
+
+thread 'main' (5453) panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

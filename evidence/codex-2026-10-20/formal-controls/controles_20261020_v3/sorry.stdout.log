@@ -1,0 +1,2 @@
+<WIN_HOME_WSL>/nse-audit-20261020/controls/sorry.lean:1:8: warning: declaration uses `sorry`
+'control_sorry' depends on axioms: [sorryAx]

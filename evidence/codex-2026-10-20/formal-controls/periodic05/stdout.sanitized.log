@@ -1,0 +1,29 @@
+<SANITIZED_FIXTURE_PATH>/PeriodicPositive.lean:36:10: warning: This simp argument is unused:
+  IsOnePeriodic
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicControlInitial]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+<SANITIZED_FIXTURE_PATH>/PeriodicPositive.lean:46:10: warning: This simp argument is unused:
+  IsOnePeriodic
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicControlForce]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+<SANITIZED_FIXTURE_PATH>/PeriodicPositive.lean:73:10: warning: This simp argument is unused:
+  IsOnePeriodic
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicControlVelocity]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+<SANITIZED_FIXTURE_PATH>/PeriodicPositive.lean:75:10: warning: This simp argument is unused:
+  IsOnePeriodic
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [IsOnePeriodic, periodicControlPressure]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'NavierStokes.Comparator.periodic_nonzero_control' depends on axioms: [propext, Classical.choice, Quot.sound]

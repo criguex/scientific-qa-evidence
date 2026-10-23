@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "case": "advection",
+  "mutant": "sign",
+  "status": "KILLED",
+  "reason": "el mutante ejecutado viola el contrato numérico",
+  "operator_change": "invertir signo de difusión, transporte o aceleración de onda",
+  "started_utc": "2026-10-20T17:45:28.497063+00:00",
+  "finished_utc": "2026-10-20T17:45:28.872959+00:00",
+  "monotonic_start_ns": 65845792077400,
+  "monotonic_finish_ns": 65846169017100,
+  "wall_seconds": 0.3769397,
+  "source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12
+  },
+  "parameters": {
+    "coefficient": 1.3,
+    "equation": "u_t = -c u_x",
+    "T": 0.7,
+    "domain": "periodic [0,2*pi)",
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\nse-audit-20261020\\skill-cc925999\\scripts\\run_scenario.py",
+    "--worker",
+    "--case",
+    "advection",
+    "--mutant",
+    "sign",
+    "--output",
+    "<WIN_HOME>\\nse-audit-20261020\\results-cc925999\\advection_sign"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 180,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "d68612dd87bac4334eada068f1f2f96c70df8c60bb5ab35bb0766215551f33e2",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": false,
+    "checks": {
+      "mean_n64": {
+        "actual": 5.551115123125783e-17,
+        "criterion": "< 1e-10",
+        "passed": true
+      },
+      "discrete_invariant_n64": {
+        "actual": 1.456303592184065e-10,
+        "criterion": "< 1e-7",
+        "passed": true
+      },
+      "oracle_n64": {
+        "actual": 1.1674577567962912,
+        "criterion": "< .005",
+        "passed": false
+      }
+    },
+    "runs": [
+      {
+        "n": 64,
+        "dt": 0.014893617021276595,
+        "steps": 47,
+        "rms_error": 1.1674577567962912,
+        "mean_drift_max": 5.551115123125783e-17,
+        "invariant_relative_drift_max": 1.456303592184065e-10,
+        "invariant_increase_max": 0.0
+      }
+    ],
+    "versions": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "environment": {
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "contrato de calibración 1D; no prueba de una teoría general",
+    "invariantes no sustituyen precisión",
+    "SURVIVED no significa equivalencia"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "19e9aaacd9dd4caf9a867bf66fc4b684b88ee65a87a1443877d8004ee1d428bc",
+    "fields.npz": "efc3bcb7dca0b5befb0a11bb68a430a4d2c8945f535a246f1cb8104d0a52a3f4",
+    "metrics.csv": "f3b5c4001b4551e69004fa9cc8869620193c7956a9f0f4f9b9f12e882923f3b8",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "491769a2b4042b3a9990129291740caaa24c47c1252bfdcf8cc271f2da5e407d"
+  }
+}

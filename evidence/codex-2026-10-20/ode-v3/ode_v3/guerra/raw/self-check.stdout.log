@@ -1,0 +1,2 @@
+{"classification_self_checks": 8, "baseline_fingerprint_self_checks": 4, "passed": true}
+{"ode_self_checks": 53, "scenarios": 18, "passed": true}

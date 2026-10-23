@@ -1,0 +1,10 @@
+{
+    "name":  "GUERRA RTX 4060",
+    "busy":  false,
+    "ready":  [
+                  "image",
+                  "project",
+                  "voice"
+              ]
+}
+<WIN_HOME>\adv050-scenarios-20261020\ode-v3-f118929e-reaction-BcbRyZ

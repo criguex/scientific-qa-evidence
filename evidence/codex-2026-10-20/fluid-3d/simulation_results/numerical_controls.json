@@ -1,0 +1,118 @@
+{
+  "tests": {
+    "taylor_green_energy_initial": {
+      "value": 0.0,
+      "threshold_exclusive": 1e-13,
+      "passed": true
+    },
+    "taylor_green_enstrophy_initial": {
+      "value": 5.551115123125783e-17,
+      "threshold_exclusive": 1e-13,
+      "passed": true
+    },
+    "taylor_green_closed_form_rhs_euler": {
+      "value": 4.718447854656915e-16,
+      "threshold_exclusive": 1e-12,
+      "passed": true
+    },
+    "taylor_green_closed_form_rhs_ns": {
+      "value": 4.996003610813204e-16,
+      "threshold_exclusive": 1e-12,
+      "passed": true
+    },
+    "leray_rejects_gradient": {
+      "value": 4.184595542717344e-18,
+      "threshold_exclusive": 1e-12,
+      "passed": true
+    },
+    "curl_matches_analytic_shear": {
+      "value": 1.6653345369377348e-15,
+      "threshold_exclusive": 1e-12,
+      "passed": true
+    },
+    "shear_euler_rhs_zero": {
+      "value": 4.876394406602658e-15,
+      "threshold_exclusive": 1e-10,
+      "passed": true
+    },
+    "shear_viscous_rhs": {
+      "value": 1.734723475976807e-16,
+      "threshold_exclusive": 1e-12,
+      "passed": true
+    },
+    "analytic_shear_euler_t1": {
+      "value": 2.220446049250313e-16,
+      "threshold_exclusive": 1e-10,
+      "passed": true
+    },
+    "analytic_shear_ns_t1": {
+      "value": 6.661338147750939e-16,
+      "threshold_exclusive": 1e-10,
+      "passed": true
+    },
+    "rotational_vs_convective_rhs": {
+      "value": 4.241633474762853e-14,
+      "threshold_exclusive": 1e-10,
+      "passed": true
+    },
+    "reject_large_divergence": {
+      "passed": true,
+      "kind": "negative_control"
+    },
+    "reject_euler_energy_drift": {
+      "passed": true,
+      "kind": "negative_control"
+    },
+    "reject_ns_energy_growth": {
+      "passed": true,
+      "kind": "negative_control"
+    },
+    "reject_wrong_viscous_sign": {
+      "passed": true,
+      "kind": "negative_control"
+    },
+    "reject_reversed_nonlinearity": {
+      "passed": true,
+      "kind": "negative_control"
+    },
+    "time_refinement_euler": {
+      "n": 16,
+      "T": 1.0,
+      "dt": [
+        0.04,
+        0.02,
+        0.01
+      ],
+      "successive_rms_differences": [
+        6.037586124142581e-09,
+        3.775481579320042e-10
+      ],
+      "ratio": 15.9915655719606,
+      "above_noise_floor": true,
+      "expected_ratio_rk4": 16,
+      "minimum_ratio": 8,
+      "passed": true,
+      "scope": "refinamiento temporal a malla fija; no convergencia espacial"
+    },
+    "time_refinement_ns": {
+      "n": 16,
+      "T": 1.0,
+      "dt": [
+        0.04,
+        0.02,
+        0.01
+      ],
+      "successive_rms_differences": [
+        2.3486309415083155e-09,
+        1.4453581502477408e-10
+      ],
+      "ratio": 16.24947381454036,
+      "above_noise_floor": true,
+      "expected_ratio_rk4": 16,
+      "minimum_ratio": 8,
+      "passed": true,
+      "scope": "refinamiento temporal a malla fija; no convergencia espacial"
+    }
+  },
+  "all_tests_passed": true
+}

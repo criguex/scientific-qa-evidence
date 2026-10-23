@@ -1,0 +1,1068 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-20T17:51:03.349137+00:00",
+  "aggregator_source_sha256": "94dfb0920310ce252f00a87284c36cc2dff331aa1ae43d44c550a735554b4c6d",
+  "runner_source_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "contract_sha256": "658817b8bcc508d24cf96520ca635eb0d3803f416489c67948ec11a74ccdb84e",
+  "total_runs": 42,
+  "verified_artifact_hashes": 294,
+  "hosts": {
+    "war": {
+      "runs": 21,
+      "status_counts": {
+        "BASELINE_PASS": 3,
+        "KILLED": 13,
+        "EQUIVALENT": 3,
+        "SURVIVED": 2
+      },
+      "rows": [
+        {
+          "case": "advection",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 0.3977453,
+          "returncode": 0,
+          "evidence": "war/advection_baseline/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.020221649390877283,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.16748250004676735,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3792517,
+          "returncode": 0,
+          "evidence": "war/advection_boundary_zero/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.17697554301633533,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3849054,
+          "returncode": 0,
+          "evidence": "war/advection_coefficient/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.3871855,
+          "returncode": 0,
+          "evidence": "war/advection_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.6812993247349072,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3757962,
+          "returncode": 0,
+          "evidence": "war/advection_frozen/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 1.1674577567962912,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3769397,
+          "returncode": 0,
+          "evidence": "war/advection_sign/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "tiny_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia",
+          "failed_contracts": {},
+          "wall_seconds": 0.384679,
+          "returncode": 0,
+          "evidence": "war/advection_tiny_coefficient/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 0.4054306,
+          "returncode": 0,
+          "evidence": "war/heat_baseline/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.10613874170157778,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "variance_monotone_n64": {
+              "actual": 0.00026901704277418337,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.2498127215125707,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.381029,
+          "returncode": 0,
+          "evidence": "war/heat_boundary_zero/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.011097090781703872,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3822732,
+          "returncode": 0,
+          "evidence": "war/heat_coefficient/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.385634,
+          "returncode": 0,
+          "evidence": "war/heat_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.05298648401298799,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3772956,
+          "returncode": 0,
+          "evidence": "war/heat_frozen/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "variance_monotone_n64": {
+              "actual": 0.3107396865146982,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.6382640405947073,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.3853076,
+          "returncode": 0,
+          "evidence": "war/heat_sign/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "tiny_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia",
+          "failed_contracts": {},
+          "wall_seconds": 0.3797593,
+          "returncode": 0,
+          "evidence": "war/heat_tiny_coefficient/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 0.4712199,
+          "returncode": 0,
+          "evidence": "war/wave_baseline/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.0706425084389901,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "discrete_invariant_n64": {
+              "actual": 0.22544878442995267,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.18748869477940489,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4640803,
+          "returncode": 0,
+          "evidence": "war/wave_boundary_zero/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 0.09515932239384754,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.06365197846645594,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4586019,
+          "returncode": 0,
+          "evidence": "war/wave_coefficient/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.4555501,
+          "returncode": 0,
+          "evidence": "war/wave_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.31433394232893896,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4535591,
+          "returncode": 0,
+          "evidence": "war/wave_frozen/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 1.2400344232894922,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.6764062704083592,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4514334,
+          "returncode": 0,
+          "evidence": "war/wave_sign/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "tiny_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 3.1912431531931146e-07,
+              "criterion": "< 1e-7",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4569091,
+          "returncode": 0,
+          "evidence": "war/wave_tiny_coefficient/run.json"
+        }
+      ],
+      "detection": {
+        "killed": 13,
+        "non_equivalent_evaluable": 15,
+        "fraction": 0.8666666666666667
+      },
+      "environments": {
+        "advection": {
+          "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        },
+        "heat": {
+          "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        },
+        "wave": {
+          "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        }
+      }
+    },
+    "guerra": {
+      "runs": 21,
+      "status_counts": {
+        "BASELINE_PASS": 3,
+        "KILLED": 13,
+        "EQUIVALENT": 3,
+        "SURVIVED": 2
+      },
+      "rows": [
+        {
+          "case": "advection",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 0.854666,
+          "returncode": 0,
+          "evidence": "guerra/advection_baseline/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.020221649390877283,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.16748250004676735,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7371622,
+          "returncode": 0,
+          "evidence": "guerra/advection_boundary_zero/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.17697554301633533,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7556371,
+          "returncode": 0,
+          "evidence": "guerra/advection_coefficient/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.7666004,
+          "returncode": 0,
+          "evidence": "guerra/advection_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.6812993247349072,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7494311,
+          "returncode": 0,
+          "evidence": "guerra/advection_frozen/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 1.1674577567962912,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7995933,
+          "returncode": 0,
+          "evidence": "guerra/advection_sign/run.json"
+        },
+        {
+          "case": "advection",
+          "mutant": "tiny_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia",
+          "failed_contracts": {},
+          "wall_seconds": 0.7619,
+          "returncode": 0,
+          "evidence": "guerra/advection_tiny_coefficient/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 1.0484718,
+          "returncode": 0,
+          "evidence": "guerra/heat_baseline/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.10613874170157778,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "variance_monotone_n64": {
+              "actual": 0.00026901704277418337,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.2498127215125707,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7528298,
+          "returncode": 0,
+          "evidence": "guerra/heat_boundary_zero/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.011097090781703872,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7231335,
+          "returncode": 0,
+          "evidence": "guerra/heat_coefficient/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.7420619,
+          "returncode": 0,
+          "evidence": "guerra/heat_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.05298648401298799,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7055493,
+          "returncode": 0,
+          "evidence": "guerra/heat_frozen/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "variance_monotone_n64": {
+              "actual": 0.3107396865146982,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.6382640405947073,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.7838874,
+          "returncode": 0,
+          "evidence": "guerra/heat_sign/run.json"
+        },
+        {
+          "case": "heat",
+          "mutant": "tiny_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia",
+          "failed_contracts": {},
+          "wall_seconds": 0.7475235,
+          "returncode": 0,
+          "evidence": "guerra/heat_tiny_coefficient/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "failed_contracts": {},
+          "wall_seconds": 0.8931264,
+          "returncode": 0,
+          "evidence": "guerra/wave_baseline/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "boundary_zero",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "mean_n64": {
+              "actual": 0.0706425084389901,
+              "criterion": "< 1e-10",
+              "passed": false
+            },
+            "discrete_invariant_n64": {
+              "actual": 0.22544878442995267,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.18748869477940489,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.911157,
+          "returncode": 0,
+          "evidence": "guerra/wave_boundary_zero/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 0.09515932239384754,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.06365197846645594,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8838141,
+          "returncode": 0,
+          "evidence": "guerra/wave_coefficient/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "equivalent_periodic_shift",
+          "status": "EQUIVALENT",
+          "reason": "roll por N posiciones es la identidad en esta malla periódica discreta",
+          "failed_contracts": {},
+          "wall_seconds": 0.9157672,
+          "returncode": 0,
+          "evidence": "guerra/wave_equivalent_periodic_shift/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "oracle_n64": {
+              "actual": 0.31433394232893896,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8494564,
+          "returncode": 0,
+          "evidence": "guerra/wave_frozen/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 1.2400344232894922,
+              "criterion": "< 1e-7",
+              "passed": false
+            },
+            "oracle_n64": {
+              "actual": 0.6764062704083592,
+              "criterion": "< .005",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9696239,
+          "returncode": 0,
+          "evidence": "guerra/wave_sign/run.json"
+        },
+        {
+          "case": "wave",
+          "mutant": "tiny_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "failed_contracts": {
+            "discrete_invariant_n64": {
+              "actual": 3.1912431531931146e-07,
+              "criterion": "< 1e-7",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8895988,
+          "returncode": 0,
+          "evidence": "guerra/wave_tiny_coefficient/run.json"
+        }
+      ],
+      "detection": {
+        "killed": 13,
+        "non_equivalent_evaluable": 15,
+        "fraction": 0.8666666666666667
+      },
+      "environments": {
+        "advection": {
+          "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        },
+        "heat": {
+          "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        },
+        "wave": {
+          "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+          "python_implementation": "CPython",
+          "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+          "numpy_version": "2.2.6",
+          "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+          "machine_architecture": "AMD64",
+          "byteorder": "little",
+          "dtype": "float64"
+        }
+      }
+    }
+  },
+  "cross_host": {
+    "advection_baseline": {
+      "same_status": true,
+      "war_status": "BASELINE_PASS",
+      "guerra_status": "BASELINE_PASS",
+      "check_actual_absolute_differences": {
+        "spatial_order_64_128": 2.220446049250313e-16,
+        "temporal_consistency": 0.0,
+        "mean_n128": 0.0,
+        "mean_n64": 0.0,
+        "mean_n32": 0.0,
+        "discrete_invariant_n64": 0.0,
+        "discrete_invariant_n128": 0.0,
+        "discrete_invariant_n32": 0.0,
+        "oracle_n128": 0.0,
+        "spatial_order_32_64": 2.220446049250313e-16
+      },
+      "maximum_absolute_difference_of_recorded_checks": 2.220446049250313e-16
+    },
+    "advection_boundary_zero": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "advection_coefficient": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "advection_equivalent_periodic_shift": {
+      "same_status": true,
+      "war_status": "EQUIVALENT",
+      "guerra_status": "EQUIVALENT",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "advection_frozen": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "advection_sign": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "advection_tiny_coefficient": {
+      "same_status": true,
+      "war_status": "SURVIVED",
+      "guerra_status": "SURVIVED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_baseline": {
+      "same_status": true,
+      "war_status": "BASELINE_PASS",
+      "guerra_status": "BASELINE_PASS",
+      "check_actual_absolute_differences": {
+        "spatial_order_64_128": 2.220446049250313e-16,
+        "variance_monotone_n64": 0.0,
+        "mean_n128": 0.0,
+        "temporal_consistency": 0.0,
+        "mean_n64": 0.0,
+        "mean_n32": 0.0,
+        "variance_monotone_n32": 0.0,
+        "oracle_n128": 0.0,
+        "variance_monotone_n128": 0.0,
+        "spatial_order_32_64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 2.220446049250313e-16
+    },
+    "heat_boundary_zero": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_coefficient": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_equivalent_periodic_shift": {
+      "same_status": true,
+      "war_status": "EQUIVALENT",
+      "guerra_status": "EQUIVALENT",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_frozen": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_sign": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "heat_tiny_coefficient": {
+      "same_status": true,
+      "war_status": "SURVIVED",
+      "guerra_status": "SURVIVED",
+      "check_actual_absolute_differences": {
+        "mean_n64": 0.0,
+        "oracle_n64": 0.0,
+        "variance_monotone_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_baseline": {
+      "same_status": true,
+      "war_status": "BASELINE_PASS",
+      "guerra_status": "BASELINE_PASS",
+      "check_actual_absolute_differences": {
+        "spatial_order_64_128": 0.0,
+        "temporal_consistency": 0.0,
+        "mean_n128": 0.0,
+        "mean_n64": 0.0,
+        "mean_n32": 0.0,
+        "discrete_invariant_n64": 0.0,
+        "discrete_invariant_n128": 0.0,
+        "discrete_invariant_n32": 0.0,
+        "oracle_n128": 0.0,
+        "spatial_order_32_64": 2.220446049250313e-16
+      },
+      "maximum_absolute_difference_of_recorded_checks": 2.220446049250313e-16
+    },
+    "wave_boundary_zero": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_coefficient": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_equivalent_periodic_shift": {
+      "same_status": true,
+      "war_status": "EQUIVALENT",
+      "guerra_status": "EQUIVALENT",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_frozen": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_sign": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    },
+    "wave_tiny_coefficient": {
+      "same_status": true,
+      "war_status": "KILLED",
+      "guerra_status": "KILLED",
+      "check_actual_absolute_differences": {
+        "oracle_n64": 0.0,
+        "mean_n64": 0.0,
+        "discrete_invariant_n64": 0.0
+      },
+      "maximum_absolute_difference_of_recorded_checks": 0.0
+    }
+  },
+  "all_classifications_match": true,
+  "input_run_sha256": {
+    "war/advection_baseline/run.json": "d68612dd87bac4334eada068f1f2f96c70df8c60bb5ab35bb0766215551f33e2",
+    "war/advection_boundary_zero/run.json": "1578c3cefdecfc39d49a45b101da427f0140b92079e7774986bd13ebb8aabe9b",
+    "war/advection_coefficient/run.json": "1871c5ce51bdcacb1a99d1f7b1c1ef2d553f6cd30ea6788a048228d8c9e2aa37",
+    "war/advection_equivalent_periodic_shift/run.json": "5195e778cf5f5b33fa7146ef34debddbd64cb73895126d025085396564541dc7",
+    "war/advection_frozen/run.json": "aef787d81b26677b2b02d41e4f5c10502e5b41690e4e02105d319a67d11bcc5c",
+    "war/advection_sign/run.json": "70c0f03f514c15d04d5f8b3b576fa594fc26879add9325e3e050e80122c87331",
+    "war/advection_tiny_coefficient/run.json": "66635cf720c455e1fe8034ad6023b637862f92407ad49a5f9a1f8123667aa9c1",
+    "war/heat_baseline/run.json": "310981d5464d8c2d6ba8dcfcdad198a556226ccdd34fdaed5e05ac1c0c2ede02",
+    "war/heat_boundary_zero/run.json": "94f0181c8056da4c9c812e3f266d171f687734e80f8a279aee1737a7be51f12d",
+    "war/heat_coefficient/run.json": "443e98b2f1f36133373578067b6d80c63d1b1ecdf68d22fee6adcc8aafbc47e5",
+    "war/heat_equivalent_periodic_shift/run.json": "1541af286aaedd51b7b216d774f6695bf92bc4e94d267699840a0c154bd94c88",
+    "war/heat_frozen/run.json": "2463d8b9e91e1ac4be2dff1a4d0dd3ccea954466d5c11461d50da4a533a75460",
+    "war/heat_sign/run.json": "e5abb983e00c9e8a081f8a8a086e8b6121bf1aa84ad8ba611cf7517181c4b73c",
+    "war/heat_tiny_coefficient/run.json": "dff594060027107743636c86c37ee867847d881262e0765d026ca982d3ad8ca3",
+    "war/wave_baseline/run.json": "494032e16ca1dc30f897c540ab1faf747a2f3f1b7621933436617ad21fbcbe56",
+    "war/wave_boundary_zero/run.json": "ddea42c4021f304fcbd616acb5640856c64a119a1c72460c83cd2f975a52be8d",
+    "war/wave_coefficient/run.json": "bf934a2c6ddf9074a24815c424b13a413eb33971cc6400263c2e30005a190047",
+    "war/wave_equivalent_periodic_shift/run.json": "6c54d4f45883b16c972c244813a757012fb74158d80e39ba72c79b42bbf961a7",
+    "war/wave_frozen/run.json": "a6cc1a659618fad15e01a278f76fa1c733c37f8c17c9c25a786ed5bddf15a07a",
+    "war/wave_sign/run.json": "ffcefde78c1e771c72cc495510637fa40a14eeb04fc1b02a8dad252ed28788a7",
+    "war/wave_tiny_coefficient/run.json": "17680a6881fad5fc73ade416f884a5ff478fce2ce5e908941de4c351ff75d9eb",
+    "guerra/advection_baseline/run.json": "0dc7830c0a37c63c12f3c46376b9208f2d5242859e92ea441edcb4790ca97069",
+    "guerra/advection_boundary_zero/run.json": "911b840be444876437b937af8a979f3013feb9f7807ffb6b035b121b1944454d",
+    "guerra/advection_coefficient/run.json": "33c791d03dca576af1090c3171e32425420fdd4dd27df0ae37755579c47654ec",
+    "guerra/advection_equivalent_periodic_shift/run.json": "b34962b3ddc097595d9c478a131a52f11c1204064acef9ab37a05a7dd21ce4a1",
+    "guerra/advection_frozen/run.json": "f2321791a9fbaf9ba261119acd44353d5650af9c4a84af38208a0fbd162d9b14",
+    "guerra/advection_sign/run.json": "021ab04a0d734088a9b11edce72222cdfbb6172d748390955438ad7d586ef91c",
+    "guerra/advection_tiny_coefficient/run.json": "63c7b20340bd4db78ff86378877c209b13852c14a41ffb66a264a43299a40ff9",
+    "guerra/heat_baseline/run.json": "52ca9002d02deee769632a9c5cfd0c2edc921d89f190eb326861034f82a934c1",
+    "guerra/heat_boundary_zero/run.json": "0f08015ebdf95355310a9aeece1d0101ddf95ced6d2300f7dc9c19d1f748ca78",
+    "guerra/heat_coefficient/run.json": "a59c02ac187590952dbd5998bd6ebd741aaf3ae02941923f667b4b7415222660",
+    "guerra/heat_equivalent_periodic_shift/run.json": "d952956a23369ed1a4d3be72260bd6d07f57bd7d3d2f6f4ac211c031890beb17",
+    "guerra/heat_frozen/run.json": "b5cd81bda445d37dfdbd8781c8545ec89def53bceb698a69a39a3834e98820b6",
+    "guerra/heat_sign/run.json": "a9c28a8529ea664686eb152bc6b08c987112cf5da76275ab44d8d4343d137c62",
+    "guerra/heat_tiny_coefficient/run.json": "7a3623951e847838a0f01516f5cc778227481388ad507ee8fc0dc747c7d86f98",
+    "guerra/wave_baseline/run.json": "f88a69b79f36ef74b46f38805d489cfae29be2e34af78a70027172467fb48753",
+    "guerra/wave_boundary_zero/run.json": "336dcf0337229c6daa633842307ec13c7f08119eefd59c8df906f12db62043be",
+    "guerra/wave_coefficient/run.json": "f281f47271dafacb3b6b68ecc2c388543595fa0d0fe772842e6cd02e1326c34e",
+    "guerra/wave_equivalent_periodic_shift/run.json": "0e7b1e7a6df7caeaea5613bb96095a5c67dc2968eae9e88fe252e12ae61abe5b",
+    "guerra/wave_frozen/run.json": "0dca39e917e8fb81f9b631400a45fcc8c48a57b16d273129d6d35238e8520c2b",
+    "guerra/wave_sign/run.json": "4470eb9ae05e0712deaba3a6349b2203bed72e5a5f5519e7ccce0d1651cdd8c3",
+    "guerra/wave_tiny_coefficient/run.json": "dc134463a1ab0c297faf2ad4cc5031f15d684cf3583256587b1111d99416872f"
+  },
+  "limitations": [
+    "Reproducibilidad del mismo código, no independencia algorítmica",
+    "No certifica Euler 3D, Navier-Stokes ni una teoría general",
+    "La comparación entre hosts reporta diferencias; no usa una tolerancia retrospectiva para proclamar exactitud",
+    "EQUIVALENT se justifica por roll de N posiciones; SURVIVED no implica equivalencia"
+  ]
+}

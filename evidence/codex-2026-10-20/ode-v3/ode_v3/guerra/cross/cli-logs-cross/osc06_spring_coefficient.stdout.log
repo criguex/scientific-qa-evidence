@@ -1,0 +1,1 @@
+{"case": "oscillator", "scenario": "osc06", "mutant": "spring_coefficient", "status": "KILLED", "reason": "el mutante ejecutado viola el contrato numérico", "output": "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results_cross_oscillator\\osc06_spring_coefficient"}

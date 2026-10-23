@@ -1,0 +1,1 @@
+{"case": "oscillator", "scenario": "osc09", "mutant": "spring_sign", "status": "EQUIVALENT", "reason": "omega=0: el término de resorte es cero para todos los estados", "output": "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results_cross_oscillator\\osc09_spring_sign"}

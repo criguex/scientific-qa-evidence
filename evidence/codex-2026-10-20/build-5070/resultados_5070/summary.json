@@ -1,0 +1,13 @@
+{
+  "finished_utc": "2026-10-20T17:02:18Z",
+  "commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+  "host_cores": 6,
+  "mutant_force_zero": "KILLED",
+  "build_seconds": "2342",
+  "axioms": "STANDARD_ONLY",
+  "comparator_euler": "SKIPPED",
+  "build": "OK",
+  "comparator_ns": "SKIPPED",
+  "cache": "OK",
+  "commit": "OK"
+}

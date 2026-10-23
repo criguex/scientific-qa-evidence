@@ -1,0 +1,121 @@
+{
+  "schema_version": 3,
+  "case": "oscillator",
+  "scenario": "osc06",
+  "mutant": "frozen",
+  "status": "KILLED",
+  "reason": "el mutante ejecutado viola el contrato numérico",
+  "operator_change": "anular ambos campos del RHS",
+  "started_utc": "2026-10-20T18:09:48.361422+00:00",
+  "finished_utc": "2026-10-20T18:09:48.820867+00:00",
+  "monotonic_start_ns": 67305665890200,
+  "monotonic_finish_ns": 67306116027200,
+  "wall_seconds": 0.450137,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12
+  },
+  "parameters": {
+    "omega": 1.7,
+    "zeta": 1.0,
+    "x0": -0.4,
+    "v0": 0.9,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "oscillator",
+    "--scenario",
+    "osc06",
+    "--mutant",
+    "frozen",
+    "--output",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc06\\frozen"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "9429d493e50884a9050df7185ae0233986ad09267b6374d3f1b7c7addf771c68",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": false,
+    "checks": {
+      "energy_increase_h0.0125": {
+        "actual": 0.0,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 0.6977761390711891,
+        "criterion": "< 1e-6",
+        "passed": false
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 0.6977761390711891
+      }
+    ],
+    "versions": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": false,
+    "equivalence_reason": null,
+    "environment": {
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "d8483629035f47cbdcd9c20b8a837b22ed09d10ed016afa4c5aa119d760a43c4",
+    "fields.npz": "0cf3bdf6d1d1e273bada35a58614f7f2b3bac76734a531a044bfa95ce1f6eb58",
+    "metrics.csv": "4e07ce82f8c8f465410d592ab1d515b4143cecdc9afcb24f7c44713f92647313",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "d4773e67b0aba17431b339a4f8008f98344c24c8982a0d8d6ec77399dac6b1de"
+  }
+}

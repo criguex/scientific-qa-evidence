@@ -1,0 +1,1 @@
+active systemd profile values match approved settings; syscall deny entries verified

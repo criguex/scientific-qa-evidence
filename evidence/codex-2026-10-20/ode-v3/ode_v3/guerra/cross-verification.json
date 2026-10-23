@@ -1,0 +1,214 @@
+{
+  "campaign": "GUERRA cross-host oscillator replication V3",
+  "expected_runs": 15,
+  "actual_runs": 15,
+  "remote_manifest_files_verified": 151,
+  "run_artifact_hashes_verified": 105,
+  "all_verified": true,
+  "issues": [],
+  "status_counts": {
+    "BASELINE_PASS": 3,
+    "KILLED": 9,
+    "EQUIVALENT": 3
+  },
+  "rows": [
+    {
+      "scenario": "osc06",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 9.08804585134894e-10,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.057530807254185,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.028751798542747,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "osc06",
+      "mutant": "damping_sign",
+      "status": "KILLED",
+      "fine_error": 8293.046098912,
+      "failed_checks": [
+        "energy_increase_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc06",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.6977761390711891,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc06",
+      "mutant": "spring_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.025115465359354685,
+      "failed_checks": [
+        "energy_increase_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc06",
+      "mutant": "spring_sign",
+      "status": "KILLED",
+      "fine_error": 2.230521843236393,
+      "failed_checks": [
+        "energy_increase_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc08",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 4.266769298521599e-08,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": 4.169308477025647,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        "order_pair_1": {
+          "actual": 4.084433146173729,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "osc08",
+      "mutant": "damping_sign",
+      "status": "KILLED",
+      "fine_error": 4761936437.1770525,
+      "failed_checks": [
+        "energy_increase_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc08",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.6758328162128692,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc08",
+      "mutant": "spring_coefficient",
+      "status": "KILLED",
+      "fine_error": 0.019640025336281678,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc08",
+      "mutant": "spring_sign",
+      "status": "KILLED",
+      "fine_error": 1.0917823122667532,
+      "failed_checks": [
+        "energy_increase_h0.0125",
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc09",
+      "mutant": "baseline",
+      "status": "BASELINE_PASS",
+      "fine_error": 6.594388326471855e-15,
+      "failed_checks": [],
+      "orders": {
+        "order_pair_0": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        "order_pair_1": {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      },
+      "reason": "referencia satisface el contrato"
+    },
+    {
+      "scenario": "osc09",
+      "mutant": "damping_sign",
+      "status": "EQUIVALENT",
+      "fine_error": 6.594388326471855e-15,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados"
+    },
+    {
+      "scenario": "osc09",
+      "mutant": "frozen",
+      "status": "KILLED",
+      "fine_error": 0.8485281374238571,
+      "failed_checks": [
+        "oracle_fine"
+      ],
+      "orders": {},
+      "reason": "el mutante ejecutado viola el contrato numérico"
+    },
+    {
+      "scenario": "osc09",
+      "mutant": "spring_coefficient",
+      "status": "EQUIVALENT",
+      "fine_error": 6.594388326471855e-15,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "omega=0: el término de resorte es cero para todos los estados"
+    },
+    {
+      "scenario": "osc09",
+      "mutant": "spring_sign",
+      "status": "EQUIVALENT",
+      "fine_error": 6.594388326471855e-15,
+      "failed_checks": [],
+      "orders": {},
+      "reason": "omega=0: el término de resorte es cero para todos los estados"
+    }
+  ],
+  "scope": "Replications of osc06,osc08,osc09 using same sources and local GUERRA baselines; not new scenarios; comparison against WAR still separate"
+}

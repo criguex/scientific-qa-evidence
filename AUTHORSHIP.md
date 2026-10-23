@@ -8,6 +8,10 @@ AI tools assisted with analysis, translation, editing, and code preparation. The
 
 The synthetic numerical examples are calculations under explicit software contracts. The formal material consists of bounded fixture checks, from-source builds and recorded Comparator runs, statement mutants, Lean bridge lemmas relative to a literal rendering of Clay's text, and pre-registered controls on Mathlib theorems and on receipts. Neither is represented as experimental validation or a general mathematical certification.
 
+## Codex work, session by session
+
+What the Codex agent did on 2026-10-20 (19 sessions, with roles, times, actions and session-file hashes) is in [`docs/CODEX_WORK_LOG.md`](docs/CODEX_WORK_LOG.md), and the evidence it produced that had stayed private is published in [`evidence/codex-2026-10-20/`](evidence/codex-2026-10-20/), with a manifest that pairs every file with the hash of its original.
+
 ## AI assistant identity across this session (traceability)
 
 For full traceability of who produced which commits, the environment's stated identity for the AI assistant changed partway through the 2026-10-21 work, and the commit trailers record it:

@@ -1,0 +1,1 @@
+{"case": "reaction", "scenario": "rxn03", "mutant": "frozen", "status": "KILLED", "reason": "el mutante ejecutado viola el contrato numérico", "output": "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn03_frozen"}

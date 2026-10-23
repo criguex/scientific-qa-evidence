@@ -1,0 +1,155 @@
+{
+  "schema_version": 3,
+  "case": "oscillator",
+  "scenario": "osc04",
+  "mutant": "baseline",
+  "status": "BASELINE_PASS",
+  "reason": "referencia satisface el contrato",
+  "operator_change": "sin cambios",
+  "started_utc": "2026-10-20T18:09:40.951903+00:00",
+  "finished_utc": "2026-10-20T18:09:41.405634+00:00",
+  "monotonic_start_ns": 67298246591600,
+  "monotonic_finish_ns": 67298709089100,
+  "wall_seconds": 0.4624975,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12
+  },
+  "parameters": {
+    "omega": 1.7,
+    "zeta": 0.35,
+    "x0": -0.4,
+    "v0": 0.9,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "oscillator",
+    "--scenario",
+    "osc04",
+    "--mutant",
+    "baseline",
+    "--output",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc04\\baseline"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": false,
+  "baseline_validation_reason": "no se proporcionó referencia",
+  "baseline_file_sha256": null,
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "energy_increase_h0.05": {
+        "actual": -9.047356961302405e-07,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "energy_increase_h0.025": {
+        "actual": -9.977645755963882e-08,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "energy_increase_h0.0125": {
+        "actual": -1.7369222213292623e-08,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 1.2637544029925673e-09,
+        "criterion": "< 1e-6",
+        "passed": true
+      },
+      "order_pair_0": {
+        "actual": 4.0157702348423445,
+        "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+        "passed": true,
+        "status": "MEASURED"
+      },
+      "order_pair_1": {
+        "actual": 4.007114829971672,
+        "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+        "passed": true,
+        "status": "MEASURED"
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.05,
+        "steps": 80,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 3.2869397083541866e-07
+      },
+      {
+        "dt": 0.025,
+        "steps": 160,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 2.0320034529404923e-08
+      },
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 1.2637544029925673e-09
+      }
+    ],
+    "versions": {
+      "python": "3.10.11",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": false,
+    "equivalence_reason": null,
+    "environment": {
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\nse-audit-20261020\\simulation-venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "3486e5ba44a0240b38cd406709a813d440786ff90ad00e9de7a9c2689bea9f3e",
+    "fields.npz": "72b3d02c92e00c9af7c6d7087dddc321384db044e22eab30519eb58d9147c0b5",
+    "metrics.csv": "7c8770c2d1ac5949c9a005a78d21793af0c0ea2aeb6ca554cc415ce588d60d67",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "ad1e81574343491346dc69e9b4a70a8cbc20ad011ef402541e3ae81dbee18c95"
+  }
+}

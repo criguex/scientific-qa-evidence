@@ -1,0 +1,377 @@
+{
+  "generated_utc": "2026-10-20T18:14:51.163061+00:00",
+  "host": "War",
+  "case": "oscillator",
+  "source_sha256": "e379be05d61bbfde291de07779d3796ec1fb731bf3ba3f0d19eebe3173b67c8e",
+  "runner_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "input_run_sha256": {
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc01\\baseline\\run.json": "1c04215d5be1cf1679ae7c95971a13683db2bb98cb408d3f70192c4da9add1cf",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc02\\baseline\\run.json": "aecaec4ce363c7010666a4b0d17543abbb3f53afa21961d1b1b2ccb92cc5cba2",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc03\\baseline\\run.json": "42f52d326cf9a7e9972f499dd27882eabb4900f438bbaa7d2901c9d1c5e11875",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc04\\baseline\\run.json": "40345eff7c2a9de0ef8332da876c0952c0bd39ce6253ef533183bd8c1ef7f4a8",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc05\\baseline\\run.json": "a6dda777508052aee52378fe5ad91b24175fa212959971e4275189adcf684c06",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc06\\baseline\\run.json": "9429d493e50884a9050df7185ae0233986ad09267b6374d3f1b7c7addf771c68",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc07\\baseline\\run.json": "5b01d3634c58026ee39b1f5cd23c1620dd0330a28dd2c0656dbaf00a8231294a",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc08\\baseline\\run.json": "9fd687fa370d9741cba5da3417cad0e967a08fce5d2e84a061e56a437ee37447",
+    "<WIN_HOME>\\nse-audit-20261020\\ode-v3-f118929e\\results\\osc09\\baseline\\run.json": "166722a623e34808a852d6ff5781dcd194df049d1bbf4154efe4f6d0c63179ae"
+  },
+  "metrics": {
+    "osc01": {
+      "parameters": {
+        "omega": 0.8,
+        "zeta": 0.0,
+        "x0": 0.7,
+        "v0": -0.2,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 1.1666202169658196e-10,
+      "orders": [
+        {
+          "actual": 3.995685896609334,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 3.9978034228031123,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc02": {
+      "parameters": {
+        "omega": 1.7,
+        "zeta": 0.0,
+        "x0": -0.4,
+        "v0": 0.9,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 7.469913691631388e-09,
+      "orders": [
+        {
+          "actual": 4.009345018586226,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.004779924793482,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc03": {
+      "parameters": {
+        "omega": 0.8,
+        "zeta": 0.35,
+        "x0": 0.7,
+        "v0": -0.2,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 4.542812015175943e-11,
+      "orders": [
+        {
+          "actual": 4.004739739752238,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.002450388325318,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc04": {
+      "parameters": {
+        "omega": 1.7,
+        "zeta": 0.35,
+        "x0": -0.4,
+        "v0": 0.9,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 1.2637544029925673e-09,
+      "orders": [
+        {
+          "actual": 4.0157702348423445,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.007114829971672,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc05": {
+      "parameters": {
+        "omega": 0.8,
+        "zeta": 1.0,
+        "x0": 0.7,
+        "v0": -0.2,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 3.7988507460823295e-11,
+      "orders": [
+        {
+          "actual": 4.031642359929889,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.015833725948539,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc06": {
+      "parameters": {
+        "omega": 1.7,
+        "zeta": 1.0,
+        "x0": -0.4,
+        "v0": 0.9,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 9.08804585134894e-10,
+      "orders": [
+        {
+          "actual": 4.057530807254185,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.028751798542747,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc07": {
+      "parameters": {
+        "omega": 0.8,
+        "zeta": 1.8,
+        "x0": 0.7,
+        "v0": -0.2,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 9.328243629525894e-11,
+      "orders": [
+        {
+          "actual": 4.079441933054479,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.039674979113234,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc08": {
+      "parameters": {
+        "omega": 1.7,
+        "zeta": 1.8,
+        "x0": -0.4,
+        "v0": 0.9,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 4.266769298521599e-08,
+      "orders": [
+        {
+          "actual": 4.169308477025647,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        },
+        {
+          "actual": 4.084433146173729,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "MEASURED"
+        }
+      ]
+    },
+    "osc09": {
+      "parameters": {
+        "omega": 0.0,
+        "zeta": 0.0,
+        "x0": 0.4,
+        "v0": 0.3,
+        "T": 4.0,
+        "units": "adimensionales",
+        "equation": "x'=v; v'=-omega^2*x-2*zeta*omega*v",
+        "method": "RK4",
+        "baseline_dt": [
+          0.05,
+          0.025,
+          0.0125
+        ],
+        "mutant_dt": 0.0125,
+        "common_sample_interval": 0.05,
+        "seed": 0,
+        "randomness_used": false,
+        "threads_requested": 1,
+        "compute_device": "CPU"
+      },
+      "oracle_fine": 6.594388326471855e-15,
+      "orders": [
+        {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        },
+        {
+          "actual": null,
+          "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+          "passed": true,
+          "status": "ROUND_OFF_LIMITED"
+        }
+      ]
+    }
+  },
+  "new_integration_performed": false,
+  "artifact_sha256": {
+    "FISICA_OSCILADORES_V3.png": "7b0f9d595c3bd6ebe76951d112db7eed95242556cf898411ae8c973e5a814da7"
+  },
+  "limits": [
+    "Resumen visual de nueve referencias; no elimina la revisión de mutantes",
+    "Las escalas de error son distintas por panel y se muestran",
+    "Todas las variables son adimensionales"
+  ]
+}

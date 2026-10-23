@@ -1,0 +1,33 @@
+UTC start: 2026-10-20T18:56:12Z
+systemd 255 (255.4-1ubuntu8.17)
+=== property=RestrictAddressFamilies=none unit=ns08-parse-raf-a5ygak ===
+Failed to start transient service unit: Failed to set unit properties: Invalid argument
+systemd_run_exit=1
+journal:
+-- No entries --
+probe_raf_exit=1
+=== property=SystemCallArchitectures=native unit=ns08-parse-arch-a5ygak ===
+Running as unit: ns08-parse-arch-a5ygak.service; invocation ID: e96b5d3c71ae4a5c8ce96b51e478443e
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 3ms
+CPU time consumed: 3ms
+Memory peak: 512.0K
+Memory swap peak: 0B
+systemd_run_exit=0
+journal:
+2026-10-20T13:56:12.860327-05:00 War systemd[334]: Started ns08-parse-arch-a5ygak.service - /usr/bin/true.
+probe_arch_exit=0
+=== property=SystemCallFilter=~@network-io io_uring_setup io_uring_enter io_uring_register unit=ns08-parse-filter-a5ygak ===
+Running as unit: ns08-parse-filter-a5ygak.service
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 3ms
+CPU time consumed: 3ms
+Memory peak: 1.5M
+Memory swap peak: 0B
+systemd_run_exit=0
+journal:
+2026-10-20T13:56:12.874909-05:00 War systemd[334]: Started ns08-parse-filter-a5ygak.service - /usr/bin/true.
+probe_filter_exit=0
+UTC end: 2026-10-20T18:56:12Z

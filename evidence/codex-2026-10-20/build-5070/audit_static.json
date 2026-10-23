@@ -1,0 +1,223 @@
+{
+ "commit": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+ "commit_date": "2026-09-10 09:40:53 -0400",
+ "commit_author": "Boris Alexeev",
+ "commits_total": 2,
+ "lean_files": 2659,
+ "lean_lines": 641332,
+ "sha256": {
+  "lean-toolchain": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88",
+  "lakefile.toml": "97b2804da5b9a2cd0aaf44ce42b7c39e9947beff9d2ac01a11e0d3d867af1c09",
+  "lake-manifest.json": "5ec1dc8e009008d0efb9601cd38f6ba54e753fd538b0e5f8c3e6c5ec72ee1e09",
+  "formalization.yaml": "d9866d5c1fdc16832f098e5f2affa96baf0b156a5f34b9be015d793e1abe2fdd",
+  "ComparatorChallenges/NavierStokes.lean": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+  "ComparatorChallenges/NavierStokes.json": "7610ecead7b390d80ff7f4229a3ff8f18d630e046f7ad1de4f92c7e8e76845b8",
+  "NavierStokes/ComparatorDefinitions.lean": "8d90e0f9eee14f8b01773852083a02fd58bda59d4de2abb60d1787bbc9f6ebf4",
+  "NavierStokes/ComparatorSolution.lean": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227"
+ },
+ "forbidden_outside_comments": {
+  "sorry": [
+   "ComparatorChallenges/Euler.lean",
+   "ComparatorChallenges/NavierStokes.lean"
+  ]
+ },
+ "statement_chain": {
+  "ForceCondition": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "ForceConditionDecay": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "ForceConditionPeriodic": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "InitialVelocityCondition": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "InitialVelocityConditionDecay": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "InitialVelocityConditionPeriodic": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "IsOnePeriodic": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "NavierStokesExistenceAndSmoothness": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "NavierStokesExistenceAndSmoothnessPeriodic": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "NavierStokesExistenceAndSmoothnessRn": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence_add": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence_const": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence_of_not_differentiableAt": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence_smul": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "divergence_zero": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "navier_stokes_breakdown_R3": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "navier_stokes_breakdown_periodic": {
+   "upstream==challenge": true,
+   "challenge==solution": true,
+   "in_upstream": true,
+   "in_challenge": true,
+   "in_solution": true
+  },
+  "navier_stokes_existence_and_smoothness_R3": {
+   "upstream==challenge": null,
+   "challenge==solution": null,
+   "in_upstream": true,
+   "in_challenge": false,
+   "in_solution": false
+  },
+  "navier_stokes_existence_and_smoothness_periodic": {
+   "upstream==challenge": null,
+   "challenge==solution": null,
+   "in_upstream": true,
+   "in_challenge": false,
+   "in_solution": false
+  }
+ },
+ "witnesses": {
+  "NavierStokes/ComparatorR3Theorem.lean": {
+   "initial_velocity": "fun _ => 0",
+   "force": "toComparator (rescaledForce ν f)"
+  },
+  "NavierStokes/ComparatorTheorem.lean": {
+   "initial_velocity": "fun _ => 0",
+   "force": "toComparator (rescaledForce ν f)"
+  }
+ },
+ "euler": {
+  "challenge_equals_solution": {
+   "divergence": true,
+   "InitialVelocityCondition": true,
+   "InitialVelocityConditionDecay": true,
+   "EulerExistenceAndSmoothness": true,
+   "EulerExistenceAndSmoothnessR3": true,
+   "euler_breakdown_R3": true,
+   "toL2": true,
+   "SobolevSmoothOn": true,
+   "EulerSobolevExistenceAndSmoothnessR3On": true,
+   "vorticity": true,
+   "velocityC1Norm": true,
+   "vorticityNorm": true,
+   "exists_compact_smooth_euler_singularity": true
+  },
+  "upstream_has_euler_statement": false,
+  "upstream_note": "DeepMind Formal Conjectures has no Euler statement at the cited commit; the Euler challenge is adapted by the proof authors from the NS file at 'main' (not pinned).",
+  "solution_fields_ns_vs_euler": {
+   "ns": [
+    "navier_stokes",
+    "div_free",
+    "initial_condition",
+    "velocity_smooth",
+    "pressure_smooth"
+   ],
+   "euler": [
+    "euler",
+    "div_free",
+    "initial_condition",
+    "velocity_smooth",
+    "pressure_smooth"
+   ]
+  },
+  "equation_ns": "∀ x, ∀ t ≥ 0, derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) = nu • Δ (v · t) x - gradient (p · t) x + f x t",
+  "equation_euler": "∀ x, ∀ t ≥ 0, derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) = -gradient (p · t) x",
+  "non_vacuity_clauses": [
+   "HasCompactSupport u₀",
+   "u₀ ≠ 0",
+   "0 < Tstar",
+   "Tstar ≤ 1",
+   "↔ T < Tstar",
+   "velocityC1Norm",
+   "= ⊤",
+   "vorticityNorm"
+  ]
+ }
+}

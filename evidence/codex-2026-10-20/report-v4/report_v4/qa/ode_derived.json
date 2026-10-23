@@ -1,0 +1,2641 @@
+{
+  "schema_version": 3,
+  "generated_utc": "2026-10-20T18:39:55.163463+00:00",
+  "aggregator_sha256": "99b74b73dac1c10511269a394cc1c7fabec56a0e672bbe5d8d963bdb00196c7e",
+  "runner_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "helper_sha256": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9",
+  "model_families": 2,
+  "distinct_parameter_scenarios": 18,
+  "actual_cli_runs": 150,
+  "verified_artifact_hashes_actual_runs": 1020,
+  "copied_fixtures_not_runs": {
+    "independent_review/raw/osc05_altered_parameters/run.json": {
+      "sha256": "4af266570d0bb187738a5a98727deaf3472bbb02084a418082852ef3fd50fd82",
+      "not_an_execution": true,
+      "alteration": "copia de osc05_baseline; omega de 0.8 a 0.81 solo en run.json",
+      "raw_artifacts_verified": 6
+    }
+  },
+  "input_run_sha256": {
+    "war/results/osc01/baseline/run.json": "1c04215d5be1cf1679ae7c95971a13683db2bb98cb408d3f70192c4da9add1cf",
+    "war/results/osc01/damping_sign/run.json": "5a31e2c6524e729dda41ece7575ff4944796aba5a27e2e7fafd85fd4322c579f",
+    "war/results/osc01/frozen/run.json": "cf418b2ac8267d47e017a21a65806e2c9d0fb7ba6dd53614ee7ad7e0c92cffde",
+    "war/results/osc01/spring_coefficient/run.json": "05532d1532da48d747e7a6b52545bf725aa6d02fc3194710c7aaae176571f7e4",
+    "war/results/osc01/spring_sign/run.json": "2b433916a820a91b665c2fb3037b87c4c1031917c30136e26fa4ca089a1178b1",
+    "war/results/osc02/baseline/run.json": "aecaec4ce363c7010666a4b0d17543abbb3f53afa21961d1b1b2ccb92cc5cba2",
+    "war/results/osc02/damping_sign/run.json": "70da2d700f8d53532649cfa688d921f8d558db94dba93f79cb89d4d8dcba08c2",
+    "war/results/osc02/frozen/run.json": "6179c7a8d85cfa3bf28b6fb543bc05ec430963e0bc32756abf74462d734c9a09",
+    "war/results/osc02/spring_coefficient/run.json": "50ceb17acdb130cd7dc4d723fe0752c90d5812ba990b06692d0e4b4e492dcb29",
+    "war/results/osc02/spring_sign/run.json": "7e824f334450c57da0286b2d73d2541e5a6d8e218ee9bb8371804086b0fd0bd5",
+    "war/results/osc03/baseline/run.json": "42f52d326cf9a7e9972f499dd27882eabb4900f438bbaa7d2901c9d1c5e11875",
+    "war/results/osc03/damping_sign/run.json": "19bdc36c2c99e3285790be0b5fb35291c57ffe5a3c991c4f98ab27e110b603a4",
+    "war/results/osc03/frozen/run.json": "0afb00b71d53fe9ff7bc6631cefd04e831c41877853bd95d768f43f27067bb82",
+    "war/results/osc03/spring_coefficient/run.json": "69917462c038debf3d5276db147dd6d8339d1e37be383d427a087a985f6f3f08",
+    "war/results/osc03/spring_sign/run.json": "11ea31672cf27db1d738aedddc29d14b732790c0d9afc0eaa8676da1801c874a",
+    "war/results/osc04/baseline/run.json": "40345eff7c2a9de0ef8332da876c0952c0bd39ce6253ef533183bd8c1ef7f4a8",
+    "war/results/osc04/damping_sign/run.json": "db3e9f6995733b96a4c349140978e72f3e5da5cced13402eee30dcd5957ce468",
+    "war/results/osc04/frozen/run.json": "e8207ad30b370d12766f8315fbcda64f12dfe8d708dc2aff5aa4b1ee0662754a",
+    "war/results/osc04/spring_coefficient/run.json": "49f488ee28596026ce9aa6461044cb9d3a10daeaedb388a9b7e3be5e70ad7fc2",
+    "war/results/osc04/spring_sign/run.json": "e702f0d52302b56480aa8968e5257eceba09bb570678b32c2aeeee36d02d5bdd",
+    "war/results/osc05/baseline/run.json": "a6dda777508052aee52378fe5ad91b24175fa212959971e4275189adcf684c06",
+    "war/results/osc05/damping_sign/run.json": "36a4c1994a27671b5f35a5a2c8dff673c37918bafbf0fff65f134f1e2a417649",
+    "war/results/osc05/frozen/run.json": "bad1a1439061f5c4ed69829b7bf3fc722b6ad236964fea3bef2cbea594f3f478",
+    "war/results/osc05/spring_coefficient/run.json": "dcd2ef9f8dc920cb5524bc5ddab9af8517b47a2a4f02629034432f2708ec92dd",
+    "war/results/osc05/spring_sign/run.json": "56826a50384b409cde7cc28b859f2c6c346b9c6d7c20223643064633eea5ef54",
+    "war/results/osc06/baseline/run.json": "9429d493e50884a9050df7185ae0233986ad09267b6374d3f1b7c7addf771c68",
+    "war/results/osc06/damping_sign/run.json": "3a13d5e31d6aa811d20856d81f7281afec524e39111c542707e051916a188887",
+    "war/results/osc06/frozen/run.json": "789256b996af52f06ad992ae66ffb63d4c239ed9d8f36346282d73ee8d4194fb",
+    "war/results/osc06/spring_coefficient/run.json": "01834fdf6d01baaff39f806b595fd0e6d5a6dd8946ebf519a29586bd9c970402",
+    "war/results/osc06/spring_sign/run.json": "0fe5979125e78b9a0917619fc446e65812b4ae59dcbe3830f09c803bb6a221e3",
+    "war/results/osc07/baseline/run.json": "5b01d3634c58026ee39b1f5cd23c1620dd0330a28dd2c0656dbaf00a8231294a",
+    "war/results/osc07/damping_sign/run.json": "28a0d5b7ecc75674d6712dda7cc2b4e03128df70116eabd8d495c87f8a1c47fb",
+    "war/results/osc07/frozen/run.json": "9f7d80ac7bea7e1f1703cbdd9234b7406cc992514b574d03a1ec656370bb49ae",
+    "war/results/osc07/spring_coefficient/run.json": "76b5e4367b29a0b7f84ed42527a4bf27b329f3cc8cf1c737cacc96cc7b625154",
+    "war/results/osc07/spring_sign/run.json": "2c2fcb979b5bcced3a2634e975cd377ef1fba386ff2a5fb0584e6588087e6d89",
+    "war/results/osc08/baseline/run.json": "9fd687fa370d9741cba5da3417cad0e967a08fce5d2e84a061e56a437ee37447",
+    "war/results/osc08/damping_sign/run.json": "884a8222d6e04e1ad11643ef49aa7d1e5d0228913de79bc57bc1fa80a59426fc",
+    "war/results/osc08/frozen/run.json": "5bfe1ac02e6de7b62ab796783b5b7b85a89e804c1750cf918cce7acd64d67184",
+    "war/results/osc08/spring_coefficient/run.json": "0d9152ef13dc52c7b7da592dff5f9d841e90ea750f92592d986a63adc2b870a0",
+    "war/results/osc08/spring_sign/run.json": "806cf42bd83ec4a6216a406760930c93eebb121b260a4555073ed6a9a44b2a84",
+    "war/results/osc09/baseline/run.json": "166722a623e34808a852d6ff5781dcd194df049d1bbf4154efe4f6d0c63179ae",
+    "war/results/osc09/damping_sign/run.json": "3874a12dd87b4f49b32baac37ce987084cbccde87abe9692016a158e0f417806",
+    "war/results/osc09/frozen/run.json": "07104d402d4c872162048b65b9bdda98dc84c0734684cabd03ef109471575c85",
+    "war/results/osc09/spring_coefficient/run.json": "40b5be97f3e4368584d2b8ebc0b635f149ad26489a8b9a69e79e2b36a65cde34",
+    "war/results/osc09/spring_sign/run.json": "dfbdc6c5d49f245b1e5e2dc65e2c3dd65759b6e929980595a2967d2721ea092e",
+    "guerra/raw/results/rxn01_baseline/run.json": "f1dcc9e897807d3542771c9ee6227be3826ff1d45ecffbea9ff2e0cfac67d3ec",
+    "guerra/raw/results/rxn01_forward_coefficient/run.json": "a102d25d01464407681d1be08ad5886a6b6420d258174ddbabbd1dfafb971f81",
+    "guerra/raw/results/rxn01_frozen/run.json": "5c0ac2e42f565444bc330f1603c62aaf8f6ca97647a2b9daae7198aee0dc8170",
+    "guerra/raw/results/rxn01_mass_leak/run.json": "cc68f1ffb7e9a4614afa4b378287cd1d1ec5a50c59006c5aa1c33c3c7c1ad784",
+    "guerra/raw/results/rxn01_reverse_sign/run.json": "12fe8533cf7cf036a3ed4a0e3df56c279c7d4937a8ebe3369ee676dd9184cecc",
+    "guerra/raw/results/rxn02_baseline/run.json": "70ac84d88bc7b2cfa2044050de41aac91435dfca4850e0c6b3b5474071a1de2f",
+    "guerra/raw/results/rxn02_forward_coefficient/run.json": "62d1faa8624a747cbdf9def5fac13d3d522d427656a91516fa5cbab2afcb5ea9",
+    "guerra/raw/results/rxn02_frozen/run.json": "0df979507baabcd6b3be28766e1c8c1c0508fa8d12f38d260d64055d637f23fa",
+    "guerra/raw/results/rxn02_mass_leak/run.json": "51e4080f64a18b3dcd3441929cdc411c7d785ba74d7d601d534f1baf69d529c9",
+    "guerra/raw/results/rxn02_reverse_sign/run.json": "9db0cbe28700b1ba1b7a95401a53d770da500fefdf314ad597e61346b697a55f",
+    "guerra/raw/results/rxn03_baseline/run.json": "5874e14880f0ef6f691a628b6712067e9698eba554ad1c6d59ffc265b2b2bf4f",
+    "guerra/raw/results/rxn03_forward_coefficient/run.json": "f82a2575a106838136d11db8a7ce31aa074d2a3452a35ece6d6795e0958c0ea5",
+    "guerra/raw/results/rxn03_frozen/run.json": "c7cd8b8df28c10770d866ade9ea8311c9853c53a7cc0bf9ff590a0154603cf37",
+    "guerra/raw/results/rxn03_mass_leak/run.json": "fb5fde439f561713ed0cdb2e0c6440d14aefc9db53e2af9032a8d5c546267416",
+    "guerra/raw/results/rxn03_reverse_sign/run.json": "333afc5dd79a4d4b2ba4811f5c820add9c05703688b9a1e2c916495cbd535db7",
+    "guerra/raw/results/rxn04_baseline/run.json": "325b61c2c1576dfe995c63118e4d0e30f511c162715a7c5fab9b8053e53a41e8",
+    "guerra/raw/results/rxn04_forward_coefficient/run.json": "e0bda74437752d792dc2e69dc8a9308b93c4718a0d37789bcaf8d2cbf2737cb3",
+    "guerra/raw/results/rxn04_frozen/run.json": "cc34ae2b01e9b7482e77e6c80fbc9433216f03a49e5d716696e87224c9afbd50",
+    "guerra/raw/results/rxn04_mass_leak/run.json": "bdf40dc67dbc472dd7c385cf26e1b9d4d61a2c8a5a589b65f24b19e13fb61525",
+    "guerra/raw/results/rxn04_reverse_sign/run.json": "5fd71652545e8478efce8668f68310a0d36ca7535c2aff30c255070a10797633",
+    "guerra/raw/results/rxn05_baseline/run.json": "6a3f5788962b634ebd3676b12cb7128699c4111302d92c15ab09c163cc9036d6",
+    "guerra/raw/results/rxn05_forward_coefficient/run.json": "c90ed660eeedd8f2310a2c27da77e65439d0030a404ad723b2dc1719d6167b48",
+    "guerra/raw/results/rxn05_frozen/run.json": "f6d7f878963b3e6129a48d46c39a01b2f97dcebc09409baeaecf9c8d8b3a6d4c",
+    "guerra/raw/results/rxn05_mass_leak/run.json": "d7f9bf105a9e18d7d6e86e0e137fab37cba546a51cd8e14db2eed9612708bd8c",
+    "guerra/raw/results/rxn05_reverse_sign/run.json": "096d14503b18816670c8970aabb227285bbdb074d3807b068a72b4c8f0b28479",
+    "guerra/raw/results/rxn06_baseline/run.json": "7e3a55bb89dff47e4c8837ad7b6e4d314129cd5f047838ef20785daa8ee4d600",
+    "guerra/raw/results/rxn06_forward_coefficient/run.json": "515882661cf5936416b89628a296e7ac803cfc30e642fd7f37b26f5d71536f7d",
+    "guerra/raw/results/rxn06_frozen/run.json": "0e915894392bd84ac90f214bf58f6110640bfb1e9e71ccdaa047824eadc9dd0e",
+    "guerra/raw/results/rxn06_mass_leak/run.json": "d996c1fa871911c857da4b9f4b5f8327d2a7483617449715fdfbdaa130b6acda",
+    "guerra/raw/results/rxn06_reverse_sign/run.json": "09a2b9326cc198796950f97dc522124edd3337eed3007c4c5723dfeba2be1532",
+    "guerra/raw/results/rxn07_baseline/run.json": "1c7acca3805d799791655f6c1c6269287768c44c5619c57348e60638603421d1",
+    "guerra/raw/results/rxn07_forward_coefficient/run.json": "6860ec0319a57c63c983a7e9b721e90ad0d39074c49e3ae181ade27795971212",
+    "guerra/raw/results/rxn07_frozen/run.json": "1b9d407d38a047ea64edef9aa98693ed0f168325734161822395c231f25212ce",
+    "guerra/raw/results/rxn07_mass_leak/run.json": "48d28766a3fafe6c70c273515d0c7d049635bba8cd78e9de29cffebb25cf0a15",
+    "guerra/raw/results/rxn07_reverse_sign/run.json": "ed4ee5353ef4e906cb2721535aa0191cc971152b0af34ecdcb9e9087595f7946",
+    "guerra/raw/results/rxn08_baseline/run.json": "e8dd98f1d6618306d78d6a1ea96d89f071bc696700ef5835765bac332c47babd",
+    "guerra/raw/results/rxn08_forward_coefficient/run.json": "09822186c8bcba11e8fbf4e12b294b6cc32a95699d46d901d1e5ecaa4cc519cd",
+    "guerra/raw/results/rxn08_frozen/run.json": "89bb29f4a4bb6140660cc57728ec4e33c44011d214c58034ab551453ce13cc8e",
+    "guerra/raw/results/rxn08_mass_leak/run.json": "0fd5ea9c3ea07d453089ac030571af2dbcbd96d355dd0e2a4f7ff6b032b02a33",
+    "guerra/raw/results/rxn08_reverse_sign/run.json": "728c60d0b2ad56f9f91bc6706b4cbd4957d9d24ed77ead1e9d0db3e86c228156",
+    "guerra/raw/results/rxn09_baseline/run.json": "0cd5b7ea3424bf4796dc0259a192775c892f783fcdbc57f0dc6df0848ce4f143",
+    "guerra/raw/results/rxn09_forward_coefficient/run.json": "b0f306e3e7328d6eb28ea3d09f72a222b80d657dcc18b73d84bff7270259561a",
+    "guerra/raw/results/rxn09_frozen/run.json": "c26da7a1e65f504decb8db7b8e7f16f2d7f4a1883d577196a65bb1ead313260b",
+    "guerra/raw/results/rxn09_mass_leak/run.json": "4c31ed43951cb2066b68fa6e81746669eb1047904df2d8c1b22c5c7c2c8c9241",
+    "guerra/raw/results/rxn09_reverse_sign/run.json": "d777b960ed87d39cc0b26c4ac7c62d0500e5430b820b0c84b7cb446823132714",
+    "war/results_cross_reaction/rxn07/baseline/run.json": "b9e8b02fe4a64a6dbf8a83216412f12bfc4093f0593f5a2d41543b46cbeae657",
+    "war/results_cross_reaction/rxn07/forward_coefficient/run.json": "51a1e64c83aa07eed348e3d74139b7f2e02080b7b8ae068b08ffbe42d51723af",
+    "war/results_cross_reaction/rxn07/frozen/run.json": "9d7d6821f591647b9c0585f63540fef8cea0732a231df6107eab7b14990d3b16",
+    "war/results_cross_reaction/rxn07/mass_leak/run.json": "55a7c6b98b1c1dbf9b45fdf978a20d7f4cd473ca4201836026381c01d55bbb37",
+    "war/results_cross_reaction/rxn07/reverse_sign/run.json": "1f6264270af995f5a04c7a66b2754c5b73d7f83a7259d334365613b53c84c016",
+    "war/results_cross_reaction/rxn08/baseline/run.json": "aaf0c708efeda46078b90ba16e6091058aff54540912a3f3eb40c60f26bbefd0",
+    "war/results_cross_reaction/rxn08/forward_coefficient/run.json": "adcff7bafe2eec6bc6536d979e990f616250760acfea8924e11e536fae4fde17",
+    "war/results_cross_reaction/rxn08/frozen/run.json": "e8c78261ae0ba6a04b468c4f9bfaf4ecdc09e5160127e90aae7fcc806d3b0883",
+    "war/results_cross_reaction/rxn08/mass_leak/run.json": "1ca2fb24511384c90bd3ee67894b34c62bed8e5776e23f1113b9bdf3ca05592b",
+    "war/results_cross_reaction/rxn08/reverse_sign/run.json": "3bc0f36c6713bd0c39d8328c5137f63c28b2bd6f1e706d63849053611bd7d9f6",
+    "war/results_cross_reaction/rxn09/baseline/run.json": "e402e072ff8ce308b5ca8df084a48d11edba8605092f54a81c12aab60d55fcb0",
+    "war/results_cross_reaction/rxn09/forward_coefficient/run.json": "2449983ca0d85d7d2e8a2b0ab5507b3fc7f02c4d58f7ab0d86d1413e09687c21",
+    "war/results_cross_reaction/rxn09/frozen/run.json": "e33684c05bff2d6d0c27aea818a218479d4b1852f8e86732d865473af97acd0b",
+    "war/results_cross_reaction/rxn09/mass_leak/run.json": "37dfd5fc4ca9c9878f31e42ba3669da97815077174f8c030d658bb71a4a084bb",
+    "war/results_cross_reaction/rxn09/reverse_sign/run.json": "b39da2b09fe842bb824a0e2d25d3e72146e546bda4faebfe0ec2c44a12b4af19",
+    "guerra/cross/results_cross_oscillator/osc06_baseline/run.json": "f229f44d60a93fd8eabeb429e676da27d5f919bdf13f5d898d485bdf69b833ef",
+    "guerra/cross/results_cross_oscillator/osc06_damping_sign/run.json": "f2854e17c5ec1a59698406585ae2d1579af743dd0585b25137d25d9b59c0c78d",
+    "guerra/cross/results_cross_oscillator/osc06_frozen/run.json": "edb7b7629cbe687d9b1bb1a5ceed08d00edce97c85bc9de9f4c47b18c33b7d95",
+    "guerra/cross/results_cross_oscillator/osc06_spring_coefficient/run.json": "e6c6557bc0779173b34c01447c5a4c0f57bebc4be750fc7a3705d1d31984698a",
+    "guerra/cross/results_cross_oscillator/osc06_spring_sign/run.json": "6263d4a297f1f80c3134184ae4eac0a34ad16ee31e4bd46d302f7ee517f387de",
+    "guerra/cross/results_cross_oscillator/osc08_baseline/run.json": "f8aa2eb65a338c62b3b72c5aa598a88308547df512b17ffa10099dc23846b8e3",
+    "guerra/cross/results_cross_oscillator/osc08_damping_sign/run.json": "8bffd105fc964f5e5b4a37f02b6d6674b5af8464cdaace7f3bed04321868e163",
+    "guerra/cross/results_cross_oscillator/osc08_frozen/run.json": "d27a00dadf6f7eb3eaeb8d71da6b9c0116d01fa63c61324a1d866d27d14a124d",
+    "guerra/cross/results_cross_oscillator/osc08_spring_coefficient/run.json": "3b53bebc0b53776c093f8daf5e446e96e0e5439fde09968743115283f1403bf5",
+    "guerra/cross/results_cross_oscillator/osc08_spring_sign/run.json": "059510a6d7a5269f521b517e2764534485eda58d5b20fef47de765688846e326",
+    "guerra/cross/results_cross_oscillator/osc09_baseline/run.json": "a37f7e194b62f6622b3e2e1fe109c066d23839c2dbe991f85c232d7a00f06f1d",
+    "guerra/cross/results_cross_oscillator/osc09_damping_sign/run.json": "ae16d352cae5b8c8762efed634bc0ec8979aeb1c004fafc59bdd00c4bd7b5910",
+    "guerra/cross/results_cross_oscillator/osc09_frozen/run.json": "c37b6a72711bfc5b08598fc408e24a2b24346ca0e5cf6b331d5ae5c6f8e8af8d",
+    "guerra/cross/results_cross_oscillator/osc09_spring_coefficient/run.json": "3d4f3ba91d29438b47e051afe3452416eff30222d80b7f53433bea42d1a22848",
+    "guerra/cross/results_cross_oscillator/osc09_spring_sign/run.json": "8964b9707f39fe2fb93934a605c9b6e84c872d837c4861a32c0dbe51ab5663bc",
+    "independent_review/raw/check_00_osc01_damping_sign/run.json": "50186965ecf73ada1c61c765c1668ec091eae03dcd07507be5e7f7e97a47202d",
+    "independent_review/raw/check_01_osc09_spring_sign/run.json": "08ce2080eec00a443a391ea902d4f2e6bea85183d290ee2a0cd876ebae83220e",
+    "independent_review/raw/check_02_osc09_frozen/run.json": "256ec87de7fbdebc69a1f53a1807652b3b49c9f8893d9e456e4fc56d05ba144c",
+    "independent_review/raw/check_03_rxn01_frozen/run.json": "83454df548928a23e4891010d0d7e4bbfc5fdf924bd4551b7ad1cb86ab5942e0",
+    "independent_review/raw/check_04_rxn08_frozen/run.json": "db4a8bc8cc761495fa057b8908a21b5b68b85742f0a654378ccd5185c49f8419",
+    "independent_review/raw/check_05_rxn09_reverse_sign/run.json": "3ab680fb115362cc49eabec2edee54786cfca1fc722fb582fe9a347c79da2aa3",
+    "independent_review/raw/check_06_rxn03_reverse_sign/run.json": "03baf18d54ab38f28f9827cc884d6b38ce7a4c6c0cebabde14ec4f8ef123c104",
+    "independent_review/raw/check_07_osc05_spring_sign/run.json": "22a0202cc9de9d9c7a1aa50bf542c33a7ef48ea23bb3b2a757f1f225b41a3ca7",
+    "independent_review/raw/check_08_rxn07_mass_leak/run.json": "710666e8e7268d2778fb8149a5f61b8a2ae302b5baee5667c9253909779e3053",
+    "independent_review/raw/check_09_osc05_damping_sign/run.json": "8a5f5e3de329ab145ef5414750442ffa40ca6f648e330a13149e720942a5502d",
+    "independent_review/raw/check_10_rxn05_forward_coefficient/run.json": "41ef8c0c9e4e6c4d96a8b1e574f505863d90d4790e8171a34c37e43a431fd3c4",
+    "independent_review/raw/check_11_osc05_damping_sign/run.json": "0ab2017362e9ea9262134b924f9f1beed51511ddcb3ccbc7af8e1ba6ac56425a",
+    "independent_review/raw/osc01_baseline/run.json": "959dae2e77b9674b8b4df08140764f90f932fcb256492e884b4dbbc7bb36fea4",
+    "independent_review/raw/osc02_baseline/run.json": "6186e760fb92a382067af06282b53a45fd25f3eb76d545db7b4a2b3b84d341be",
+    "independent_review/raw/osc03_baseline/run.json": "558d5b693e30e419b978b6e2d9e6cc3eaea8400634dadbc1e10b7481b5ed1846",
+    "independent_review/raw/osc04_baseline/run.json": "205a981e0ddff994f1e19c5d6d93cebd250633a2ebdc8d38104f4a66d4d1fe01",
+    "independent_review/raw/osc05_altered_parameters/run.json": "4af266570d0bb187738a5a98727deaf3472bbb02084a418082852ef3fd50fd82",
+    "independent_review/raw/osc05_baseline/run.json": "bd9fa4e07fd3c3eb33e92ba26399fa2c4400631e7fe4d60ec25ba4497d9f7625",
+    "independent_review/raw/osc06_baseline/run.json": "2361a333bd4154b8239255ce6b97f6d97dfc628881a7e02df0446eeb958f5904",
+    "independent_review/raw/osc07_baseline/run.json": "53eebecc85964eb471183bce94c21b9a26367439fc30fbad41efb560870b3377",
+    "independent_review/raw/osc08_baseline/run.json": "b752260cb65d60ec6794a158002329a8a07185040d7ca8d36bff080ddb5f8a6c",
+    "independent_review/raw/osc09_baseline/run.json": "536e8eb2b89a5eda1d22085f0bac2447ce45541787ba872a616db1eea7fc37cc",
+    "independent_review/raw/rxn01_baseline/run.json": "f6b1967dfa1026d6ae666394b55af2c348515c65ef740de69a1a953ad800da2f",
+    "independent_review/raw/rxn02_baseline/run.json": "6af29c7be0b43ca4fc0c444db6a891c872f3bba8f6101092b6ef9f38b605c9e0",
+    "independent_review/raw/rxn03_baseline/run.json": "f9eae9340c785ea10cf7f28dddab37d033a35037b7e395caff196023ae37e1dc",
+    "independent_review/raw/rxn04_baseline/run.json": "6b115741680525bbcbc1785e34acb35a4b875fec6253beee09e6fabd594eadec",
+    "independent_review/raw/rxn05_baseline/run.json": "0bd5b9f90b48fe51dc92f4d86c962163677d453b548a197e8d09ddc1de96f899",
+    "independent_review/raw/rxn06_baseline/run.json": "637ce32aea62f26ade92e59cd502ef4b7c7631bb8cddb38a13987d202087a0f4",
+    "independent_review/raw/rxn07_baseline/run.json": "42f63d21abe3673fb7fc2c993a132bf9a2b5915e4642665cb6389fe36b5dfe3b",
+    "independent_review/raw/rxn08_baseline/run.json": "65b252124fc0c7372c2bf2c5b7460e9b9e09cff60358388eaf8c4f830a58bce8",
+    "independent_review/raw/rxn09_baseline/run.json": "dd4f6b1d1bfd06bcbacfa51f704ef6ba0ee308c472b21f2efc72d5b12fa44eca"
+  },
+  "categories": {
+    "main": {
+      "runs": 90,
+      "status_counts": {
+        "BASELINE_PASS": 18,
+        "EQUIVALENT": 16,
+        "KILLED": 51,
+        "SURVIVED": 5
+      }
+    },
+    "cross": {
+      "runs": 30,
+      "status_counts": {
+        "BASELINE_PASS": 6,
+        "KILLED": 16,
+        "SURVIVED": 5,
+        "EQUIVALENT": 3
+      }
+    },
+    "review": {
+      "runs": 30,
+      "status_counts": {
+        "EQUIVALENT": 4,
+        "KILLED": 3,
+        "SURVIVED": 2,
+        "INCONCLUSIVE": 3,
+        "BASELINE_PASS": 18
+      }
+    }
+  },
+  "groups": {
+    "war_main": {
+      "category": "main",
+      "runs": 45,
+      "status_counts": {
+        "BASELINE_PASS": 9,
+        "EQUIVALENT": 5,
+        "KILLED": 31
+      },
+      "rows": [
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc01/baseline/run.json",
+          "oracle_fine": 1.1666202169658196e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.4658907
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "damping_sign",
+          "status": "EQUIVALENT",
+          "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+          "evidence": "war/results/osc01/damping_sign/run.json",
+          "oracle_fine": 1.1666202169658196e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.4655539
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc01/frozen/run.json",
+          "oracle_fine": 1.0350573427367822,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 1.0350573427367822,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4605309
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc01/spring_coefficient/run.json",
+          "oracle_fine": 0.18211859578406756,
+          "failed_checks": {
+            "energy_relative_drift_h0.0125": {
+              "actual": 0.22171868682655582,
+              "criterion": "<= 1e-6",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.18211859578406756,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4584183
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc01/spring_sign/run.json",
+          "oracle_fine": 5.296366825453129,
+          "failed_checks": {
+            "energy_relative_drift_h0.0125": {
+              "actual": 109.2942259367213,
+              "criterion": "<= 1e-6",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 5.296366825453129,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.458785
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc02/baseline/run.json",
+          "oracle_fine": 7.469913691631388e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.4557593
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "damping_sign",
+          "status": "EQUIVALENT",
+          "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+          "evidence": "war/results/osc02/damping_sign/run.json",
+          "oracle_fine": 7.469913691631388e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.4619284
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc02/frozen/run.json",
+          "oracle_fine": 1.468104911879654,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 1.468104911879654,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4574634
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc02/spring_coefficient/run.json",
+          "oracle_fine": 0.4686194208684708,
+          "failed_checks": {
+            "energy_relative_drift_h0.0125": {
+              "actual": 0.1273164174605042,
+              "criterion": "<= 1e-6",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.4686194208684708,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.455144
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc02/spring_sign/run.json",
+          "oracle_fine": 80.37341903952188,
+          "failed_checks": {
+            "energy_relative_drift_h0.0125": {
+              "actual": 15330.923710648574,
+              "criterion": "<= 1e-6",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 80.37341903952188,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4599159
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc03/baseline/run.json",
+          "oracle_fine": 4.542812015175943e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.4568417
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc03/damping_sign/run.json",
+          "oracle_fine": 1.5227981281294611,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.010293880518184695,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.5227981281294611,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4625379
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc03/frozen/run.json",
+          "oracle_fine": 0.6767998334391766,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6767998334391766,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.451788
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc03/spring_coefficient/run.json",
+          "oracle_fine": 0.05739682014287017,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 9.600701664173178e-06,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.05739682014287017,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.456068
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc03/spring_sign/run.json",
+          "oracle_fine": 2.864897203418648,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.0767992062495173,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 2.864897203418648,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4520569
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc04/baseline/run.json",
+          "oracle_fine": 1.2637544029925673e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.4624975
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc04/damping_sign/run.json",
+          "oracle_fine": 7.913723714408663,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 1.6515242919374487,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 7.913723714408663,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4574562
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc04/frozen/run.json",
+          "oracle_fine": 0.9154255195393045,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.9154255195393045,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4622363
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc04/spring_coefficient/run.json",
+          "oracle_fine": 0.06442215175702261,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 8.94667582567038e-05,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.06442215175702261,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4582396
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc04/spring_sign/run.json",
+          "oracle_fine": 2.2707221704716227,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.26338676119192606,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 2.2707221704716227,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.450459
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc05/baseline/run.json",
+          "oracle_fine": 3.7988507460823295e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.4627864
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc05/damping_sign/run.json",
+          "oracle_fine": 61.10485805883615,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 82.31903739060544,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 61.10485805883615,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4582614
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc05/frozen/run.json",
+          "oracle_fine": 0.44524076174773436,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.44524076174773436,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4568108
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc05/spring_coefficient/run.json",
+          "oracle_fine": 0.044713119112893614,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.044713119112893614,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4581233
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc05/spring_sign/run.json",
+          "oracle_fine": 1.382323346765507,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.011357446172408858,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.382323346765507,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4592384
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc06/baseline/run.json",
+          "oracle_fine": 9.08804585134894e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.4627811
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc06/damping_sign/run.json",
+          "oracle_fine": 8293.046098912,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 4534800.619123921,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 8293.046098912,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.457287
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc06/frozen/run.json",
+          "oracle_fine": 0.6977761390711891,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6977761390711891,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.450137
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc06/spring_coefficient/run.json",
+          "oracle_fine": 0.025115465359354685,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 6.08343461936116e-08,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.025115465359354685,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4533076
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc06/spring_sign/run.json",
+          "oracle_fine": 2.230521843236393,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.19650534503406725,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 2.230521843236393,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4536544
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc07/baseline/run.json",
+          "oracle_fine": 9.328243629525894e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.4655774
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc07/damping_sign/run.json",
+          "oracle_fine": 11751.717685918376,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 8413822.436462894,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 11751.717685918376,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4642571
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc07/frozen/run.json",
+          "oracle_fine": 0.32554064843364566,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.32554064843364566,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4599683
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc07/spring_coefficient/run.json",
+          "oracle_fine": 0.0401119429220826,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.0401119429220826,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4608102
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc07/spring_sign/run.json",
+          "oracle_fine": 0.8178062807484106,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.0032841671962483554,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.8178062807484106,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4555606
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc08/baseline/run.json",
+          "oracle_fine": 4.266769298521599e-08,
+          "failed_checks": {},
+          "wall_seconds": 0.4580535
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc08/damping_sign/run.json",
+          "oracle_fine": 4761936437.1770525,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 3.137457562761728e+18,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 4761936437.1770525,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4576378
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc08/frozen/run.json",
+          "oracle_fine": 0.6758328162128692,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6758328162128692,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4486318
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc08/spring_coefficient/run.json",
+          "oracle_fine": 0.019640025336281678,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.019640025336281678,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4560068
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc08/spring_sign/run.json",
+          "oracle_fine": 1.0917823122667532,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.034750437741996265,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.0917823122667532,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4618273
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results/osc09/baseline/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.4626488
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "damping_sign",
+          "status": "EQUIVALENT",
+          "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+          "evidence": "war/results/osc09/damping_sign/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.4639112
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results/osc09/frozen/run.json",
+          "oracle_fine": 0.8485281374238571,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.8485281374238571,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4591083
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "spring_coefficient",
+          "status": "EQUIVALENT",
+          "reason": "omega=0: el término de resorte es cero para todos los estados",
+          "evidence": "war/results/osc09/spring_coefficient/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.4592719
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "spring_sign",
+          "status": "EQUIVALENT",
+          "reason": "omega=0: el término de resorte es cero para todos los estados",
+          "evidence": "war/results/osc09/spring_sign/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.4621466
+        }
+      ]
+    },
+    "guerra_main": {
+      "category": "main",
+      "runs": 45,
+      "status_counts": {
+        "BASELINE_PASS": 9,
+        "EQUIVALENT": 11,
+        "KILLED": 20,
+        "SURVIVED": 5
+      },
+      "rows": [
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn01_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 3.3930627
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "forward_coefficient",
+          "status": "EQUIVALENT",
+          "reason": "kf=0: el término directo modificado es cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn01_forward_coefficient/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8659891
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "frozen",
+          "status": "EQUIVALENT",
+          "reason": "kf=kr=0: el operador original es cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn01_frozen/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.9563438
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "mass_leak",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn01_mass_leak/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8680164
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "reverse_sign",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn01_reverse_sign/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8662812
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn02_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8761898
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "forward_coefficient",
+          "status": "EQUIVALENT",
+          "reason": "kf=0: el término directo modificado es cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn02_forward_coefficient/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8970182
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "frozen",
+          "status": "EQUIVALENT",
+          "reason": "kf=kr=0: el operador original es cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn02_frozen/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8547099
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "mass_leak",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn02_mass_leak/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.9171702
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "reverse_sign",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn02_reverse_sign/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8940217
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn03_baseline/run.json",
+          "oracle_fine": 1.923988747901597e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.9537447
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn03_forward_coefficient/run.json",
+          "oracle_fine": 0.0819171923775815,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.0819171923775815,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8699223
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn03_frozen/run.json",
+          "oracle_fine": 0.7981034820053446,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.7981034820053446,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8480901
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "mass_leak",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn03_mass_leak/run.json",
+          "oracle_fine": 1.923988747901597e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.8437526
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "reverse_sign",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn03_reverse_sign/run.json",
+          "oracle_fine": 1.923988747901597e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.937579
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn04_baseline/run.json",
+          "oracle_fine": 9.76030367891287e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.9334815
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "forward_coefficient",
+          "status": "EQUIVALENT",
+          "reason": "kf=0: el término directo modificado es cero para todos los estados",
+          "evidence": "guerra/raw/results/rxn04_forward_coefficient/run.json",
+          "oracle_fine": 9.76030367891287e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.9988933
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn04_frozen/run.json",
+          "oracle_fine": 0.9092820467105875,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.9092820467105875,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8877108
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn04_mass_leak/run.json",
+          "oracle_fine": 1.234713298043226,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 2.399999999999997,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 2.399999999999997,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.234713298043226,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8653029
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn04_reverse_sign/run.json",
+          "oracle_fine": 10.932458426658972,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -10.023176379948382,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 11.023176379948389,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 10.932458426658972,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9389086
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn05_baseline/run.json",
+          "oracle_fine": 1.8807733222391156e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.8951788
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn05_forward_coefficient/run.json",
+          "oracle_fine": 0.058314495855146004,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.058314495855146004,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8751102
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn05_frozen/run.json",
+          "oracle_fine": 0.3458658867053549,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.3458658867053549,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9861308
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn05_mass_leak/run.json",
+          "oracle_fine": 0.2226950587579659,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 0.4031264725221795,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.2226950587579659,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9519639
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn05_reverse_sign/run.json",
+          "oracle_fine": 0.6377835085771618,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6377835085771618,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8782319
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn06_baseline/run.json",
+          "oracle_fine": 2.3185064993955487e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.8663586
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn06_forward_coefficient/run.json",
+          "oracle_fine": 0.02408279629411699,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.02408279629411699,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9234674
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn06_frozen/run.json",
+          "oracle_fine": 0.07194283470162248,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.07194283470162248,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9558926
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn06_mass_leak/run.json",
+          "oracle_fine": 0.268253015945897,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 0.41237734675516924,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 1.2497296186016176,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.268253015945897,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.964161
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn06_reverse_sign/run.json",
+          "oracle_fine": 0.2614605824234748,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -0.13340341712509737,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 1.1334034171250973,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.2614605824234748,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8433955
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn07_baseline/run.json",
+          "oracle_fine": 9.856225779980576e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.9819736
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn07_forward_coefficient/run.json",
+          "oracle_fine": 0.05454545417379805,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.05454545417379805,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9377472
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn07_frozen/run.json",
+          "oracle_fine": 0.19999999958776926,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.19999999958776926,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8650653
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn07_mass_leak/run.json",
+          "oracle_fine": 373.1510652913047,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 742.7751029759645,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 408.02295031049755,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 373.1510652913047,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8510512
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn07_reverse_sign/run.json",
+          "oracle_fine": 139.55518997143633,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -138.95518997184854,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 139.95518997184857,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 139.55518997143633,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9011729
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn08_baseline/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.8886976
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn08_forward_coefficient/run.json",
+          "oracle_fine": 0.04817455874513282,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.04817455874513282,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9737375
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "frozen",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "guerra/raw/results/rxn08_frozen/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.9305073
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn08_mass_leak/run.json",
+          "oracle_fine": 1.1584437117524644,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 2.3079101033750407,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 1.752074867236963,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.1584437117524644,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8782087
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/raw/results/rxn08_reverse_sign/run.json",
+          "oracle_fine": 4.150684045571704,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -3.4506840455717063,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 4.450684045571702,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 4.150684045571704,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9876555
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/raw/results/rxn09_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.9174354
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "forward_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "guerra/raw/results/rxn09_forward_coefficient/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.9238402
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "frozen",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "guerra/raw/results/rxn09_frozen/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8713933
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "mass_leak",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "guerra/raw/results/rxn09_mass_leak/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8653138
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "reverse_sign",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "guerra/raw/results/rxn09_reverse_sign/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.8786305
+        }
+      ]
+    },
+    "war_cross": {
+      "category": "cross",
+      "runs": 15,
+      "status_counts": {
+        "BASELINE_PASS": 3,
+        "KILLED": 7,
+        "SURVIVED": 5
+      },
+      "rows": [
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results_cross_reaction/rxn07/baseline/run.json",
+          "oracle_fine": 9.856225779980576e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.4640233
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn07/forward_coefficient/run.json",
+          "oracle_fine": 0.05454545417379805,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.05454545417379805,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4615906
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn07/frozen/run.json",
+          "oracle_fine": 0.19999999958776926,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.19999999958776926,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4550464
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn07/mass_leak/run.json",
+          "oracle_fine": 373.1510652913047,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 742.7751029759645,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 408.02295031049755,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 373.1510652913047,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4544981
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn07/reverse_sign/run.json",
+          "oracle_fine": 139.55518997143633,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -138.95518997184854,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 139.95518997184857,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 139.55518997143633,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4610481
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results_cross_reaction/rxn08/baseline/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.4622249
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "forward_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn08/forward_coefficient/run.json",
+          "oracle_fine": 0.04817455874513282,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.04817455874513282,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4620773
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "frozen",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "war/results_cross_reaction/rxn08/frozen/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.4531371
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn08/mass_leak/run.json",
+          "oracle_fine": 1.1584437117524644,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 2.3079101033750407,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 1.752074867236963,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.1584437117524644,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4585289
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "reverse_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "war/results_cross_reaction/rxn08/reverse_sign/run.json",
+          "oracle_fine": 4.150684045571704,
+          "failed_checks": {
+            "nonnegative_h0.0125": {
+              "actual": -3.4506840455717063,
+              "criterion": ">= -1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 4.450684045571702,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 4.150684045571704,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.4445827
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "war/results_cross_reaction/rxn09/baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.449658
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "forward_coefficient",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "war/results_cross_reaction/rxn09/forward_coefficient/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.448962
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "frozen",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "war/results_cross_reaction/rxn09/frozen/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.4425472
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "mass_leak",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "war/results_cross_reaction/rxn09/mass_leak/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.4442481
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "reverse_sign",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "war/results_cross_reaction/rxn09/reverse_sign/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.4438226
+        }
+      ]
+    },
+    "guerra_cross": {
+      "category": "cross",
+      "runs": 15,
+      "status_counts": {
+        "BASELINE_PASS": 3,
+        "KILLED": 9,
+        "EQUIVALENT": 3
+      },
+      "rows": [
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/cross/results_cross_oscillator/osc06_baseline/run.json",
+          "oracle_fine": 9.08804585134894e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.9221198
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc06_damping_sign/run.json",
+          "oracle_fine": 8293.046098912,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 4534800.619123921,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 8293.046098912,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.893216
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc06_frozen/run.json",
+          "oracle_fine": 0.6977761390711891,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6977761390711891,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9032215
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc06_spring_coefficient/run.json",
+          "oracle_fine": 0.025115465359354685,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 6.08343461936116e-08,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 0.025115465359354685,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9190682
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc06_spring_sign/run.json",
+          "oracle_fine": 2.230521843236393,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.19650534503406725,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 2.230521843236393,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8572079
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/cross/results_cross_oscillator/osc08_baseline/run.json",
+          "oracle_fine": 4.266769298521599e-08,
+          "failed_checks": {},
+          "wall_seconds": 0.9055539
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "damping_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc08_damping_sign/run.json",
+          "oracle_fine": 4761936437.1770525,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 3.137457562761728e+18,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 4761936437.1770525,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9184257
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc08_frozen/run.json",
+          "oracle_fine": 0.6758328162128692,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.6758328162128692,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8768244
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "spring_coefficient",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc08_spring_coefficient/run.json",
+          "oracle_fine": 0.019640025336281678,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.019640025336281678,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8616636
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc08_spring_sign/run.json",
+          "oracle_fine": 1.0917823122667532,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.034750437741996265,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.0917823122667532,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.8867607
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "guerra/cross/results_cross_oscillator/osc09_baseline/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.9713847
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "damping_sign",
+          "status": "EQUIVALENT",
+          "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+          "evidence": "guerra/cross/results_cross_oscillator/osc09_damping_sign/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.9446247
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "guerra/cross/results_cross_oscillator/osc09_frozen/run.json",
+          "oracle_fine": 0.8485281374238571,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.8485281374238571,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.9844184
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "spring_coefficient",
+          "status": "EQUIVALENT",
+          "reason": "omega=0: el término de resorte es cero para todos los estados",
+          "evidence": "guerra/cross/results_cross_oscillator/osc09_spring_coefficient/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.9326557
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "spring_sign",
+          "status": "EQUIVALENT",
+          "reason": "omega=0: el término de resorte es cero para todos los estados",
+          "evidence": "guerra/cross/results_cross_oscillator/osc09_spring_sign/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.9857164
+        }
+      ]
+    },
+    "independent_review": {
+      "category": "review",
+      "runs": 30,
+      "status_counts": {
+        "EQUIVALENT": 4,
+        "KILLED": 3,
+        "SURVIVED": 2,
+        "INCONCLUSIVE": 3,
+        "BASELINE_PASS": 18
+      },
+      "rows": [
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "damping_sign",
+          "status": "EQUIVALENT",
+          "reason": "zeta*omega=0: el término de amortiguamiento es cero para todos los estados",
+          "evidence": "independent_review/raw/check_00_osc01_damping_sign/run.json",
+          "oracle_fine": 1.1666202169658196e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.220551083
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "spring_sign",
+          "status": "EQUIVALENT",
+          "reason": "omega=0: el término de resorte es cero para todos los estados",
+          "evidence": "independent_review/raw/check_01_osc09_spring_sign/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.189904208
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "frozen",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "independent_review/raw/check_02_osc09_frozen/run.json",
+          "oracle_fine": 0.8485281374238571,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.8485281374238571,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.183874084
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "frozen",
+          "status": "EQUIVALENT",
+          "reason": "kf=kr=0: el operador original es cero para todos los estados",
+          "evidence": "independent_review/raw/check_03_rxn01_frozen/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.188573417
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "frozen",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "independent_review/raw/check_04_rxn08_frozen/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.186962167
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "reverse_sign",
+          "status": "SURVIVED",
+          "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias",
+          "evidence": "independent_review/raw/check_05_rxn09_reverse_sign/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.186386125
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "reverse_sign",
+          "status": "EQUIVALENT",
+          "reason": "kr=0: los términos inversos modificados son cero para todos los estados",
+          "evidence": "independent_review/raw/check_06_rxn03_reverse_sign/run.json",
+          "oracle_fine": 1.923988747901597e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.186230375
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "spring_sign",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "independent_review/raw/check_07_osc05_spring_sign/run.json",
+          "oracle_fine": 1.382323346765507,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 0.011357446172408858,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 1.382323346765507,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.188792917
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "mass_leak",
+          "status": "KILLED",
+          "reason": "el mutante ejecutado viola el contrato numérico",
+          "evidence": "independent_review/raw/check_08_rxn07_mass_leak/run.json",
+          "oracle_fine": 373.1510652913047,
+          "failed_checks": {
+            "mass_drift_h0.0125": {
+              "actual": 742.7751029759645,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "bounded_h0.0125": {
+              "actual": 408.02295031049755,
+              "criterion": "<= initial_total + 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 373.1510652913047,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.184434
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "damping_sign",
+          "status": "INCONCLUSIVE",
+          "reason": "no hay referencia válida del mismo caso, fuente, contrato, host y entorno",
+          "evidence": "independent_review/raw/check_09_osc05_damping_sign/run.json",
+          "oracle_fine": 61.10485805883615,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 82.31903739060544,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 61.10485805883615,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.185962916
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "forward_coefficient",
+          "status": "INCONCLUSIVE",
+          "reason": "no hay referencia válida del mismo caso, fuente, contrato, host y entorno",
+          "evidence": "independent_review/raw/check_10_rxn05_forward_coefficient/run.json",
+          "oracle_fine": 0.058314495855146004,
+          "failed_checks": {
+            "oracle_fine": {
+              "actual": 0.058314495855146004,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.185415
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "damping_sign",
+          "status": "INCONCLUSIVE",
+          "reason": "no hay referencia válida del mismo caso, fuente, contrato, host y entorno",
+          "evidence": "independent_review/raw/check_11_osc05_damping_sign/run.json",
+          "oracle_fine": 61.10485805883615,
+          "failed_checks": {
+            "energy_increase_h0.0125": {
+              "actual": 82.31903739060544,
+              "criterion": "<= 1e-12",
+              "passed": false
+            },
+            "oracle_fine": {
+              "actual": 61.10485805883615,
+              "criterion": "< 1e-6",
+              "passed": false
+            }
+          },
+          "wall_seconds": 0.188918791
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc01",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc01_baseline/run.json",
+          "oracle_fine": 1.1666202169658196e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.203787875
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc02",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc02_baseline/run.json",
+          "oracle_fine": 7.4699136247264e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.194844833
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc03",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc03_baseline/run.json",
+          "oracle_fine": 4.542812015175943e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.19139825
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc04",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc04_baseline/run.json",
+          "oracle_fine": 1.2637544029925673e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.190291584
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc05",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc05_baseline/run.json",
+          "oracle_fine": 3.7988507460823295e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.194116834
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc06",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc06_baseline/run.json",
+          "oracle_fine": 9.08804585134894e-10,
+          "failed_checks": {},
+          "wall_seconds": 0.19518575
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc07",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc07_baseline/run.json",
+          "oracle_fine": 9.328243629525894e-11,
+          "failed_checks": {},
+          "wall_seconds": 0.195026167
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc08_baseline/run.json",
+          "oracle_fine": 4.266769298521599e-08,
+          "failed_checks": {},
+          "wall_seconds": 0.188211375
+        },
+        {
+          "case": "oscillator",
+          "scenario": "osc09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/osc09_baseline/run.json",
+          "oracle_fine": 6.594388326471855e-15,
+          "failed_checks": {},
+          "wall_seconds": 0.187532125
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn01",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn01_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.189304959
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn02",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn02_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.187870458
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn03",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn03_baseline/run.json",
+          "oracle_fine": 1.923988747901597e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.19095375
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn04",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn04_baseline/run.json",
+          "oracle_fine": 9.76030367891287e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.190875458
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn05",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn05_baseline/run.json",
+          "oracle_fine": 1.8807733222391156e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.192583292
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn06",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn06_baseline/run.json",
+          "oracle_fine": 2.3185064993955487e-12,
+          "failed_checks": {},
+          "wall_seconds": 0.189415083
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn07",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn07_baseline/run.json",
+          "oracle_fine": 9.856225779980576e-09,
+          "failed_checks": {},
+          "wall_seconds": 0.18921475
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn08",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn08_baseline/run.json",
+          "oracle_fine": 3.925231146709438e-17,
+          "failed_checks": {},
+          "wall_seconds": 0.19275225
+        },
+        {
+          "case": "reaction",
+          "scenario": "rxn09",
+          "mutant": "baseline",
+          "status": "BASELINE_PASS",
+          "reason": "referencia satisface el contrato",
+          "evidence": "independent_review/raw/rxn09_baseline/run.json",
+          "oracle_fine": 0.0,
+          "failed_checks": {},
+          "wall_seconds": 0.192485959
+        }
+      ]
+    }
+  },
+  "main_detection": {
+    "killed": 51,
+    "non_equivalent_evaluable": 56,
+    "fraction": 0.9107142857142857,
+    "denominator_unit": "pares configuración-mutante; no probabilidad de verdad"
+  },
+  "cross_host_evidence_sha256": "1d632efccfcdbeb7c9857a42bacf1e57bfd9e4fa4667d41c4d4cd037a8a36864",
+  "cross_host_recorded_result": {
+    "paired_runs": 30,
+    "matched_statuses": 30,
+    "all_arrays_exactly_equal": true,
+    "maximum_absolute_difference": 0.0
+  },
+  "cross_host_note": "Este agregador verifica los enlaces por hash; la comparación numérica de arrays está documentada por separado.",
+  "limitations": [
+    "Verificación interna reproducible, no certificación externa ni acreditación",
+    "Dos modelos estipulados, no validación experimental de materiales ni sustancias",
+    "Dos hosts con el mismo código comprueban reproducibilidad, no independencia algorítmica",
+    "El fixture de parámetros alterados no es una ejecución adicional"
+  ]
+}

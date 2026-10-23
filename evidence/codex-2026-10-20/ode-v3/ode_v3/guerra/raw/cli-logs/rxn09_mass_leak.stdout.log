@@ -1,0 +1,1 @@
+{"case": "reaction", "scenario": "rxn09", "mutant": "mass_leak", "status": "SURVIVED", "reason": "el contrato no detectó el cambio; no implica equivalencia; dato inicial de equilibrio: cobertura limitada de trayectorias", "output": "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn09_mass_leak"}

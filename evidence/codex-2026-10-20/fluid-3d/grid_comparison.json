@@ -1,0 +1,69 @@
+{
+  "scope": "SENSIBILIDAD ESPACIAL ENTRE DOS MALLAS; NO CERTIFICADO DE CONVERGENCIA",
+  "host": "War",
+  "finished_utc": "2026-10-20T16:51:54.539492+00:00",
+  "grids": [
+    32,
+    64
+  ],
+  "dt": 0.01,
+  "T": 4.0,
+  "comparison": "Velocidad final de la malla fina muestreada en puntos coincidentes, sin filtrado adicional.",
+  "interpretation": "Diferencia observada, no error contra una solución continua exacta. No se asigna PASS espacial.",
+  "coarse_source_sha256": "23d42d339f84387c714e30723ca1607181193989913751d8c1a8c0960cdaae44",
+  "fine_source_sha256": "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50",
+  "coarse_fields_sha256": "9adab406c424e2d36bc3e0c9ee666561a7085d4a429498c197119eaf16943f6d",
+  "fine_fields_sha256": "c9c16b767f9a16b0239e88aae0bf60fec99e7ded4ba39638edfdfb7a76437c16",
+  "results": {
+    "Euler": {
+      "rms_velocity_difference": 0.04828268296291882,
+      "reference_velocity_rms": 0.2887317335911783,
+      "relative_rms_velocity_difference": 0.16722333344655266,
+      "coarse_final": {
+        "t": 4.0,
+        "model": "Euler",
+        "energy": 0.12499999999805216,
+        "enstrophy": 1.5700736466820184,
+        "omega_max": 7.1667570384816335,
+        "divergence_linf": 1.3264913577181072e-16,
+        "cfl": 0.07380494465322497,
+        "spectral_tail_fraction": 0.019282676580322743
+      },
+      "fine_final": {
+        "t": 4.0,
+        "model": "Euler",
+        "energy": 0.12499999999307623,
+        "enstrophy": 1.8230945135053855,
+        "omega_max": 13.684833087186377,
+        "divergence_linf": 1.391183239382729e-16,
+        "cfl": 0.15940037381972894,
+        "spectral_tail_fraction": 0.002678284178874276
+      }
+    },
+    "NavierStokes": {
+      "rms_velocity_difference": 8.620607253167824e-05,
+      "reference_velocity_rms": 0.16107972928148634,
+      "relative_rms_velocity_difference": 0.000535176418014916,
+      "coarse_final": {
+        "t": 4.0,
+        "model": "NavierStokes",
+        "energy": 0.03892002202084956,
+        "enstrophy": 0.16457561163715306,
+        "omega_max": 0.956057966198048,
+        "divergence_linf": 1.4029553664433638e-17,
+        "cfl": 0.028026451868051465,
+        "spectral_tail_fraction": 4.6628223192102546e-06
+      },
+      "fine_final": {
+        "t": 4.0,
+        "model": "NavierStokes",
+        "energy": 0.038920018731798366,
+        "enstrophy": 0.16457563992336188,
+        "omega_max": 0.9564225257021659,
+        "divergence_linf": 1.1623219511508316e-17,
+        "cfl": 0.05675725700815055,
+        "spectral_tail_fraction": 8.077613258094733e-12
+      }
+    }
+  }
+}

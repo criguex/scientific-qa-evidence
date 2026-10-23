@@ -1,0 +1,211 @@
+{
+  "scope": "SIMULACION NUMERICA ILUSTRATIVA; NO PRUEBA DE EXPLOSION NI DE LOS TEOREMAS LEAN",
+  "started_utc": "2026-10-20T16:43:14.970219+00:00",
+  "finished_utc": "2026-10-20T16:51:39.006162+00:00",
+  "wall_seconds": 504.03540860000066,
+  "machine": {
+    "hostname": "War",
+    "platform": "Windows-10-10.0.26100-SP0"
+  },
+  "versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6"
+  },
+  "source_sha256": "87d3372edf646da285731f5144551c2a626987f3718c6985b47a6c816f3bdc50",
+  "parameters": {
+    "n": 64,
+    "dt": 0.01,
+    "T": 4.0,
+    "save_dt": 0.02,
+    "viscosities": [
+      0.0,
+      0.04
+    ],
+    "forcing": 0,
+    "domain": "periodic [0, 2*pi]^3",
+    "initial": "(sin(x)cos(y)cos(z), -cos(x)sin(y)cos(z), 0)",
+    "method": "Fourier rotational pseudospectral; Leray; RK4; strict 2/3 mask each stage",
+    "compute_dtype": "float64/complex128",
+    "visualization_storage_dtype": "float32 vorticity magnitude; float64 endpoint velocity",
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "controls": {
+    "tests": {
+      "taylor_green_energy_initial": {
+        "value": 0.0,
+        "threshold_exclusive": 1e-13,
+        "passed": true
+      },
+      "taylor_green_enstrophy_initial": {
+        "value": 5.551115123125783e-17,
+        "threshold_exclusive": 1e-13,
+        "passed": true
+      },
+      "taylor_green_closed_form_rhs_euler": {
+        "value": 4.718447854656915e-16,
+        "threshold_exclusive": 1e-12,
+        "passed": true
+      },
+      "taylor_green_closed_form_rhs_ns": {
+        "value": 4.996003610813204e-16,
+        "threshold_exclusive": 1e-12,
+        "passed": true
+      },
+      "leray_rejects_gradient": {
+        "value": 4.184595542717344e-18,
+        "threshold_exclusive": 1e-12,
+        "passed": true
+      },
+      "curl_matches_analytic_shear": {
+        "value": 1.6653345369377348e-15,
+        "threshold_exclusive": 1e-12,
+        "passed": true
+      },
+      "shear_euler_rhs_zero": {
+        "value": 4.876394406602658e-15,
+        "threshold_exclusive": 1e-10,
+        "passed": true
+      },
+      "shear_viscous_rhs": {
+        "value": 1.734723475976807e-16,
+        "threshold_exclusive": 1e-12,
+        "passed": true
+      },
+      "analytic_shear_euler_t1": {
+        "value": 2.220446049250313e-16,
+        "threshold_exclusive": 1e-10,
+        "passed": true
+      },
+      "analytic_shear_ns_t1": {
+        "value": 6.661338147750939e-16,
+        "threshold_exclusive": 1e-10,
+        "passed": true
+      },
+      "rotational_vs_convective_rhs": {
+        "value": 4.241633474762853e-14,
+        "threshold_exclusive": 1e-10,
+        "passed": true
+      },
+      "reject_large_divergence": {
+        "passed": true,
+        "kind": "negative_control"
+      },
+      "reject_euler_energy_drift": {
+        "passed": true,
+        "kind": "negative_control"
+      },
+      "reject_ns_energy_growth": {
+        "passed": true,
+        "kind": "negative_control"
+      },
+      "reject_wrong_viscous_sign": {
+        "passed": true,
+        "kind": "negative_control"
+      },
+      "reject_reversed_nonlinearity": {
+        "passed": true,
+        "kind": "negative_control"
+      },
+      "time_refinement_euler": {
+        "n": 16,
+        "T": 1.0,
+        "dt": [
+          0.04,
+          0.02,
+          0.01
+        ],
+        "successive_rms_differences": [
+          6.037586124142581e-09,
+          3.775481579320042e-10
+        ],
+        "ratio": 15.9915655719606,
+        "above_noise_floor": true,
+        "expected_ratio_rk4": 16,
+        "minimum_ratio": 8,
+        "passed": true,
+        "scope": "refinamiento temporal a malla fija; no convergencia espacial"
+      },
+      "time_refinement_ns": {
+        "n": 16,
+        "T": 1.0,
+        "dt": [
+          0.04,
+          0.02,
+          0.01
+        ],
+        "successive_rms_differences": [
+          2.3486309415083155e-09,
+          1.4453581502477408e-10
+        ],
+        "ratio": 16.24947381454036,
+        "above_noise_floor": true,
+        "expected_ratio_rk4": 16,
+        "minimum_ratio": 8,
+        "passed": true,
+        "scope": "refinamiento temporal a malla fija; no convergencia espacial"
+      }
+    },
+    "all_tests_passed": true
+  },
+  "diagnostics": {
+    "divergence_linf_max": 1.4450975699449362e-16,
+    "euler_energy_relative_drift_max": 5.539035896617861e-11,
+    "ns_energy_increase_max": -0.0002641584792670501,
+    "cfl_max": 0.15940037381972894,
+    "euler_spectral_tail_fraction_max": 0.002678284178874276,
+    "ns_spectral_tail_fraction_max": 1.897962711015591e-11,
+    "euler_initial": {
+      "t": 0.0,
+      "model": "Euler",
+      "energy": 0.12500000000000003,
+      "enstrophy": 0.37500000000000006,
+      "omega_max": 2.000000000000002,
+      "divergence_linf": 1.8503717077086262e-17,
+      "cfl": 0.10185916357881307,
+      "spectral_tail_fraction": 9.663884825733652e-33
+    },
+    "euler_final": {
+      "t": 4.0,
+      "model": "Euler",
+      "energy": 0.12499999999307623,
+      "enstrophy": 1.8230945135053855,
+      "omega_max": 13.684833087186377,
+      "divergence_linf": 1.391183239382729e-16,
+      "cfl": 0.15940037381972894,
+      "spectral_tail_fraction": 0.002678284178874276
+    },
+    "ns_initial": {
+      "t": 0.0,
+      "model": "NavierStokes",
+      "energy": 0.12500000000000003,
+      "enstrophy": 0.37500000000000006,
+      "omega_max": 2.000000000000002,
+      "divergence_linf": 1.8503717077086262e-17,
+      "cfl": 0.10185916357881307,
+      "spectral_tail_fraction": 9.663884825733652e-33
+    },
+    "ns_final": {
+      "t": 4.0,
+      "model": "NavierStokes",
+      "energy": 0.038920018731798366,
+      "enstrophy": 0.16457563992336188,
+      "omega_max": 0.9564225257021659,
+      "divergence_linf": 1.1623219511508316e-17,
+      "cfl": 0.05675725700815055,
+      "spectral_tail_fraction": 8.077613258094733e-12
+    },
+    "snapshot_count_per_model": 201
+  },
+  "all_numerical_checks_passed": true,
+  "limits": [
+    "No convergencia espacial medida.",
+    "Malla 64^3 ilustrativa; las escalas cercanas al corte espectral pueden no resolverse.",
+    "Dominio periodico y dato Taylor-Green: diferentes de datos compactos en R3.",
+    "Tiempo finito muestreado no prueba regularidad global ni singularidad."
+  ],
+  "artifact_sha256": {
+    "fields.npz": "c9c16b767f9a16b0239e88aae0bf60fec99e7ded4ba39638edfdfb7a76437c16",
+    "metrics.csv": "565637d7756dc42574de9f270712bb3e906fa87df4dca9bf276085b5332630df"
+  }
+}

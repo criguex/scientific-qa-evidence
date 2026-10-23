@@ -1,0 +1,185 @@
+{
+  "schema_version": 3,
+  "case": "reaction",
+  "scenario": "rxn08",
+  "mutant": "baseline",
+  "status": "BASELINE_PASS",
+  "reason": "referencia satisface el contrato",
+  "operator_change": "sin cambios",
+  "started_utc": "2026-10-20T18:10:41.886009+00:00",
+  "finished_utc": "2026-10-20T18:10:42.775372+00:00",
+  "monotonic_start_ns": 71388412867700,
+  "monotonic_finish_ns": 71389301565300,
+  "wall_seconds": 0.8886976,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "kf": 0.3,
+    "kr": 0.7,
+    "A0": 0.7,
+    "B0": 0.3,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "A'=-kf*A+kr*B; B'=kf*A-kr*B",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "reaction",
+    "--scenario",
+    "rxn08",
+    "--mutant",
+    "baseline",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn08_baseline"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": false,
+  "baseline_validation_reason": "no se proporcionó referencia",
+  "baseline_file_sha256": null,
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "mass_drift_h0.05": {
+        "actual": 0.0,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "nonnegative_h0.05": {
+        "actual": 0.3,
+        "criterion": ">= -1e-12",
+        "passed": true
+      },
+      "bounded_h0.05": {
+        "actual": 0.7,
+        "criterion": "<= initial_total + 1e-12",
+        "passed": true
+      },
+      "mass_drift_h0.025": {
+        "actual": 0.0,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "nonnegative_h0.025": {
+        "actual": 0.3,
+        "criterion": ">= -1e-12",
+        "passed": true
+      },
+      "bounded_h0.025": {
+        "actual": 0.7,
+        "criterion": "<= initial_total + 1e-12",
+        "passed": true
+      },
+      "mass_drift_h0.0125": {
+        "actual": 0.0,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "nonnegative_h0.0125": {
+        "actual": 0.3,
+        "criterion": ">= -1e-12",
+        "passed": true
+      },
+      "bounded_h0.0125": {
+        "actual": 0.7,
+        "criterion": "<= initial_total + 1e-12",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 3.925231146709438e-17,
+        "criterion": "< 1e-6",
+        "passed": true
+      },
+      "order_pair_0": {
+        "actual": null,
+        "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+        "passed": true,
+        "status": "ROUND_OFF_LIMITED"
+      },
+      "order_pair_1": {
+        "actual": null,
+        "criterion": "3.6 <= p <= 4.4 if both errors > 1e-12",
+        "passed": true,
+        "status": "ROUND_OFF_LIMITED"
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.05,
+        "steps": 80,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 3.925231146709438e-17
+      },
+      {
+        "dt": 0.025,
+        "steps": 160,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 3.925231146709438e-17
+      },
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 3.925231146709438e-17
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": true,
+    "equivalence_reason": null,
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "ed7a44ebc33e1e7aa4450f231f997a0a9ee92324d040f1eec52bebedc976f8be",
+    "fields.npz": "4508c6e9455a73ae3650f95c70cc6dec02222f3b6d576e7ec177bbc8624bc173",
+    "metrics.csv": "4ab6550ee4a57a26ee5686f7525611fc502231f7874e1e733570a62fde96dc19",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "0be8108226f32fdb3e94952411391378a194c90f4f5fcaf85138c60ed941078e"
+  }
+}

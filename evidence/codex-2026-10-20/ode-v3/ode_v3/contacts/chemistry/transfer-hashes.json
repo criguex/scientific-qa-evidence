@@ -1,0 +1,22 @@
+﻿[
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2\\contacts_summary.json",
+        "Hash":  "38DA59BAE0F22270D657196EB4D170CF540F3289A4073163201A7462BAA4D718"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2\\QUIMICA_REACCIONES_V3.png",
+        "Hash":  "472A9406C4E824D53EEBB4D8EACB87DD93248341564E9D37E956AB8E85DAC4EC"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2\\render-operation.json",
+        "Hash":  "11065AA4F7B3A4169515AF1C659066FFD9FE8148A3354CD0CD2F8083E7F41135"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2\\render-reaction-v2.stderr.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\visual_reaction_v2\\render-reaction-v2.stdout.log",
+        "Hash":  "2F690A21DD1FAF399D2D165AC5BEB8C4485CED5542F609E8E174A066B2F733BC"
+    }
+]

@@ -1,0 +1,7 @@
+prelaunch_utc=2026-10-20T19:01:55Z
+CapEff=0000000000000000
+unit=ns08-comparator-ns-20261020-1901
+requested_start_utc=2026-10-20T19:01:56Z
+systemd-run --user --unit=ns08-comparator-ns-20261020-1901 --working-directory=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler --property=RestrictAddressFamilies=\~AF_UNIX --property=SystemCallArchitectures=native --property=SystemCallFilter=\~@network-io\ io_uring_setup\ io_uring_enter\ io_uring_register --property=NoNewPrivileges=yes --property=SystemCallErrorNumber=EPERM --property=MemoryMax=28991029248 --property=CPUQuota=800% --property=RuntimeMaxSec=8h --property=StandardInput=null --property=StandardOutput=append:<WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/unit-stdout.log --property=StandardError=append:<WSL_HOME>/ns08_validation_20261020_a5YGak/results/comparator-ns-20261020-1901/unit-stderr.log -E PATH=<WSL_HOME>/.elan/bin:/usr/bin:/bin -E COMPARATOR_LANDRUN=<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/landrun/landrun -E COMPARATOR_LEAN4EXPORT=<WSL_HOME>/nse_audit_20261020/NavierStokesAndEuler/.lake/packages/lean4export/.lake/build/bin/lean4export -E COMPARATOR_NANODA=<WSL_HOME>/ns08_validation_20261020_a5YGak/tools/nanoda/target/release/nanoda_bin /usr/bin/bash <WSL_HOME>/ns08_validation_20261020_a5YGak/ops/run-comparator-ns-20261020-1901.sh
+systemd_run_launch_exit=0
+Running as unit: ns08-comparator-ns-20261020-1901.service; invocation ID: 44b7fbb3fcb240ad96766d1490642517

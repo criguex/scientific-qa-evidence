@@ -1,0 +1,131 @@
+{
+  "schema_version": 3,
+  "case": "reaction",
+  "scenario": "rxn02",
+  "mutant": "forward_coefficient",
+  "status": "EQUIVALENT",
+  "reason": "kf=0: el término directo modificado es cero para todos los estados",
+  "operator_change": "multiplicar kf por 1.25 en ambas ecuaciones",
+  "started_utc": "2026-10-20T18:10:11.486729+00:00",
+  "finished_utc": "2026-10-20T18:10:12.383435+00:00",
+  "monotonic_start_ns": 71358012926500,
+  "monotonic_finish_ns": 71358909944700,
+  "wall_seconds": 0.8970182,
+  "source_sha256": "f118929e692f90ff86cc9bda0f1e3a5288abd0191dceaae432eafaf0c00db9a8",
+  "contract_sha256": "cee74957ddab6f5fa196d06840cfa642f5c08c15eb7b70540eb7e56c9bf5ed06",
+  "dependencies": {
+    "run_scenario.py": "cc9259992eee682d9ebb7c368e0cb91454b3f777d4b41ae3a87baf72e19094b9"
+  },
+  "machine": {
+    "hostname": "guerra",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 16
+  },
+  "parameters": {
+    "kf": 0.0,
+    "kr": 0.0,
+    "A0": 0.3,
+    "B0": 0.7,
+    "T": 4.0,
+    "units": "adimensionales",
+    "equation": "A'=-kf*A+kr*B; B'=kf*A-kr*B",
+    "method": "RK4",
+    "baseline_dt": [
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "mutant_dt": 0.0125,
+    "common_sample_interval": 0.05,
+    "seed": 0,
+    "randomness_used": false,
+    "threads_requested": 1,
+    "compute_device": "CPU"
+  },
+  "command": [
+    "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\scripts\\run_ode_scenario.py",
+    "--worker",
+    "--case",
+    "reaction",
+    "--scenario",
+    "rxn02",
+    "--mutant",
+    "forward_coefficient",
+    "--output",
+    "<WIN_HOME>\\adv050-scenarios-20261020\\ode-v3-f118929e-reaction-BcbRyZ\\results\\rxn02_forward_coefficient"
+  ],
+  "returncode": 0,
+  "timeout_seconds": 120,
+  "baseline_valid": true,
+  "baseline_validation_reason": "misma fuente, contrato, host y entorno; artefactos verificados",
+  "baseline_file_sha256": "70ac84d88bc7b2cfa2044050de41aac91435dfca4850e0c6b3b5474071a1de2f",
+  "result": {
+    "completed": true,
+    "all_contracts_passed": true,
+    "checks": {
+      "mass_drift_h0.0125": {
+        "actual": 0.0,
+        "criterion": "<= 1e-12",
+        "passed": true
+      },
+      "nonnegative_h0.0125": {
+        "actual": 0.3,
+        "criterion": ">= -1e-12",
+        "passed": true
+      },
+      "bounded_h0.0125": {
+        "actual": 0.7,
+        "criterion": "<= initial_total + 1e-12",
+        "passed": true
+      },
+      "oracle_fine": {
+        "actual": 0.0,
+        "criterion": "< 1e-6",
+        "passed": true
+      }
+    },
+    "runs": [
+      {
+        "dt": 0.0125,
+        "steps": 320,
+        "common_sample_count": 81,
+        "maximum_rms_error_common_times": 0.0
+      }
+    ],
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.8"
+    },
+    "all_values_finite": true,
+    "initial_state_is_exact_equilibrium": true,
+    "equivalence_reason": "kf=0: el término directo modificado es cero para todos los estados",
+    "environment": {
+      "python_version": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "python_executable": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Scripts\\python.exe",
+      "numpy_version": "2.2.6",
+      "numpy_location": "<WIN_HOME>\\adv050-scenarios-20261020\\venv\\Lib\\site-packages\\numpy\\__init__.py",
+      "machine_architecture": "AMD64",
+      "byteorder": "little",
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Modelos ODE estipulados, no validación experimental de física o química reales",
+    "Equilibrio inicial puede no excitar un operador incorrecto",
+    "ROUND_OFF_LIMITED no acredita orden cuatro",
+    "Un fallo de infraestructura no recibe crédito de detección"
+  ],
+  "artifact_sha256": {
+    "comparison.png": "3ae35369fb9c5f764a04878a2e1ef6f4b50bb057f1a645704d3c6d574d466a13",
+    "fields.npz": "87151b5b8d2ad0d489938b44b06221e13889f360993b2dcd48eeb84f1f4aba0e",
+    "metrics.csv": "ee94bc1fc04a5b863d48bbaadf74fccc351a62ee5c839b6f6d4ce1903e086e6e",
+    "returncode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker_result.json": "e2ffba7799abc3a39c12b4f746e4698982d1997ea2606633cc49dd11a379a365"
+  }
+}

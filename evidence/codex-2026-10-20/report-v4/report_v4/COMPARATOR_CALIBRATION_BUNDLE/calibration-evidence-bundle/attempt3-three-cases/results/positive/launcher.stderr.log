@@ -1,0 +1,7 @@
+Running as unit: ns08-cal-positive-20261020t1957z-3p8kza.service; invocation ID: 1314907d9b204444a60b54a0813cf87b
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 2.848s
+CPU time consumed: 2.205s
+Memory peak: 42.8M
+Memory swap peak: 0B

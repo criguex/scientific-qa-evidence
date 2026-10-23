@@ -298,7 +298,7 @@ A QA report is only useful if it says what it did not test.
 
 ## How AI was used
 
-The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent at first, and Anthropic's Claude Code made the later audit, documentation and experiment changes. Each commit names the agent in a `Co-Authored-By` trailer. Cristian Guerra chose the questions, froze the contracts, decided what counts as evidence and is responsible for every claim. Details, including a mid-session change of the assistant's reported model, are in [AUTHORSHIP.md](AUTHORSHIP.md).
+The work was AI-assisted and human-directed. OpenAI Codex was the main coding agent at first, and Anthropic's Claude Code made the later audit, documentation and experiment changes. Each commit names the agent in a `Co-Authored-By` trailer. Cristian Guerra chose the questions, froze the contracts, decided what counts as evidence and is responsible for every claim. Details, including a mid-session change of the assistant's reported model, are in [AUTHORSHIP.md](AUTHORSHIP.md). What Codex did, session by session, is in [`docs/CODEX_WORK_LOG.md`](docs/CODEX_WORK_LOG.md); the evidence it produced is in [`evidence/codex-2026-10-20/`](evidence/codex-2026-10-20/).
 
 ## Repository map
 

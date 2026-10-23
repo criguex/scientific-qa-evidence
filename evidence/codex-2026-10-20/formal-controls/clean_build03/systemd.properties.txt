@@ -1,0 +1,13 @@
+RuntimeMaxUSec=2h
+ControlGroup=/user.slice/<USER_SLICE>/<USER_SLICE>/app.slice/adv050-clean-build-20261020T205743Z-361.service
+CPUQuotaPerSecUSec=6s
+MemoryMax=25769803776
+StandardInput=null
+StandardOutput=append
+StandardError=append
+NoNewPrivileges=yes
+SystemCallFilter=~accept accept4 bind connect getpeername getsockname getsockopt io_uring_enter io_uring_register io_uring_setup listen recv recvfrom recvmmsg recvmmsg_time64 recvmsg send sendmmsg sendmsg sendto setsockopt shutdown socket socketcall socketpair
+SystemCallArchitectures=native
+SystemCallErrorNumber=1
+RestrictAddressFamilies=~AF_UNIX
+ActiveState=active

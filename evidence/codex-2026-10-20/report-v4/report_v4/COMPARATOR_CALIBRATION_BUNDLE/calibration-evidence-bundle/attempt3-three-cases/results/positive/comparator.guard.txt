@@ -1,0 +1,2 @@
+service_socket_fds=[]
+socket_guard_exit=0 CapEff=0000000000000000 NoNewPrivs=1 Seccomp=2
