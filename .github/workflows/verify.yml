@@ -49,3 +49,18 @@ jobs:
       - name: Receipt check on authentic records (recompute P6)
         working-directory: experiments/receipt-check
         run: python3 -m unittest -v test_results
+
+  verificar:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.9", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: One-command check (verificar.py)
+        run: python verificar.py

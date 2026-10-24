@@ -99,7 +99,15 @@ Cada afirmación con su evidencia, resultado y limitación está en [CLAIMS.md](
 
 ## Verifícalo tú mismo
 
-Python 3.9 o más reciente, sin dependencias, alrededor de un minuto:
+**La forma más fácil, en Windows, Mac o Linux.** Instala [Python](https://www.python.org/downloads/) 3.9 o más reciente. Descarga este repositorio (botón verde «Code» → «Download ZIP») y descomprímelo. Abre una terminal en esa carpeta y ejecuta:
+
+```sh
+python verificar.py
+```
+
+En Mac o Linux puede ser `python3 verificar.py`. En menos de un minuto muestra OK o FALLA en cada una de las seis comprobaciones y una huella, un código corto para comparar con el de otras personas. Si te dio igual o distinto, cuéntanos en el [formulario de reproducción](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml). Un resultado distinto es igual de útil.
+
+Los mismos pasos, uno por uno, con Python 3.9 o más reciente, sin dependencias, alrededor de un minuto:
 
 ```sh
 git clone https://github.com/criguex/scientific-qa-evidence.git

@@ -1,0 +1,61 @@
+name: Reporte de reproducción (español)
+description: Corriste verificar.py en tu computador. Cuéntanos si te dio igual o distinto.
+title: "[Reproducción] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por probarlo. Un resultado distinto al nuestro es igual de útil que uno igual: justo eso es lo que buscamos encontrar.
+        Si aún no lo corriste: descarga el repositorio (botón verde «Code» → «Download ZIP»), descomprímelo, abre una terminal en esa carpeta y ejecuta `python verificar.py` (en Mac o Linux puede ser `python3 verificar.py`).
+  - type: dropdown
+    id: resultado
+    attributes:
+      label: ¿Qué te dio?
+      options:
+        - Las 6 comprobaciones OK
+        - Alguna comprobación FALLÓ
+        - No pude ejecutarlo
+    validations:
+      required: true
+  - type: input
+    id: huella
+    attributes:
+      label: Tu huella
+      description: El código que imprime al final, por ejemplo 1A2B-3C4D-5E6F.
+  - type: dropdown
+    id: sistema
+    attributes:
+      label: Sistema operativo
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Otro
+    validations:
+      required: true
+  - type: dropdown
+    id: descarga
+    attributes:
+      label: ¿Cómo descargaste el repositorio?
+      options:
+        - Download ZIP desde GitHub
+        - git clone
+        - Otra forma
+  - type: textarea
+    id: detalle
+    attributes:
+      label: Contenido de mi_resultado.txt
+      description: El script lo guarda en la carpeta del repositorio. Pégalo completo.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: comentario
+    attributes:
+      label: Comentarios (opcional)
+      description: Lo que te pareció confuso, lo que falló al instalar, o cualquier observación.
+  - type: input
+    id: credito
+    attributes:
+      label: ¿Cómo te damos crédito? (opcional)
+      description: Déjalo vacío si prefieres quedar anónimo.

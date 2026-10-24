@@ -99,7 +99,15 @@ Every claim with its evidence, result and limitation is in [CLAIMS.md](CLAIMS.md
 
 ## Verify it yourself
 
-Python 3.9 or newer, no dependencies, about a minute:
+**The easiest way, on Windows, Mac or Linux.** Install [Python](https://www.python.org/downloads/) 3.9 or newer, download this repository (green "Code" button, "Download ZIP"), unzip it, open a terminal in that folder and run:
+
+```sh
+python verificar.py
+```
+
+On Mac or Linux it may be `python3 verificar.py`. In under a minute it prints OK or FALLA (fail) for each of the six checks and a short fingerprint to compare with other people's. Its messages are in Spanish. You can report what you got, same or different, with the [reproduction form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml) or the [review form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=review.yml).
+
+The same steps one by one, with Python 3.9 or newer, no dependencies, about a minute:
 
 ```sh
 git clone https://github.com/criguex/scientific-qa-evidence.git
