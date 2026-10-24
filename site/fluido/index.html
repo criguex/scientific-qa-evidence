@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Explorador ADV-050</title>
+<meta name="description" content="Fluido 3D de Taylor–Green, 21 escenarios PDE y 151 corridas ODE de ADV-050, en video, cortes y gráficas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #edf0f4;
+  --ink: #0f1722;
+  --ink-2: #465163;
+  --muted: #6f7a8c;
+  --line: #dce1e8;
+  --grid: #e9edf2;
+  --axis: #c3cad4;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --ref: #0f1722;
+  --flag: #7a4f00;
+  --flag-bg: #fff1cc;
+  --bar: #2a78d6;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d1117;
+    --surface: #131820;
+    --surface-2: #1a212b;
+    --ink: #e6edf3;
+    --ink-2: #a3adba;
+    --muted: #7d8796;
+    --line: #262e39;
+    --grid: #1e252f;
+    --axis: #3a4350;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --ref: #e6edf3;
+    --flag: #f2c25b;
+    --flag-bg: #2a2310;
+    --bar: #3987e5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --surface: #131820;
+  --surface-2: #1a212b;
+  --ink: #e6edf3;
+  --ink-2: #a3adba;
+  --muted: #7d8796;
+  --line: #262e39;
+  --grid: #1e252f;
+  --axis: #3a4350;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --ref: #e6edf3;
+  --flag: #f2c25b;
+  --flag-bg: #2a2310;
+  --bar: #3987e5;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.6 var(--body);
+  padding-inline: 20px;
+  padding-block: 0 64px;
+}
+.wrap { max-width: 1160px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(26px, 3.2vw, 34px); font-weight: 600; }
+h3 { font-size: 19px; font-weight: 600; }
+p { margin: 0; max-width: 68ch; color: var(--ink-2); }
+code, .mono { font-family: var(--mono); font-size: 0.92em; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: -20px; padding: 10px 20px;
+}
+nav.top .wrap { display: flex; gap: 6px 22px; align-items: center; flex-wrap: wrap; }
+nav.top b { font-family: var(--display); font-size: 17px; margin-right: auto; }
+nav.top a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+nav.top a:hover, nav.top a:focus-visible { color: var(--ink); text-decoration: underline; }
+
+header.hero { display: grid; gap: 16px; padding-block: 44px 28px; }
+.inv { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 6px; }
+.inv div { display: grid; }
+.inv strong { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.1; }
+.inv span { font-size: 13px; color: var(--muted); }
+
+section { display: grid; gap: 18px; padding-block: 40px 8px; border-top: 1px solid var(--line); margin-top: 28px; scroll-margin-top: 64px; }
+.head { display: grid; gap: 8px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+.row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.spacer { flex: 1; }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface-2); }
+.seg button {
+  font: 500 13px/1 var(--body); color: var(--ink-2); background: transparent; border: 0;
+  padding: 8px 12px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
+button:focus-visible, input:focus-visible, select:focus-visible, svg:focus-visible, .cellbtn:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; font-family: var(--mono); }
+
+.video { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; background: #0d1117; border-radius: 8px; display: block; }
+
+.slices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; width: 100%; max-width: 860px; margin-inline: auto; }
+.slice { display: grid; gap: 6px; }
+.slice canvas { width: 100%; aspect-ratio: 1; max-width: 100%; image-rendering: pixelated; border-radius: 6px; background: #000004; display: block; }
+.slice .cap { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--ink-2); }
+.slice .cap .mono { color: var(--ink); }
+.playbtn { font: 600 13px/1 var(--body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; min-width: 92px; }
+input[type="range"] { flex: 1; min-width: 160px; accent-color: var(--s1); }
+.tread { font-family: var(--mono); font-size: 18px; min-width: 88px; text-align: right; font-variant-numeric: tabular-nums; }
+.cbar { display: grid; gap: 4px; max-width: 420px; width: 100%; }
+.cbar canvas { width: 100%; height: 12px; border-radius: 3px; display: block; }
+.cbar .ticks { position: relative; height: 16px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.cbar .ticks span { position: absolute; transform: translateX(-50%); }
+
+.chart { position: relative; display: grid; gap: 6px; min-width: 0; }
+.chart svg { display: block; width: 100%; overflow: visible; }
+.chart svg text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+.chart .ttl { font-weight: 600; font-size: 14px; color: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.key { width: 18px; height: 0; border-top: 2px solid; display: inline-block; }
+.key.dash { border-top-style: dashed; }
+.key.dot { width: 8px; height: 8px; border-radius: 50%; border: 0; }
+.tip {
+  position: absolute; pointer-events: none; z-index: 5; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; min-width: 150px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+.tip .tx { font-family: var(--mono); color: var(--muted); margin-bottom: 4px; }
+.tip .r { display: flex; align-items: center; gap: 8px; }
+.tip .r b { font-family: var(--mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.tip .r i { font-style: normal; color: var(--ink-2); }
+
+.findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .findings { grid-template-columns: minmax(0, 1fr); } }
+.finding { display: grid; gap: 6px; align-content: start; padding-top: 12px; border-top: 2px solid var(--ink); }
+.finding h3 { font-size: 17px; }
+.finding p { font-size: 14px; }
+
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 12px; }
+td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.matrix th.var { min-width: 120px; }
+.matrix td { padding: 3px; }
+.cellbtn {
+  display: grid; gap: 4px; width: 100%; min-width: 92px; text-align: left; cursor: pointer;
+  background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 6px 7px; color: var(--ink);
+}
+.cellbtn:hover { background: var(--surface-2); }
+.cellbtn[aria-pressed="true"] { border-color: var(--ink); background: var(--surface-2); }
+.cellbtn .v { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; display: flex; gap: 6px; align-items: center; white-space: nowrap; }
+.cellbtn .track { height: 4px; border-radius: 2px; background: var(--grid); overflow: hidden; }
+.cellbtn .fill { height: 100%; background: var(--bar); border-radius: 2px; }
+.flag { font: 600 10.5px/1 var(--body); color: var(--flag); background: var(--flag-bg); border-radius: 4px; padding: 3px 5px; white-space: nowrap; }
+.rawname { font-family: var(--mono); font-size: 11px; color: var(--muted); font-weight: 400; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; color: var(--ink-2); background: var(--surface-2); }
+.casehead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.note { font-size: 13px; color: var(--muted); }
+#pdeRes table, #odeRes table { max-width: 640px; }
+#pdeRes { display: grid; gap: 8px; }
+select { font: 14px var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; max-width: 100%; }
+footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <b><a href="../" style="color:inherit;text-decoration:none">← ADV-050</a> · Explorador</b>
+  <a href="#fluido">Fluido 3D</a>
+  <a href="#pde">PDE 1D</a>
+  <a href="#ode">ODE</a>
+  <a href="#inventario">Inventario</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Downloads/codex-2026-10-20-npz · salidas crudas de simulación</span>
+    <h1>Todo lo que hay dentro de los 197 archivos NPZ</h1>
+    <p>Esta carpeta es la salida numérica de ADV-050: un fluido 3D (vórtice de Taylor–Green, con y sin viscosidad) y dos campañas de mutantes: ecuaciones en derivadas parciales (PDE) en 1D y modelos de ecuaciones diferenciales ordinarias (ODE). Cada número de esta página se calculó a partir de los arrays originales.</p>
+    <div class="inv" id="inv"></div>
+  </header>
+
+  <section id="fluido">
+    <div class="head">
+      <span class="eyebrow">fluid-3d/ · 4 archivos</span>
+      <h2>Fluido 3D: vórtice de Taylor–Green</h2>
+      <p>Una malla periódica en [0, 2π)³. Se arranca desde u₀ = (sin x cos y cos z, −cos x sin y cos z, 0) y se avanza hasta t = 4. Hay dos fluidos: uno sin viscosidad (ν = 0, ecuación de Euler) y otro con viscosidad (ν = 0.04, Navier–Stokes con Re = 25). Lo que se guardó es la magnitud de la vorticidad |ω| en cada punto de la malla, en 201 instantes.</p>
+    </div>
+
+    <div class="findings" id="fluidFindings"></div>
+
+    <div class="panel">
+      <div class="row">
+        <h3>Video en volumen</h3>
+        <span class="spacer"></span>
+        <div class="seg" role="group" aria-label="Resolución del video" id="vidSeg">
+          <button type="button" data-v="64" aria-pressed="true">Malla 64³</button>
+          <button type="button" data-v="32" aria-pressed="false">Malla 32³</button>
+        </div>
+      </div>
+      <video class="video" id="vid" controls muted loop playsinline preload="metadata" src="../media/taylor_green_vorticidad_64.mp4"></video>
+      <p class="note">Render de volumen de |ω| que gira mientras avanza el tiempo. Los dos fluidos usan la misma escala de color, así que se comparan directamente.</p>
+    </div>
+
+    <div class="panel">
+      <div class="row">
+        <h3>Cortes del campo, cuadro a cuadro</h3>
+        <span class="spacer"></span>
+        <div class="seg" role="group" aria-label="Malla" id="resSeg">
+          <button type="button" data-v="n64" aria-pressed="true">64³</button>
+          <button type="button" data-v="n32" aria-pressed="false">32³</button>
+        </div>
+        <div class="seg" role="group" aria-label="Vista" id="viewSeg">
+          <button type="button" data-v="z0" aria-pressed="true">Plano z = 0</button>
+          <button type="button" data-v="zpi2" aria-pressed="false">Plano z = π/2</button>
+          <button type="button" data-v="mip" aria-pressed="false">Máximo en z</button>
+        </div>
+      </div>
+      <div class="slices">
+        <div class="slice">
+          <div class="cap"><span>ν = 0 · Euler</span><span>pico <span class="mono" id="pk0">–</span></span></div>
+          <canvas id="cv0" width="64" height="64" aria-label="Corte de vorticidad, fluido sin viscosidad"></canvas>
+        </div>
+        <div class="slice">
+          <div class="cap"><span>ν = 0.04 · Navier–Stokes</span><span>pico <span class="mono" id="pk1">–</span></span></div>
+          <canvas id="cv1" width="64" height="64" aria-label="Corte de vorticidad, fluido viscoso"></canvas>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" class="playbtn" id="play">▶ Reproducir</button>
+        <input type="range" id="tslider" min="0" max="100" value="0" step="1" aria-label="Tiempo">
+        <span class="tread" id="tread">t = 0.00</span>
+      </div>
+      <div class="row">
+        <div class="cbar">
+          <span class="label">|ω| · escala logarítmica, igual en ambos</span>
+          <canvas id="cbar" width="512" height="12"></canvas>
+          <div class="ticks" id="cbarTicks"></div>
+        </div>
+        <p class="note" style="max-width:52ch">Cada píxel es un punto de la malla, sin suavizado: así se ve la resolución real de cada corrida. «Máximo en z» muestra, para cada (x, y), el mayor |ω| de toda la columna en z.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="row">
+        <h3>¿Converge la simulación?</h3>
+        <span class="spacer"></span>
+        <div class="seg" role="group" aria-label="Métrica" id="metSeg">
+          <button type="button" data-v="enst" aria-pressed="true">Enstrofía ½⟨|ω|²⟩</button>
+          <button type="button" data-v="wmax" aria-pressed="false">Pico max |ω|</button>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="chart" id="chNu0"></div>
+        <div class="chart" id="chNu1"></div>
+      </div>
+      <p class="note">Las tres corridas comparten el mismo estado inicial. Si una curva no cambia al refinar la malla o el paso de tiempo, ese resultado es confiable. La línea vertical marca el instante del corte de arriba.</p>
+    </div>
+  </section>
+
+  <section id="pde">
+    <div class="head">
+      <span class="eyebrow">scenarios-v2/ · 42 archivos (guerra 21 + war 21)</span>
+      <h2>PDE 1D: calor, advección y onda contra su solución exacta</h2>
+      <p>Cada ecuación se resolvió en [0, 2π) con 64 puntos y se comparó, en el instante final, contra la solución exacta. Además del modelo correcto hay seis versiones alteradas a propósito (mutantes). Un buen chequeo debería notar la diferencia en cada una.</p>
+      <p id="pdeTwin" class="note"></p>
+    </div>
+    <div class="panel">
+      <h3>Error máximo |numérico − exacto| por caso</h3>
+      <div class="tablewrap"><table class="matrix" id="pdeMatrix"></table></div>
+      <p class="note"><span class="flag">≈ correcto</span> significa que el error queda a menos de 10× del error del modelo correcto: comparando contra la solución exacta, ese mutante no se distingue del modelo bueno. La barra muestra el orden de magnitud (de 10⁻¹⁶ a 10⁴). Haz clic en una celda para verla abajo.</p>
+    </div>
+    <div class="panel">
+      <div class="casehead"><h3 id="pdeTitle">–</h3><span class="rawname" id="pdeRaw"></span><span class="spacer"></span><div class="seg" role="group" aria-label="Componente" id="pdeComp" hidden></div></div>
+      <div class="grid2">
+        <div class="chart" id="pdeSol"></div>
+        <div class="chart" id="pdeErr"></div>
+      </div>
+      <div id="pdeRes"></div>
+    </div>
+  </section>
+
+  <section id="ode">
+    <div class="head">
+      <span class="eyebrow">ode-v3/ · 151 archivos (guerra 60 · war 60 · independent_review 31)</span>
+      <h2>ODE: 9 osciladores y 9 reacciones contra su oráculo</h2>
+      <p>Cada modelo tiene dos variables de estado y se integra de t = 0 a t = 4. La trayectoria numérica se compara con un oráculo (la solución de referencia). Los modelos correctos se corrieron con 80, 160 y 320 pasos; los mutantes, con 320.</p>
+      <p id="odeTwin" class="note"></p>
+    </div>
+    <div style="display:grid;gap:16px">
+      <div class="panel"><h3>Osciladores</h3><div class="tablewrap"><table class="matrix" id="oscMatrix"></table></div></div>
+      <div class="panel"><h3>Reacciones</h3><div class="tablewrap"><table class="matrix" id="rxnMatrix"></table></div></div>
+    </div>
+    <p class="note">Misma lectura que arriba: el valor es el error máximo contra el oráculo en la malla más fina, y <span class="flag">≈ correcto</span> marca los mutantes que quedan a menos de 10× del error del modelo correcto.</p>
+    <div class="panel">
+      <div class="casehead"><h3 id="odeTitle">–</h3><span class="rawname" id="odeRaw"></span></div>
+      <div class="chips" id="odeChips"></div>
+      <div class="grid2">
+        <div class="chart" id="odeSol"></div>
+        <div class="chart" id="odeErr"></div>
+      </div>
+      <div id="odeRes"></div>
+    </div>
+  </section>
+
+  <section id="inventario">
+    <div class="head">
+      <span class="eyebrow">codex-2026-10-20-npz/ · 81 MB</span>
+      <h2>Inventario de la carpeta</h2>
+    </div>
+    <div class="panel"><div class="tablewrap"><table id="invTable"></table></div></div>
+  </section>
+
+  <footer>Generado a partir de los NPZ originales con <code>explorador/build_data.py</code>; los videos salen de <code>fluid-3d/render_video.py</code>. La carpeta no trae metadatos: los nombres de los mutantes se interpretaron a partir del nombre de cada archivo.</footer>
+</div>
+
+<script>
+const INFERNO = "000004,010005,010106,010108,02010a,02020c,02020e,030210,040312,040314,050417,060419,07051b,08051d,09061f,0a0722,0b0724,0c0826,0d0829,0e092b,10092d,110a30,120a32,140b34,150b37,160b39,180c3c,190c3e,1b0c41,1c0c43,1e0c45,1f0c48,210c4a,230c4c,240c4f,260c51,280b53,290b55,2b0b57,2d0b59,2f0a5b,310a5c,320a5e,340a5f,360961,380962,390963,3b0964,3d0965,3e0966,400a67,420a68,440a68,450a69,470b6a,490b6a,4a0c6b,4c0c6b,4d0d6c,4f0d6c,510e6c,520e6d,540f6d,550f6d,57106e,59106e,5a116e,5c126e,5d126e,5f136e,61136e,62146e,64156e,65156e,67166e,69166e,6a176e,6c186e,6d186e,6f196e,71196e,721a6e,741a6e,751b6e,771c6d,781c6d,7a1d6d,7c1d6d,7d1e6d,7f1e6c,801f6c,82206c,84206b,85216b,87216b,88226a,8a226a,8c2369,8d2369,8f2469,902568,922568,932667,952667,972766,982766,9a2865,9b2964,9d2964,9f2a63,a02a63,a22b62,a32c61,a52c60,a62d60,a82e5f,a92e5e,ab2f5e,ad305d,ae305c,b0315b,b1325a,b3325a,b43359,b63458,b73557,b93556,ba3655,bc3754,bd3853,bf3952,c03a51,c13a50,c33b4f,c43c4e,c63d4d,c73e4c,c83f4b,ca404a,cb4149,cc4248,ce4347,cf4446,d04545,d24644,d34743,d44842,d54a41,d74b3f,d84c3e,d94d3d,da4e3c,db503b,dd513a,de5238,df5337,e05536,e15635,e25734,e35933,e45a31,e55c30,e65d2f,e75e2e,e8602d,e9612b,ea632a,eb6429,eb6628,ec6726,ed6925,ee6a24,ef6c23,ef6e21,f06f20,f1711f,f1731d,f2741c,f3761b,f37819,f47918,f57b17,f57d15,f67e14,f68013,f78212,f78410,f8850f,f8870e,f8890c,f98b0b,f98c0a,f98e09,fa9008,fa9207,fa9407,fb9606,fb9706,fb9906,fb9b06,fb9d07,fc9f07,fca108,fca309,fca50a,fca60c,fca80d,fcaa0f,fcac11,fcae12,fcb014,fcb216,fcb418,fbb61a,fbb81d,fbba1f,fbbc21,fbbe23,fac026,fac228,fac42a,fac62d,f9c72f,f9c932,f9cb35,f8cd37,f8cf3a,f7d13d,f7d340,f6d543,f6d746,f5d949,f5db4c,f4dd4f,f4df53,f4e156,f3e35a,f3e55d,f2e661,f2e865,f2ea69,f1ec6d,f1ed71,f1ef75,f1f179,f2f27d,f2f482,f3f586,f3f68a,f4f88e,f5f992,f6fa96,f8fb9a,f9fc9d,fafda1,fcffa4".split(",");
+const W_LO = 0.5, W_HI = 14;
+const LUT = new Uint8Array(256 * 3);
+INFERNO.forEach((h, i) => { LUT[i * 3] = parseInt(h.slice(0, 2), 16); LUT[i * 3 + 1] = parseInt(h.slice(2, 4), 16); LUT[i * 3 + 2] = parseInt(h.slice(4, 6), 16); });
+
+const PDE_VAR = {
+  baseline: "Modelo correcto",
+  sign: "Signo invertido",
+  coefficient: "Coeficiente alterado",
+  tiny_coefficient: "Coeficiente apenas alterado",
+  boundary_zero: "Frontera forzada a cero",
+  frozen: "Congelado (no evoluciona)",
+  equivalent_periodic_shift: "Desplazamiento periódico equivalente",
+};
+const PDE_EQ = { heat: "Calor", advection: "Advección", wave: "Onda" };
+const ODE_VAR = {
+  baseline: "Modelo correcto",
+  damping_sign: "Amortiguamiento con signo invertido",
+  spring_sign: "Resorte con signo invertido",
+  spring_coefficient: "Coeficiente del resorte alterado",
+  altered_parameters: "Parámetros alterados",
+  forward_coefficient: "Coeficiente directo alterado",
+  reverse_sign: "Reacción inversa con signo invertido",
+  mass_leak: "Fuga de masa",
+  frozen: "Congelado (no evoluciona)",
+};
+const OSC_COLS = ["baseline", "damping_sign", "spring_sign", "spring_coefficient", "frozen", "altered_parameters"];
+const RXN_COLS = ["baseline", "forward_coefficient", "reverse_sign", "mass_leak", "frozen"];
+const GROUP_LABEL = { guerra: "guerra", war: "war", independent_review: "independent_review" };
+
+const SUP = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+function sci(v, d = 1) {
+  if (v === 0) return "0";
+  if (!isFinite(v)) return String(v);
+  const e = Math.floor(Math.log10(Math.abs(v)));
+  if (e >= -2 && e <= 3) return (+v.toPrecision(d + 2)).toString();
+  const m = v / Math.pow(10, e);
+  return m.toFixed(d) + "×10" + String(e).split("").map(c => SUP[c]).join("");
+}
+function fix(v, d = 3) { return Number(v).toFixed(d); }
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else if (k === "style") n.style.cssText = v; else n.setAttribute(k, v);
+  }
+  kids.flat().forEach(c => { if (c != null) n.append(c.nodeType ? c : document.createTextNode(c)); });
+  return n;
+}
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function seg(id, onChange) {
+  const g = document.getElementById(id);
+  g.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    g.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    onChange(b.dataset.v);
+  });
+  return () => g.querySelector('[aria-pressed="true"]').dataset.v;
+}
+
+function niceTicks(min, max, count) {
+  const span = max - min || Math.abs(max) || 1;
+  const raw = span / count, mag = Math.pow(10, Math.floor(Math.log10(raw))), r = raw / mag;
+  const step = (r >= 7.5 ? 10 : r >= 3.5 ? 5 : r >= 1.5 ? 2 : 1) * mag;
+  const out = [];
+  for (let v = Math.ceil(min / step) * step; v <= max + step * 1e-9; v += step) out.push(+v.toPrecision(12));
+  return out;
+}
+function nearest(xs, x) {
+  let lo = 0, hi = xs.length - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (xs[m] < x) lo = m; else hi = m; }
+  return Math.abs(xs[lo] - x) <= Math.abs(xs[hi] - x) ? lo : hi;
+}
+
+const charts = new Map();
+const ro = new ResizeObserver(entries => entries.forEach(en => { const o = charts.get(en.target); if (o) drawChart(en.target, o); }));
+function lineChart(host, opt) {
+  if (!charts.has(host)) ro.observe(host);
+  charts.set(host, opt);
+  drawChart(host, opt);
+}
+function drawChart(host, opt) {
+  const NS = "http://www.w3.org/2000/svg";
+  host.replaceChildren();
+  host.append(el("div", { class: "ttl", text: opt.title }));
+  if (opt.series.length > 1) {
+    const lg = el("div", { class: "legend" });
+    opt.series.forEach(s => {
+      const k = el("span", { class: "key" + (s.dash ? " dash" : "") + (s.markers && !s.line ? " dot" : "") });
+      if (s.markers && !s.line) k.style.background = s.color; else k.style.borderTopColor = s.color;
+      lg.append(el("span", {}, k, s.name));
+    });
+    host.append(lg);
+  }
+  const W = Math.max(260, host.clientWidth || 500), H = opt.height || 240;
+  const m = { l: 58, r: 14, t: 10, b: 34 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const xs = opt.series.flatMap(s => s.x);
+  const xmin = opt.xDomain ? opt.xDomain[0] : Math.min(...xs), xmax = opt.xDomain ? opt.xDomain[1] : Math.max(...xs);
+  let ys = opt.series.flatMap(s => s.y).filter(v => isFinite(v));
+  let ymin, ymax, yTicks, fy;
+  if (opt.log) {
+    const pos = ys.filter(v => v > 0);
+    const lo = pos.length ? Math.floor(Math.log10(Math.min(...pos))) : -16;
+    const hi = pos.length ? Math.ceil(Math.log10(Math.max(...pos))) : 0;
+    ymin = Math.min(lo, hi - 1); ymax = Math.max(hi, ymin + 1);
+    const span = ymax - ymin, stp = span > 12 ? 4 : span > 6 ? 2 : 1;
+    yTicks = []; for (let e = Math.ceil(ymin / stp) * stp; e <= ymax; e += stp) yTicks.push(e);
+    fy = v => m.t + ih - ((Math.log10(Math.max(v, Math.pow(10, ymin))) - ymin) / (ymax - ymin)) * ih;
+  } else {
+    ymin = Math.min(...ys, opt.yZero ? 0 : Infinity); ymax = Math.max(...ys);
+    if (ymax - ymin < 1e-12) { ymax += 1; ymin -= 1; }
+    const pad = (ymax - ymin) * 0.06; ymin -= opt.yZero && ymin === 0 ? 0 : pad; ymax += pad;
+    yTicks = niceTicks(ymin, ymax, 5);
+    fy = v => m.t + ih - ((v - ymin) / (ymax - ymin)) * ih;
+  }
+  const fx = v => m.l + ((v - xmin) / (xmax - xmin || 1)) * iw;
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("height", H); svg.setAttribute("tabindex", "0");
+  svg.setAttribute("role", "img"); svg.setAttribute("aria-label", opt.title + ". Usa las flechas para recorrer los valores.");
+  const add = (tag, a) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); svg.append(n); return n; };
+  yTicks.forEach(t => {
+    const y = opt.log ? fy(Math.pow(10, t)) : fy(t);
+    add("line", { x1: m.l, x2: W - m.r, y1: y, y2: y, stroke: css("--grid"), "stroke-width": 1 });
+    const tx = add("text", { x: m.l - 8, y: y + 4, "text-anchor": "end" });
+    tx.textContent = opt.log ? (t >= -2 && t <= 3 ? String(+Math.pow(10, t).toPrecision(3)) : "10" + String(t).split("").map(ch => SUP[ch]).join("")) : (opt.fmtTick || (v => +v.toPrecision(4)))(t);
+  });
+  niceTicks(xmin, xmax, Math.max(3, Math.round(iw / 90))).forEach(t => {
+    const x = fx(t);
+    add("line", { x1: x, x2: x, y1: m.t + ih, y2: m.t + ih + 4, stroke: css("--axis") });
+    const tx = add("text", { x, y: m.t + ih + 17, "text-anchor": "middle" }); tx.textContent = +t.toPrecision(4);
+  });
+  add("line", { x1: m.l, x2: W - m.r, y1: m.t + ih, y2: m.t + ih, stroke: css("--axis"), "stroke-width": 1 });
+  const xl = add("text", { x: m.l + iw, y: H - 2, "text-anchor": "end" }); xl.textContent = opt.xLabel || "";
+  if (opt.cursor != null) {
+    const cx = fx(opt.cursor);
+    add("line", { x1: cx, x2: cx, y1: m.t, y2: m.t + ih, stroke: css("--ink-2"), "stroke-width": 1, "stroke-dasharray": "3 3" });
+  }
+  const clip = "c" + Math.random().toString(36).slice(2);
+  const cp = add("clipPath", { id: clip }); const cr = document.createElementNS(NS, "rect");
+  Object.entries({ x: m.l, y: m.t - 2, width: iw, height: ih + 4 }).forEach(([k, v]) => cr.setAttribute(k, v)); cp.append(cr);
+  opt.series.forEach(s => {
+    if (s.line !== false) {
+      let d = "";
+      s.x.forEach((x, i) => { const y = s.y[i]; if (!isFinite(y)) return; d += (d ? "L" : "M") + fx(x).toFixed(1) + "," + fy(y).toFixed(1); });
+      add("path", { d, fill: "none", stroke: s.color, "stroke-width": s.width || 2, "stroke-dasharray": s.dash || "", "stroke-linejoin": "round", "clip-path": `url(#${clip})` });
+    }
+    if (s.markers) s.x.forEach((x, i) => add("circle", { cx: fx(x), cy: fy(s.y[i]), r: 3.5, fill: s.color, stroke: css("--surface"), "stroke-width": 1.5 }));
+  });
+  const hair = add("line", { x1: 0, x2: 0, y1: m.t, y2: m.t + ih, stroke: css("--ink-2"), "stroke-width": 1, visibility: "hidden" });
+  const dots = opt.series.map(s => add("circle", { r: 4.5, fill: s.color, stroke: css("--surface"), "stroke-width": 2, visibility: "hidden" }));
+  add("rect", { x: m.l, y: m.t, width: iw, height: ih, fill: "transparent" });
+  host.append(svg);
+  const tip = el("div", { class: "tip", hidden: "" }); host.append(tip);
+  const base = opt.series[0].x;
+  let cur = null;
+  const show = i => {
+    cur = i;
+    const x = base[i], px = fx(x);
+    hair.setAttribute("x1", px); hair.setAttribute("x2", px); hair.setAttribute("visibility", "visible");
+    tip.replaceChildren(el("div", { class: "tx", text: (opt.xName || "x") + " = " + (+x.toPrecision(4)) }));
+    opt.series.forEach((s, k) => {
+      const j = nearest(s.x, x), v = s.y[j];
+      dots[k].setAttribute("cx", fx(s.x[j])); dots[k].setAttribute("cy", fy(v)); dots[k].setAttribute("visibility", isFinite(v) ? "visible" : "hidden");
+      const key = el("span", { class: "key" + (s.dash ? " dash" : "") }); key.style.borderTopColor = s.color;
+      tip.append(el("div", { class: "r" }, key, el("b", { text: (opt.fmt || sci)(v) }), el("i", { text: s.name })));
+    });
+    tip.hidden = false;
+    const sx = svg.getBoundingClientRect().width / W;
+    const left = px * sx, tw = tip.offsetWidth;
+    tip.style.left = Math.min(Math.max(0, left + 12), host.clientWidth - tw) + "px";
+    if (left + 12 + tw > host.clientWidth) tip.style.left = Math.max(0, left - tw - 12) + "px";
+    tip.style.top = (svg.offsetTop + 8) + "px";
+  };
+  const hide = () => { hair.setAttribute("visibility", "hidden"); dots.forEach(d => d.setAttribute("visibility", "hidden")); tip.hidden = true; };
+  svg.addEventListener("pointermove", e => {
+    const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) * (W / r.width);
+    const x = xmin + ((px - m.l) / iw) * (xmax - xmin); show(nearest(base, x));
+  });
+  svg.addEventListener("pointerleave", hide);
+  svg.addEventListener("blur", hide);
+  svg.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const step = Math.max(1, Math.round(base.length / 40));
+    show(Math.min(base.length - 1, Math.max(0, (cur ?? 0) + (e.key === "ArrowRight" ? step : -step))));
+  });
+}
+
+function magBar(v) {
+  const f = v <= 0 ? 0 : Math.min(1, Math.max(0.02, (Math.log10(v) + 16) / 20));
+  const track = el("span", { class: "track" }); const fill = el("span", { class: "fill" }); fill.style.width = (f * 100).toFixed(1) + "%"; fill.style.display = "block";
+  track.style.display = "block"; track.append(fill); return track;
+}
+
+async function main() {
+  const D = await (await fetch("data.json")).json();
+  const F = D.fluid;
+
+  const odeUnique = new Set(D.ode.map(c => c.model + "/" + c.variant)).size;
+  const inv = document.getElementById("inv");
+  [["197", "archivos NPZ"], ["4", "corridas de fluido 3D"], ["21", "escenarios PDE (×2 carpetas)"], [String(D.ode.length), `corridas ODE · ${odeUnique} casos distintos`]]
+    .forEach(([a, b]) => inv.append(el("div", {}, el("strong", { text: a }), el("span", { text: b }))));
+
+  const R = F.runs, last = F.times.length - 1;
+  const dtd = Math.max(...F.dt_max_diff);
+  const ff = document.getElementById("fluidFindings");
+  [
+    ["El paso de tiempo no cambia nada", `Con Δt = 0.01 y con Δt = 0.005 (malla 32³) sale el mismo campo: la diferencia máxima en |ω| es ${sci(dtd)}. ${F.legacy_equals_dt001 ? "La carpeta simulation_results trae exactamente los mismos datos que n32-dt001." : ""}`],
+    ["Con viscosidad, la simulación está resuelta", `Con ν = 0.04 las mallas 32³ y 64³ dan prácticamente lo mismo: la enstrofía final es ${fix(R.n32_dt001.enst[1][last])} con 32³ y ${fix(R.n64.enst[1][last])} con 64³. El flujo se disipa y pierde energía.`],
+    ["Sin viscosidad, la malla no alcanza", `Con ν = 0 el pico final de |ω| pasa de ${fix(R.n32_dt001.wmax[0][last], 2)} (32³) a ${fix(R.n64.wmax[0][last], 2)} (64³). Si el resultado cambia al refinar, las estructuras son más finas que la malla. Eso es falta de resolución, no evidencia de explosión.`],
+  ].forEach(([h, p]) => ff.append(el("div", { class: "finding" }, el("h3", { text: h }), el("p", { text: p }))));
+
+  const vid = document.getElementById("vid");
+  seg("vidSeg", v => { const t = vid.currentTime, playing = !vid.paused; vid.src = `../media/taylor_green_vorticidad_${v}.mp4`; vid.addEventListener("loadedmetadata", () => { vid.currentTime = Math.min(t, vid.duration || t); if (playing) vid.play().catch(() => {}); }, { once: true }); });
+
+  const sheets = {};
+  const loadSheet = (res, view, nu) => {
+    const key = `${res}_${view}_nu${nu}`;
+    if (sheets[key]) return sheets[key];
+    sheets[key] = new Promise((ok, bad) => {
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+        const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(img, 0, 0);
+        const px = g.getImageData(0, 0, img.width, img.height).data;
+        const n = img.width, out = new Uint8Array(n * img.height);
+        for (let i = 0; i < out.length; i++) out[i] = px[i * 4];
+        ok({ n, frames: img.height / n, data: out });
+      };
+      img.onerror = bad;
+      img.src = `slices/${key}.png`;
+    });
+    return sheets[key];
+  };
+  const cvs = [document.getElementById("cv0"), document.getElementById("cv1")];
+  const slider = document.getElementById("tslider"), tread = document.getElementById("tread");
+  let res = "n64", view = "z0", frame = 0, timer = null;
+  const runKey = () => (res === "n64" ? "n64" : "n32_dt001");
+  async function drawSlices() {
+    const ss = await Promise.all([0, 1].map(nu => loadSheet(res, view, nu)));
+    ss.forEach((s, k) => {
+      const c = cvs[k]; if (c.width !== s.n) { c.width = s.n; c.height = s.n; }
+      const g = c.getContext("2d"); const im = g.createImageData(s.n, s.n);
+      const off = Math.min(frame, s.frames - 1) * s.n * s.n;
+      for (let i = 0; i < s.n * s.n; i++) { const v = s.data[off + i] * 3; im.data[i * 4] = LUT[v]; im.data[i * 4 + 1] = LUT[v + 1]; im.data[i * 4 + 2] = LUT[v + 2]; im.data[i * 4 + 3] = 255; }
+      g.putImageData(im, 0, 0);
+    });
+    const t = F.slice_times[frame], ti = nearest(F.times, t), run = R[runKey()];
+    tread.textContent = "t = " + t.toFixed(2);
+    document.getElementById("pk0").textContent = fix(run.wmax[0][ti], 2);
+    document.getElementById("pk1").textContent = fix(run.wmax[1][ti], 2);
+    drawConv();
+  }
+  slider.max = F.slice_times.length - 1;
+  slider.addEventListener("input", () => { frame = +slider.value; drawSlices(); });
+  seg("resSeg", v => { res = v; drawSlices(); });
+  seg("viewSeg", v => { view = v; drawSlices(); });
+  const playBtn = document.getElementById("play");
+  playBtn.addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; playBtn.textContent = "▶ Reproducir"; return; }
+    playBtn.textContent = "❚❚ Pausar";
+    if (frame >= F.slice_times.length - 1) frame = 0;
+    timer = setInterval(() => { frame = (frame + 1) % F.slice_times.length; slider.value = frame; drawSlices(); }, 90);
+  });
+
+  const cb = document.getElementById("cbar"), cg = cb.getContext("2d"), cim = cg.createImageData(512, 12);
+  for (let x = 0; x < 512; x++) { const v = Math.round((x / 511) * 255) * 3; for (let y = 0; y < 12; y++) { const o = (y * 512 + x) * 4; cim.data[o] = LUT[v]; cim.data[o + 1] = LUT[v + 1]; cim.data[o + 2] = LUT[v + 2]; cim.data[o + 3] = 255; } }
+  cg.putImageData(cim, 0, 0);
+  const toS = w => Math.log1p(w / W_LO) / Math.log1p(W_HI / W_LO);
+  const ticks = document.getElementById("cbarTicks");
+  [0.5, 1, 2, 4, 8, 14].forEach(w => { const s = el("span", { text: String(w) }); s.style.left = (toS(w) * 100).toFixed(1) + "%"; ticks.append(s); });
+
+  let metric = "enst";
+  seg("metSeg", v => { metric = v; drawConv(); });
+  function drawConv() {
+    const tNow = F.slice_times[frame];
+    [0, 1].forEach(nu => {
+      lineChart(document.getElementById(nu ? "chNu1" : "chNu0"), {
+        title: nu ? "ν = 0.04 · Navier–Stokes" : "ν = 0 · Euler",
+        xLabel: "tiempo t", xName: "t", cursor: tNow,
+        fmt: v => fix(v, metric === "enst" ? 4 : 3),
+        series: [
+          { name: "32³ · Δt 0.01", x: F.times, y: R.n32_dt001[metric][nu], color: css("--s1"), width: 2 },
+          { name: "32³ · Δt 0.005", x: F.times, y: R.n32_dt0005[metric][nu], color: css("--s3"), width: 2, dash: "5 4" },
+          { name: "64³ · Δt 0.01", x: F.times, y: R.n64[metric][nu], color: css("--s2"), width: 2 },
+        ],
+      });
+    });
+  }
+  drawSlices();
+
+  const pdeBy = {}; D.pde.forEach(c => { pdeBy[c.eq + "/" + c.variant] = c; });
+  const twin = D.pde.filter(c => c.identical_war).length;
+  document.getElementById("pdeTwin").textContent = `Las carpetas guerra y war son dos corridas del mismo experimento. En ${twin} de ${D.pde.length} casos los arrays son idénticos bit a bit, así que abajo se muestra una sola.`;
+  const eqs = ["heat", "advection", "wave"];
+  const pvars = ["baseline", "sign", "coefficient", "tiny_coefficient", "boundary_zero", "frozen", "equivalent_periodic_shift"];
+  const pm = document.getElementById("pdeMatrix");
+  const pdeCells = {};
+  pm.append(el("thead", {}, el("tr", {}, el("th", { class: "var", text: "Variante" }), ...eqs.map(e => el("th", { text: PDE_EQ[e] })))));
+  const pb = el("tbody"); pm.append(pb);
+  pvars.forEach(v => {
+    const tr = el("tr", {}, el("th", { class: "var" }, PDE_VAR[v], el("br"), el("span", { class: "rawname", text: v })));
+    eqs.forEach(e => {
+      const c = pdeBy[e + "/" + v], b = pdeBy[e + "/baseline"];
+      const flagged = v !== "baseline" && c.err_max <= 10 * b.err_max;
+      const btn = el("button", { type: "button", class: "cellbtn", "aria-pressed": "false", "aria-label": `${PDE_EQ[e]}, ${PDE_VAR[v]}: error ${sci(c.err_max)}` },
+        el("span", { class: "v" }, sci(c.err_max), flagged ? el("span", { class: "flag", text: "≈ correcto" }) : null), magBar(c.err_max));
+      btn.addEventListener("click", () => showPde(e, v));
+      pdeCells[e + "/" + v] = btn;
+      tr.append(el("td", {}, btn));
+    });
+    pb.append(tr);
+  });
+  let pdeComp = 0, pdeSel = null;
+  const compSeg = document.getElementById("pdeComp");
+  compSeg.addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; pdeComp = +b.dataset.v; showPde(...pdeSel); });
+  function showPde(e, v) {
+    pdeSel = [e, v];
+    Object.entries(pdeCells).forEach(([k, b]) => b.setAttribute("aria-pressed", k === e + "/" + v ? "true" : "false"));
+    const c = pdeBy[e + "/" + v];
+    const nc = c.num.length; if (pdeComp >= nc) pdeComp = 0;
+    compSeg.hidden = nc < 2; compSeg.replaceChildren(...Array.from({ length: nc }, (_, i) => el("button", { type: "button", "data-v": String(i), "aria-pressed": String(i === pdeComp), text: "Componente " + (i + 1) })));
+    document.getElementById("pdeTitle").textContent = `${PDE_EQ[e]} · ${PDE_VAR[v]}`;
+    document.getElementById("pdeRaw").textContent = `scenarios_v2/{guerra,war}/${e}_${v}`;
+    const errComp = c.err[pdeComp];
+    lineChart(document.getElementById("pdeSol"), {
+      title: "Solución en el instante final", xLabel: "posición x", xName: "x", xDomain: [0, 2 * Math.PI],
+      series: [
+        { name: "exacta", x: c.x, y: c.exact[pdeComp], color: css("--ref"), width: 1.5 },
+        { name: "numérica (64 puntos)", x: c.x, y: c.num[pdeComp], color: css("--s1"), markers: true, line: false },
+      ], fmt: v => (+v.toPrecision(5)).toString(),
+    });
+    lineChart(document.getElementById("pdeErr"), {
+      title: "Error |numérica − exacta| (escala log)", xLabel: "posición x", xName: "x", log: true, xDomain: [0, 2 * Math.PI],
+      series: [{ name: "error", x: c.x, y: errComp, color: css("--s2"), width: 2 }],
+    });
+    const box = document.getElementById("pdeRes"); box.replaceChildren();
+    const keys = ["n32", "n64", "n128"].filter(k => k in c.res);
+    if (keys.length > 1) {
+      const t = el("table");
+      t.append(el("thead", {}, el("tr", {}, el("th", { text: "Malla" }), el("th", { class: "num", text: "Error máximo" }), el("th", { class: "num", text: "Orden observado" }))));
+      const tb = el("tbody"); t.append(tb);
+      keys.forEach((k, i) => {
+        const ord = i ? Math.log2(c.res[keys[i - 1]] / c.res[k]).toFixed(2) : "–";
+        tb.append(el("tr", {}, el("td", { text: k.replace("n", "") + " puntos" }), el("td", { class: "num", text: sci(c.res[k], 2) }), el("td", { class: "num", text: ord })));
+      });
+      if ("n64_half" in c.res) tb.append(el("tr", {}, el("td", { text: "64 puntos (variante «half»)" }), el("td", { class: "num", text: sci(c.res.n64_half, 2) }), el("td", { class: "num", text: "–" })));
+      box.append(el("p", { class: "note", text: "Convergencia del modelo correcto: si el error cae 4× cada vez que se duplica la malla, el método es de orden 2." }), el("div", { class: "tablewrap" }, t));
+    }
+  }
+  showPde("heat", "baseline");
+
+  const odeBy = {};
+  D.ode.forEach(c => { (odeBy[c.model + "/" + c.variant] ||= []).push(c); });
+  const shared = Object.values(odeBy).filter(a => a.length > 1).length;
+  document.getElementById("odeTwin").textContent = `Hay ${D.ode.length} archivos, pero solo ${odeUnique} casos distintos. ${shared} casos aparecen en más de una carpeta (guerra, war, independent_review) y coinciden hasta 2.2×10⁻¹⁶, es decir, al último bit del número.`;
+  const errOf = c => c.errs[c.errs.length - 1];
+  let odeSel = null;
+  const odeCells = {};
+  function odeMatrix(id, prefix, cols) {
+    const t = document.getElementById(id);
+    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Modelo" }), ...cols.map(v => el("th", {}, ODE_VAR[v], el("br"), el("span", { class: "rawname", text: v }))))));
+    const tb = el("tbody"); t.append(tb);
+    for (let i = 1; i <= 9; i++) {
+      const model = prefix + String(i).padStart(2, "0");
+      const tr = el("tr", {}, el("th", { class: "mono", text: model }));
+      cols.forEach(v => {
+        const list = odeBy[model + "/" + v];
+        if (!list) { tr.append(el("td", { class: "note", text: "—" })); return; }
+        const c = list[0], b = odeBy[model + "/baseline"][0];
+        const flagged = v !== "baseline" && errOf(c) <= 10 * errOf(b);
+        const btn = el("button", { type: "button", class: "cellbtn", "aria-pressed": "false", "aria-label": `${model}, ${ODE_VAR[v]}: error ${sci(errOf(c))}` },
+          el("span", { class: "v" }, sci(errOf(c)), flagged ? el("span", { class: "flag", text: "≈ correcto" }) : null), magBar(errOf(c)));
+        btn.addEventListener("click", () => showOde(model, v));
+        odeCells[model + "/" + v] = btn;
+        tr.append(el("td", {}, btn));
+      });
+      tb.append(tr);
+    }
+  }
+  odeMatrix("oscMatrix", "osc", OSC_COLS);
+  odeMatrix("rxnMatrix", "rxn", RXN_COLS);
+  function showOde(model, v) {
+    odeSel = [model, v];
+    Object.entries(odeCells).forEach(([k, b]) => b.setAttribute("aria-pressed", k === model + "/" + v ? "true" : "false"));
+    const list = odeBy[model + "/" + v], c = list[0];
+    document.getElementById("odeTitle").textContent = `${model} · ${ODE_VAR[v]}`;
+    document.getElementById("odeRaw").textContent = c.path;
+    const chips = document.getElementById("odeChips"); chips.replaceChildren(el("span", { class: "label", text: "Aparece en" }));
+    list.forEach(x => chips.append(el("span", { class: "chip", text: x.group + (x.check ? ` · check ${x.check}` : "") })));
+    lineChart(document.getElementById("odeSol"), {
+      title: "Trayectoria: numérica y oráculo", xLabel: "tiempo t", xName: "t",
+      series: [
+        { name: "x₁ numérica", x: c.t, y: c.num[0], color: css("--s1"), width: 2 },
+        { name: "x₂ numérica", x: c.t, y: c.num[1], color: css("--s2"), width: 2 },
+        { name: "x₁ oráculo", x: c.t, y: c.oracle[0], color: css("--ref"), width: 1.2, dash: "4 4" },
+        { name: "x₂ oráculo", x: c.t, y: c.oracle[1], color: css("--ink-2"), width: 1.2, dash: "1 3" },
+      ], fmt: v => (+v.toPrecision(6)).toString(),
+    });
+    lineChart(document.getElementById("odeErr"), {
+      title: "Error máximo contra el oráculo (escala log)", xLabel: "tiempo t", xName: "t", log: true,
+      series: [{ name: "error", x: c.t, y: c.err, color: css("--s2"), width: 2 }],
+    });
+    const box = document.getElementById("odeRes"); box.replaceChildren();
+    const t = el("table");
+    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Pasos de tiempo" }), el("th", { class: "num", text: "Error máximo" }), el("th", { class: "num", text: "Orden observado" }))));
+    const tb = el("tbody"); t.append(tb);
+    c.steps.forEach((s, i) => {
+      const ord = i && c.errs[i] > 0 && c.errs[i - 1] > 0 ? Math.log2(c.errs[i - 1] / c.errs[i]).toFixed(2) : "–";
+      tb.append(el("tr", {}, el("td", { text: String(s) }), el("td", { class: "num", text: sci(c.errs[i], 2) }), el("td", { class: "num", text: ord })));
+    });
+    box.append(el("div", { class: "tablewrap" }, t));
+  }
+  showOde("osc01", "baseline");
+
+  const it = document.getElementById("invTable");
+  it.append(el("thead", {}, el("tr", {}, el("th", { text: "Carpeta" }), el("th", { class: "num", text: "Archivos" }), el("th", { text: "Contenido de cada archivo" }))));
+  const ib = el("tbody"); it.append(ib);
+  [
+    ["fluid-3d/simulation_results", 1, "Fluido 3D 32³: |ω| en 201 instantes para ν = 0 y 0.04, velocidad inicial y final. Mismos datos que n32-dt001."],
+    ["fluid-3d/simulation_results_n64", 1, "Fluido 3D 64³, mismos campos (70 MB, el más pesado)."],
+    ["fluid-3d/fluid_temporal_v2/remote/n32-dt001-T4", 1, "Fluido 3D 32³ con Δt = 0.01."],
+    ["fluid-3d/fluid_temporal_v2/remote/n32-dt0005-T4", 1, "Fluido 3D 32³ con Δt = 0.005, para probar la convergencia en el tiempo."],
+    ["scenarios-v2/scenarios_v2/guerra", 21, "Ecuación × variante: solución numérica y exacta en el instante final (32, 64 y 128 puntos en los modelos correctos)."],
+    ["scenarios-v2/scenarios_v2/war", 21, "Las mismas 21 corridas que guerra, idénticas bit a bit."],
+    ["ode-v3/ode_v3/guerra", 60, "Reacciones rxn01–09 × 5 variantes y osciladores cruzados (results_cross_oscillator)."],
+    ["ode-v3/ode_v3/war", 60, "Osciladores osc01–09 × 5 variantes y reacciones cruzadas rxn07–09."],
+    ["ode-v3/ode_v3/independent_review", 31, "18 modelos correctos, 12 chequeos puntuales de mutantes y osc05 con parámetros alterados."],
+  ].forEach(([a, b, c]) => ib.append(el("tr", {}, el("td", { class: "mono", text: a }), el("td", { class: "num", text: String(b) }), el("td", { text: c }))));
+
+  const mq = matchMedia("(prefers-color-scheme: dark)");
+  const retheme = () => { drawConv(); showPde(...pdeSel); showOde(...odeSel); };
+  mq.addEventListener("change", retheme);
+  new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+}
+main().catch(err => {
+  document.querySelector(".hero").append(el("p", { text: "No se pudieron cargar los datos: " + err.message + ". Recarga la página." }));
+});
+</script>
+
+</body>
+</html>

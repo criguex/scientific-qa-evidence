@@ -1,0 +1,40 @@
+VERIFICACIÓN LEAN COMPLETADA — 23 de octubre de 2026
+
+Resultado: ComparatorSolution y las tres versiones fijadas de ClayLiteral/Bridges compilaron correctamente. Los dos procesos supervisores finales terminaron con código 0.
+
+Entorno y versiones
+- Linux cloud del asistente, Lean v4.34.0-rc2, un trabajador (LEAN_NUM_THREADS=1).
+- OpenAI NavierStokesAndEuler: f9e8bc5b38b6e212696e8a30e3e91517af887bbd.
+- scientific-qa-evidence: c5f4f5596e8e09eb97dc79018e15f12c42caa028, 059a53c1d2e5a201523f5bf7d4c93bdf4e9b8bc9 y ac195f733199c1ffc582b71eafd954a198d27c37.
+- Se usó caché oficial de dependencias Mathlib: no fue una reconstrucción completa desde cero de todas las dependencias. Los pins, hashes de binarios, dependencias y fuentes están en pins.json y recibos de validación.
+
+Comandos y resultados
+1. lake build +NavierStokes.ComparatorSolution:olean
+   Código 0, final 2026-10-23 21:53:04 UTC (16:53:04 Colombia).
+   609/609 módulos NavierStokes de la clausura estática de imports completados. Lake reportó 9.371 jobs totales, cifra que incluye dependencias/caché y no equivale a 9.371 módulos compilados de nuevo.
+2. Para cada una de las tres versiones, en carpeta aislada y con LEAN_PATH derivado de lake env:
+   lean --root=. -o ClayLiteral.olean ClayLiteral.lean
+   lean --root=. -o Bridges.olean Bridges.lean
+   lean --root=. Audit.lean
+   Los 9 pasos terminaron con código 0. La auditoría imprime las declaraciones y sus axiomas; no es un replay independiente con otro kernel.
+   Último final: 2026-10-23 21:58:36 UTC (16:58:36 Colombia).
+
+Los axiomas impresos para los dos teoremas de ComparatorSolution y las declaraciones auditadas de Bridges son propext, Classical.choice y Quot.sound. No aparece sorryAx en esas listas.
+
+Distinción entre versiones y alcance
+- c5f4f55 conserva parámetros explícitos bD5/bS1/bS2/bS5 para k1_C y bD7/bS1/bS2 para k1_D. Compilar esa versión NO elimina sus hipótesis de puente.
+- 059a53c y ac195f7 presentan k1_C y k1_D sin esos parámetros adicionales; ambos requieren viscosidad positiva. En ac195f7 también pasaron k1_C_oneSided y k1_D_oneSided.
+- La rama D tiene como conclusión AltD_withErratum (y la variante oneSided correspondiente); no debe describirse como una certificación incondicional del texto oficial.
+- Esto es reproducción técnica operada por IA en un entorno separado, con fuentes fijadas y Lean estándar. No establece por sí solo equivalencia semántica con el enunciado oficial, revisión humana independiente, validación de fluidos físicos ni certificación institucional.
+- Las dos discrepancias numéricas históricas y FFT están fuera de esta ejecución Lean y no quedan resueltas por ella.
+
+Continuidad y evidencia
+La ejecución iniciada 20:55 UTC perdió seguimiento después de 281 módulos. No se inventó un código de salida: quedó registrada como interrumpida con salida desconocida. Se conservaron los archivos y se verificó una copia externa; la continuación se inició 21:19:24 tras comprobar ausencia de las identidades registradas y bloqueo libre. Los logs originales no se sobrescribieron. ParticularCopyBounds y MovingFrameODE pasaron en esta nueva ejecución, sin trasladar el fallo de ejecución anterior al resultado actual.
+
+Respaldo final separado: lean_complete_checkpoint_20261023T215550Z-c9380cec.zip.
+Contiene los 609 módulos completados, 4.880 archivos y ocho partes internas. Se descargó de nuevo y se verificaron SHA-256, CRC e inventario completo.
+SHA-256 archivo: 1dda16858cb262a37e75e602d59c0798cdc632ca49692bd6475a47687175e07e
+SHA-256 manifiesto: a0f2fbb9e3cfc176c751ea47069af51bbadc2cab3ec4e247339b7be00f62c8e8
+Library: libfile_ccb5dbca4b148191aa3d35cd51853a7d, versión 0.
+
+Este paquete incluye logs, recibos, declaraciones fuente fijadas, artefactos de los puentes, planes, scripts y cadenas de eventos. SHA-256 detecta cambios respecto de un digest confiable, pero no autentica autoría. El estado final prevalece sobre descripciones históricas de preparación contenidas en recibos antiguos.

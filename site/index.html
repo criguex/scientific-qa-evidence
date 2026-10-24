@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repítelo tú · ADV-050</title>
+<meta name="description" content="¿Se puede repetir una demostración matemática como se repite una prueba de software? Videos, un comando para probarlo en tu computador y los reportes de quienes ya lo hicieron.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --surface-2: #edf0f4; --ink: #0f1722; --ink-2: #465163; --muted: #6f7a8c;
+  --line: #dce1e8; --ok: #1a7f37; --ok-bg: #e6f4ea; --warn: #7a4f00; --warn-bg: #fff1cc; --accent: #2a78d6;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; --bg: #0d1117; --surface: #131820; --surface-2: #1a212b; --ink: #e6edf3; --ink-2: #a3adba;
+    --muted: #7d8796; --line: #262e39; --ok: #3fb950; --ok-bg: #12261a; --warn: #f2c25b; --warn-bg: #2a2310; --accent: #4c9be8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); padding-inline: 20px; padding-block: 0 56px; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.12; text-wrap: balance; }
+h1 { font-size: clamp(32px, 5.2vw, 54px); font-weight: 700; }
+h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; color: var(--ink-2); max-width: 68ch; }
+a { color: var(--accent); }
+code, .mono { font-family: var(--mono); }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 18px; padding-block: 48px 32px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); }
+.chip b { font-family: var(--mono); font-weight: 500; font-size: 18px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; letter-spacing: .04em; }
+section { display: grid; gap: 18px; padding-block: 36px 4px; border-top: 1px solid var(--line); margin-top: 24px; }
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 760px) { .videos, .two { grid-template-columns: minmax(0, 1fr) !important; } }
+figure { margin: 0; display: grid; gap: 8px; }
+video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0d1117; border-radius: 10px; display: block; }
+figcaption { font-size: 14px; color: var(--ink-2); }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: start; }
+ol.steps li::before { content: counter(s); font-family: var(--display); font-weight: 700; font-size: 20px; width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); }
+ol.steps li > div { display: grid; gap: 6px; padding-top: 4px; }
+.cmd { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cmd code { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 15px; }
+button { font: 500 14px var(--body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.note { font-size: 14px; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; }
+td.mono { font-size: 13px; }
+.pill { font: 600 12px/1 var(--body); border-radius: 999px; padding: 4px 8px; }
+.pill.ok { color: var(--ok); background: var(--ok-bg); }
+.pill.diff { color: var(--warn); background: var(--warn-bg); }
+.count { display: flex; gap: 28px; flex-wrap: wrap; }
+.count div { display: grid; }
+.count strong { font-family: var(--display); font-size: 34px; line-height: 1.1; }
+.count span { font-size: 13px; color: var(--muted); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.two ul { margin: 8px 0 0; padding-left: 20px; color: var(--ink-2); display: grid; gap: 6px; }
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.links a { display: grid; gap: 4px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.links a:hover { border-color: var(--ink-2); }
+.links a span { font-size: 14px; color: var(--ink-2); }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">ADV-050 · evidencia abierta · Medellín</span>
+    <h1>¿Se puede repetir una demostración matemática como se repite una prueba de software?</h1>
+    <p>Este año OpenAI publicó demostraciones, verificadas por computador, sobre las ecuaciones de Navier–Stokes, las que describen cómo se mueven los fluidos. Yo soy ingeniero de calidad de software (QA), no matemático. Revisé ese trabajo como se revisa un software y dejé todo para que cualquiera lo repita. Lo que falta es que lo repitan muchas personas, en muchos computadores.</p>
+    <div class="chip">Huella de referencia <b>C5F0-F1A8-2F4D</b> si te da esta, te dio lo mismo que a todos.</div>
+  </header>
+
+  <section aria-labelledby="ver">
+    <h2 id="ver">Míralo en dos videos</h2>
+    <div class="videos">
+      <figure>
+        <video controls muted loop playsinline preload="metadata" src="media/taylor_green_vorticidad_64.mp4"></video>
+        <figcaption>Un fluido en 3D. Con viscosidad el remolino se apaga; sin ella se afila hasta que la malla ya no alcanza a dibujarlo. Ese brillo final no es una «explosión».</figcaption>
+      </figure>
+      <figure>
+        <video controls muted loop playsinline preload="metadata" src="media/reproduccion_lean_609.mp4"></video>
+        <figcaption>Las demostraciones de OpenAI, compiladas y verificadas otra vez en un contenedor en la nube: 609 de 609 piezas y 9 de 9 pasos con el enunciado oficial.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="probar">
+    <h2 id="probar">Pruébalo en tu computador</h2>
+    <p>Funciona en Windows, Mac y Linux. Tarda menos de un minuto y no instala nada en tu equipo aparte de Python.</p>
+    <ol class="steps">
+      <li><div><h3>Instala Python 3.9 o más reciente</h3><p>Desde <a href="https://www.python.org/downloads/">python.org</a>. Si ya lo tienes, sigue.</p></div></li>
+      <li><div><h3>Descarga el repositorio</h3><p><a href="https://github.com/criguex/scientific-qa-evidence/archive/refs/heads/main.zip">Descarga el ZIP</a> y descomprímelo. Queda una carpeta llamada <code>scientific-qa-evidence-main</code>.</p></div></li>
+      <li><div><h3>Ejecuta un solo comando</h3><p>Abre una terminal dentro de esa carpeta y escribe:</p>
+        <div class="cmd"><code id="cmdtext">python verificar.py</code><button type="button" id="copy">Copiar</button><span class="note" id="copied" aria-live="polite"></span></div>
+        <p class="note">En Mac o Linux puede ser <code>python3 verificar.py</code>. Verás OK o FALLA en seis comprobaciones y tu huella.</p></div></li>
+      <li><div><h3>Cuéntanos qué te dio</h3><p>Con el <a href="https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml">formulario de reproducción</a> (necesitas una cuenta gratis de GitHub). Pega el contenido de <code>mi_resultado.txt</code> y, si quieres, adjunta capturas o un video. Un resultado distinto es igual de útil.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="quienes">
+    <h2 id="quienes">Quienes ya lo repitieron</h2>
+    <div class="count" id="counts"></div>
+    <div class="panel">
+      <div class="tablewrap"><table id="reports"><thead><tr><th>Fecha (UTC)</th><th>Sistema</th><th>Python</th><th>Huella</th><th>Resultado</th><th>Reporte</th></tr></thead><tbody></tbody></table></div>
+      <p class="note" id="status">Cargando los reportes desde GitHub…</p>
+    </div>
+    <p class="note">Esta lista se lee en vivo de los reportes recibidos. La tabla revisada, con la relación de cada persona con el autor y la copia exacta de cada resultado, está en <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/evidence/reproductions/README.md">evidence/reproductions</a>.</p>
+  </section>
+
+  <section aria-labelledby="alcance">
+    <h2 id="alcance">Qué es y qué no es</h2>
+    <div class="two">
+      <div class="panel"><h3>Sí es</h3><ul>
+        <li>Una revisión de calidad de software sobre demostraciones publicadas por OpenAI.</li>
+        <li>Un registro público de cada comando, versión, hash y resultado, incluidos los errores corregidos.</li>
+        <li>Una prueba de que ese registro da lo mismo en muchos computadores.</li>
+      </ul></div>
+      <div class="panel"><h3>No es</h3><ul>
+        <li>La solución de un Problema del Milenio. La matemática es de OpenAI, y la versión clásica del problema, sin fuerza externa, sigue abierta.</li>
+        <li>Una certificación ni una revisión por pares.</li>
+        <li>Una recompilación independiente de Lean hecha por otra persona. Esa sigue pendiente.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mas">
+    <h2 id="mas">Para ir más a fondo</h2>
+    <div class="links">
+      <a href="fluido/"><b>Explorador del fluido 3D</b><span>Cortes cuadro a cuadro, convergencia y las campañas PDE y ODE, con los datos originales.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/tree/main/evidence/lean-cloud-2026-10-23"><b>Evidencia del video 2</b><span>Logs, recibos y hashes de la recompilación del 23 de octubre.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/README.es.md"><b>El repositorio completo</b><span>Qué se comprobó, cómo, y sus límites.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/docs/INDEPENDENT_REPRODUCTION.md"><b>Recompilar Lean tú mismo</b><span>Para quien sepa Lean: la guía de la reproducción que falta (en inglés).</span></a>
+    </div>
+  </section>
+
+  <footer>Cristian Guerra · QA Automation · Medellín, Colombia. Hecho con ayuda de asistentes de IA, bajo mi dirección; el repositorio lo declara.</footer>
+</div>
+<script>
+const REF = "C5F0-F1A8-2F4D";
+document.getElementById("copy").addEventListener("click", () => {
+  const t = document.getElementById("cmdtext").textContent, msg = document.getElementById("copied");
+  const done = () => { msg.textContent = "Copiado"; setTimeout(() => (msg.textContent = ""), 2000); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(() => select());
+  else select();
+  function select() { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmdtext")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selecciónalo y cópialo"; }
+});
+function field(body, label) {
+  const m = body.match(new RegExp("### " + label + "\\s*\\n+([^\\n]+)"));
+  return m ? m[1].trim() : "";
+}
+function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
+async function load() {
+  const status = document.getElementById("status");
+  try {
+    const r = await fetch("https://api.github.com/repos/criguex/scientific-qa-evidence/issues?state=all&per_page=100");
+    if (!r.ok) throw new Error(r.status);
+    const items = (await r.json()).filter(i => !i.pull_request && /^\[Reproducci[oó]n\]/.test(i.title));
+    const tbody = document.querySelector("#reports tbody");
+    const people = new Set(), systems = new Set();
+    let same = 0;
+    items.sort((a, b) => a.created_at.localeCompare(b.created_at)).forEach(i => {
+      const body = i.body || "";
+      const huella = (field(body, "Tu huella").match(/[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}/i) || [""])[0].toUpperCase();
+      const so = field(body, "Sistema operativo");
+      const py = (body.match(/python:\s*([0-9.]+)/) || ["", "?"])[1];
+      people.add(i.user.login); if (so) systems.add(so);
+      const tr = document.createElement("tr");
+      tr.append(cell(i.created_at.slice(0, 16).replace("T", " "), "mono"), cell(so || "?"), cell(py, "mono"), cell(huella || "sin huella", "mono"));
+      const res = document.createElement("td"), pill = document.createElement("span");
+      const ok = huella === REF; if (ok) same++;
+      pill.className = "pill " + (ok ? "ok" : "diff"); pill.textContent = ok ? "igual a la referencia" : "distinta";
+      res.append(pill); tr.append(res);
+      const link = document.createElement("td"), a = document.createElement("a");
+      a.href = i.html_url; a.textContent = "#" + i.number; link.append(a); tr.append(link);
+      tbody.append(tr);
+    });
+    const counts = document.getElementById("counts");
+    [[items.length, "reportes"], [people.size, "personas"], [systems.size, "sistemas operativos"], [same, "con la huella de referencia"]]
+      .forEach(([n, l]) => { const d = document.createElement("div"), s = document.createElement("strong"), sp = document.createElement("span"); s.textContent = n; sp.textContent = l; d.append(s, sp); counts.append(d); });
+    status.textContent = items.length ? "Actualizado en vivo desde GitHub." : "Todavía no hay reportes. Puedes ser el primero.";
+  } catch (e) {
+    status.textContent = "No se pudieron cargar los reportes en este momento. Míralos directamente en GitHub.";
+    const a = document.createElement("a"); a.href = "https://github.com/criguex/scientific-qa-evidence/issues?q=%5BReproducci%C3%B3n%5D"; a.textContent = " Ver reportes";
+    status.append(a);
+  }
+}
+load();
+</script>
+</body>
+</html>

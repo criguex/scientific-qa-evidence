@@ -1,0 +1,103 @@
+{
+  "verified_utc": "2026-10-23T21:58:57.241698+00:00",
+  "base_exit_code": 0,
+  "base_modules_completed": 609,
+  "bridge_stages": 9,
+  "followon_pins_and_gate_stages": 2,
+  "results": [
+    {
+      "stage": "23h_059a53c_Audit",
+      "exit_code": 0,
+      "elapsed_seconds": 43.25419340999997,
+      "finished_utc": "2026-10-23T21:57:07.127231+00:00"
+    },
+    {
+      "stage": "23h_059a53c_Bridges",
+      "exit_code": 0,
+      "elapsed_seconds": 42.659272504,
+      "finished_utc": "2026-10-23T21:56:23.869618+00:00"
+    },
+    {
+      "stage": "23h_059a53c_ClayLiteral",
+      "exit_code": 0,
+      "elapsed_seconds": 26.22805725299986,
+      "finished_utc": "2026-10-23T21:55:41.203610+00:00"
+    },
+    {
+      "stage": "23h_ac195f7_Audit",
+      "exit_code": 0,
+      "elapsed_seconds": 36.243735543000184,
+      "finished_utc": "2026-10-23T21:58:36.252608+00:00"
+    },
+    {
+      "stage": "23h_ac195f7_Bridges",
+      "exit_code": 0,
+      "elapsed_seconds": 34.048886771999605,
+      "finished_utc": "2026-10-23T21:58:00.005176+00:00"
+    },
+    {
+      "stage": "23h_ac195f7_ClayLiteral",
+      "exit_code": 0,
+      "elapsed_seconds": 18.822788831999787,
+      "finished_utc": "2026-10-23T21:57:25.953235+00:00"
+    },
+    {
+      "stage": "23h_c5f4f55_Audit",
+      "exit_code": 0,
+      "elapsed_seconds": 43.05474473100003,
+      "finished_utc": "2026-10-23T21:55:14.972182+00:00"
+    },
+    {
+      "stage": "23h_c5f4f55_Bridges",
+      "exit_code": 0,
+      "elapsed_seconds": 43.24924896700031,
+      "finished_utc": "2026-10-23T21:54:31.913988+00:00"
+    },
+    {
+      "stage": "23h_c5f4f55_ClayLiteral",
+      "exit_code": 0,
+      "elapsed_seconds": 27.632618178000484,
+      "finished_utc": "2026-10-23T21:53:48.660701+00:00"
+    },
+    {
+      "stage": "23h_require_target_success",
+      "exit_code": 0,
+      "elapsed_seconds": 0.21174098499977845,
+      "finished_utc": "2026-10-23T21:53:21.025316+00:00"
+    },
+    {
+      "stage": "23h_validate_pins",
+      "exit_code": 0,
+      "elapsed_seconds": 0.21010377099992184,
+      "finished_utc": "2026-10-23T21:53:20.810820+00:00"
+    }
+  ],
+  "axiom_output": {
+    "23h_c5f4f55_Audit.stdout.log": [
+      "'Bridges.k1_C' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "'Bridges.k1_D' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    ],
+    "23h_059a53c_Audit.stdout.log": [
+      "'Bridges.k1_C' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "'Bridges.k1_D' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    ],
+    "23h_ac195f7_Audit.stdout.log": [
+      "'Bridges.k1_C' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "'Bridges.k1_D' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "'Bridges.k1_C_oneSided' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "'Bridges.k1_D_oneSided' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    ]
+  },
+  "not_claimed": [
+    "Independent human review",
+    "Semantic equivalence to an official problem statement",
+    "Physical-fluid validation",
+    "Full uncached dependency rebuild",
+    "External kernel replay beyond standard Lean compilation",
+    "Institutional certification"
+  ],
+  "unrelated_open_items": [
+    "Two prior numerical array discrepancies remain outside this execution",
+    "FFT not executed"
+  ]
+}

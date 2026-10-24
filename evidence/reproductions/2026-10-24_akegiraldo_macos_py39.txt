@@ -1,0 +1,13 @@
+scientific-qa-evidence · verificar.py
+fecha (UTC): 2026-10-24 16:51:04
+sistema: macOS-26.5.2-arm64-arm-64bit · arm64
+python: 3.9.6 (CPython)
+versión de los datos: 26791fe6546f
+huella: C5F0-F1A8-2F4D
+
+[OK] Archivos intactos (SHA-256) (0.3 s)
+[OK] Corridas numéricas guardadas, iguales entre Mac y Linux (0.1 s)
+[OK] Volver a correr las 84 variantes numéricas (0.6 s)
+[OK] README, CLAIMS y registros dicen lo mismo (0.1 s)
+[OK] Recibos de los controles Mathlib (0.0 s)
+[OK] Comprobación de recibos en los paquetes publicados (0.1 s)

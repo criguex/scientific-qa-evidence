@@ -1,0 +1,4 @@
+ℹ [9371/9371] Built NavierStokes.ComparatorSolution (45s)
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (9371 jobs).

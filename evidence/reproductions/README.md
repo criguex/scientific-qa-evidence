@@ -19,6 +19,11 @@ Versión de los datos `26791fe6546f`, huella `C5F0-F1A8-2F4D`. La misma huella s
 | # | Fecha (UTC) | Sistema | Python | Descarga | Huella | ¿Coincide? | Relación con el autor | Reporte |
 |---|---|---|---|---|---|---|---|---|
 | 1 | 2026-10-24 15:16 | Windows 11 (10.0.26200) | 3.9.13 | ZIP | `C5F0-F1A8-2F4D` | Sí | Conocido del autor | [issue #1](https://github.com/criguex/scientific-qa-evidence/issues/1) · [archivo](2026-10-24_gowtherw_windows.txt) |
+| 2 | 2026-10-24 16:16 | macOS 27.0.1, Apple Silicon | 3.14.7 | git clone | `C5F0-F1A8-2F4D` | Sí | Conocido o familiar, según el propio reporte | [issue #2](https://github.com/criguex/scientific-qa-evidence/issues/2) · [archivo](2026-10-24_6uerra_macos.txt) |
+| 3 | 2026-10-24 16:51 | macOS 26.5.2, Apple Silicon | 3.9.6 | git clone | `C5F0-F1A8-2F4D` | Sí | No declarada | [issue #3](https://github.com/criguex/scientific-qa-evidence/issues/3) · [archivo](2026-10-24_akegiraldo_macos_py39.txt) |
+| 4 | 2026-10-24 17:04 | macOS 26.7.1, Apple Silicon | 3.14.4 | git clone | `C5F0-F1A8-2F4D` | Sí | No declarada (misma persona que el 3) | [issue #4](https://github.com/criguex/scientific-qa-evidence/issues/4) · [archivo](2026-10-24_akegiraldo_macos_py314.txt) |
+
+Hasta ahora: 4 reportes de 3 personas, todos con la huella de referencia. Ninguno en Linux todavía, y ninguno con una huella distinta.
 
 ---
 
