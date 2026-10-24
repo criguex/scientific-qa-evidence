@@ -1,0 +1,10 @@
+name = "PhyslibCrosscheck"
+defaultTargets = ["PhyslibCrosscheck"]
+
+[[require]]
+name = "Physlib"
+git = "https://github.com/leanprover-community/physlib"
+rev = "8ddcc004043c5b537e4225fa763121c176b62a4a"
+
+[[lean_lib]]
+name = "PhyslibCrosscheck"

@@ -1,0 +1,5 @@
+# lake build Physlib.FluidDynamics.CauchyFlow.NavierStokes (Physlib deps compiled locally; Mathlib oleans from lake exe cache get)
+✔ [3288/3289] Built Physlib.FluidDynamics.CauchyFlow.Momentum (1.9s)
+✔ [3289/3289] Built Physlib.FluidDynamics.CauchyFlow.NavierStokes (1.8s)
+Build completed successfully (3289 jobs).
+lake build Physlib.FluidDynamics.CauchyFlow.NavierStokes  61.51s user 36.04s system 234% cpu 41.587 total

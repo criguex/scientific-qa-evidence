@@ -1,0 +1,28 @@
+date: 2026-10-24T21:09:25Z
+Lean (version 4.35.0, arm64-apple-darwin24.6.0, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)
+Lake version 5.0.0-src+eb6cafb (Lean version 4.35.0)
+host: Darwin arm64, macOS 26.2
+
+lake-manifest.json:
+  Physlib 8ddcc004043c5b537e4225fa763121c176b62a4a
+  mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679
+  plausible dfa4f38190d07c37e315953e08b90fe2d95b3c24
+  LeanSearchClient d6b4c7be5be75ec4917c873ac50c756dc1436372
+  importGraph a41f0e9a4dea23188ea9cc1c41ac9f8bbafe0b93
+  proofwidgets df72b022e558978a1c50264cfc4d7fec86fa8e04
+  aesop 4a174c490d8707121c4a9290800489f105d85e07
+  Qq dce0ad79c486cb1fb504af04f953c3466b0c6db8
+  batteries 66e469188fe07963e5cf666c7d4433f45b8131c5
+  Cli c24fe6078c630e89b489bffe59b3e20ac30d12c8
+
+SHA-256:
+ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c  lean-toolchain
+506aa33d95e9cd96ddfa0e51b2e5ad8aa3bbddfdab973b055628724d752c495a  lakefile.toml
+868bb1aee3b469287d12747ee359563ff416768f6423c7418bfdb6eb4848ad7d  lake-manifest.json
+9544231bf69c7ce87d81b4b366c2e69d7b84a8edd3ecc66556c68e6ff380d6e7  PhyslibCrosscheck.lean
+31761ef2e62fe2e3937302ce2319478668ad63aa9daea9b63f81d042c4a97c72  PhyslibCrosscheck/ClayLiteralCopy.lean
+9de4db5a9092047657b11ccf95c3e6c15b5b1060a72127bd1c53355651cbec4a  PhyslibCrosscheck/Crosscheck.lean
+d22a27436cf5d33fc7cc9c663cc468d9273fe82ba61282837d1e7c174ff4f9f8  Axioms.lean
+40e2e46baf7ed0a7add2aa3ccc6f39d1ea49eae9a761aa198ea14e4455d317a5  check_copy.py
+1998dac2bee2477b8cc1d100f5345574624bf62290d1f85abf27203b9f8acb2d  ../../bridges/ClayLiteral.lean
+a2e05f67b26d17e0e5d4d2c48fc208dca61fd5f231a858b1d888522c3190d4b4  .lake/packages/Physlib/Physlib/FluidDynamics/CauchyFlow/NavierStokes.lean

@@ -1,0 +1,8 @@
+⚠ [9075/9078] Built PhyslibCrosscheck.ClayLiteralCopy (40s)
+warning: PhyslibCrosscheck/ClayLiteralCopy.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+✔ [9076/9078] Built PhyslibCrosscheck.Crosscheck (45s)
+✔ [9077/9078] Built PhyslibCrosscheck (35s)
+Build completed successfully (9078 jobs).
+real 129.71
+user 12.71
+sys 48.67

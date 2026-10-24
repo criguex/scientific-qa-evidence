@@ -1,0 +1,5 @@
+source: bridges/ClayLiteral.lean 1998dac2bee2477b8cc1d100f5345574624bf62290d1f85abf27203b9f8acb2d
+source lines 22-23 vs copy lines 12-13: identical
+source lines 25-26 vs copy lines 15-16: identical
+source lines 62-64 vs copy lines 18-20: identical
+source lines 66-76 vs copy lines 22-32: identical

@@ -1,0 +1,15 @@
+import PhyslibCrosscheck
+
+#print axioms PhyslibCrosscheck.deriv_transport
+#print axioms PhyslibCrosscheck.timeDeriv_transport
+#print axioms PhyslibCrosscheck.convectiveNavierStokes_iff_forall_at
+#print axioms PhyslibCrosscheck.fderiv_fderiv_comm
+#print axioms PhyslibCrosscheck.div_clayFlow
+#print axioms PhyslibCrosscheck.stress_clayFlow
+#print axioms PhyslibCrosscheck.matrixDiv_clayFlow
+#print axioms PhyslibCrosscheck.continuity_clayFlow
+#print axioms PhyslibCrosscheck.div_of_convectiveNavierStokesAt
+#print axioms PhyslibCrosscheck.materialAcceleration_clayFlow
+#print axioms PhyslibCrosscheck.convectiveNavierStokesAt_clayFlow_iff
+#print axioms PhyslibCrosscheck.eq1_and_eq2_iff_convectiveNavierStokesAt
+#print axioms PhyslibCrosscheck.eq1_and_eq2_of_convectiveNavierStokes
