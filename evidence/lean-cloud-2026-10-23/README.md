@@ -1,6 +1,6 @@
 # Recompilación de las demostraciones de OpenAI en un contenedor en la nube (23-oct-2026)
 
-Un asistente de IA, bajo la dirección del autor, recompiló las demostraciones en Lean de OpenAI en un contenedor Linux en la nube, separado del computador del autor. Esta carpeta guarda la evidencia completa de esa corrida, la misma que se envió a soporte de OpenAI (caso 17914950).
+Con ayuda de un asistente de IA y bajo mi dirección, recompilé las demostraciones en Lean de OpenAI en un contenedor Linux en la nube, separado de mi computador. En esta carpeta guardo la evidencia completa de esa corrida, la misma que envié a soporte de OpenAI (caso 17914950).
 
 ## Resultado
 
@@ -15,7 +15,7 @@ Versiones: Lean v4.34.0-rc2, un solo proceso (`LEAN_NUM_THREADS=1`), OpenAI `Nav
 ## Límites
 
 - **No es una compilación desde cero:** se usó la caché oficial de dependencias de Mathlib. Las compilaciones completas sin caché son B4 y B5, en [evidence/formal](../formal/).
-- **No es independiente:** la operó un asistente de IA bajo la dirección del autor. Una recompilación por otra persona sigue pendiente ([guía](../../docs/INDEPENDENT_REPRODUCTION.md)).
+- **No es independiente:** la operé con ayuda de un asistente de IA y bajo mi dirección. Sigue pendiente que otra persona la recompile ([guía](../../docs/INDEPENDENT_REPRODUCTION.md)).
 - **La auditoría imprime declaraciones y axiomas;** no es una comprobación con un segundo kernel.
 - **La versión c5f4f55 conserva hipótesis explícitas de puente.** 059a53c y ac195f7 no las tienen y requieren viscosidad positiva. La rama D concluye `AltD_withErratum`.
 - **Hubo una interrupción:** la corrida que empezó a las 20:55 UTC perdió el seguimiento después de 281 módulos. Se registró como interrumpida, con salida desconocida, y se reanudó a las 21:19:24 UTC sin sobrescribir logs. El detalle está en `LEEME_RESULTADO.txt`.
@@ -31,4 +31,4 @@ El zip contiene 242 archivos: comandos, fuentes fijadas, logs, recibos con hashe
 
 ---
 
-**In English.** A cloud Linux rebuild of OpenAI's Lean proofs, run by an AI assistant under the author's direction on 2026-10-23: `ComparatorSolution` built with exit code 0 (609/609 modules), the two headline theorems use only `propext`, `Classical.choice` and `Quot.sound`, and the Clay transcription, bridges and axiom audit passed in three pinned versions of this repository (9/9). It used the official Mathlib cache and is not an independent reproduction.
+**In English.** With help from an AI assistant and under my direction, I rebuilt OpenAI's Lean proofs in a cloud Linux container on 2026-10-23. `ComparatorSolution` built with exit code 0 (609/609 modules). The two headline theorems use only `propext`, `Classical.choice` and `Quot.sound`. The Clay transcription, bridges and axiom audit passed in three pinned versions of this repository (9/9). I used the official Mathlib cache, so this is not an independent reproduction.
