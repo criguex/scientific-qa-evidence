@@ -93,4 +93,4 @@ Results that differ from ours, steps that failed, or steps you could not run are
 
 ## Reproductions received
 
-None yet.
+No independent rebuild of the Lean proofs yet: every Lean run so far was made by the author or by tools under the author's direction, the latest on 2026-10-23 ([record](../evidence/lean-cloud-2026-10-23/README.md)). Reports of the lighter one-command check, `verificar.py`, which does not rebuild Lean, are listed in [evidence/reproductions/](../evidence/reproductions/README.md).

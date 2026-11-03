@@ -47,7 +47,7 @@ All on 2026-10-20 (UTC−5), each with a `Co-Authored-By: Codex` trailer:
 
 `20d67e5` prepare English QA evidence and video review package · `3281ad5` clarify AI attribution and English publication identity · `b39e7d6` record rendered English delivery and review checks · `a2e063f` add animated evidence review package · `f97e8b9` improve explainer canvas attribution · `554a678` add narration-synced V2 video compositions · `0264eb8` add visual evidence landing page · `43520e2` clarify available animation preview · `df64ec1` explain each evidence animation · `4ec9814` prepare Spanish narration pipeline · `46ba636` add animated previews to evidence guides · `098f4ca` correct V2 visual claims and layout · `275e6b0` add Spanish V2 narration compositions · `a8aa21d` record X animation preview receipts · `6ac3c07` update Spanish delivery readiness · `f49fcd5` preserve proportional visual scales.
 
-Later work (from 2026-10-21) was done with Claude Code; its commits carry `Co-Authored-By: Claude …` trailers ([`AUTHORSHIP.md`](../AUTHORSHIP.md)).
+Later work (from 2026-10-21) was done with Claude Code; its commits carry `Co-Authored-By: Claude …` trailers ([`AUTHORSHIP.md`](AUTHORSHIP.md)).
 
 ## What was not executed: the "auto-fix" scenarios
 

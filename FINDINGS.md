@@ -1,6 +1,6 @@
 # What the protocol found that the documented procedure does not show
 
-The useful question for this study is not whether its techniques are new; [RELATED_WORK.md](RELATED_WORK.md) shows they are not. The question is: **what could this protocol detect, in this case, that the previously documented procedure could not?**
+The useful question for this study is not whether its techniques are new; [RELATED_WORK.md](docs/RELATED_WORK.md) shows they are not. The question is: **what could this protocol detect, in this case, that the previously documented procedure could not?**
 
 **Baseline.** The verification procedure documented in OpenAI's repository at `f9e8bc5`: fetch the Mathlib cache with `lake exe cache get`, run `lake build`, then check the formalizations with Comparator as described in `ComparatorChallenges/README.md`.
 
