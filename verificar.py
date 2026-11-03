@@ -3,6 +3,10 @@
 
 Uso: python verificar.py   (en Mac o Linux puede ser python3 verificar.py)
 Necesita Python 3.9 o más reciente y nada más. Funciona en Windows, macOS y Linux.
+
+La versión de los datos sale solo de los archivos de evidencia listados en
+evidence/SHA256SUMS.txt (evidence/, experiments/ y bridges/), sin la bitácora ni
+los reportes de reproducción. Editar README, docs, la página o el CI no la cambia.
 """
 
 import datetime
@@ -18,6 +22,8 @@ ROOT = Path(__file__).resolve().parent
 SUMS = ROOT / "evidence" / "SHA256SUMS.txt"
 REPORT = ROOT / "mi_resultado.txt"
 FORM = "https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml"
+DATA_DIRS = ("evidence/", "experiments/", "bridges/")
+NOT_DATA = ("evidence/bitacora/", "evidence/reproductions/")
 
 
 def sha256(path):
@@ -28,12 +34,21 @@ def sha256(path):
     return h.hexdigest()
 
 
+def manifest():
+    for line in SUMS.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            yield line[:64], line[64:].lstrip(" *")
+
+
+def data_version():
+    lines = sorted(f"{h}  {rel}" for h, rel in manifest()
+                   if rel.startswith(DATA_DIRS) and not rel.startswith(NOT_DATA))
+    return hashlib.sha256("\n".join(lines).encode("utf-8")).hexdigest()[:12]
+
+
 def check_sums():
     bad, total = [], 0
-    for line in SUMS.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        expected, rel = line[:64], line[64:].lstrip(" *")
+    for expected, rel in manifest():
         total += 1
         path = ROOT / rel
         if not path.is_file():
@@ -83,7 +98,7 @@ def main():
     if not SUMS.is_file():
         print("No encuentro evidence/SHA256SUMS.txt. Ejecuta el comando dentro de la carpeta del repositorio.")
         return 2
-    version = sha256(SUMS)[:12]
+    version = data_version()
     print()
     print("Verificación de scientific-qa-evidence")
     print(f"Versión de los datos: {version}   Sistema: {platform.system()} {platform.machine()}   Python {platform.python_version()}")

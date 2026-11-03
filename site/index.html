@@ -79,7 +79,7 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
     <span class="eyebrow">ADV-050 · evidencia abierta · Medellín</span>
     <h1>¿Se puede repetir una demostración matemática como se repite una prueba de software?</h1>
     <p>Este año, OpenAI publicó demostraciones verificadas por computador sobre las ecuaciones de Navier–Stokes, que describen cómo se mueven los fluidos. Soy ingeniero de calidad de software (QA), no matemático. Revisé ese trabajo como reviso un software y dejé todo listo para que cualquiera pueda repetirlo. Agradezco a quienes se tomen el tiempo de probarlo. Me gustaría que muchas personas lo repitieran en distintos computadores.</p>
-    <div class="chip">Referencia histórica de la versión 26791fe6546f: <b>C5F0-F1A8-2F4D</b>. Cada versión tiene su propia huella; compara resultados de la misma versión.</div>
+    <div class="chip">Huella de referencia de la versión actual (c8edd482375d): <b>5292-A47D-AFA5</b>. La huella <b>C5F0-F1A8-2F4D</b> que compartí el 24 de octubre corresponde a la versión 26791fe6546f y sigue siendo válida para esa versión.</div>
   </header>
 
   <section aria-labelledby="ver">
@@ -113,10 +113,10 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
     <h2 id="quienes">Quienes ya lo repitieron</h2>
     <div class="count" id="counts"></div>
     <div class="panel">
-      <div class="tablewrap"><table id="reports"><thead><tr><th>Fecha (UTC)</th><th>Sistema</th><th>Python</th><th>Huella</th><th>Comparación histórica</th><th>Reporte</th></tr></thead><tbody></tbody></table></div>
+      <div class="tablewrap"><table id="reports"><thead><tr><th>Fecha (UTC)</th><th>Sistema</th><th>Python</th><th>Versión</th><th>Huella</th><th>Comparación</th><th>Reporte</th></tr></thead><tbody></tbody></table></div>
       <p class="note" id="status">Cargando los reportes desde GitHub…</p>
     </div>
-    <p class="note">La comparación usa la referencia histórica de la versión 26791fe6546f; una huella de otra versión puede ser distinta aunque todas sus comprobaciones pasen. Leo esta lista en vivo de los reportes recibidos. En la tabla revisada incluyo cómo conozco a cada persona y una copia exacta de cada resultado. Está en <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/evidence/reproductions/README.md">evidence/reproductions</a>.</p>
+    <p class="note">Cada reporte se compara con la referencia de la versión de los datos que dice haber usado. La versión solo cambia cuando cambia la evidencia; editar textos, la página o el CI no la cambia. Leo esta lista en vivo de los reportes recibidos. En la tabla revisada incluyo cómo conozco a cada persona y una copia exacta de cada resultado. Está en <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/evidence/reproductions/README.md">evidence/reproductions</a>.</p>
   </section>
 
   <section aria-labelledby="alcance">
@@ -158,7 +158,11 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
   <footer>Cristian Guerra · QA Automation · Medellín, Colombia. Preparé este trabajo con ayuda de asistentes de IA, bajo mi dirección, como explico en el repositorio.</footer>
 </div>
 <script>
-const REF = "C5F0-F1A8-2F4D";
+const REFS = {
+  "26791fe6546f": "C5F0-F1A8-2F4D",
+  "727c5b5f98ef": "1A86-6B19-21C7",
+  "c8edd482375d": "5292-A47D-AFA5"
+};
 document.getElementById("copy").addEventListener("click", () => {
   const t = document.getElementById("cmdtext").textContent, msg = document.getElementById("copied");
   const done = () => { msg.textContent = "Copiado"; setTimeout(() => (msg.textContent = ""), 2000); };
@@ -182,22 +186,24 @@ async function load() {
     let same = 0;
     items.sort((a, b) => a.created_at.localeCompare(b.created_at)).forEach(i => {
       const body = i.body || "";
-      const huella = (field(body, "Tu huella").match(/[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}/i) || [""])[0].toUpperCase();
+      const fp = /[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}/i;
+      const huella = ((field(body, "Tu huella").match(fp) || (body.match(/huella:\s*(\S+)/) || ["", ""])[1].match(fp)) || [""])[0].toUpperCase();
+      const version = (body.match(/versi[oó]n de los datos:\s*([0-9a-f]{12})/i) || ["", ""])[1].toLowerCase();
       const so = field(body, "Sistema operativo");
       const py = (body.match(/python:\s*([0-9.]+)/) || ["", "?"])[1];
       people.add(i.user.login); if (so) systems.add(so);
       const tr = document.createElement("tr");
-      tr.append(cell(i.created_at.slice(0, 16).replace("T", " "), "mono"), cell(so || "?"), cell(py, "mono"), cell(huella || "sin huella", "mono"));
+      tr.append(cell(i.created_at.slice(0, 16).replace("T", " "), "mono"), cell(so || "?"), cell(py, "mono"), cell(version || "?", "mono"), cell(huella || "sin huella", "mono"));
       const res = document.createElement("td"), pill = document.createElement("span");
-      const ok = huella === REF; if (ok) same++;
-      pill.className = "pill " + (ok ? "ok" : "diff"); pill.textContent = ok ? "igual a la referencia" : "distinta";
+      const ok = Boolean(huella) && REFS[version] === huella; if (ok) same++;
+      pill.className = "pill " + (ok ? "ok" : "diff"); pill.textContent = ok ? "igual a la referencia" : (REFS[version] ? "distinta" : "versión sin referencia");
       res.append(pill); tr.append(res);
       const link = document.createElement("td"), a = document.createElement("a");
       a.href = i.html_url; a.textContent = "#" + i.number; link.append(a); tr.append(link);
       tbody.append(tr);
     });
     const counts = document.getElementById("counts");
-    [[items.length, "reportes"], [people.size, "personas"], [systems.size, "sistemas operativos"], [same, "con la huella de referencia"]]
+    [[items.length, "reportes"], [people.size, "personas"], [systems.size, "sistemas operativos"], [same, "iguales a la referencia de su versión"]]
       .forEach(([n, l]) => { const d = document.createElement("div"), s = document.createElement("strong"), sp = document.createElement("span"); s.textContent = n; sp.textContent = l; d.append(s, sp); counts.append(d); });
     status.textContent = items.length ? "Actualizado en vivo desde GitHub." : "Todavía no hay reportes. Puedes ser el primero.";
   } catch (e) {

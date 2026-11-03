@@ -70,3 +70,15 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: One-command check (verificar.py)
         run: python verificar.py
+      - name: Page knows this fingerprint
+        if: runner.os == 'Linux'
+        run: |
+          python3 - <<'EOF'
+          import re, sys
+          txt = open("mi_resultado.txt", encoding="utf-8").read()
+          version = re.search(r"versión de los datos: ([0-9a-f]{12})", txt).group(1)
+          code = re.search(r"huella: ([0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4})", txt).group(1)
+          if f'"{version}": "{code}"' not in open("site/index.html", encoding="utf-8").read():
+              sys.exit(f"site/index.html no conoce la huella {code} de la versión {version}: agrégala a REFS")
+          print(f"La página conoce la huella {code} de la versión {version}")
+          EOF

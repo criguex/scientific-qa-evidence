@@ -105,7 +105,7 @@ Cada afirmación con su evidencia, resultado y limitación está en [CLAIMS.md](
 python verificar.py
 ```
 
-En Mac o Linux puede ser `python3 verificar.py`. En menos de un minuto muestra OK o FALLA en cada una de las seis comprobaciones y una huella, un código corto para comparar con el de otras personas. Si te dio igual o distinto, cuéntanos en el [formulario de reproducción](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml). Un resultado distinto es igual de útil.
+En Mac o Linux puede ser `python3 verificar.py`. En menos de un minuto muestra OK o FALLA en cada una de las seis comprobaciones y una huella, un código corto para comparar con el de otras personas que usaron la misma versión de los datos. La versión solo cambia cuando cambia la evidencia, no cuando edito textos, la página o el CI. Si te dio igual o distinto, cuéntanos en el [formulario de reproducción](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml). Un resultado distinto es igual de útil.
 
 Los mismos pasos, uno por uno, con Python 3.9 o más reciente, sin dependencias, alrededor de un minuto:
 

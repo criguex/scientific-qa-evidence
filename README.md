@@ -105,7 +105,7 @@ Every claim with its evidence, result and limitation is in [CLAIMS.md](CLAIMS.md
 python verificar.py
 ```
 
-On Mac or Linux it may be `python3 verificar.py`. In under a minute it prints OK or FALLA (fail) for each of the six checks and a short fingerprint to compare with other people's. Its messages are in Spanish. You can report what you got, same or different, with the [reproduction form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml) or the [review form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=review.yml).
+On Mac or Linux it may be `python3 verificar.py`. In under a minute it prints OK or FALLA (fail) for each of the six checks and a short fingerprint to compare with other people who used the same data version. The data version changes only when the evidence changes, not when I edit text, the page or CI. Its messages are in Spanish. You can report what you got, same or different, with the [reproduction form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml) or the [review form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=review.yml).
 
 The same steps one by one, with Python 3.9 or newer, no dependencies, about a minute:
 
