@@ -36,7 +36,7 @@ python3 -m unittest discover -s animations -p 'test_*.py'
 (cd experiments/receipt-check && python3 -m unittest test_results)  # receipt checks on authentic bundles
 ```
 
-The same commands run in [GitHub Actions](.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.3.3`) link the successful CI run for that exact commit, with its logs.
+The same commands run in [GitHub Actions](../.github/workflows/verify.yml) on Ubuntu and macOS with Python 3.9 and 3.12. The release notes of each tag (here `v1.3.3`) link the successful CI run for that exact commit, with its logs.
 
 To rerun the numerical suite into a new folder and inspect the raw output:
 
@@ -66,9 +66,9 @@ These need OpenAI's repository and a Linux host; they cannot be rerun from this 
 | Item | Version or hash |
 | --- | --- |
 | Source | `openai/NavierStokesAndEuler` at `f9e8bc5b38b6e212696e8a30e3e91517af887bbd`, archive SHA-256 `afd4d2263a4cabefd1317e890b49bc04f8538402c322db4317a08161e834b4b5` |
-| Lean and Lake | `leanprover/lean4:v4.34.0-rc2`, commit `6a10ac8`; binary hashes in [`receipts/tools.tsv`](evidence/formal/cd-validation/receipts/tools.tsv) |
-| Mathlib and dependencies | Pinned in the source's `lake-manifest.json`; the resolved revisions are in [`receipts/fresh_build_versions.txt`](evidence/formal/cd-validation/receipts/fresh_build_versions.txt) |
-| Comparator, lean4export, nanoda, landrun | Revisions and binary hashes in [`receipts/`](evidence/formal/cd-validation/receipts/) |
+| Lean and Lake | `leanprover/lean4:v4.34.0-rc2`, commit `6a10ac8`; binary hashes in [`receipts/tools.tsv`](../evidence/formal/cd-validation/receipts/tools.tsv) |
+| Mathlib and dependencies | Pinned in the source's `lake-manifest.json`; the resolved revisions are in [`receipts/fresh_build_versions.txt`](../evidence/formal/cd-validation/receipts/fresh_build_versions.txt) |
+| Comparator, lean4export, nanoda, landrun | Revisions and binary hashes in [`receipts/`](../evidence/formal/cd-validation/receipts/) |
 | Host | Linux x86_64 (WSL2), 12 vCPU, 30 GiB RAM; about 28 GB of disk per build. `landrun` needs Linux Landlock. |
 
 Commands, run from the extracted source:
@@ -86,17 +86,17 @@ lake env leanchecker --fresh NavierStokes.ComparatorSolution
 lake env leanchecker --fresh Euler.Solution
 ```
 
-A statement mutant is a one-line edit to `ComparatorChallenges/NavierStokes.lean` or `Euler.lean`, followed by the Comparator command. The exact edits are the diffs in [`evidence/formal/cd-validation/mutants/`](evidence/formal/cd-validation/mutants/). Every recorded run, its build, its times, exit code and the SHA-256 of its original log are in [`evidence/formal/cd-validation/README.md`](evidence/formal/cd-validation/README.md) and [`PROVENANCE.md`](evidence/formal/cd-validation/PROVENANCE.md).
+A statement mutant is a one-line edit to `ComparatorChallenges/NavierStokes.lean` or `Euler.lean`, followed by the Comparator command. The exact edits are the diffs in [`evidence/formal/cd-validation/mutants/`](../evidence/formal/cd-validation/mutants/). Every recorded run, its build, its times, exit code and the SHA-256 of its original log are in [`evidence/formal/cd-validation/README.md`](../evidence/formal/cd-validation/README.md) and [`PROVENANCE.md`](../evidence/formal/cd-validation/PROVENANCE.md).
 
-A run from a fresh clone of the Python checks, the Lean bridges and the Mathlib-control steps, with its results, is in [`evidence/FROM_ZERO.md`](evidence/FROM_ZERO.md); it did not repeat the OpenAI build, which was repeated separately as build B5 ([record](evidence/formal/b5/README.md)).
+A run from a fresh clone of the Python checks, the Lean bridges and the Mathlib-control steps, with its results, is in [`evidence/FROM_ZERO.md`](../evidence/FROM_ZERO.md); it did not repeat the OpenAI build, which was repeated separately as build B5 ([record](../evidence/formal/b5/README.md)).
 
 ## 5. The bridge lemmas (Lean)
 
-`bridges/ClayLiteral.lean` and `bridges/Bridges.lean` are checked against the same Lean 4.34.0-rc2 and Mathlib as the formal runs, from a built `openai/NavierStokesAndEuler` tree; the exact commands and the `#print axioms` receipt are in [`bridges/README.md`](bridges/README.md).
+`bridges/ClayLiteral.lean` and `bridges/Bridges.lean` are checked against the same Lean 4.34.0-rc2 and Mathlib as the formal runs, from a built `openai/NavierStokesAndEuler` tree; the exact commands and the `#print axioms` receipt are in [`bridges/README.md`](../bridges/README.md).
 
 ## 6. Blind-fault benchmark
 
-The assignment is reproducible from the revealed seed; the commands are in [`experiments/blind-faults/RESULTS.md`](experiments/blind-faults/RESULTS.md#reproduce-the-assignment).
+The assignment is reproducible from the revealed seed; the commands are in [`experiments/blind-faults/RESULTS.md`](../experiments/blind-faults/RESULTS.md#reproduce-the-assignment).
 
 ## 7. Optional: GIF previews
 

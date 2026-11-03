@@ -10,7 +10,7 @@ The synthetic numerical examples are calculations under explicit software contra
 
 ## Codex work, session by session
 
-What the Codex agent did on 2026-10-20 (19 sessions, with roles, times, actions and session-file hashes) is in [`docs/CODEX_WORK_LOG.md`](docs/CODEX_WORK_LOG.md), and the evidence it produced that had stayed private is published in [`evidence/codex-2026-10-20/`](evidence/codex-2026-10-20/), with a manifest that pairs every file with the hash of its original.
+What the Codex agent did on 2026-10-20 (19 sessions, with roles, times, actions and session-file hashes) is in [`docs/CODEX_WORK_LOG.md`](CODEX_WORK_LOG.md), and the evidence it produced that had stayed private is published in [`evidence/codex-2026-10-20/`](../evidence/codex-2026-10-20/), with a manifest that pairs every file with the hash of its original.
 
 ## AI assistant identity across this session (traceability)
 
