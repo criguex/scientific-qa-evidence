@@ -15,14 +15,11 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.23925749
     description: "Concept DOI: all versions, resolves to the latest"
-  - type: doi
-    value: 10.5281/zenodo.23925750
-    description: "Version 1.4.0"
 license:
   - Apache-2.0
   - CC-BY-4.0
 url: "https://github.com/criguex/scientific-qa-evidence"
-version: "1.4.0"
+version: "1.5.0"
 date-released: 2026-11-03
 abstract: >-
   A software-QA audit package. It rebuilds OpenAI's Lean 4 formalizations of
