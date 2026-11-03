@@ -1,0 +1,34 @@
+{
+  "title": "Scientific QA Evidence: an independent QA audit of OpenAI's Navier–Stokes and Euler Lean proofs, with Lean bridges to Clay's problem statement and checker controls",
+  "upload_type": "software",
+  "description": "<p>A software-QA audit package. It rebuilds OpenAI's Lean 4 formalizations of finite-time blowup for Navier–Stokes (Clay alternatives C and D) and Euler from a pinned commit, rechecks them with Comparator using the Lean kernel and nanoda on five builds, tests the statement check with mutants, and proves in Lean that OpenAI's theorems imply Clay's (C) and (D) as written literally in Lean, a rendering not yet independently reviewed. Pre-registered controls on three Mathlib theorems separate a changed statement from a false one, a receipt check on authentic records tests the traceability of the evidence, and a paired macOS/Linux mutation-testing campaign covers nine synthetic numerical models (84 variants per host: 27 PASS, 54 KILLED, 3 SURVIVED). It claims no new theorem and no scientific certification.</p><p>License: code under Apache-2.0; text, data and media under CC BY 4.0. Third-party material keeps its own terms (see LICENSE_STATUS.md in the repository). The original mathematics and Lean proofs belong to OpenAI.</p>",
+  "creators": [
+    {
+      "name": "Guerra Gómez, Cristian",
+      "orcid": "0009-0001-7189-5214"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+    "software testing",
+    "quality assurance",
+    "reproducibility",
+    "mutation testing",
+    "formal verification",
+    "Lean 4",
+    "Navier–Stokes"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/openai/NavierStokesAndEuler",
+      "relation": "references",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://criguex.github.io/scientific-qa-evidence/",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    }
+  ],
+  "language": "eng"
+}
