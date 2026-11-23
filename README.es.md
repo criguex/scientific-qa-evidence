@@ -55,6 +55,37 @@ Las mismas comprobaciones corren en cada push en [GitHub Actions](.github/workfl
 
 Mis propios errores, encontrados y corregidos en público, están en el [informe detallado](docs/DETAILS.es.md#lo-que-encontramos) y en [FINDINGS.md](FINDINGS.md). [CLAIMS.md](CLAIMS.md) presenta cada afirmación con su evidencia y su limitación.
 
+## La auditoría como historias de usuario
+
+La misma revisión, contada como la cuenta un equipo de QA: seis historias de usuario, 24 criterios de aceptación que se responden con sí o no, escenarios en Gherkin, casos de prueba y ejecuciones con fecha. Cada criterio apunta a su evidencia, y si no hay evidencia, la respuesta es no.
+
+| Historia | La pregunta | Criterios que cumplen |
+| --- | --- | --- |
+| HU-1 · Las demostraciones compilan | ¿Lean revisó cada paso? | 3 de 3 |
+| HU-2 · Otros verificadores dicen lo mismo | ¿Un segundo verificador está de acuerdo? | 3 de 4 |
+| HU-3 · El enunciado no deja pasar trampas | ¿Lo verificado es exactamente lo publicado? | 4 de 4 |
+| HU-4 · Es la pregunta de Clay | ¿Responde el texto oficial del Instituto Clay? | 2 de 4 |
+| HU-5 · Otra persona lo repite sin mí | ¿Alguien más obtiene el mismo resultado? | 2 de 4 |
+| HU-6 · La evidencia es trazable | ¿La evidencia está intacta y las herramientas reportan sus fallos? | 5 de 5 |
+
+Así se ve un escenario:
+
+```gherkin
+# language: es
+Esquema del escenario: Cada trampa de un símbolo es rechazada
+  Dado que cambio un solo símbolo del enunciado: "<trampa>"
+  Cuando corro Comparator con el enunciado cambiado
+  Entonces Comparator lo rechaza con "statements do not match"
+
+  Ejemplos:
+    | trampa                                    |
+    | (C) sin fuerza externa: f = 0             |
+    | (C) viscosidad ≥ 0 en vez de > 0          |
+    | Euler: tiempo T* ≤ 1/2 en vez de T* ≤ 1   |
+```
+
+Los cinco criterios que todavía dicen no dependen de personas, no de máquinas: una revisión experta de la transcripción de Clay, la lectura de la presión periódica en (D), una recompilación en Lean sin mí, un reporte desde Linux y una tercera implementación del kernel. **Versión interactiva con ejemplos visuales, pensada para el seminario de la UNAL:** [criguex.github.io/scientific-qa-evidence/metodologia](https://criguex.github.io/scientific-qa-evidence/metodologia/). Explicación paso a paso, casos, defectos y matriz de trazabilidad: [docs/METODOLOGIA.md](docs/METODOLOGIA.md). Escenarios completos: [features/](features/).
+
 ## Qué pido
 
 1. **Una revisión de mi transcripción del texto de Clay.** Si sabes Lean o conoces el problema de Navier–Stokes: ¿es [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) fiel al enunciado oficial de Clay? La [hoja de revisión](bridges/K0_REVIEW.md) tiene 14 puntos para comparar con el PDF, cada uno con su página, ecuación y línea de Lean. Hay dos dudas principales: qué significa «suave» en el tiempo cero, y si la fe de erratas sobre la presión periódica aplica a las soluciones en (D).

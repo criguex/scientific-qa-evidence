@@ -55,6 +55,21 @@ The same checks run on every push in [GitHub Actions](.github/workflows/verify.y
 
 My own mistakes, found and corrected in the open, are in the [full write-up](docs/DETAILS.md#what-we-found) and in [FINDINGS.md](FINDINGS.md). [CLAIMS.md](CLAIMS.md) gives each claim with its evidence and its limitation.
 
+## The audit as user stories
+
+The same review, told the way a QA team tells it: six user stories, 24 yes-or-no acceptance criteria, Gherkin scenarios, test cases and dated executions. Every criterion points to its evidence; without evidence, the answer is no.
+
+| Story | The question | Criteria met |
+| --- | --- | --- |
+| US-1 · The proofs build | Did Lean check every step? | 3 of 3 |
+| US-2 · Other checkers agree | Does a second checker agree? | 3 of 4 |
+| US-3 · The statement lets no trap through | Is what was checked exactly what was published? | 4 of 4 |
+| US-4 · It is Clay's question | Does it answer the Clay Institute's official text? | 2 of 4 |
+| US-5 · Someone else repeats it without me | Does anyone else get the same result? | 2 of 4 |
+| US-6 · The evidence is traceable | Is the evidence intact, and do the tools report their own failures? | 5 of 5 |
+
+The five criteria that still say no depend on people, not machines: an expert review of the Clay transcription, the reading of periodic pressure in (D), a Lean rebuild without me, a report from Linux and a third kernel implementation. **Interactive version with visual examples:** [criguex.github.io/scientific-qa-evidence/methodology](https://criguex.github.io/scientific-qa-evidence/methodology/). Step-by-step explanation, cases, defects and traceability matrix: [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Gherkin scenarios (in Spanish; translated on the interactive page): [features/](features/).
+
 ## What I am asking for
 
 1. **A review of my transcription of Clay's text.** If you know Lean or the Navier–Stokes problem: is [`bridges/ClayLiteral.lean`](bridges/ClayLiteral.lean) faithful to Clay's official statement? The [review sheet](bridges/K0_REVIEW.md) lists 14 points to compare with the PDF, each with its page, equation and Lean line. Two doubts matter most: what "smooth" means at time zero, and whether the erratum on periodic pressure applies to solutions in (D).

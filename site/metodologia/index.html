@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Navier–Stokes en Gherkin · Scientific QA Evidence</title>
+<meta name="description" content="La auditoría de la demostración de OpenAI sobre Navier–Stokes contada como QA: historias de usuario, 24 criterios de sí o no, escenarios Gherkin, casos, ejecuciones y evidencia, con ejemplos interactivos.">
+<link rel="alternate" hreflang="es" href="https://criguex.github.io/scientific-qa-evidence/metodologia/">
+<link rel="alternate" hreflang="en" href="https://criguex.github.io/scientific-qa-evidence/methodology/">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#F6F4EE; --surface:#FFFDF8; --sunk:#ECE8DE; --line:#D9D3C4;
+  --ink:#14213D; --ink-2:#3D4659; --mute:#6B6557;
+  --teal:#0E6E6A; --teal-soft:#DDEEEC; --mint:#7FD1C8;
+  --orange:#C2410C; --orange-soft:#FBE5D9; --peach:#F4A261;
+  --code-bg:#14213D; --code-ink:#E9EEF5; --code-kw:#F4A261; --code-str:#7FD1C8; --code-tag:#C9B6F2; --code-cm:#8C9AB0; --code-tb:#B7E4C7;
+  --focus:#0E6E6A;
+  --f-display:'Fredoka', 'Nunito Sans', system-ui, sans-serif;
+  --f-body:'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F1830; --surface:#16223F; --sunk:#1C2A4B; --line:#2C3D63;
+    --ink:#E9EEF5; --ink-2:#C9D3E0; --mute:#9AA6BA;
+    --teal:#7FD1C8; --teal-soft:#16403F; --mint:#7FD1C8;
+    --orange:#F4A261; --orange-soft:#47301F; --peach:#F4A261;
+    --code-bg:#0A1124; --focus:#7FD1C8;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F1830; --surface:#16223F; --sunk:#1C2A4B; --line:#2C3D63;
+  --ink:#E9EEF5; --ink-2:#C9D3E0; --mute:#9AA6BA;
+  --teal:#7FD1C8; --teal-soft:#16403F; --mint:#7FD1C8;
+  --orange:#F4A261; --orange-soft:#47301F; --peach:#F4A261;
+  --code-bg:#0A1124; --focus:#7FD1C8;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.62;padding-inline:20px}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;line-height:1.12;text-wrap:balance;margin:0}
+p{margin:0}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+:not(pre)>code{background:var(--sunk);padding:.1em .35em;border-radius:5px}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;padding-block:28px 80px}
+@media (max-width:980px){.wrap{grid-template-columns:1fr;gap:0}}
+
+/* índice */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:14px}
+.toc .eyebrow{display:block;margin-bottom:10px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;border-left:2px solid var(--line)}
+.toc a{display:block;padding:5px 12px;color:var(--ink-2);text-decoration:none;margin-left:-2px;border-left:2px solid transparent}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--ink);border-left-color:var(--orange);font-weight:700}
+.toc .sub a{padding-left:24px;font-size:13px}
+@media (max-width:980px){
+  .toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);padding-block:10px;margin-inline:-20px;padding-inline:20px;border-bottom:1px solid var(--line)}
+  .toc .eyebrow{display:none}
+  .toc ol{display:flex;gap:6px;overflow-x:auto;border:0;scrollbar-width:none}
+  .toc ol::-webkit-scrollbar{display:none}
+  .toc a{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin:0}
+  .toc a.on{border-color:var(--orange)}
+  .toc .sub{display:none}
+}
+
+main{min-width:0;display:grid;gap:96px}
+.wrap>*,main>*,section>*,.figure>*,.hu>*,.lab>*,.anat>*,.fp>*{min-width:0}
+section{display:grid;gap:22px;scroll-margin-top:90px}
+.prose{max-width:68ch;display:grid;gap:14px;color:var(--ink-2)}
+.prose strong{color:var(--ink)}
+.lead{font-size:20px;color:var(--ink-2);max-width:62ch}
+h2{font-size:clamp(30px,4vw,42px)}
+h3{font-size:24px}
+h4{font-size:18px}
+.note{font-size:14.5px;color:var(--mute);max-width:70ch}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* portada */
+.hero{display:grid;gap:26px;padding-top:8px}
+.hero h1{font-size:clamp(38px,6.2vw,68px);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--mute)}
+.translate{display:grid;grid-template-columns:minmax(0,1.05fr) 40px minmax(0,1fr);gap:0;align-items:stretch;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.translate .pane{padding:20px 22px;display:grid;gap:10px;align-content:start;min-width:0}
+.translate .pane.lean{background:var(--code-bg);color:var(--code-ink)}
+.translate .lab{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.translate .lean .lab{color:var(--code-cm)}
+.translate .gk .lab{color:var(--mute)}
+.translate pre{margin:0;font-family:var(--f-mono);font-size:13.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+.translate .arrow{display:grid;place-items:center;background:var(--sunk);color:var(--mute);font-family:var(--f-mono)}
+.hl{border-radius:4px;padding:1px 2px;transition:background .15s,color .15s;cursor:default}
+.translate .lean .hl.on{background:var(--peach);color:#14213D}
+.translate .gk .hl.on{background:var(--orange-soft);color:var(--ink);box-shadow:inset 0 -2px 0 var(--orange)}
+@media (max-width:760px){.translate{grid-template-columns:1fr}.translate .arrow{padding:6px;transform:rotate(90deg)}}
+.legend-keys{display:flex;flex-wrap:wrap;gap:8px}
+.keybtn{font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.keybtn[aria-pressed="true"]{border-color:var(--orange);background:var(--orange-soft)}
+
+/* mapa del método */
+.pipe{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;counter-reset:p}
+.pipe a{display:grid;gap:4px;padding:14px 12px 14px 14px;text-decoration:none;color:var(--ink);border:1px solid var(--line);margin-left:-1px;background:var(--surface);position:relative}
+.pipe a:first-child{border-radius:14px 0 0 14px;margin-left:0}
+.pipe a:last-child{border-radius:0 14px 14px 0}
+.pipe a:hover{background:var(--teal-soft)}
+.pipe .n{font-family:var(--f-mono);font-size:12px;color:var(--mute)}
+.pipe .t{font-family:var(--f-display);font-weight:600;font-size:16px;line-height:1.15}
+.pipe .d{font-size:12.5px;color:var(--mute);line-height:1.35}
+@media (max-width:900px){.pipe{grid-template-columns:1fr 1fr}.pipe a,.pipe a:first-child,.pipe a:last-child{border-radius:12px;margin:0}.pipe{gap:8px}}
+
+/* diccionario */
+.dict{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.dict article{background:var(--surface);padding:18px 20px;display:grid;gap:8px;align-content:start}
+.dict h4{font-size:19px}
+.dict article:last-child:nth-child(odd){grid-column:1/-1}
+.dict dl{margin:0;display:grid;gap:6px;font-size:14.5px}
+.dict dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.dict dd{margin:0 0 4px;color:var(--ink-2)}
+.dict .math dd{font-style:italic}
+
+/* anatomía de Gherkin */
+.anat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.anat{grid-template-columns:1fr}}
+.code{background:var(--code-bg);color:var(--code-ink);border-radius:16px;padding:18px 0;font-family:var(--f-mono);font-size:13.5px;line-height:1.7;overflow-x:auto}
+.code .ln{display:block;padding:1px 20px;white-space:pre;border-left:3px solid transparent}
+.code button.ln{all:unset;display:block;padding:1px 20px;white-space:pre;border-left:3px solid transparent;cursor:pointer;width:calc(100% - 43px)}
+.code button.ln:hover{background:rgba(127,209,200,.08)}
+.code button.ln[aria-pressed="true"]{background:rgba(244,162,97,.14);border-left-color:var(--peach)}
+.code button.ln:focus-visible{outline:2px solid var(--mint);outline-offset:-2px}
+.k{color:var(--code-kw);font-weight:600}.s{color:var(--code-str)}.tg{color:var(--code-tag)}.c{color:var(--code-cm);font-style:italic}.tb{color:var(--code-tb)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px;position:sticky;top:90px}
+.panel .role{display:inline-flex;gap:8px;align-items:center;font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange)}
+.panel h4{font-size:22px}
+.panel dl{margin:0;display:grid;grid-template-columns:120px 1fr;gap:8px 14px;font-size:14.5px}
+.panel dt{color:var(--mute);font-weight:700}
+.panel dd{margin:0;color:var(--ink-2)}
+@media (max-width:860px){.panel{position:static}.panel dl{grid-template-columns:1fr}}
+
+.expand{display:grid;gap:12px}
+.btn{font:inherit;font-weight:700;font-size:14.5px;border:0;border-radius:999px;padding:9px 18px;background:var(--ink);color:var(--ground);cursor:pointer;justify-self:start}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{opacity:.9}
+.expanded{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.mini{background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:12px 14px;font-family:var(--f-mono);font-size:12.2px;line-height:1.6;white-space:pre-wrap}
+
+/* tres revisores */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.three{grid-template-columns:1fr}}
+.three article{border-radius:16px;padding:20px;display:grid;gap:10px;align-content:start;border:1px solid var(--line);background:var(--surface)}
+.three article.who{border:2px solid var(--orange)}
+.three .who-l{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.three h4{font-size:22px}
+.three .verb{font-family:var(--f-mono);font-size:13px;color:var(--teal);font-weight:600}
+.three p{font-size:14.5px;color:var(--ink-2)}
+
+/* pasos */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .num{font-family:var(--f-display);font-weight:600;font-size:30px;color:var(--orange);line-height:1}
+.steps h4{font-size:19px;margin-bottom:4px}
+.steps p{font-size:15px;color:var(--ink-2)}
+.steps .here{font-size:14px;color:var(--mute);margin-top:6px}
+.steps .here b{color:var(--teal)}
+
+/* marcador */
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.board a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.board a:hover{border-color:var(--teal)}
+.board .id{font-family:var(--f-mono);font-size:12px;color:var(--mute);font-weight:600}
+.board .t{font-family:var(--f-display);font-weight:600;font-size:16px;line-height:1.2}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:14px;height:14px;border-radius:4px;background:var(--teal)}
+.dot.no{background:transparent;border:2px dashed var(--orange)}
+.score{font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+
+/* HU */
+.hu{display:grid;gap:26px;padding-top:6px}
+.hu-head{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline;justify-content:space-between}
+.hu-head h2{font-size:clamp(28px,3.6vw,38px)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12.5px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pill.si{background:var(--teal-soft);color:var(--teal)}
+.pill.no{background:var(--orange-soft);color:var(--orange)}
+.pill.n{background:var(--sunk);color:var(--ink-2)}
+.story{border-left:4px solid var(--orange);padding:6px 0 6px 20px;font-size:19px;line-height:1.55;max-width:60ch}
+.story b{font-family:var(--f-display);font-weight:600;color:var(--orange)}
+.risk{display:grid;gap:8px;max-width:72ch}
+.risk h4{font-size:17px}
+.risk ul{margin:0;padding-left:20px;color:var(--ink-2);display:grid;gap:4px}
+.crit{width:100%;border-collapse:collapse;font-size:15px;min-width:620px}
+.crit th{text-align:left;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--line)}
+.crit td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+.crit td:first-child{font-family:var(--f-mono);font-size:13px;color:var(--ink);white-space:nowrap}
+.crit td:nth-child(2){color:var(--ink)}
+.crit .ev{font-size:13.5px}
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:16px}
+.figure > .cap{display:grid;gap:4px}
+.figure > .cap .eyebrow{color:var(--orange)}
+.figure > .cap h4{font-size:21px}
+.figure > .cap p{font-size:14.5px;color:var(--ink-2);max-width:72ch}
+details.gk{border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+details.gk > summary{cursor:pointer;padding:12px 16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.gk > summary::-webkit-details-marker{display:none}
+details.gk > summary::after{content:"+";font-family:var(--f-mono);font-size:18px;color:var(--mute)}
+details.gk[open] > summary::after{content:"−"}
+details.gk .code{border-radius:0 0 14px 14px}
+.cases{width:100%;border-collapse:collapse;font-size:14.5px;min-width:680px}
+.cases th{text-align:left;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--line)}
+.cases td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+.cases td:first-child{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);white-space:nowrap}
+.cases td.res{color:var(--ink);font-weight:600}
+.limit{background:var(--sunk);border-radius:14px;padding:14px 18px;font-size:14.5px;color:var(--ink-2);max-width:78ch}
+.limit b{color:var(--ink)}
+
+/* HU-1 procedencia */
+.prov{width:100%;border-collapse:separate;border-spacing:6px;min-width:640px;font-size:13.5px}
+.prov th{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;text-align:left;padding:2px 4px}
+.prov td.b{font-family:var(--f-display);font-weight:600;font-size:16px;white-space:nowrap;padding-right:8px}
+.prov td.b small{display:block;font-family:var(--f-mono);font-weight:400;font-size:11.5px;color:var(--mute)}
+.cell{border-radius:10px;padding:9px 11px;line-height:1.3}
+.cell.here{background:var(--teal-soft);color:var(--teal);font-weight:700}
+.cell.cache{background:var(--sunk);color:var(--ink-2)}
+.cell.down{background:var(--orange-soft);color:var(--orange);font-weight:700}
+.cell.na{border:1px dashed var(--line);color:var(--mute)}
+.keys{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-2)}
+.keys span{display:inline-flex;gap:6px;align-items:center}
+.sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+/* HU-2 rejilla */
+.grid2{display:grid;grid-template-columns:110px repeat(5,minmax(70px,1fr));gap:6px;min-width:560px;font-size:13px}
+.grid2 .h{font-family:var(--f-mono);font-size:11.5px;color:var(--mute);font-weight:600;align-self:end;padding-bottom:2px}
+.grid2 .r{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);align-self:center}
+.acc{border-radius:8px;padding:8px 6px;text-align:center;font-family:var(--f-mono);font-size:11.5px;font-weight:600;background:var(--teal-soft);color:var(--teal)}
+.acc.grey{background:transparent;border:1px dashed var(--line);color:var(--mute);font-weight:400}
+.judges{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+@media (max-width:640px){.judges{grid-template-columns:1fr}}
+.judge{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--ground);display:grid;gap:4px}
+.judge b{font-family:var(--f-display);font-size:17px}
+.judge span{font-size:13.5px;color:var(--ink-2)}
+.judges .mid{font-family:var(--f-mono);font-size:12.5px;color:var(--mute);text-align:center}
+
+/* HU-3 laboratorio */
+.lab{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px}
+@media (max-width:820px){.lab{grid-template-columns:1fr}}
+.traps{display:grid;gap:6px;align-content:start}
+.trap{all:unset;cursor:pointer;display:grid;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--ground)}
+.trap .tid{font-family:var(--f-mono);font-size:11.5px;color:var(--mute);font-weight:600}
+.trap .tt{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.3}
+.trap[aria-pressed="true"]{border-color:var(--orange);background:var(--orange-soft)}
+.trap.ctl[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.trap:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.labout{display:grid;gap:14px;align-content:start;min-width:0}
+.diff{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:14px 0;font-family:var(--f-mono);font-size:13px;line-height:1.75;overflow-x:auto}
+.diff .ln{display:block;padding:0 16px;white-space:pre}
+.diff .del{background:rgba(244,162,97,.12);color:#F6C8A4}
+.diff .add{background:rgba(127,209,200,.14);color:#BFEDE7}
+.diff .ctx{color:var(--code-cm)}
+.diff mark{background:var(--peach);color:#14213D;border-radius:3px;padding:0 2px}
+.diff .add mark{background:var(--mint)}
+.verdict{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.big{font-family:var(--f-display);font-weight:600;font-size:22px;border-radius:999px;padding:6px 18px;border:2px solid}
+.big.killed{color:var(--orange);border-color:var(--orange);background:var(--orange-soft)}
+.big.ok{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
+.labout .say{font-size:15.5px;color:var(--ink-2);max-width:66ch}
+.quad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.quad{grid-template-columns:1fr}}
+.quad article{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;background:var(--ground)}
+.quad .q{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.quad .ex{font-family:var(--f-mono);font-size:13px;color:var(--ink)}
+.quad p{font-size:14px;color:var(--ink-2)}
+
+/* HU-4 cláusulas */
+.clauses{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+@media (max-width:700px){.clauses{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.cl{all:unset;cursor:pointer;aspect-ratio:1/1;max-width:100%;border-radius:10px;display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;font-weight:600;text-align:center;padding:4px;line-height:1.15}
+.cl.direct{background:var(--teal);color:var(--ground)}
+.cl.std{background:var(--teal-soft);color:var(--teal);border:1px solid var(--teal)}
+.cl.att{background:var(--orange-soft);color:var(--orange);border:2px solid var(--orange)}
+.cl[aria-pressed="true"]{outline:3px solid var(--ink);outline-offset:2px}
+.cl:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.clinfo{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--ground);display:grid;gap:6px;min-height:118px}
+.clinfo .nm{font-family:var(--f-display);font-weight:600;font-size:18px}
+.clinfo .lean{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);background:var(--sunk);border-radius:8px;padding:6px 8px;overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+.clinfo p{font-size:14px;color:var(--ink-2)}
+.loop{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.loop{grid-template-columns:1fr}}
+.loop article{border-radius:14px;padding:16px;border:1px solid var(--line);background:var(--ground);display:grid;gap:8px}
+.loop h4{font-size:17px}
+.loop p{font-size:14px;color:var(--ink-2)}
+.bridge{display:grid;grid-template-columns:repeat(5,auto);gap:8px;align-items:center;justify-content:start;font-size:14px;overflow-x:auto;padding-bottom:4px}
+.bridge .node{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--ground);display:grid;gap:2px;min-width:150px}
+.bridge .node b{font-family:var(--f-display);font-size:15px}
+.bridge .node span{font-size:12.5px;color:var(--mute)}
+.bridge .node.person{border:2px dashed var(--orange)}
+.bridge .ar{font-family:var(--f-mono);color:var(--mute)}
+@media (max-width:820px){.bridge{grid-template-columns:1fr;justify-content:stretch}.bridge .ar{transform:rotate(90deg);justify-self:center}}
+
+/* HU-5 huella */
+.fp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:820px){.fp{grid-template-columns:1fr}}
+.fp label{display:grid;gap:4px;font-size:13.5px;font-weight:700}
+.fp input[type=text]{font:inherit;font-family:var(--f-mono);font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--ground);color:var(--ink);width:100%}
+.checks{display:grid;gap:6px;margin-top:6px}
+.chk{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--ground);font-size:13.5px}
+.chk button{font:inherit;font-family:var(--f-mono);font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid var(--teal);background:var(--teal-soft);color:var(--teal);cursor:pointer;min-width:66px}
+.chk button[data-ok="0"]{border-color:var(--orange);background:var(--orange-soft);color:var(--orange)}
+.fpout{display:grid;gap:12px}
+.fpout .raw{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);background:var(--sunk);border-radius:10px;padding:10px;word-break:break-all;max-height:150px;overflow:auto}
+.fpbig{font-family:var(--f-mono);font-size:clamp(26px,4vw,36px);font-weight:600;letter-spacing:.04em}
+.match{font-weight:700;font-size:14.5px}
+.match.y{color:var(--teal)}.match.n{color:var(--orange)}
+.reports{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.rep{border-radius:12px;padding:10px 12px;display:grid;gap:2px;font-size:13px;background:var(--teal-soft);color:var(--teal)}
+.rep b{font-family:var(--f-display);font-size:15px;color:var(--ink)}
+.rep.ci{background:var(--sunk);color:var(--ink-2)}
+.rep.miss{background:transparent;border:2px dashed var(--orange);color:var(--orange)}
+
+/* HU-6 */
+.aval{display:grid;gap:10px}
+.hexrow{font-family:var(--f-mono);font-size:13px;word-break:break-all;line-height:1.7;background:var(--sunk);border-radius:10px;padding:10px 12px}
+.hexrow .d{background:var(--orange-soft);color:var(--orange);font-weight:700}
+.waffle{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px;max-width:520px}
+.w{aspect-ratio:1/1;border-radius:4px}
+.w.p{background:var(--teal)}
+.w.k{background:var(--orange)}
+.w.s{border:2px solid var(--mute);background:transparent}
+.lanes{display:grid;gap:10px}
+.lane{display:grid;grid-template-columns:170px repeat(3,minmax(0,1fr));gap:8px;align-items:stretch;font-size:13.5px}
+@media (max-width:760px){.lane{grid-template-columns:1fr}}
+.lane .who{font-weight:700;align-self:center}
+.lane .st{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--ground)}
+.lane .st.bad{border-color:var(--orange);background:var(--orange-soft);color:var(--orange);font-weight:700}
+.lane .st.good{border-color:var(--teal);background:var(--teal-soft);color:var(--teal);font-weight:700}
+
+/* defectos */
+.bugs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.bug{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--surface);display:grid;gap:8px;align-content:start}
+.bug .id{font-family:var(--f-mono);font-size:12.5px;font-weight:600;color:var(--orange)}
+.bug h4{font-size:18px}
+.bug dl{margin:0;display:grid;gap:4px;font-size:14px}
+.bug dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-top:4px}
+.bug dd{margin:0;color:var(--ink-2)}
+.zero{border:2px solid var(--teal);border-radius:16px;padding:18px;display:grid;gap:6px;align-content:center;background:var(--teal-soft)}
+.zero .n{font-family:var(--f-display);font-weight:600;font-size:54px;line-height:1;color:var(--teal)}
+.zero p{font-size:14.5px;color:var(--ink)}
+
+/* matriz */
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.fbtn{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.trace{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+.trace th{text-align:left;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--line);position:sticky;top:0;background:var(--ground)}
+.trace td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.trace td:first-child{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);white-space:nowrap}
+.trace tr:hover td{background:var(--sunk)}
+.count{font-size:14px;color:var(--mute)}
+
+/* faltantes y preguntas */
+.missing{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.missing li{display:grid;grid-template-columns:90px minmax(0,1fr);gap:14px;border:2px dashed var(--orange);border-radius:14px;padding:14px 16px;background:var(--surface)}
+.missing .id{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--orange)}
+.missing b{font-family:var(--f-display);font-size:17px;display:block}
+.missing span{font-size:14.5px;color:var(--ink-2)}
+@media (max-width:560px){.missing li{grid-template-columns:1fr}}
+.qa{display:grid;gap:10px}
+.qa details{border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.qa summary{cursor:pointer;padding:14px 18px;font-family:var(--f-display);font-weight:600;font-size:18px;list-style:none;display:flex;gap:12px;justify-content:space-between}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"Ver respuesta";font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--teal);white-space:nowrap;align-self:center}
+.qa details[open] summary::after{content:"Ocultar"}
+.qa .ans{padding:0 18px 16px;font-size:15.5px;color:var(--ink-2);display:grid;gap:8px;max-width:76ch}
+.thesis{font-family:var(--f-display);font-weight:600;font-size:clamp(24px,3.4vw,34px);line-height:1.25;display:grid;gap:4px}
+.thesis span:nth-child(1){color:var(--teal)}
+.thesis span:nth-child(2){color:var(--orange)}
+footer{border-top:1px solid var(--line);padding-top:22px;font-size:14px;color:var(--mute);display:grid;gap:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+.topbar{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;font-weight:700}
+.topbar a{text-decoration:none}
+.topbar a:last-child{margin-left:auto;border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Contenido">
+    <span class="eyebrow">Contenido</span>
+    <ol id="toc">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#idioma">El idioma de QA</a></li>
+      <li><a href="#anatomia">Anatomía de un escenario</a></li>
+      <li><a href="#revisores">Tres revisiones</a></li>
+      <li><a href="#metodo">El método</a></li>
+      <li><a href="#historias">Las seis historias</a></li>
+      <li class="sub"><a href="#hu1">HU-1 · Compila</a></li>
+      <li class="sub"><a href="#hu2">HU-2 · Verificadores</a></li>
+      <li class="sub"><a href="#hu3">HU-3 · Trampas</a></li>
+      <li class="sub"><a href="#hu4">HU-4 · Clay</a></li>
+      <li class="sub"><a href="#hu5">HU-5 · Repetible</a></li>
+      <li class="sub"><a href="#hu6">HU-6 · Trazable</a></li>
+      <li><a href="#defectos">Defectos</a></li>
+      <li><a href="#trazabilidad">Trazabilidad</a></li>
+      <li><a href="#falta">Lo que falta</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="topbar"><a href="../">← Scientific QA Evidence</a><a href="https://github.com/criguex/scientific-qa-evidence">GitHub</a><a href="../methodology/" lang="en" hreflang="en">English</a></div>
+      <span class="eyebrow">Seminario Temas de Análisis · UNAL Medellín · material de estudio</span>
+      <h1>Un teorema es un <em>Dado</em> y un <em>Entonces</em>.</h1>
+      <p class="lead">En QA de software, antes de escribir una línea de programa se escribe lo que debe cumplirse: <strong>Dado</strong> un contexto, <strong>Cuando</strong> pasa algo, <strong>Entonces</strong> se observa un resultado. Esta página toma la demostración en Lean que OpenAI publicó sobre Navier–Stokes y muestra cómo se audita con ese mismo método: historias de usuario, criterios de sí o no, escenarios, casos de prueba, ejecuciones y evidencia.</p>
+      <div class="meta"><span>La demostración es de OpenAI</span><span>La auditoría y la evidencia: Cristian Guerra Gómez</span><span>Todo verificable en el repositorio</span></div>
+
+      <div class="figure" aria-labelledby="tr-t">
+        <div class="cap">
+          <span class="eyebrow">Traductor</span>
+          <h4 id="tr-t">La alternativa (C) de Clay, en Lean y en Gherkin</h4>
+          <p>Pasa el cursor (o toca un botón) para ver qué parte del enunciado en Lean corresponde a cada línea del escenario. El enunciado en Lean es el preciso; el Gherkin es para leerlo en voz alta.</p>
+        </div>
+        <div class="legend-keys" role="group" aria-label="Partes del enunciado">
+          <button class="keybtn" data-k="nu" aria-pressed="false">Hipótesis: ν &gt; 0</button>
+          <button class="keybtn" data-k="ex" aria-pressed="false">Existen u₀ y f</button>
+          <button class="keybtn" data-k="data" aria-pressed="false">Condiciones de los datos</button>
+          <button class="keybtn" data-k="neg" aria-pressed="false">No existe solución</button>
+        </div>
+        <div class="translate">
+          <div class="pane lean">
+            <span class="lab">Lean · navier_stokes_breakdown_R3</span>
+<pre>theorem navier_stokes_breakdown_R3
+    <span class="hl" data-k="nu">(nu : ℝ) (hnu : nu &gt; 0)</span> :
+    <span class="hl" data-k="ex">∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),</span>
+    <span class="hl" data-k="data">InitialVelocityConditionDecay u₀ ∧
+    ForceConditionDecay f ∧</span>
+    <span class="hl" data-k="neg">¬ (∃ v p,
+      NavierStokesExistenceAndSmoothnessRn
+        nu u₀ f v p)</span></pre>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="pane gk">
+            <span class="lab">Gherkin · en palabras</span>
+<pre><b>Escenario:</b> (C) el fluido se rompe en ℝ³
+  <span class="hl" data-k="nu"><b>Dado</b> una viscosidad ν mayor que 0</span>
+  <span class="hl" data-k="ex"><b>Cuando</b> escojo bien una velocidad
+    inicial u₀ y una fuerza externa f</span>
+  <span class="hl" data-k="data"><b>Y</b> las dos son suaves y decaen
+    lejos del origen</span>
+  <span class="hl" data-k="neg"><b>Entonces</b> no existe ninguna
+    solución (v, p) suave para todo
+    tiempo y con energía acotada</span></pre>
+          </div>
+        </div>
+        <p class="note">Gherkin no es una lógica: no tiene cuantificadores ni negación formal. Sirve para que una persona lea la intención. La máquina revisa el Lean; la persona revisa que el Lean diga lo que la frase promete. Esa diferencia es el corazón de esta auditoría.</p>
+      </div>
+
+      <div class="pipe" aria-label="El método">
+        <a href="#metodo"><span class="n">1</span><span class="t">Historia</span><span class="d">qué se pide y para qué</span></a>
+        <a href="#metodo"><span class="n">2</span><span class="t">Análisis</span><span class="d">qué podría salir mal</span></a>
+        <a href="#metodo"><span class="n">3</span><span class="t">Criterios</span><span class="d">preguntas de sí o no</span></a>
+        <a href="#anatomia"><span class="n">4</span><span class="t">Escenarios</span><span class="d">Dado · Cuando · Entonces</span></a>
+        <a href="#metodo"><span class="n">5</span><span class="t">Casos</span><span class="d">acciones concretas</span></a>
+        <a href="#metodo"><span class="n">6</span><span class="t">Ejecución</span><span class="d">con fecha y registro</span></a>
+        <a href="#trazabilidad"><span class="n">7</span><span class="t">Veredicto</span><span class="d">sí o no, con evidencia</span></a>
+      </div>
+    </section>
+
+    <!-- IDIOMA -->
+    <section id="idioma">
+      <span class="eyebrow">Capítulo 1</span>
+      <h2>El idioma de QA, traducido a matemáticas</h2>
+      <div class="prose">
+        <p>Cada palabra de QA tiene un pariente cercano en el trabajo de ustedes. No son iguales, y en las diferencias está lo interesante: un teorema se demuestra una vez y vale para siempre, mientras que un programa cambia cada semana y hay que volver a probarlo. Por eso QA vive de la <strong>evidencia repetible</strong>.</p>
+      </div>
+      <div class="dict">
+        <article><h4>Historia de usuario (HU)</h4><dl><dt>Qué es</dt><dd>Una necesidad contada desde quien la tiene: como &lt;rol&gt;, quiero &lt;algo&gt;, para &lt;un fin&gt;.</dd><dt>En matemáticas</dt><dd class="math"><i>La motivación del problema: por qué a alguien le importa este enunciado.</i></dd><dt>Aquí</dt><dd>«Como comunidad matemática, quiero saber si el enunciado en Lean es la pregunta de Clay.»</dd></dl></article>
+        <article><h4>Criterio de aceptación (CA)</h4><dl><dt>Qué es</dt><dd>Una pregunta que solo admite sí o no y que decide si la historia se cumple. Si no se puede responder con evidencia, no es un criterio.</dd><dt>En matemáticas</dt><dd><i>Una condición que se debe verificar para aceptar la conclusión.</i></dd><dt>Aquí</dt><dd>«¿El verificador rechaza cada cambio de un símbolo del enunciado?» Sí, 6 de 6.</dd></dl></article>
+        <article><h4>Escenario (Gherkin)</h4><dl><dt>Qué es</dt><dd>El criterio escrito en lenguaje natural con palabras fijas: Dado, Cuando, Entonces, Y, Pero.</dd><dt>En matemáticas</dt><dd><i>Hipótesis, construcción y tesis. «Sea… tomemos… entonces…».</i></dd><dt>Aquí</dt><dd>Dado el commit f9e8bc5, Cuando lo compilo, Entonces termina con código 0.</dd></dl></article>
+        <article><h4>Esquema y Ejemplos</h4><dl><dt>Qué es</dt><dd>Un escenario con huecos (&lt;trampa&gt;) y una tabla de valores. Cada fila produce un escenario concreto.</dd><dt>En matemáticas</dt><dd><i>Un «para todo» sobre un conjunto finito y explícito. No es el ∀ de un teorema: solo cubre las filas escritas.</i></dd><dt>Aquí</dt><dd>Seis trampas en una sola plantilla.</dd></dl></article>
+        <article><h4>Caso de prueba (CP)</h4><dl><dt>Qué es</dt><dd>La acción concreta que responde un criterio: qué se ejecuta, con qué datos y qué se espera.</dd><dt>En matemáticas</dt><dd><i>Un ejemplo calculado, o la comprobación de un caso particular.</i></dd><dt>Aquí</dt><dd>Compilar sin caché y revisar que cada archivo .olean sea nuevo.</dd></dl></article>
+        <article><h4>Ejecución y evidencia</h4><dl><dt>Qué es</dt><dd>Una corrida real del caso, con fecha, versión, comando, código de salida y un registro que otra persona puede revisar.</dd><dt>En matemáticas</dt><dd><i>El certificado: algo que se puede volver a revisar sin confiar en quien lo produjo.</i></dd><dt>Aquí</dt><dd>B4, 21 de octubre, 1 h 29 min, código 0, log con su hash.</dd></dl></article>
+        <article><h4>Mutante y control</h4><dl><dt>Qué es</dt><dd>Un mutante es un error sembrado a propósito para ver si la prueba lo atrapa. Un control es un cambio inofensivo que la prueba debe dejar pasar.</dd><dt>En matemáticas</dt><dd><i>Perturbar una hipótesis para ver si el argumento la usa; el control es el caso trivial que no debe romper nada.</i></dd><dt>Aquí</dt><dd>Cambiar ν &gt; 0 por ν ≥ 0, o solo un comentario.</dd></dl></article>
+        <article><h4>Defecto (bug)</h4><dl><dt>Qué es</dt><dd>Un criterio que algo prometía cumplir y no cumplió. No es para ganar una discusión: es para encontrar la causa y arreglarla.</dd><dt>En matemáticas</dt><dd><i>Un error en un paso, o una hipótesis que se usó sin decirlo.</i></dd><dt>Aquí</dt><dd>Tres, los tres en mi propio trabajo, corregidos en público.</dd></dl></article>
+        <article><h4>Trazabilidad</h4><dl><dt>Qué es</dt><dd>Poder ir de la historia al criterio, al escenario, al caso, a la ejecución y a la evidencia, y volver, sin huecos.</dd><dt>En matemáticas</dt><dd><i>Que cada afirmación del artículo tenga su lema y cada lema su demostración.</i></dd><dt>Aquí</dt><dd>La matriz del final: 24 filas, una por criterio.</dd></dl></article>
+      </div>
+    </section>
+
+    <!-- ANATOMÍA -->
+    <section id="anatomia">
+      <span class="eyebrow">Capítulo 2</span>
+      <h2>Anatomía de un escenario</h2>
+      <div class="prose">
+        <p>Gherkin tiene pocas palabras, y cada una tiene un papel fijo. El analizador oficial de Gherkin, el mismo que usan las herramientas de pruebas, clasifica cada línea en <strong>contexto</strong>, <strong>acción</strong>, <strong>resultado</strong> o <strong>conjunción</strong>. Toca una línea del escenario para ver qué hace.</p>
+      </div>
+      <div class="anat">
+        <div class="code" id="anat-code" role="group" aria-label="Escenario de ejemplo"></div>
+        <aside class="panel" id="anat-panel" aria-live="polite"></aside>
+      </div>
+      <div class="figure expand">
+        <div class="cap">
+          <span class="eyebrow">Esquema del escenario</span>
+          <h4>Una plantilla, seis escenarios</h4>
+          <p>El esquema de arriba tiene un hueco, <code>&lt;trampa&gt;</code>. Cada fila de la tabla Ejemplos lo llena y produce un escenario completo. Es un «para todo» sobre seis casos explícitos, no sobre todos los cambios posibles. Por eso, además de las trampas, se necesita entender qué significa un rechazo (capítulo HU-3).</p>
+        </div>
+        <button class="btn" id="expand-btn" aria-expanded="false" aria-controls="expanded">Expandir los seis escenarios</button>
+        <div class="expanded" id="expanded" hidden></div>
+      </div>
+    </section>
+
+    <!-- TRES REVISORES -->
+    <section id="revisores">
+      <span class="eyebrow">Capítulo 3</span>
+      <h2>Verificar, probar la prueba y validar no son lo mismo</h2>
+      <div class="prose">
+        <p>Piensen en un pastel. <strong>Verificar</strong> es comprobar que se siguió la receta paso a paso. <strong>Validar</strong> es comprobar que era el pastel que pidió el cliente. Se puede seguir una receta a la perfección y entregar el pastel equivocado. Entre los dos hay un tercer paso que en matemáticas casi no se nombra: <strong>probar la prueba</strong>, es decir, comprobar que el revisor de verdad revisa.</p>
+      </div>
+      <div class="three">
+        <article><span class="who-l">La máquina</span><h4>revisa la cuenta</h4><span class="verb">verificar</span><p>Lean revisa cada paso y Comparator compara el enunciado con el del desafío. Si un paso falla, no compila. Responde: ¿la demostración es correcta para este enunciado?</p></article>
+        <article><span class="who-l">Las trampas</span><h4>revisan a la máquina</h4><span class="verb">probar la prueba</span><p>Se cambia un símbolo del enunciado y se mira si el verificador lo nota; se cambia un comentario y se mira que no proteste. Responde: ¿el verificador es exacto o deja pasar cualquier cosa?</p></article>
+        <article class="who"><span class="who-l">Una persona</span><h4>revisa la pregunta</h4><span class="verb">validar</span><p>Alguien que conoce el problema lee el enunciado en Lean junto al texto de Clay. Ninguna máquina puede hacerlo sola. Responde: ¿es la pregunta que se quería responder?</p></article>
+      </div>
+    </section>
+
+    <!-- MÉTODO -->
+    <section id="metodo">
+      <span class="eyebrow">Capítulo 4</span>
+      <h2>El método, en siete pasos</h2>
+      <ol class="steps">
+        <li><span class="num">1</span><div><h4>Entender qué se pide</h4><p>Se escribe la necesidad como historia de usuario: quién la tiene, qué quiere y para qué.</p><p class="here">En esta auditoría: <b>seis historias</b>, desde «que compile» hasta «que otra persona lo repita sin mí».</p></div></li>
+        <li><span class="num">2</span><div><h4>Analizar antes de probar</h4><p>Se pregunta qué podría salir mal y se ordenan los riesgos por impacto. No soy un ejecutor de pruebas: primero soy analista.</p><p class="here">Riesgo principal: que el enunciado verificado <b>no sea la pregunta oficial</b>, por ejemplo una versión más fácil.</p></div></li>
+        <li><span class="num">3</span><div><h4>Escribir los criterios de aceptación</h4><p>Cada riesgo se vuelve una pregunta de sí o no que la evidencia puede responder.</p><p class="here"><b>24 criterios</b>. Si no hay evidencia, la respuesta es no.</p></div></li>
+        <li><span class="num">4</span><div><h4>Escribir los escenarios en Gherkin</h4><p>Cada criterio se escribe con Dado, Cuando y Entonces antes de ejecutar nada. Así nadie ajusta la expectativa al resultado.</p><p class="here"><b>Seis archivos .feature</b>, uno por historia, validados con el analizador oficial.</p></div></li>
+        <li><span class="num">5</span><div><h4>Diseñar los casos de prueba</h4><p>Cada escenario se vuelve acciones concretas: compilar, correr un verificador, sembrar un error.</p><p class="here">Compilaciones con y sin caché, <b>6 trampas y 1 control</b>, 11 controles con Mathlib, una huella en cinco sistemas.</p></div></li>
+        <li><span class="num">6</span><div><h4>Ejecutar y guardar la evidencia</h4><p>Cada corrida deja su comando, versión, hash y código de salida, también las que fallan.</p><p class="here">Compilaciones B1 a B5, una recompilación en la nube y <b>cada log con su SHA-256</b>.</p></div></li>
+        <li><span class="num">7</span><div><h4>Decidir y reportar</h4><p>Cada criterio queda en sí o no, con su evidencia. Los defectos se registran, también los propios, y lo que falta se dice claramente.</p><p class="here"><b>19 de 24</b> criterios en sí. 3 defectos, todos míos. 0 en la demostración de OpenAI.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- HISTORIAS -->
+    <section id="historias">
+      <span class="eyebrow">Capítulo 5</span>
+      <h2>Las seis historias, de un vistazo</h2>
+      <div class="prose"><p>Cada cuadro es un criterio de aceptación. Lleno es sí; punteado es no. Toca una historia para ir a su detalle.</p></div>
+      <div class="board" id="board"></div>
+    </section>
+
+    <div id="hus" style="display:grid;gap:96px"></div>
+
+    <!-- DEFECTOS -->
+    <section id="defectos">
+      <span class="eyebrow">Capítulo 6</span>
+      <h2>Defectos encontrados</h2>
+      <div class="prose"><p>Una auditoría que solo encuentra errores ajenos es sospechosa. Estos tres defectos fueron míos, la misma auditoría los encontró en pasos posteriores y se corrigieron en público. Están en FINDINGS.md como hallazgos 1, 3 y 8.</p></div>
+      <div class="bugs">
+        <article class="bug"><span class="id">D-1 · hallazgo 1</span><h4>Una compilación «limpia» no lo era</h4><dl><dt>Qué pasó</dt><dd>La compilación B3 había recibido 7 dependencias pequeñas ya compiladas (399 módulos). El log no lo mostraba.</dd><dt>Cómo se encontró</dt><dd>Comparando la fecha de cada archivo .olean con la hora de inicio, y revisando la carpeta de paquetes.</dd><dt>Corrección</dt><dd>B4 y B5 compilan todo en la máquina, sin caché.</dd></dl></article>
+        <article class="bug"><span class="id">D-2 · hallazgo 3</span><h4>«La misma compilación» eran dos</h4><dl><dt>Qué pasó</dt><dd>Dos corridas reportadas como hechas sobre la misma compilación habían usado compilaciones distintas.</dd><dt>Cómo se encontró</dt><dd>Con recibos por corrida y los hashes originales de cada archivo.</dd><dt>Corrección</dt><dd>Cada corrida dice ahora sobre qué compilación se hizo.</dd></dl></article>
+        <article class="bug"><span class="id">D-3 · hallazgo 8</span><h4>La herramienta decía «válido» cuando fallaba</h4><dl><dt>Qué pasó</dt><dd>El ejecutor numérico marcaba oracle_valid: true aunque el oráculo hubiera lanzado una excepción o devuelto NaN.</dd><dt>Cómo se encontró</dt><dd>Probando la propia herramienta: se le inyectaron fallos a propósito.</dd><dt>Corrección</dt><dd>Ahora marca INCONCLUSIVE y, si falla al exportar, sale con código 2.</dd></dl></article>
+        <div class="zero"><span class="n">0</span><p><b>Defectos encontrados en las demostraciones de OpenAI</b>, dentro de este alcance. Cero defectos no es una certificación: es lo que vieron estas pruebas.</p></div>
+      </div>
+    </section>
+
+    <!-- TRAZABILIDAD -->
+    <section id="trazabilidad">
+      <span class="eyebrow">Capítulo 7</span>
+      <h2>Matriz de trazabilidad</h2>
+      <div class="prose"><p>Cada fila une un criterio con su escenario, su caso, su ejecución y su veredicto. Filtra por historia o por estado.</p></div>
+      <div class="filters" id="f-hu" role="group" aria-label="Filtrar por historia"></div>
+      <div class="filters" id="f-st" role="group" aria-label="Filtrar por estado"></div>
+      <p class="count" id="tcount"></p>
+      <div class="scroll"><table class="trace"><thead><tr><th>Criterio</th><th>Pregunta</th><th>Caso</th><th>Ejecución</th><th>¿Cumple?</th></tr></thead><tbody id="tbody"></tbody></table></div>
+    </section>
+
+    <!-- FALTA -->
+    <section id="falta">
+      <span class="eyebrow">Capítulo 8</span>
+      <h2>Lo que falta para que los 24 digan sí</h2>
+      <div class="prose"><p>Los criterios pendientes no dependen de máquinas sino de personas. Ahí entran ustedes.</p></div>
+      <ul class="missing">
+        <li><span class="id">CA-4.3</span><div><b>Revisar la transcripción de Clay</b><span>Leer <code>bridges/ClayLiteral.lean</code> junto al PDF de Fefferman, con la hoja de revisión K0: 14 puntos, cada uno con su página, su ecuación y su línea de Lean.</span></div></li>
+        <li><span class="id">CA-4.4</span><div><b>Decidir la lectura de la presión periódica en (D)</b><span>¿La fe de erratas de Clay pide que p sea periódica como condición de la solución? Es una decisión matemática, no una prueba.</span></div></li>
+        <li><span class="id">CA-5.4</span><div><b>Recompilar en Lean sin mí</b><span>Seguir la guía de reproducción independiente y reportar con su plantilla. Toma más de una hora en un computador normal.</span></div></li>
+        <li><span class="id">CA-5.3</span><div><b>Correr verificar.py desde Linux</b><span>Menos de un minuto. Falta el primer reporte de una persona en Linux.</span></div></li>
+        <li><span class="id">CA-2.4</span><div><b>Una tercera implementación del kernel</b><span>lean4lean no compiló para Lean 4.34. Cuando lo haga, se puede repetir la revisión con un tercer juez.</span></div></li>
+      </ul>
+      <div class="thesis"><span>La máquina revisa la cuenta.</span><span>Las trampas revisan a la máquina.</span><span>Una persona revisa la pregunta.</span></div>
+    </section>
+
+    <!-- PREGUNTAS -->
+    <section id="preguntas">
+      <span class="eyebrow">Capítulo 9</span>
+      <h2>Preguntas para pensar</h2>
+      <div class="prose"><p>Para discutir en el seminario. Intenta responder antes de abrir cada una.</p></div>
+      <div class="qa">
+        <details><summary>Si Comparator rechaza el enunciado con f = 0, ¿eso demuestra algo sobre el problema sin fuerza externa?</summary><div class="ans"><p>No. Comparator compara enunciados, no los demuestra ni los refuta. El rechazo solo dice «este no es el enunciado del desafío». Las alternativas (A) y (B) de Clay, sin fuerza externa, siguen abiertas, y esta auditoría no dice nada sobre ellas.</p></div></details>
+        <details><summary>¿Para qué sirve un control que se acepta, si lo que buscamos son rechazos?</summary><div class="ans"><p>Sin el control no se distingue un verificador exacto de uno que lo rechaza todo. Si también rechazara un cambio de comentario, los seis rechazos no dirían nada: rechazaría por cualquier motivo. El control negativo calibra la prueba.</p></div></details>
+        <details><summary>Comparator rechazó cambios equivalentes, como n + 1 ≤ p en vez de n &lt; p. ¿Es un defecto?</summary><div class="ans"><p>No: muestra qué compara. Comparator compara la forma del enunciado, no su significado. Por eso un rechazo significa «cambió», no «es falso», y para separar equivalente, más débil y falso hace falta una segunda demostración en Lean para cada caso. Eso se hizo con tres teoremas de Mathlib: infinitud de primos, Cauchy–Schwarz y convergencia dominada.</p></div></details>
+        <details><summary>Dos verificadores escritos por separado aceptan la demostración. ¿Eso garantiza que es correcta?</summary><div class="ans"><p>Baja mucho la probabilidad de un error, pero no la elimina: los dos podrían compartir un error que nadie conoce todavía. Por eso se revisó además que los dos incluyeran todas las correcciones conocidas de errores del kernel, y se intentó un tercero.</p></div></details>
+        <details><summary>¿Por qué la presión periódica importa en (D) y no en (C)?</summary><div class="ans"><p>(C) y (D) dicen «existen datos tales que no existe solución». Exigirle más a la solución (que p sea periódica) achica la clase de soluciones, y «no existe ninguna» se vuelve más fácil de demostrar. Con u y f periódicas, la ecuación obliga a que ∇p sea periódico, pero p puede llevar una parte lineal c(t)·x. Si la fe de erratas no pide p periódica, la (D) formal sería más débil que la de Clay. (C) vive en ℝ³ y no tiene esa condición.</p></div></details>
+        <details><summary>Si edito el README, ¿cambia la huella?</summary><div class="ans"><p>No. La huella depende de la versión de los datos, y esa versión se calcula solo con los archivos de evidencia, experimentos y puentes. El README sí tiene su hash en el manifiesto, así que la primera comprobación detecta si alguien lo cambió, pero la versión de los datos, y con ella la huella, no se mueve. Lo pueden probar en la calculadora de HU-5.</p></div></details>
+        <details><summary>¿Qué cambiaría si mi transcripción de Clay tuviera un error?</summary><div class="ans"><p>CA-4.2 seguiría en sí, porque los teoremas de OpenAI implicarían igual lo que yo escribí. Pero lo que yo escribí ya no sería Clay. Por eso CA-4.3 existe y está en no: la cadena es tan fuerte como su eslabón humano.</p></div></details>
+      </div>
+    </section>
+
+    <footer>
+      <p><b>Repositorio:</b> <a href="https://github.com/criguex/scientific-qa-evidence">github.com/criguex/scientific-qa-evidence</a> · <b>DOI:</b> <a href="https://doi.org/10.5281/zenodo.23925749">10.5281/zenodo.23925749</a> · huella vigente <code>5292-A47D-AFA5</code> para la versión de datos <code>c8edd482375d</code>.</p>
+      <p>Demostraciones originales: OpenAI, openai/NavierStokesAndEuler en f9e8bc5 (Apache-2.0). Enunciado: C. L. Fefferman, Instituto Clay de Matemáticas. Auditoría hecha con asistentes de IA (Codex y Claude Code) bajo dirección del autor, que responde por cada afirmación. Esto no es una certificación ni matemática nueva.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- resaltado Gherkin ---------- */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var KW=/^(\s*)(Característica|Antecedentes|Esquema del escenario|Escenario|Ejemplos|Dado|Cuando|Entonces|Y|Pero)(:?)(?=\s|$)/;
+function hlLine(raw){
+  var t=raw.trim();
+  if(t.charAt(0)==="#") return '<span class="c">'+esc(raw)+'</span>';
+  if(t.charAt(0)==="@") return '<span class="tg">'+esc(raw)+'</span>';
+  if(t.charAt(0)==="|") return '<span class="tb">'+esc(raw)+'</span>';
+  function strs(t){return esc(t).replace(/"([^"]*)"/g,'<span class="s">"$1"</span>').replace(/(&lt;[a-zéó]+&gt;)/g,'<span class="s">$1</span>');}
+  var m=raw.match(KW);
+  if(m) return esc(m[1])+'<span class="k">'+m[2]+m[3]+'</span>'+strs(raw.slice(m[0].length));
+  return strs(raw);
+}
+function codeBlock(text){
+  return text.split("\n").map(function(l){return '<span class="ln">'+(hlLine(l)||" ")+'</span>';}).join("");
+}
+
+/* ---------- traductor ---------- */
+var keys=document.querySelectorAll(".keybtn"), hls=document.querySelectorAll(".translate .hl");
+function setK(k){
+  hls.forEach(function(h){h.classList.toggle("on",h.dataset.k===k);});
+  keys.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.k===k?"true":"false");});
+}
+hls.forEach(function(h){h.addEventListener("mouseenter",function(){setK(h.dataset.k);});});
+keys.forEach(function(b){b.addEventListener("click",function(){setK(b.getAttribute("aria-pressed")==="true"?null:b.dataset.k);});b.addEventListener("mouseenter",function(){setK(b.dataset.k);});});
+document.querySelector(".translate").addEventListener("mouseleave",function(){setK(null);});
+
+/* ---------- anatomía ---------- */
+var ANAT=[
+ {t:"# language: es",role:"Directiva",title:"El idioma del archivo",sem:"Le dice al analizador que las palabras clave están en español. Gherkin existe en unos 80 idiomas.",math:"Fijar la notación antes de empezar.",rule:"Va en la primera línea del archivo."},
+ {t:"@HU-3 @CA-3.1 @cumple",role:"Etiquetas",title:"Metadatos para la trazabilidad",sem:"No se ejecutan. Sirven para saber a qué historia y a qué criterio pertenece el escenario, y en qué estado está.",math:"La numeración de un lema que permite citarlo.",rule:"Aquí: @cumple si la evidencia lo respalda, @pendiente si no."},
+ {t:"Esquema del escenario: Cada trampa de un símbolo es rechazada",role:"Escenario",title:"El nombre del comportamiento",sem:"Una frase que dice qué se prueba. «Esquema» indica que tiene huecos que se llenan desde la tabla Ejemplos.",math:"El enunciado de un lema, antes de la demostración.",rule:"Un escenario prueba una sola cosa. Si el nombre necesita «y», probablemente son dos."},
+ {t:"  Dado la compilación B2",role:"Contexto",title:"Dado: el estado del mundo antes",sem:"Las condiciones de partida. No es una acción: es lo que ya es verdad cuando empieza la prueba.",math:"Las hipótesis. «Sea…»",rule:"El analizador lo clasifica como Context."},
+ {t:'  Y que cambio un solo símbolo del enunciado: "<trampa>"',role:"Conjunción",title:"Y: otra condición del mismo tipo",sem:"Hereda el papel de la línea anterior. Aquí es otra condición de contexto, con un hueco que llena la tabla.",math:"«y además…» dentro de las hipótesis.",rule:"El analizador lo clasifica como Conjunction."},
+ {t:"  Cuando corro Comparator con el enunciado cambiado",role:"Acción",title:"Cuando: lo que se hace",sem:"La única acción del escenario: el evento que se prueba.",math:"La construcción o la operación que se aplica.",rule:"El analizador lo clasifica como Action. Lo ideal es una sola acción por escenario."},
+ {t:'  Entonces Comparator lo rechaza con "statements do not match"',role:"Resultado",title:"Entonces: lo que se observa",sem:"El resultado esperado. Tiene que ser observable y medible: un mensaje, un código de salida, un número.",math:"La tesis. «Entonces…»",rule:"El analizador lo clasifica como Outcome. «Funciona bien» no sirve; «código de salida 1» sí."},
+ {t:"  Pero el código de salida no es 0",role:"Conjunción",title:"Pero: una condición en contraste",sem:"Igual que Y, pero se lee como contraste. Aquí refuerza el resultado: además del mensaje, el programa falla.",math:"«…y sin embargo…»",rule:"Hereda el papel de la línea anterior, aquí Outcome."},
+ {t:"  Ejemplos:",role:"Ejemplos",title:"La tabla que llena los huecos",sem:"Cada fila produce un escenario concreto. La primera fila son los nombres de los huecos.",math:"Un ∀ sobre un conjunto finito y explícito.",rule:"Seis filas, seis escenarios."},
+ {t:"    | trampa                              |",role:"Ejemplos",title:"Encabezado de la tabla",sem:"El nombre del hueco que se llena: <trampa>.",math:"La variable que se instancia.",rule:"Debe coincidir con el nombre entre < > del esquema."},
+ {t:"    | (C) sin fuerza externa: f = 0       |",role:"Ejemplos",title:"Una fila, un escenario",sem:"Este valor reemplaza a <trampa>. Abajo puedes expandir los seis.",math:"Una instancia concreta.",rule:"Toca «Expandir» para verlos todos."}
+];
+var codeEl=document.getElementById("anat-code"), panel=document.getElementById("anat-panel");
+ANAT.forEach(function(a,i){
+  var b=document.createElement("button"); b.className="ln"; b.type="button"; b.setAttribute("aria-pressed","false");
+  b.innerHTML=hlLine(a.t); b.addEventListener("click",function(){showAnat(i);}); codeEl.appendChild(b);
+});
+function showAnat(i){
+  var a=ANAT[i];
+  codeEl.querySelectorAll("button.ln").forEach(function(b,j){b.setAttribute("aria-pressed",j===i?"true":"false");});
+  panel.innerHTML='<span class="role">'+esc(a.role)+'</span><h4>'+esc(a.title)+'</h4><dl><dt>Qué hace</dt><dd>'+esc(a.sem)+'</dd><dt>En matemáticas</dt><dd><i>'+esc(a.math)+'</i></dd><dt>Regla</dt><dd>'+esc(a.rule)+'</dd></dl>';
+}
+showAnat(3);
+
+var TRAPS6=["(C) sin fuerza externa: f = 0","(D) sin fuerza externa: f = 0","(C) datos periódicos en vez de datos en ℝ³","(C) viscosidad ≥ 0 en vez de > 0","(D) sin la negación: existencia en vez de ruptura","Euler: tiempo T* ≤ 1/2 en vez de T* ≤ 1"];
+var exBtn=document.getElementById("expand-btn"), exEl=document.getElementById("expanded");
+exBtn.addEventListener("click",function(){
+  var open=exEl.hidden;
+  if(open && !exEl.childElementCount){
+    TRAPS6.forEach(function(t,i){
+      var d=document.createElement("div"); d.className="mini";
+      d.innerHTML=hlLine("Escenario: trampa "+(i+1))+"\n"+hlLine("  Dado la compilación B2")+"\n"+hlLine('  Y que cambio un símbolo: "'+t+'"')+"\n"+hlLine("  Cuando corro Comparator")+"\n"+hlLine('  Entonces lo rechaza');
+      exEl.appendChild(d);
+    });
+  }
+  exEl.hidden=!open; exBtn.setAttribute("aria-expanded",open?"true":"false");
+  exBtn.textContent=open?"Contraer":"Expandir los seis escenarios";
+});
+
+/* ---------- datos de las historias ---------- */
+var HU=[
+ {id:"hu1",n:"HU-1",title:"Las demostraciones compilan",q:"¿Lean revisó cada paso?",
+  story:["revisor de la demostración","que el código que publicó OpenAI compile desde una versión fija","saber que Lean revisó cada paso y que no hay pasos sin demostrar"],
+  why:"En Lean, si un paso está mal, el programa no compila. Compilar es la primera prueba: si no pasa, no tiene sentido seguir.",
+  risks:["Que la compilación use piezas que otra persona compiló antes y nadie volvió a revisar.","Que una demostración quede con un paso pendiente (sorry) o con un axioma extra.","Que no se pueda repetir porque la versión no está fijada."],
+  ca:[["CA-1.1","¿El código de OpenAI en el commit f9e8bc5 compila y termina con código de salida 0?",1,"compilaciones B1–B5 y recompilación en la nube"],
+      ["CA-1.2","¿Compila con todas las dependencias construidas en la máquina, sin descargar piezas ya compiladas?",1,"B4 y B5, lake --no-cache build"],
+      ["CA-1.3","¿Las conclusiones dependen solo de los tres axiomas estándar, sin sorry?",1,"evidence/formal/b5/axioms.log"]],
+  fig:"prov",
+  feature:'# language: es\n@HU-1\nCaracterística: Las demostraciones de OpenAI compilan\n\n  Antecedentes:\n    Dado el repositorio openai/NavierStokesAndEuler en el commit "f9e8bc5"\n    Y la versión de Lean "v4.34.0-rc2"\n\n  @CA-1.2 @cumple\n  Esquema del escenario: Compila sin piezas compiladas por otros\n    Dado una carpeta de caché vacía\n    Cuando compilo con "lake --no-cache build" en la compilación "<compilación>"\n    Entonces la compilación termina con código de salida 0\n    Y cada archivo ".olean" es más nuevo que el inicio de la compilación\n    Y no se descargó ningún paquete ya compilado\n\n    Ejemplos:\n      | compilación                 |\n      | B4 · 21-oct · 1 h 29 min    |\n      | B5 · 21/22-oct · 1 h 15 min |\n\n  @CA-1.3 @cumple\n  Escenario: Las conclusiones usan solo los axiomas estándar\n    Dado la compilación B5\n    Cuando le pido a Lean los axiomas de "k1_C" y "k1_D"\n    Entonces la lista es exactamente "propext", "Classical.choice" y "Quot.sound"\n    Pero no aparece "sorryAx" ni ningún axioma adicional',
+  cases:[["CP-1.1","Compilar desde el commit fijado, reutilizando las cachés de dependencias","B1 · 20-oct · 11.424 tareas","Código 0"],
+         ["CP-1.1","Compilar con la caché oficial de Mathlib, como lo indica OpenAI","B2 · 20-oct","Código 0"],
+         ["CP-1.1","Recompilar en un contenedor en la nube, con un agente de IA bajo mi dirección","23-oct · Lean v4.34.0-rc2","609 de 609 módulos, código 0"],
+         ["CP-1.2","Compilar Mathlib en la máquina, con la caché vacía","B3 · 21-oct · 1 h 27 min","Código 0, con el defecto D-1"],
+         ["CP-1.2","Compilar todo sin caché y revisar la fecha de cada .olean","B4 · 21-oct · 1 h 29 min","Código 0, nada descargado"],
+         ["CP-1.2","Repetir la compilación sin caché para la versión 1.3.0","B5 · 21/22-oct · 1 h 15 min 39 s","Código 0, 11.406 .olean nuevos"],
+         ["CP-1.3","Preguntarle a Lean de qué axiomas dependen los teoremas finales","B5","propext, Classical.choice, Quot.sound"]],
+  limit:"Todas las compilaciones reutilizaron el instalador de Lean y los binarios de los verificadores, y corrieron en máquinas que yo escogí. Compilar muestra que la cuenta está bien hecha, no que sea la cuenta correcta: eso lo responden HU-3 y HU-4."},
+ {id:"hu2",n:"HU-2",title:"Otros verificadores dicen lo mismo",q:"¿Un segundo verificador está de acuerdo?",
+  story:["revisor","que verificadores distintos acepten la misma demostración","no depender de un solo programa que podría tener un error"],
+  why:"Si el revisor tiene un error, puede aceptar algo falso. Con dos revisores escritos por separado el riesgo baja, aunque no desaparece.",
+  risks:["Un error en el kernel de Lean que acepte una demostración inválida.","Un verificador desactualizado, con un error ya conocido y corregido en otra versión."],
+  ca:[["CA-2.1","¿Comparator, con el kernel de Lean, acepta (C), (D) y Euler en todas las compilaciones?",1,"corridas 1 a 5 sobre B1 a B5"],
+      ["CA-2.2","¿Un segundo verificador escrito aparte (nanoda) también las acepta?",1,"las mismas corridas"],
+      ["CA-2.3","¿Los verificadores incluyen todas las correcciones conocidas de errores del kernel?",1,"evidence/formal/kernel-currency.md"],
+      ["CA-2.4","¿Las revisó una tercera implementación del kernel?",0,"lean4lean no compiló para Lean 4.34"]],
+  fig:"judges",
+  feature:'# language: es\n@HU-2\nCaracterística: Otros verificadores dicen lo mismo\n\n  @CA-2.1 @CA-2.2 @cumple\n  Esquema del escenario: Comparator acepta con dos kernels distintos\n    Dado la compilación "<compilación>"\n    Cuando corro Comparator sobre "<desafío>" con el kernel de Lean y con nanoda\n    Entonces los dos responden "Your solution is okay!"\n    Y el código de salida es 0\n\n    Ejemplos:\n      | compilación | desafío                 |\n      | B1          | Navier–Stokes (C) y (D) |\n      | B1          | Euler                   |\n      | ...         | ...                     |\n      | B5          | Euler                   |\n\n  @CA-2.4 @pendiente\n  Escenario: Una tercera implementación del kernel revisa las demostraciones\n    Dado la compilación B2\n    Cuando intento compilar lean4lean para Lean 4.34\n    Entonces lean4lean revisa las dos soluciones\n    # Resultado real: no compiló. Este criterio queda en NO.',
+  cases:[["CP-2.1","Correr Comparator sobre cada compilación, para Navier–Stokes y para Euler","Corridas 1 a 5","Las 18 pruebas: «Your solution is okay!», código 0"],
+         ["CP-2.2","Repetir la revisión del kernel desde cero (leanchecker --fresh)","Sobre B2 · 19,6 y 22,5 min","Código 0 en las dos soluciones"],
+         ["CP-2.3","Comparar el código del kernel con las versiones que corrigen errores conocidos","Revisión del código fuente","Idéntico a v4.33.1, v4.34.0 y v4.34.1"],
+         ["CP-2.4","Intentar una tercera revisión con lean4lean","Sobre B2","No compiló: versión incompatible"]],
+  limit:"Que dos verificadores coincidan no dice nada sobre un error que ninguno conoce. Todas las corridas fueron en una sola máquina Linux."},
+ {id:"hu3",n:"HU-3",title:"El enunciado no deja pasar trampas",q:"¿Lo verificado es exactamente lo publicado?",
+  story:["revisor","saber que el verificador compara el enunciado exacto","estar seguro de que lo demostrado es lo publicado y no una versión más fácil"],
+  why:"Que algo pase no dice mucho si la prueba deja pasar cualquier cosa. Por eso se le ponen trampas: se cambia un símbolo y se mira si lo nota. Es probar la prueba, lo que en software se llama pruebas de mutación.",
+  risks:["Que el verificador acepte un enunciado distinto, por ejemplo más débil.","Que el enunciado del desafío no sea el que se publicó."],
+  ca:[["CA-3.1","¿El verificador rechaza cada cambio de un símbolo en el enunciado?",1,"6 de 6 mutantes rechazados"],
+      ["CA-3.2","¿Acepta un cambio que no altera el significado (solo un comentario)?",1,"control aceptado"],
+      ["CA-3.3","¿El enunciado del desafío coincide con el que publicó Google DeepMind?",1,"18 declaraciones, comparación textual"],
+      ["CA-3.4","¿Sabemos qué significa un rechazo: «cambió» y no «es falso»?",1,"11 controles con Mathlib"]],
+  fig:"lab",
+  feature:null,
+  cases:[["CP-3.1","Seis trampas de un símbolo sobre el enunciado","B2 · 1,4 min cada una","6 de 6 rechazadas"],
+         ["CP-3.2","Control: cambiar solo un comentario","B2 · 7 min","Aceptado"],
+         ["CP-3.3","Comparar las 18 declaraciones con el texto público de DeepMind","Comparación textual","Coinciden tras normalizar"],
+         ["CP-3.4","11 casos con tres teoremas de Mathlib, registrados antes de correrlos","21-oct","8 de 8 cambios rechazados, 4 de ellos equivalentes"]],
+  limit:"Un rechazo solo dice que el enunciado cambió. Las trampas con f = 0 no dicen nada sobre las alternativas (A) y (B), que siguen abiertas. La comparación con DeepMind es de texto: no se verificó que cada nombre apunte a lo mismo."},
+ {id:"hu4",n:"HU-4",title:"Es la pregunta de Clay",q:"¿Responde el texto oficial del Instituto Clay?",
+  story:["comunidad matemática","que el enunciado en Lean diga lo mismo que el texto oficial del Instituto Clay","saber si lo demostrado responde las alternativas (C) y (D)"],
+  why:"Este es el paso de validar. La máquina puede verificar una cuenta perfecta que responde otra pregunta. Ninguna herramienta lo decide sola.",
+  risks:["Que el enunciado formal deje escoger datos que Clay no permite (puerta trasera en los datos).","Que la clase de soluciones formal sea más estricta que la de Clay (puerta trasera en las soluciones).","Que mi transcripción de Clay a Lean tenga un error."],
+  ca:[["CA-4.1","¿Se revisaron una por una las 16 cláusulas del texto de Clay frente al enunciado formal?",1,"evidence/formal/clay-lean-risk.md"],
+      ["CA-4.2","¿Los teoremas de OpenAI implican, en Lean, una transcripción literal de (C) y (D) de Clay?",1,"bridges/: k1_C y k1_D"],
+      ["CA-4.3","¿Un experto independiente revisó esa transcripción contra el PDF?",0,"hoja K0 sin revisar"],
+      ["CA-4.4","¿Está decidida la lectura de la presión periódica en (D)?",0,"el Instituto Clay no la interpretó"]],
+  fig:"clay",
+  feature:'# language: es\n@HU-4\nCaracterística: Es la pregunta del Instituto Clay\n\n  @CA-4.2 @cumple\n  Escenario: Los teoremas de OpenAI implican el texto literal de Clay en Lean\n    Dado mi transcripción literal de Clay en "bridges/ClayLiteral.lean"\n    Cuando demuestro en Lean "k1_C" y "k1_D" a partir de los teoremas de OpenAI\n    Entonces los dos quedan demostrados para toda viscosidad mayor que 0\n    Y valen con las dos lecturas de "suave" en el tiempo cero\n    Y la solución cero cumple todas las condiciones de Clay\n\n  @CA-4.3 @pendiente\n  Escenario: Un experto independiente revisa la transcripción de Clay\n    Dado la hoja de revisión "bridges/K0_REVIEW.md" con 14 puntos\n    Cuando una persona que conoce el problema la compara con el PDF de Clay\n    Entonces confirma que la transcripción es fiel\n    # Resultado real: nadie la ha revisado. Este criterio queda en NO.',
+  cases:[["CP-4.1","Comparar cada cláusula de Clay con el enunciado formal, por dirección del riesgo","Revisión del 21-oct","6 directas, 9 por hechos estándar, 1 necesita decisión humana"],
+         ["CP-4.2","Escribir Clay en Lean tal cual y demostrar que OpenAI lo implica","Compilación B5","k1_C y k1_D demostrados; de 18 filas de puentes, 16 demostradas"],
+         ["CP-4.2","Control: la solución cero cumple todas las condiciones de Clay","Compilación B5","Cumple: el resultado no es vacío"],
+         ["CP-4.3","Pedir revisión de la transcripción con la hoja K0","—","Pendiente"],
+         ["CP-4.4","Consultar al Instituto Clay sobre la presión periódica en (D)","—","Sin decisión"]],
+  limit:"La conexión con Clay es tan buena como mi transcripción, y nadie independiente la ha revisado. Tampoco se revisa si la demostración en Lean sigue el artículo escrito de OpenAI."},
+ {id:"hu5",n:"HU-5",title:"Otra persona lo repite sin mí",q:"¿Alguien más obtiene el mismo resultado?",
+  story:["persona que quiere revisar este trabajo","correr las comprobaciones en mi computador y obtener el mismo resultado","no tener que confiar en lo que dice el autor"],
+  why:"Una evidencia que solo funciona en la máquina de quien la hizo no es evidencia para nadie más. La huella resume el resultado en 12 caracteres: si la tuya y la mía coinciden para la misma versión de los datos, vimos exactamente lo mismo.",
+  risks:["Que el resultado dependa del sistema operativo o de la versión de Python.","Que solo el autor lo haya corrido."],
+  ca:[["CA-5.1","¿python verificar.py da la misma huella en Windows, macOS y Linux?",1,"CI en cada push"],
+      ["CA-5.2","¿Otras personas lo corrieron y les dio la misma huella?",1,"4 reportes de 3 personas"],
+      ["CA-5.3","¿Hay un reporte de una persona desde Linux?",0,"todavía no"],
+      ["CA-5.4","¿Alguien distinto al autor recompiló las demostraciones en Lean?",0,"todavía no"]],
+  fig:"fp",
+  feature:'# language: es\n@HU-5\nCaracterística: Otra persona lo repite sin mí\n\n  @CA-5.1 @cumple\n  Esquema del escenario: La misma huella en distintos sistemas\n    Dado la versión de los datos "c8edd482375d"\n    Cuando corro "python verificar.py" en "<sistema>" con Python "<python>"\n    Entonces las seis comprobaciones dicen OK\n    Y la huella es "5292-A47D-AFA5"\n\n    Ejemplos:\n      | sistema | python |\n      | Ubuntu  | 3.12   |\n      | macOS   | 3.9    |\n      | macOS   | 3.12   |\n      | Windows | 3.9    |\n      | Windows | 3.12   |',
+  cases:[["CP-5.1","Correr las seis comprobaciones de verificar.py en cada push","CI: Ubuntu (3.12), macOS y Windows (3.9 y 3.12)","Misma huella: 5292-A47D-AFA5"],
+         ["CP-5.2","Pedir a otras personas que lo corran y lo reporten","24-oct · Windows 11 y tres Mac","Los 4 reportes coinciden: C5F0-F1A8-2F4D"],
+         ["CP-5.3","Recibir un reporte desde Linux hecho por una persona","—","Pendiente"],
+         ["CP-5.4","Recompilar en Lean sin intervención del autor","—","Pendiente"]],
+  limit:"Ninguna de esas personas es independiente en sentido estricto. verificar.py revisa la evidencia guardada; no recompila Lean, que toma más de una hora."},
+ {id:"hu6",n:"HU-6",title:"La evidencia es trazable",q:"¿La evidencia está intacta y las herramientas reportan sus fallos?",
+  story:["auditor","que cada resultado apunte a un archivo intacto y que las herramientas reporten sus propios fallos","confiar en la evidencia y no solo en el informe"],
+  why:"Un informe puede decir «todo pasó» aunque un log se haya cambiado o una herramienta haya fallado en silencio. Este paso prueba la evidencia y prueba las pruebas.",
+  risks:["Un archivo de evidencia cambiado después de la corrida.","Un documento que dice un número distinto al del registro.","Una herramienta que reporta éxito cuando falló."],
+  ca:[["CA-6.1","¿Cada archivo de evidencia conserva el hash SHA-256 registrado?",1,"evidence/SHA256SUMS.txt"],
+      ["CA-6.2","¿El README, CLAIMS.md y los registros dicen los mismos números?",1,"evidence/test_consistency.py"],
+      ["CA-6.3","¿Se detecta un log alterado o que falta, aunque el procedimiento publicado no lo note?",1,"revisión de recibos P6"],
+      ["CA-6.4","¿Las pruebas numéricas atrapan los errores sembrados y dejan visibles los que no?",1,"27 PASS · 54 KILLED · 3 SURVIVED"],
+      ["CA-6.5","¿La herramienta reporta sus propios fallos en vez de dar un éxito falso?",1,"INCONCLUSIVE, código 2"]],
+  fig:"hash",
+  feature:'# language: es\n@HU-6\nCaracterística: La evidencia es trazable y la herramienta se revisa a sí misma\n\n  @CA-6.3 @cumple\n  Escenario: Se detecta un recibo que nombra un log que falta\n    Dado los archivos auténticos de una corrida\n    Y un recibo que nombra un log que no existe\n    Cuando corro el procedimiento publicado y la revisión de recibos P6\n    Entonces el procedimiento publicado termina con código 0 y no lo nota\n    Pero P6 termina con código 1 y reporta "P6:receipt-log-missing-comparator-run.log"\n\n  @CA-6.5 @cumple\n  Escenario: La herramienta no da un éxito falso cuando falla el oráculo\n    Dado un oráculo que lanza una excepción o devuelve NaN\n    Cuando el ejecutor numérico procesa el caso\n    Entonces marca el caso como "INCONCLUSIVE" con "oracle_valid: false"',
+  cases:[["CP-6.1","Recalcular el SHA-256 de cada archivo de evidencia","CI en cada push","OK"],
+         ["CP-6.2","Cruzar los números del README y CLAIMS.md con los registros","CI en cada push","OK"],
+         ["CP-6.3","Sobre archivos auténticos, nombrar en un recibo un log que no existe","Experimento registrado","Procedimiento publicado: 0 · P6: 1"],
+         ["CP-6.4","Correr 84 variantes numéricas por equipo en macOS y Linux","Dos equipos","27 · 54 · 3, idéntico en los dos"],
+         ["CP-6.5","Inyectar fallos en el oráculo y en el simulador","Pruebas del ejecutor","INCONCLUSIVE; antes del arreglo, oracle_valid: true (D-3)"]],
+  limit:"Los modelos numéricos son sintéticos: son cálculos de software, no mediciones. Un hash detecta un cambio frente a un valor confiable, pero no prueba quién creó el archivo si alguien puede cambiar el archivo y el valor a la vez."}
+];
+
+/* ---------- marcador ---------- */
+var board=document.getElementById("board");
+HU.forEach(function(h){
+  var yes=h.ca.filter(function(c){return c[2];}).length;
+  var a=document.createElement("a"); a.href="#"+h.id;
+  a.innerHTML='<span class="id">'+h.n+'</span><span class="t">'+esc(h.title)+'</span><span class="dots">'+h.ca.map(function(c){return '<span class="dot'+(c[2]?'':' no')+'" title="'+c[0]+'"></span>';}).join("")+'</span><span class="score">'+yes+' de '+h.ca.length+'</span>';
+  board.appendChild(a);
+});
+
+/* ---------- figuras ---------- */
+function figProv(){
+  var rows=[
+    ["B1","20-oct","cache","Reutilizada","cache","Reutilizadas","here","Compilado"],
+    ["B2","20-oct","down","Descargada (caché oficial)","na","Sin registro","here","Compilado"],
+    ["B3","21-oct · 1 h 27","here","Compilada aquí","down","7 llegaron ya compiladas · D-1","here","Compilado"],
+    ["B4","21-oct · 1 h 29","here","Compilada aquí","here","Compiladas aquí","here","Compilado"],
+    ["B5","21/22-oct · 1 h 15","here","Compilada aquí","here","Compiladas aquí","here","Compilado"],
+    ["Nube","23-oct","down","Caché oficial","na","Sin registro","here","609 de 609"]
+  ];
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">De dónde salió cada pieza</span><h4>Seis compilaciones, una pregunta: ¿qué se compiló aquí?</h4><p>Una compilación puede «pasar» con piezas que compiló otra persona. Por eso cada compilación se revisa pieza por pieza. CA-1.2 se cumple con B4 y B5, donde todo se construyó en la máquina.</p></div>';
+  h+='<div class="scroll"><table class="prov"><thead><tr><th></th><th>Mathlib</th><th>Dependencias pequeñas</th><th>Proyecto de OpenAI</th></tr></thead><tbody>';
+  rows.forEach(function(r){h+='<tr><td class="b">'+r[0]+'<small>'+r[1]+'</small></td><td><div class="cell '+r[2]+'">'+r[3]+'</div></td><td><div class="cell '+r[4]+'">'+r[5]+'</div></td><td><div class="cell '+r[6]+'">'+r[7]+'</div></td></tr>';});
+  h+='</tbody></table></div><div class="keys"><span><i class="sw" style="background:var(--teal-soft);border:1px solid var(--teal)"></i>Compilado en la máquina</span><span><i class="sw" style="background:var(--orange-soft);border:1px solid var(--orange)"></i>Descargado ya compilado</span><span><i class="sw" style="background:var(--sunk)"></i>Caché reutilizada</span><span><i class="sw" style="border:1px dashed var(--line)"></i>Sin registro</span></div></div>';
+  return h;
+}
+function figJudges(){
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Dos jueces</span><h4>La misma demostración, revisada por dos programas escritos aparte</h4><p>Comparator le pasa la demostración al kernel de Lean y a nanoda, otro verificador escrito desde cero. Los dos deben aceptar. Cada cuadro es un veredicto real.</p></div>';
+  h+='<div class="judges"><div class="judge"><b>Kernel de Lean</b><span>El revisor oficial, escrito en C++. Versión v4.34.0-rc2.</span></div><div class="mid">misma demostración<br>→ ¿acepta? ←</div><div class="judge"><b>nanoda</b><span>Un verificador independiente, escrito en Rust por otra persona.</span></div></div>';
+  h+='<div class="scroll"><div class="grid2"><span></span><span class="h">B1</span><span class="h">B2</span><span class="h">B3</span><span class="h">B4</span><span class="h">B5</span>';
+  [["(C)+(D) · Lean"],["(C)+(D) · nanoda"],["Euler · Lean"],["Euler · nanoda"]].forEach(function(r){h+='<span class="r">'+r[0]+'</span>';for(var i=0;i<5;i++)h+='<span class="acc">acepta</span>';});
+  h+='<span class="r">fresh replay</span><span class="acc grey">—</span><span class="acc">acepta ×2</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
+  h+='<span class="r">lean4lean</span><span class="acc grey">—</span><span class="acc grey">no compiló</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
+  h+='</div></div></div>';
+  return h;
+}
+var MUT=[
+ {id:"T1",t:"(C) sin fuerza externa",del:"InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧",add:"InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ <m>f = 0 ∧</m>",ctx:"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :",say:"Pide la ruptura sin fuerza externa. Esa versión estaría cerca del problema que sigue abierto. Comparator la rechaza porque no es el enunciado del desafío; el rechazo no dice nada sobre el problema abierto.",v:"k",tm:"1,4 min"},
+ {id:"T2",t:"(D) sin fuerza externa",del:"InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧",add:"InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧ <m>f = 0 ∧</m>",ctx:"theorem navier_stokes_breakdown_periodic (nu : ℝ) (hnu : nu > 0) :",say:"La misma trampa en el caso periódico (D).",v:"k",tm:"1,4 min"},
+ {id:"T3",t:"(C) con datos periódicos",del:"<m>InitialVelocityConditionDecay</m> u₀ ∧ <m>ForceConditionDecay</m> f ∧",add:"<m>InitialVelocityConditionPeriodic</m> u₀ ∧ <m>ForceConditionPeriodic</m> f ∧",ctx:"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :",say:"Cambia el tipo de datos de (C): de datos que decaen en ℝ³ a datos periódicos. Es otro problema.",v:"k",tm:"1,4 min"},
+ {id:"T4",t:"(C) con viscosidad ≥ 0",del:"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu <m>></m> 0) :",add:"theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu <m>≥</m> 0) :",ctx:"",say:"Permite ν = 0, un fluido sin viscosidad. Un solo símbolo cambia la física del problema.",v:"k",tm:"1,4 min"},
+ {id:"T5",t:"(D) sin la negación",del:"<m>¬</m> (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by",add:"(∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by",ctx:"",say:"Quitar ¬ convierte «no existe solución» en «existe solución»: afirma lo contrario.",v:"k",tm:"1,4 min"},
+ {id:"T6",t:"Euler con T* ≤ 1/2",del:"0 < Tstar ∧ Tstar ≤ <m>1</m> ∧",add:"0 < Tstar ∧ Tstar ≤ <m>1 / 2</m> ∧",ctx:"",say:"Exige que la singularidad de Euler aparezca antes de la mitad del tiempo. Es una afirmación más fuerte que la publicada.",v:"k",tm:"1,4 min"},
+ {id:"C",t:"Control: solo un comentario",del:"/-- (C) Breakdown of Navier–Stokes solutions on ℝ³. -/",add:"/-- (C) Breakdown of Navier–Stokes solutions on ℝ³. <m>(comentario cambiado)</m> -/",ctx:"",say:"Un comentario no cambia el enunciado. Si Comparator lo rechazara, sus seis rechazos no dirían nada: rechazaría por cualquier motivo. (El texto exacto del comentario cambiado está en control_comment.diff.)",v:"ok",tm:"7 min",ctl:true}
+];
+function hm(s){return esc(s).replace(/&lt;m&gt;/g,"<mark>").replace(/&lt;\/m&gt;/g,"</mark>");}
+function figLab(){
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Laboratorio de trampas</span><h4>Seis cambios de un símbolo y un control</h4><p>Cambios reales sobre el enunciado del desafío (los archivos .diff están en el repositorio). Elige uno: ves la línea original (−), la línea cambiada (+) y el veredicto de Comparator.</p></div>';
+  h+='<div class="lab"><div class="traps" role="group" aria-label="Trampas">';
+  MUT.forEach(function(m,i){h+='<button type="button" class="trap'+(m.ctl?' ctl':'')+'" data-i="'+i+'" aria-pressed="false"><span class="tid">'+m.id+'</span><span class="tt">'+esc(m.t)+'</span></button>';});
+  h+='</div><div class="labout" id="labout" aria-live="polite"></div></div></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">Un rechazo no es un «falso»</span><h4>Lo que enseñaron 11 controles con teoremas de Mathlib</h4><p>Con tres teoremas que Mathlib ya demuestra (infinitud de primos, Cauchy–Schwarz y convergencia dominada) se probaron cambios de cuatro tipos. Comparator rechazó los 8 cambios, aunque cuatro eran equivalentes. Para separar los tipos hizo falta otra demostración en Lean para cada caso.</p></div><div class="quad">';
+  h+='<article><span class="q">Equivalente por definición · rechazado</span><span class="ex">n + 1 ≤ p  en vez de  n &lt; p</span><p>Lean lo reduce a lo mismo (Iff.rfl), y aun así Comparator lo rechaza: compara la forma del enunciado.</p></article>';
+  h+='<article><span class="q">Equivalente con demostración · rechazado</span><span class="ex">|a| ≤ bc  ⇔  a² ≤ b²c²  (b, c ≥ 0)</span><p>Una reformulación de Cauchy–Schwarz. Es verdad, pero no es el mismo texto.</p></article>';
+  h+='<article><span class="q">Más débil y verdadero · rechazado</span><span class="ex">∀ n ≤ 100, ∃ p primo &gt; n</span><p>Lo implica el teorema completo, pero no lo implica a él. Un ejemplo no es el teorema.</p></article>';
+  h+='<article><span class="q">Falso · rechazado</span><span class="ex">desigualdad estricta en Cauchy–Schwarz</span><p>Refutado con x = y = 1. Comparator lo rechaza igual que a los anteriores: por eso su rechazo no distingue.</p></article>';
+  h+='</div></div>';
+  return h;
+}
+var CL=[
+ ["ν > 0, n = 3","parámetro","d","(nu : ℝ) (hnu : nu > 0)","Lean lo demuestra para todo ν > 0, lo que cubre el ν que da Clay."],
+ ["u° suave","datos","d","ContDiff ℝ ∞ u₀","∞ es C^∞, no analítico."],
+ ["div u° = 0","datos","s","∀ x, ∇⬝ u₀ x = 0","La traza de la derivada es la suma de las derivadas parciales."],
+ ["(4) decaimiento de u°","datos (C)","s","‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖)^K","La norma de la derivada m-ésima y la mayor parcial de orden m se acotan mutuamente."],
+ ["f suave en ℝ³ × [0, ∞)","datos","s","ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0)","Suave dentro del semiespacio cerrado equivale a suave hasta el borde."],
+ ["(5) decaimiento de f","datos (C)","s","… ≤ C / (1 + ‖x‖ + t)^K","La derivada conjunta en (x, t) controla las parciales mixtas."],
+ ["(8) u°, f periódicas","datos (D)","d","IsOnePeriodic u₀","f(x + eᵢ) = f(x) para cada vector unitario."],
+ ["(9) decaimiento de f periódica","datos (D)","s","… ≤ C / (1 + t)^K","Como en (5)."],
+ ["(1) la ecuación","solución","s","derivWithin … + fderiv … = nu • Δ … − gradient … + f","(u·∇)u es la derivada espacial aplicada a u; Δ y gradient son las versiones de Mathlib."],
+ ["(2) div u = 0","solución","s","∀ x, ∀ t ≥ 0, ∇⬝ (v · t) x = 0","Como div u° = 0."],
+ ["(3) condición inicial","solución","d","∀ x, v x 0 = u₀ x","Igual."],
+ ["(6), (11) p, u ∈ C^∞","solución","s","ContDiffOn ℝ ∞ (↿v) …","Por el teorema de extensión de Seeley (1964), ninguna clase es más estricta."],
+ ["(7) energía acotada","solución (C)","s","MemLp (‖v · t‖) 2 ∧ ∃ E, ∀ t ≥ 0, ∫ ‖v‖² < E","MemLp evita que la integral de Bochner valga 0 para funciones no integrables."],
+ ["(10) u periódica","solución (D)","d","∀ t ≥ 0, IsOnePeriodic (v · t)","Igual."],
+ ["Fe de erratas: p periódica","solución (D)","a","∀ t ≥ 0, IsOnePeriodic (p · t)","La fe de erratas la pone en la ecuación (8), que es de datos, pero p es parte de la solución. Leerla como condición de la solución es una decisión humana."],
+ ["Forma lógica de (C), (D)","—","d","∃ u₀ f, datos ∧ ¬ ∃ v p, solución","«Existen u°, f… para los que no existen soluciones (p, u).»"]
+];
+function figClay(){
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Mapa de las 16 cláusulas</span><h4>Cada cláusula del texto de Clay, frente al enunciado en Lean</h4><p>Toca un cuadro para ver la cláusula, su versión en Lean y por qué coincide. Oscuro: coincide directamente. Claro: coincide por un hecho estándar, ahora demostrado en Lean. Naranja: necesita una decisión humana.</p></div>';
+  h+='<div class="clauses" role="group" aria-label="Cláusulas">';
+  CL.forEach(function(c,i){var cls=c[2]==="d"?"direct":c[2]==="s"?"std":"att";h+='<button type="button" class="cl '+cls+'" data-i="'+i+'" aria-pressed="false" aria-label="'+esc(c[0])+'">'+(i+1)+'</button>';});
+  h+='</div><div class="clinfo" id="clinfo" aria-live="polite"></div>';
+  h+='<div class="keys"><span><i class="sw" style="background:var(--teal)"></i>6 directas</span><span><i class="sw" style="background:var(--teal-soft);border:1px solid var(--teal)"></i>9 por hechos estándar</span><span><i class="sw" style="background:var(--orange-soft);border:2px solid var(--orange)"></i>1 necesita decisión humana</span></div></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">Por qué importa la dirección</span><h4>Las dos maneras de hacer (C) y (D) más fáciles</h4><p>(C) y (D) dicen: existen datos tales que no existe solución. Hay exactamente dos maneras de volver eso más fácil de demostrar, y la revisión busca las dos.</p></div><div class="loop">';
+  h+='<article><h4>Puerta trasera en los datos</h4><p>Si el enunciado formal deja escoger datos que Clay no permite, el «existen datos» se vuelve más fácil. Es seguro cuando cada condición formal sobre los datos implica la de Clay.</p></article>';
+  h+='<article><h4>Puerta trasera en las soluciones</h4><p>Si la clase de soluciones formal es más estricta que la de Clay, «no existe ninguna» excluye menos candidatas y es más fácil. Es seguro cuando toda solución de Clay es también solución formal. Aquí vive la presión periódica.</p></article></div></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">La cadena completa</span><h4>Del teorema de OpenAI al texto de Clay</h4><p>Cada flecha está demostrada en Lean, salvo la última, que es humana.</p></div><div class="bridge">';
+  h+='<div class="node"><b>Teoremas de OpenAI</b><span>(C), (D) en el lenguaje del desafío</span></div><span class="ar">→</span><div class="node"><b>Puentes</b><span>18 filas: 16 demostradas</span></div><span class="ar">→</span><div class="node"><b>ClayLiteral.lean</b><span>mi transcripción de (C) y (D)</span></div>';
+  h+='</div><div class="bridge" style="margin-top:-4px"><span class="ar">→</span><div class="node person"><b>¿Fiel al PDF de Clay?</b><span>Revisión humana pendiente (CA-4.3)</span></div></div>';
+  h+='<p class="note">Control de no vacuidad: se demostró que la solución cero cumple todas las condiciones de Clay. Sin ese control, un enunciado con condiciones imposibles haría trivial el «no existe solución».</p></div>';
+  return h;
+}
+function figFp(){
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Calculadora de huella</span><h4>La huella, calculada aquí mismo</h4><p>verificar.py une la versión de los datos y el resultado de las seis comprobaciones en un texto, le aplica SHA-256 y toma los primeros 12 caracteres. Con todo en OK y la versión vigente da la referencia. Cambia una comprobación a FALLA, o un carácter de la versión, y mira qué pasa.</p></div>';
+  h+='<div class="fp"><div><label for="fp-ver">Versión de los datos<input type="text" id="fp-ver" value="c8edd482375d" spellcheck="false" autocomplete="off"></label><div class="checks" id="fp-checks"></div></div>';
+  h+='<div class="fpout"><span class="eyebrow">Texto que se resume</span><div class="raw" id="fp-raw"></div><span class="eyebrow">Huella</span><div class="fpbig" id="fp-out">····-····-····</div><div class="match" id="fp-match"></div></div></div></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">Quiénes lo han corrido</span><h4>Cinco combinaciones en el CI y cuatro reportes de personas</h4><p>Los reportes del 24 de octubre fueron con la versión anterior de los datos, cuya referencia era C5F0-F1A8-2F4D. El cuadro punteado es el que falta.</p></div><div class="reports">';
+  [["CI","Ubuntu · Python 3.12"],["CI","macOS · Python 3.9"],["CI","macOS · Python 3.12"],["CI","Windows · Python 3.9"],["CI","Windows · Python 3.12"]].forEach(function(r){h+='<div class="rep ci"><b>'+r[1]+'</b><span>CI · cada push</span></div>';});
+  [["#1","Windows 11"],["#2","macOS"],["#3","macOS"],["#4","macOS"]].forEach(function(r){h+='<div class="rep"><b>'+r[1]+'</b><span>Reporte '+r[0]+' · coincide</span></div>';});
+  h+='<div class="rep miss"><b>Linux</b><span>Falta un reporte de una persona</span></div></div></div>';
+  return h;
+}
+function figHash(){
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Efecto avalancha</span><h4>Cambiar un carácter cambia todo el hash</h4><p>Así se sabe si un archivo de evidencia cambió: su SHA-256 deja de coincidir con el registrado. Edita el texto y mira cuántos caracteres del hash cambian respecto del original.</p></div><div class="aval">';
+  h+='<label for="hash-in" style="font-size:13.5px;font-weight:700">Texto<input type="text" id="hash-in" value="609 de 609 módulos, código de salida 0" spellcheck="false" autocomplete="off" style="font:inherit;font-family:var(--f-mono);font-size:14px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--ground);color:var(--ink);width:100%;margin-top:4px"></label>';
+  h+='<span class="eyebrow">SHA-256 del original</span><div class="hexrow" id="hash-orig"></div><span class="eyebrow">SHA-256 de tu texto</span><div class="hexrow" id="hash-now"></div><p class="count" id="hash-diff"></p></div></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">Probar la prueba, en números</span><h4>84 variantes numéricas por equipo</h4><p>Nueve modelos sintéticos, 27 configuraciones. Cada cuadro es una variante. Las 27 de línea base deben pasar; los 54 mutantes deben ser atrapados; 3 calibraciones diminutas sobreviven a propósito, para mostrar dónde está el límite. macOS y Linux clasificaron igual cada una.</p></div>';
+  h+='<div class="waffle" aria-label="27 PASS, 54 KILLED, 3 SURVIVED">';
+  for(var i=0;i<84;i++){h+='<i class="w '+(i<27?'p':i<81?'k':'s')+'"></i>';}
+  h+='</div><div class="keys"><span><i class="sw" style="background:var(--teal)"></i>27 PASS</span><span><i class="sw" style="background:var(--orange)"></i>54 KILLED (51 comportamientos distintos)</span><span><i class="sw" style="border:2px solid var(--mute)"></i>3 SURVIVED: un cambio relativo de 5 × 10⁻⁸, unas 60 veces bajo la tolerancia</span></div><p class="note">Que un mutante sobreviva no prueba que sea equivalente: el mutante atrapado más pequeño tiene un error normalizado de 0,12, y entre los dos no se muestreó nada, así que el umbral de detección no está medido.</p></div>';
+  h+='<div class="figure"><div class="cap"><span class="eyebrow">Revisión de recibos</span><h4>Un recibo que nombra un log que no existe</h4><p>Mismos archivos auténticos, dos revisores. El procedimiento publicado no revisa recibos (y no dice hacerlo). La revisión P6 sí.</p></div><div class="lanes">';
+  h+='<div class="lane"><span class="who">Procedimiento publicado</span><span class="st">lee los archivos</span><span class="st">no mira el recibo</span><span class="st bad">código 0 · no lo nota</span></div>';
+  h+='<div class="lane"><span class="who">Revisión P6</span><span class="st">lee los archivos</span><span class="st">cruza recibo y logs</span><span class="st good">código 1 · log faltante</span></div></div></div>';
+  return h;
+}
+var FIG={prov:figProv,judges:figJudges,lab:figLab,clay:figClay,fp:figFp,hash:figHash};
+
+/* ---------- render de historias ---------- */
+var husEl=document.getElementById("hus");
+HU.forEach(function(h){
+  var yes=h.ca.filter(function(c){return c[2];}).length;
+  var s='<section class="hu" id="'+h.id+'"><div class="hu-head"><div><span class="eyebrow">'+h.n+'</span><h2>'+esc(h.title)+'</h2></div><span class="pill '+(yes===h.ca.length?'si':'n')+'">'+yes+' de '+h.ca.length+' criterios en sí</span></div>';
+  s+='<p class="story"><b>Como</b> '+esc(h.story[0])+', <b>quiero</b> '+esc(h.story[1])+', <b>para</b> '+esc(h.story[2])+'.</p>';
+  s+='<div class="prose"><p><strong>Por qué importa.</strong> '+esc(h.why)+'</p></div>';
+  s+='<div class="risk"><h4>Análisis: ¿qué podría salir mal?</h4><ul>'+h.risks.map(function(r){return '<li>'+esc(r)+'</li>';}).join("")+'</ul></div>';
+  s+='<div class="scroll"><table class="crit"><thead><tr><th>Criterio</th><th>Pregunta de sí o no</th><th>¿Cumple?</th><th>Evidencia</th></tr></thead><tbody>';
+  h.ca.forEach(function(c){s+='<tr><td>'+c[0]+'</td><td>'+esc(c[1])+'</td><td><span class="pill '+(c[2]?'si':'no')+'">'+(c[2]?'Sí':'No')+'</span></td><td class="ev">'+esc(c[3])+'</td></tr>';});
+  s+='</tbody></table></div>';
+  s+=FIG[h.fig]();
+  if(h.feature){s+='<details class="gk"><summary>Escenarios en Gherkin · features/'+(h.n.replace("HU-","0"))+'-*.feature</summary><div class="code">'+codeBlock(h.feature)+'</div></details>';}
+  else{s+='<details class="gk"><summary>Escenarios en Gherkin · features/03-trampas-al-enunciado.feature</summary><div class="code">'+codeBlock('# language: es\n@HU-3\nCaracterística: El enunciado no deja pasar trampas\n\n  Antecedentes:\n    Dado la compilación B2\n    Y una copia del enunciado del desafío\n\n  @CA-3.1 @cumple\n  Esquema del escenario: Cada trampa de un símbolo es rechazada\n    Dado que cambio un solo símbolo del enunciado: "<trampa>"\n    Cuando corro Comparator con el enunciado cambiado\n    Entonces Comparator lo rechaza con "statements do not match"\n    Y el código de salida no es 0\n\n    Ejemplos:\n      | trampa                                            |\n      | (C) sin fuerza externa: f = 0                     |\n      | (D) sin fuerza externa: f = 0                     |\n      | (C) datos periódicos en vez de datos en ℝ³        |\n      | (C) viscosidad ≥ 0 en vez de > 0                  |\n      | (D) sin la negación: existencia en vez de ruptura |\n      | Euler: tiempo T* ≤ 1/2 en vez de T* ≤ 1           |\n\n  @CA-3.2 @cumple\n  Escenario: Un cambio sin significado es aceptado (control)\n    Dado que solo cambio un comentario del enunciado\n    Cuando corro Comparator\n    Entonces Comparator responde "Your solution is okay!"')+'</div></details>';}
+  s+='<div class="scroll"><table class="cases"><thead><tr><th>Caso</th><th>Qué se hizo</th><th>Ejecución</th><th>Resultado</th></tr></thead><tbody>';
+  h.cases.forEach(function(c){s+='<tr><td>'+c[0]+'</td><td>'+esc(c[1])+'</td><td>'+esc(c[2])+'</td><td class="res">'+esc(c[3])+'</td></tr>';});
+  s+='</tbody></table></div>';
+  s+='<p class="limit"><b>Lo que esto no prueba.</b> '+esc(h.limit)+'</p></section>';
+  husEl.insertAdjacentHTML("beforeend",s);
+});
+
+/* laboratorio */
+var labout=document.getElementById("labout"), trapBtns=document.querySelectorAll(".trap");
+function showTrap(i){
+  var m=MUT[i];
+  trapBtns.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.i==i?"true":"false");});
+  var d='<div class="diff">'+(m.ctx?'<span class="ln ctx">  '+esc(m.ctx)+'</span>':'')+'<span class="ln del">− '+hm(m.del)+'</span><span class="ln add">+ '+hm(m.add)+'</span></div>';
+  var v=m.v==="k"?'<span class="big killed">RECHAZADO</span><span class="mono" style="color:var(--mute)">statements do not match · '+m.tm+'</span>':'<span class="big ok">ACEPTADO</span><span class="mono" style="color:var(--mute)">Your solution is okay! · '+m.tm+'</span>';
+  labout.innerHTML=d+'<div class="verdict">'+v+'</div><p class="say">'+esc(m.say)+'</p>';
+}
+trapBtns.forEach(function(b){b.addEventListener("click",function(){showTrap(+b.dataset.i);});});
+showTrap(3);
+
+/* cláusulas */
+var clinfo=document.getElementById("clinfo"), clBtns=document.querySelectorAll(".cl");
+function showCl(i){
+  var c=CL[i]; clBtns.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.i==i?"true":"false");});
+  var st=c[2]==="d"?'<span class="pill si">directa</span>':c[2]==="s"?'<span class="pill si">hecho estándar · demostrado en Lean</span>':'<span class="pill no">decisión humana</span>';
+  clinfo.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="nm">'+(i+1)+' · '+esc(c[0])+'</span>'+st+'<span class="pill n">'+esc(c[1])+'</span></div><div class="lean">'+esc(c[3])+'</div><p>'+esc(c[4])+'</p>';
+}
+clBtns.forEach(function(b){b.addEventListener("click",function(){showCl(+b.dataset.i);});});
+showCl(14);
+
+/* ---------- SHA-256 (implementación local, sin red) ---------- */
+function sha256hex(str){
+  var bytes=new TextEncoder().encode(str);
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  var l=bytes.length, nb=((l+9+63)>>6)<<6, m=new Uint8Array(nb); m.set(bytes); m[l]=0x80;
+  var bits=l*8; for(var i=0;i<8;i++){m[nb-1-i]=Math.floor(bits/Math.pow(2,8*i))&0xff;}
+  var w=new Uint32Array(64);
+  function r(x,n){return (x>>>n)|(x<<(32-n));}
+  for(var o=0;o<nb;o+=64){
+    for(var t=0;t<16;t++){w[t]=(m[o+4*t]<<24)|(m[o+4*t+1]<<16)|(m[o+4*t+2]<<8)|m[o+4*t+3];}
+    for(t=16;t<64;t++){var s0=r(w[t-15],7)^r(w[t-15],18)^(w[t-15]>>>3), s1=r(w[t-2],17)^r(w[t-2],19)^(w[t-2]>>>10); w[t]=(w[t-16]+s0+w[t-7]+s1)|0;}
+    var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+    for(t=0;t<64;t++){var S1=r(e,6)^r(e,11)^r(e,25), ch=(e&f)^(~e&g), t1=(h+S1+ch+K[t]+w[t])|0, S0=r(a,2)^r(a,13)^r(a,22), mj=(a&b)^(a&c)^(b&c), t2=(S0+mj)|0; h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;}
+    H[0]=(H[0]+a)|0;H[1]=(H[1]+b)|0;H[2]=(H[2]+c)|0;H[3]=(H[3]+d)|0;H[4]=(H[4]+e)|0;H[5]=(H[5]+f)|0;H[6]=(H[6]+g)|0;H[7]=(H[7]+h)|0;
+  }
+  return H.map(function(x){return ("00000000"+(x>>>0).toString(16)).slice(-8);}).join("");
+}
+
+/* calculadora de huella */
+var STEPS=["Archivos intactos (SHA-256)","Corridas numéricas guardadas, iguales entre Mac y Linux","Volver a correr las 84 variantes numéricas","README, CLAIMS y registros dicen lo mismo","Recibos de los controles Mathlib","Comprobación de recibos en los paquetes publicados"];
+var okState=STEPS.map(function(){return true;});
+var chkEl=document.getElementById("fp-checks"), verEl=document.getElementById("fp-ver");
+STEPS.forEach(function(n,i){
+  var row=document.createElement("div"); row.className="chk";
+  var lab=document.createElement("span"); lab.textContent=(i+1)+". "+n;
+  var b=document.createElement("button"); b.type="button"; b.dataset.ok="1"; b.textContent="OK"; b.setAttribute("aria-label",n+": OK");
+  b.addEventListener("click",function(){okState[i]=!okState[i]; b.dataset.ok=okState[i]?"1":"0"; b.textContent=okState[i]?"OK":"FALLA"; b.setAttribute("aria-label",n+": "+b.textContent); calcFp();});
+  row.appendChild(lab); row.appendChild(b); chkEl.appendChild(row);
+});
+function calcFp(){
+  var text=verEl.value.trim()+"|"+STEPS.map(function(n,i){return n+"="+(okState[i]?"OK":"FALLA");}).join("|");
+  var hx=sha256hex(text).slice(0,12).toUpperCase(), fp=hx.slice(0,4)+"-"+hx.slice(4,8)+"-"+hx.slice(8);
+  document.getElementById("fp-raw").textContent=text;
+  document.getElementById("fp-out").textContent=fp;
+  var mt=document.getElementById("fp-match");
+  if(fp==="5292-A47D-AFA5"){mt.className="match y";mt.textContent="Coincide con la referencia de la versión c8edd482375d.";}
+  else{mt.className="match n";mt.textContent="No coincide con la referencia 5292-A47D-AFA5. Un solo cambio basta para que la huella sea otra.";}
+}
+verEl.addEventListener("input",calcFp); calcFp();
+
+/* avalancha */
+var hin=document.getElementById("hash-in"), ORIG=hin.value, ho=sha256hex(ORIG);
+document.getElementById("hash-orig").textContent=ho;
+function calcHash(){
+  var hn=sha256hex(hin.value), out="", diff=0;
+  for(var i=0;i<64;i++){var ch=hn.charAt(i); if(ch!==ho.charAt(i)){diff++; out+='<span class="d">'+ch+'</span>';} else out+=ch;}
+  document.getElementById("hash-now").innerHTML=out;
+  document.getElementById("hash-diff").textContent=hin.value===ORIG?"Es el mismo texto: el hash es idéntico. Cambia una letra, un espacio o un número.":diff+" de 64 caracteres cambiaron. Con un cambio cualquiera, en promedio cambian unos 60.";
+}
+hin.addEventListener("input",calcHash); calcHash();
+
+/* ---------- trazabilidad ---------- */
+var CASEX={"CA-1.1":["CP-1.1","B1, B2, nube 23-oct"],"CA-1.2":["CP-1.2","B4, B5"],"CA-1.3":["CP-1.3","B5"],"CA-2.1":["CP-2.1, CP-2.2","Corridas 1–5; fresh B2"],"CA-2.2":["CP-2.1","Corridas 1–5"],"CA-2.3":["CP-2.3","Revisión del código fuente"],"CA-2.4":["CP-2.4","lean4lean"],"CA-3.1":["CP-3.1","6 mutantes sobre B2"],"CA-3.2":["CP-3.2","Control sobre B2"],"CA-3.3":["CP-3.3","Comparación textual"],"CA-3.4":["CP-3.4","11 casos con Mathlib"],"CA-4.1":["CP-4.1","Revisión de riesgos"],"CA-4.2":["CP-4.2","k1_C, k1_D en B5"],"CA-4.3":["CP-4.3","—"],"CA-4.4":["CP-4.4","—"],"CA-5.1":["CP-5.1","CI en cada push"],"CA-5.2":["CP-5.2","4 reportes, 24-oct"],"CA-5.3":["CP-5.3","—"],"CA-5.4":["CP-5.4","—"],"CA-6.1":["CP-6.1","CI"],"CA-6.2":["CP-6.2","CI"],"CA-6.3":["CP-6.3","Experimento P6"],"CA-6.4":["CP-6.4","macOS y Linux"],"CA-6.5":["CP-6.5","Fallos inyectados"]};
+var ROWS=[]; HU.forEach(function(h){h.ca.forEach(function(c){ROWS.push({hu:h.n,id:c[0],q:c[1],ok:c[2]});});});
+var fHu="Todas", fSt="Todos";
+var fhuEl=document.getElementById("f-hu"), fstEl=document.getElementById("f-st");
+["Todas"].concat(HU.map(function(h){return h.n;})).forEach(function(v){var b=document.createElement("button");b.type="button";b.className="fbtn";b.textContent=v;b.setAttribute("aria-pressed",v===fHu?"true":"false");b.addEventListener("click",function(){fHu=v;fhuEl.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x.textContent===v?"true":"false");});drawTrace();});fhuEl.appendChild(b);});
+["Todos","Sí","No"].forEach(function(v){var b=document.createElement("button");b.type="button";b.className="fbtn";b.textContent=v;b.setAttribute("aria-pressed",v===fSt?"true":"false");b.addEventListener("click",function(){fSt=v;fstEl.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x.textContent===v?"true":"false");});drawTrace();});fstEl.appendChild(b);});
+function drawTrace(){
+  var rows=ROWS.filter(function(r){return (fHu==="Todas"||r.hu===fHu)&&(fSt==="Todos"||(fSt==="Sí")===!!r.ok);});
+  document.getElementById("tbody").innerHTML=rows.map(function(r){var cx=CASEX[r.id];return '<tr><td>'+r.id+'</td><td>'+esc(r.q)+'</td><td class="mono">'+cx[0]+'</td><td>'+esc(cx[1])+'</td><td><span class="pill '+(r.ok?'si':'no')+'">'+(r.ok?'Sí':'No')+'</span></td></tr>';}).join("");
+  var y=rows.filter(function(r){return r.ok;}).length;
+  document.getElementById("tcount").textContent=rows.length+" criterios · "+y+" en sí · "+(rows.length-y)+" en no";
+}
+drawTrace();
+
+/* ---------- índice activo ---------- */
+var links=[].slice.call(document.querySelectorAll("#toc a")), map={};
+links.forEach(function(a){map[a.getAttribute("href").slice(1)]=a;});
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.remove("on");});var a=map[e.target.id];if(a){a.classList.add("on");if(a.scrollIntoView&&window.innerWidth<980){a.scrollIntoView({block:"nearest",inline:"center"});}}}});},{rootMargin:"-35% 0px -60% 0px"});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
+}
+})();
+</script>
+
+</body>
+</html>
