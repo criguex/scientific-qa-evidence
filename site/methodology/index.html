@@ -247,6 +247,11 @@ details.gk .code{border-radius:0 0 14px 14px}
 .judge b{font-family:var(--f-display);font-size:17px}
 .judge span{font-size:13.5px;color:var(--ink-2)}
 .judges .mid{font-family:var(--f-mono);font-size:12.5px;color:var(--mute);text-align:center}
+.third{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--ground);display:grid;gap:10px}
+.third .eyebrow{color:var(--teal)}
+.grid3{display:grid;grid-template-columns:110px repeat(2,minmax(0,1fr));gap:6px;font-size:13px}
+.grid3 .h{font-family:var(--f-mono);font-size:11.5px;color:var(--mute);font-weight:600;align-self:end;padding-bottom:2px}
+.grid3 .r{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);align-self:center}
 
 /* HU-3 laboratorio */
 .lab{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px}
@@ -534,8 +539,8 @@ html{scroll-behavior:smooth}
         <li><span class="num">3</span><div><h4>Write the acceptance criteria</h4><p>Each risk becomes a yes-or-no question that evidence can answer.</p><p class="here"><b>24 criteria</b>. Without evidence, the answer is no.</p></div></li>
         <li><span class="num">4</span><div><h4>Write the scenarios in Gherkin</h4><p>Each criterion is written with Given, When and Then before anything runs. That way nobody adjusts the expectation to the result.</p><p class="here"><b>Six .feature files</b>, one per story, validated with the official parser.</p></div></li>
         <li><span class="num">5</span><div><h4>Design the test cases</h4><p>Each scenario becomes concrete actions: build, run a checker, plant an error.</p><p class="here">Builds with and without cache, <b>6 traps and 1 control</b>, 11 Mathlib controls, one fingerprint on five systems.</p></div></li>
-        <li><span class="num">6</span><div><h4>Run and keep the evidence</h4><p>Each run leaves its command, version, hash and exit code, failed runs included.</p><p class="here">Builds B1 to B5, a cloud rebuild and <b>every log with its SHA-256</b>.</p></div></li>
-        <li><span class="num">7</span><div><h4>Decide and report</h4><p>Each criterion ends as yes or no, with its evidence. Defects are recorded, my own included, and what is missing is said plainly.</p><p class="here"><b>19 of 24</b> criteria at yes. 3 defects, all mine. 0 in OpenAI's proof.</p></div></li>
+        <li><span class="num">6</span><div><h4>Run and keep the evidence</h4><p>Each run leaves its command, version, hash and exit code, failed runs included.</p><p class="here">Builds B1 to B5, a cloud rebuild, a campaign on three Lean releases and <b>every log with its SHA-256</b>.</p></div></li>
+        <li><span class="num">7</span><div><h4>Decide and report</h4><p>Each criterion ends as yes or no, with its evidence. Defects are recorded, my own included, and what is missing is said plainly.</p><p class="here"><b>20 of 24</b> criteria at yes. 4 defects, all mine. 0 in OpenAI's proof.</p></div></li>
       </ol>
     </section>
 
@@ -551,11 +556,12 @@ html{scroll-behavior:smooth}
     <section id="defectos">
       <span class="eyebrow">Chapter 6</span>
       <h2>Defects found</h2>
-      <div class="prose"><p>An audit that only finds other people's errors is suspicious. These three defects were mine; the same audit caught them in later steps and they were fixed in public. They are findings 1, 3 and 8 in FINDINGS.md.</p></div>
+      <div class="prose"><p>An audit that only finds other people's errors is suspicious. These four defects were mine, and the same audit caught them in later steps. The first three were fixed in public; the fourth was documented without touching the published files, so the fingerprint does not change. They are findings 1, 3, 8 and 9 in FINDINGS.md.</p></div>
       <div class="bugs">
         <article class="bug"><span class="id">D-1 · finding 1</span><h4>A "clean" build was not clean</h4><dl><dt>What happened</dt><dd>Build B3 had received 7 small dependencies already compiled (399 modules). The build log did not show it.</dd><dt>How it was found</dt><dd>By comparing each .olean file's timestamp with the build start, and inspecting the package folder.</dd><dt>Fix</dt><dd>B4 and B5 compile everything on the machine, with no cache.</dd></dl></article>
         <article class="bug"><span class="id">D-2 · finding 3</span><h4>"The same build" was two builds</h4><dl><dt>What happened</dt><dd>Two runs reported as using the same build had used different builds.</dd><dt>How it was found</dt><dd>With per-run receipts and the original hash of each file.</dd><dt>Fix</dt><dd>Every run now says which build it used.</dd></dl></article>
         <article class="bug"><span class="id">D-3 · finding 8</span><h4>The tool said "valid" when it failed</h4><dl><dt>What happened</dt><dd>The numerical runner reported oracle_valid: true even when the oracle had raised an exception or returned NaN.</dd><dt>How it was found</dt><dd>By testing the tool itself: failures were injected on purpose.</dd><dt>Fix</dt><dd>It now marks INCONCLUSIVE and, if export fails, exits with code 2.</dd></dl></article>
+        <article class="bug"><span class="id">D-4 · finding 9</span><h4>Three published traps did not apply</h4><dl><dt>What happened</dt><dd>Three of the seven published mutant diffs (domain_R3_to_periodic_data, force_zero_R3 and force_zero_periodic) lack their last context line, a single space. As published they do not apply: git apply stops with "corrupt patch".</dd><dt>How it was found</dt><dd>By rerunning the traps in the version campaign on 24 Nov. With the line restored, each diff's SHA-256 matches the original recorded in PROVENANCE.md: the original runs used complete diffs.</dd><dt>Status</dt><dd>Documented. The restored copies are in experiments/version-port/R0/diffs/. The published ones are left unchanged, because changing them would change the data version and the fingerprint.</dd></dl></article>
         <div class="zero"><span class="n">0</span><p><b>Defects found in OpenAI's proofs</b>, within this scope. Zero defects is not a certification: it is what these tests saw.</p></div>
       </div>
     </section>
@@ -579,7 +585,6 @@ html{scroll-behavior:smooth}
         <li><span class="id">AC-4.4</span><div><b>Decide how to read periodic pressure in (D)</b><span>Does Clay's erratum require p to be periodic as a condition on the solution? It is a mathematical decision, not a proof.</span></div></li>
         <li><span class="id">AC-5.4</span><div><b>Rebuild in Lean without me</b><span>Follow the independent reproduction guide and report with its template. It takes more than an hour on an ordinary computer.</span></div></li>
         <li><span class="id">AC-5.3</span><div><b>Run verificar.py on Linux</b><span>Under a minute. The first report from a person on Linux is still missing.</span></div></li>
-        <li><span class="id">AC-2.4</span><div><b>A third kernel implementation</b><span>lean4lean did not build for Lean 4.34. When it does, the check can be repeated with a third judge.</span></div></li>
       </ul>
       <div class="thesis"><span>The machine checks the computation.</span><span>The traps check the machine.</span><span>A person checks the question.</span></div>
     </section>
@@ -691,22 +696,23 @@ var HU=[
          ["TC-1.2","Build everything without cache and check each .olean timestamp","B4 · 21 Oct · 1 h 29 min","Exit 0, nothing downloaded"],
          ["TC-1.2","Repeat the no-cache build for release 1.3.0","B5 · 21/22 Oct · 1 h 15 min 39 s","Exit 0, 11,406 new .olean files"],
          ["TC-1.3","Ask Lean which axioms the final theorems depend on","B5","propext, Classical.choice, Quot.sound"]],
-  limit:"Every build reused the installed Lean toolchain and the checker binaries, and ran on machines I chose. Building shows the computation is done right, not that it is the right computation: US-3 and US-4 answer that."},
+  limit:"Every build reused the installed Lean toolchain and the checker binaries, and ran on machines I chose. Building shows the computation is done right, not that it is the right computation: US-3 and US-4 answer that. In the version campaign on 24 Nov, the statements build unchanged on Lean v4.34.0 and v4.35.0 but the proofs do not, because of Mathlib API changes; the port of the proofs is in progress."},
  {id:"hu2",n:"US-2",title:"Other checkers agree",q:"Does a second checker agree?",
   story:["a reviewer","separately written checkers to accept the same proof","I do not depend on a single program that might have a bug"],
-  why:"If the checker has a bug, it may accept something false. With two separately written checkers the risk drops, though it does not vanish.",
+  why:"If the checker has a bug, it may accept something false. With several separately written checkers the risk drops, though it does not vanish.",
   risks:["A bug in Lean's kernel that accepts an invalid proof.","An outdated checker, with a bug already known and fixed in another version."],
   ca:[["AC-2.1","Does Comparator, with Lean's kernel, accept (C), (D) and Euler on every build?",1,"runs 1 to 5 on B1 to B5"],
       ["AC-2.2","Does a second, separately written checker (nanoda) accept them too?",1,"the same runs"],
       ["AC-2.3","Do the checkers include every known kernel soundness fix?",1,"evidence/formal/kernel-currency.md"],
-      ["AC-2.4","Did a third kernel implementation check them?",0,"lean4lean did not build for Lean 4.34"]],
+      ["AC-2.4","Did a third kernel implementation check them?",1,"lean4lean 0048ed7, rebuilt on rc2, accepted both solutions on 24 Nov (experiments/version-port/RESULTS.md)"]],
   fig:"judges",
-  feature:'# language: en\n@US-2\nFeature: Other checkers agree\n\n  @AC-2.1 @AC-2.2 @met\n  Scenario Outline: Comparator accepts with two different kernels\n    Given build "<build>"\n    When I run Comparator on "<challenge>" with Lean\'s kernel and with nanoda\n    Then both answer "Your solution is okay!"\n    And the exit code is 0\n\n    Examples:\n      | build | challenge               |\n      | B1    | Navier–Stokes (C) and (D) |\n      | B1    | Euler                   |\n      | ...   | ...                     |\n      | B5    | Euler                   |\n\n  @AC-2.4 @pending\n  Scenario: A third kernel implementation checks the proofs\n    Given build B2\n    When I try to build lean4lean for Lean 4.34\n    Then lean4lean checks both solutions\n    # Actual result: it did not build. This criterion stays at NO.',
+  feature:'# language: en\n@US-2\nFeature: Other checkers agree\n\n  @AC-2.1 @AC-2.2 @met\n  Scenario Outline: Comparator accepts with two different kernels\n    Given build "<build>"\n    When I run Comparator on "<challenge>" with Lean\'s kernel and with nanoda\n    Then both answer "Your solution is okay!"\n    And the exit code is 0\n\n    Examples:\n      | build | challenge               |\n      | B1    | Navier–Stokes (C) and (D) |\n      | B1    | Euler                   |\n      | ...   | ...                     |\n      | B5    | Euler                   |\n\n  @AC-2.4 @met\n  Scenario: A third kernel implementation checks the proofs\n    Given build R0 of the version campaign, on Lean v4.34.0-rc2 and commit f9e8bc5\n    And lean4lean 0048ed7 rebuilt on Lean v4.34.0-rc2\n    When I run "lean4lean --fresh" on "NavierStokes.ComparatorSolution" and on "Euler.Solution"\n    Then both exit with code 0\n    And lean4lean reports "checked 806768 declarations" for Navier–Stokes\n    And lean4lean reports "checked 788326 declarations" for Euler',
   cases:[["TC-2.1","Run Comparator on every build, for Navier–Stokes and for Euler","Runs 1 to 5","All 18 checks: \"Your solution is okay!\", exit 0"],
          ["TC-2.2","Replay the kernel check from scratch (leanchecker --fresh)","On B2 · 19.6 and 22.5 min","Exit 0 for both solutions"],
          ["TC-2.3","Compare the kernel source with the versions that fix known bugs","Source review","Identical to v4.33.1, v4.34.0 and v4.34.1"],
-         ["TC-2.4","Attempt a third check with lean4lean","On B2","Did not build: incompatible version"]],
-  limit:"Two agreeing checkers say nothing about a bug neither of them knows. Every run was on a single Linux machine."},
+         ["TC-2.4","Attempt a third check with lean4lean","On B2","Did not build: incompatible version"],
+         ["TC-2.4","Rebuild lean4lean 0048ed7 on rc2 and run lean4lean --fresh on both solutions","Version campaign, build R0 · 24 Nov","Exit 0 for both: 806,768 and 788,326 declarations"]],
+  limit:"Three agreeing checkers say nothing about a bug none of them knows. The runs were on Linux machines of mine. lean4lean was rebuilt on rc2 rather than on its upstream toolchain (v4.34.0), and it ran on build R0 of the version campaign, not on B1–B5."},
  {id:"hu3",n:"US-3",title:"The statement lets no trap through",q:"Is what was checked exactly what was published?",
   story:["a reviewer","to know the checker compares the exact statement","I can be sure that what was proved is what was published and not an easier version"],
   why:"Passing says little if the test lets anything through. So traps are set: change one symbol and see whether it notices. It is testing the test, what software calls mutation testing.",
@@ -796,13 +802,16 @@ function figProv(){
   return h;
 }
 function figJudges(){
-  var h='<div class="figure"><div class="cap"><span class="eyebrow">Two judges</span><h4>The same proof, checked by two separately written programs</h4><p>Comparator hands the proof to Lean\'s kernel and to nanoda, another checker written from scratch. Both must accept. Each square is a real verdict.</p></div>';
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Three judges</span><h4>The same proof, checked by separately written programs</h4><p>Comparator hands the proof to Lean\'s kernel and to nanoda, another checker written from scratch. Both must accept. A third kernel, lean4lean, checked it separately on 24 Nov. Each square is a real verdict.</p></div>';
   h+='<div class="judges"><div class="judge"><b>Lean\'s kernel</b><span>The official checker, written in C++. Version v4.34.0-rc2.</span></div><div class="mid">same proof<br>→ accepts? ←</div><div class="judge"><b>nanoda</b><span>An independent checker, written in Rust by someone else.</span></div></div>';
   h+='<div class="scroll"><div class="grid2"><span></span><span class="h">B1</span><span class="h">B2</span><span class="h">B3</span><span class="h">B4</span><span class="h">B5</span>';
   [["(C)+(D) · Lean"],["(C)+(D) · nanoda"],["Euler · Lean"],["Euler · nanoda"]].forEach(function(r){h+='<span class="r">'+r[0]+'</span>';for(var i=0;i<5;i++)h+='<span class="acc">accepts</span>';});
   h+='<span class="r">fresh replay</span><span class="acc grey">—</span><span class="acc">accepts ×2</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
   h+='<span class="r">lean4lean</span><span class="acc grey">—</span><span class="acc grey">did not build</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
-  h+='</div></div></div>';
+  h+='</div></div>';
+  h+='<div class="third"><span class="eyebrow">Third judge · version campaign · 24 Nov</span><div class="grid3"><span></span><span class="h">(C)+(D)</span><span class="h">Euler</span><span class="r">lean4lean</span><span class="acc">accepts · 806,768</span><span class="acc">accepts · 788,326</span></div>';
+  h+='<p class="note">lean4lean 0048ed7, rebuilt on Lean v4.34.0-rc2 rather than on its upstream toolchain (v4.34.0), ran --fresh on build R0 of the campaign, from the same commit f9e8bc5, not on B1–B5. The numbers are the declarations checked. In October it had not built for Lean 4.34.</p></div>';
+  h+='</div>';
   return h;
 }
 var MUT=[
@@ -975,7 +984,7 @@ function calcHash(){
 }
 hin.addEventListener("input",calcHash); calcHash();
 
-var CASEX={"AC-1.1":["TC-1.1","B1, B2, cloud 23 Oct"],"AC-1.2":["TC-1.2","B4, B5"],"AC-1.3":["TC-1.3","B5"],"AC-2.1":["TC-2.1, TC-2.2","Runs 1–5; fresh B2"],"AC-2.2":["TC-2.1","Runs 1–5"],"AC-2.3":["TC-2.3","Source review"],"AC-2.4":["TC-2.4","lean4lean"],"AC-3.1":["TC-3.1","6 mutants on B2"],"AC-3.2":["TC-3.2","Control on B2"],"AC-3.3":["TC-3.3","Textual comparison"],"AC-3.4":["TC-3.4","11 Mathlib cases"],"AC-4.1":["TC-4.1","Risk review"],"AC-4.2":["TC-4.2","k1_C, k1_D on B5"],"AC-4.3":["TC-4.3","—"],"AC-4.4":["TC-4.4","—"],"AC-5.1":["TC-5.1","CI on every push"],"AC-5.2":["TC-5.2","4 reports, 24 Oct"],"AC-5.3":["TC-5.3","—"],"AC-5.4":["TC-5.4","—"],"AC-6.1":["TC-6.1","CI"],"AC-6.2":["TC-6.2","CI"],"AC-6.3":["TC-6.3","P6 experiment"],"AC-6.4":["TC-6.4","macOS and Linux"],"AC-6.5":["TC-6.5","Injected failures"]};
+var CASEX={"AC-1.1":["TC-1.1","B1, B2, cloud 23 Oct"],"AC-1.2":["TC-1.2","B4, B5"],"AC-1.3":["TC-1.3","B5"],"AC-2.1":["TC-2.1, TC-2.2","Runs 1–5; fresh B2"],"AC-2.2":["TC-2.1","Runs 1–5"],"AC-2.3":["TC-2.3","Source review"],"AC-2.4":["TC-2.4","lean4lean on R0, 24 Nov"],"AC-3.1":["TC-3.1","6 mutants on B2"],"AC-3.2":["TC-3.2","Control on B2"],"AC-3.3":["TC-3.3","Textual comparison"],"AC-3.4":["TC-3.4","11 Mathlib cases"],"AC-4.1":["TC-4.1","Risk review"],"AC-4.2":["TC-4.2","k1_C, k1_D on B5"],"AC-4.3":["TC-4.3","—"],"AC-4.4":["TC-4.4","—"],"AC-5.1":["TC-5.1","CI on every push"],"AC-5.2":["TC-5.2","4 reports, 24 Oct"],"AC-5.3":["TC-5.3","—"],"AC-5.4":["TC-5.4","—"],"AC-6.1":["TC-6.1","CI"],"AC-6.2":["TC-6.2","CI"],"AC-6.3":["TC-6.3","P6 experiment"],"AC-6.4":["TC-6.4","macOS and Linux"],"AC-6.5":["TC-6.5","Injected failures"]};
 var ROWS=[]; HU.forEach(function(h){h.ca.forEach(function(c){ROWS.push({hu:h.n,id:c[0],q:c[1],ok:c[2]});});});
 var fHu="All", fSt="All";
 var fhuEl=document.getElementById("f-hu"), fstEl=document.getElementById("f-st");

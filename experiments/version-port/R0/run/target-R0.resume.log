@@ -1,0 +1,36 @@
+[2026-11-24T01:38:40Z] === R0 (v4.34.0-rc2) pasos: 9 10 7
+[2026-11-24T01:39:33Z] INICIO s9_mutant_control_comment: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/control_comment)
+[2026-11-24T01:46:43Z] FIN s9_mutant_control_comment rc=0
+[2026-11-24T01:46:43Z] CHECK s9_mutant_control_comment: esperado=[accept (exit 0, okay)] obtenido=[exit 0; Your solution is okay!] => OK
+[2026-11-24T01:47:27Z] INICIO s9_mutant_domain_R3_to_periodic_data: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/domain_R3_to_periodic_data)
+[2026-11-24T01:49:13Z] FIN s9_mutant_domain_R3_to_periodic_data rc=1
+[2026-11-24T01:49:13Z] CHECK s9_mutant_domain_R3_to_periodic_data: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'] => OK
+[2026-11-24T01:49:56Z] INICIO s9_mutant_euler_tstar_half: lake exe comparator ComparatorChallenges/Euler.json (cwd <path>/R0/mut/euler_tstar_half)
+[2026-11-24T01:51:40Z] FIN s9_mutant_euler_tstar_half rc=1
+[2026-11-24T01:51:40Z] CHECK s9_mutant_euler_tstar_half: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'] => OK
+[2026-11-24T01:52:19Z] INICIO s9_mutant_existence_not_breakdown_periodic: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/existence_not_breakdown_periodic)
+[2026-11-24T01:54:06Z] FIN s9_mutant_existence_not_breakdown_periodic rc=1
+[2026-11-24T01:54:06Z] CHECK s9_mutant_existence_not_breakdown_periodic: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'] => OK
+[2026-11-24T01:54:41Z] INICIO s9_mutant_force_zero_R3: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/force_zero_R3)
+[2026-11-24T01:56:31Z] FIN s9_mutant_force_zero_R3 rc=1
+[2026-11-24T01:56:31Z] CHECK s9_mutant_force_zero_R3: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'] => OK
+[2026-11-24T01:57:06Z] INICIO s9_mutant_force_zero_periodic: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/force_zero_periodic)
+[2026-11-24T01:58:55Z] FIN s9_mutant_force_zero_periodic rc=1
+[2026-11-24T01:58:55Z] CHECK s9_mutant_force_zero_periodic: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'] => OK
+[2026-11-24T01:59:31Z] INICIO s9_mutant_viscosity_nonneg_R3: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/viscosity_nonneg_R3)
+[2026-11-24T02:01:28Z] FIN s9_mutant_viscosity_nonneg_R3 rc=1
+[2026-11-24T02:01:28Z] CHECK s9_mutant_viscosity_nonneg_R3: esperado=[reject: statement do not match] obtenido=[exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'] => OK
+[2026-11-24T02:01:32Z] INICIO s10_clay: lake env lean -o .lake/build/lib/lean/ClayLiteral.olean ClayLiteral.lean (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T02:01:37Z] FIN s10_clay rc=0
+[2026-11-24T02:01:37Z] INICIO s10_bridges: lake env lean -o .lake/build/lib/lean/Bridges.olean Bridges.lean (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T02:01:44Z] FIN s10_bridges rc=0
+[2026-11-24T02:01:44Z] INICIO s10_bridge_axioms: lake env lean <path>/R0/work/BridgeAxioms.lean (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T02:01:48Z] FIN s10_bridge_axioms rc=0
+[2026-11-24T02:01:48Z] CHECK s10_bridges: esperado=[clay, bridges, axioms exit 0; 35 theorems only standard axioms] obtenido=[exits 0 0 0 ; 35/35 reported; 35 with exactly [propext, Classical.choice, Quot.sound]; 0 with no axioms; non-standard: none; error lines: 0] => OK
+[2026-11-24T02:01:48Z] INICIO s7_leanchecker_NavierStokes.ComparatorSolution: timeout 10h lake env leanchecker --fresh NavierStokes.ComparatorSolution (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T02:36:24Z] FIN s7_leanchecker_NavierStokes.ComparatorSolution rc=0
+[2026-11-24T02:36:24Z] CHECK s7_leanchecker_NavierStokes.ComparatorSolution: esperado=[exit 0] obtenido=[exit 0; log 0 bytes] => OK
+[2026-11-24T02:36:24Z] INICIO s7_leanchecker_Euler.Solution: timeout 10h lake env leanchecker --fresh Euler.Solution (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T03:26:59Z] FIN s7_leanchecker_Euler.Solution rc=0
+[2026-11-24T03:26:59Z] CHECK s7_leanchecker_Euler.Solution: esperado=[exit 0] obtenido=[exit 0; log 0 bytes] => OK
+[2026-11-24T03:26:59Z] LISTO R0

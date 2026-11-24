@@ -1,0 +1,6 @@
+import NavierStokes.ComparatorSolution
+import Euler.Solution
+#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3
+#print axioms NavierStokes.Comparator.navier_stokes_breakdown_periodic
+#print axioms Euler.euler_breakdown_R3
+#print axioms Euler.exists_compact_smooth_euler_singularity

@@ -91,7 +91,7 @@ Comparator checks that the submitted solution proves exactly the theorem stated 
 
 - **Rebuild, check again.** Four builds: the 2026-10-20 record (B1), an audit build whose Mathlib came from the prebuilt cache (B2), a fresh build (B3), and a full `lake --no-cache build` (B4) with every dependency compiled locally. Comparator accepted both challenges on each; a fifth build, B5, came later and is not in this scene. B3 had silently received 7 small dependencies as prebuilt [Reservoir](https://reservoir.lean-lang.org) archives, which is why B4 exists. The Lean toolchain and checker binaries were reused.
 - **Change the statement; it must be refused.** OpenAI's proof is never touched. Six one-symbol edits to the challenge were all refused with `Challenge and solution theorem statement do not match`; a comment-only control was accepted. A refused mutant says nothing about whether the mutated statement is true, and the `f = 0` mutants say nothing about (A) or (B).
-- **Replay every step from an empty start.** `leanchecker --fresh` accepted both solutions. It reuses Lean's kernel, so it is not a third implementation. `lean4lean` could not be built for Lean 4.34 and never examined the proofs.
+- **Replay every step from an empty start.** `leanchecker --fresh` accepted both solutions. It reuses Lean's kernel, so it is not a third implementation. When this scene was made, `lean4lean` could not be built for Lean 4.34; on 2026-11-24, lean4lean `0048ed7` rebuilt on v4.34.0-rc2 accepted both solutions ([version port](../experiments/version-port/RESULTS.md)).
 - **Where the statement comes from.** The 18 declarations match after textual normalization; name resolution was not verified. The remaining differences with Google DeepMind's Formal Conjectures file are the import, the namespace, notation copied in with the same definition, and (A)/(B) left out.
 
 **Against Clay's text.** (C) and (D) say "there exist data for which no solution exists", so the formal version could only be easier if it allowed data Clay forbids or demanded more of solutions than Clay does. Of 16 clauses, 6 match directly, 9 match through standard analysis facts, and 1 needs a human decision: Clay's erratum asks for periodic pressure "in Eqn (8)", the data list, while the formalization requires it of solutions in (D). See the [risk review](../evidence/formal/clay-lean-risk.md) and Part D.
@@ -111,14 +111,14 @@ Each host recorded **27 PASS, 54 KILLED and 3 SURVIVED** over the same **84 pair
 | Element | Numerical code | Formal proof pipeline |
 | --- | --- | --- |
 | Contract, frozen first | [`CONTRACT.md`](../evidence/numerical/source/CONTRACT.md), tolerance 10⁻⁶ | The official challenge statement and the permitted axioms |
-| Independent oracle | A separately coded solution per model | Comparator with two kernels, plus a `leanchecker --fresh` replay |
+| Independent oracle | A separately coded solution per model | Comparator with two kernels, plus `leanchecker --fresh` and `lean4lean --fresh` replays |
 | Deliberate mutation | Two known bugs per model, plus one near-threshold change | A wrong proof value and six statement mutants with a control |
 | Repetition | The same 84 variants on two hosts | Comparator on five builds |
 | Specification check | The contract itself | Statement provenance, the Clay risk review and the Lean bridges (Part D) |
 
 ### Findings in this case
 
-Compared with the verification procedure in OpenAI's README, the protocol produced eight findings that procedure does not show, three of them corrected defects in this study's own work ([FINDINGS.md](../FINDINGS.md)).
+Compared with the verification procedure in OpenAI's README, the protocol produced nine findings that procedure does not show, four of them defects in this study's own work: three corrected and one documented with restored copies ([FINDINGS.md](../FINDINGS.md)).
 
 ### Blind-fault benchmark
 
@@ -244,7 +244,8 @@ The Taylor–Green scene is visual context only: the exact analytic solution of 
 A QA report is only useful if it says what it did not test.
 
 - **One host, reused tools.** All formal runs used one Linux host. Every build reused the installed Lean toolchain and the prebuilt Comparator, lean4export, nanoda and landrun binaries, whose hashes are [recorded](../evidence/formal/cd-validation/README.md#reused-tools).
-- **Two kernel implementations.** Only the Lean kernel and nanoda have examined the proofs. `leanchecker` reuses the Lean kernel, and `lean4lean` could not be built for Lean 4.34.
+- **Three kernel implementations.** The Lean kernel, nanoda and lean4lean have examined the proofs. `leanchecker` reuses the Lean kernel. lean4lean `0048ed7` was rebuilt on v4.34.0-rc2 rather than on its upstream toolchain v4.34.0, and ran on the author's host ([version port](../experiments/version-port/RESULTS.md)).
+- **Tied to one Lean release.** The proofs do not build unchanged on Lean v4.34.0 or v4.35.0: the statements still compile, but proof code breaks on Mathlib API changes (15 and 20 failing modules). A port of the proofs is in progress.
 - **Known kernel bugs only.** The checkers are current with the known 2026 fixes, but in July 2026 a Lean bug and a separate nanoda bug let the same false proof through, so agreement between two kernels says nothing about unknown bugs.
 - **Standalone Comparator.** The runs used the tool pinned at `19e111e`, not the later `lake check` of Lean v4.35.0.
 - **Proof correspondence not tested.** Whether the Lean proof follows OpenAI's paper is out of scope; [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) argues it does not, without claiming any Lean theorem is false.

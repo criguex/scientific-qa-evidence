@@ -1,5 +1,5 @@
 # language: en
-# Evidence: evidence/formal/comparator/, evidence/formal/cd-validation/, evidence/formal/kernel-currency.md
+# Evidence: evidence/formal/comparator/, evidence/formal/cd-validation/, evidence/formal/kernel-currency.md, experiments/version-port/
 # Step-by-step explanation: docs/METODOLOGIA.md#hu-2--otros-verificadores-dicen-lo-mismo
 
 @US-2
@@ -41,10 +41,11 @@ Feature: Other checkers agree
     Then Lean's kernel is identical to that of v4.33.1, v4.34.0 and v4.34.1
     And the nanoda commit is later than its July 2026 fix
 
-  @AC-2.4 @pending
+  @AC-2.4 @met
   Scenario: A third kernel implementation checks the proofs
-    Given build B2
-    When I try to build lean4lean for Lean 4.34
-    Then lean4lean checks both solutions
-    # Actual result: lean4lean did not build, due to an incompatible Lean version.
-    # This criterion stays at NO.
+    Given build R0 of the version campaign, on Lean v4.34.0-rc2 and commit f9e8bc5
+    And lean4lean 0048ed7 rebuilt on Lean v4.34.0-rc2
+    When I run "lean4lean --fresh" on "NavierStokes.ComparatorSolution" and on "Euler.Solution"
+    Then both exit with code 0
+    And lean4lean reports "checked 806768 declarations" for Navier–Stokes
+    And lean4lean reports "checked 788326 declarations" for Euler

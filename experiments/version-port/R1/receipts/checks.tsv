@@ -1,0 +1,5 @@
+step	expected	observed	verdict
+s1_manifest	95bb21c9…52e95fc	95bb21c93e834581e1400e31e33a9fb7943db2f64f11425b034f97b9b52e95fc	OK
+s2_versions	toolchain leanprover/lean4:v4.34.0, mathlib 5ed2965, Comparator d03acab	toolchain leanprover/lean4:v4.34.0, mathlib 5ed2965, Comparator d03acab	OK
+s3_statements	empty diff vs f9e8bc5 (ComparatorChallenges/, solution files)	exit 0	OK
+s4_build	exit 0	exit 1; 142 modules built here; error: build failed	UNEXPECTED

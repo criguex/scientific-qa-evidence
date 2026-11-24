@@ -39,12 +39,12 @@ One rule runs through all of it: **the machine checks the computation, the traps
 | US | The question, in plain words | Criteria met | Scenarios |
 | --- | --- | --- | --- |
 | [US-1](#us-1--the-proofs-build) | Did Lean check every step of the proof? | **3 of 3** | [01-compilacion.feature](../features/01-compilacion.feature) |
-| [US-2](#us-2--other-checkers-agree) | Do other checkers agree? | **3 of 4** | [02-verificadores.feature](../features/02-verificadores.feature) |
+| [US-2](#us-2--other-checkers-agree) | Do other checkers agree? | **4 of 4** | [02-verificadores.feature](../features/02-verificadores.feature) |
 | [US-3](#us-3--the-statement-lets-no-trap-through) | Is the verified statement exactly the published one? | **4 of 4** | [03-trampas-al-enunciado.feature](../features/03-trampas-al-enunciado.feature) |
 | [US-4](#us-4--it-is-clays-question) | Is it the Clay Institute's official question? | **2 of 4** | [04-pregunta-de-clay.feature](../features/04-pregunta-de-clay.feature) |
 | [US-5](#us-5--someone-else-repeats-it-without-me) | Can someone else repeat it without me? | **2 of 4** | [05-reproducible.feature](../features/05-reproducible.feature) |
 | [US-6](#us-6--the-evidence-is-traceable-and-the-tool-checks-itself) | Is the evidence reliable, and does the tool check itself? | **5 of 5** | [06-trazabilidad.feature](../features/06-trazabilidad.feature) |
-| **Total** | | **19 of 24** | |
+| **Total** | | **20 of 24** | |
 
 **Quick read.** What depends on machines and traps is met. What depends on other people is not yet: an expert still has to review the Clay transcription, and someone other than me has to rebuild in Lean. That is why this is not a certification.
 
@@ -80,6 +80,8 @@ One rule runs through all of it: **the machine checks the computation, the traps
 
 **What it does not prove.** Every build reused the installed Lean toolchain and the checker binaries, and ran on machines I chose. Building shows the computation is done right, not that it is the right computation (that is US-3 and US-4).
 
+**Version campaign (24 Nov).** I repeated the checks on three Lean releases, with a plan registered before running ([results](../experiments/version-port/RESULTS.md)). On R0, the audited version (v4.34.0-rc2), everything came out as registered: build with exit 0, standard axioms only, Comparator with both kernels, `leanchecker --fresh`, lean4lean, the 6 traps and the 35 bridge theorems. On R1 (v4.34.0) and R2 (v4.35.0) the statements of both challenges compile unchanged, but the proofs do not: 15 modules fail with 103 errors on R1 and 20 modules with 121 errors on R2, because of Mathlib API changes. This is not a defect in the proofs, which still build on the pinned version; it says they are tied to that version. The port of the proofs is in progress. None of these results changes the US-1 criteria, which refer to the pinned version.
+
 ---
 
 ## US-2 · Other checkers agree
@@ -88,7 +90,7 @@ One rule runs through all of it: **the machine checks the computation, the traps
 > **I want** separately written checkers to accept the same proof,
 > **so that** I do not depend on a single program that might have a bug.
 
-**Why it matters.** If the checker has a bug, it may accept something false. With two separately written checkers that risk drops, though it does not disappear.
+**Why it matters.** If the checker has a bug, it may accept something false. With several separately written checkers that risk drops, though it does not disappear.
 
 ### Acceptance criteria
 
@@ -97,7 +99,7 @@ One rule runs through all of it: **the machine checks the computation, the traps
 | AC-2.1 | Does Comparator, with Lean's kernel, accept the (C), (D) and Euler solutions on every build? | **Yes** | [revalidation](../evidence/formal/cd-validation/README.md), [20 Oct record](../evidence/formal/comparator/README.md) |
 | AC-2.2 | Does a second, separately written checker (nanoda) accept them too? | **Yes** | the same runs |
 | AC-2.3 | Do the checkers used include every known kernel soundness fix? | **Yes** | [kernel currency](../evidence/formal/kernel-currency.md) |
-| AC-2.4 | Did a third kernel implementation check them? | **No** | lean4lean did not build for Lean 4.34 ([receipt](../evidence/formal/cd-validation/receipts/lean4lean.txt)) |
+| AC-2.4 | Did a third kernel implementation check them? | **Yes** | lean4lean `0048ed7`, rebuilt on rc2, accepted both solutions on 24 Nov ([version campaign](../experiments/version-port/RESULTS.md)). Earlier it had not built for Lean 4.34 ([receipt](../evidence/formal/cd-validation/receipts/lean4lean.txt)) |
 
 ### Test cases and executions
 
@@ -107,8 +109,9 @@ One rule runs through all of it: **the machine checks the computation, the traps
 | TC-2.2 | Replay the kernel check from scratch (`leanchecker --fresh`) | On B2 · 19.6 and 22.5 min | Exit 0 for both solutions |
 | TC-2.3 | Compare the kernel source used with the versions that fix the known 2026 bugs | Source review | Identical to v4.33.1, v4.34.0 and v4.34.1 |
 | TC-2.4 | Attempt a third check with lean4lean | On B2 | Did not build: incompatible Lean version |
+| TC-2.4 | Rebuild lean4lean `0048ed7` on Lean v4.34.0-rc2 and run `lean4lean --fresh` on both solutions | Version campaign, build R0 · 24 Nov · 24 and 30 min | Exit 0 for both: `checked 806768 declarations` (Navier–Stokes) and `checked 788326 declarations` (Euler) ([results](../experiments/version-port/RESULTS.md)) |
 
-**What it does not prove.** Two agreeing checkers say nothing about a bug neither of them knows. The runs were on a single Linux machine.
+**What it does not prove.** Three agreeing checkers say nothing about a bug none of them knows. The runs were on Linux machines of mine. lean4lean was rebuilt on rc2 rather than on its upstream toolchain (v4.34.0), because the proofs do not build on lean4lean's native versions; and it ran on build R0 of the version campaign, not on B1–B5.
 
 ---
 
@@ -144,6 +147,8 @@ The six traps and the control ran on build B2. Each trap took 1.4 minutes (the c
 | TC-3.2 | Control: change only a comment | Acceptance | **Accepted** |
 | TC-3.3 | Compare the 18 declarations with DeepMind's public text | They match | **They match**, after textual normalization |
 | TC-3.4 | 11 cases on three theorems Mathlib already proves, registered before running them | Comparator rejects every change, even equivalent ones | **8 of 8 changes rejected**, 4 of them equivalent |
+
+**Repeated in the version campaign (24 Nov).** On build R0, the 6 traps were rejected again and the control was accepted twice. To run them I found that three of the published diffs do not apply as published ([D-4](#defects-found)); the restored copies, whose hash matches the original, were used.
 
 **What it does not prove.** A rejection only says the statement changed. The `f = 0` traps say nothing about alternatives (A) and (B) of the problem, which remain open. The comparison with DeepMind is textual: it was not verified that every name points to the same thing.
 
@@ -249,9 +254,10 @@ The six traps and the control ran on build B2. Each trap took 1.4 minutes (the c
 | D-1 | A build I believed clean (B3) had received 7 prebuilt dependencies, and the log did not show it | My work | Checking `.olean` timestamps against the build start | Fixed: B4 and B5 compile everything on the machine |
 | D-2 | Two runs reported as "the same build" had used different builds | My work | Per-run receipts with their original hashes | Fixed: every run states its build |
 | D-3 | The numerical runner said `oracle_valid: true` when the oracle failed or returned NaN | My work | Testing the tool itself with injected failures | Fixed: it now gives `INCONCLUSIVE` |
+| D-4 | Three of the seven published mutant diffs (`domain_R3_to_periodic_data`, `force_zero_R3`, `force_zero_periodic`) do not apply as published: they lack their last context line. With that line restored, the SHA-256 matches the original in `PROVENANCE.md` | My work | Rerunning the mutants in the version campaign (24 Nov), `git apply` stopped with `corrupt patch` | Documented: restored copies in [`R0/diffs/`](../experiments/version-port/R0/diffs/); the published ones are left unchanged to keep the fingerprint |
 | — | Defects in OpenAI's proofs | — | All the stories above | **None found** within this scope |
 
-All three defects were mine, and the audit found and fixed them in public. They are findings 1, 3 and 8 in [FINDINGS.md](../FINDINGS.md). Finding 7 is not a defect: periodic pressure in (D) is a point for mathematicians to interpret (AC-4.4).
+All four defects were mine, and the audit found and disclosed them in public. They are findings 1, 3, 8 and 9 in [FINDINGS.md](../FINDINGS.md). The first three were fixed. The fourth was documented without touching the published files, because changing them would change the data version and the fingerprint. Finding 7 is not a defect: periodic pressure in (D) is a point for mathematicians to interpret (AC-4.4).
 
 ## Traceability matrix
 
@@ -263,7 +269,7 @@ All three defects were mine, and the audit found and fixed them in public. They 
 | AC-2.1 | Lean's kernel accepts | TC-2.1 | Runs 1–5 | Yes |
 | AC-2.2 | nanoda accepts | TC-2.1 | Runs 1–5 | Yes |
 | AC-2.3 | Kernel up to date | TC-2.3 | Source review | Yes |
-| AC-2.4 | Third implementation | TC-2.4 | lean4lean | No |
+| AC-2.4 | Third implementation | TC-2.4 | lean4lean on R0, 24 Nov | Yes |
 | AC-3.1 | Rejects every trap | TC-3.1a–f | 6 mutants on B2 | Yes |
 | AC-3.2 | Accepts the control | TC-3.2 | Control on B2 | Yes |
 | AC-3.3 | Matches DeepMind | TC-3.3 | Textual comparison | Yes |
@@ -288,6 +294,5 @@ All three defects were mine, and the audit found and fixed them in public. They 
 2. **AC-4.4:** a mathematician decides how to read periodic pressure in (D).
 3. **AC-5.4:** someone other than me rebuilds in Lean with the [guide](INDEPENDENT_REPRODUCTION.md).
 4. **AC-5.3:** a `verificar.py` report from Linux, with the [form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduction.yml).
-5. **AC-2.4:** a third kernel implementation that works with Lean 4.34.
 
-The first four depend on people, not machines. That is the last gate: **be the referee**.
+All four depend on people, not machines. That is the last gate: **be the referee**.

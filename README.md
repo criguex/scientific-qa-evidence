@@ -48,7 +48,7 @@ The same checks run on every push in [GitHub Actions](.github/workflows/verify.y
 | Question | Answer | Record |
 | --- | --- | --- |
 | Do OpenAI's proofs build? | Yes. Five builds from OpenAI's pinned commit `f9e8bc5`; the last two (`lake --no-cache build`) compiled every Lean dependency locally, while the Lean toolchain and the checker binaries were reused. A later cloud rebuild on 2026-10-23 (609 of 609 modules, exit 0) used the Mathlib cache. | [builds](evidence/formal/cd-validation/README.md), [cloud rebuild](evidence/lean-cloud-2026-10-23/README.md) |
-| Do independent checkers accept them? | Yes. Comparator, with Lean's kernel and the separate checker nanoda, accepted Navier–Stokes (C), (D) and Euler on all five builds. All 18 checks finished. | [revalidation](evidence/formal/cd-validation/README.md) |
+| Do independent checkers accept them? | Yes. Comparator, with Lean's kernel and the separate checker nanoda, accepted Navier–Stokes (C), (D) and Euler on all five builds. All 18 checks finished. On 2026-11-24 lean4lean `0048ed7`, a third kernel implementation, rebuilt on v4.34.0-rc2 rather than on its upstream toolchain v4.34.0, replayed both solution modules from scratch and exited 0 (806,768 and 788,326 declarations). | [revalidation](evidence/formal/cd-validation/README.md), [version port](experiments/version-port/RESULTS.md) |
 | Is the checked statement the published one? | Yes. Six one-symbol changes to the statement were all refused, and a comment-only change was accepted. The 18 declarations match after textual normalization; name resolution was not verified. | [mutants](evidence/formal/cd-validation/mutants/), [provenance](evidence/formal/statement-provenance/README.md) |
 | Does it match the Clay Institute's text? | Of 16 clauses, 6 match directly, 9 match through standard facts and 1 needs a human decision. In Lean, OpenAI's theorems imply my literal transcription of Clay's (C) and (D); nobody independent has reviewed that transcription. | [risk review](evidence/formal/clay-lean-risk.md), [bridges](bridges/README.md) |
 | What does a refusal by the checker mean? | Only "the statement changed", not "the theorem is false". Shown on three theorems that Mathlib already proves. | [Mathlib controls](experiments/mathlib-controls/RESULTS.md) |
@@ -64,13 +64,13 @@ The same review, told the way a QA team tells it: six user stories, 24 yes-or-no
 | Story | The question | Criteria met |
 | --- | --- | --- |
 | US-1 · The proofs build | Did Lean check every step? | 3 of 3 |
-| US-2 · Other checkers agree | Does a second checker agree? | 3 of 4 |
+| US-2 · Other checkers agree | Does a second checker agree? | 4 of 4 |
 | US-3 · The statement lets no trap through | Is what was checked exactly what was published? | 4 of 4 |
 | US-4 · It is Clay's question | Does it answer the Clay Institute's official text? | 2 of 4 |
 | US-5 · Someone else repeats it without me | Does anyone else get the same result? | 2 of 4 |
 | US-6 · The evidence is traceable | Is the evidence intact, and do the tools report their own failures? | 5 of 5 |
 
-The five criteria that still say no depend on people, not machines: an expert review of the Clay transcription, the reading of periodic pressure in (D), a Lean rebuild without me, a report from Linux and a third kernel implementation. **Interactive version with visual examples:** [criguex.github.io/scientific-qa-evidence/methodology](https://criguex.github.io/scientific-qa-evidence/methodology/). Step-by-step explanation, cases, defects and traceability matrix: [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Gherkin scenarios (in Spanish; translated on the interactive page): [features/](features/).
+The four criteria that still say no depend on people, not machines: an expert review of the Clay transcription, the reading of periodic pressure in (D), a Lean rebuild without me and a report from Linux. **Interactive version with visual examples:** [criguex.github.io/scientific-qa-evidence/methodology](https://criguex.github.io/scientific-qa-evidence/methodology/). Step-by-step explanation, cases, defects and traceability matrix: [docs/METHODOLOGY.md](docs/METHODOLOGY.md). Gherkin scenarios (in Spanish; translated on the interactive page): [features/](features/).
 
 ## What I am asking for
 
@@ -82,7 +82,8 @@ The five criteria that still say no depend on people, not machines: an expert re
 
 - **Not reviewed by a mathematician.** The link to Clay's text depends on a transcription that nobody independent has checked.
 - **Not independent.** All Lean builds ran on infrastructure I chose (one Linux host and one cloud container operated by an AI agent), and the reproduction reports so far come from people I know.
-- **Two kernel implementations only.** Lean's kernel and nanoda examined the proofs; agreement between two checkers says nothing about bugs nobody knows yet.
+- **Three kernel implementations only.** Lean's kernel, nanoda and lean4lean examined the proofs; lean4lean was rebuilt on v4.34.0-rc2, not on its upstream toolchain, and ran on my own host. Agreement between three checkers says nothing about bugs nobody knows yet.
+- **Tied to one Lean release.** The proofs do not build unchanged on Lean v4.34.0 or v4.35.0: the statements still compile, but proof code breaks on Mathlib API changes. A port of the proofs is in progress ([version port](experiments/version-port/RESULTS.md)).
 - **Out of scope:** whether the Lean proof follows OpenAI's written paper, which [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) disputes.
 - **Small, synthetic numerical tests** with coarse mutants, so no real-world detection rate.
 

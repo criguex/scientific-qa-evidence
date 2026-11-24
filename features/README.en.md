@@ -7,7 +7,7 @@ Each `.feature` file is a user story from the audit, written in Gherkin in Spani
 | File | Story | Criteria met |
 | --- | --- | --- |
 | [01-compilacion.feature](01-compilacion.feature) | US-1 · The proofs build | 3 of 3 |
-| [02-verificadores.feature](02-verificadores.feature) | US-2 · Other checkers agree | 3 of 4 |
+| [02-verificadores.feature](02-verificadores.feature) | US-2 · Other checkers agree | 4 of 4 |
 | [03-trampas-al-enunciado.feature](03-trampas-al-enunciado.feature) | US-3 · The statement lets no trap through | 4 of 4 |
 | [04-pregunta-de-clay.feature](04-pregunta-de-clay.feature) | US-4 · It is Clay's question | 2 of 4 |
 | [05-reproducible.feature](05-reproducible.feature) | US-5 · Someone else repeats it without me | 2 of 4 |

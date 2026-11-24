@@ -1,0 +1,16 @@
+   Compiling proc-macro2 v1.0.103
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling num-traits v0.2.19
+   Compiling indexmap v2.13.0
+error: linker `cc` not found
+  |
+  = note: No such file or directory (os error 2)
+
+error: could not compile `num-traits` (build script) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `serde_json` (build script) due to 1 previous error
+error: could not compile `serde` (build script) due to 1 previous error
+error: could not compile `serde_core` (build script) due to 1 previous error
+error: could not compile `proc-macro2` (build script) due to 1 previous error

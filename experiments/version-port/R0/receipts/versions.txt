@@ -1,0 +1,10 @@
+lean-toolchain: leanprover/lean4:v4.34.0-rc2
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+Linux <host> 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550  <path>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lean
+6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d  <path>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/lake
+ccef1bfe9bfeecea65137d94a69033c1a89f360711f50fa3178e7ba3e696fcbe  <path>/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/leanchecker
+1c35440a6ceb32badfe51f392ae0489eb9da4b37c7e08d8c57b9bd803d803153  <path>/tools/bin/landrun
+23fe7e2e1f904021eed2cf1bd74bbeb5c18d693d6a1d3ba9c21f60d41b3229f8  <path>/tools/bin/nanoda_bin
+4fa9e14cada304109e85da5048bcd411cf781a03539b3e50953e5c537074bd9e  <path>/tools/bin-v4.34.0-rc2/lean4export

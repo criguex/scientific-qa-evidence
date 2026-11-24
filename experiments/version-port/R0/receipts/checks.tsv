@@ -1,0 +1,22 @@
+step	expected	observed	verdict
+s1_manifest	95bb21c9…52e95fc	95bb21c93e834581e1400e31e33a9fb7943db2f64f11425b034f97b9b52e95fc	OK
+s2_versions	toolchain leanprover/lean4:v4.34.0-rc2, mathlib 85e3a25, Comparator 19e111e	toolchain leanprover/lean4:v4.34.0-rc2, mathlib 85e3a25, Comparator 19e111e	OK
+s3_statements	empty diff vs f9e8bc5 (ComparatorChallenges/, solution files)	exit 0	OK
+s4_build	exit 0	exit 0; 0 modules built here; Build completed successfully (11424 jobs).	OK
+s3b_statements_after_build	empty diff	exit 0	OK
+s5_axioms	4 theorems, only propext/Classical.choice/Quot.sound	exit 0; 4/4 reported; 4 with exactly [propext, Classical.choice, Quot.sound]; 0 with no axioms; non-standard: none; error lines: 0	OK
+s6_comparator_NavierStokes	exit 0, Your solution is okay!	exit 0; okay-lines=1; Running nanoda kernel on solution;nanoda kernel accepts the solution;Lean default kernel accepts the solution; Your solution is okay!	OK
+s6_comparator_Euler	exit 0, Your solution is okay!	exit 0; okay-lines=1; Running nanoda kernel on solution;nanoda kernel accepts the solution;Lean default kernel accepts the solution; Your solution is okay!	OK
+s9_mutant_control_comment	accept (exit 0, okay)	exit 0; Your solution is okay!	OK
+s9_domain_R3_to_periodic_data	diff applies	git apply failed	UNEXPECTED
+s9_mutant_control_comment	accept (exit 0, okay)	exit 0; Your solution is okay!	OK
+s9_mutant_domain_R3_to_periodic_data	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'	OK
+s9_mutant_euler_tstar_half	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'Euler.exists_compact_smooth_euler_singularity'	OK
+s9_mutant_existence_not_breakdown_periodic	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'	OK
+s9_mutant_force_zero_R3	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'	OK
+s9_mutant_force_zero_periodic	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic'	OK
+s9_mutant_viscosity_nonneg_R3	reject: statement do not match	exit 1; uncaught exception: Challenge and solution theorem statement do not match: 'NavierStokes.Comparator.navier_stokes_breakdown_R3'	OK
+s10_bridges	clay, bridges, axioms exit 0; 35 theorems only standard axioms	exits 0 0 0 ; 35/35 reported; 35 with exactly [propext, Classical.choice, Quot.sound]; 0 with no axioms; non-standard: none; error lines: 0	OK
+s8_lean4lean_Euler.Solution	exit 0	exit 0; checked 788326 declarations	OK
+s7_leanchecker_NavierStokes.ComparatorSolution	exit 0	exit 0; log 0 bytes	OK
+s7_leanchecker_Euler.Solution	exit 0	exit 0; log 0 bytes	OK

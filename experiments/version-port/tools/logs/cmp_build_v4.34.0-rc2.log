@@ -1,0 +1,21 @@
+info: lean4export: cloning https://github.com/leanprover/lean4export
+info: lean4export: checking out revision 'cacf989bd75f608700820f6afc595f32e7a99a4d'
+✔ [4/21] Built Comparator.Util (507ms)
+✔ [5/21] Built Comparator.Util:c.o (242ms)
+✔ [6/21] Built Export.Parse (2.6s)
+✔ [7/21] Built Comparator.Axioms (679ms)
+✔ [8/21] Built Comparator.Axioms:c.o (498ms)
+✔ [9/21] Built Export (4.3s)
+✔ [10/21] Built Comparator.Compare (1.2s)
+✔ [11/21] Built Comparator.Compare:c.o (616ms)
+✔ [12/21] Built Comparator (775ms)
+✔ [13/21] Built Comparator:c.o (140ms)
+✔ [14/21] Built Main (1.8s)
+✔ [15/21] Built Main:c.o (293ms)
+✔ [16/21] Built Export.Parse:c.o (4.0s)
+✔ [17/21] Built Export:c.o (3.5s)
+✔ [18/21] Built Main (2.5s)
+✔ [19/21] Built Main:c.o (1.3s)
+✔ [20/21] Built lean4export:exe (3.5s)
+✔ [21/21] Built comparator:exe (2.4s)
+Build completed successfully (21 jobs).

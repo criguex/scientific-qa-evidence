@@ -1,0 +1,59 @@
+[2026-11-24T00:37:06Z] esperando a que termine la compilación de OpenAI (build 0 en ~/lean/pasos.tsv)
+[2026-11-24T00:55:17Z] INICIO build_0048ed7: try_build 0048ed7
+[2026-11-24T00:55:19Z] lean4lean 0048ed71e784ecb5344de3c056cc415e8564f016 upstream_toolchain=leanprover/lean4:v4.34.0 used_toolchain=leanprover/lean4:v4.34.0-rc2
+⚠ [136/162] Built Lean4Lean.Verify.Typing.Lemmas (5.5s)
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:641:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:722:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:725:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:893:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:936:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:1239:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/Typing/Lemmas.lean:1508:8: declaration uses `sorry`
+✔ [137/162] Built Lean4Lean.Verify.Typing.ConditionallyTyped (889ms)
+✔ [138/162] Built Lean4Lean.Verify.Typing.TrTerm (889ms)
+✔ [139/162] Built Lean4Lean.Verify.LocalContext (1.2s)
+✔ [140/162] Built Lean4Lean.Verify.Primitive (1.1s)
+✔ [141/162] Built Lean4Lean.Verify.Environment.Basic (923ms)
+✔ [142/162] Built Lean4Lean.Verify.Environment.Lemmas (937ms)
+✔ [143/162] Built Lean4Lean.Verify.TypeChecker.Basic (2.7s)
+⚠ [144/162] Built Lean4Lean.Verify.TypeChecker.Reduce (1.5s)
+warning: Lean4Lean/Verify/TypeChecker/Reduce.lean:164:8: declaration uses `sorry`
+⚠ [145/162] Built Lean4Lean.Verify.TypeChecker.WHNF (2.0s)
+warning: Lean4Lean/Verify/TypeChecker/WHNF.lean:6:8: declaration uses `sorry`
+✔ [146/162] Built Lean4Lean.Verify.EquivManager (5.7s)
+⚠ [147/162] Built Lean4Lean.Verify.TypeChecker.IsDefEq (5.3s)
+warning: Lean4Lean/Verify/TypeChecker/IsDefEq.lean:225:8: declaration uses `sorry`
+warning: Lean4Lean/Verify/TypeChecker/IsDefEq.lean:486:8: declaration uses `sorry`
+⚠ [148/162] Built Lean4Lean.Verify.TypeChecker.InferType (7.8s)
+warning: Lean4Lean/Verify/TypeChecker/InferType.lean:388:8: declaration uses `sorry`
+✔ [149/162] Built Lean4Lean.Verify.TypeChecker (973ms)
+✔ [150/162] Built Lean4Lean.Verify.Environment.Primitive.Basic (2.0s)
+✔ [151/162] Built Lean4Lean.Verify.Environment.Primitive.Condition (6.4s)
+✔ [152/162] Built Lean4Lean.Verify.Environment.Primitive.Clauses (1.4s)
+✔ [153/162] Built Lean4Lean.Verify.Environment.Primitive.DivMod (3.1s)
+✔ [154/162] Built Lean4Lean.Verify.Environment.Primitive.Recursion (9.4s)
+✔ [155/162] Built Lean4Lean.Verify.Environment.Primitive.Gcd (1.2s)
+✔ [156/162] Built Lean4Lean.Verify.Environment.Primitive.Bitwise (2.5s)
+✔ [157/162] Built Lean4Lean.Verify.Environment.Primitive (1.6s)
+✔ [158/162] Built Lean4Lean.Verify.Environment.Checker (900ms)
+✔ [159/162] Built Lean4Lean.Verify.Environment.Extension (1.2s)
+⚠ [160/162] Built Lean4Lean.Verify.Environment (1.3s)
+warning: Lean4Lean/Verify/Environment.lean:224:8: declaration uses `sorry`
+✔ [161/162] Built Lean4Lean.Verify (664ms)
+Build completed successfully (162 jobs).
+[2026-11-24T00:57:10Z] FIN build_0048ed7 rc=0 (113 s)
+[2026-11-24T00:57:10Z] binario: total 232552
+drwxr-xr-x 2 root root      4096 Nov 23 19:55 .
+drwxr-xr-x 5 root root      4096 Nov 23 19:55 ..
+-rwxr-xr-x 1 root root 238112648 Nov 23 19:55 lean4lean
+-rw-r--r-- 1 root root        16 Nov 23 19:55 lean4lean.hash
+-rw-r--r-- 1 root root      3057 Nov 23 19:55 lean4lean.rsp
+-rw-r--r-- 1 root root      3936 Nov 23 19:55 lean4lean.trace
+[2026-11-24T00:57:10Z] INICIO check_NavierStokes.ComparatorSolution: bash -c lake env <path>/lean4lean/.lake/build/bin/lean4lean --fresh NavierStokes.ComparatorSolution > <path>/l4l/NavierStokes.ComparatorSolution.log 2>&1
+[2026-11-24T01:21:29Z] FIN check_NavierStokes.ComparatorSolution rc=0 (1459 s)
+NavierStokes.ComparatorSolution:thmDecl PadicInt.coe_adicCompletionIntegersEquiv_apply: lean4lean took 19625
+NavierStokes.ComparatorSolution:thmDecl SheafOfModules.pushforwardCongr_symm: lean4lean took 1736
+NavierStokes.ComparatorSolution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.coe_valueGroupEquiv: lean4lean took 1163
+NavierStokes.ComparatorSolution:thmDecl Unitary.conjStarAlgAut_symm_unitaryLinearIsometryEquiv: lean4lean took 1512
+checked 806768 declarations
+[2026-11-24T01:21:29Z] INICIO check_Euler.Solution: bash -c lake env <path>/lean4lean/.lake/build/bin/lean4lean --fresh Euler.Solution > <path>/l4l/Euler.Solution.log 2>&1

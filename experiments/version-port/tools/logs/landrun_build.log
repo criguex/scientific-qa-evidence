@@ -1,0 +1,4 @@
+go: downloading github.com/urfave/cli/v3 v3.6.2
+go: downloading github.com/landlock-lsm/go-landlock v0.10.1
+go: downloading kernel.org/pub/linux/libs/security/libcap/psx v1.2.77
+go: downloading golang.org/x/sys v0.40.0

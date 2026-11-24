@@ -247,6 +247,11 @@ details.gk .code{border-radius:0 0 14px 14px}
 .judge b{font-family:var(--f-display);font-size:17px}
 .judge span{font-size:13.5px;color:var(--ink-2)}
 .judges .mid{font-family:var(--f-mono);font-size:12.5px;color:var(--mute);text-align:center}
+.third{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--ground);display:grid;gap:10px}
+.third .eyebrow{color:var(--teal)}
+.grid3{display:grid;grid-template-columns:110px repeat(2,minmax(0,1fr));gap:6px;font-size:13px}
+.grid3 .h{font-family:var(--f-mono);font-size:11.5px;color:var(--mute);font-weight:600;align-self:end;padding-bottom:2px}
+.grid3 .r{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);align-self:center}
 
 /* HU-3 laboratorio */
 .lab{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px}
@@ -539,8 +544,8 @@ html{scroll-behavior:smooth}
         <li><span class="num">3</span><div><h4>Escribir los criterios de aceptación</h4><p>Cada riesgo se vuelve una pregunta de sí o no que la evidencia puede responder.</p><p class="here"><b>24 criterios</b>. Si no hay evidencia, la respuesta es no.</p></div></li>
         <li><span class="num">4</span><div><h4>Escribir los escenarios en Gherkin</h4><p>Cada criterio se escribe con Dado, Cuando y Entonces antes de ejecutar nada. Así nadie ajusta la expectativa al resultado.</p><p class="here"><b>Seis archivos .feature</b>, uno por historia, validados con el analizador oficial.</p></div></li>
         <li><span class="num">5</span><div><h4>Diseñar los casos de prueba</h4><p>Cada escenario se vuelve acciones concretas: compilar, correr un verificador, sembrar un error.</p><p class="here">Compilaciones con y sin caché, <b>6 trampas y 1 control</b>, 11 controles con Mathlib, una huella en cinco sistemas.</p></div></li>
-        <li><span class="num">6</span><div><h4>Ejecutar y guardar la evidencia</h4><p>Cada corrida deja su comando, versión, hash y código de salida, también las que fallan.</p><p class="here">Compilaciones B1 a B5, una recompilación en la nube y <b>cada log con su SHA-256</b>.</p></div></li>
-        <li><span class="num">7</span><div><h4>Decidir y reportar</h4><p>Cada criterio queda en sí o no, con su evidencia. Los defectos se registran, también los propios, y lo que falta se dice claramente.</p><p class="here"><b>19 de 24</b> criterios en sí. 3 defectos, todos míos. 0 en la demostración de OpenAI.</p></div></li>
+        <li><span class="num">6</span><div><h4>Ejecutar y guardar la evidencia</h4><p>Cada corrida deja su comando, versión, hash y código de salida, también las que fallan.</p><p class="here">Compilaciones B1 a B5, una recompilación en la nube, una campaña en tres versiones de Lean y <b>cada log con su SHA-256</b>.</p></div></li>
+        <li><span class="num">7</span><div><h4>Decidir y reportar</h4><p>Cada criterio queda en sí o no, con su evidencia. Los defectos se registran, también los propios, y lo que falta se dice claramente.</p><p class="here"><b>20 de 24</b> criterios en sí. 4 defectos, todos míos. 0 en la demostración de OpenAI.</p></div></li>
       </ol>
     </section>
 
@@ -558,11 +563,12 @@ html{scroll-behavior:smooth}
     <section id="defectos">
       <span class="eyebrow">Capítulo 6</span>
       <h2>Defectos encontrados</h2>
-      <div class="prose"><p>Una auditoría que solo encuentra errores ajenos es sospechosa. Estos tres defectos fueron míos, la misma auditoría los encontró en pasos posteriores y se corrigieron en público. Están en FINDINGS.md como hallazgos 1, 3 y 8.</p></div>
+      <div class="prose"><p>Una auditoría que solo encuentra errores ajenos es sospechosa. Estos cuatro defectos fueron míos y la misma auditoría los encontró en pasos posteriores. Los tres primeros se corrigieron en público; el cuarto se documentó sin tocar los archivos publicados, para no cambiar la huella. Están en FINDINGS.md como hallazgos 1, 3, 8 y 9.</p></div>
       <div class="bugs">
         <article class="bug"><span class="id">D-1 · hallazgo 1</span><h4>Una compilación «limpia» no lo era</h4><dl><dt>Qué pasó</dt><dd>La compilación B3 había recibido 7 dependencias pequeñas ya compiladas (399 módulos). El log no lo mostraba.</dd><dt>Cómo se encontró</dt><dd>Comparando la fecha de cada archivo .olean con la hora de inicio, y revisando la carpeta de paquetes.</dd><dt>Corrección</dt><dd>B4 y B5 compilan todo en la máquina, sin caché.</dd></dl></article>
         <article class="bug"><span class="id">D-2 · hallazgo 3</span><h4>«La misma compilación» eran dos</h4><dl><dt>Qué pasó</dt><dd>Dos corridas reportadas como hechas sobre la misma compilación habían usado compilaciones distintas.</dd><dt>Cómo se encontró</dt><dd>Con recibos por corrida y los hashes originales de cada archivo.</dd><dt>Corrección</dt><dd>Cada corrida dice ahora sobre qué compilación se hizo.</dd></dl></article>
         <article class="bug"><span class="id">D-3 · hallazgo 8</span><h4>La herramienta decía «válido» cuando fallaba</h4><dl><dt>Qué pasó</dt><dd>El ejecutor numérico marcaba oracle_valid: true aunque el oráculo hubiera lanzado una excepción o devuelto NaN.</dd><dt>Cómo se encontró</dt><dd>Probando la propia herramienta: se le inyectaron fallos a propósito.</dd><dt>Corrección</dt><dd>Ahora marca INCONCLUSIVE y, si falla al exportar, sale con código 2.</dd></dl></article>
+        <article class="bug"><span class="id">D-4 · hallazgo 9</span><h4>Tres trampas publicadas no aplicaban</h4><dl><dt>Qué pasó</dt><dd>A tres de los siete diffs de mutantes publicados (domain_R3_to_periodic_data, force_zero_R3 y force_zero_periodic) les falta la última línea de contexto, un solo espacio. Así no aplican: git apply se detiene con «corrupt patch».</dd><dt>Cómo se encontró</dt><dd>Al repetir las trampas en la campaña de versiones del 24-nov. Con la línea restaurada, el SHA-256 de cada diff coincide con el original registrado en PROVENANCE.md: las corridas originales usaron diffs completos.</dd><dt>Estado</dt><dd>Documentado. Las copias restauradas están en experiments/version-port/R0/diffs/. Los publicados no se cambian, porque cambiaría la versión de los datos y la huella.</dd></dl></article>
         <div class="zero"><span class="n">0</span><p><b>Defectos encontrados en las demostraciones de OpenAI</b>, dentro de este alcance. Cero defectos no es una certificación: es lo que vieron estas pruebas.</p></div>
       </div>
     </section>
@@ -588,7 +594,6 @@ html{scroll-behavior:smooth}
         <li><span class="id">CA-4.4</span><div><b>Decidir la lectura de la presión periódica en (D)</b><span>¿La fe de erratas de Clay pide que p sea periódica como condición de la solución? Es una decisión matemática, no una prueba.</span></div></li>
         <li><span class="id">CA-5.4</span><div><b>Recompilar en Lean sin mí</b><span>Seguir la guía de reproducción independiente y reportar con su plantilla. Toma más de una hora en un computador normal.</span></div></li>
         <li><span class="id">CA-5.3</span><div><b>Correr verificar.py desde Linux</b><span>Menos de un minuto. Falta el primer reporte de una persona en Linux.</span></div></li>
-        <li><span class="id">CA-2.4</span><div><b>Una tercera implementación del kernel</b><span>lean4lean no compiló para Lean 4.34. Cuando lo haga, se puede repetir la revisión con un tercer juez.</span></div></li>
       </ul>
       <div class="thesis"><span>La máquina revisa la cuenta.</span><span>Las trampas revisan a la máquina.</span><span>Una persona revisa la pregunta.</span></div>
     </section>
@@ -705,22 +710,23 @@ var HU=[
          ["CP-1.2","Compilar todo sin caché y revisar la fecha de cada .olean","B4 · 21-oct · 1 h 29 min","Código 0, nada descargado"],
          ["CP-1.2","Repetir la compilación sin caché para la versión 1.3.0","B5 · 21/22-oct · 1 h 15 min 39 s","Código 0, 11.406 .olean nuevos"],
          ["CP-1.3","Preguntarle a Lean de qué axiomas dependen los teoremas finales","B5","propext, Classical.choice, Quot.sound"]],
-  limit:"Todas las compilaciones reutilizaron el instalador de Lean y los binarios de los verificadores, y corrieron en máquinas que yo escogí. Compilar muestra que la cuenta está bien hecha, no que sea la cuenta correcta: eso lo responden HU-3 y HU-4."},
+  limit:"Todas las compilaciones reutilizaron el instalador de Lean y los binarios de los verificadores, y corrieron en máquinas que yo escogí. Compilar muestra que la cuenta está bien hecha, no que sea la cuenta correcta: eso lo responden HU-3 y HU-4. En la campaña de versiones del 24-nov, los enunciados compilan sin cambios en Lean v4.34.0 y v4.35.0, pero las pruebas no, por cambios en la API de Mathlib; el port de las pruebas está en curso."},
  {id:"hu2",n:"HU-2",title:"Otros verificadores dicen lo mismo",q:"¿Un segundo verificador está de acuerdo?",
   story:["revisor","que verificadores distintos acepten la misma demostración","no depender de un solo programa que podría tener un error"],
-  why:"Si el revisor tiene un error, puede aceptar algo falso. Con dos revisores escritos por separado el riesgo baja, aunque no desaparece.",
+  why:"Si el revisor tiene un error, puede aceptar algo falso. Con varios revisores escritos por separado el riesgo baja, aunque no desaparece.",
   risks:["Un error en el kernel de Lean que acepte una demostración inválida.","Un verificador desactualizado, con un error ya conocido y corregido en otra versión."],
   ca:[["CA-2.1","¿Comparator, con el kernel de Lean, acepta (C), (D) y Euler en todas las compilaciones?",1,"corridas 1 a 5 sobre B1 a B5"],
       ["CA-2.2","¿Un segundo verificador escrito aparte (nanoda) también las acepta?",1,"las mismas corridas"],
       ["CA-2.3","¿Los verificadores incluyen todas las correcciones conocidas de errores del kernel?",1,"evidence/formal/kernel-currency.md"],
-      ["CA-2.4","¿Las revisó una tercera implementación del kernel?",0,"lean4lean no compiló para Lean 4.34"]],
+      ["CA-2.4","¿Las revisó una tercera implementación del kernel?",1,"lean4lean 0048ed7, recompilado sobre rc2, aceptó las dos soluciones el 24-nov (experiments/version-port/RESULTS.es.md)"]],
   fig:"judges",
-  feature:'# language: es\n@HU-2\nCaracterística: Otros verificadores dicen lo mismo\n\n  @CA-2.1 @CA-2.2 @cumple\n  Esquema del escenario: Comparator acepta con dos kernels distintos\n    Dado la compilación "<compilación>"\n    Cuando corro Comparator sobre "<desafío>" con el kernel de Lean y con nanoda\n    Entonces los dos responden "Your solution is okay!"\n    Y el código de salida es 0\n\n    Ejemplos:\n      | compilación | desafío                 |\n      | B1          | Navier–Stokes (C) y (D) |\n      | B1          | Euler                   |\n      | ...         | ...                     |\n      | B5          | Euler                   |\n\n  @CA-2.4 @pendiente\n  Escenario: Una tercera implementación del kernel revisa las demostraciones\n    Dado la compilación B2\n    Cuando intento compilar lean4lean para Lean 4.34\n    Entonces lean4lean revisa las dos soluciones\n    # Resultado real: no compiló. Este criterio queda en NO.',
+  feature:'# language: es\n@HU-2\nCaracterística: Otros verificadores dicen lo mismo\n\n  @CA-2.1 @CA-2.2 @cumple\n  Esquema del escenario: Comparator acepta con dos kernels distintos\n    Dado la compilación "<compilación>"\n    Cuando corro Comparator sobre "<desafío>" con el kernel de Lean y con nanoda\n    Entonces los dos responden "Your solution is okay!"\n    Y el código de salida es 0\n\n    Ejemplos:\n      | compilación | desafío                 |\n      | B1          | Navier–Stokes (C) y (D) |\n      | B1          | Euler                   |\n      | ...         | ...                     |\n      | B5          | Euler                   |\n\n  @CA-2.4 @cumple\n  Escenario: Una tercera implementación del kernel revisa las demostraciones\n    Dado la compilación R0 de la campaña de versiones, en Lean v4.34.0-rc2 y el commit f9e8bc5\n    Y lean4lean 0048ed7 recompilado sobre Lean v4.34.0-rc2\n    Cuando corro "lean4lean --fresh" sobre "NavierStokes.ComparatorSolution" y sobre "Euler.Solution"\n    Entonces las dos terminan con código de salida 0\n    Y lean4lean reporta "checked 806768 declarations" para Navier–Stokes\n    Y lean4lean reporta "checked 788326 declarations" para Euler',
   cases:[["CP-2.1","Correr Comparator sobre cada compilación, para Navier–Stokes y para Euler","Corridas 1 a 5","Las 18 pruebas: «Your solution is okay!», código 0"],
          ["CP-2.2","Repetir la revisión del kernel desde cero (leanchecker --fresh)","Sobre B2 · 19,6 y 22,5 min","Código 0 en las dos soluciones"],
          ["CP-2.3","Comparar el código del kernel con las versiones que corrigen errores conocidos","Revisión del código fuente","Idéntico a v4.33.1, v4.34.0 y v4.34.1"],
-         ["CP-2.4","Intentar una tercera revisión con lean4lean","Sobre B2","No compiló: versión incompatible"]],
-  limit:"Que dos verificadores coincidan no dice nada sobre un error que ninguno conoce. Todas las corridas fueron en una sola máquina Linux."},
+         ["CP-2.4","Intentar una tercera revisión con lean4lean","Sobre B2","No compiló: versión incompatible"],
+         ["CP-2.4","Recompilar lean4lean 0048ed7 sobre rc2 y correr lean4lean --fresh sobre las dos soluciones","Campaña de versiones, compilación R0 · 24-nov","Código 0 en las dos: 806.768 y 788.326 declaraciones"]],
+  limit:"Que tres verificadores coincidan no dice nada sobre un error que ninguno conoce. Las corridas fueron en equipos Linux míos. lean4lean se recompiló sobre rc2 y no sobre su toolchain upstream (v4.34.0), y corrió sobre la compilación R0 de la campaña de versiones, no sobre B1–B5."},
  {id:"hu3",n:"HU-3",title:"El enunciado no deja pasar trampas",q:"¿Lo verificado es exactamente lo publicado?",
   story:["revisor","saber que el verificador compara el enunciado exacto","estar seguro de que lo demostrado es lo publicado y no una versión más fácil"],
   why:"Que algo pase no dice mucho si la prueba deja pasar cualquier cosa. Por eso se le ponen trampas: se cambia un símbolo y se mira si lo nota. Es probar la prueba, lo que en software se llama pruebas de mutación.",
@@ -812,13 +818,16 @@ function figProv(){
   return h;
 }
 function figJudges(){
-  var h='<div class="figure"><div class="cap"><span class="eyebrow">Dos jueces</span><h4>La misma demostración, revisada por dos programas escritos aparte</h4><p>Comparator le pasa la demostración al kernel de Lean y a nanoda, otro verificador escrito desde cero. Los dos deben aceptar. Cada cuadro es un veredicto real.</p></div>';
+  var h='<div class="figure"><div class="cap"><span class="eyebrow">Tres jueces</span><h4>La misma demostración, revisada por programas escritos aparte</h4><p>Comparator le pasa la demostración al kernel de Lean y a nanoda, otro verificador escrito desde cero. Los dos deben aceptar. Un tercer kernel, lean4lean, la revisó aparte el 24-nov. Cada cuadro es un veredicto real.</p></div>';
   h+='<div class="judges"><div class="judge"><b>Kernel de Lean</b><span>El revisor oficial, escrito en C++. Versión v4.34.0-rc2.</span></div><div class="mid">misma demostración<br>→ ¿acepta? ←</div><div class="judge"><b>nanoda</b><span>Un verificador independiente, escrito en Rust por otra persona.</span></div></div>';
   h+='<div class="scroll"><div class="grid2"><span></span><span class="h">B1</span><span class="h">B2</span><span class="h">B3</span><span class="h">B4</span><span class="h">B5</span>';
   [["(C)+(D) · Lean"],["(C)+(D) · nanoda"],["Euler · Lean"],["Euler · nanoda"]].forEach(function(r){h+='<span class="r">'+r[0]+'</span>';for(var i=0;i<5;i++)h+='<span class="acc">acepta</span>';});
   h+='<span class="r">fresh replay</span><span class="acc grey">—</span><span class="acc">acepta ×2</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
   h+='<span class="r">lean4lean</span><span class="acc grey">—</span><span class="acc grey">no compiló</span><span class="acc grey">—</span><span class="acc grey">—</span><span class="acc grey">—</span>';
-  h+='</div></div></div>';
+  h+='</div></div>';
+  h+='<div class="third"><span class="eyebrow">Tercer juez · campaña de versiones · 24-nov</span><div class="grid3"><span></span><span class="h">(C)+(D)</span><span class="h">Euler</span><span class="r">lean4lean</span><span class="acc">acepta · 806.768</span><span class="acc">acepta · 788.326</span></div>';
+  h+='<p class="note">lean4lean 0048ed7, recompilado sobre Lean v4.34.0-rc2 y no sobre su toolchain upstream (v4.34.0), corrió --fresh sobre la compilación R0 de la campaña, del mismo commit f9e8bc5, no sobre B1–B5. Los números son las declaraciones revisadas. En octubre no había compilado para Lean 4.34.</p></div>';
+  h+='</div>';
   return h;
 }
 var MUT=[
@@ -998,7 +1007,7 @@ function calcHash(){
 hin.addEventListener("input",calcHash); calcHash();
 
 /* ---------- trazabilidad ---------- */
-var CASEX={"CA-1.1":["CP-1.1","B1, B2, nube 23-oct"],"CA-1.2":["CP-1.2","B4, B5"],"CA-1.3":["CP-1.3","B5"],"CA-2.1":["CP-2.1, CP-2.2","Corridas 1–5; fresh B2"],"CA-2.2":["CP-2.1","Corridas 1–5"],"CA-2.3":["CP-2.3","Revisión del código fuente"],"CA-2.4":["CP-2.4","lean4lean"],"CA-3.1":["CP-3.1","6 mutantes sobre B2"],"CA-3.2":["CP-3.2","Control sobre B2"],"CA-3.3":["CP-3.3","Comparación textual"],"CA-3.4":["CP-3.4","11 casos con Mathlib"],"CA-4.1":["CP-4.1","Revisión de riesgos"],"CA-4.2":["CP-4.2","k1_C, k1_D en B5"],"CA-4.3":["CP-4.3","—"],"CA-4.4":["CP-4.4","—"],"CA-5.1":["CP-5.1","CI en cada push"],"CA-5.2":["CP-5.2","4 reportes, 24-oct"],"CA-5.3":["CP-5.3","—"],"CA-5.4":["CP-5.4","—"],"CA-6.1":["CP-6.1","CI"],"CA-6.2":["CP-6.2","CI"],"CA-6.3":["CP-6.3","Experimento P6"],"CA-6.4":["CP-6.4","macOS y Linux"],"CA-6.5":["CP-6.5","Fallos inyectados"]};
+var CASEX={"CA-1.1":["CP-1.1","B1, B2, nube 23-oct"],"CA-1.2":["CP-1.2","B4, B5"],"CA-1.3":["CP-1.3","B5"],"CA-2.1":["CP-2.1, CP-2.2","Corridas 1–5; fresh B2"],"CA-2.2":["CP-2.1","Corridas 1–5"],"CA-2.3":["CP-2.3","Revisión del código fuente"],"CA-2.4":["CP-2.4","lean4lean sobre R0, 24-nov"],"CA-3.1":["CP-3.1","6 mutantes sobre B2"],"CA-3.2":["CP-3.2","Control sobre B2"],"CA-3.3":["CP-3.3","Comparación textual"],"CA-3.4":["CP-3.4","11 casos con Mathlib"],"CA-4.1":["CP-4.1","Revisión de riesgos"],"CA-4.2":["CP-4.2","k1_C, k1_D en B5"],"CA-4.3":["CP-4.3","—"],"CA-4.4":["CP-4.4","—"],"CA-5.1":["CP-5.1","CI en cada push"],"CA-5.2":["CP-5.2","4 reportes, 24-oct"],"CA-5.3":["CP-5.3","—"],"CA-5.4":["CP-5.4","—"],"CA-6.1":["CP-6.1","CI"],"CA-6.2":["CP-6.2","CI"],"CA-6.3":["CP-6.3","Experimento P6"],"CA-6.4":["CP-6.4","macOS y Linux"],"CA-6.5":["CP-6.5","Fallos inyectados"]};
 var ROWS=[]; HU.forEach(function(h){h.ca.forEach(function(c){ROWS.push({hu:h.n,id:c[0],q:c[1],ok:c[2]});});});
 var fHu="Todas", fSt="Todos";
 var fhuEl=document.getElementById("f-hu"), fstEl=document.getElementById("f-st");

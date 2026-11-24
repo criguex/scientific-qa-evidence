@@ -1,0 +1,7 @@
+[2026-11-24T16:10:16Z] === R1 (v4.34.0) pasos: 4
+[2026-11-24T16:10:16Z] INICIO s4_cache_get: lake exe cache get (cwd <path>/R1/NavierStokesAndEuler)
+[2026-11-24T16:10:28Z] FIN s4_cache_get rc=0
+[2026-11-24T16:10:28Z] INICIO s4_build: lake build (cwd <path>/R1/NavierStokesAndEuler)
+[2026-11-24T16:13:46Z] FIN s4_build rc=1
+[2026-11-24T16:13:46Z] CHECK s4_build: esperado=[exit 0] obtenido=[exit 1; 142 modules built here; error: build failed] => UNEXPECTED
+[2026-11-24T16:13:46Z] ALERTA: build falló (ver logs/s4_build.log)

@@ -1,0 +1,36 @@
+[2026-11-24T00:46:43Z] === R0 (v4.34.0-rc2) pasos: 1 2 3 4 5 6 9 10 7
+[2026-11-24T00:46:43Z] INICIO s1_clone: git clone -q https://github.com/openai/NavierStokesAndEuler.git (cwd <path>/R0)
+[2026-11-24T00:46:47Z] FIN s1_clone rc=0
+[2026-11-24T00:46:47Z] INICIO s1_manifest: bash -c manifest (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:46:57Z] FIN s1_manifest rc=0
+[2026-11-24T00:46:57Z] CHECK s1_manifest: esperado=[95bb21c9…52e95fc] obtenido=[95bb21c93e834581e1400e31e33a9fb7943db2f64f11425b034f97b9b52e95fc] => OK
+[2026-11-24T00:46:57Z] CHECK s2_versions: esperado=[toolchain leanprover/lean4:v4.34.0-rc2, mathlib 85e3a25, Comparator 19e111e] obtenido=[toolchain leanprover/lean4:v4.34.0-rc2, mathlib 85e3a25, Comparator 19e111e] => OK
+[2026-11-24T00:46:57Z] INICIO s3_statements: bash -c stmt_check (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:46:57Z] FIN s3_statements rc=0
+[2026-11-24T00:46:57Z] CHECK s3_statements: esperado=[empty diff vs f9e8bc5 (ComparatorChallenges/, solution files)] obtenido=[exit 0] => OK
+[2026-11-24T00:46:57Z] R0: espero la compilación original (~/lean/pasos.tsv build 0)
+[2026-11-24T00:55:33Z] INICIO s4_copy_lake: cp -a <path>/NavierStokesAndEuler/.lake <path>/R0/NavierStokesAndEuler/.lake (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:56:31Z] FIN s4_copy_lake rc=0
+[2026-11-24T00:56:31Z] INICIO s4_build: lake build (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:56:43Z] FIN s4_build rc=0
+[2026-11-24T00:56:43Z] CHECK s4_build: esperado=[exit 0] obtenido=[exit 0; 0 modules built here; Build completed successfully (11424 jobs).] => OK
+[2026-11-24T00:56:43Z] INICIO s3b_statements_after_build: bash -c stmt_check (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:56:43Z] FIN s3b_statements_after_build rc=0
+[2026-11-24T00:56:43Z] CHECK s3b_statements_after_build: esperado=[empty diff] obtenido=[exit 0] => OK
+[2026-11-24T00:56:43Z] INICIO s5_axioms: lake env lean <path>/R0/work/FinalAxioms.lean (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:57:06Z] FIN s5_axioms rc=0
+[2026-11-24T00:57:06Z] CHECK s5_axioms: esperado=[4 theorems, only propext/Classical.choice/Quot.sound] obtenido=[exit 0; 4/4 reported; 4 with exactly [propext, Classical.choice, Quot.sound]; 0 with no axioms; non-standard: none; error lines: 0] => OK
+[2026-11-24T00:57:06Z] INICIO s6_comparator_prebuild: bash -c lake build Comparator/comparator 2>&1 || lake exe comparator 2>&1 | tail -3; true (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T00:57:12Z] FIN s6_comparator_prebuild rc=0
+[2026-11-24T00:57:12Z] INICIO s6_comparator_NavierStokes: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T01:04:32Z] FIN s6_comparator_NavierStokes rc=0
+[2026-11-24T01:04:32Z] CHECK s6_comparator_NavierStokes: esperado=[exit 0, Your solution is okay!] obtenido=[exit 0; okay-lines=1; Running nanoda kernel on solution;nanoda kernel accepts the solution;Lean default kernel accepts the solution; Your solution is okay!] => OK
+[2026-11-24T01:04:32Z] INICIO s6_comparator_Euler: lake exe comparator ComparatorChallenges/Euler.json (cwd <path>/R0/NavierStokesAndEuler)
+[2026-11-24T01:16:47Z] FIN s6_comparator_Euler rc=0
+[2026-11-24T01:16:47Z] CHECK s6_comparator_Euler: esperado=[exit 0, Your solution is okay!] obtenido=[exit 0; okay-lines=1; Running nanoda kernel on solution;nanoda kernel accepts the solution;Lean default kernel accepts the solution; Your solution is okay!] => OK
+[2026-11-24T01:17:20Z] INICIO s9_mutant_control_comment: lake exe comparator ComparatorChallenges/NavierStokes.json (cwd <path>/R0/mut/control_comment)
+[2026-11-24T01:24:54Z] FIN s9_mutant_control_comment rc=0
+[2026-11-24T01:24:54Z] CHECK s9_mutant_control_comment: esperado=[accept (exit 0, okay)] obtenido=[exit 0; Your solution is okay!] => OK
+error: corrupt patch at line 13
+[2026-11-24T01:25:40Z] CHECK s9_domain_R3_to_periodic_data: esperado=[diff applies] obtenido=[git apply failed] => UNEXPECTED
+[2026-11-24T01:26:44Z] INICIO s9_mutant_euler_tstar_half: lake exe comparator ComparatorChallenges/Euler.json (cwd <path>/R0/mut/euler_tstar_half)

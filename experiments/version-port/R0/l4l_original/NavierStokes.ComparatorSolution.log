@@ -1,0 +1,21 @@
+NavierStokes.ComparatorSolution:thmDecl Algebra.Generators.CotangentSpace.fst_compEquiv: lean4lean took 1087
+NavierStokes.ComparatorSolution:defnDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.valueGroupEquiv: lean4lean took 1389
+NavierStokes.ComparatorSolution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.valueGroupOrderIso._proof_11: lean4lean took 1413
+NavierStokes.ComparatorSolution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.embedding_valueGroupOrderIso: lean4lean took 1110
+NavierStokes.ComparatorSolution:thmDecl CliffordAlgebra.GradedAlgebra.lift_ι_eq: lean4lean took 2170
+NavierStokes.ComparatorSolution:thmDecl PresheafOfModules.freeObj._proof_2: lean4lean took 31108
+NavierStokes.ComparatorSolution:thmDecl Algebra.FormallyEtale.of_isSeparable: lean4lean took 1534
+NavierStokes.ComparatorSolution:thmDecl _private.Mathlib.Combinatorics.SimpleGraph.Regularity.Chunk.0.SzemerediRegularity.edgeDensity_star_not_uniform._proof_1_10: lean4lean took 1367
+NavierStokes.ComparatorSolution:thmDecl ExteriorAlgebra.liftAlternatingEquiv._proof_1: lean4lean took 1064
+NavierStokes.ComparatorSolution:thmDecl _private.Mathlib.Condensed.Light.Sequence.0.InternalProjectivityProof.cocone._proof_1: lean4lean took 2498
+NavierStokes.ComparatorSolution:thmDecl PiTensorProduct.ofDirectSumEquiv_tprod_lof: lean4lean took 1307
+NavierStokes.ComparatorSolution:thmDecl MatrixModCat.unitIso._proof_2: lean4lean took 1155
+NavierStokes.ComparatorSolution:thmDecl Std.Tactic.BVDecide.BVExpr.bitblast.goCache_Inv_of_Inv._mutual: lean4lean took 1580
+NavierStokes.ComparatorSolution:thmDecl Unitary.conjStarAlgEquiv_unitaryLinearIsometryEquiv: lean4lean took 1523
+NavierStokes.ComparatorSolution:thmDecl Polynomial.iterate_derivative_derivative_mul_X: lean4lean took 22021
+NavierStokes.ComparatorSolution:thmDecl PiTensorProduct.ofDirectSumEquiv_symm_lof_tprod: lean4lean took 1498
+NavierStokes.ComparatorSolution:thmDecl PadicInt.coe_adicCompletionIntegersEquiv_apply: lean4lean took 19625
+NavierStokes.ComparatorSolution:thmDecl SheafOfModules.pushforwardCongr_symm: lean4lean took 1736
+NavierStokes.ComparatorSolution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.coe_valueGroupEquiv: lean4lean took 1163
+NavierStokes.ComparatorSolution:thmDecl Unitary.conjStarAlgAut_symm_unitaryLinearIsometryEquiv: lean4lean took 1512
+checked 806768 declarations

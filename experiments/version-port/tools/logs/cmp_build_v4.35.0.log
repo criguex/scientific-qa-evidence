@@ -1,0 +1,24 @@
+info: downloading https://releases.lean-lang.org/lean4/v4.35.0/lean-4.35.0-linux.tar.zst
+info: installing <path>/.elan/toolchains/leanprover--lean4---v4.35.0
+info: lean4export: materializing new dependency
+info: lean4export: fetching revision '5a9a355dc6c5fd82b69058d433e2ae2e8dfbf8fe' from https://github.com/leanprover/lean4export
+info: lean4export: checking out revision '5a9a355dc6c5fd82b69058d433e2ae2e8dfbf8fe'
+✔ [4/21] Built Comparator.Util (489ms)
+✔ [5/21] Built Comparator.Util:c.o (251ms)
+✔ [6/21] Built Export.Parse (2.7s)
+✔ [7/21] Built Export (3.3s)
+✔ [8/21] Built Comparator.Axioms (852ms)
+✔ [9/21] Built Comparator.Axioms:c.o (347ms)
+✔ [10/21] Built Comparator.Compare (966ms)
+✔ [11/21] Built Main (1.6s)
+✔ [12/21] Built Comparator (467ms)
+✔ [13/21] Built Comparator.Compare:c.o (492ms)
+✔ [14/21] Built Comparator:c.o (109ms)
+✔ [15/21] Built Main:c.o (250ms)
+✔ [16/21] Built Export:c.o (2.7s)
+✔ [17/21] Built Main (2.6s)
+✔ [18/21] Built Export.Parse:c.o (5.0s)
+✔ [19/21] Built lean4export:exe (1.8s)
+✔ [20/21] Built Main:c.o (1.2s)
+✔ [21/21] Built comparator:exe (1.3s)
+Build completed successfully (21 jobs).

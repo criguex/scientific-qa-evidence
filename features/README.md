@@ -5,7 +5,7 @@ Cada archivo `.feature` es una historia de usuario de la auditoría, escrita en 
 | Archivo | Historia | Criterios que cumplen |
 | --- | --- | --- |
 | [01-compilacion.feature](01-compilacion.feature) | HU-1 · Las demostraciones compilan | 3 de 3 |
-| [02-verificadores.feature](02-verificadores.feature) | HU-2 · Otros verificadores dicen lo mismo | 3 de 4 |
+| [02-verificadores.feature](02-verificadores.feature) | HU-2 · Otros verificadores dicen lo mismo | 4 de 4 |
 | [03-trampas-al-enunciado.feature](03-trampas-al-enunciado.feature) | HU-3 · El enunciado no deja pasar trampas | 4 de 4 |
 | [04-pregunta-de-clay.feature](04-pregunta-de-clay.feature) | HU-4 · Es la pregunta de Clay | 2 de 4 |
 | [05-reproducible.feature](05-reproducible.feature) | HU-5 · Otra persona lo repite sin mí | 2 de 4 |

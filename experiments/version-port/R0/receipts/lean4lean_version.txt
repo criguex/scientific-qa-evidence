@@ -1,0 +1,2 @@
+lean4lean 0048ed71e784ecb5344de3c056cc415e8564f016 used_toolchain=leanprover/lean4:v4.34.0-rc2
+176afe26174008221f0c00f07759c5c5c00739207025e37a57025558a72233ef  <path>/lean4lean/.lake/build/bin/lean4lean

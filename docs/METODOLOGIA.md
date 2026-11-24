@@ -39,12 +39,12 @@ Hay una regla que atraviesa todo: **la máquina revisa la cuenta, las trampas re
 | HU | La pregunta, en palabras simples | Criterios que cumplen | Escenarios |
 | --- | --- | --- | --- |
 | [HU-1](#hu-1--las-demostraciones-compilan) | ¿Lean revisó cada paso de la demostración? | **3 de 3** | [01-compilacion.feature](../features/01-compilacion.feature) |
-| [HU-2](#hu-2--otros-verificadores-dicen-lo-mismo) | ¿Otros verificadores dicen lo mismo? | **3 de 4** | [02-verificadores.feature](../features/02-verificadores.feature) |
+| [HU-2](#hu-2--otros-verificadores-dicen-lo-mismo) | ¿Otros verificadores dicen lo mismo? | **4 de 4** | [02-verificadores.feature](../features/02-verificadores.feature) |
 | [HU-3](#hu-3--el-enunciado-no-deja-pasar-trampas) | ¿El enunciado verificado es exactamente el publicado? | **4 de 4** | [03-trampas-al-enunciado.feature](../features/03-trampas-al-enunciado.feature) |
 | [HU-4](#hu-4--es-la-pregunta-de-clay) | ¿Es la pregunta oficial del Instituto Clay? | **2 de 4** | [04-pregunta-de-clay.feature](../features/04-pregunta-de-clay.feature) |
 | [HU-5](#hu-5--otra-persona-lo-repite-sin-mí) | ¿Otra persona lo puede repetir sin mí? | **2 de 4** | [05-reproducible.feature](../features/05-reproducible.feature) |
 | [HU-6](#hu-6--la-evidencia-es-trazable-y-la-herramienta-se-revisa-a-sí-misma) | ¿La evidencia es confiable y la herramienta se revisa a sí misma? | **5 de 5** | [06-trazabilidad.feature](../features/06-trazabilidad.feature) |
-| **Total** | | **19 de 24** | |
+| **Total** | | **20 de 24** | |
 
 **Lectura rápida.** Lo que depende de máquinas y de trampas cumple. Lo que depende de otras personas todavía no: falta que un experto revise la transcripción de Clay y que alguien distinto a mí recompile en Lean. Por eso esto no es una certificación.
 
@@ -80,6 +80,8 @@ Hay una regla que atraviesa todo: **la máquina revisa la cuenta, las trampas re
 
 **Qué no prueba.** Todas las compilaciones reutilizaron el instalador de Lean y los binarios de los verificadores, y corrieron en máquinas que yo escogí. Compilar demuestra que la cuenta está bien hecha, no que sea la cuenta correcta (eso es HU-3 y HU-4).
 
+**Campaña de versiones (24-nov).** Repetí las comprobaciones sobre tres versiones de Lean, con un plan registrado antes de correr ([resultados](../experiments/version-port/RESULTS.es.md)). En R0, la versión auditada (v4.34.0-rc2), todo dio lo registrado: compilación con código 0, solo axiomas estándar, Comparator con los dos kernels, `leanchecker --fresh`, lean4lean, las 6 trampas y los 35 teoremas de los puentes. En R1 (v4.34.0) y R2 (v4.35.0) los enunciados de los dos retos compilan sin cambios, pero las pruebas no: fallan 15 módulos con 103 errores en R1 y 20 módulos con 121 errores en R2, por cambios en la API de Mathlib. No es un defecto de las demostraciones, que siguen compilando en la versión fijada; dice que están atadas a esa versión. El port de las pruebas está en curso. Ninguno de estos resultados cambia los criterios de HU-1, que se refieren a la versión fijada.
+
 ---
 
 ## HU-2 · Otros verificadores dicen lo mismo
@@ -88,7 +90,7 @@ Hay una regla que atraviesa todo: **la máquina revisa la cuenta, las trampas re
 > **quiero** que verificadores distintos acepten la misma demostración,
 > **para** no depender de un solo programa que podría tener un error.
 
-**Por qué importa.** Si el revisor tiene un error, puede aceptar algo falso. Con dos revisores escritos por separado, ese riesgo baja, aunque no desaparece.
+**Por qué importa.** Si el revisor tiene un error, puede aceptar algo falso. Con varios revisores escritos por separado, ese riesgo baja, aunque no desaparece.
 
 ### Criterios de aceptación
 
@@ -97,7 +99,7 @@ Hay una regla que atraviesa todo: **la máquina revisa la cuenta, las trampas re
 | CA-2.1 | ¿Comparator, con el kernel de Lean, acepta las soluciones de (C), (D) y Euler en todas las compilaciones? | **Sí** | [revalidación](../evidence/formal/cd-validation/README.md), [registro del 20-oct](../evidence/formal/comparator/README.md) |
 | CA-2.2 | ¿Un segundo verificador escrito aparte (nanoda) también las acepta? | **Sí** | las mismas corridas |
 | CA-2.3 | ¿Los verificadores usados incluyen todas las correcciones conocidas de errores del kernel? | **Sí** | [vigencia del kernel](../evidence/formal/kernel-currency.md) |
-| CA-2.4 | ¿Las revisó una tercera implementación del kernel? | **No** | lean4lean no compiló para Lean 4.34 ([recibo](../evidence/formal/cd-validation/receipts/lean4lean.txt)) |
+| CA-2.4 | ¿Las revisó una tercera implementación del kernel? | **Sí** | lean4lean `0048ed7`, recompilado sobre rc2, aceptó las dos soluciones el 24-nov ([campaña de versiones](../experiments/version-port/RESULTS.es.md)). Antes no había compilado para Lean 4.34 ([recibo](../evidence/formal/cd-validation/receipts/lean4lean.txt)) |
 
 ### Casos de prueba y ejecuciones
 
@@ -107,8 +109,9 @@ Hay una regla que atraviesa todo: **la máquina revisa la cuenta, las trampas re
 | CP-2.2 | Repetir la revisión del kernel desde cero (`leanchecker --fresh`) | Sobre B2 · 19,6 y 22,5 min | Código 0 en las dos soluciones |
 | CP-2.3 | Comparar el código del kernel usado con las versiones que corrigen errores conocidos de 2026 | Revisión del código fuente | Idéntico a v4.33.1, v4.34.0 y v4.34.1 |
 | CP-2.4 | Intentar una tercera revisión con lean4lean | Sobre B2 | No compiló: versión de Lean incompatible |
+| CP-2.4 | Recompilar lean4lean `0048ed7` sobre Lean v4.34.0-rc2 y correr `lean4lean --fresh` sobre las dos soluciones | Campaña de versiones, compilación R0 · 24-nov · 24 y 30 min | Código 0 en las dos: `checked 806768 declarations` (Navier–Stokes) y `checked 788326 declarations` (Euler) ([resultados](../experiments/version-port/RESULTS.es.md)) |
 
-**Qué no prueba.** Que dos verificadores coincidan no dice nada sobre un error que ninguno de los dos conoce. Las corridas fueron en una sola máquina Linux.
+**Qué no prueba.** Que tres verificadores coincidan no dice nada sobre un error que ninguno conoce. Las corridas fueron en equipos Linux míos. lean4lean se recompiló sobre rc2 y no sobre su toolchain upstream (v4.34.0), porque en las versiones nativas de lean4lean las pruebas no compilan; y corrió sobre la compilación R0 de la campaña de versiones, no sobre B1–B5.
 
 ---
 
@@ -144,6 +147,8 @@ Las seis trampas y el control corrieron sobre la compilación B2. Cada una tard�
 | CP-3.2 | Control: cambiar solo un comentario | Aceptación | **Aceptado** |
 | CP-3.3 | Comparar las 18 declaraciones con el texto público de DeepMind | Coinciden | **Coinciden**, tras normalización textual |
 | CP-3.4 | 11 casos con tres teoremas que Mathlib ya demuestra, registrados antes de correrlos | Comparator rechaza todo cambio, incluso los equivalentes | **8 de 8 cambios rechazados**, 4 de ellos equivalentes |
+
+**Repetición en la campaña de versiones (24-nov).** Sobre la compilación R0, las 6 trampas fueron rechazadas otra vez y el control fue aceptado dos veces. Para correrlas encontré que tres de los diffs publicados no aplican tal como están ([D-4](#defectos-encontrados)); se usaron las copias restauradas, cuyo hash coincide con el original.
 
 **Qué no prueba.** Un rechazo solo dice que el enunciado cambió. Las trampas con `f = 0` no dicen nada sobre las alternativas (A) y (B) del problema, que siguen abiertas. La comparación con DeepMind es de texto: no se verificó que cada nombre apunte a lo mismo.
 
@@ -249,9 +254,10 @@ Las seis trampas y el control corrieron sobre la compilación B2. Cada una tard�
 | D-1 | Una compilación que creía limpia (B3) había recibido 7 dependencias ya compiladas, y el log no lo mostraba | Mi trabajo | Revisando las fechas de los `.olean` contra el inicio de la compilación | Corregido: B4 y B5 compilan todo en la máquina |
 | D-2 | Dos corridas reportadas como «la misma compilación» habían usado compilaciones distintas | Mi trabajo | Recibos por corrida, con sus hashes originales | Corregido: cada corrida dice su compilación |
 | D-3 | El ejecutor numérico decía `oracle_valid: true` cuando el oráculo fallaba o devolvía NaN | Mi trabajo | Probando la propia herramienta con fallos inyectados | Corregido: ahora da `INCONCLUSIVE` |
+| D-4 | Tres de los siete diffs de mutantes publicados (`domain_R3_to_periodic_data`, `force_zero_R3`, `force_zero_periodic`) no aplican tal como están: les falta la última línea de contexto. Restaurada esa línea, el SHA-256 coincide con el original de `PROVENANCE.md` | Mi trabajo | Al repetir los mutantes en la campaña de versiones (24-nov), `git apply` se detuvo con `corrupt patch` | Documentado: copias restauradas en [`R0/diffs/`](../experiments/version-port/R0/diffs/); los publicados no se cambian, para conservar la huella |
 | — | Defectos en las demostraciones de OpenAI | — | Todas las historias de arriba | **Ninguno encontrado** dentro de este alcance |
 
-Los tres defectos fueron míos, y la auditoría los encontró y los corrigió en público. Están en [FINDINGS.md](../FINDINGS.md) como hallazgos 1, 3 y 8. Además, el hallazgo 7 no es un defecto: la presión periódica en (D) es un punto que deben interpretar los matemáticos (CA-4.4).
+Los cuatro defectos fueron míos, y la auditoría los encontró y los declaró en público. Están en [FINDINGS.md](../FINDINGS.md) como hallazgos 1, 3, 8 y 9. Los tres primeros se corrigieron. El cuarto se documentó sin tocar los archivos publicados, porque cambiarlos cambiaría la versión de los datos y la huella. Además, el hallazgo 7 no es un defecto: la presión periódica en (D) es un punto que deben interpretar los matemáticos (CA-4.4).
 
 ## Matriz de trazabilidad
 
@@ -263,7 +269,7 @@ Los tres defectos fueron míos, y la auditoría los encontró y los corrigió en
 | CA-2.1 | El kernel de Lean acepta | CP-2.1 | Corridas 1–5 | Sí |
 | CA-2.2 | nanoda acepta | CP-2.1 | Corridas 1–5 | Sí |
 | CA-2.3 | Kernel al día | CP-2.3 | Revisión del código fuente | Sí |
-| CA-2.4 | Tercera implementación | CP-2.4 | lean4lean | No |
+| CA-2.4 | Tercera implementación | CP-2.4 | lean4lean sobre R0, 24-nov | Sí |
 | CA-3.1 | Rechaza cada trampa | CP-3.1a–f | 6 mutantes sobre B2 | Sí |
 | CA-3.2 | Acepta el control | CP-3.2 | Control sobre B2 | Sí |
 | CA-3.3 | Coincide con DeepMind | CP-3.3 | Comparación textual | Sí |
@@ -288,6 +294,5 @@ Los tres defectos fueron míos, y la auditoría los encontró y los corrigió en
 2. **CA-4.4:** que un matemático decida cómo leer la presión periódica en (D).
 3. **CA-5.4:** que alguien distinto a mí recompile en Lean con la [guía](INDEPENDENT_REPRODUCTION.md).
 4. **CA-5.3:** un reporte de `verificar.py` desde Linux, con el [formulario](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml).
-5. **CA-2.4:** una tercera implementación del kernel que funcione con Lean 4.34.
 
-Los cuatro primeros dependen de personas, no de máquinas. Esa es la última puerta: **sean el árbitro**.
+Los cuatro dependen de personas, no de máquinas. Esa es la última puerta: **sean el árbitro**.

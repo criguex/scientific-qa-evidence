@@ -51,6 +51,7 @@ Empieza por el [README](../README.es.md) ([in English](../README.md)). Esta pág
 | [experiments/blind-faults/](../experiments/blind-faults/) | Benchmark de fallos sembrados: diseño, v1 congelada con fe de erratas, v2 corregida |
 | [experiments/mathlib-controls/](../experiments/mathlib-controls/) | «El enunciado cambió» no es «el teorema es falso», sobre tres teoremas de Mathlib |
 | [experiments/receipt-check/](../experiments/receipt-check/README.md) | Recibos frente a logs sobre registros auténticos, dos casos ([solicitud de revisión](REVIEW_REQUEST.md)) |
+| [experiments/version-port/](../experiments/version-port/RESULTS.es.md) | Las comprobaciones repetidas en tres versiones de Lean: lean4lean como tercer kernel sobre la versión auditada; las pruebas no compilan sin cambios en v4.34.0 ni en v4.35.0 |
 | [evidence/numerical/source/CONTRACT.md](../evidence/numerical/source/CONTRACT.md) | El contrato congelado de los nueve modelos numéricos |
 
 ## Sobre el proyecto

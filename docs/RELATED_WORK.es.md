@@ -27,7 +27,7 @@ Que una comprobación en Lean pase involucra preguntas separadas:
 
 | Capa | Pregunta | Este estudio |
 | --- | --- | --- |
-| Aceptación del kernel | ¿La prueba en Lean deriva el enunciado formal? | Probado: cinco compilaciones, dos kernels, una revisión desde cero, vigencia del kernel |
+| Aceptación del kernel | ¿La prueba en Lean deriva el enunciado formal? | Probado: cinco compilaciones, dos kernels en Comparator, una revisión desde cero, lean4lean como tercer kernel sobre la versión auditada, vigencia del kernel |
 | Fidelidad del enunciado | ¿El enunciado formal es el problema que se pretendía? | Parcialmente: procedencia textual frente al enunciado de DeepMind y una revisión basada en lectura frente al texto de Clay |
 | Correspondencia de la prueba | ¿La prueba en Lean sigue el argumento del artículo? | **No probado.** arXiv:2610.08144 sostiene que no. Su abstract no afirma que algún teorema de Lean sea falso ni que el enunciado final difiera del de Clay. |
 

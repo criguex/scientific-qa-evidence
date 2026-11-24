@@ -1,0 +1,18 @@
+[2026-11-24T16:17:15Z] === R2 (v4.35.0) pasos: 1 2 3 4
+[2026-11-24T16:17:15Z] INICIO s1_clone: git clone -q https://github.com/openai/NavierStokesAndEuler.git (cwd <path>/R2)
+[2026-11-24T16:17:18Z] FIN s1_clone rc=0
+[2026-11-24T16:17:18Z] INICIO s1_manifest: bash -c manifest (cwd <path>/R2/NavierStokesAndEuler)
+[2026-11-24T16:17:21Z] FIN s1_manifest rc=0
+[2026-11-24T16:17:21Z] CHECK s1_manifest: esperado=[95bb21c9…52e95fc] obtenido=[95bb21c93e834581e1400e31e33a9fb7943db2f64f11425b034f97b9b52e95fc] => OK
+[2026-11-24T16:17:21Z] INICIO s2_lake_update: lake update (cwd <path>/R2/NavierStokesAndEuler)
+[2026-11-24T16:18:21Z] FIN s2_lake_update rc=0
+[2026-11-24T16:18:21Z] CHECK s2_versions: esperado=[toolchain leanprover/lean4:v4.35.0, mathlib 56a0058, Comparator e3dcf30] obtenido=[toolchain leanprover/lean4:v4.35.0, mathlib 56a0058, Comparator e3dcf30] => OK
+[2026-11-24T16:18:21Z] INICIO s3_statements: bash -c stmt_check (cwd <path>/R2/NavierStokesAndEuler)
+[2026-11-24T16:18:21Z] FIN s3_statements rc=0
+[2026-11-24T16:18:21Z] CHECK s3_statements: esperado=[empty diff vs f9e8bc5 (ComparatorChallenges/, solution files)] obtenido=[exit 0] => OK
+[2026-11-24T16:18:21Z] INICIO s4_cache_get: lake exe cache get (cwd <path>/R2/NavierStokesAndEuler)
+[2026-11-24T16:18:54Z] FIN s4_cache_get rc=0
+[2026-11-24T16:18:54Z] INICIO s4_build: lake build (cwd <path>/R2/NavierStokesAndEuler)
+[2026-11-24T16:24:02Z] FIN s4_build rc=1
+[2026-11-24T16:24:02Z] CHECK s4_build: esperado=[exit 0] obtenido=[exit 1; 371 modules built here; error: build failed] => UNEXPECTED
+[2026-11-24T16:24:02Z] ALERTA: build falló (ver logs/s4_build.log)

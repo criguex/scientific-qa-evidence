@@ -1,0 +1,12 @@
+   Compiling proc-macro2 v1.0.103
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.35
+   Compiling syn v2.0.111
+   Compiling num-integer v0.1.47
+   Compiling serde_derive v1.0.228
+   Compiling num-bigint v0.5.1
+   Compiling nanoda_lib v0.4.32 (<path>/tools/nanoda_lib)
+    Finished `release` profile [optimized] target(s) in 25.61s

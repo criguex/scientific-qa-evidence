@@ -48,7 +48,7 @@ Las mismas comprobaciones corren en cada push en [GitHub Actions](.github/workfl
 | Pregunta | Respuesta | Registro |
 | --- | --- | --- |
 | ¿Compilan las demostraciones de OpenAI? | Sí. Cinco compilaciones desde el commit fijado de OpenAI `f9e8bc5`; las dos últimas (`lake --no-cache build`) compilaron localmente todas las dependencias de Lean, aunque se reutilizaron el toolchain de Lean y los binarios de los verificadores. Una recompilación posterior en la nube, el 2026-10-23 (609 de 609 módulos, salida 0), usó la caché de Mathlib. | [compilaciones](evidence/formal/cd-validation/README.md), [recompilación en la nube](evidence/lean-cloud-2026-10-23/README.md) |
-| ¿Las aceptan verificadores independientes? | Sí. Comparator, con el kernel de Lean y el verificador separado nanoda, aceptó Navier–Stokes (C), (D) y Euler en las cinco compilaciones. Terminaron las 18 pruebas. | [revalidación](evidence/formal/cd-validation/README.md) |
+| ¿Las aceptan verificadores independientes? | Sí. Comparator, con el kernel de Lean y el verificador separado nanoda, aceptó Navier–Stokes (C), (D) y Euler en las cinco compilaciones. Terminaron las 18 pruebas. El 2026-11-24, lean4lean `0048ed7`, una tercera implementación del kernel, recompilado sobre v4.34.0-rc2 y no sobre su toolchain upstream v4.34.0, volvió a revisar desde cero los dos módulos de solución y terminó con código 0 (806.768 y 788.326 declaraciones). | [revalidación](evidence/formal/cd-validation/README.md), [port de versión](experiments/version-port/RESULTS.es.md) |
 | ¿El enunciado verificado es el publicado? | Sí. Seis cambios de un símbolo en el enunciado fueron rechazados, y un cambio solo en un comentario fue aceptado. Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. | [mutantes](evidence/formal/cd-validation/mutants/), [procedencia](evidence/formal/statement-provenance/README.md) |
 | ¿Coincide con el texto del Instituto Clay? | De 16 cláusulas, 6 coinciden directamente, 9 coinciden mediante hechos estándar y 1 necesita una decisión humana. En Lean, los teoremas de OpenAI implican mi transcripción literal de (C) y (D) de Clay; nadie independiente ha revisado esa transcripción. | [revisión de riesgos](evidence/formal/clay-lean-risk.md), [puentes](bridges/README.md) |
 | ¿Qué significa que el verificador rechace algo? | Solo que «el enunciado cambió», no que «el teorema es falso». Se mostró con tres teoremas que Mathlib ya demuestra. | [controles con Mathlib](experiments/mathlib-controls/RESULTS.md) |
@@ -64,7 +64,7 @@ La misma revisión, contada como la cuenta un equipo de QA: seis historias de us
 | Historia | La pregunta | Criterios que cumplen |
 | --- | --- | --- |
 | HU-1 · Las demostraciones compilan | ¿Lean revisó cada paso? | 3 de 3 |
-| HU-2 · Otros verificadores dicen lo mismo | ¿Un segundo verificador está de acuerdo? | 3 de 4 |
+| HU-2 · Otros verificadores dicen lo mismo | ¿Un segundo verificador está de acuerdo? | 4 de 4 |
 | HU-3 · El enunciado no deja pasar trampas | ¿Lo verificado es exactamente lo publicado? | 4 de 4 |
 | HU-4 · Es la pregunta de Clay | ¿Responde el texto oficial del Instituto Clay? | 2 de 4 |
 | HU-5 · Otra persona lo repite sin mí | ¿Alguien más obtiene el mismo resultado? | 2 de 4 |
@@ -86,7 +86,7 @@ Esquema del escenario: Cada trampa de un símbolo es rechazada
     | Euler: tiempo T* ≤ 1/2 en vez de T* ≤ 1   |
 ```
 
-Los cinco criterios que todavía dicen no dependen de personas, no de máquinas: una revisión experta de la transcripción de Clay, la lectura de la presión periódica en (D), una recompilación en Lean sin mí, un reporte desde Linux y una tercera implementación del kernel. **Versión interactiva con ejemplos visuales, pensada para el seminario de la UNAL:** [criguex.github.io/scientific-qa-evidence/metodologia](https://criguex.github.io/scientific-qa-evidence/metodologia/). Explicación paso a paso, casos, defectos y matriz de trazabilidad: [docs/METODOLOGIA.md](docs/METODOLOGIA.md). Escenarios completos: [features/](features/).
+Los cuatro criterios que todavía dicen no dependen de personas, no de máquinas: una revisión experta de la transcripción de Clay, la lectura de la presión periódica en (D), una recompilación en Lean sin mí y un reporte desde Linux. **Versión interactiva con ejemplos visuales, pensada para el seminario de la UNAL:** [criguex.github.io/scientific-qa-evidence/metodologia](https://criguex.github.io/scientific-qa-evidence/metodologia/). Explicación paso a paso, casos, defectos y matriz de trazabilidad: [docs/METODOLOGIA.md](docs/METODOLOGIA.md). Escenarios completos: [features/](features/).
 
 ## Qué pido
 
@@ -98,7 +98,8 @@ Los cinco criterios que todavía dicen no dependen de personas, no de máquinas:
 
 - **Sin revisión de un matemático.** La conexión con el texto de Clay depende de una transcripción que nadie independiente ha revisado.
 - **No es independiente.** Todas las compilaciones de Lean corrieron en infraestructura que yo escogí (un equipo Linux y un contenedor en la nube operado por un agente de IA), y los reportes de reproducción hasta ahora vienen de personas que conozco.
-- **Solo dos implementaciones de kernel.** El kernel de Lean y nanoda revisaron las demostraciones; que dos verificadores coincidan no dice nada sobre errores que nadie conoce todavía.
+- **Solo tres implementaciones de kernel.** El kernel de Lean, nanoda y lean4lean revisaron las demostraciones; lean4lean se recompiló sobre v4.34.0-rc2, no sobre su toolchain upstream, y corrió en mi propio equipo. Que tres verificadores coincidan no dice nada sobre errores que nadie conoce todavía.
+- **Atado a una versión de Lean.** Las demostraciones no compilan sin cambios en Lean v4.34.0 ni en v4.35.0: los enunciados siguen compilando, pero el código de las pruebas se rompe por cambios en la API de Mathlib. Está en curso un port de las pruebas ([port de versión](experiments/version-port/RESULTS.es.md)).
 - **Fuera de alcance:** si la demostración en Lean sigue el artículo escrito de OpenAI, algo que [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) discute.
 - **Pruebas numéricas pequeñas y sintéticas**, con mutantes gruesos, así que no hay una tasa de detección en el mundo real.
 

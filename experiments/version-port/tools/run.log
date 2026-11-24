@@ -1,0 +1,28 @@
+[2026-11-24T00:42:49Z] INICIO rustup: bash -c curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable (cwd <path>/tools)
+[2026-11-24T00:43:05Z] FIN rustup rc=0
+[2026-11-24T00:43:06Z] go go1.27.4
+[2026-11-24T00:43:06Z] INICIO go_install: bash -c curl -sSfL https://go.dev/dl/go1.27.4.linux-amd64.tar.gz -o /tmp/go.tgz && sha256sum /tmp/go.tgz && tar -C /usr/local -xzf /tmp/go.tgz (cwd <path>/tools)
+[2026-11-24T00:43:13Z] FIN go_install rc=0
+[2026-11-24T00:43:14Z] INICIO landrun_build: go build -o <path>/tools/bin/landrun ./cmd/landrun (cwd <path>/tools/landrun)
+[2026-11-24T00:47:31Z] FIN landrun_build rc=143
+[2026-11-24T00:47:33Z] INICIO nanoda_build: cargo build --release (cwd <path>/tools/nanoda_lib)
+[2026-11-24T00:47:36Z] FIN nanoda_build rc=101
+[2026-11-24T00:47:37Z] INICIO cmp_build_v4.34.0-rc2: lake build lean4export comparator (cwd <path>/tools/cmp-v4.34.0-rc2)
+[2026-11-24T00:47:52Z] FIN cmp_build_v4.34.0-rc2 rc=0
+[2026-11-24T00:47:53Z] INICIO cmp_build_v4.34.0: lake build lean4export comparator (cwd <path>/tools/cmp-v4.34.0)
+[2026-11-24T00:48:58Z] FIN cmp_build_v4.34.0 rc=0
+[2026-11-24T00:49:00Z] INICIO cmp_build_v4.35.0: lake build lean4export comparator (cwd <path>/tools/cmp-v4.35.0)
+[2026-11-24T00:49:49Z] FIN cmp_build_v4.35.0 rc=0
+tool	revision	sha256	path
+landrun	ec104f6edc1e14d7fec6d31146f1ec6f9c192c5a	1c35440a6ceb32badfe51f392ae0489eb9da4b37c7e08d8c57b9bd803d803153	tools/bin/landrun
+nanoda_bin	0da9f98feadd3a0a2ef4b3dbcf52a298a6fef929	23fe7e2e1f904021eed2cf1bd74bbeb5c18d693d6a1d3ba9c21f60d41b3229f8	tools/bin/nanoda_bin
+comparator(v4.34.0-rc2)	19e111e2141cf333c7daff0f64c5f24acc91dd2e	514de8d2acbd6e0102575cd2c575e336b7c4a40daf3ae66abe97cef5e1e6b02a	tools/cmp-v4.34.0-rc2/.lake/build/bin/comparator
+lean4export(v4.34.0-rc2)	cacf989bd75f608700820f6afc595f32e7a99a4d	4fa9e14cada304109e85da5048bcd411cf781a03539b3e50953e5c537074bd9e	tools/bin-v4.34.0-rc2/lean4export
+comparator(v4.34.0)	d03acab154d269c06e60e4de7e4cc85deebff94b	8efd5e1532b5e47d5ed5ead9ea42483068fbba81ad76e486ff8d2dbcf76e00f2	tools/cmp-v4.34.0/.lake/build/bin/comparator
+lean4export(v4.34.0)	076e8e57707e813375e8f9da8bf989799ace9680	cbf95bb18e3fc19bbe39ad2a250d9cfce4ca01315b2acf8f630d1e315498bf60	tools/bin-v4.34.0/lean4export
+comparator(v4.35.0)	e3dcf3083fc53d44b27a4431fabf7d43181583f5	3300f5a725ae8dcbfb88b3eb0c605c5737ec8e02bc3033f80665a182d997b023	tools/cmp-v4.35.0/.lake/build/bin/comparator
+lean4export(v4.35.0)	5a9a355dc6c5fd82b69058d433e2ae2e8dfbf8fe	87f4fe988dfe97a2a607cf38a8777a625b482f833985c16dbc1ddafa525f4bba	tools/bin-v4.35.0/lean4export
+rustc 1.100.0 (0ef1bc386 2026-11-09)
+cargo 1.100.0 (3acc79c0c 2026-11-05)
+go version go1.27.4 linux/amd64
+[2026-11-24T00:49:50Z] LISTO

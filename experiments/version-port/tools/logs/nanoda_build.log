@@ -1,0 +1,51 @@
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded getrandom v0.4.3
+  Downloaded num-integer v0.1.47
+  Downloaded autocfg v1.1.0
+  Downloaded cfg-if v1.0.0
+  Downloaded equivalent v1.0.1
+  Downloaded rustc-hash v1.1.0
+  Downloaded rand_core v0.10.1
+  Downloaded serde v1.0.228
+  Downloaded chacha20 v0.10.2
+  Downloaded itoa v1.0.15
+  Downloaded cpufeatures v0.3.1
+  Downloaded ryu v1.0.20
+  Downloaded semver v1.0.27
+  Downloaded num-traits v0.2.19
+  Downloaded quote v1.0.35
+  Downloaded unicode-ident v1.0.12
+  Downloaded serde_derive v1.0.228
+  Downloaded serde_core v1.0.228
+  Downloaded memchr v2.7.6
+  Downloaded proc-macro2 v1.0.103
+  Downloaded num-bigint v0.5.1
+  Downloaded rand v0.10.2
+  Downloaded hashbrown v0.16.1
+  Downloaded indexmap v2.13.0
+  Downloaded serde_json v1.0.145
+  Downloaded syn v2.0.111
+  Downloaded libc v0.2.180
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.12
+   Compiling serde_core v1.0.228
+   Compiling autocfg v1.1.0
+   Compiling serde v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling memchr v2.7.6
+   Compiling itoa v1.0.15
+   Compiling equivalent v1.0.1
+   Compiling hashbrown v0.16.1
+   Compiling ryu v1.0.20
+   Compiling rustc-hash v1.1.0
+   Compiling semver v1.0.27
+error: linker `cc` not found
+  |
+  = note: No such file or directory (os error 2)
+
+error: could not compile `serde_json` (build script) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `serde_core` (build script) due to 1 previous error
+error: could not compile `proc-macro2` (build script) due to 1 previous error
+error: could not compile `serde` (build script) due to 1 previous error

@@ -1,0 +1,24 @@
+Euler.Solution:defnDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.valueGroupEquiv: lean4lean took 1339
+Euler.Solution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.valueGroupOrderIso._proof_11: lean4lean took 1338
+Euler.Solution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.embedding_valueGroupOrderIso: lean4lean took 1165
+Euler.Solution:thmDecl CliffordAlgebra.GradedAlgebra.lift_ι_eq: lean4lean took 2033
+Euler.Solution:thmDecl PresheafOfModules.freeObj._proof_2: lean4lean took 30558
+Euler.Solution:thmDecl Algebra.FormallyEtale.of_isSeparable: lean4lean took 1510
+Euler.Solution:thmDecl _private.Mathlib.Combinatorics.SimpleGraph.Regularity.Chunk.0.SzemerediRegularity.edgeDensity_star_not_uniform._proof_1_10: lean4lean took 1278
+Euler.Solution:thmDecl ExteriorAlgebra.liftAlternatingEquiv._proof_1: lean4lean took 1024
+Euler.Solution:thmDecl _private.Mathlib.Condensed.Light.Sequence.0.InternalProjectivityProof.cocone._proof_1: lean4lean took 2516
+Euler.Solution:thmDecl EulerPacketCylinderField.ProfileRegularity.literalTailGradeField_path: lean4lean took 60421
+Euler.Solution:thmDecl PiTensorProduct.ofDirectSumEquiv_tprod_lof: lean4lean took 1304
+Euler.Solution:thmDecl MatrixModCat.unitIso._proof_2: lean4lean took 1109
+Euler.Solution:thmDecl Std.Tactic.BVDecide.BVExpr.bitblast.goCache_Inv_of_Inv._mutual: lean4lean took 1743
+Euler.Solution:thmDecl Unitary.conjStarAlgEquiv_unitaryLinearIsometryEquiv: lean4lean took 1618
+Euler.Solution:thmDecl Polynomial.iterate_derivative_derivative_mul_X: lean4lean took 23049
+Euler.Solution:thmDecl PiTensorProduct.ofDirectSumEquiv_symm_lof_tprod: lean4lean took 1736
+Euler.Solution:thmDecl EulerPacketCylinderField.sourceLiteralTailGradeField_path: lean4lean took 64319
+Euler.Solution:thmDecl PadicInt.coe_adicCompletionIntegersEquiv_apply: lean4lean took 21142
+Euler.Solution:thmDecl EulerPacketCylinderField.joinedLiteralTailGradeField_path: lean4lean took 62607
+Euler.Solution:thmDecl LinearMap.lTensor_tensor: lean4lean took 1027
+Euler.Solution:thmDecl SheafOfModules.pushforwardCongr_symm: lean4lean took 2260
+Euler.Solution:thmDecl IsDedekindDomain.HeightOneSpectrum.adicCompletion.coe_valueGroupEquiv: lean4lean took 1400
+Euler.Solution:thmDecl Unitary.conjStarAlgAut_symm_unitaryLinearIsometryEquiv: lean4lean took 1736
+checked 788326 declarations

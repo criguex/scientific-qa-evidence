@@ -1,0 +1,8 @@
+step	command	cwd	start_utc	end_utc	exit	log_sha256	log_bytes
+s1_clone	git clone -q https://github.com/openai/NavierStokesAndEuler.git	<path>/R1	2026-11-24T03:26:59Z	2026-11-24T03:27:05Z	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855	0
+s1_manifest	bash -c manifest	<path>/R1/NavierStokesAndEuler	2026-11-24T03:27:05Z	2026-11-24T03:27:09Z	0	b3f8a3b6019bad4370693199e26b1b743584506ce7d6cd8f4042a35caa71457c	68
+s2_lake_update	lake update	<path>/R1/NavierStokesAndEuler	2026-11-24T03:27:09Z	2026-11-24T03:32:27Z	0	61cafb67aad630f88842bf8a410ef75d7fd15910b4cf32563bcd323d231dadb4	1795
+s3_statements	bash -c stmt_check	<path>/R1/NavierStokesAndEuler	2026-11-24T03:32:27Z	2026-11-24T03:32:27Z	0	81bff35bafede1b747cfdc552034c4173afefa7c7b8d42f66588ec7d2993404f	692
+s4_cache_get	lake exe cache get	<path>/R1/NavierStokesAndEuler	2026-11-24T03:32:27Z	2026-11-24T03:34:27Z	0	2a7dd7efc866a3afef23a698a62efbaba85db5a5c797d456d27e39c5a782d690	27752
+s4_cache_get	lake exe cache get	<path>/R1/NavierStokesAndEuler	2026-11-24T16:10:16Z	2026-11-24T16:10:28Z	0	29e284dc7d8024aa6a333a92d0b23035028d78ada47b37f7dd77d8e1a0293483	138
+s4_build	lake build	<path>/R1/NavierStokesAndEuler	2026-11-24T16:10:28Z	2026-11-24T16:13:46Z	1	b01a2a998ee5bcfa01a3ed39f351d92365c18b380e7533626f837e4dd1a39fa6	76156

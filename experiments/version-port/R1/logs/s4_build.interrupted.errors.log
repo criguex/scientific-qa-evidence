@@ -1,0 +1,262 @@
+# Excerpt of s4_build.interrupted.log: failing modules (✖) with their error blocks and the final summary; "trace:" lines (compiler command lines) and successful-module lines removed. Original: 532 lines, SHA-256 48393c00ac65c218639cf929ac770177dc720321cb6a9ed8235f3bc9ee3ea6ce
+warning: NavierStokes/AxisWeightEstimates.lean:5:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+warning: NavierStokes/TangentProjection.lean:4:0: 'Mathlib.Data.Complex.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Complex.Basic
+warning: NavierStokes/CurlGeometry.lean:1:0: 'Mathlib.Data.Complex.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Complex.Basic
+warning: NavierStokes/ExponentLedger.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+warning: NavierStokes/BoundaryCoordinates.lean:3:0: 'Mathlib.Data.Real.Sign' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Sign
+✖ [9072/9741] Building NavierStokes.AppendixHeatResults (8.0s)
+error: NavierStokes/AppendixHeatResults.lean:36:2: failed to synthesize
+  MulLeftMono ℝ
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+✖ [9092/9741] Building NavierStokes.R3.PairedKernelBound (12s)
+error: NavierStokes/R3/PairedKernelBound.lean:48:41: unsolved goals
+E : Type u_1
+inst✝ : NormedAddCommGroup E
+f : Space → E
+hf : AEStronglyMeasurable f volume
+⊢ AEStronglyMeasurable f volume
+error: NavierStokes/R3/PairedKernelBound.lean:78:6: Application type mismatch: The argument
+  MemLp.aestronglyMeasurable hr
+has type
+  AEStronglyMeasurable.{0, u_1} r volume
+but is expected to have type
+  AEStronglyMeasurable.{0, 0} k volume
+in the application
+  eLpNorm_smul_le_mul_eLpNorm (MemLp.aestronglyMeasurable hr)
+error: NavierStokes/R3/PairedKernelBound.lean:80:4: Invalid `⟨...⟩` notation: The expected type
+  WithTop.LT (eLpNorm (fun y => k y • r y) 1 volume) ∞
+has more than one constructor
+
+Note: This notation can only be used when the expected type is an inductive type with a single constructor
+error: NavierStokes/R3/PairedKernelBound.lean:106:29: Application type mismatch: The argument
+  hbound
+has type
+  ∀ᵐ (y : Space), ‖m y‖ ≤ k (x - y)
+but is expected to have type
+  AEStronglyMeasurable ?m.157 ?m.155
+in the application
+  eLpNorm_mono_ae_real hbound
+error: NavierStokes/R3/PairedKernelBound.lean:110:9: Invalid `⟨...⟩` notation: The expected type
+  WithTop.LT (eLpNorm m (4 / 3) volume) ∞
+has more than one constructor
+
+Note: This notation can only be used when the expected type is an inductive type with a single constructor
+error: NavierStokes/R3/PairedKernelBound.lean:279:2: Type mismatch: After simplification, term
+  norm_paired_kernel_le (Measurable.comp hkm (Measurable.sub measurable_fst measurable_snd)) (MemLp.norm hk) hr hg
+    fun x x_1 => le_rfl
+ has type
+  ‖∫ (x : Space), g x • ∫ (y : Space), k (x - y) • r y‖ ≤
+    (eLpNorm g 1 volume).toReal * (eLpNorm (fun x => ‖k x‖) (4 / 3) volume).toReal * (eLpNorm r 4 volume).toReal
+but is expected to have type
+  ‖∫ (x : Space), g x • ∫ (y : Space), k (x - y) • r y‖ ≤
+    (eLpNorm g 1 volume).toReal * (eLpNorm k (4 / 3) volume).toReal * (eLpNorm r 4 volume).toReal
+✖ [9095/9741] Building NavierStokes.R3.WeightedInterpolation (7.6s)
+error: NavierStokes/R3/WeightedInterpolation.lean:39:76: unsolved goals
+E : Type u_1
+F : Type u_2
+G : Type u_3
+inst✝² : NormedAddCommGroup E
+inst✝¹ : NormedAddCommGroup F
+inst✝ : NormedAddCommGroup G
+f : Space → E
+g : Space → F
+h : Space → G
+p q r : ℝ≥0∞
+a b : ℝ
+hf : AEStronglyMeasurable f volume
+hg : AEStronglyMeasurable g volume
+hp : 0 < p.toReal
+hq : 0 < q.toReal
+hr : 0 < r.toReal
+ha : 0 < a
+hb : 0 < b
+hra : r.toReal < p.toReal / a
+hab : 1 / r.toReal = 1 / (p.toReal / a) + 1 / (q.toReal / b)
+hh : ∀ᵐ (x : Space), ‖h x‖ ≤ ‖f x‖ ^ a * ‖g x‖ ^ b
+hp0 : 0 < p
+hpt : p < ∞
+hq0 : 0 < q
+hqt : q < ∞
+hr0 : 0 < r
+hrt : r < ∞
+⊢ AEStronglyMeasurable g volume
+
+E : Type u_1
+F : Type u_2
+G : Type u_3
+inst✝² : NormedAddCommGroup E
+inst✝¹ : NormedAddCommGroup F
+inst✝ : NormedAddCommGroup G
+f : Space → E
+g : Space → F
+h : Space → G
+p q r : ℝ≥0∞
+a b : ℝ
+hf : AEStronglyMeasurable f volume
+hg : AEStronglyMeasurable g volume
+hp : 0 < p.toReal
+hq : 0 < q.toReal
+hr : 0 < r.toReal
+ha : 0 < a
+hb : 0 < b
+hra : r.toReal < p.toReal / a
+hab : 1 / r.toReal = 1 / (p.toReal / a) + 1 / (q.toReal / b)
+hh : ∀ᵐ (x : Space), ‖h x‖ ≤ ‖f x‖ ^ a * ‖g x‖ ^ b
+hp0 : 0 < p
+hpt : p < ∞
+hq0 : 0 < q
+hqt : q < ∞
+hr0 : 0 < r
+hrt : r < ∞
+⊢ AEStronglyMeasurable f volume
+
+E : Type u_1
+F : Type u_2
+G : Type u_3
+inst✝² : NormedAddCommGroup E
+inst✝¹ : NormedAddCommGroup F
+inst✝ : NormedAddCommGroup G
+f : Space → E
+g : Space → F
+h : Space → G
+p q r : ℝ≥0∞
+a b : ℝ
+hf : AEStronglyMeasurable f volume
+hg : AEStronglyMeasurable g volume
+hp : 0 < p.toReal
+hq : 0 < q.toReal
+hr : 0 < r.toReal
+ha : 0 < a
+hb : 0 < b
+hra : r.toReal < p.toReal / a
+hab : 1 / r.toReal = 1 / (p.toReal / a) + 1 / (q.toReal / b)
+hh : ∀ᵐ (x : Space), ‖h x‖ ≤ ‖f x‖ ^ a * ‖g x‖ ^ b
+hp0 : 0 < p
+hpt : p < ∞
+hq0 : 0 < q
+hqt : q < ∞
+hr0 : 0 < r
+hrt : r < ∞
+⊢ AEStronglyMeasurable h volume
+error: NavierStokes/R3/WeightedInterpolation.lean:79:37: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hf
+has type
+  WithTop.LT (eLpNorm f p volume) ∞
+which is not a one-constructor inductive type.
+error: NavierStokes/R3/WeightedInterpolation.lean:79:42: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hg
+has type
+  WithTop.LT (eLpNorm g q volume) ∞
+which is not a one-constructor inductive type.
+error: NavierStokes/R3/WeightedInterpolation.lean:84:10: Invalid `⟨...⟩` notation: The expected type
+  WithTop.LT (eLpNorm h r volume) ∞
+has more than one constructor
+
+Note: This notation can only be used when the expected type is an inductive type with a single constructor
+error: NavierStokes/R3/WeightedInterpolation.lean:143:68: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hw
+has type
+  WithTop.LT (eLpNorm w 2 volume) ∞
+which is not a one-constructor inductive type.
+✖ [9099/9741] Building NavierStokes.R3.LpNormTools (9.6s)
+error: NavierStokes/R3/LpNormTools.lean:33:60: Application type mismatch: The argument
+  hfg
+has type
+  ∀ᵐ (x : Space), ‖f x‖ ≤ ‖g x‖
+but is expected to have type
+  AEStronglyMeasurable ?m.50 ?m.47
+in the application
+  eLpNorm_mono_ae hfg
+error: NavierStokes/R3/LpNormTools.lean:48:9: Function expected at
+  eLpNorm_add_le ?m.114
+but this term has type
+  eLpNorm (?m.103 + ?m.104) ?m.101 ?m.102 ≤ eLpNorm ?m.103 ?m.101 ?m.102 + eLpNorm ?m.104 ?m.101 ?m.102
+
+Note: Expected a function because this term is being applied to the argument
+  hg.aestronglyMeasurable
+error: NavierStokes/R3/LpNormTools.lean:48:24: Application type mismatch: The argument
+  MemLp.aestronglyMeasurable hf
+has type
+  AEStronglyMeasurable f volume
+but is expected to have type
+  1 ≤ ?m.101
+in the application
+  eLpNorm_add_le (MemLp.aestronglyMeasurable hf)
+error: NavierStokes/R3/LpNormTools.lean:59:49: unsolved goals
+E : Type u_1
+inst✝ : NormedAddCommGroup E
+f : Space → E
+hf : Integrable f volume
+⊢ AEStronglyMeasurable f volume
+✖ [9103/9741] Building NavierStokes.R3.ComparisonCutoffs (10s)
+error: NavierStokes/R3/ComparisonCutoffs.lean:184:10: Function expected at
+  Finset.prod_le_prod fun x x_1 => norm_nonneg (?m.250 x)
+but this term has type
+  ∏ i ∈ ?m.238, 0 ≤ ∏ i ∈ ?m.238, ‖?m.250 i‖
+
+Note: Expected a function because this term is being applied to the argument
+  (fun _ _ => norm_dilation_le hR)
+✖ [9112/9741] Building NavierStokes.EdgeWeightJets (13s)
+error: NavierStokes/EdgeWeightJets.lean:131:10: Function expected at
+  Finset.prod_le_one fun x x_1 => ?m.138
+but this term has type
+  ∏ i ∈ ?m.131, ?m.130 i ≤ 1
+
+Note: Expected a function because this term is being applied to the argument
+  (fun _ _ => ContinuousLinearMap.norm_snd_le _ _ _)
+error: NavierStokes/EdgeWeightJets.lean:131:41: Type mismatch
+  norm_nonneg ?m.137
+has type
+  0 ≤ ‖?m.137‖
+but is expected to have type
+  ?m.130 x✝¹ ≤ 1
+error: NavierStokes/EdgeWeightJets.lean:261:4: Function expected at
+  Finset.prod_le_one fun x x_1 => ?m.119
+but this term has type
+  ∏ i ∈ ?m.112, ?m.111 i ≤ 1
+
+Note: Expected a function because this term is being applied to the argument
+  (fun _ _ => hL)
+error: NavierStokes/EdgeWeightJets.lean:261:35: Type mismatch
+  norm_nonneg ?m.118
+has type
+  0 ≤ ‖?m.118‖
+but is expected to have type
+  ?m.111 x✝¹ ≤ 1
+✖ [9123/9741] Building NavierStokes.WeightedRadialPrimitive (17s)
+error: NavierStokes/WeightedRadialPrimitive.lean:801:12: Function expected at
+  Finset.prod_le_one fun x x_1 => ?m.395
+but this term has type
+  ∏ i ∈ ?m.388, ?m.387 i ≤ 1
+
+Note: Expected a function because this term is being applied to the argument
+  (fun _ _ => ContinuousLinearMap.norm_fst_le _ _ _)
+error: NavierStokes/WeightedRadialPrimitive.lean:801:43: Type mismatch
+  norm_nonneg ?m.394
+has type
+  0 ≤ ‖?m.394‖
+but is expected to have type
+  ?m.387 x✝¹ ≤ 1
+✖ [9208/9741] Building NavierStokes.R3.H3Products (11s)
+error: NavierStokes/R3/H3Products.lean:30:17: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hg
+has type
+  WithTop.LT (eLpNorm g 2 volume) ⊤
+which is not a one-constructor inductive type.
+✖ [9216/9741] Building NavierStokes.R3.ComparatorBridge (16s)
+error: NavierStokes/R3/ComparatorBridge.lean:70:42: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  h.integrable t ht
+has type
+  WithTop.LT (eLpNorm (fun x => ‖v x t‖) 2 volume) ⊤
+which is not a one-constructor inductive type.

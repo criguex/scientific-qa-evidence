@@ -1,0 +1,11 @@
+step	command	cwd	start_utc	end_utc	exit	log_sha256	log_bytes
+rustup	bash -c curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable	<path>/tools	2026-11-24T00:42:49Z	2026-11-24T00:43:05Z	0	20665e28cda6c834facdad581dd8e949cccbbd4c5217280479a7263971060877	2147
+go_install	bash -c curl -sSfL https://go.dev/dl/go1.27.4.linux-amd64.tar.gz -o /tmp/go.tgz && sha256sum /tmp/go.tgz && tar -C /usr/local -xzf /tmp/go.tgz	<path>/tools	2026-11-24T00:43:06Z	2026-11-24T00:43:13Z	0	ada981fbafac30ee3b31d695346e720dceca1b63daafbc00dfdb76d9d5e605e7	78
+landrun_build	go build -o <path>/tools/bin/landrun ./cmd/landrun	<path>/tools/landrun	2026-11-24T00:43:14Z	2026-11-24T00:47:31Z	143	dbd114182c593972252a8b16f5b1de22d5800ce4968a1f32131d40fca76fd4a3	219
+nanoda_build	cargo build --release	<path>/tools/nanoda_lib	2026-11-24T00:47:33Z	2026-11-24T00:47:36Z	101	e676694d02741e09fde18e9579a360c77e097d052aeeeff2f3e6d03b90b1a0d4	1696
+landrun_build_retry	go build -o <path>/tools/bin/landrun ./cmd/landrun	<path>/tools/landrun	2026-11-24T00:47:45Z	2026-11-24T00:47:45Z	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855	0
+cmp_build_v4.34.0-rc2	lake build lean4export comparator	<path>/tools/cmp-v4.34.0-rc2	2026-11-24T00:47:37Z	2026-11-24T00:47:52Z	0	ec1c86d8dab3e5d33598a3b8adcc44bf47fbf6def102f99a8a7876c0851526da	896
+nanoda_build_retry	cargo build --release	<path>/tools/nanoda_lib	2026-11-24T00:48:33Z	2026-11-24T00:48:34Z	101	7cd7f7239b3739e5de0e494f0e455ed03623b9491081c6ee371e6773d8fe182b	713
+cmp_build_v4.34.0	lake build lean4export comparator	<path>/tools/cmp-v4.34.0	2026-11-24T00:47:53Z	2026-11-24T00:48:58Z	0	7fdb55d6fddebd7da38509c0fefcd329f0bc1beaac229dd5c3c2bed2815f18ba	883
+nanoda_build_retry2	cargo build --release	<path>/tools/nanoda_lib	2026-11-24T00:49:10Z	2026-11-24T00:49:35Z	0	8db15a05a258d36b4a61f6ef6d46bd1bf728039d6289dcfa23f02ee512d8dc8e	442
+cmp_build_v4.35.0	lake build lean4export comparator	<path>/tools/cmp-v4.35.0	2026-11-24T00:49:00Z	2026-11-24T00:49:49Z	0	e9b962a6531011b58c3d434fc63a8016c99317a7a27b9fe3bdde00384d643ec9	1160

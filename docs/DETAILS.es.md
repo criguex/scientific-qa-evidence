@@ -91,7 +91,7 @@ Comparator comprueba que la solución prueba exactamente el teorema del archivo 
 
 - **Recompilar y volver a verificar.** Cuatro compilaciones: el registro del 2026-10-20 (B1), una de auditoría cuyo Mathlib vino de la caché precompilada (B2), una nueva (B3) y una completa con `lake --no-cache build` (B4), con todas las dependencias compiladas localmente. Comparator aceptó los dos desafíos en cada una; una quinta compilación, B5, vino después y no está en esta escena. B3 había recibido en silencio 7 dependencias pequeñas como archivos precompilados de [Reservoir](https://reservoir.lean-lang.org); por eso existe B4. Se reutilizaron la toolchain de Lean y los binarios de los verificadores.
 - **Cambiar el enunciado: debe ser rechazado.** La prueba de OpenAI nunca se toca. Seis cambios de un símbolo al desafío fueron rechazados con `Challenge and solution theorem statement do not match`; un control de solo comentario fue aceptado. Que un mutante sea rechazado no dice si el enunciado mutado es verdadero, y los mutantes con `f = 0` no dicen nada sobre (A) o (B).
-- **Revisar cada paso desde un entorno vacío.** `leanchecker --fresh` aceptó las dos soluciones. Usa el kernel de Lean, así que no es una tercera implementación. `lean4lean` no compiló para Lean 4.34 y nunca revisó las pruebas.
+- **Revisar cada paso desde un entorno vacío.** `leanchecker --fresh` aceptó las dos soluciones. Usa el kernel de Lean, así que no es una tercera implementación. Cuando se hizo esta escena, `lean4lean` no compilaba para Lean 4.34; el 2026-11-24, lean4lean `0048ed7` recompilado sobre v4.34.0-rc2 aceptó las dos soluciones ([port de versión](../experiments/version-port/RESULTS.es.md)).
 - **De dónde viene el enunciado.** Las 18 declaraciones coinciden tras normalización textual; la resolución de nombres no se verificó. Las diferencias restantes con el archivo de Formal Conjectures de Google DeepMind son el import, el namespace, notación copiada con la misma definición y (A)/(B) excluidos.
 
 **Frente al texto de Clay.** (C) y (D) dicen "existen datos para los que no existe solución", así que la versión formal solo podría ser más fácil si permitiera datos que Clay prohíbe o si exigiera a las soluciones más que Clay. De 16 cláusulas, 6 coinciden directamente, 9 por hechos estándar de análisis y 1 necesita una decisión humana: la errata de Clay pide presión periódica "en la Ec. (8)", la lista de datos, mientras que la formalización la exige a las soluciones en (D). Ver la [revisión de riesgos](../evidence/formal/clay-lean-risk.md) y la Parte D.
@@ -111,14 +111,14 @@ Cada máquina registró **27 PASS, 54 KILLED y 3 SURVIVED** sobre las mismas **8
 | Elemento | Código numérico | Cadena de verificación formal |
 | --- | --- | --- |
 | Contrato, congelado primero | [`CONTRACT.md`](../evidence/numerical/source/CONTRACT.md), tolerancia 10⁻⁶ | El enunciado oficial del desafío y los axiomas permitidos |
-| Oráculo independiente | Una solución programada aparte para cada modelo | Comparator con dos kernels, más una revisión con `leanchecker --fresh` |
+| Oráculo independiente | Una solución programada aparte para cada modelo | Comparator con dos kernels, más revisiones desde cero con `leanchecker --fresh` y `lean4lean --fresh` |
 | Mutación deliberada | Dos errores conocidos por modelo y un cambio cerca del umbral | Un valor de prueba erróneo y seis mutantes del enunciado con un control |
 | Repetición | Las mismas 84 variantes en dos máquinas | Comparator sobre cinco compilaciones |
 | Revisión de la especificación | El propio contrato | Procedencia del enunciado, revisión de riesgos frente a Clay y los puentes en Lean (Parte D) |
 
 ### Hallazgos en este caso
 
-Frente al procedimiento de verificación del README de OpenAI, el protocolo produjo ocho hallazgos que ese procedimiento no muestra, tres de ellos defectos corregidos de este mismo estudio ([FINDINGS.md](../FINDINGS.md), en inglés).
+Frente al procedimiento de verificación del README de OpenAI, el protocolo produjo nueve hallazgos que ese procedimiento no muestra, cuatro de ellos defectos de este mismo estudio: tres corregidos y uno documentado con copias restauradas ([FINDINGS.md](../FINDINGS.md), en inglés).
 
 ### Benchmark de fallos a ciegas
 
@@ -244,7 +244,8 @@ La escena de Taylor–Green es solo contexto visual: la solución analítica exa
 Un informe de QA solo sirve si dice lo que no probó.
 
 - **Una sola máquina, herramientas reutilizadas.** Todas las corridas formales usaron una sola máquina Linux. Todas las compilaciones reutilizaron la toolchain de Lean instalada y los binarios de Comparator, lean4export, nanoda y landrun, cuyos hashes están [registrados](../evidence/formal/cd-validation/README.md#reused-tools).
-- **Dos implementaciones de kernel.** Solo el kernel de Lean y nanoda han revisado las pruebas. `leanchecker` usa el kernel de Lean, y `lean4lean` no compiló para Lean 4.34.
+- **Tres implementaciones de kernel.** El kernel de Lean, nanoda y lean4lean han revisado las pruebas. `leanchecker` usa el kernel de Lean. lean4lean `0048ed7` se recompiló sobre v4.34.0-rc2 y no sobre su toolchain upstream v4.34.0, y corrió en el equipo del autor ([port de versión](../experiments/version-port/RESULTS.es.md)).
+- **Atado a una versión de Lean.** Las pruebas no compilan sin cambios en Lean v4.34.0 ni en v4.35.0: los enunciados siguen compilando, pero el código de las pruebas se rompe por cambios en la API de Mathlib (15 y 20 módulos que fallan). Está en curso un port de las pruebas.
 - **Solo bugs de kernel conocidos.** Los verificadores están al día con las correcciones conocidas de 2026, pero en julio de 2026 un bug de Lean y otro distinto de nanoda dejaron pasar la misma prueba falsa, así que el acuerdo entre dos kernels no dice nada sobre bugs desconocidos.
 - **Comparator independiente.** Las corridas usaron la herramienta fijada en `19e111e`, no el posterior `lake check` de Lean v4.35.0.
 - **No se prueba la correspondencia con el artículo.** Si la prueba en Lean sigue el artículo de OpenAI está fuera de alcance; [arXiv:2610.08144](https://arxiv.org/abs/2610.08144) sostiene que no, sin afirmar que algún teorema de Lean sea falso.
