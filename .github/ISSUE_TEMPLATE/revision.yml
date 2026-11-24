@@ -1,0 +1,55 @@
+name: Revisión o reporte de reproducción (español)
+description: Señala un error, revisa un punto de la transcripción de Clay o reporta una reproducción.
+title: "[Revisión] "
+labels: ["review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tomarte el tiempo. Cualquier comentario ayuda, aunque sea una sola frase, y un resultado distinto al nuestro es igual de útil.
+        Para la transcripción de Clay, los puntos para comparar están en `bridges/K0_REVIEW.es.md`; para una recompilación, los pasos están en `docs/INDEPENDENT_REPRODUCTION.es.md`.
+  - type: dropdown
+    id: area
+    attributes:
+      label: ¿Qué revisaste?
+      options:
+        - La transcripción de Clay (bridges/ClayLiteral.lean, un punto K0)
+        - Una reproducción independiente (compilación, Comparator, axiomas)
+        - Los experimentos numéricos o de escenarios
+        - El resumen en lenguaje natural o las afirmaciones
+        - Otra cosa
+    validations:
+      required: true
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Veredicto
+      options:
+        - De acuerdo
+        - Objeción
+        - No estoy seguro
+        - Reporte de reproducción
+    validations:
+      required: true
+  - type: textarea
+    id: citation
+    attributes:
+      label: En qué te apoyas
+      description: La página y la ecuación del PDF, el archivo y la línea, o el commit y los comandos que usaste.
+  - type: textarea
+    id: argument
+    attributes:
+      label: Tu comentario
+      description: Por qué el texto dice o no dice lo que debería, o qué obtuviste al correrlo.
+    validations:
+      required: true
+  - type: textarea
+    id: resolution
+    attributes:
+      label: Corrección sugerida (opcional)
+      description: Si objetas, el cambio que propones o la lectura que crees que se pretende.
+  - type: input
+    id: credit
+    attributes:
+      label: ¿Cómo te damos crédito? (opcional)
+      description: Déjalo vacío si prefieres quedar anónimo.

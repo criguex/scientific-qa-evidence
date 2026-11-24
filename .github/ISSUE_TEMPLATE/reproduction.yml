@@ -1,0 +1,61 @@
+name: Reproduction report (English)
+description: You ran verificar.py on your computer. Tell us whether you got the same result or a different one.
+title: "[Reproduction] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for trying it. A result that differs from ours is just as useful as a matching one: that is exactly what we are looking for.
+        If you have not run it yet: download the repository (green "Code" button → "Download ZIP"), unzip it, open a terminal in that folder and run `python verificar.py` (on Mac or Linux it may be `python3 verificar.py`). Its messages are in Spanish; OK means passed and FALLA means failed.
+  - type: dropdown
+    id: resultado
+    attributes:
+      label: What did you get?
+      options:
+        - All 6 checks OK
+        - Some check FAILED
+        - I could not run it
+    validations:
+      required: true
+  - type: input
+    id: huella
+    attributes:
+      label: Your fingerprint
+      description: The code printed at the end, for example 1A2B-3C4D-5E6F.
+  - type: dropdown
+    id: sistema
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: descarga
+    attributes:
+      label: How did you download the repository?
+      options:
+        - Download ZIP from GitHub
+        - git clone
+        - Another way
+  - type: textarea
+    id: detalle
+    attributes:
+      label: Contents of mi_resultado.txt
+      description: The script saves it in the repository folder. Paste it in full.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: comentario
+    attributes:
+      label: Comments (optional)
+      description: Anything confusing, anything that failed during installation, or any other remark.
+  - type: input
+    id: credito
+    attributes:
+      label: How should we credit you? (optional)
+      description: Leave empty to stay anonymous.

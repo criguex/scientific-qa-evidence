@@ -287,7 +287,7 @@ All three defects were mine, and the audit found and fixed them in public. They 
 1. **AC-4.3:** someone who knows Lean or the problem reviews [`bridges/ClayLiteral.lean`](../bridges/ClayLiteral.lean) with the [K0 sheet](../bridges/K0_REVIEW.md).
 2. **AC-4.4:** a mathematician decides how to read periodic pressure in (D).
 3. **AC-5.4:** someone other than me rebuilds in Lean with the [guide](INDEPENDENT_REPRODUCTION.md).
-4. **AC-5.3:** a `verificar.py` report from Linux, with the [form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml).
+4. **AC-5.3:** a `verificar.py` report from Linux, with the [form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduction.yml).
 5. **AC-2.4:** a third kernel implementation that works with Lean 4.34.
 
 The first four depend on people, not machines. That is the last gate: **be the referee**.

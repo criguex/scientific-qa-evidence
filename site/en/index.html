@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repeat it yourself · Scientific QA Evidence</title>
+<meta name="description" content="Can a mathematical proof be repeated the way a software test is repeated? Videos, a one-line command to try it on your own computer, and the reports from people who already did.">
+<link rel="alternate" hreflang="es" href="https://criguex.github.io/scientific-qa-evidence/">
+<link rel="alternate" hreflang="en" href="https://criguex.github.io/scientific-qa-evidence/en/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --surface-2: #edf0f4; --ink: #0f1722; --ink-2: #465163; --muted: #6f7a8c;
+  --line: #dce1e8; --ok: #1a7f37; --ok-bg: #e6f4ea; --warn: #7a4f00; --warn-bg: #fff1cc; --accent: #2a78d6;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; --bg: #0d1117; --surface: #131820; --surface-2: #1a212b; --ink: #e6edf3; --ink-2: #a3adba;
+    --muted: #7d8796; --line: #262e39; --ok: #3fb950; --ok-bg: #12261a; --warn: #f2c25b; --warn-bg: #2a2310; --accent: #4c9be8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); padding-inline: 20px; padding-block: 0 56px; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.12; text-wrap: balance; }
+h1 { font-size: clamp(32px, 5.2vw, 54px); font-weight: 700; }
+h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; color: var(--ink-2); max-width: 68ch; }
+a { color: var(--accent); }
+code, .mono { font-family: var(--mono); }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 18px; padding-block: 48px 32px; }
+.topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.topbar a.lang { font: 500 13px var(--body); color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+.topbar a.lang:hover { color: var(--ink); border-color: var(--ink-2); }
+.chip { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); }
+.chip b { font-family: var(--mono); font-weight: 500; font-size: 18px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; letter-spacing: .04em; }
+section { display: grid; gap: 18px; padding-block: 36px 4px; border-top: 1px solid var(--line); margin-top: 24px; }
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 760px) { .videos, .two { grid-template-columns: minmax(0, 1fr) !important; } }
+figure { margin: 0; display: grid; gap: 8px; }
+video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #0d1117; border-radius: 10px; display: block; }
+figcaption { font-size: 14px; color: var(--ink-2); }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: start; }
+ol.steps li::before { content: counter(s); font-family: var(--display); font-weight: 700; font-size: 20px; width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); }
+ol.steps li > div { display: grid; gap: 6px; padding-top: 4px; }
+.cmd { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cmd code { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 15px; }
+button { font: 500 14px var(--body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.note { font-size: 14px; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; }
+td.mono { font-size: 13px; }
+.pill { font: 600 12px/1 var(--body); border-radius: 999px; padding: 4px 8px; }
+.pill.ok { color: var(--ok); background: var(--ok-bg); }
+.pill.diff { color: var(--warn); background: var(--warn-bg); }
+.count { display: flex; gap: 28px; flex-wrap: wrap; }
+.count div { display: grid; }
+.count strong { font-family: var(--display); font-size: 34px; line-height: 1.1; }
+.count span { font-size: 13px; color: var(--muted); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.two ul { margin: 8px 0 0; padding-left: 20px; color: var(--ink-2); display: grid; gap: 6px; }
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.links a { display: grid; gap: 4px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.links a:hover { border-color: var(--ink-2); }
+.links a span { font-size: 14px; color: var(--ink-2); }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topbar">
+      <span class="eyebrow">QA audit · open evidence · Medellín</span>
+      <a class="lang" href="../" lang="es" hreflang="es">Español</a>
+    </div>
+    <h1>Can a mathematical proof be repeated the way a software test is repeated?</h1>
+    <p>This year, OpenAI published computer-verified proofs about the Navier–Stokes equations, which describe how fluids move. I'm a software quality assurance (QA) engineer, not a mathematician. I reviewed that work the way I review software, and I left everything ready for anyone to repeat it. I'm grateful to anyone who takes the time to try it. I'd like many people, on many different computers, to repeat it.</p>
+    <div class="chip">Reference fingerprint for the current version (c8edd482375d): <b>5292-A47D-AFA5</b>. The fingerprint <b>C5F0-F1A8-2F4D</b> I shared on October 24 corresponds to version 26791fe6546f and is still valid for that version.</div>
+  </header>
+
+  <section aria-labelledby="ver">
+    <h2 id="ver">Watch it in two videos</h2>
+    <div class="videos">
+      <figure>
+        <video controls muted loop playsinline preload="metadata" src="../media/taylor_green_vorticidad_64.mp4"></video>
+        <figcaption>A fluid in 3D. With viscosity the eddy dies down; without it, it sharpens until the mesh can no longer resolve it. That final brightness is not an "explosion".</figcaption>
+      </figure>
+      <figure>
+        <video controls muted loop playsinline preload="metadata" src="../media/reproduccion_lean_609.mp4"></video>
+        <figcaption>I rebuilt and re-verified OpenAI's proofs in a cloud container: 609 of 609 pieces and 9 of 9 steps against the official statement.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="probar">
+    <h2 id="probar">Try it on your computer</h2>
+    <p>I put together a check that works on Windows, Mac and Linux. It takes under a minute and installs nothing on your machine besides Python.</p>
+    <ol class="steps">
+      <li><div><h3>Install Python 3.9 or newer</h3><p>From <a href="https://www.python.org/downloads/">python.org</a>. If you already have it, move on.</p></div></li>
+      <li><div><h3>Download the repository</h3><p><a href="https://github.com/criguex/scientific-qa-evidence/archive/refs/heads/main.zip">Download the ZIP</a> and unzip it. You'll get a folder named <code>scientific-qa-evidence-main</code>.</p></div></li>
+      <li><div><h3>Run a single command</h3><p>Open a terminal inside that folder and type:</p>
+        <div class="cmd"><code id="cmdtext">python verificar.py</code><button type="button" id="copy">Copy</button><span class="note" id="copied" aria-live="polite"></span></div>
+        <p class="note">On Mac or Linux it may be <code>python3 verificar.py</code>. You'll see OK or FAIL on six checks, plus your fingerprint.</p></div></li>
+      <li><div><h3>Tell us what you got</h3><p>With the <a href="https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduction.yml">review and reproduction form</a> (you need a free GitHub account). Paste the contents of <code>mi_resultado.txt</code> and, if you like, attach screenshots or a video. A different result is just as useful.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="quienes">
+    <h2 id="quienes">Who has already repeated it</h2>
+    <div class="count" id="counts"></div>
+    <div class="panel">
+      <div class="tablewrap"><table id="reports"><thead><tr><th>Date (UTC)</th><th>System</th><th>Python</th><th>Version</th><th>Fingerprint</th><th>Comparison</th><th>Report</th></tr></thead><tbody></tbody></table></div>
+      <p class="note" id="status">Loading reports from GitHub…</p>
+    </div>
+    <p class="note">Each report is compared against the reference for the data version it says it used. The version only changes when the evidence changes; editing text, the page, or the CI does not change it. I read this list live from the reports received. In the reviewed table I note how I know each person and keep an exact copy of each result. It lives in <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/evidence/reproductions/README.en.md">evidence/reproductions</a>.</p>
+  </section>
+
+  <section aria-labelledby="alcance">
+    <h2 id="alcance">What this is and isn't</h2>
+    <div class="two">
+      <div class="panel"><h3>What it is</h3><ul>
+        <li>The software-quality review I did of proofs OpenAI published.</li>
+        <li>The public record I kept, with every command, version, hash and result, including the errors I fixed.</li>
+        <li>A check that this record gives the same result on several computers.</li>
+      </ul></div>
+      <div class="panel"><h3>What it isn't</h3><ul>
+        <li>The solution to a Millennium Problem. The mathematics is OpenAI's, and the classical version of the problem, with no external force, is still open.</li>
+        <li>A certification or a peer review.</li>
+        <li>An independent rebuild of the Lean proof by someone else. That is still pending.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="otro">
+    <h2 id="otro">My other experiment: a physics debugger for an AI predictor</h2>
+    <p>Here I'm not reviewing anyone else's work. I trained a neural network that predicts how a fluid moves in 3D, and I wrote a debugger that checks whether each prediction respects physics: that the fluid doesn't compress, that energy adds up, and that the evolution obeys the equations. I tested it over four rounds. In each one I committed the hypotheses and thresholds before generating the test data, and the result was the same on three computers. One of the hypotheses failed, and I report it that way.</p>
+    <p>I'm looking for someone to prepare sabotaged predictions, blind, for round 5: I won't know which ones are traps until the verdicts are published.</p>
+    <div class="links">
+      <a href="https://github.com/criguex/predictor-debugger"><b>predictor-debugger</b><span>The four rounds, their results, the fingerprints and how to verify it.</span></a>
+      <a href="https://github.com/criguex/predictor-debugger/blob/main/round5/KIT.md"><b>Round 5: sabotage it blind</b><span>The rules, in Spanish, for anyone who wants to set traps for the debugger.</span></a>
+    </div>
+  </section>
+
+  <section aria-labelledby="mas">
+    <h2 id="mas">Go deeper</h2>
+    <div class="links">
+      <a href="../methodology/"><b>The audit as QA, step by step</b><span>User stories, 24 yes/no criteria, Gherkin scenarios and interactive examples. <span lang="es">También en español.</span></span></a>
+      <a href="../fluido/en/"><b>3D fluid explorer</b><span>Frame-by-frame slices, convergence, and the PDE and ODE campaigns, with the original data.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/tree/main/evidence/lean-cloud-2026-10-23"><b>Evidence for video 2</b><span>Logs, receipts and hashes from the October 23 rebuild.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/README.md"><b>The full repository</b><span>What was checked, how, and its limits.</span></a>
+      <a href="https://github.com/criguex/scientific-qa-evidence/blob/main/docs/INDEPENDENT_REPRODUCTION.md"><b>Rebuild Lean yourself</b><span>For anyone who knows Lean: the guide to the reproduction that's still missing.</span></a>
+    </div>
+  </section>
+
+  <footer>Cristian Guerra Gómez · QA Automation · Medellín, Colombia · <a href="https://orcid.org/0009-0001-7189-5214">ORCID</a>. I prepared this work with the help of AI assistants, under my direction, as I explain in the repository. To cite it: <a href="https://doi.org/10.5281/zenodo.23925749">doi:10.5281/zenodo.23925749</a>. License: Apache-2.0 for the code and CC BY 4.0 for text, data and videos; you may reuse it with attribution.</footer>
+</div>
+<script>
+const REFS = {
+  "26791fe6546f": "C5F0-F1A8-2F4D",
+  "727c5b5f98ef": "1A86-6B19-21C7",
+  "c8edd482375d": "5292-A47D-AFA5"
+};
+document.getElementById("copy").addEventListener("click", () => {
+  const t = document.getElementById("cmdtext").textContent, msg = document.getElementById("copied");
+  const done = () => { msg.textContent = "Copied"; setTimeout(() => (msg.textContent = ""), 2000); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(() => select());
+  else select();
+  function select() { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmdtext")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Select it and copy it"; }
+});
+function field(body, label) {
+  const m = body.match(new RegExp("### " + label + "\\s*\\n+([^\\n]+)"));
+  return m ? m[1].trim() : "";
+}
+function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
+async function load() {
+  const status = document.getElementById("status");
+  try {
+    const r = await fetch("https://api.github.com/repos/criguex/scientific-qa-evidence/issues?state=all&per_page=100");
+    if (!r.ok) throw new Error(r.status);
+    const items = (await r.json()).filter(i => !i.pull_request && /^\[(Reproducci[oó]n|Reproduction)\]/.test(i.title));
+    const tbody = document.querySelector("#reports tbody");
+    const people = new Set(), systems = new Set();
+    let same = 0;
+    items.sort((a, b) => a.created_at.localeCompare(b.created_at)).forEach(i => {
+      const body = i.body || "";
+      const fp = /[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}/i;
+      const huella = ((field(body, "Tu huella").match(fp) || (body.match(/huella:\s*(\S+)/) || ["", ""])[1].match(fp)) || [""])[0].toUpperCase();
+      const version = (body.match(/versi[oó]n de los datos:\s*([0-9a-f]{12})/i) || ["", ""])[1].toLowerCase();
+      const so = field(body, "Sistema operativo");
+      const py = (body.match(/python:\s*([0-9.]+)/) || ["", "?"])[1];
+      people.add(i.user.login); if (so) systems.add(so);
+      const tr = document.createElement("tr");
+      tr.append(cell(i.created_at.slice(0, 16).replace("T", " "), "mono"), cell(so || "?"), cell(py, "mono"), cell(version || "?", "mono"), cell(huella || "no fingerprint", "mono"));
+      const res = document.createElement("td"), pill = document.createElement("span");
+      const ok = Boolean(huella) && REFS[version] === huella; if (ok) same++;
+      pill.className = "pill " + (ok ? "ok" : "diff"); pill.textContent = ok ? "matches the reference" : (REFS[version] ? "different" : "version without reference");
+      res.append(pill); tr.append(res);
+      const link = document.createElement("td"), a = document.createElement("a");
+      a.href = i.html_url; a.textContent = "#" + i.number; link.append(a); tr.append(link);
+      tbody.append(tr);
+    });
+    const counts = document.getElementById("counts");
+    [[items.length, "reports"], [people.size, "people"], [systems.size, "operating systems"], [same, "matching their version's reference"]]
+      .forEach(([n, l]) => { const d = document.createElement("div"), s = document.createElement("strong"), sp = document.createElement("span"); s.textContent = n; sp.textContent = l; d.append(s, sp); counts.append(d); });
+    status.textContent = items.length ? "Live-updated from GitHub." : "No reports yet. You can be the first.";
+  } catch (e) {
+    status.textContent = "Reports could not be loaded right now. View them directly on GitHub.";
+    const a = document.createElement("a"); a.href = "https://github.com/criguex/scientific-qa-evidence/issues?q=is%3Aissue+in%3Atitle+%22Reproducci%C3%B3n%22+OR+%22Reproduction%22"; a.textContent = " View reports";
+    status.append(a);
+  }
+}
+load();
+</script>
+</body>
+</html>

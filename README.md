@@ -39,7 +39,7 @@ I am a software tester, not a mathematician. I checked those proofs the way I wo
 
    Reference for the current data version (`c8edd482375d`): fingerprint **`5292-A47D-AFA5`**, the same on my Mac and on GitHub's Ubuntu, macOS and Windows runners.
 
-4. Tell me what you got, same or different, with the [reproduction form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduccion.yml). So far there are 4 reports from 3 people, all of whom know me ([reports](evidence/reproductions/README.md)). A different result is just as useful.
+4. Tell me what you got, same or different, with the [reproduction form](https://github.com/criguex/scientific-qa-evidence/issues/new?template=reproduction.yml). So far there are 4 reports from 3 people, all of whom know me ([reports](evidence/reproductions/README.md)). A different result is just as useful.
 
 The same checks run on every push in [GitHub Actions](.github/workflows/verify.yml). The commands one by one, the versions, and which results are recomputed versus only verified by hash are in [docs/REPRODUCE.md](docs/REPRODUCE.md).
 
