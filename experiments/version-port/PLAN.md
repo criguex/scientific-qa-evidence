@@ -48,3 +48,13 @@ Every step records its command, start and end time, exit code and the SHA-256 of
 - **A failed build, a refused solution or a surviving mutant** is reported as found, with its log, and is not retried silently. A checker refusing a solution would be the most important possible result and would be reported before anything else.
 - This is not an independent reproduction: the author runs it, on his own machine (Linux on WSL2, 12 cores, 30 GB), with AI assistance. It does not change AC-5.4.
 - Using the Mathlib cache means Mathlib is not compiled from source in these runs; B4 and B5 already did that for rc2.
+
+## Amendment 1 · 2026-11-24, before any proof edit was used for a result
+
+R0 finished as registered. R1 and R2 did not build: proof code fails on Mathlib API changes, while the challenge statements still compile unchanged. On the author's decision the port is attempted with no time limit. One case was not foreseen: in Mathlib v4.34.0 `eLpNorm f p μ` is defined as ∞ when `f` is not `AEStronglyMeasurable`, and `MemLp` became only `eLpNorm < ∞`. Some **internal** lemmas of OpenAI's proof are therefore false as written under the new definitions (for example `NavierStokesR3.WeightedInterpolation.eLpNorm_le_rpow_mul`, which bounds `eLpNorm h` without assuming `h` measurable).
+
+What changes in "What is allowed to change":
+
+- The statement of an **internal** lemma may gain a hypothesis, or be adjusted otherwise, **only when a change of Mathlib definitions requires it**. Each such change is listed separately in `R1/port/` (and `R2/port/`) with the statement before and after and the reason.
+- Unchanged: `ComparatorChallenges/*.lean` and the `theorem` lines of `NavierStokes/ComparatorSolution.lean` and `Euler/Solution.lean` stay byte-identical to `f9e8bc5`; Comparator checks the final statements against the challenge, so a weakened final statement would be refused. No `sorry`, no new axiom, no option that relaxes the kernel or the checks, no disabled linter or `warningAsError`.
+- A port that needs to change a challenge statement or a final theorem line still counts as failed.

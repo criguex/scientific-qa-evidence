@@ -50,3 +50,13 @@ Cada paso registra su comando, hora de inicio y fin, código de salida y el SHA-
 - **Una compilación fallida, una solución rechazada o un mutante que sobrevive** se reporta tal como se encuentra, con su log, y no se vuelve a intentar en silencio. Que un verificador rechace una solución sería el resultado posible más importante, y se reportaría antes que cualquier otra cosa.
 - Esto no es una reproducción independiente: el autor la corre, en su propia máquina (Linux sobre WSL2, 12 núcleos, 30 GB), con asistencia de IA. No cambia AC-5.4.
 - Usar la caché de Mathlib significa que Mathlib no se compila desde la fuente en estas corridas; B4 y B5 ya lo hicieron para rc2.
+
+## Enmienda 1 · 24 de noviembre de 2026, antes de usar cualquier cambio de demostración en un resultado
+
+R0 terminó como se registró. R1 y R2 no compilaron: falla el código de las demostraciones por cambios en la API de Mathlib, mientras los enunciados de los desafíos siguen compilando sin cambios. Por decisión del autor, el port se intenta sin límite de tiempo. Apareció un caso no previsto: en Mathlib v4.34.0, `eLpNorm f p μ` vale ∞ cuando `f` no es `AEStronglyMeasurable`, y `MemLp` pasó a ser solo `eLpNorm < ∞`. Por eso algunos lemas **internos** de la demostración de OpenAI son falsos tal como están escritos con las definiciones nuevas (por ejemplo `NavierStokesR3.WeightedInterpolation.eLpNorm_le_rpow_mul`, que acota `eLpNorm h` sin suponer que `h` sea medible).
+
+Qué cambia en «Qué se permite cambiar»:
+
+- El enunciado de un lema **interno** puede recibir una hipótesis, u otro ajuste, **solo cuando lo exija un cambio de definiciones de Mathlib**. Cada cambio de este tipo se lista aparte en `R1/port/` (y `R2/port/`) con el enunciado antes y después y la razón.
+- Sin cambios: `ComparatorChallenges/*.lean` y las líneas `theorem` de `NavierStokes/ComparatorSolution.lean` y `Euler/Solution.lean` siguen idénticas byte a byte a `f9e8bc5`; Comparator compara los enunciados finales con el desafío, así que un enunciado final debilitado sería rechazado. Sin `sorry`, sin axiomas nuevos, sin opciones que relajen el kernel o las comprobaciones, sin apagar linters ni `warningAsError`.
+- Un port que necesite cambiar un enunciado de desafío o una línea `theorem` final sigue contando como fallido.
