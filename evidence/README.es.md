@@ -1,0 +1,29 @@
+> Traducción al español de [README.md](README.md). Si hay alguna diferencia, vale el original.
+
+# Lista blanca de evidencia curada
+
+Esta carpeta contiene una lista blanca curada de fixtures y controles citados por el release en inglés, no una copia del árbol de evidencia heredado. La lista de checksums del paquete verifica los archivos que incluye. Los dos conjuntos de datos de la campaña de 84 casos usan el mapa `artifact_sha256` del resumen original de cada equipo; valida los 168 casos, los dos CSV de 756 filas y la comparación entre equipos con `python3 evidence/verify_numerical.py` desde la raíz del paquete.
+
+La lista de checksums de la raíz cubre cada archivo curado del release, incluidos los dos directorios de casos pareados, pero excluye las salidas de render generadas, los directorios de dependencias, las cachés de Python y la propia lista de checksums. El verificador numérico además revisa los dos resúmenes originales copiados y cada JSON de caso y CSV de observación contra los mapas SHA-256 por archivo de esos resúmenes originales. Su comparación es de solo lectura; volver a correr la suite de cálculo es una acción aparte, descrita en el README de la raíz.
+
+## Suite numérica
+
+`numerical/summary.mac.json` es el resumen original de la corrida en macOS arm64. `numerical/multidomain_derived.json` es el resumen original pareado entre equipos. Los registros completos de los 84 casos, los resúmenes originales y los CSV de observaciones para macOS arm64 y Linux x86_64 están en `numerical/paired/`. Dos salidas de RC preservadas byte a byte hacen concreta una comparación de línea base contra mutación. Los cuatro archivos fuente en Python son el runner exacto y las implementaciones numéricas, nombrados por los hashes de la fuente original. El contrato de la fuente se describe en inglés en [CLAIMS.md](../CLAIMS.md).
+
+`numerical/source/test_runner.py` prueba el runner: una excepción del oráculo debe marcar el oráculo como inválido, una excepción del sistema bajo prueba debe dejar la variante como `INCONCLUSIVE`, y volver a correr todo debe reproducir cada registro guardado. `runner.py` se corrigió el 2026-10-21; ver `SOURCE_PROVENANCE.md` para el hash de la versión que produjo las corridas guardadas.
+
+Los resultados seleccionados no sustituyen la corrida completa de 84 variantes. Los conteos de 27 PASS, 54 KILLED y 3 SURVIVED son por equipo. macOS arm64 y Linux x86_64 son ejecuciones pareadas de las mismas variantes.
+
+## Controles formales
+
+`formal/fixtures/` contiene las fuentes exactas de los fixtures de Lean. `formal/kernel-mutation/` conserva el resumen bruto del runner con su estado `COLLECTED_PENDING_CLASSIFICATION` y la clasificación aparte derivada de la fuente. Lean reporta un desajuste de tipos. nanoda llega a una aserción interna de igualdad definicional; el análisis sobre la fuente fijada deriva eso como un rechazo por verificación de tipos. El binario en sí no emite una categoría de rechazo estructurada, así que se conserva el estado bruto pendiente. `formal/periodic-control/` contiene una salida saneada preservada byte a byte y un manifiesto de fuente para el control periódico acotado. Esa salida lista `propext`, `Classical.choice` y `Quot.sound` para la declaración periódica. El campo constante está sobre un toro y no se traslada al problema euclidiano.
+
+`formal/clean-build/summary.en.json` traduce el registro de la compilación clean03 desde la fuente. Ahí el resumen y los manifiestos originales quedan enlazados por hash; ningún archivo de evidencia original se reescribió. Los archivos contiguos `dependency-pins.txt`, `tool-versions.txt` y `toolchain.sha256` conservan las dependencias fijadas seleccionadas, las versiones de Lean/Lake y los hashes de los binarios del toolchain; ver la [tabla de fidelidad](formal/clean-build/README.md) resumida. `build-output-excerpt.txt` conserva un extracto saneado del stdout original, incluido el estado final y los axiomas de Euler reportados. La evidencia de Comparator se mantiene aparte en `formal/comparator/`, con registros de corrida saneados y hashes de la transcripción original. La revalidación del 2026-10-21 (corridas 2–4 de Comparator sobre las compilaciones B2–B4, mutantes del enunciado, revisión del kernel desde cero y compilación desde cero) está en `formal/cd-validation/`, con logs saneados, diffs de mutantes y veredictos legibles por máquina. `formal/statement-provenance/` compara el desafío de OpenAI con el enunciado público de DeepMind, y `formal/clay-lean-risk.md` revisa la (C)/(D) formal contra el texto de Clay, cláusula por cláusula. `formal/kernel-currency.md` revisa la fuente del kernel de Lean y el commit de nanoda usados, contra las correcciones de solidez del kernel de 2026.
+
+## Registros formales posteriores
+
+`formal/cd-validation/` contiene la revalidación del 2026-10-21 (compilaciones B1–B4, corridas 1–4 de Comparator, mutantes del enunciado, revisiones desde cero) y `formal/b5/` la compilación posterior desde la fuente B5 y la corrida 5 de Comparator. `formal/clay-lean-fidelity.md` es la primera comparación documental por cláusula con el texto de Clay, refinada por la revisión direccional de riesgos `formal/clay-lean-risk.md`; `formal/clay-lean-bridges.md` es la tabla de los lemas puente en Lean, probados en [`../bridges/`](../bridges/README.md). `formal/clay-correspondence.md` registra la respuesta del presidente del CMI. `FROM_ZERO.md` registra las comprobaciones repetidas desde un clon nuevo.
+
+## Privacidad e interpretación
+
+El conjunto de evidencia excluye claves de proveedores, respuestas de voz en bruto, direcciones IP privadas, nombres de usuario de los equipos, rutas de fuente privadas y los artefactos heredados completos. El clip de flujo es solo una ilustración visual, marcada como tal en la fuente del video. Ninguna evidencia aquí respalda el descubrimiento de teoremas, la validación experimental ni la certificación en el mundo real.

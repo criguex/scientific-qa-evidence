@@ -1,0 +1,21 @@
+> Traducción al español de [STATUS.md](STATUS.md). Si hay alguna diferencia, vale el original.
+
+# Estado
+
+| Fecha | Evento | Script tal como se corrió |
+| --- | --- | --- |
+| 2026-10-22 | Caso 1 registrado antes de correrlo | `8478f68` |
+| 2026-10-22 | **Intento 1 abortado durante el montaje, sin resultado.** Copiar el árbol de la compilación B5 (unos 26 GB) llenó la unidad de sistema Windows del equipo, que contiene el disco virtual de WSL; la copia falló con errores de E/S antes de correr cualquier paso de Z o X. Las copias de trabajo se borraron. | `8478f68` |
+| 2026-10-22 | **Enmienda 1, antes de correr cualquier paso.** El árbol de B5 se había borrado para liberar espacio en el equipo, así que la copia se hace desde el árbol de la compilación B4, también compilada desde la fuente con `lake --no-cache build`; el script mide la unidad del equipo antes y después de la copia. Nada más cambió. | `db1da97` |
+| 2026-10-22 | **Caso 1 corrido, según lo registrado** ([resultados](RESULTS.md)) | `run.sh` en `db1da97` |
+| 2026-10-22 | Caso 2 registrado antes de correrlo | `a719676` |
+| 2026-10-22 | **Caso 2 corrido, según lo registrado** ([resultados](RESULTS2.md)) | `run2.sh` en `a719676` |
+| 2026-10-22 | Scripts endurecidos después de una revisión externa (abajo); los resultados observados no cambian | este commit |
+
+**Qué se repitió en cada corrida.** El árbol del proyecto se copió de B4, que ya estaba compilado; `lake exe cache get` y `lake build` corrieron una vez para escribir el paquete (caso 1) y no se repitieron por variante. Solo Comparator se corrió una vez por variante, sobre el mismo árbol con el paquete de esa variante dentro.
+
+**Vacíos de reproducibilidad encontrados en la revisión, y corregidos para corridas futuras.** Los scripts tal como se corrieron (1) no abortaban si no se podía medir el espacio libre del equipo, o si fallaba el clon, la copia o el registro del toolchain; (2) clonaban `main` en vez de un commit fijado (el commit realmente usado queda registrado en el `versions.txt` o `toolchain.txt` de cada corrida: `db1da97` y `a719676`); (3) no verificaban el toolchain, las revisiones de `lake-manifest.json` ni los hashes de las herramientas, que solo se registraban; (4) el caso 2 dependía de enlaces a herramientas creados por el caso 1 en un directorio compartido que el script del caso 1 borra al iniciar. Los `run.sh` y `run2.sh` actuales exigen un `QA_COMMIT`, usan un directorio por caso, y cargan [`preflight.sh`](preflight.sh), que aborta ante cualquiera de esto y revisa las revisiones de Lean `v4.34.0-rc2`, Comparator `19e111e`, Mathlib `85e3a25` y lean4export `cacf989`, y los hashes de los binarios de landrun, lean4export, nanoda y Comparator. Estas correcciones no cambian los resultados observados; los scripts exactamente como se corrieron se conservan en el historial de git en los commits de arriba.
+
+**Segundo endurecimiento, 2026-10-22, después de una revisión externa.** Los scripts tal como se corrieron todavía podían imprimir `DONE` después de un fallo inesperado de una etapa. Ahora cada etapa pasa por `expect` (en `preflight.sh`): su recibo se escribe primero, y el script se detiene a menos que el código de salida sea uno de los que debería tener. Los pasos del procedimiento y Comparator deben salir con 0; las comprobaciones P6 y de hash pueden salir con 0 o 1, ya que 1 es un hallazgo; las copias, ediciones y la colocación del paquete deben tener éxito. Los recibos publicados muestran que cada etapa tuvo éxito como se esperaba, así que esto no cambia los resultados observados.
+
+**La comprobación por hash usada sola, 2026-10-22, después de una revisión externa.** `check_hash.py` solo leía las filas presentes, así que un recibo vacío, uno con solo el encabezado, o uno al que le faltara un paso, la pasaban; P6 los rechaza. Ahora valida primero la estructura del recibo: el recibo debe existir, empezar con el encabezado esperado, tener cuatro campos por fila, contener cada paso registrado exactamente una vez y ningún otro paso. Ocho pruebas de regresión cubren estos casos (`HashCheckStandalone` en `test_results.py`), y las ocho fallan contra la versión anterior. Los resultados publicados del caso 2 no cambian: C pasa, F5 y F7 dan las mismas marcas.

@@ -6,6 +6,8 @@
 
 [Página pública](https://criguex.github.io/scientific-qa-evidence/) · [Read in English](README.md) · [Glosario](docs/GLOSSARY.md) · [Cada afirmación con su evidencia](CLAIMS.md) · [Informe detallado](docs/DETAILS.es.md)
 
+**Todos los documentos están en español y en inglés.** Las traducciones al español están al lado de cada original como `*.es.md`; la bitácora y los reportes de reproducción, escritos en español, tienen su versión en inglés como `*.en.md`; los escenarios Gherkin están en [`features/`](features/) y [`features/en/`](features/en/). Si una traducción difiere de su original, vale el original.
+
 Por **Cristian Guerra Gómez**, ingeniero de QA de software, Medellín, Colombia · [ORCID 0009-0001-7189-5214](https://orcid.org/0009-0001-7189-5214) · [@criguex](https://github.com/criguex)
 
 ## En un minuto
